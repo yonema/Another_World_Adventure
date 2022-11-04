@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{e33934e8-8bb1-4863-8acf-73c404a276ac}</ProjectGuid>
+    <RootNamespace>Game</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../ExLibrary/DirectXTex-main\DirectXTex;YonemaEngine/PreCompileHeader;..\ExLibrary\Autodesk\FBX\FBX SDK\2020.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>YonemaEnginePreCompile.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>YonemaEnginePreCompile.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../ExLibrary/DirectXTex-main\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug;../ExLibrary\DirectXTex-main\DirectXTex\Bin\Desktop_2019\x64\Debug;..\ExLibrary\Autodesk\FBX\FBX SDK\2020.3.2\lib\vs2019\x64\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../ExLibrary/DirectXTex-main\DirectXTex;YonemaEngine/PreCompileHeader;..\ExLibrary\Autodesk\FBX\FBX SDK\2020.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>YonemaEnginePreCompile.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>YonemaEnginePreCompile.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../ExLibrary/DirectXTex-main\DirectXTex\Bin\Desktop_2019_Win10\x64\Release;../ExLibrary\DirectXTex-main\DirectXTex\Bin\Desktop_2019\x64\Release;..\ExLibrary\Autodesk\FBX\FBX SDK\2020.3.2\lib\vs2019\x64\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\ModelRendererBase.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\ModelRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\RendererTable.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\Renderer.cpp" />
+    <ClCompile Include="YonemaEngine\GameObject\GameObject.cpp" />
+    <ClCompile Include="YonemaEngine\GameObject\GameObjectManager.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\GenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\2D\Sprite.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Shader.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\PipelineState.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Blob.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\RootSignature.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\IndexBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\VertexBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\FrameBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHeap.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Camera.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.cpp" />
+    <ClCompile Include="YonemaEngine\Time\GameTime.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Quaternion.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Vector2.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Vector3.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Matrix.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Vector4.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\PMDModels\PMDGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\PMDModels\PMDRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Texture.cpp" />
+    <ClCompile Include="YonemaEngine\GameWindow\MessageBox.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\GraphicsEngine.cpp" />
+    <ClCompile Include="YonemaEngine\GameWindow\GameWindow.cpp" />
+    <ClCompile Include="YonemaEngine\Utils\StringManipulation.cpp" />
+    <ClCompile Include="YonemaEngine\YonemaEngine.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Images\StarMan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Game\GamePreCompile.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\ModelRendererBase.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\ModelRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\SpriteRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\RendererTable.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\Renderer.h" />
+    <ClInclude Include="YonemaEngine\CommonLibrary\CommonDataLibrary.h" />
+    <ClInclude Include="YonemaEngine\CommonLibrary\CommonLibrary.h" />
+    <ClInclude Include="YonemaEngine\GameObject\GameObject.h" />
+    <ClInclude Include="YonemaEngine\GameObject\GameObjectManager.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\GenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\2D\Sprite.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList_Inline.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Shader.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\PipelineState.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Blob.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\RootSignature.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\IndexBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\VertexBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Dx12Wrappers_Include.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\FrameBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHeap.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Camera.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.h" />
+    <ClInclude Include="YonemaEngine\Time\GameTime.h" />
+    <ClInclude Include="YonemaEngine\Math\Math.h" />
+    <ClInclude Include="YonemaEngine\Math\Quaternion.h" />
+    <ClInclude Include="YonemaEngine\Math\Vector2.h" />
+    <ClInclude Include="YonemaEngine\Math\Vector3.h" />
+    <ClInclude Include="YonemaEngine\Math\Matrix.h" />
+    <ClInclude Include="YonemaEngine\Math\Vector4.h" />
+    <ClInclude Include="YonemaEngine\Graphics\PMDModels\PMDGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\PMDModels\PMDRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Texture.h" />
+    <ClInclude Include="YonemaEngine\GameWindow\MessageBox.h" />
+    <ClInclude Include="YonemaEngine\Time\Timer.h" />
+    <ClInclude Include="YonemaEngine\Utils\AlignSize.h" />
+    <ClInclude Include="YonemaEngine\Utils\StringManipulation.h" />
+    <ClInclude Include="YonemaEngine\Utils\Noncopyable.h" />
+    <ClInclude Include="YonemaEngine\Graphics\GraphicsEngine.h" />
+    <ClInclude Include="YonemaEngine\GameWindow\GameWindow.h" />
+    <ClInclude Include="YonemaEngine\Memory\ResourceBank.h" />
+    <ClInclude Include="YonemaEngine\YonemaEngine.h" />
+    <ClInclude Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.h" />
+    <ClInclude Include="YonemaEngine\CommonLibrary\CommonFunctionLibrary.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\BasicHeader.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Assets\Shaders\FbxTestHeader.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Assets\Shaders\PeraPolygonHeader.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Assets\Shaders\SimplePostEffectHeader.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Assets\Shaders\SpriteHeader.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Assets\Shaders\BasicPixelShader.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\BasicVertexShader.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\FbxTestPixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\FbxTestVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\PeraPolygonPixelShader.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\PeraPolygonVertexShader.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\SpritePixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Assets\Shaders\SpriteVertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
