@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerInput.h"
 
 namespace nsAWA {
 
@@ -14,10 +15,18 @@ namespace nsAWA {
 
 			void Update(float deltaTime)override final;
 
+		public:
+			const CVector3& GetPosition()const {
+
+				//座標を取得。
+				return m_action.GetPosition();
+			}
 		private:
 			void CreatePlayerModel();
 		private:
 			CModelRenderer* m_modelRenderer = nullptr;	//プレイヤーモデル
+			CPlayerInput m_input;						//入力
+			CPlayerAction m_action;						//アクション
 		};
 	}
 }

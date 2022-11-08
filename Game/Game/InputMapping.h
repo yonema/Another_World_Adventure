@@ -90,13 +90,13 @@ namespace nsYMEngine
 			{
 				{{CGamepad::EnPadButton::enUp, 1.0f}, {CGamepad::EnPadButton::enDown, -1.0f}},
 				{{CKeyboard::EnKeyButton::enW, 1.0f}, {CKeyboard::EnKeyButton::enS, -1.0f}},
-				{{nsInputManagerData::EnGamepadStickAxis::enLStickY, 1.0f}, {nsInputManagerData::EnGamepadStickAxis::enRStickY, -1.0f}}
+				{{nsInputManagerData::EnGamepadStickAxis::enLStickY, 1.0f}}
 			},
 			// enRight
 			{
 				{{CGamepad::EnPadButton::enLeft, -1.0f}, {CGamepad::EnPadButton::enRight, 1.0f}},
 				{{CKeyboard::EnKeyButton::enA, -1.0f},{CKeyboard::EnKeyButton::enD, 1.0f}},
-				{{nsInputManagerData::EnGamepadStickAxis::enLStickX, 1.0f}, {nsInputManagerData::EnGamepadStickAxis::enRStickX, -1.0f}}
+				{{nsInputManagerData::EnGamepadStickAxis::enLStickX, 1.0f}}
 			}
 		};
 

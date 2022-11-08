@@ -15,6 +15,9 @@ namespace nsAWA {
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();
 
+			//入力クラスを初期化。
+			m_input.Init(&m_action);
+
 			return true;
 		}
 
@@ -26,7 +29,14 @@ namespace nsAWA {
 
 		void CPlayer::Update(float deltaTime) {
 
+			//プレイヤーアクションクラスのdeltaTimeを更新（Updateではなく各関数で必要になるため）。
+			m_action.UpdateDeltaTime(deltaTime);
 
+			//入力クラスを更新。
+			m_input.Update();
+
+			//座標を設定。
+			m_modelRenderer->SetPosition(m_action.GetPosition());
 		}
 
 		void CPlayer::CreatePlayerModel() {
