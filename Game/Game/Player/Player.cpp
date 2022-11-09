@@ -10,6 +10,8 @@ namespace nsAWA {
 
 	namespace nsPlayer {
 
+		const char* const CPlayer::m_kObjName_Player = "Player";
+
 		bool CPlayer::Start() {
 
 			//プレイヤーモデルを生成。
@@ -49,6 +51,7 @@ namespace nsAWA {
 			modelInitData.modelFilePath = kPlayerModelFilePath;
 			modelInitData.modelFormat = nsGraphics::nsRenderers::EnModelFormat::enFBX;
 			modelInitData.vertexBias.SetRotationX(nsMath::YM_PIDIV2);
+			modelInitData.vertexBias.AddRotationY(nsMath::YM_PI);
 
 			//プレイヤーモデルを初期化。
 			m_modelRenderer->Init(modelInitData);

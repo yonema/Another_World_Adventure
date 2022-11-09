@@ -23,6 +23,7 @@ namespace nsYMEngine
 		{
 			enAction,
 			enJump,
+
 			enNumActions
 		};
 
@@ -34,6 +35,8 @@ namespace nsYMEngine
 		{
 			enForward,
 			enRight,
+			enCameraUp,
+			enCameraRight,
 			enNumAxes
 		};
 
@@ -97,7 +100,19 @@ namespace nsYMEngine
 				{{CGamepad::EnPadButton::enLeft, -1.0f}, {CGamepad::EnPadButton::enRight, 1.0f}},
 				{{CKeyboard::EnKeyButton::enA, -1.0f},{CKeyboard::EnKeyButton::enD, 1.0f}},
 				{{nsInputManagerData::EnGamepadStickAxis::enLStickX, 1.0f}}
-			}
+			},
+			// enCameraUp（まだ未完成）
+			{
+				{{CGamepad::EnPadButton::enNone, .0f}, {CGamepad::EnPadButton::enNone, .0f}},
+				{{CKeyboard::EnKeyButton::enUp, 1.0f},{CKeyboard::EnKeyButton::enDown, -1.0f}},
+				{{nsInputManagerData::EnGamepadStickAxis::enRStickY, 1.0f}}
+			},
+			// enCameraRight（まだ未完成）
+			{
+				{{CGamepad::EnPadButton::enNone, .0f}, {CGamepad::EnPadButton::enNone, .0f}},
+				{{CKeyboard::EnKeyButton::enRight, 1.0f},{CKeyboard::EnKeyButton::enLeft, -1.0f}},
+				{{nsInputManagerData::EnGamepadStickAxis::enRStickX, 1.0f}}
+			},
 		};
 
 

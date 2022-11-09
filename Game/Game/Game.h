@@ -2,6 +2,15 @@
 
 namespace nsAWA
 {
+	//エイリアス宣言
+	namespace nsPlayer {
+		class CPlayer;
+	}
+	namespace nsCamera {
+		class CMainCamera;
+	}
+
+	//ゲームクラス
 	class CGame : public IGameObject
 	{
 	private:
@@ -19,7 +28,8 @@ namespace nsAWA
 		~CGame() = default;
 
 	private:
-
+		nsPlayer::CPlayer* m_player = nullptr;			//プレイヤー
+		nsCamera::CMainCamera* m_mainCamera = nullptr;	//メインカメラ
 	};
 
 }

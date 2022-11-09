@@ -1,4 +1,6 @@
 #pragma once
+#include "CameraInput.h"
+#include "CameraAction.h"
 
 namespace nsAWA {
 
@@ -7,16 +9,29 @@ namespace nsAWA {
 		//メインカメラクラス
 		class CMainCamera : public IGameObject
 		{
+		public:
+			static const char* const m_kObjName_MainCamera;		//メインカメラクラスの名前
+		private:
 			bool Start()override final;
 
 			void OnDestroy()override final;
 
 			void Update(float deltaTime)override final;
 
+		public:
+
+			const CVector3& GetPosition()const {
+
+				return m_action.GetPosition();
+			}
+
+			const CVector3& GetTargetPosition()const {
+
+				return m_action.GetTargetPosition();
+			}
 		private:
-			CVector3 m_position = CVector3::Zero();			//視点
-			CVector3 m_target = CVector3::Zero();			//注視点
-			CVector3 m_addCameraVec = CVector3::Zero();		//注視点から視点までの加算ベクトル
+			CCameraInput m_input;		//カメラへの入力
+			CCameraAction m_action;		//カメラアクション
 		};
 	}
 }
