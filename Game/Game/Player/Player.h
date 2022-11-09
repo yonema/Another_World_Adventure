@@ -9,6 +9,8 @@ namespace nsAWA {
 		class CPlayer : public IGameObject
 		{
 		public:
+			static const char* const m_kObjName_Player;		//プレイヤークラスの名前
+		public:
 			bool Start()override final;
 
 			void OnDestroy()override final;

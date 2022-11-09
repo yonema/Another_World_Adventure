@@ -152,11 +152,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Game\Camera\CameraAction.cpp" />
+    <ClCompile Include="Game\Camera\CameraInput.cpp" />
     <ClCompile Include="Game\InputMapping.cpp" />
     <ClCompile Include="Game\Player\Player.cpp" />
     <ClCompile Include="Game\Scenes\YonejiDebugScene.cpp" />
     <ClCompile Include="Game\Player\PlayerInput.cpp" />
     <ClCompile Include="Game\Player\PlayerAction.cpp" />
+    <ClCompile Include="Game\Camera\MainCamera.cpp" />
     <ClCompile Include="YonemaEngine\Input\Keyboard.cpp" />
     <ClCompile Include="YonemaEngine\Input\InputManager.cpp" />
     <ClCompile Include="YonemaEngine\Input\Gamepad.cpp" />
@@ -212,11 +215,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Game\Camera\CameraAction.h" />
+    <ClInclude Include="Game\Camera\CameraInput.h" />
     <ClInclude Include="Game\InputMapping.h" />
     <ClInclude Include="Game\Player\Player.h" />
     <ClInclude Include="Game\Scenes\YonejiDebugScene.h" />
     <ClInclude Include="Game\Player\PlayerInput.h" />
     <ClInclude Include="Game\Player\PlayerAction.h" />
+    <ClInclude Include="Game\Camera\MainCamera.h" />
     <ClInclude Include="YonemaEngine\Input\InputManagerData.h" />
     <ClInclude Include="YonemaEngine\Input\Keyboard.h" />
     <ClInclude Include="YonemaEngine\Input\InputManager.h" />
