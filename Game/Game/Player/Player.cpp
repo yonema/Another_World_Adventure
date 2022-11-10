@@ -34,14 +34,17 @@ namespace nsAWA {
 
 		void CPlayer::Update(float deltaTime) {
 
-			//プレイヤーアクションクラスのdeltaTimeを更新（Updateではなく各関数で必要になるため）。
-			m_action.UpdateDeltaTime(deltaTime);
+			//プレイヤーアクションクラスを更新。
+			m_action.Update(deltaTime);
 
 			//入力クラスを更新。
 			m_input.Update();
 
 			//座標を設定。
 			m_modelRenderer->SetPosition(m_action.GetPosition());
+
+			//回転情報を設定。
+			m_modelRenderer->SetRotation(m_action.GetRotation());
 		}
 
 		void CPlayer::CreatePlayerModel() {

@@ -23,6 +23,12 @@ namespace nsAWA {
 				//À•W‚ğæ“¾B
 				return m_action.GetPosition();
 			}
+
+			const CQuaternion& GetRotation()const {
+
+				//‰ñ“]î•ñ‚ğæ“¾B
+				return m_action.GetRotation();
+			}
 		private:
 			void CreatePlayerModel();
 		private:
