@@ -7,7 +7,7 @@ namespace nsAWA {
 
 		namespace {
 
-			constexpr const float kCanPlayerMoveInput = 0.01f;	//移動入力が判定される最低値
+			constexpr const float kCanPlayerMoveInput = 0.001f;	//移動入力が判定される最低値
 		}
 
 		void CPlayerInput::Init(CPlayerAction* playerAction) {
@@ -18,9 +18,9 @@ namespace nsAWA {
 
 		void CPlayerInput::Update() {
 
-			//移動入力。
+			//移動・回転入力。
 			{
-				//移動入力を受け取る。
+				//入力を受け取る。
 				auto inputX = Input()->GetVirtualAxis(EnAxisMapping::enRight);
 				auto inputZ = Input()->GetVirtualAxis(EnAxisMapping::enForward);
 				
@@ -34,6 +34,9 @@ namespace nsAWA {
 						inputX,
 						inputZ
 					);
+
+					//回転。
+					m_playerAction->Rotate();
 				}
 			}
 		}
