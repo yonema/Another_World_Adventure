@@ -17,6 +17,9 @@ namespace nsAWA {
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();
 
+			//ステータスを初期化。
+			m_status.Init();
+
 			//入力クラスを初期化。
 			m_input.Init(&m_action);
 
@@ -33,6 +36,15 @@ namespace nsAWA {
 		}
 
 		void CPlayer::Update(float deltaTime) {
+
+#ifdef _DEBUG
+			//仮にHPが0になると自身を削除。
+			if (GetStatus()->GetHP() == 0) {
+
+				//更新しないようにする。
+				Deactivare();
+			}
+#endif
 
 			//プレイヤーアクションクラスを更新。
 			m_action.Update(deltaTime);

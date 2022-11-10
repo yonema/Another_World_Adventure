@@ -1,6 +1,10 @@
 #include "YonemaEnginePreCompile.h"
 #include "PlayerInput.h"
 
+#ifdef _DEBUG
+#include "Player.h"
+#endif
+
 namespace nsAWA {
 
 	namespace nsPlayer {
@@ -39,6 +43,17 @@ namespace nsAWA {
 					m_playerAction->Rotate();
 				}
 			}
+
+#ifdef _DEBUG
+			//仮にアクションボタン入力でHPダメージを受けるように。
+			if (Input()->IsTrigger(EnActionMapping::enAction)) {
+
+				//プレイヤーを検索。
+				auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+				//40ダメージを与える。
+				player->GetStatus()->DamageHP(40);
+			}
+#endif
 		}
 	}
 }

@@ -6,7 +6,7 @@ namespace nsAWA {
 	namespace nsCamera {
 
 		//カメラの入力クラス（回転やロックオンなどを実装予定）
-		class CCameraInput
+		class CCameraInput : nsUtils::SNoncopyable
 		{
 		public:
 

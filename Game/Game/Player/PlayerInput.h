@@ -6,7 +6,7 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		//プレイヤーの入力からアクションを起こすクラス
-		class CPlayerInput
+		class CPlayerInput : nsUtils::SNoncopyable
 		{
 		public:
 			void Init(CPlayerAction* playerAction);
