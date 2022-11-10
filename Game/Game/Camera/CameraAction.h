@@ -5,7 +5,7 @@ namespace nsAWA {
 	namespace nsCamera {
 
 		//カメラアクションクラス
-		class CCameraAction
+		class CCameraAction : nsUtils::SNoncopyable
 		{
 		public:
 			void Init();

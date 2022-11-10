@@ -160,6 +160,7 @@
     <ClCompile Include="Game\Player\PlayerInput.cpp" />
     <ClCompile Include="Game\Player\PlayerAction.cpp" />
     <ClCompile Include="Game\Camera\MainCamera.cpp" />
+    <ClCompile Include="Game\Player\PlayerStatus.cpp" />
     <ClCompile Include="YonemaEngine\Input\Keyboard.cpp" />
     <ClCompile Include="YonemaEngine\Input\InputManager.cpp" />
     <ClCompile Include="YonemaEngine\Input\Gamepad.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="Game\Player\PlayerInput.h" />
     <ClInclude Include="Game\Player\PlayerAction.h" />
     <ClInclude Include="Game\Camera\MainCamera.h" />
+    <ClInclude Include="Game\Player\PlayerStatus.h" />
     <ClInclude Include="YonemaEngine\Input\InputManagerData.h" />
     <ClInclude Include="YonemaEngine\Input\Keyboard.h" />
     <ClInclude Include="YonemaEngine\Input\InputManager.h" />

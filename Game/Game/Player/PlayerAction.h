@@ -11,7 +11,7 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		//プレイヤーアクションクラス
-		class CPlayerAction
+		class CPlayerAction : nsUtils::SNoncopyable
 		{
 		public:
 			void Init();

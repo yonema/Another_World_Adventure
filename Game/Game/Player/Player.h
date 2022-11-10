@@ -1,5 +1,6 @@
 #pragma once
 #include "PlayerInput.h"
+#include "PlayerStatus.h"
 
 namespace nsAWA {
 
@@ -29,12 +30,19 @@ namespace nsAWA {
 				//回転情報を取得。
 				return m_action.GetRotation();
 			}
+
+			CPlayerStatus* GetStatus() {
+
+				//ステータスを受け取る。
+				return &m_status;
+			}
 		private:
 			void CreatePlayerModel();
 		private:
 			CModelRenderer* m_modelRenderer = nullptr;	//プレイヤーモデル
 			CPlayerInput m_input;						//入力
 			CPlayerAction m_action;						//アクション
+			CPlayerStatus m_status;						//ステータス
 		};
 	}
 }
