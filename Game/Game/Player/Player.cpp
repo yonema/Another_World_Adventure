@@ -20,6 +20,9 @@ namespace nsAWA {
 			//入力クラスを初期化。
 			m_input.Init(&m_action);
 
+			//アクションクラスを初期化。
+			m_action.Init();
+
 			return true;
 		}
 

@@ -11,14 +11,17 @@ namespace nsAWA {
 			constexpr const float kMoveAmount = 20.0f;		//移動量
 		}
 
-		void CPlayerAction::Move(float inputX, float inputZ) {
-			
+		void CPlayerAction::Init() {
+
 			//カメラを検索。
-			auto camera = FindGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
+			m_mainCamera = FindGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
+		}
+
+		void CPlayerAction::Move(float inputX, float inputZ) {
 
 			//カメラの前方向、右方向を取得。
-			auto cameraForward = camera->GetForwardDirection();
-			auto cameraRight = camera->GetRightDirection();
+			auto cameraForward = m_mainCamera->GetForwardDirection();
+			auto cameraRight = m_mainCamera->GetRightDirection();
 
 			//不要な成分を初期化して正規化。
 			cameraForward.y = 0.0f;
