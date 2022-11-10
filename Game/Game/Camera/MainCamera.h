@@ -29,6 +29,18 @@ namespace nsAWA {
 
 				return m_action.GetTargetPosition();
 			}
+
+			const CVector3& GetForwardDirection()const {
+
+				//前方向を取得。
+				return MainCamera()->GetForeardDirection();
+			}
+
+			const CVector3& GetRightDirection()const {
+
+				//右方向を取得。
+				return MainCamera()->GetRightDirection();
+			}
 		private:
 			CCameraInput m_input;		//カメラへの入力
 			CCameraAction m_action;		//カメラアクション
