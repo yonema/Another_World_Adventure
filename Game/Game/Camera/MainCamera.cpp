@@ -43,12 +43,11 @@ namespace nsAWA {
 
 			//注視点を設定。
 			MainCamera()->SetTargetPosition(m_action.GetTargetPosition());
-			//MainCamera()->SetTargetPosition({ 0.0f,10.0f,0.0f });
 
 			//視点を設定。
 			MainCamera()->SetPosition(m_action.GetPosition());
-			//MainCamera()->SetPosition({ 0.0f,10.0f,-25.0f });
 
+			//更新。
 			MainCamera()->UpdateCameraParam();
 		}
 	}
