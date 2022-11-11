@@ -23,6 +23,13 @@ namespace nsYMEngine
 		{
 			enAction,
 			enJump,
+			enSkillPreparation,			//スキル準備
+			enUseSkill_1,				//スキル１使用
+			enUseSkill_2,				//スキル２使用
+			enUseSkill_3,				//スキル３使用
+			enUseSkill_4,				//スキル４使用
+			enUseSkill_5,				//スキル５使用
+			enUseSkill_6,				//スキル６使用
 
 			enNumActions
 		};
@@ -66,7 +73,42 @@ namespace nsYMEngine
 			{
 				{CGamepad::EnPadButton::enA},
 				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}
-			}
+			},
+			//enSkillPreparation
+			{
+				{CGamepad::EnPadButton::enLB1},
+				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+			},
+			//enUseSkill_1
+			{
+				{CGamepad::EnPadButton::enA},
+				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+			},
+			//enUseSkill_2
+			{
+				{CGamepad::EnPadButton::enB},
+				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+			},
+			//enUseSkill_3
+			{
+				{CGamepad::EnPadButton::enX},
+				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+			},
+			//enUseSkill_4
+			{
+				{CGamepad::EnPadButton::enY},
+				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+			},
+			//enUseSkill_5
+			{
+				{CGamepad::EnPadButton::enRB1},
+				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+			},
+			//enUseSkill_6
+			{
+				{CGamepad::EnPadButton::enRB2},
+				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+			},
 		};
 
 		/**

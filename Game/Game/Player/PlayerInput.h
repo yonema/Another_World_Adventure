@@ -13,6 +13,8 @@ namespace nsAWA {
 
 			void Update();
 		private:
+			void InputSkillAction();
+		private:
 			CPlayerAction* m_playerAction = nullptr;	//プレイヤーアクションのポインタ
 		};
 	}

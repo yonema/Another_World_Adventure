@@ -1,4 +1,5 @@
 #include "YonemaEnginePreCompile.h"
+#include "Player.h"
 #include "PlayerAction.h"
 #include "../Camera/MainCamera.h"
 
@@ -9,14 +10,21 @@ namespace nsAWA {
 		namespace {
 
 			constexpr const float kMoveAmount = 20.0f;		//移動量
-			constexpr const float kRotateSpeed = 8.0f;		//回転速度
 			constexpr const float kRotationSlerpRate = 9.375f;		//回転の補間率
+			constexpr const float kAutoHealMPTimeInterval = 0.1f;	//MP自動回復間隔
+			constexpr const int kAutoHealMPValue = 1;				//MP自動回復量
 		}
 
 		void CPlayerAction::Init() {
 
 			//カメラを検索。
 			m_mainCamera = FindGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
+
+			//プレイヤーを検索。
+			auto player = FindGO<CPlayer>(CPlayer::m_kObjName_Player);
+
+			//プレイヤーのステータスを保持。
+			m_playerStatus = player->GetStatus();
 		}
 
 		void CPlayerAction::Update(float deltaTime) {
@@ -26,6 +34,9 @@ namespace nsAWA {
 
 			//前方向を更新。
 			UpdateForwardDirection();
+
+			//MPを自動回復。
+			AutoHealMP();
 		}
 
 		void CPlayerAction::Move(float inputX, float inputZ) {
@@ -57,6 +68,18 @@ namespace nsAWA {
 			//線形補間。
 			m_rotation.Slerp(rotationSlerpRate, m_rotation, rotSource);
 		}
+
+#ifdef _DEBUG
+		/**
+		 * @brief スキル使用関数。後で削除。（今はMPが足りなくても使える）
+		 * @param decreaseMPValue 消費MP
+		*/
+		void CPlayerAction::UseSkill(int decreaseMPValue) {
+
+			//MPを消費。
+			m_playerStatus->DamageMP(decreaseMPValue);
+		}
+#endif
 
 		const CVector3& CPlayerAction::CalculateMoveAmount(float inputX, float inputZ) {
 
@@ -92,6 +115,22 @@ namespace nsAWA {
 
 			//正規化。
 			m_forwardDirection.Normalize();
+		}
+
+		void CPlayerAction::AutoHealMP() {
+
+			//タイマーを加算。
+			m_healMPTimer += m_deltaTimeRef;
+
+			//タイマーが一定間隔幅を超えたら。
+			if (m_healMPTimer >= kAutoHealMPTimeInterval) {
+
+				//MPを自動回復。
+				m_playerStatus->HealMP(kAutoHealMPValue);
+
+				//タイマーを減算。
+				m_healMPTimer -= kAutoHealMPTimeInterval;
+			}
 		}
 	}
 }
