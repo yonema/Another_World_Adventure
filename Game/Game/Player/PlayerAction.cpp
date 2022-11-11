@@ -9,10 +9,15 @@ namespace nsAWA {
 
 		namespace {
 
-			constexpr const float kMoveAmount = 20.0f;		//移動量
+			constexpr const float kMoveAmount_Walk = 20.0f;			//歩き状態の移動量
+			constexpr const float kMoveAmount_Dash = 30.0f;			//ダッシュ状態の移動量
 			constexpr const float kRotationSlerpRate = 9.375f;		//回転の補間率
 			constexpr const float kAutoHealMPTimeInterval = 0.1f;	//MP自動回復間隔
 			constexpr const int kAutoHealMPValue = 1;				//MP自動回復量
+			constexpr const float kAutoHealSPTimeInterval = 0.1f;	//SP自動回復間隔
+			constexpr const int kAutoHealSPValue = 1;				//SP自動回復量
+			constexpr const int kDashSPDamage = 2;					//ダッシュによるSP減少量
+			constexpr const float kDashSPTimeInterval = 0.1f;		//ダッシュによるSP減少間隔
 		}
 
 		void CPlayerAction::Init() {
@@ -37,20 +42,30 @@ namespace nsAWA {
 
 			//MPを自動回復。
 			AutoHealMP();
+
+			//SPを自動回復。
+			AutoHealSP();
 		}
 
 		void CPlayerAction::Move(float inputX, float inputZ) {
 
+			//ダッシュ状態か。
+			if (m_state == EnPlayerState::enDash) {
+
+				//ダッシュにより、SPを減少させる。
+				DamageSPDash();
+			}
+
 			//移動量を計算。
-			CVector3 m_moveAmount = CalculateMoveAmount(inputX, inputZ);
+			CVector3 moveAmount = CalculateMoveAmount(inputX, inputZ);
 
 			//移動方向を計算。
-			m_moveDirection = m_moveAmount;
+			m_moveDirection = moveAmount;
 			//正規化。
 			m_moveDirection.Normalize();
 
 			//移動。
-			m_position += m_moveAmount;
+			m_position += moveAmount;
 		}
 
 		void CPlayerAction::Rotate() {
@@ -70,14 +85,13 @@ namespace nsAWA {
 		}
 
 #ifdef _DEBUG
-		/**
-		 * @brief スキル使用関数。後で削除。（今はMPが足りなくても使える）
-		 * @param decreaseMPValue 消費MP
-		*/
-		void CPlayerAction::UseSkill(int decreaseMPValue) {
+		void CPlayerAction::StrongAttack() {
 
-			//MPを消費。
-			m_playerStatus->DamageMP(decreaseMPValue);
+			//強攻撃を繰り出す。
+			//...
+
+			//SPを消費する。
+			m_playerStatus->DamageSP(30);
 		}
 #endif
 
@@ -93,10 +107,24 @@ namespace nsAWA {
 			cameraRight.y = 0.0f;
 			cameraRight.Normalize();
 
+			//移動速度を初期化。
+			float moveAmountf = 0.0f;
+
+			//ダッシュ状態か。
+			if (m_state == EnPlayerState::enDash) {
+
+				//走る速度を代入。
+				moveAmountf = kMoveAmount_Dash;
+			}
+			else {
+				//歩く速度を代入。
+				moveAmountf = kMoveAmount_Walk;
+			}
+
 			//移動量を計算。
 			CVector3 moveAmount = CVector3::Zero();
-			moveAmount += cameraForward * inputZ * kMoveAmount * m_deltaTimeRef;
-			moveAmount += cameraRight * inputX * kMoveAmount * m_deltaTimeRef;
+			moveAmount += cameraForward * inputZ * moveAmountf * m_deltaTimeRef;
+			moveAmount += cameraRight * inputX * moveAmountf * m_deltaTimeRef;
 
 			//リターン。
 			return moveAmount;
@@ -130,6 +158,38 @@ namespace nsAWA {
 
 				//タイマーを減算。
 				m_healMPTimer -= kAutoHealMPTimeInterval;
+			}
+		}
+
+		void CPlayerAction::AutoHealSP() {
+
+			//タイマーを加算。
+			m_healSPTimer += m_deltaTimeRef;
+
+			//タイマーが一定間隔幅を超えたら。
+			if (m_healSPTimer >= kAutoHealSPTimeInterval) {
+
+				//SPを自動回復。
+				m_playerStatus->HealSP(kAutoHealSPValue);
+
+				//タイマーを減算。
+				m_healSPTimer -= kAutoHealSPTimeInterval;
+			}
+		}
+
+		void CPlayerAction::DamageSPDash() {
+
+			//タイマーを加算。
+			m_dashSPTimer += m_deltaTimeRef;
+
+			//タイマーが一定間隔幅を超えたら。
+			if (m_dashSPTimer >= kDashSPTimeInterval) {
+
+				//SPを減少。
+				m_playerStatus->DamageSP(kDashSPDamage);
+
+				//タイマーを減算。
+				m_dashSPTimer -= kDashSPTimeInterval;
 			}
 		}
 	}

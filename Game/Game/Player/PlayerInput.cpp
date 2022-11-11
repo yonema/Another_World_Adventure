@@ -1,5 +1,6 @@
 #include "YonemaEnginePreCompile.h"
 #include "PlayerInput.h"
+#include "PlayerAction.h"
 
 #ifdef _DEBUG
 #include "Player.h"
@@ -33,6 +34,17 @@ namespace nsAWA {
 					|| std::fabsf(inputZ) > kCanPlayerMoveInput
 				)
 				{
+					//ダッシュ準備入力がされているか。
+					if (Input()->IsPress(EnActionMapping::enDashPreparation)) {
+
+						//ダッシュ状態にする。
+						m_playerAction->SetState(EnPlayerState::enDash);
+					}
+					else {
+						//歩き状態にする。
+						m_playerAction->SetState(EnPlayerState::enWalk);
+					}
+
 					//移動。
 					m_playerAction->Move(
 						inputX,
@@ -51,6 +63,13 @@ namespace nsAWA {
 				InputSkillAction();
 			}
 
+			//強攻撃入力。
+			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
+
+				//強攻撃。
+				m_playerAction->StrongAttack();
+			}
+
 #ifdef _DEBUG
 			//プレイヤーを検索。
 			auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
@@ -59,9 +78,9 @@ namespace nsAWA {
 				auto sp = FindGO<CSpriteRenderer>("sampleSprite");
 				if (sp != nullptr) {
 
-					float mp = static_cast<float>(player->GetStatus()->GetMP());
-					mp = mp / 100.0f;
-					sp->SetScale({ mp ,mp ,mp });
+					float playerSP = static_cast<float>(player->GetStatus()->GetSP());
+					playerSP = playerSP / 100.0f;
+					sp->SetScale({ playerSP ,playerSP ,playerSP });
 				}
 			}
 #endif
@@ -72,6 +91,7 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 
 #ifdef _DEBUG
+				//デバッグ用にサンプルスプライトを生成。
 				if (FindGO<CSpriteRenderer>("sampleSprite") == nullptr) {
 					SSpriteInitData sampleSpriteData;
 					sampleSpriteData.filePath = "Assets/Images/200x200PNG.png";
@@ -85,17 +105,13 @@ namespace nsAWA {
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
-#ifdef _DEBUG
+
 				//スキル２使用。
-				m_playerAction->UseSkill(2);
-#endif
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
-#ifdef _DEBUG
+
 				//スキル３使用。
-				m_playerAction->UseSkill(10);
-#endif
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_4)) {

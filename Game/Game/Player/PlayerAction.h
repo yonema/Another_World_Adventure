@@ -14,6 +14,15 @@ namespace nsAWA {
 
 	namespace nsPlayer {
 
+		//プレイヤーステート
+		enum EnPlayerState {								
+			enIdle,			//待機
+			enWalk,			//歩き
+			enDash,			//ダッシュ
+
+			enStateNum		//ステート数
+		};
+
 		//プレイヤーアクションクラス
 		class CPlayerAction : nsUtils::SNoncopyable
 		{
@@ -26,7 +35,8 @@ namespace nsAWA {
 
 			void Rotate();
 #ifdef _DEBUG
-			void UseSkill(int decreaseMPValue);	//Jobごとにスキルの中が違うので後で消す。
+			//強攻撃。ジョブごとに違うので後で消す。
+			void StrongAttack();
 #endif
 		private:
 			const CVector3& CalculateMoveAmount(float inputX, float inputZ);
@@ -40,6 +50,10 @@ namespace nsAWA {
 			void UpdateForwardDirection();
 
 			void AutoHealMP();
+
+			void AutoHealSP();
+
+			void DamageSPDash();
 		public:
 			const CVector3& GetPosition()const {
 
@@ -51,13 +65,26 @@ namespace nsAWA {
 
 				return m_rotation;
 			}
+			
+			void SetState(const EnPlayerState& state) {
+
+				m_state = state;
+			}
+			const EnPlayerState& GetState()const {
+
+				return m_state;
+			}
 		private:
+			
 			CVector3 m_position = CVector3::Zero();				//座標
 			CQuaternion m_rotation = CQuaternion::Identity();	//回転
 			CVector3 m_forwardDirection = CVector3::Zero();		//前方向
 			CVector3 m_moveDirection = CVector3::Zero();		//移動方向
+			EnPlayerState m_state = EnPlayerState::enIdle;		//ステート
 			float m_deltaTimeRef = 0.0f;						//そのフレームのdeltaTime
-			float m_healMPTimer = 0.0f;							//HP自動回復用タイマー
+			float m_healMPTimer = 0.0f;							//MP自動回復用タイマー
+			float m_healSPTimer = 0.0f;							//SP自動回復用タイマー
+			float m_dashSPTimer = 0.0f;							//ダッシュによるSPダメージタイマー
 
 			nsCamera::CMainCamera* m_mainCamera = nullptr;		//メインカメラのポインタ
 			CPlayerStatus* m_playerStatus = nullptr;			//プレイヤーステータスのポインタ

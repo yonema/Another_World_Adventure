@@ -32,10 +32,10 @@ namespace nsAWA
 			}
 			//if (Gamepad()->IsPress(EnPadButton::enB))
 			//if (Keyboard()->IsPress(EnKeyButton::enB))
-			if (Input()->IsPress(EnActionMapping::enAction))
-			{
-				addPos.y -= 0.5f;
-			}
+			//if (Input()->IsPress(EnActionMapping::enAction))
+			//{
+			//	addPos.y -= 0.5f;
+			//}
 
 			addPos.z += Input()->GetVirtualAxis(EnAxisMapping::enForward) * 0.1f;
 			addPos.x += Input()->GetVirtualAxis(EnAxisMapping::enRight) * 0.1f;

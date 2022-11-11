@@ -11,6 +11,7 @@ namespace nsAWA {
 			//仮の定数。後ほどcsvで入力するコードを書く。
 			constexpr const int kLev1MaxHP = 200;		//仮のHP最大値。
 			constexpr const int kLev1MaxMP = 100;		//仮のHP最大値。
+			constexpr const int kMaxSP = 100;			//SP最大値。
 #endif
 		}
 
@@ -28,6 +29,9 @@ namespace nsAWA {
 			m_MP = kLev1MaxMP;
 			m_maxMP = kLev1MaxMP;
 #endif
+			//SPを設定。
+			m_SP = kMaxSP;
+			m_maxSP = kMaxSP;
 		}
 
 		void CPlayerStatus::HealHP(int value) {
@@ -77,6 +81,31 @@ namespace nsAWA {
 			if (m_MP <= 0) {
 
 				m_MP = 0;
+			}
+		}
+
+		void CPlayerStatus::HealSP(int value) {
+
+			//SPを上昇させる。
+			m_SP += value;
+
+			//最大SPを超えているなら。
+			if (m_SP > m_maxSP) {
+
+				//最大SPと同じに設定する。
+				m_SP = m_maxSP;
+			}
+		}
+
+		void CPlayerStatus::DamageSP(int value) {
+
+			//SPを減少させる。
+			m_SP -= value;
+
+			//0未満になったら0に設定する。
+			if (m_SP <= 0) {
+
+				m_SP = 0;
 			}
 		}
 	}
