@@ -1,9 +1,16 @@
 #pragma once
-#include "PlayerAction.h"
 
 namespace nsAWA {
+	//エイリアス宣言
+	
+	namespace nsPlayer {
+
+		class CPlayerAction;
+	}
 
 	namespace nsPlayer {
+
+		
 
 		//プレイヤーの入力からアクションを起こすクラス
 		class CPlayerInput : nsUtils::SNoncopyable

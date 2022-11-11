@@ -1,6 +1,7 @@
 #pragma once
-#include "PlayerInput.h"
 #include "PlayerStatus.h"
+#include "PlayerAction.h"
+#include "PlayerInput.h"
 
 namespace nsAWA {
 
