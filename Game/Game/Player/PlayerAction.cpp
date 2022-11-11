@@ -48,8 +48,12 @@ namespace nsAWA {
 			//SPを自動回復。
 			AutoHealSP();
 
-			//ガードゲージの値を自動回復。
-			AutoHealGuardGaugeValue();
+			//ガード中以外か。
+			if (m_state != EnPlayerState::enGuard) {
+				
+				//ガードゲージの値を自動回復。
+				AutoHealGuardGaugeValue();
+			}
 		}
 
 		void CPlayerAction::Move(float inputX, float inputZ) {
