@@ -58,7 +58,7 @@ namespace nsAWA {
 			m_HP -= value;
 
 			//0未満になったら0に設定する。
-			if (m_HP <= 0) {
+			if (m_HP < 0) {
 
 				m_HP = 0;
 			}
@@ -83,7 +83,7 @@ namespace nsAWA {
 			m_MP -= value;
 
 			//0未満になったら0に設定する。
-			if (m_MP <= 0) {
+			if (m_MP < 0) {
 
 				m_MP = 0;
 			}
@@ -108,7 +108,7 @@ namespace nsAWA {
 			m_SP -= value;
 
 			//0未満になったら0に設定する。
-			if (m_SP <= 0) {
+			if (m_SP < 0) {
 
 				m_SP = 0;
 			}
@@ -133,7 +133,7 @@ namespace nsAWA {
 			m_guardGaugeValue -= value;
 
 			//0未満になったら0に設定する。
-			if (m_guardGaugeValue <= 0) {
+			if (m_guardGaugeValue < 0) {
 
 				m_guardGaugeValue = 0;
 			}
