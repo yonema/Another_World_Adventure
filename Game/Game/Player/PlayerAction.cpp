@@ -9,15 +9,17 @@ namespace nsAWA {
 
 		namespace {
 
-			constexpr const float kMoveAmount_Walk = 20.0f;			//歩き状態の移動量
-			constexpr const float kMoveAmount_Dash = 30.0f;			//ダッシュ状態の移動量
-			constexpr const float kRotationSlerpRate = 9.375f;		//回転の補間率
-			constexpr const float kAutoHealMPTimeInterval = 0.1f;	//MP自動回復間隔
-			constexpr const int kAutoHealMPValue = 1;				//MP自動回復量
-			constexpr const float kAutoHealSPTimeInterval = 0.1f;	//SP自動回復間隔
-			constexpr const int kAutoHealSPValue = 1;				//SP自動回復量
-			constexpr const int kDashSPDamage = 2;					//ダッシュによるSP減少量
-			constexpr const float kDashSPTimeInterval = 0.1f;		//ダッシュによるSP減少間隔
+			constexpr const float kMoveAmount_Walk = 20.0f;				//歩き状態の移動量
+			constexpr const float kMoveAmount_Dash = 30.0f;				//ダッシュ状態の移動量
+			constexpr const float kRotationSlerpRate = 9.375f;			//回転の補間率
+			constexpr const float kAutoHealMPTimeInterval = 0.1f;		//MP自動回復間隔
+			constexpr const int kAutoHealMPValue = 1;					//MP自動回復量
+			constexpr const float kAutoHealSPTimeInterval = 0.1f;		//SP自動回復間隔
+			constexpr const int kAutoHealSPValue = 1;					//SP自動回復量
+			constexpr const float kAutoHealGuardGaugeInterval = 0.1f;	//ガードゲージの値自動回復間隔
+			constexpr const int kAutoHealGuardGaugeValueAmount = 1;		//ガードゲージの値自動回復量
+			constexpr const int kDashSPDamage = 2;						//ダッシュによるSP減少量
+			constexpr const float kDashSPTimeInterval = 0.1f;			//ダッシュによるSP減少間隔
 		}
 
 		void CPlayerAction::Init() {
@@ -45,6 +47,9 @@ namespace nsAWA {
 
 			//SPを自動回復。
 			AutoHealSP();
+
+			//ガードゲージの値を自動回復。
+			AutoHealGuardGaugeValue();
 		}
 
 		void CPlayerAction::Move(float inputX, float inputZ) {
@@ -82,6 +87,12 @@ namespace nsAWA {
 
 			//線形補間。
 			m_rotation.Slerp(rotationSlerpRate, m_rotation, rotSource);
+		}
+
+		void CPlayerAction::Guard() {
+
+			//ガード状態に設定。
+			m_state = EnPlayerState::enGuard;
 		}
 
 #ifdef _DEBUG
@@ -190,6 +201,22 @@ namespace nsAWA {
 
 				//タイマーを減算。
 				m_dashSPTimer -= kDashSPTimeInterval;
+			}
+		}
+
+		void CPlayerAction::AutoHealGuardGaugeValue() {
+
+			//タイマーを加算。
+			m_healGuardGaugeValueTimer += m_deltaTimeRef;
+
+			//タイマーが一定間隔幅を超えたら。
+			if (m_healGuardGaugeValueTimer >= kAutoHealGuardGaugeInterval) {
+
+				//ガードゲージの値を自動回復。
+				m_playerStatus->HealGuardGaugeValue(kAutoHealGuardGaugeValueAmount);
+
+				//タイマーを減算。
+				m_healGuardGaugeValueTimer -= kAutoHealGuardGaugeInterval;
 			}
 		}
 	}

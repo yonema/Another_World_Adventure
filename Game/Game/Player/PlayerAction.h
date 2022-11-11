@@ -19,6 +19,7 @@ namespace nsAWA {
 			enIdle,			//待機
 			enWalk,			//歩き
 			enDash,			//ダッシュ
+			enGuard,		//ガード
 
 			enStateNum		//ステート数
 		};
@@ -34,6 +35,8 @@ namespace nsAWA {
 			void Move(float inputX,float inputZ);
 
 			void Rotate();
+
+			void Guard();
 #ifdef _DEBUG
 			//強攻撃。ジョブごとに違うので後で消す。
 			void StrongAttack();
@@ -54,6 +57,8 @@ namespace nsAWA {
 			void AutoHealSP();
 
 			void DamageSPDash();
+
+			void AutoHealGuardGaugeValue();
 		public:
 			const CVector3& GetPosition()const {
 
@@ -75,7 +80,6 @@ namespace nsAWA {
 				return m_state;
 			}
 		private:
-			
 			CVector3 m_position = CVector3::Zero();				//座標
 			CQuaternion m_rotation = CQuaternion::Identity();	//回転
 			CVector3 m_forwardDirection = CVector3::Zero();		//前方向
@@ -84,6 +88,7 @@ namespace nsAWA {
 			float m_deltaTimeRef = 0.0f;						//そのフレームのdeltaTime
 			float m_healMPTimer = 0.0f;							//MP自動回復用タイマー
 			float m_healSPTimer = 0.0f;							//SP自動回復用タイマー
+			float m_healGuardGaugeValueTimer = 0.0f;			//ガードゲージの値自動回復用タイマー
 			float m_dashSPTimer = 0.0f;							//ダッシュによるSPダメージタイマー
 
 			nsCamera::CMainCamera* m_mainCamera = nullptr;		//メインカメラのポインタ

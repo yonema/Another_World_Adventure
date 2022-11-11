@@ -10,8 +10,6 @@ namespace nsAWA {
 
 	namespace nsPlayer {
 
-		
-
 		//プレイヤーの入力からアクションを起こすクラス
 		class CPlayerInput : nsUtils::SNoncopyable
 		{

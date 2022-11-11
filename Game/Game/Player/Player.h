@@ -19,6 +19,8 @@ namespace nsAWA {
 
 			void Update(float deltaTime)override final;
 
+			void ApplyDamage(int power);
+
 		public:
 			const CVector3& GetPosition()const {
 

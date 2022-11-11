@@ -9,9 +9,10 @@ namespace nsAWA {
 
 #ifdef _DEBUG
 			//仮の定数。後ほどcsvで入力するコードを書く。
-			constexpr const int kLev1MaxHP = 200;		//仮のHP最大値。
-			constexpr const int kLev1MaxMP = 100;		//仮のHP最大値。
-			constexpr const int kMaxSP = 100;			//SP最大値。
+			constexpr const int kLev1MaxHP = 200;			//仮のHP最大値。
+			constexpr const int kLev1MaxMP = 100;			//仮のHP最大値。
+			constexpr const int kMaxSP = 100;				//SP最大値。
+			constexpr const int kMaxGuardGaugeValue = 100;	//ガードゲージの最大値。
 #endif
 		}
 
@@ -32,6 +33,10 @@ namespace nsAWA {
 			//SPを設定。
 			m_SP = kMaxSP;
 			m_maxSP = kMaxSP;
+
+			//ガードゲージの値を設定。
+			m_guardGaugeValue = kMaxGuardGaugeValue;
+			m_maxGuardGaugeValue = kMaxGuardGaugeValue;
 		}
 
 		void CPlayerStatus::HealHP(int value) {
@@ -106,6 +111,31 @@ namespace nsAWA {
 			if (m_SP <= 0) {
 
 				m_SP = 0;
+			}
+		}
+
+		void CPlayerStatus::HealGuardGaugeValue(int value) {
+
+			//ガードゲージの値を上昇させる。
+			m_guardGaugeValue += value;
+
+			//ガードゲージの最大値を超えているなら。
+			if (m_guardGaugeValue > m_maxGuardGaugeValue) {
+
+				//ガードゲージの最大値と同じに設定する。
+				m_guardGaugeValue = m_maxGuardGaugeValue;
+			}
+		}
+
+		void CPlayerStatus::DamageGuardGaugeValue(int value) {
+
+			//ガードゲージの値を減少させる。
+			m_guardGaugeValue -= value;
+
+			//0未満になったら0に設定する。
+			if (m_guardGaugeValue <= 0) {
+
+				m_guardGaugeValue = 0;
 			}
 		}
 	}
