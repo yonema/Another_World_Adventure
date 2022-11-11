@@ -50,6 +50,23 @@ namespace nsAWA {
 			m_modelRenderer->SetRotation(m_action.GetRotation());
 		}
 
+		void CPlayer::ApplyDamage(int power) {
+
+			//ガード中かつガードゲージの値が威力より高い。
+			if (m_action.GetState() == EnPlayerState::enGuard
+				&& m_status.GetGuardGaugeValue() >= power
+				)
+			{
+				//ガード成功。
+				//威力分だけガードゲージの値が減少する。
+				m_status.DamageGuardGaugeValue(power);
+			}
+			else {
+				//ダメージをくらう。
+				m_status.DamageHP(power);
+			}
+		}
+
 		void CPlayer::CreatePlayerModel() {
 
 			//プレイヤーモデルを生成。

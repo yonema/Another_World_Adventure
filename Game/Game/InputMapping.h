@@ -21,10 +21,12 @@ namespace nsYMEngine
 		*/
 		enum class EnActionMapping
 		{
-			enWeakAttack,
-			enStrongAttack,
-			enDashPreparation,
-			enJump,
+			enWeakAttack,				//弱攻撃
+			enStrongAttack,				//強攻撃
+			enDashPreparation,			//ダッシュ準備
+			enJump,						//ジャンプ
+			enGuardPreparation,			//ガード準備
+			enGuard,					//ガード
 			enSkillPreparation,			//スキル準備
 			enUseSkill_1,				//スキル１使用
 			enUseSkill_2,				//スキル２使用
@@ -85,6 +87,16 @@ namespace nsYMEngine
 			{
 				{CGamepad::EnPadButton::enA},
 				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}
+			},
+			// enGuardPreparation
+			{
+				{CGamepad::EnPadButton::enRB1},
+				{CKeyboard::EnKeyButton::en7}
+			},
+			// enGuard
+			{
+				{CGamepad::EnPadButton::enB},
+				{CKeyboard::EnKeyButton::enK}
 			},
 			//enSkillPreparation
 			{

@@ -54,6 +54,11 @@ namespace nsAWA {
 					//回転。
 					m_playerAction->Rotate();
 				}
+				else {
+
+					//待機状態に設定する。
+					m_playerAction->SetState(EnPlayerState::enIdle);
+				}
 			}
 
 			//スキル準備入力。
@@ -70,17 +75,35 @@ namespace nsAWA {
 				m_playerAction->StrongAttack();
 			}
 
+			//ガード準備入力。
+			if (Input()->IsPress(EnActionMapping::enGuardPreparation)) {
+
+				//ガード入力。
+				if (Input()->IsPress(EnActionMapping::enGuard)) {
+
+					//ガード。
+					m_playerAction->Guard();
+				}
+			}
 #ifdef _DEBUG
+
 			//プレイヤーを検索。
 			auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+			//サンプル入力。
+			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
+
+				//プレイヤーにダメージを与える。
+				player->ApplyDamage(50);
+			}
+
 			if (player != nullptr) {
 
 				auto sp = FindGO<CSpriteRenderer>("sampleSprite");
 				if (sp != nullptr) {
 
-					float playerSP = static_cast<float>(player->GetStatus()->GetSP());
-					playerSP = playerSP / 100.0f;
-					sp->SetScale({ playerSP ,playerSP ,playerSP });
+					float guardGaugeValue = static_cast<float>(player->GetStatus()->GetGuardGaugeValue());
+					guardGaugeValue = guardGaugeValue / 100.0f;
+					sp->SetScale({ guardGaugeValue ,guardGaugeValue ,guardGaugeValue });
 				}
 			}
 #endif
