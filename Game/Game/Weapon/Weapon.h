@@ -45,7 +45,7 @@ namespace nsAWA {
 		};
 
 		//•Ší¶¬ƒNƒ‰ƒX
-		class CWeaponBuilder {
+		class CWeaponBuilder : nsUtils::SNoncopyable {
 
 		public:
 			CWeapon* Create(const SWeaponInfo& weaponInfo, const char* modelFilePath);
