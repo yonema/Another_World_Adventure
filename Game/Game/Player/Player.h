@@ -2,6 +2,7 @@
 #include "PlayerStatus.h"
 #include "PlayerAction.h"
 #include "PlayerInput.h"
+#include "../GameActor.h"
 
 namespace nsAWA {
 
@@ -18,7 +19,7 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		//プレイヤークラス
-		class CPlayer : public IGameObject
+		class CPlayer : public CGameActor
 		{
 		public:
 			static const char* const m_kObjName_Player;		//プレイヤークラスの名前

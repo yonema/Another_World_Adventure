@@ -6,6 +6,7 @@
 #include "../YonemaEngine/Graphics/Renderers/SpriteRenderer.h"
 #include "../YonemaEngine/Graphics/2D/Sprite.h"
 
+
 // エイリアス宣言
 
 using namespace nsYMEngine;
