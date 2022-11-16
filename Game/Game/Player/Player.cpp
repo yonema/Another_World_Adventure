@@ -1,6 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "Player.h"
 #include "../Weapon/Weapon.h"
+#include "../Armor/Armor.h"
 
 namespace nsAWA {
 
@@ -20,6 +21,9 @@ namespace nsAWA {
 
 			//武器を生成。
 			CreateWeapon();
+
+			//防具を生成。
+			CreateArmor();
 
 			//ステータスを初期化。
 			m_status.Init();
@@ -96,22 +100,25 @@ namespace nsAWA {
 
 		void CPlayer::CreateWeapon() {
 
+
+		}
+
+		void CPlayer::CreateArmor() {
+
 #ifdef _DEBUG
 
-			//武器情報を定義。
-			nsWeapon::SWeaponInfo weaponInfo;
-			weaponInfo.name = "sampleWeapon";
-			weaponInfo.weaponType = nsWeapon::EnWeaponType::enSword;
-			weaponInfo.attack = 100;
-			weaponInfo.intelligence = 20;
-			weaponInfo.critical = 10;
+			//防具情報を定義。
+			nsArmor::SArmorInfo armorInfo;
+			armorInfo.name = "sampleArmor";
+			armorInfo.defence= 100;
+			armorInfo.mind = 20;
 
-			//武器モデルのファイルパスを定義。（今回はサンプルボックスを使用...）
-			const char* weaponModelFilePath = "Assets/Models/sampleBox.fbx";
+			//防具モデルのファイルパスを定義。（今回はサンプルボックスを使用...）
+			const char* armorModelFilePath = "Assets/Models/sampleBox.fbx";
 
-			//武器生成クラスを使って武器を生成。
-			nsWeapon::CWeaponBuilder weaponBuilder;
-			m_weapon = weaponBuilder.Create(weaponInfo, weaponModelFilePath);
+			//防具生成クラスを使って武器を生成。
+			nsArmor::CArmorBuilder armorBuilder;
+			m_armor = armorBuilder.Create(armorInfo, armorModelFilePath);
 #endif
 		}
 	}

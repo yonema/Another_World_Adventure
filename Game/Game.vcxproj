@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Game\Armor\Armor.cpp" />
     <ClCompile Include="Game\Camera\CameraAction.cpp" />
     <ClCompile Include="Game\Camera\CameraInput.cpp" />
     <ClCompile Include="Game\InputMapping.cpp" />
@@ -218,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Game\Armor\Armor.h" />
     <ClInclude Include="Game\Camera\CameraAction.h" />
     <ClInclude Include="Game\Camera\CameraInput.h" />
     <ClInclude Include="Game\InputMapping.h" />
