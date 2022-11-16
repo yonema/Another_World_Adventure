@@ -5,9 +5,14 @@
 
 namespace nsAWA {
 
+	//エイリアス宣言
 	namespace nsWeapon {
 
 		class CWeapon;
+	}
+	namespace nsArmor {
+
+		class CArmor;
 	}
 
 	namespace nsPlayer {
@@ -48,12 +53,15 @@ namespace nsAWA {
 			void CreatePlayerModel();
 
 			void CreateWeapon();
+
+			void CreateArmor();
 		private:
 			CModelRenderer* m_modelRenderer = nullptr;	//プレイヤーモデル
 			CPlayerInput m_input;						//入力
 			CPlayerAction m_action;						//アクション
 			CPlayerStatus m_status;						//ステータス
 			nsWeapon::CWeapon* m_weapon = nullptr;		//武器
+			nsArmor::CArmor* m_armor = nullptr;			//防具
 		};
 	}
 }
