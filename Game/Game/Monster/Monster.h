@@ -1,4 +1,5 @@
 #pragma once
+#include "../GameActor.h"
 
 namespace nsAWA {
 
@@ -12,7 +13,7 @@ namespace nsAWA {
 		};
 
 		//モンスタークラス
-		class CMonster : public IGameObject
+		class CMonster : public CGameActor
 		{
 		public:
 			static const char* const m_kObjName_Monster;		//モンスタークラスの名前
