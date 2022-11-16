@@ -1,5 +1,6 @@
 #include "YonemaEnginePreCompile.h"
 #include "Player.h"
+#include "../Weapon/Weapon.h"
 
 namespace nsAWA {
 
@@ -17,6 +18,9 @@ namespace nsAWA {
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();
 
+			//武器を生成。
+			CreateWeapon();
+
 			//ステータスを初期化。
 			m_status.Init();
 
@@ -33,6 +37,12 @@ namespace nsAWA {
 
 			//プレイヤーモデルを破棄。
 			DeleteGO(m_modelRenderer);
+
+			//武器を破棄。
+			if (m_weapon != nullptr) {
+				m_weapon->Release();
+				m_weapon = nullptr;
+			}
 		}
 
 		void CPlayer::Update(float deltaTime) {
@@ -82,6 +92,27 @@ namespace nsAWA {
 			//プレイヤーモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
 			m_modelRenderer->SetScale(10.0f);
+		}
+
+		void CPlayer::CreateWeapon() {
+
+#ifdef _DEBUG
+
+			//武器情報を定義。
+			nsWeapon::SWeaponInfo weaponInfo;
+			weaponInfo.name = "sampleWeapon";
+			weaponInfo.weaponType = nsWeapon::EnWeaponType::enSword;
+			weaponInfo.attack = 100;
+			weaponInfo.intelligence = 20;
+			weaponInfo.critical = 10;
+
+			//武器モデルのファイルパスを定義。（今回はサンプルボックスを使用...）
+			const char* weaponModelFilePath = "Assets/Models/sampleBox.fbx";
+
+			//武器生成クラスを使って武器を生成。
+			nsWeapon::CWeaponBuilder weaponBuilder;
+			m_weapon = weaponBuilder.Create(weaponInfo, weaponModelFilePath);
+#endif
 		}
 	}
 }
