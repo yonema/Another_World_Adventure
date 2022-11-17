@@ -6,6 +6,11 @@ namespace nsAWA {
 
 	namespace nsAbnormalStatus {
 
+		namespace {
+
+			constexpr float kDurationTimeBase = 10.0f;	//ベースとなる持続時間
+		}
+
 		bool CAbnormalStatus::Update(float deltaTime) {
 
 			//タイマーを更新。
@@ -31,9 +36,16 @@ namespace nsAWA {
 		void CAbnormalStatusBuilder::Create(
 			EnAbnormalStatusType abnormalStatusType,
 			IGameActor* target,
-			float durationTime
+			int abnormalStatusLevel
 		)
 		{
+			//レベル0なら。
+			if (abnormalStatusLevel == 0) {
+
+				//生成せずに終了。
+				return;
+			}
+
 			//状態異常クラスの雛形を生成。
 			CAbnormalStatus* abnormalStatus = nullptr;
 
@@ -58,7 +70,7 @@ namespace nsAWA {
 			abnormalStatus->m_target = target;
 
 			//持続時間を設定。
-			abnormalStatus->m_durationTimer = durationTime;
+			abnormalStatus->m_durationTimer = abnormalStatusLevel * kDurationTimeBase;
 
 			//初期化処理を実行。
 			abnormalStatus->Init();

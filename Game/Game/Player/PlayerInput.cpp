@@ -98,7 +98,7 @@ namespace nsAWA {
 				builder.Create(
 					nsAbnormalStatus::EnAbnormalStatusType::enPoison,
 					player,
-					90.0f		//‘±ŠÔ
+					9		//“ÅƒŒƒxƒ‹
 				);
 			}
 
