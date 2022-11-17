@@ -110,7 +110,7 @@ namespace nsAWA {
 		}
 #endif
 
-		const CVector3& CPlayerAction::CalculateMoveAmount(float inputX, float inputZ) {
+		const CVector3 CPlayerAction::CalculateMoveAmount(float inputX, float inputZ) {
 
 			//カメラの前方向、右方向を取得。
 			auto cameraForward = m_mainCamera->GetForwardDirection();

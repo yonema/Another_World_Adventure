@@ -20,9 +20,9 @@ namespace nsAWA {
 
 			EnWeaponType weaponType = EnWeaponType::enNone;	//武器の種類
 			const char* name = nullptr;		//名前
-			int attack = 0;					//物理攻撃力
-			int intelligence = 0;			//魔法攻撃力
-			int critical = 0;				//クリティカル率
+			float attack = 0.0f;			//物理攻撃力
+			float intelligence = 0.0f;		//魔法攻撃力
+			float critical = 0.0f;			//クリティカル率
 		};
 
 		//武器クラス

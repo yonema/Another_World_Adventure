@@ -19,7 +19,7 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		//プレイヤークラス
-		class CPlayer : public CGameActor
+		class CPlayer : public IGameActor
 		{
 		public:
 			static const char* const m_kObjName_Player;		//プレイヤークラスの名前
@@ -28,9 +28,9 @@ namespace nsAWA {
 
 			void OnDestroy()override final;
 
-			void Update(float deltaTime)override final;
+			void UpdateActor(float deltaTime)override final;
 
-			void ApplyDamage(int power);
+			void ApplyDamage(float power, bool canGuard = true)override final;
 
 		public:
 			const CVector3& GetPosition()const {

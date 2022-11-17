@@ -9,10 +9,10 @@ namespace nsAWA {
 
 #ifdef _DEBUG
 			//仮の定数。後ほどcsvで入力するコードを書く。
-			constexpr const int kLev1MaxHP = 200;			//仮のHP最大値。
-			constexpr const int kLev1MaxMP = 100;			//仮のHP最大値。
-			constexpr const int kMaxSP = 100;				//SP最大値。
-			constexpr const int kMaxGuardGaugeValue = 100;	//ガードゲージの最大値。
+			constexpr const float kLev1MaxHP = 200.0f;			//仮のHP最大値。
+			constexpr const float kLev1MaxMP = 100.0f;			//仮のHP最大値。
+			constexpr const float kMaxSP = 100.0f;				//SP最大値。
+			constexpr const float kMaxGuardGaugeValue = 100.0f;	//ガードゲージの最大値。
 #endif
 		}
 
@@ -39,7 +39,7 @@ namespace nsAWA {
 			m_maxGuardGaugeValue = kMaxGuardGaugeValue;
 		}
 
-		void CPlayerStatus::HealHP(int value) {
+		void CPlayerStatus::HealHP(float value) {
 
 			//HPを上昇させる。
 			m_HP += value;
@@ -52,19 +52,19 @@ namespace nsAWA {
 			}
 		}
 
-		void CPlayerStatus::DamageHP(int value) {
+		void CPlayerStatus::DamageHP(float value) {
 
 			//HPを減少させる。
 			m_HP -= value;
 
 			//0未満になったら0に設定する。
-			if (m_HP < 0) {
+			if (m_HP < 0.0f) {
 
-				m_HP = 0;
+				m_HP = 0.0f;
 			}
 		}
 
-		void CPlayerStatus::HealMP(int value) {
+		void CPlayerStatus::HealMP(float value) {
 
 			//MPを上昇させる。
 			m_MP += value;
@@ -77,19 +77,19 @@ namespace nsAWA {
 			}
 		}
 
-		void CPlayerStatus::DamageMP(int value) {
+		void CPlayerStatus::DamageMP(float value) {
 
 			//MPを減少させる。
 			m_MP -= value;
 
 			//0未満になったら0に設定する。
-			if (m_MP < 0) {
+			if (m_MP < 0.0f) {
 
-				m_MP = 0;
+				m_MP = 0.0f;
 			}
 		}
 
-		void CPlayerStatus::HealSP(int value) {
+		void CPlayerStatus::HealSP(float value) {
 
 			//SPを上昇させる。
 			m_SP += value;
@@ -102,19 +102,19 @@ namespace nsAWA {
 			}
 		}
 
-		void CPlayerStatus::DamageSP(int value) {
+		void CPlayerStatus::DamageSP(float value) {
 
 			//SPを減少させる。
 			m_SP -= value;
 
 			//0未満になったら0に設定する。
-			if (m_SP < 0) {
+			if (m_SP < 0.0f) {
 
-				m_SP = 0;
+				m_SP = 0.0f;
 			}
 		}
 
-		void CPlayerStatus::HealGuardGaugeValue(int value) {
+		void CPlayerStatus::HealGuardGaugeValue(float value) {
 
 			//ガードゲージの値を上昇させる。
 			m_guardGaugeValue += value;
@@ -127,15 +127,15 @@ namespace nsAWA {
 			}
 		}
 
-		void CPlayerStatus::DamageGuardGaugeValue(int value) {
+		void CPlayerStatus::DamageGuardGaugeValue(float value) {
 
 			//ガードゲージの値を減少させる。
 			m_guardGaugeValue -= value;
 
 			//0未満になったら0に設定する。
-			if (m_guardGaugeValue < 0) {
+			if (m_guardGaugeValue < 0.0f) {
 
-				m_guardGaugeValue = 0;
+				m_guardGaugeValue = 0.0f;
 			}
 		}
 	}

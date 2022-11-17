@@ -49,7 +49,7 @@ namespace nsAWA {
 			}
 		}
 
-		void CPlayer::Update(float deltaTime) {
+		void CPlayer::UpdateActor(float deltaTime) {
 
 			//プレイヤーアクションクラスを更新。
 			m_action.Update(deltaTime);
@@ -64,10 +64,11 @@ namespace nsAWA {
 			m_modelRenderer->SetRotation(m_action.GetRotation());
 		}
 
-		void CPlayer::ApplyDamage(int power) {
+		void CPlayer::ApplyDamage(float power, bool canGuard) {
 
 			//ガード中かつガードゲージの値が威力より高い。
 			if (m_action.GetState() == EnPlayerState::enGuard
+				&& canGuard == true
 				&& m_status.GetGuardGaugeValue() >= power
 				)
 			{
@@ -110,8 +111,8 @@ namespace nsAWA {
 			//防具情報を定義。
 			nsArmor::SArmorInfo armorInfo;
 			armorInfo.name = "sampleArmor";
-			armorInfo.defence= 100;
-			armorInfo.mind = 20;
+			armorInfo.defence= 100.0f;
+			armorInfo.mind = 20.0f;
 
 			//防具モデルのファイルパスを定義。（今回はサンプルボックスを使用...）
 			const char* armorModelFilePath = "Assets/Models/sampleBox.fbx";

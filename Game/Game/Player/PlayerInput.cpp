@@ -4,6 +4,7 @@
 
 #ifdef _DEBUG
 #include "Player.h"
+#include "../AbnormalStatus/AbnormalStatus.h"
 #endif
 
 namespace nsAWA {
@@ -92,8 +93,13 @@ namespace nsAWA {
 			//サンプル入力。
 			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
-				//プレイヤーにダメージを与える。
-				player->ApplyDamage(50);
+				//プレイヤーに毒を与える。
+				nsAbnormalStatus::CAbnormalStatusBuilder builder;
+				builder.Create(
+					nsAbnormalStatus::EnAbnormalStatusType::enPoison,
+					player,
+					90.0f		//持続時間
+				);
 			}
 
 			if (player != nullptr) {
@@ -101,9 +107,9 @@ namespace nsAWA {
 				auto sp = FindGO<CSpriteRenderer>("sampleSprite");
 				if (sp != nullptr) {
 
-					float guardGaugeValue = static_cast<float>(player->GetStatus()->GetGuardGaugeValue());
-					guardGaugeValue = guardGaugeValue / 100.0f;
-					sp->SetScale({ guardGaugeValue ,guardGaugeValue ,guardGaugeValue });
+					float hp = static_cast<float>(player->GetStatus()->GetHP());
+					hp = hp / 200.0f;
+					sp->SetScale({ hp ,hp ,hp });
 				}
 			}
 #endif
