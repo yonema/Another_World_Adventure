@@ -42,7 +42,7 @@ namespace nsAWA {
 			void Create(
 				EnAbnormalStatusType abnormalStatusType,
 				IGameActor* target,
-				float durationTime
+				int abnormalStatusLevel
 			);
 		};
 	}
