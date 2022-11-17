@@ -44,6 +44,4 @@ namespace nsAWA
 		//ƒƒCƒ“ƒJƒƒ‰‚ğ”jŠüB
 		DeleteGO(m_mainCamera);
 	}
-
-
 }
