@@ -6,7 +6,7 @@ namespace nsAWA {
 	namespace nsAbnormalStatus {
 
 		//ó‘ÔˆÙí‚Ìí—Ş
-		enum EnAbnormalStatusType {
+		enum class EnAbnormalStatusType {
 
 			enPoison,	//“Å
 

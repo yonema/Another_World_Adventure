@@ -8,6 +8,7 @@ namespace nsAWA {
 	namespace {
 
 		constexpr const char* const kPlayerModelFilePath = "Assets/Models/hoge.fbx";	//プレイヤーモデルのファイルパス
+		constexpr float kPlayerModelScale = 10.0f;	//プレイヤーモデルの拡大率
 	}
 
 	namespace nsPlayer {
@@ -92,11 +93,10 @@ namespace nsAWA {
 			modelInitData.modelFilePath = kPlayerModelFilePath;
 			modelInitData.modelFormat = nsGraphics::nsRenderers::EnModelFormat::enFBX;
 			modelInitData.vertexBias.AddRotationX(nsMath::YM_PIDIV2);
-			modelInitData.vertexBias.AddRotationY(nsMath::YM_PI);
 
 			//プレイヤーモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
-			m_modelRenderer->SetScale(10.0f);
+			m_modelRenderer->SetScale(kPlayerModelScale);
 		}
 
 		void CPlayer::CreateWeapon() {

@@ -5,7 +5,7 @@ namespace nsAWA {
 	namespace nsWeapon {
 
 		//•Ší‚Ìí—Ş
-		enum EnWeaponType {
+		enum class EnWeaponType {
 
 			enSword,	//Œ•
 			enAxe,		//•€
