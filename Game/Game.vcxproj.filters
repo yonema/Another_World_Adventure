@@ -120,9 +120,6 @@
     <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="YonemaEngine\GameObject\GameObjectManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -195,6 +192,25 @@
     <ClCompile Include="Game\GameActor.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp">
     <ClCompile Include="Game\AbnormalStatus\AbnormalStatus.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -337,9 +353,6 @@
     <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="YonemaEngine\GameObject\GameObjectManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -427,6 +440,28 @@
     <ClInclude Include="Game\GameActor.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="YonemaEngine\Graphics\AssimpCommonHeader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YonemaEngine\Graphics\Animations\Skelton.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h">
     <ClInclude Include="Game\AbnormalStatus\AbnormalStatus.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -446,6 +481,7 @@
     <None Include="Assets\Shaders\BasicHeader.hlsli" />
     <None Include="Assets\Shaders\PeraPolygonHeader.hlsli" />
     <None Include="Assets\Shaders\FbxTestHeader.hlsli" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\SpriteVertexShader.hlsl" />

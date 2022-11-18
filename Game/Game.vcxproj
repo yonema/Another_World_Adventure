@@ -166,6 +166,13 @@
     <ClCompile Include="Game\Player\PlayerStatus.cpp" />
     <ClCompile Include="Game\Monster\Monster.cpp" />
     <ClCompile Include="Game\Weapon\Weapon.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.cpp" />
     <ClCompile Include="Game\AbnormalStatus\Poison.cpp" />
     <ClCompile Include="Game\Status.cpp" />
     <ClCompile Include="Game\Monster\MonsterStatus.cpp" />
@@ -180,7 +187,6 @@
     <ClCompile Include="YonemaEngine\Graphics\Renderers\Renderer.cpp" />
     <ClCompile Include="YonemaEngine\GameObject\GameObject.cpp" />
     <ClCompile Include="YonemaEngine\GameObject\GameObjectManager.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.cpp" />
@@ -238,6 +244,14 @@
     <ClInclude Include="Game\Player\PlayerStatus.h" />
     <ClInclude Include="Game\Monster\Monster.h" />
     <ClInclude Include="Game\Weapon\Weapon.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\Skelton.h" />
+    <ClInclude Include="YonemaEngine\Graphics\AssimpCommonHeader.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.h" />
     <ClInclude Include="Game\AbnormalStatus\Poison.h" />
     <ClInclude Include="Game\Status.h" />
     <ClInclude Include="Game\Monster\MonsterStatus.h" />
@@ -256,7 +270,6 @@
     <ClInclude Include="YonemaEngine\CommonLibrary\CommonLibrary.h" />
     <ClInclude Include="YonemaEngine\GameObject\GameObject.h" />
     <ClInclude Include="YonemaEngine\GameObject\GameObjectManager.h" />
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.h" />
@@ -316,6 +329,7 @@
     <None Include="Assets\Shaders\SpriteHeader.hlsli">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\BasicPixelShader.hlsl">
@@ -363,5 +377,12 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets" Condition="Exists('packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets'))" />
+  </Target>
 </Project>

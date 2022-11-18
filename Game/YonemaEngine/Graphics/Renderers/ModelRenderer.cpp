@@ -1,8 +1,8 @@
 #include "ModelRenderer.h"
 #include "../Utils/StringManipulation.h"
-#include "../GameWindow/MessageBox.h"
 #include "../PMDModels/PMDRenderer.h"
-#include "../FBXModels/FBXRenderer.h"
+#include "../FBXModels/FBXRendererFBX_SDK.h"
+#include "../FBXModels/FBXRendererAssimp.h"
 
 namespace nsYMEngine
 {
@@ -24,7 +24,7 @@ namespace nsYMEngine
 				{
 					m_renderer->UpdateWorldMatrix(m_position, m_rotation, m_scale);
 				}
-
+				m_renderer->PlayAnimation(0);
 				return true;
 			}
 
@@ -89,7 +89,8 @@ namespace nsYMEngine
 						modelInitData.modelFilePath, modelInitData.animFilePath);
 					break;
 				case EnModelFormat::enFBX:
-					m_renderer = new nsFBXModels::CFBXRenderer(modelInitData);
+					//m_renderer = new nsFBXModels::CFBXRendererFBX_SDK(modelInitData);
+					m_renderer = new nsFBXModels::CFBXRendererAssimp(modelInitData);
 					break;
 				case EnModelFormat::enVRM:
 					msg = "モデルのロードに失敗しました。\nごめんなさい、この拡張子はまだ対応していません。\n";
