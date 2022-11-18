@@ -42,7 +42,7 @@ namespace nsAWA {
 			void StrongAttack();
 #endif
 		private:
-			const CVector3& CalculateMoveAmount(float inputX, float inputZ);
+			const CVector3 CalculateMoveAmount(float inputX, float inputZ);
 
 			void UpdateDeltaTime(float deltaTime) {
 

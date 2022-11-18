@@ -18,7 +18,7 @@ namespace nsAWA {
 			DeleteGO(m_modelRenderer);
 		}
 
-		void CMonster::Update(float deltaTime) {
+		void CMonster::UpdateActor(float deltaTime) {
 
 
 		}
@@ -30,6 +30,11 @@ namespace nsAWA {
 
 			//ñºëOÇê›íËÅB
 			m_name = monsterInfo.name;
+		}
+
+		void CMonster::ApplyDamage(float power, bool canGuard) {
+
+
 		}
 
 		void CMonster::CreateMonsterModel(const SMonsterInfo& monsterInfo) {

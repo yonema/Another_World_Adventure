@@ -8,8 +8,8 @@ namespace nsAWA {
 		struct SArmorInfo {
 
 			const char* name = nullptr;		//–¼‘O
-			int defence = 0;				//•¨—–hŒä—Í
-			int mind = 0;					//–‚–@–hŒä—Í
+			float defence = 0.0f;			//•¨—–hŒä—Í
+			float mind = 0.0f;				//–‚–@–hŒä—Í
 		};
 
 		//–h‹ïƒNƒ‰ƒX

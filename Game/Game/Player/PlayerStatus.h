@@ -1,52 +1,57 @@
 #pragma once
+#include "../Status.h"
 
 namespace nsAWA {
 
 	namespace nsPlayer {
 
 		//プレイヤーステータスクラス
-		class CPlayerStatus : nsUtils::SNoncopyable
+		class CPlayerStatus : public CStatus
 		{
 		public:
 			void Init();
 
-			void HealHP(int value);
-			void DamageHP(int value);
+			void HealHP(float value);
+			void DamageHP(float value);
 
-			void HealMP(int value);
-			void DamageMP(int value);
+			void HealMP(float value);
+			void DamageMP(float value);
 
-			void HealSP(int value);
-			void DamageSP(int value);
+			void HealSP(float value);
+			void DamageSP(float value);
 
-			void HealGuardGaugeValue(int value);
-			void DamageGuardGaugeValue(int value);
+			void HealGuardGaugeValue(float value);
+			void DamageGuardGaugeValue(float value);
 		public:
-			int GetHP()const {
+			float GetHP()const {
 
 				return m_HP;
 			}
-			int GetMP()const {
+			float GetMaxHP()const {
+
+				return m_maxHP;
+			}
+			float GetMP()const {
 
 				return m_MP;
 			}
-			int GetSP()const {
+			float GetSP()const {
 
 				return m_SP;
 			}
-			int GetGuardGaugeValue()const {
+			float GetGuardGaugeValue()const {
 
 				return m_guardGaugeValue;
 			}
 		private:
-			int m_HP = 0;					//HP
-			int m_maxHP = 0;				//最大HP
-			int m_MP = 0;					//MP
-			int m_maxMP = 0;				//最大MP
-			int m_SP = 0;					//SP
-			int m_maxSP = 0;				//最大SP
-			int m_guardGaugeValue = 0;		//ガードゲージの値
-			int m_maxGuardGaugeValue = 0;	//ガードゲージの最大値
+			float m_HP = 0;					//HP
+			float m_maxHP = 0;				//最大HP
+			float m_MP = 0;					//MP
+			float m_maxMP = 0;				//最大MP
+			float m_SP = 0;					//SP
+			float m_maxSP = 0;				//最大SP
+			float m_guardGaugeValue = 0;	//ガードゲージの値
+			float m_maxGuardGaugeValue = 0;	//ガードゲージの最大値
 		};
 	}
 }

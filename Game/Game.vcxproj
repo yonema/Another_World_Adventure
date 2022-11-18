@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\AbnormalStatus\AbnormalStatus.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Game\GameActor.cpp" />
     <ClCompile Include="Game\Armor\Armor.cpp" />
@@ -172,6 +173,9 @@
     <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.cpp" />
+    <ClCompile Include="Game\AbnormalStatus\Poison.cpp" />
+    <ClCompile Include="Game\Status.cpp" />
+    <ClCompile Include="Game\Monster\MonsterStatus.cpp" />
     <ClCompile Include="YonemaEngine\Input\Keyboard.cpp" />
     <ClCompile Include="YonemaEngine\Input\InputManager.cpp" />
     <ClCompile Include="YonemaEngine\Input\Gamepad.cpp" />
@@ -225,6 +229,7 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\AbnormalStatus\AbnormalStatus.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Game\GameActor.h" />
     <ClInclude Include="Game\Armor\Armor.h" />
@@ -247,6 +252,9 @@
     <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.h" />
     <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.h" />
     <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.h" />
+    <ClInclude Include="Game\AbnormalStatus\Poison.h" />
+    <ClInclude Include="Game\Status.h" />
+    <ClInclude Include="Game\Monster\MonsterStatus.h" />
     <ClInclude Include="YonemaEngine\Input\InputManagerData.h" />
     <ClInclude Include="YonemaEngine\Input\Keyboard.h" />
     <ClInclude Include="YonemaEngine\Input\InputManager.h" />
