@@ -15,7 +15,7 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		//プレイヤーステート
-		enum EnPlayerState {								
+		enum class EnPlayerState {								
 			enIdle,			//待機
 			enWalk,			//歩き
 			enDash,			//ダッシュ

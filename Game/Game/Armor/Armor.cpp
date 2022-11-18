@@ -36,7 +36,7 @@ namespace nsAWA {
 
 			//–h‹ïƒ‚ƒfƒ‹‚ð‰Šú‰»B
 			m_modelRenderer->Init(modelInitData);
-			m_modelRenderer->SetScale(10.0f);
+			m_modelRenderer->SetScale(0.1f);
 		}
 
 		CArmor* CArmorBuilder::Create(const SArmorInfo& armorInfo, const char* modelFilePath) {

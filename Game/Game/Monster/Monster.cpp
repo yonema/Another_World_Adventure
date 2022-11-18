@@ -46,11 +46,12 @@ namespace nsAWA {
 			SModelInitData modelInitData;
 			modelInitData.modelFilePath = monsterInfo.modelFilePath;
 			modelInitData.modelFormat = nsGraphics::nsRenderers::EnModelFormat::enFBX;
+			modelInitData.vertexBias.AddRotationX(-(nsMath::YM_PIDIV2));
 			modelInitData.vertexBias.AddRotationY(nsMath::YM_PI);
 
 			//モンスターモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
-			m_modelRenderer->SetScale(10.0f);
+			m_modelRenderer->SetScale(0.1f);
 		}
 	}
 }

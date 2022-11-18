@@ -61,6 +61,7 @@ namespace nsAWA {
 			//それ以外。
 			default:
 				nsGameWindow::MessageBoxError(L"状態異常が指定されていません。");
+				return;
 			}
 
 			//状態異常の種類を設定。
