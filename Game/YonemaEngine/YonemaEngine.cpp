@@ -27,8 +27,8 @@ namespace nsYMEngine
 
 		m_inputManager = new nsInput::CInputManager();
 
-		//NewGO<nsAWA::CGame>(EnGOPriority::enMid, "AWAGame");
-		NewGO<nsAWA::nsScenes::CYonejiDebugScene>(EnGOPriority::enMid, "YonejiDebugScene");
+		NewGO<nsAWA::CGame>(EnGOPriority::enMid, "AWAGame");
+		//NewGO<nsAWA::nsScenes::CYonejiDebugScene>(EnGOPriority::enMid, "YonejiDebugScene");
 
 		nsMath::CMatrix mat = nsMath::CMatrix::Identity();
 
@@ -61,9 +61,9 @@ namespace nsYMEngine
 
 		m_graphicsEngine->Update();
 
-		// Drawˆ—
+		// Drawå‡¦ç†
 
-		// •`‰æŠJŽnˆ—BXVˆ—‚æ‚èŒãA•`‰æˆ—‚æ‚è‘O‚ÉŒÄ‚Ô‚±‚ÆB
+		// æç”»é–‹å§‹å‡¦ç†ã€‚æ›´æ–°å‡¦ç†ã‚ˆã‚Šå¾Œã€æç”»å‡¦ç†ã‚ˆã‚Šå‰ã«å‘¼ã¶ã“ã¨ã€‚
 		m_graphicsEngine->BeginDraw();
 
 		m_graphicsEngine->DrawToMainRenderTarget();
