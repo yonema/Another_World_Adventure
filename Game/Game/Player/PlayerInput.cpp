@@ -4,7 +4,7 @@
 
 #ifdef _DEBUG
 #include "Player.h"
-#include "../AbnormalStatus/AbnormalStatus.h"
+#include "../StatusChanger/AbnormalStatus/AbnormalStatus.h"
 #endif
 
 namespace nsAWA {
@@ -94,9 +94,9 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
 				//プレイヤーに毒を与える。
-				nsAbnormalStatus::CAbnormalStatusBuilder builder;
+				nsStatusChanger::nsAbnormalStatus::CAbnormalStatusBuilder builder;
 				builder.Create(
-					nsAbnormalStatus::EnAbnormalStatusType::enPoison,
+					nsStatusChanger::nsAbnormalStatus::EnAbnormalStatusType::enPoison,
 					player,
 					9		//毒レベル
 				);

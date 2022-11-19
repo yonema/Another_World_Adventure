@@ -1,38 +1,38 @@
 #include "YonemaEnginePreCompile.h"
 #include "GameActor.h"
-#include "AbnormalStatus/AbnormalStatus.h"
+#include "StatusChanger/StatusChanger.h"
 
 namespace nsAWA {
 
-	void IGameActor::AddAbnormalStatus(nsAbnormalStatus::CAbnormalStatus* abnormalStatus) {
+	void IGameActor::AddStatusChanger(nsStatusChanger::CStatusChanger* statusChanger) {
 
-		//状態異常を付与。
-		m_abnormalStatus.emplace_back(abnormalStatus);
+		//ステータス変化を付与。
+		m_statusChanger.emplace_back(statusChanger);
 	}
 
 	void IGameActor::Update(float deltaTime) {
 
-		//状態異常を更新。
-		UpdateAbnormalStatus(deltaTime);
+		//ステータス変化を更新。
+		UpdateStatusChanger(deltaTime);
 
 		//派生クラスを更新。
 		UpdateActor(deltaTime);
 	}
 
-	void IGameActor::UpdateAbnormalStatus(float deltaTime) {
+	void IGameActor::UpdateStatusChanger(float deltaTime) {
 
-		//状態異常のリストのイテレータを順に参照。
-		std::list<nsAbnormalStatus::CAbnormalStatus*>::iterator itr;
-		for (itr = m_abnormalStatus.begin(); itr != m_abnormalStatus.end(); ) {
+		//ステータス変化のリストのイテレータを順に参照。
+		std::list<nsStatusChanger::CStatusChanger*>::iterator itr;
+		for (itr = m_statusChanger.begin(); itr != m_statusChanger.end(); ) {
 
-			//状態異常を更新。
+			//ステータス変化を更新。
 			bool isDead = (*itr)->Update(deltaTime);
 
 			//終了したか。
 			if (isDead) {
 
-				//この状態異常を破棄。
-				itr = m_abnormalStatus.erase(itr);
+				//このステータス変化を破棄。
+				itr = m_statusChanger.erase(itr);
 
 				//破棄されたことにより、既に次のイテレータが入っているので移る処理をスキップ。
 				continue;

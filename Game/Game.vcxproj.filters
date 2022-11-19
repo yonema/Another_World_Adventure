@@ -1,496 +1,182 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\YonemaEngine.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\GameWindow\GameWindow.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\GraphicsEngine.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\GameWindow\MessageBox.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Texture.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\PMDModels\PMDGenericRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\PMDModels\PMDRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Utils\StringManipulation.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Math\Vector4.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Math\Matrix.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Math\Vector3.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Math\Vector2.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Math\Quaternion.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Time\GameTime.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Camera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHeap.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\FrameBuffer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\VertexBuffer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\IndexBuffer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\RootSignature.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Blob.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\PipelineState.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Shader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\2D\Sprite.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Renderers\GenericRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\GameObject\GameObjectManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\GameObject\GameObject.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Game.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Renderers\Renderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Renderers\RendererTable.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Renderers\ModelRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Renderers\SpriteRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Renderers\ModelRendererBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Input\Gamepad.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Input\InputManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Scenes\YonejiDebugScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Input\Keyboard.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\InputMapping.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Player\Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Player\PlayerInput.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Player\PlayerAction.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Camera\MainCamera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Camera\CameraInput.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Camera\CameraAction.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Player\PlayerStatus.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Monster\Monster.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Weapon\Weapon.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Armor\Armor.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\GameActor.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp">
-    <ClCompile Include="Game\AbnormalStatus\AbnormalStatus.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\AbnormalStatus\Poison.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Status.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Monster\MonsterStatus.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Images\StarMan.png">
-      <Filter>リソース ファイル</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="YonemaEngine\YonemaEngine.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\GameWindow\GameWindow.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\GraphicsEngine.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Utils\Noncopyable.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\GameWindow\MessageBox.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Texture.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Memory\ResourceBank.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Utils\StringManipulation.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Utils\AlignSize.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\PMDModels\PMDGenericRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\PMDModels\PMDRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Math\Vector4.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Math\Matrix.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Math\Vector3.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Math\Vector2.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Math\Quaternion.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Math\Math.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Time\Timer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Time\GameTime.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Camera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHeap.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\FrameBuffer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Dx12Wrappers_Include.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\VertexBuffer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\IndexBuffer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\RootSignature.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Blob.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\PipelineState.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Shader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList_Inline.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\2D\Sprite.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Renderers\GenericRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\GameObject\GameObjectManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\GameObject\GameObject.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\CommonLibrary\CommonFunctionLibrary.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\CommonLibrary\CommonDataLibrary.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\CommonLibrary\CommonLibrary.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Game.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GamePreCompile.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Renderers\Renderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Renderers\RendererTable.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Renderers\ModelRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Renderers\SpriteRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Renderers\ModelRendererBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Input\Gamepad.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Input\InputManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Scenes\YonejiDebugScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Input\Keyboard.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\InputMapping.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Input\InputManagerData.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Player\Player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Player\PlayerInput.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Player\PlayerAction.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Camera\MainCamera.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Camera\CameraInput.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Camera\CameraAction.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Player\PlayerStatus.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Monster\Monster.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Weapon\Weapon.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Armor\Armor.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\GameActor.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\AssimpCommonHeader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Animations\Skelton.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h">
-    <ClInclude Include="Game\AbnormalStatus\AbnormalStatus.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\AbnormalStatus\Poison.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Status.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Monster\MonsterStatus.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\Shaders\SpriteHeader.hlsli" />
-    <None Include="Assets\Shaders\SimplePostEffectHeader.hlsli" />
-    <None Include="Assets\Shaders\BasicHeader.hlsli" />
-    <None Include="Assets\Shaders\PeraPolygonHeader.hlsli" />
-    <None Include="Assets\Shaders\FbxTestHeader.hlsli" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Assets\Shaders\SpriteVertexShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\SpritePixelShader.hlsl" />
     <FxCompile Include="Assets\Shaders\BasicPixelShader.hlsl" />
     <FxCompile Include="Assets\Shaders\BasicVertexShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\PeraPolygonPixelShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\PeraPolygonVertexShader.hlsl" />
     <FxCompile Include="Assets\Shaders\FbxTestPixelShader.hlsl" />
     <FxCompile Include="Assets\Shaders\FbxTestVertexShader.hlsl" />
+    <FxCompile Include="Assets\Shaders\PeraPolygonPixelShader.hlsl" />
+    <FxCompile Include="Assets\Shaders\PeraPolygonVertexShader.hlsl" />
+    <FxCompile Include="Assets\Shaders\SpritePixelShader.hlsl" />
+    <FxCompile Include="Assets\Shaders\SpriteVertexShader.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Game\GameActor.cpp" />
+    <ClCompile Include="Game\Armor\Armor.cpp" />
+    <ClCompile Include="Game\Camera\CameraAction.cpp" />
+    <ClCompile Include="Game\Camera\CameraInput.cpp" />
+    <ClCompile Include="Game\InputMapping.cpp" />
+    <ClCompile Include="Game\Player\Player.cpp" />
+    <ClCompile Include="Game\Scenes\YonejiDebugScene.cpp" />
+    <ClCompile Include="Game\Player\PlayerInput.cpp" />
+    <ClCompile Include="Game\Player\PlayerAction.cpp" />
+    <ClCompile Include="Game\Camera\MainCamera.cpp" />
+    <ClCompile Include="Game\Player\PlayerStatus.cpp" />
+    <ClCompile Include="Game\Monster\Monster.cpp" />
+    <ClCompile Include="Game\Weapon\Weapon.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.cpp" />
+    <ClCompile Include="Game\StatusChanger\AbnormalStatus\Poison.cpp" />
+    <ClCompile Include="Game\Status.cpp" />
+    <ClCompile Include="Game\Monster\MonsterStatus.cpp" />
+    <ClCompile Include="YonemaEngine\Input\Keyboard.cpp" />
+    <ClCompile Include="YonemaEngine\Input\InputManager.cpp" />
+    <ClCompile Include="YonemaEngine\Input\Gamepad.cpp" />
+    <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\ModelRendererBase.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\ModelRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\RendererTable.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\Renderer.cpp" />
+    <ClCompile Include="YonemaEngine\GameObject\GameObject.cpp" />
+    <ClCompile Include="YonemaEngine\GameObject\GameObjectManager.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\GenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\2D\Sprite.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Shader.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\PipelineState.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Blob.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\RootSignature.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\IndexBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\VertexBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\FrameBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHeap.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Camera.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.cpp" />
+    <ClCompile Include="YonemaEngine\Time\GameTime.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Quaternion.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Vector2.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Vector3.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Matrix.cpp" />
+    <ClCompile Include="YonemaEngine\Math\Vector4.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\PMDModels\PMDGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\PMDModels\PMDRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Texture.cpp" />
+    <ClCompile Include="YonemaEngine\GameWindow\MessageBox.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\GraphicsEngine.cpp" />
+    <ClCompile Include="YonemaEngine\GameWindow\GameWindow.cpp" />
+    <ClCompile Include="YonemaEngine\Utils\StringManipulation.cpp" />
+    <ClCompile Include="YonemaEngine\YonemaEngine.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.cpp" />
+    <ClCompile Include="Game\StatusChanger\StatusChanger.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Game\GameActor.h" />
+    <ClInclude Include="Game\Armor\Armor.h" />
+    <ClInclude Include="Game\Camera\CameraAction.h" />
+    <ClInclude Include="Game\Camera\CameraInput.h" />
+    <ClInclude Include="Game\InputMapping.h" />
+    <ClInclude Include="Game\Player\Player.h" />
+    <ClInclude Include="Game\Scenes\YonejiDebugScene.h" />
+    <ClInclude Include="Game\Player\PlayerInput.h" />
+    <ClInclude Include="Game\Player\PlayerAction.h" />
+    <ClInclude Include="Game\Camera\MainCamera.h" />
+    <ClInclude Include="Game\Player\PlayerStatus.h" />
+    <ClInclude Include="Game\Monster\Monster.h" />
+    <ClInclude Include="Game\Weapon\Weapon.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\Skelton.h" />
+    <ClInclude Include="YonemaEngine\Graphics\AssimpCommonHeader.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.h" />
+    <ClInclude Include="Game\StatusChanger\AbnormalStatus\Poison.h" />
+    <ClInclude Include="Game\Status.h" />
+    <ClInclude Include="Game\Monster\MonsterStatus.h" />
+    <ClInclude Include="YonemaEngine\Input\InputManagerData.h" />
+    <ClInclude Include="YonemaEngine\Input\Keyboard.h" />
+    <ClInclude Include="YonemaEngine\Input\InputManager.h" />
+    <ClInclude Include="YonemaEngine\Input\Gamepad.h" />
+    <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Game\GamePreCompile.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\ModelRendererBase.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\ModelRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\SpriteRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\RendererTable.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\Renderer.h" />
+    <ClInclude Include="YonemaEngine\CommonLibrary\CommonDataLibrary.h" />
+    <ClInclude Include="YonemaEngine\CommonLibrary\CommonLibrary.h" />
+    <ClInclude Include="YonemaEngine\GameObject\GameObject.h" />
+    <ClInclude Include="YonemaEngine\GameObject\GameObjectManager.h" />
+    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\GenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\2D\Sprite.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList_Inline.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Shader.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\PipelineState.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Blob.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\RootSignature.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\IndexBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\VertexBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Dx12Wrappers_Include.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\FrameBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHeap.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Camera.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.h" />
+    <ClInclude Include="YonemaEngine\Time\GameTime.h" />
+    <ClInclude Include="YonemaEngine\Math\Math.h" />
+    <ClInclude Include="YonemaEngine\Math\Quaternion.h" />
+    <ClInclude Include="YonemaEngine\Math\Vector2.h" />
+    <ClInclude Include="YonemaEngine\Math\Vector3.h" />
+    <ClInclude Include="YonemaEngine\Math\Matrix.h" />
+    <ClInclude Include="YonemaEngine\Math\Vector4.h" />
+    <ClInclude Include="YonemaEngine\Graphics\PMDModels\PMDGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\PMDModels\PMDRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Texture.h" />
+    <ClInclude Include="YonemaEngine\GameWindow\MessageBox.h" />
+    <ClInclude Include="YonemaEngine\Time\Timer.h" />
+    <ClInclude Include="YonemaEngine\Utils\AlignSize.h" />
+    <ClInclude Include="YonemaEngine\Utils\StringManipulation.h" />
+    <ClInclude Include="YonemaEngine\Utils\Noncopyable.h" />
+    <ClInclude Include="YonemaEngine\Graphics\GraphicsEngine.h" />
+    <ClInclude Include="YonemaEngine\GameWindow\GameWindow.h" />
+    <ClInclude Include="YonemaEngine\Memory\ResourceBank.h" />
+    <ClInclude Include="YonemaEngine\YonemaEngine.h" />
+    <ClInclude Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.h" />
+    <ClInclude Include="YonemaEngine\CommonLibrary\CommonFunctionLibrary.h" />
+    <ClInclude Include="Game\StatusChanger\StatusChanger.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Images\StarMan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\BasicHeader.hlsli" />
+    <None Include="Assets\Shaders\FbxTestHeader.hlsli" />
+    <None Include="Assets\Shaders\PeraPolygonHeader.hlsli" />
+    <None Include="Assets\Shaders\SimplePostEffectHeader.hlsli" />
+    <None Include="Assets\Shaders\SpriteHeader.hlsli" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
