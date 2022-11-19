@@ -45,11 +45,7 @@ namespace nsAWA {
 				return m_action.GetRotation();
 			}
 
-			CPlayerStatus* GetStatus() {
-
-				//ステータスを受け取る。
-				return &m_status;
-			}
+			CPlayerStatus* GetStatus()override final;
 		private:
 			void CreatePlayerModel();
 

@@ -30,11 +30,7 @@ namespace nsAWA {
 			void ApplyDamage(float power, bool canGuard = true)override final;
 		public:
 
-			CStatus* GetStatus()override final {
-
-				//ステータスを受け取る。
-				return &m_status;
-			}
+			CStatus* GetStatus()override final;
 		private:
 			void CreateMonsterModel(const SMonsterInfo& monsterInfo);
 		private:

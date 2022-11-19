@@ -1,5 +1,7 @@
 #include "YonemaEnginePreCompile.h"
+#include "../../GameActor.h"
 #include "Poison.h"
+#include "../../Status.h"
 
 namespace nsAWA {
 

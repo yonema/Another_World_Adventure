@@ -1,4 +1,5 @@
 #include "YonemaEnginePreCompile.h"
+#include "../../GameActor.h"
 #include "AbnormalStatus.h"
 #include "Poison.h"
 

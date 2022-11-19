@@ -1,5 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "CameraInput.h"
+#include "CameraAction.h"
+
 namespace nsAWA {
 
 	namespace nsCamera {

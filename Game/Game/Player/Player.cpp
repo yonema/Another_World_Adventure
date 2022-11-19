@@ -1,4 +1,5 @@
 #include "YonemaEnginePreCompile.h"
+#include "../Status.h"
 #include "Player.h"
 #include "../Weapon/Weapon.h"
 #include "../Armor/Armor.h"
@@ -97,6 +98,12 @@ namespace nsAWA {
 			//プレイヤーモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
 			m_modelRenderer->SetScale(kPlayerModelScale);
+		}
+
+		CPlayerStatus* CPlayer::GetStatus() {
+
+			//ステータスを受け取る。
+			return &m_status;
 		}
 
 		void CPlayer::CreateWeapon() {
