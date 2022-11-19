@@ -3,17 +3,19 @@
 
 namespace nsAWA {
 
-	namespace nsAbnormalStatus {
+	//エイリアス宣言
+	namespace nsStatusChanger {
 
-		class CAbnormalStatus;
+		class CStatusChanger;
 	}
+
 	//ゲームアクター
-	//状態異常などを付与される
+	//ステータス変化などを付与される
 	class IGameActor : public IGameObject
 	{
 	public:
 
-		void AddAbnormalStatus(nsAbnormalStatus::CAbnormalStatus* abnormalStatus);
+		void AddStatusChanger(nsStatusChanger::CStatusChanger* statusChanger);
 
 		virtual CStatus* GetStatus() = 0;
 
@@ -25,9 +27,9 @@ namespace nsAWA {
 		virtual void UpdateActor(float deltaTime){}
 	private:
 
-		void UpdateAbnormalStatus(float deltaTime);
+		void UpdateStatusChanger(float deltaTime);
 	private:
-		std::list<nsAbnormalStatus::CAbnormalStatus*> m_abnormalStatus;		//状態異常
+		std::list<nsStatusChanger::CStatusChanger*> m_statusChanger;	//ステータスを変化させるもののリスト
 	};
 }
 
