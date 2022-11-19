@@ -1,7 +1,9 @@
 #pragma once
-#include "../GameActor.h"
 
 namespace nsAWA {
+
+	//エイリアス宣言
+	class IGameActor;
 
 	namespace nsStatusChanger {
 

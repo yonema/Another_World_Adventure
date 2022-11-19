@@ -1,7 +1,12 @@
 #pragma once
-#include "CameraAction.h"
 
 namespace nsAWA {
+
+	//エイリアス宣言
+	namespace nsCamera {
+
+		class CCameraAction;
+	}
 
 	namespace nsCamera {
 

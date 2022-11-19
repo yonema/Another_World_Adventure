@@ -1,9 +1,9 @@
 #pragma once
-#include "Status.h"
 
 namespace nsAWA {
 
 	//エイリアス宣言
+	class CStatus;
 	namespace nsStatusChanger {
 
 		class CStatusChanger;

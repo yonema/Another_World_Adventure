@@ -1,4 +1,5 @@
 #include "YonemaEnginePreCompile.h"
+#include "../Status.h"
 #include "Monster.h"
 
 namespace nsAWA {
@@ -52,6 +53,12 @@ namespace nsAWA {
 			//モンスターモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
 			m_modelRenderer->SetScale(0.1f);
+		}
+
+		CStatus* CMonster::GetStatus() {
+
+			//ステータスを受け取る。
+			return &m_status;
 		}
 	}
 }
