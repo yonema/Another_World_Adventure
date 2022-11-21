@@ -46,6 +46,10 @@ namespace nsAWA {
 			}
 
 			CPlayerStatus* GetStatus()override final;
+
+			nsWeapon::CWeapon* GetWeapon()override final;
+
+			nsArmor::CArmor* GetArmor()override final;
 		private:
 			void CreatePlayerModel();
 

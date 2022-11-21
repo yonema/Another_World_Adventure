@@ -25,6 +25,24 @@ namespace nsAWA {
 			void Create(const SArmorInfo& armorInfo, const char* modelFilePath);
 
 			void CreateModel(const char* modelFilePath);
+		public:
+			float GetDeffence()const {
+
+				return m_info.defence;
+			}
+			void SetDeffence(float deffence) {
+
+				m_info.defence = deffence;
+			}
+
+			float GetMind()const {
+
+				return m_info.mind;
+			}
+			void SetMind(float mind) {
+
+				m_info.mind = mind;
+			}
 		private:
 
 			CModelRenderer* m_modelRenderer = nullptr;		//ƒ‚ƒfƒ‹

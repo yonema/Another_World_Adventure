@@ -19,13 +19,13 @@ namespace nsAWA
 
 #ifdef _DEBUG
 		//csv読み込みがまだできないため、手動で設定。
-		nsMonster::SMonsterInfo monsterInfo;
-		monsterInfo.name = "Giyara";
-		monsterInfo.modelFilePath = "Assets/Models/Giyara.fbx";
-		
-		//情報を元にモンスターモデルを生成。
-		auto monster = NewGO<nsMonster::CMonster>(nsMonster::CMonster::m_kObjName_Monster);
-		monster->Create(monsterInfo);
+		//nsMonster::SMonsterInfo monsterInfo;
+		//monsterInfo.name = "Giyara";
+		//monsterInfo.modelFilePath = "Assets/Models/Giyara.fbx";
+		//
+		////情報を元にモンスターモデルを生成。
+		//auto monster = NewGO<nsMonster::CMonster>(nsMonster::CMonster::m_kObjName_Monster);
+		//monster->Create(monsterInfo);
 #endif
 
 		return true;

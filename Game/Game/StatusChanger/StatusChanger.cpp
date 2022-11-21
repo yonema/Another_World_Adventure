@@ -5,7 +5,16 @@ namespace nsAWA {
 
 	namespace nsStatusChanger {
 
-		bool CStatusChanger::Update(float deltaTime) {
+		void CStatusChanger::UpdateAtStart(float deltaTime) {
+
+			//ステータス変化の効果を発動。
+			ExecuteAtStart(deltaTime);
+		}
+
+		bool CStatusChanger::UpdateAtEnd(float deltaTime) {
+
+			//ステータス変化の効果を発動。
+			ExecuteAtEnd(deltaTime);
 
 			//タイマーを更新。
 			m_durationTimer -= deltaTime;
@@ -20,12 +29,8 @@ namespace nsAWA {
 				return true;
 			}
 
-			//ステータス変化の効果を発動。
-			Execute(deltaTime);
-
 			//終了しないことを知らせる（まだ効果が残っている）。
 			return false;
 		}
-
 	}
 }

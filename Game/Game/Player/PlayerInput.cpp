@@ -4,7 +4,7 @@
 
 #ifdef _DEBUG
 #include "Player.h"
-#include "../StatusChanger/AbnormalStatus/AbnormalStatus.h"
+#include "../StatusChanger/BuffDebuff.h"
 #endif
 
 namespace nsAWA {
@@ -93,24 +93,15 @@ namespace nsAWA {
 			//サンプル入力。
 			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
-				//プレイヤーに毒を与える。
-				nsStatusChanger::nsAbnormalStatus::CAbnormalStatusBuilder builder;
+				//プレイヤーに攻撃力２倍のバフを与える。
+				nsStatusChanger::CBuffDebuffBuilder builder;
 				builder.Create(
-					nsStatusChanger::nsAbnormalStatus::EnAbnormalStatusType::enPoison,
+					nsStatusChanger::EnBuffOrDebuff::enBuff,
 					player,
-					9		//毒レベル
+					nsStatusChanger::EnStatusRef::enDeffence,
+					2.0f,	//防御力２倍
+					5.0f	//5秒間
 				);
-			}
-
-			if (player != nullptr) {
-
-				auto sp = FindGO<CSpriteRenderer>("sampleSprite");
-				if (sp != nullptr) {
-
-					float hp = static_cast<float>(player->GetStatus()->GetHP());
-					hp = hp / 200.0f;
-					sp->SetScale({ hp ,hp ,hp });
-				}
 			}
 #endif
 		}

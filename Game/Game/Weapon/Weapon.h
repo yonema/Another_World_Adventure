@@ -38,6 +38,36 @@ namespace nsAWA {
 			void Create(const SWeaponInfo& weaponInfo, const char* modelFilePath);
 
 			void CreateModel(const char* modelFilePath);
+
+		public:
+			void SetAttack(float attack) {
+
+				m_info.attack = attack;
+			}
+			float GetAttack()const {
+
+				return m_info.attack;
+			}
+
+			void SetIntelligence(float intelligence) {
+
+				m_info.intelligence = intelligence;
+			}
+			float GetIntelligence()const {
+
+				return m_info.intelligence;
+			}
+
+			void SetCritical(float critical) {
+
+				m_info.critical = critical;
+			}
+			float GetCritical()const {
+
+				return m_info.critical;
+			}
+
+
 		private:
 			
 			CModelRenderer* m_modelRenderer = nullptr;		//ƒ‚ƒfƒ‹

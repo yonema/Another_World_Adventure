@@ -4,6 +4,14 @@
 
 namespace nsAWA {
 
+	namespace nsWeapon {
+
+		class CWeapon;
+	}
+	namespace nsArmor {
+
+		class CArmor;
+	}
 	namespace nsMonster {
 
 		//モンスター情報
@@ -31,12 +39,18 @@ namespace nsAWA {
 		public:
 
 			CStatus* GetStatus()override final;
+
+			nsWeapon::CWeapon* GetWeapon()override final;
+
+			nsArmor::CArmor* GetArmor()override final;
 		private:
 			void CreateMonsterModel(const SMonsterInfo& monsterInfo);
 		private:
 			const char* m_name = nullptr;
 			CModelRenderer* m_modelRenderer = nullptr;	//モデル
 			CMonsterStatus m_status;					//ステータス
+			nsWeapon::CWeapon* m_weapon = nullptr;		//武器
+			nsArmor::CArmor* m_armor = nullptr;			//防具
 		};
 	}
 }

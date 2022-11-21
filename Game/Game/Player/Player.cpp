@@ -106,6 +106,18 @@ namespace nsAWA {
 			return &m_status;
 		}
 
+		nsWeapon::CWeapon* CPlayer::GetWeapon() {
+
+			//•Ší‚ğó‚¯æ‚éB
+			return m_weapon;
+		}
+
+		nsArmor::CArmor* CPlayer::GetArmor() {
+
+			//–h‹ï‚ğó‚¯æ‚éB
+			return m_armor;
+		}
+
 		void CPlayer::CreateWeapon() {
 
 
