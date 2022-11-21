@@ -2,6 +2,11 @@
 #include "GameActor.h"
 #include "StatusChanger/StatusChanger.h"
 
+#ifdef _DEBUG
+#include "Player/Player.h"
+#include "Armor/Armor.h"
+#endif
+
 namespace nsAWA {
 
 	void IGameActor::AddStatusChanger(nsStatusChanger::CStatusChanger* statusChanger) {
@@ -13,20 +18,55 @@ namespace nsAWA {
 	void IGameActor::Update(float deltaTime) {
 
 		//ステータス変化を更新。
-		UpdateStatusChanger(deltaTime);
+		UpdateStatusChangerAtStart(deltaTime);
 
 		//派生クラスを更新。
 		UpdateActor(deltaTime);
+
+		//ステータス変化を更新。
+		UpdateStatusChangerAtEnd(deltaTime);
+
+		//プレイヤーを検索。
+		auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+
+		if (player != nullptr) {
+
+			//最終防御力を参照してスプライトに反映。
+			auto sp = FindGO<CSpriteRenderer>("sampleSprite");
+			if (sp != nullptr) {
+
+				float def = static_cast<float>(player->GetArmor()->GetDeffence());
+
+				for (const auto& statusChanger : m_statusChanger) {
+
+					//バフの効果を受け取る。
+					def *= statusChanger->Apply(nsStatusChanger::EnStatusRef::enDeffence);
+				}
+
+				def = def / 200.0f;
+				sp->SetScale({ def ,def ,def });
+			}
+		}
 	}
 
-	void IGameActor::UpdateStatusChanger(float deltaTime) {
+	void IGameActor::UpdateStatusChangerAtStart(float deltaTime) {
+
+		//ステータス変化のリストのイテレータを順に参照。
+		for (const auto& statusChanger : m_statusChanger) {
+
+			//ステータス変化を更新。
+			statusChanger->UpdateAtStart(deltaTime);
+		}
+	}
+
+	void IGameActor::UpdateStatusChangerAtEnd(float deltaTime) {
 
 		//ステータス変化のリストのイテレータを順に参照。
 		std::list<nsStatusChanger::CStatusChanger*>::iterator itr;
 		for (itr = m_statusChanger.begin(); itr != m_statusChanger.end(); ) {
 
 			//ステータス変化を更新。
-			bool isDead = (*itr)->Update(deltaTime);
+			bool isDead = (*itr)->UpdateAtEnd(deltaTime);
 
 			//終了したか。
 			if (isDead) {
@@ -41,20 +81,5 @@ namespace nsAWA {
 			//次のイテレータに移る。
 			itr++;
 		}
-
-
-		
-		//for (const auto& as : m_abnormalStatus) {
-
-		//	//状態異常を更新。
-		//	bool isDead = as->Update(deltaTime);
-
-		//	//死んでいるなら破棄。
-		//	if (isDead) {
-		//		m_abnormalStatus.erase(as);
-		//	}
-
-		//	
-		//}
 	}
 }
