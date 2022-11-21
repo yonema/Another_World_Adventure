@@ -5,9 +5,12 @@ namespace nsAWA {
 	//エイリアス宣言
 	class CStatus;
 	
-	namespace nsStatusChanger {
+	namespace nsFeature{
 
-		class CStatusChanger;
+		namespace nsStatusChanger {
+
+			class CStatusChanger;
+		}
 	}
 	namespace nsWeapon {
 
@@ -24,7 +27,7 @@ namespace nsAWA {
 	{
 	public:
 
-		void AddStatusChanger(nsStatusChanger::CStatusChanger* statusChanger);
+		void AddStatusChanger(nsFeature::nsStatusChanger::CStatusChanger* statusChanger);
 
 		virtual CStatus* GetStatus() = 0;
 
@@ -33,6 +36,10 @@ namespace nsAWA {
 		virtual nsArmor::CArmor* GetArmor() = 0;
 
 		virtual void ApplyDamage(float power, bool canGuard = true) = 0;
+
+		virtual void HealHP(float healValue) = 0;
+		virtual void HealMP(float healValue) = 0;
+		virtual void HealSP(float healValue) = 0;
 	protected:
 
 		void Update(float deltaTime)override final;
@@ -44,7 +51,7 @@ namespace nsAWA {
 
 		void UpdateStatusChangerAtEnd(float deltaTime);
 	private:
-		std::list<nsStatusChanger::CStatusChanger*> m_statusChanger;	//ステータスを変化させるもののリスト
+		std::list<nsFeature::nsStatusChanger::CStatusChanger*> m_statusChanger;	//ステータスを変化させるもののリスト
 	};
 }
 

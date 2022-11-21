@@ -4,7 +4,7 @@
 
 namespace nsAWA {
 
-	void IGameActor::AddStatusChanger(nsStatusChanger::CStatusChanger* statusChanger) {
+	void IGameActor::AddStatusChanger(nsFeature::nsStatusChanger::CStatusChanger* statusChanger) {
 
 		//ステータス変化を付与。
 		m_statusChanger.emplace_back(statusChanger);
@@ -35,7 +35,7 @@ namespace nsAWA {
 	void IGameActor::UpdateStatusChangerAtEnd(float deltaTime) {
 
 		//ステータス変化のリストのイテレータを順に参照。
-		std::list<nsStatusChanger::CStatusChanger*>::iterator itr;
+		std::list<nsFeature::nsStatusChanger::CStatusChanger*>::iterator itr;
 		for (itr = m_statusChanger.begin(); itr != m_statusChanger.end(); ) {
 
 			//ステータス変化を更新。

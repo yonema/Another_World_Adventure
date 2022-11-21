@@ -3,47 +3,50 @@
 
 namespace nsAWA {
 
-	namespace nsStatusChanger {
+	namespace nsFeature {
 
-		//状態異常の種類
-		enum class EnAbnormalStatusType {
+		namespace nsStatusChanger {
 
-			enPoison,	//毒
+			//状態異常の種類
+			enum class EnAbnormalStatusType {
 
-			enNum,		//状態異常の数
-			enNone		//設定なし
-		};
+				enPoison,	//毒
 
-		//状態異常クラス
-		class CAbnormalStatus : public CStatusChanger
-		{
-			//状態異常生成クラスはフレンド
-			friend class CAbnormalStatusBuilder;
+				enNum,		//状態異常の数
+				enNone		//設定なし
+			};
 
-		protected:
-			virtual void Init() {}
+			//状態異常クラス
+			class CAbnormalStatus : public CStatusChanger
+			{
+				//状態異常生成クラスはフレンド
+				friend class CAbnormalStatusBuilder;
 
-			void ExecuteAtStart(float deltaTime)override{}
+			protected:
+				virtual void Init() {}
 
-		private:
-			EnAbnormalStatusType m_type = EnAbnormalStatusType::enNone;	//状態異常の種類
-		};
+				void ExecuteAtStart(float deltaTime)override {}
 
-		//状態異常生成クラス
-		class CAbnormalStatusBuilder : public CFeature {
+			private:
+				EnAbnormalStatusType m_type = EnAbnormalStatusType::enNone;	//状態異常の種類
+			};
 
-		public:
-			void Init(
-				EnAbnormalStatusType abnormalStatusType,
-				IGameActor* target,
-				int abnormalStatusLevel
-			);
+			//状態異常生成クラス
+			class CAbnormalStatusBuilder : public CFeature {
 
-			void Create()override final;
-		private:
-			EnAbnormalStatusType m_abnormalStatusType = EnAbnormalStatusType::enNone;	//状態異常の種類
-			IGameActor* m_target = nullptr;			//ターゲット
-			int m_abnormalStatusLevel = 0;			//状態異常レベル
-		};
+			public:
+				void Init(
+					EnAbnormalStatusType abnormalStatusType,
+					IGameActor* target,
+					int abnormalStatusLevel
+				);
+
+				void Create()override final;
+			private:
+				EnAbnormalStatusType m_abnormalStatusType = EnAbnormalStatusType::enNone;	//状態異常の種類
+				IGameActor* m_target = nullptr;			//ターゲット
+				int m_abnormalStatusLevel = 0;			//状態異常レベル
+			};
+		}
 	}
 }

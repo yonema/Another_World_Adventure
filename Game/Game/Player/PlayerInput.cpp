@@ -4,6 +4,7 @@
 
 #ifdef _DEBUG
 #include "Player.h"
+#include "../StatusChanger/HealFeature.h"
 #include "../StatusChanger/ApplyDamageFeature.h"
 #endif
 
@@ -93,8 +94,23 @@ namespace nsAWA {
 			//サンプル入力。
 			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
+				//プレイヤーのHPを回復する。
+				nsFeature::HealFeature damage;
+				damage.Init(
+					player,
+					nsFeature::EnHealTarget::enHP,
+					100
+				);
+
+				//生成。
+				damage.Create();
+			}
+
+			//サンプル入力。
+			if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
+
 				//プレイヤーにダメージを与える。（値はすべて仮）
-				CApplyDamageFeature damage;
+				nsFeature::CApplyDamageFeature damage;
 				damage.Init(
 					10,			//レベル
 					10,			//威力
