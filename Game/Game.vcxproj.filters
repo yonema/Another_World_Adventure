@@ -19,7 +19,6 @@
     <ClCompile Include="Game\Camera\CameraInput.cpp" />
     <ClCompile Include="Game\InputMapping.cpp" />
     <ClCompile Include="Game\Player\Player.cpp" />
-    <ClCompile Include="Game\Scenes\YonejiDebugScene.cpp" />
     <ClCompile Include="Game\Player\PlayerInput.cpp" />
     <ClCompile Include="Game\Player\PlayerAction.cpp" />
     <ClCompile Include="Game\Camera\MainCamera.cpp" />
@@ -48,11 +47,8 @@
     <ClCompile Include="YonemaEngine\GameObject\GameObject.cpp" />
     <ClCompile Include="YonemaEngine\GameObject\GameObjectManager.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Renderers\GenericRenderer.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\2D\Sprite.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Shader.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\PipelineState.cpp" />
@@ -86,6 +82,17 @@
     <ClCompile Include="Game\StatusChanger\ApplyDamageFeature.cpp" />
     <ClCompile Include="Game\StatusChanger\Feature.cpp" />
     <ClCompile Include="Game\StatusChanger\HealFeature.cpp" />
+    <ClCompile Include="Game\Samples\FontSample.cpp" />
+    <ClCompile Include="Game\Samples\SampleMain.cpp" />
+    <ClCompile Include="Game\Samples\SkeltalAnimationSample.cpp" />
+    <ClCompile Include="Game\Samples\SpriteSample.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Fonts\FontEngine.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Fonts\FontRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Fonts\SpriteFontWrapper.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Sprites\Sprite.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Sprites\SpriteGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Sprites\TransSpriteGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Debug\DisplayFPS.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.h" />
@@ -96,7 +103,6 @@
     <ClInclude Include="Game\Camera\CameraInput.h" />
     <ClInclude Include="Game\InputMapping.h" />
     <ClInclude Include="Game\Player\Player.h" />
-    <ClInclude Include="Game\Scenes\YonejiDebugScene.h" />
     <ClInclude Include="Game\Player\PlayerInput.h" />
     <ClInclude Include="Game\Player\PlayerAction.h" />
     <ClInclude Include="Game\Camera\MainCamera.h" />
@@ -130,11 +136,8 @@
     <ClInclude Include="YonemaEngine\GameObject\GameObject.h" />
     <ClInclude Include="YonemaEngine\GameObject\GameObjectManager.h" />
     <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.h" />
-    <ClInclude Include="YonemaEngine\Graphics\2D\TransSpriteGenericRenderer.h" />
-    <ClInclude Include="YonemaEngine\Graphics\2D\SpriteGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Renderers\GenericRenderer.h" />
-    <ClInclude Include="YonemaEngine\Graphics\2D\Sprite.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList_Inline.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Shader.h" />
@@ -175,6 +178,18 @@
     <ClInclude Include="Game\StatusChanger\ApplyDamageFeature.h" />
     <ClInclude Include="Game\StatusChanger\Feature.h" />
     <ClInclude Include="Game\StatusChanger\HealFeature.h" />
+    <ClInclude Include="Game\FontTypeList.h" />
+    <ClInclude Include="Game\Samples\FontSample.h" />
+    <ClInclude Include="Game\Samples\SampleMain.h" />
+    <ClInclude Include="Game\Samples\SkeltalAnimationSample.h" />
+    <ClInclude Include="Game\Samples\SpriteSample.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Fonts\FontEngine.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Fonts\FontRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Fonts\SpriteFontWrapper.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Sprites\Sprite.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Sprites\SpriteGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Sprites\TransSpriteGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Debug\DisplayFPS.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
