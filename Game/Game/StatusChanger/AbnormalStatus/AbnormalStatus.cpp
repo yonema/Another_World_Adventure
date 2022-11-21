@@ -12,14 +12,21 @@ namespace nsAWA {
 			constexpr float kDurationTimeBase = 10.0f;	//ベースとなる持続時間
 		}
 
-		void CAbnormalStatusBuilder::Create(
+		void CAbnormalStatusBuilder::Init(
 			EnAbnormalStatusType abnormalStatusType,
 			IGameActor* target,
 			int abnormalStatusLevel
-		)
+		) {
+			//情報を設定。
+			m_abnormalStatusType = abnormalStatusType;
+			m_target = target;
+			m_abnormalStatusLevel = abnormalStatusLevel;
+		}
+
+		void CAbnormalStatusBuilder::Create()
 		{
 			//レベル0なら。
-			if (abnormalStatusLevel == 0) {
+			if (m_abnormalStatusLevel == 0) {
 
 				//生成せずに終了。
 				return;
@@ -29,7 +36,7 @@ namespace nsAWA {
 			CAbnormalStatus* abnormalStatus = nullptr;
 
 			//状態異常の種類で生成するクラスを変える。
-			switch (abnormalStatusType) {
+			switch (m_abnormalStatusType) {
 
 				//毒。
 			case EnAbnormalStatusType::enPoison:
@@ -44,19 +51,19 @@ namespace nsAWA {
 			}
 
 			//状態異常の種類を設定。
-			abnormalStatus->m_type = abnormalStatusType;
+			abnormalStatus->m_type = m_abnormalStatusType;
 
 			//ターゲットを設定。
-			abnormalStatus->m_target = target;
+			abnormalStatus->m_target = m_target;
 
 			//持続時間を設定。
-			abnormalStatus->m_durationTimer = abnormalStatusLevel * kDurationTimeBase;
+			abnormalStatus->m_durationTimer = m_abnormalStatusLevel * kDurationTimeBase;
 
 			//初期化処理を実行。
 			abnormalStatus->Init();
 
 			//ターゲットにも状態異常を設定。
-			target->AddStatusChanger(abnormalStatus);
+			abnormalStatus->m_target->AddStatusChanger(abnormalStatus);
 		}
 	}
 }

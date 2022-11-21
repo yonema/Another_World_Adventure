@@ -83,6 +83,8 @@
     <ClCompile Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.cpp" />
     <ClCompile Include="Game\StatusChanger\StatusChanger.cpp" />
     <ClCompile Include="Game\StatusChanger\BuffDebuff.cpp" />
+    <ClCompile Include="Game\StatusChanger\ApplyDamageFeature.cpp" />
+    <ClCompile Include="Game\StatusChanger\Feature.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.h" />
@@ -169,6 +171,8 @@
     <ClInclude Include="YonemaEngine\CommonLibrary\CommonFunctionLibrary.h" />
     <ClInclude Include="Game\StatusChanger\StatusChanger.h" />
     <ClInclude Include="Game\StatusChanger\BuffDebuff.h" />
+    <ClInclude Include="Game\StatusChanger\ApplyDamageFeature.h" />
+    <ClInclude Include="Game\StatusChanger\Feature.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

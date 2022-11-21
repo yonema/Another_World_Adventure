@@ -49,16 +49,23 @@ namespace nsAWA {
 		};
 
 		//バフデバフ生成クラス
-		class CBuffDebuffBuilder : public nsUtils::SNoncopyable {
+		class CBuffDebuffBuilder : public CFeature {
 
 		public:
-			void Create(
-				EnBuffOrDebuff buffOrDebuff,
+			void Init(EnBuffOrDebuff buffOrDebuff,
 				IGameActor* target,
 				EnStatusRef statusRef,
 				float value,
 				float durationTime
 			);
+
+			void Create()override final;
+		private:
+			EnBuffOrDebuff m_buffOrDebuff = EnBuffOrDebuff::enNone;		//バフかデバフか
+			IGameActor* m_target = nullptr;								//ターゲット
+			EnStatusRef m_statusRef = EnStatusRef::enNone;				//参照ステータス
+			float m_value = 0.0f;										//増減値
+			float m_durationTime = 0.0f;								//持続時間
 		};
 	}
 }
