@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\StatusChanger\Feature.cpp" />
+    <ClCompile Include="Game\StatusChanger\ApplyDamageFeature.cpp" />
     <ClCompile Include="Game\StatusChanger\BuffDebuff.cpp" />
     <ClCompile Include="Game\StatusChanger\StatusChanger.cpp" />
     <ClCompile Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.cpp" />
@@ -231,6 +233,8 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\StatusChanger\Feature.h" />
+    <ClInclude Include="Game\StatusChanger\ApplyDamageFeature.h" />
     <ClInclude Include="Game\StatusChanger\BuffDebuff.h" />
     <ClInclude Include="Game\StatusChanger\StatusChanger.h" />
     <ClInclude Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.h" />

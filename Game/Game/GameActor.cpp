@@ -2,11 +2,6 @@
 #include "GameActor.h"
 #include "StatusChanger/StatusChanger.h"
 
-#ifdef _DEBUG
-#include "Player/Player.h"
-#include "Armor/Armor.h"
-#endif
-
 namespace nsAWA {
 
 	void IGameActor::AddStatusChanger(nsStatusChanger::CStatusChanger* statusChanger) {
@@ -25,28 +20,6 @@ namespace nsAWA {
 
 		//ステータス変化を更新。
 		UpdateStatusChangerAtEnd(deltaTime);
-
-		//プレイヤーを検索。
-		auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
-
-		if (player != nullptr) {
-
-			//最終防御力を参照してスプライトに反映。
-			auto sp = FindGO<CSpriteRenderer>("sampleSprite");
-			if (sp != nullptr) {
-
-				float def = static_cast<float>(player->GetArmor()->GetDeffence());
-
-				for (const auto& statusChanger : m_statusChanger) {
-
-					//バフの効果を受け取る。
-					def *= statusChanger->Apply(nsStatusChanger::EnStatusRef::enDeffence);
-				}
-
-				def = def / 200.0f;
-				sp->SetScale({ def ,def ,def });
-			}
-		}
 	}
 
 	void IGameActor::UpdateStatusChangerAtStart(float deltaTime) {

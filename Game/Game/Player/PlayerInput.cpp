@@ -4,7 +4,7 @@
 
 #ifdef _DEBUG
 #include "Player.h"
-#include "../StatusChanger/BuffDebuff.h"
+#include "../StatusChanger/ApplyDamageFeature.h"
 #endif
 
 namespace nsAWA {
@@ -93,15 +93,31 @@ namespace nsAWA {
 			//サンプル入力。
 			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
-				//プレイヤーに攻撃力２倍のバフを与える。
-				nsStatusChanger::CBuffDebuffBuilder builder;
-				builder.Create(
-					nsStatusChanger::EnBuffOrDebuff::enBuff,
-					player,
-					nsStatusChanger::EnStatusRef::enDeffence,
-					2.0f,	//防御力２倍
-					5.0f	//5秒間
+				//プレイヤーにダメージを与える。（値はすべて仮）
+				CApplyDamageFeature damage;
+				damage.Init(
+					10,			//レベル
+					10,			//威力
+					7,			//攻撃力
+					100,		//防御力
+					player,		//ターゲット
+					false		//ガードできる？
 				);
+				//生成。
+				damage.Create();
+			}
+
+			if (player != nullptr) {
+
+				//プレイヤーのHPを参照してスプライトに反映。
+				auto sp = FindGO<CSpriteRenderer>("sampleSprite");
+				if (sp != nullptr) {
+
+					float hp = static_cast<float>(player->GetStatus()->GetHP());
+
+					hp = hp / 200.0f;
+					sp->SetScale({ hp ,hp ,hp });
+				}
 			}
 #endif
 		}

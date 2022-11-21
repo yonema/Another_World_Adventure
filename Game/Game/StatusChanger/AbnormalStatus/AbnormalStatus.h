@@ -30,14 +30,20 @@ namespace nsAWA {
 		};
 
 		//状態異常生成クラス
-		class CAbnormalStatusBuilder : nsUtils::SNoncopyable {
+		class CAbnormalStatusBuilder : public CFeature {
 
 		public:
-			void Create(
+			void Init(
 				EnAbnormalStatusType abnormalStatusType,
 				IGameActor* target,
 				int abnormalStatusLevel
 			);
+
+			void Create()override final;
+		private:
+			EnAbnormalStatusType m_abnormalStatusType = EnAbnormalStatusType::enNone;	//状態異常の種類
+			IGameActor* m_target = nullptr;			//ターゲット
+			int m_abnormalStatusLevel = 0;			//状態異常レベル
 		};
 	}
 }

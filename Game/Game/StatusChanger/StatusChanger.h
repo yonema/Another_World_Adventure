@@ -1,4 +1,5 @@
 #pragma once
+#include "Feature.h"
 
 namespace nsAWA {
 
@@ -16,6 +17,7 @@ namespace nsAWA {
 			enNone			//設定なし
 		};
 
+		//ステータス変化クラス
 		class CStatusChanger : nsUtils::SNoncopyable
 		{
 		public:
