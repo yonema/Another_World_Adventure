@@ -1,8 +1,8 @@
 #pragma once
 
 namespace nsAWA {
+
 	//エイリアス宣言
-	
 	namespace nsPlayer {
 
 		class CPlayerAction;

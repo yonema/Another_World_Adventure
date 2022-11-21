@@ -85,6 +85,7 @@
     <ClCompile Include="Game\StatusChanger\BuffDebuff.cpp" />
     <ClCompile Include="Game\StatusChanger\ApplyDamageFeature.cpp" />
     <ClCompile Include="Game\StatusChanger\Feature.cpp" />
+    <ClCompile Include="Game\StatusChanger\HealFeature.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Game\StatusChanger\BuffDebuff.h" />
     <ClInclude Include="Game\StatusChanger\ApplyDamageFeature.h" />
     <ClInclude Include="Game\StatusChanger\Feature.h" />
+    <ClInclude Include="Game\StatusChanger\HealFeature.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

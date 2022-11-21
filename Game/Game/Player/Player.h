@@ -32,6 +32,21 @@ namespace nsAWA {
 
 			void ApplyDamage(float power, bool canGuard = true)override final;
 
+			void HealHP(float healValue)override final {
+
+				//HP‚ğ‰ñ•œB
+				m_status.HealHP(healValue);
+			}
+			void HealMP(float healValue)override final {
+
+				//MP‚ğ‰ñ•œB
+				m_status.HealMP(healValue);
+			}
+			void HealSP(float healValue)override final {
+
+				//SP‚ğ‰ñ•œB
+				m_status.HealSP(healValue);
+			}
 		public:
 			const CVector3& GetPosition()const {
 

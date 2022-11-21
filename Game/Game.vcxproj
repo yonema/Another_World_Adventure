@@ -170,6 +170,7 @@
     <ClCompile Include="Game\Player\PlayerStatus.cpp" />
     <ClCompile Include="Game\Monster\Monster.cpp" />
     <ClCompile Include="Game\Weapon\Weapon.cpp" />
+    <ClCompile Include="Game\StatusChanger\HealFeature.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp" />
@@ -252,6 +253,7 @@
     <ClInclude Include="Game\Player\PlayerStatus.h" />
     <ClInclude Include="Game\Monster\Monster.h" />
     <ClInclude Include="Game\Weapon\Weapon.h" />
+    <ClInclude Include="Game\StatusChanger\HealFeature.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Skelton.h" />

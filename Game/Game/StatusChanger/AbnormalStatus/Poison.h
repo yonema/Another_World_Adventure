@@ -3,20 +3,23 @@
 
 namespace nsAWA {
 
-	namespace nsStatusChanger {
+	namespace nsFeature {
 
-		//毒クラス
-		class CPoison : public CAbnormalStatus
-		{
-		public:
-			void Init()override final;
+		namespace nsStatusChanger {
 
-			void ExecuteAtStart(float deltaTime)override final;
+			//毒クラス
+			class CPoison : public CAbnormalStatus
+			{
+			public:
+				void Init()override final;
 
-		private:
-			float m_targetMaxHP = 0.0f;		//ターゲットの最大HP
-			//float m_damageTank = 0.0f;		//ダメージの蓄え
-		};
+				void ExecuteAtStart(float deltaTime)override final;
+
+			private:
+				float m_targetMaxHP = 0.0f;		//ターゲットの最大HP
+				//float m_damageTank = 0.0f;		//ダメージの蓄え
+			};
+		}
 	}
 }
 
