@@ -36,6 +36,23 @@ namespace nsAWA {
 			//アクションクラスを初期化。
 			m_action.Init();
 
+			m_fontRenderer = NewGO<nsGraphics::nsFonts::CFontRenderer>();
+
+#ifdef _DEBUG
+			//フォントの情報を設定。
+			nsGraphics::nsFonts::CFontRenderer::SFontParameter fontParam(
+				L"",
+				{0.0f,20.0f},
+				nsMath::CVector4::White(),
+				0.0f,
+				0.5f,
+				nsMath::CVector2::Zero(),
+				EnAnchors::enTopLeft
+			);
+
+			//初期化。
+			m_fontRenderer->Init(fontParam);
+#endif
 			return true;
 		}
 
@@ -64,6 +81,13 @@ namespace nsAWA {
 
 			//回転情報を設定。
 			m_modelRenderer->SetRotation(m_action.GetRotation());
+
+#ifdef _DEBUG
+			//プレイヤーのHPを表示。
+			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
+			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.4f", m_status.GetHP());
+			m_fontRenderer->SetText(m_dispText);
+#endif
 		}
 
 		void CPlayer::ApplyDamage(float power, bool canGuard) {

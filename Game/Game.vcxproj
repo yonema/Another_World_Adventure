@@ -155,11 +155,10 @@
     <ClCompile Include="Game\Samples\SampleMain.cpp" />
     <ClCompile Include="Game\Samples\SkeltalAnimationSample.cpp" />
     <ClCompile Include="Game\Samples\SpriteSample.cpp" />
-    <ClCompile Include="Game\StatusChanger\Feature.cpp" />
-    <ClCompile Include="Game\StatusChanger\ApplyDamageFeature.cpp" />
-    <ClCompile Include="Game\StatusChanger\BuffDebuff.cpp" />
-    <ClCompile Include="Game\StatusChanger\StatusChanger.cpp" />
-    <ClCompile Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.cpp" />
+    <ClCompile Include="Game\Feature\Feature.cpp" />
+    <ClCompile Include="Game\Feature\ApplyDamageFeature.cpp" />
+    <ClCompile Include="Game\Feature\BuffDebuff.cpp" />
+    <ClCompile Include="Game\Feature\AbnormalStatus\AbnormalStatus.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Game\GameActor.cpp" />
     <ClCompile Include="Game\Armor\Armor.cpp" />
@@ -173,7 +172,7 @@
     <ClCompile Include="Game\Player\PlayerStatus.cpp" />
     <ClCompile Include="Game\Monster\Monster.cpp" />
     <ClCompile Include="Game\Weapon\Weapon.cpp" />
-    <ClCompile Include="Game\StatusChanger\HealFeature.cpp" />
+    <ClCompile Include="Game\Feature\HealFeature.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\DisplayFPS.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
@@ -182,7 +181,7 @@
     <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.cpp" />
-    <ClCompile Include="Game\StatusChanger\AbnormalStatus\Poison.cpp" />
+    <ClCompile Include="Game\Feature\AbnormalStatus\Poison.cpp" />
     <ClCompile Include="Game\Status.cpp" />
     <ClCompile Include="Game\Monster\MonsterStatus.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Fonts\FontEngine.cpp" />
@@ -246,11 +245,10 @@
     <ClInclude Include="Game\Samples\SampleMain.h" />
     <ClInclude Include="Game\Samples\SkeltalAnimationSample.h" />
     <ClInclude Include="Game\Samples\SpriteSample.h" />
-    <ClInclude Include="Game\StatusChanger\Feature.h" />
-    <ClInclude Include="Game\StatusChanger\ApplyDamageFeature.h" />
-    <ClInclude Include="Game\StatusChanger\BuffDebuff.h" />
-    <ClInclude Include="Game\StatusChanger\StatusChanger.h" />
-    <ClInclude Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.h" />
+    <ClInclude Include="Game\Feature\Feature.h" />
+    <ClInclude Include="Game\Feature\ApplyDamageFeature.h" />
+    <ClInclude Include="Game\Feature\BuffDebuff.h" />
+    <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Game\GameActor.h" />
     <ClInclude Include="Game\Armor\Armor.h" />
@@ -264,7 +262,7 @@
     <ClInclude Include="Game\Player\PlayerStatus.h" />
     <ClInclude Include="Game\Monster\Monster.h" />
     <ClInclude Include="Game\Weapon\Weapon.h" />
-    <ClInclude Include="Game\StatusChanger\HealFeature.h" />
+    <ClInclude Include="Game\Feature\HealFeature.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\DisplayFPS.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
@@ -274,7 +272,7 @@
     <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.h" />
     <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.h" />
     <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.h" />
-    <ClInclude Include="Game\StatusChanger\AbnormalStatus\Poison.h" />
+    <ClInclude Include="Game\Feature\AbnormalStatus\Poison.h" />
     <ClInclude Include="Game\Status.h" />
     <ClInclude Include="Game\Monster\MonsterStatus.h" />
     <ClInclude Include="YonemaEngine\Graphics\Fonts\FontEngine.h" />

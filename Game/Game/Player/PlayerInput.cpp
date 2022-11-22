@@ -3,9 +3,10 @@
 #include "PlayerAction.h"
 
 #ifdef _DEBUG
-#include "Player.h"
-#include "../StatusChanger/HealFeature.h"
-#include "../StatusChanger/ApplyDamageFeature.h"
+#include "../Player/Player.h"
+#include "../Feature/AbnormalStatus/Poison.h"
+#include "../Feature/ApplyDamageFeature.h"
+#include "../Feature/HealFeature.h"
 #endif
 
 namespace nsAWA {
@@ -73,8 +74,7 @@ namespace nsAWA {
 			//強攻撃入力。
 			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
-				//強攻撃。
-				m_playerAction->StrongAttack();
+				
 			}
 
 			//ガード準備入力。
@@ -87,82 +87,54 @@ namespace nsAWA {
 					m_playerAction->Guard();
 				}
 			}
-#ifdef _DEBUG
-
-			//プレイヤーを検索。
-			auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
-			//サンプル入力。
-			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
-
-				//プレイヤーのHPを回復する。
-				nsFeature::HealFeature damage;
-				damage.Init(
-					player,
-					nsFeature::EnHealTarget::enHP,
-					100
-				);
-
-				//生成。
-				damage.Create();
-			}
-
-			//サンプル入力。
-			if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
-
-				//プレイヤーにダメージを与える。（値はすべて仮）
-				nsFeature::CApplyDamageFeature damage;
-				damage.Init(
-					10,			//レベル
-					10,			//威力
-					7,			//攻撃力
-					100,		//防御力
-					player,		//ターゲット
-					false		//ガードできる？
-				);
-				//生成。
-				damage.Create();
-			}
-
-			if (player != nullptr) {
-
-				//プレイヤーのHPを参照してスプライトに反映。
-				auto sp = FindGO<CSpriteRenderer>("sampleSprite");
-				if (sp != nullptr) {
-
-					float hp = static_cast<float>(player->GetStatus()->GetHP());
-
-					hp = hp / 200.0f;
-					sp->SetScale({ hp ,hp ,hp });
-				}
-			}
-#endif
 		}
 
 		void CPlayerInput::InputSkillAction() {
 
-			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
-
 #ifdef _DEBUG
-				//デバッグ用にサンプルスプライトを生成。
-				if (FindGO<CSpriteRenderer>("sampleSprite") == nullptr) {
-					SSpriteInitData sampleSpriteData;
-					sampleSpriteData.filePath = "Assets/Images/200x200PNG.png";
-					sampleSpriteData.spriteSize = { 300.0f,300.0f };
-					auto sampleSprite = NewGO<CSpriteRenderer>("sampleSprite");
-					sampleSprite->Init(sampleSpriteData);
-					sampleSprite->SetScale(1.0f);
-				}
+			//プレイやーを探す。
+			auto player = FindGO<CPlayer>(CPlayer::m_kObjName_Player);
 #endif
+
+			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
+#ifdef _DEBUG
+				//ダメージ。
+				nsFeature::CApplyDamageFeature damage;
+				damage.Init(
+					12,			//レベル
+					10,			//威力
+					20,			//攻撃力
+					14,			//防御力
+					player,		//ターゲット
+					false		//ガードできる？
+					);
+				damage.Create();
+#endif 
 				//スキル１使用。
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
+#ifdef _DEBUG
+				//回復。
+				nsFeature::HealFeature heal;
+				heal.Init(player, nsFeature::EnHealTarget::enHP, 100);
+				heal.Create();
+#endif
 
 				//スキル２使用。
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
-
+#ifdef _DEBUG
+				//毒。
+				nsFeature::nsStatusChanger::CAbnormalStatus abnormalStatus;
+				abnormalStatus.Init(
+					nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
+					player,
+					1		//レベル
+				);
+				abnormalStatus.Create();
+#endif
 				//スキル３使用。
 			}
 

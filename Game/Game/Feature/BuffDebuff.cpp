@@ -1,7 +1,6 @@
 #include "YonemaEnginePreCompile.h"
 #include "../GameActor.h"
 #include "BuffDebuff.h"
-#include "../Weapon/Weapon.h"
 
 namespace nsAWA {
 
@@ -9,11 +8,7 @@ namespace nsAWA {
 
 		namespace nsStatusChanger {
 
-			void CBuffDebuff::Init() {
-
-			}
-
-			void CBuffDebuffBuilder::Init(EnBuffOrDebuff buffOrDebuff,
+			void CBuffDebuff::Init(EnBuffOrDebuff buffOrDebuff,
 				IGameActor* target,
 				EnStatusRef statusRef,
 				float value,
@@ -27,7 +22,7 @@ namespace nsAWA {
 				m_durationTime = durationTime;
 			}
 
-			void CBuffDebuffBuilder::Create()
+			void CBuffDebuff::Create()
 			{
 
 				//バフデバフクラスを生成。
@@ -46,12 +41,9 @@ namespace nsAWA {
 				buffDebuff->m_target = m_target;
 
 				//持続時間を設定。
-				buffDebuff->m_durationTimer = m_durationTime;
+				buffDebuff->m_durationTime = m_durationTime;
 
-				//初期化処理を実行。
-				buffDebuff->Init();
-
-				//ターゲットにも状態異常を設定。
+				//ターゲットにもバフデバフ情報を設定。
 				buffDebuff->m_target->AddStatusChanger(buffDebuff);
 			}
 		}

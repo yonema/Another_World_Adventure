@@ -13,7 +13,7 @@ namespace nsAWA {
 			public:
 				void Init()override final;
 
-				void ExecuteAtStart(float deltaTime)override final;
+				void Execute(float deltaTime)override final;
 
 			private:
 				float m_targetMaxHP = 0.0f;		//ターゲットの最大HP

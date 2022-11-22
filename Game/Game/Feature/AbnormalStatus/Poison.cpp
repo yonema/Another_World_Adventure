@@ -21,7 +21,7 @@ namespace nsAWA {
 				m_targetMaxHP = m_target->GetStatus()->GetMaxHP();
 			}
 
-			void CPoison::ExecuteAtStart(float deltaTime) {
+			void CPoison::Execute(float deltaTime) {
 
 				//“Å‚ÌˆĞ—Í‚ğŒvZB
 				float damageAmount = m_targetMaxHP * (kPoisonPower / kPoisonMaxPower);

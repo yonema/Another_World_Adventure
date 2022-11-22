@@ -99,17 +99,6 @@ namespace nsAWA {
 			m_state = EnPlayerState::enGuard;
 		}
 
-#ifdef _DEBUG
-		void CPlayerAction::StrongAttack() {
-
-			//強攻撃を繰り出す。
-			//...
-
-			//SPを消費する。
-			m_playerStatus->DamageSP(30);
-		}
-#endif
-
 		const CVector3 CPlayerAction::CalculateMoveAmount(float inputX, float inputZ) {
 
 			//カメラの前方向、右方向を取得。

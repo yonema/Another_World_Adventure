@@ -78,6 +78,11 @@ namespace nsAWA {
 			CPlayerStatus m_status;						//ステータス
 			nsWeapon::CWeapon* m_weapon = nullptr;		//武器
 			nsArmor::CArmor* m_armor = nullptr;			//防具
+
+#ifdef _DEBUG
+			CFontRenderer* m_fontRenderer = nullptr;
+			wchar_t m_dispText[32] = {};
+#endif		
 		};
 	}
 }
