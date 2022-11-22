@@ -37,10 +37,6 @@ namespace nsAWA {
 			void Rotate();
 
 			void Guard();
-#ifdef _DEBUG
-			//強攻撃。ジョブごとに違うので後で消す。
-			void StrongAttack();
-#endif
 		private:
 			const CVector3 CalculateMoveAmount(float inputX, float inputZ);
 

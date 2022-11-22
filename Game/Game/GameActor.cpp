@@ -1,51 +1,37 @@
 #include "YonemaEnginePreCompile.h"
 #include "GameActor.h"
-#include "StatusChanger/StatusChanger.h"
+#include "Feature/feature.h"
 
 namespace nsAWA {
 
-	void IGameActor::AddStatusChanger(nsFeature::nsStatusChanger::CStatusChanger* statusChanger) {
+	void IGameActor::AddStatusChanger(nsFeature::CFeature* statusChanger) {
 
 		//ステータス変化を付与。
-		m_statusChanger.emplace_back(statusChanger);
+		m_feature.emplace_back(statusChanger);
 	}
 
 	void IGameActor::Update(float deltaTime) {
-
-		//ステータス変化を更新。
-		UpdateStatusChangerAtStart(deltaTime);
 
 		//派生クラスを更新。
 		UpdateActor(deltaTime);
 
 		//ステータス変化を更新。
-		UpdateStatusChangerAtEnd(deltaTime);
+		UpdateFeature(deltaTime);
 	}
 
-	void IGameActor::UpdateStatusChangerAtStart(float deltaTime) {
+	void IGameActor::UpdateFeature(float deltaTime) {
 
 		//ステータス変化のリストのイテレータを順に参照。
-		for (const auto& statusChanger : m_statusChanger) {
+		for (auto itr = m_feature.begin(); itr != m_feature.end(); ) {
 
-			//ステータス変化を更新。
-			statusChanger->UpdateAtStart(deltaTime);
-		}
-	}
-
-	void IGameActor::UpdateStatusChangerAtEnd(float deltaTime) {
-
-		//ステータス変化のリストのイテレータを順に参照。
-		std::list<nsFeature::nsStatusChanger::CStatusChanger*>::iterator itr;
-		for (itr = m_statusChanger.begin(); itr != m_statusChanger.end(); ) {
-
-			//ステータス変化を更新。
-			bool isDead = (*itr)->UpdateAtEnd(deltaTime);
+			//ステータス変化の機能を更新。
+			bool isDead = (*itr)->Update(deltaTime);
 
 			//終了したか。
 			if (isDead) {
 
 				//このステータス変化を破棄。
-				itr = m_statusChanger.erase(itr);
+				itr = m_feature.erase(itr);
 
 				//破棄されたことにより、既に次のイテレータが入っているので移る処理をスキップ。
 				continue;

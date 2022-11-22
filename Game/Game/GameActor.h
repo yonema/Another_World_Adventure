@@ -7,10 +7,7 @@ namespace nsAWA {
 	
 	namespace nsFeature{
 
-		namespace nsStatusChanger {
-
-			class CStatusChanger;
-		}
+		class CFeature;
 	}
 	namespace nsWeapon {
 
@@ -27,7 +24,7 @@ namespace nsAWA {
 	{
 	public:
 
-		void AddStatusChanger(nsFeature::nsStatusChanger::CStatusChanger* statusChanger);
+		void AddStatusChanger(nsFeature::CFeature* statusChanger);
 
 		virtual CStatus* GetStatus() = 0;
 
@@ -47,11 +44,9 @@ namespace nsAWA {
 		virtual void UpdateActor(float deltaTime){}
 	private:
 
-		void UpdateStatusChangerAtStart(float deltaTime);
-
-		void UpdateStatusChangerAtEnd(float deltaTime);
+		void UpdateFeature(float deltaTime);
 	private:
-		std::list<nsFeature::nsStatusChanger::CStatusChanger*> m_statusChanger;	//ステータスを変化させるもののリスト
+		std::list<nsFeature::CFeature*> m_feature;	//ステータスを変化させるもののリスト
 	};
 }
 
