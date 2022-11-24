@@ -29,6 +29,8 @@ namespace nsAWA {
 
 				void Create()override final;
 
+				CFeature* CreateAndReturn()override final;
+
 				float Apply(EnStatusRef statusRef) {
 
 					//ˆê’v‚·‚é‚È‚çB

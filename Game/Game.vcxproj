@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Skill\ActiveSkill.cpp" />
     <ClCompile Include="Game\Samples\FontSample.cpp" />
     <ClCompile Include="Game\Samples\SampleMain.cpp" />
     <ClCompile Include="Game\Samples\SkeltalAnimationSample.cpp" />
@@ -173,6 +174,8 @@
     <ClCompile Include="Game\Monster\Monster.cpp" />
     <ClCompile Include="Game\Weapon\Weapon.cpp" />
     <ClCompile Include="Game\Feature\HealFeature.cpp" />
+    <ClCompile Include="Game\Skill\Skill.cpp" />
+    <ClCompile Include="Game\Skill\PassiveSkill.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\DisplayFPS.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
@@ -240,6 +243,7 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Skill\ActiveSkill.h" />
     <ClInclude Include="Game\FontTypeList.h" />
     <ClInclude Include="Game\Samples\FontSample.h" />
     <ClInclude Include="Game\Samples\SampleMain.h" />
@@ -263,6 +267,8 @@
     <ClInclude Include="Game\Monster\Monster.h" />
     <ClInclude Include="Game\Weapon\Weapon.h" />
     <ClInclude Include="Game\Feature\HealFeature.h" />
+    <ClInclude Include="Game\Skill\Skill.h" />
+    <ClInclude Include="Game\Skill\PassiveSkill.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\DisplayFPS.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />

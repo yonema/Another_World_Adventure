@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "PlayerAction.h"
 #include "../Camera/MainCamera.h"
+#include "../Skill/ActiveSkill.h"
 
 namespace nsAWA {
 
@@ -97,6 +98,17 @@ namespace nsAWA {
 
 			//ガード状態に設定。
 			m_state = EnPlayerState::enGuard;
+		}
+
+		void CPlayerAction::SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill) {
+
+			//アクティブスキルを設定。
+			m_activeSkill[static_cast<int>(activeSkillNum)] = activeSkill;
+		}
+
+		void CPlayerAction::UseActiveSkill(EnActiveSkillListNumber activeSkillNum) {
+
+			m_activeSkill[static_cast<int>(activeSkillNum)]->Execute();
 		}
 
 		const CVector3 CPlayerAction::CalculateMoveAmount(float inputX, float inputZ) {

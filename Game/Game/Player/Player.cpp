@@ -108,6 +108,12 @@ namespace nsAWA {
 			}
 		}
 
+		void CPlayer::SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill) {
+
+			//アクティブスキルを設定。
+			m_action.SetActiveSkill(activeSkillNum, activeSkill);
+		}
+
 		void CPlayer::CreatePlayerModel() {
 
 			//プレイヤーモデルを生成。

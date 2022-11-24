@@ -7,6 +7,8 @@
 #include "../Feature/AbnormalStatus/Poison.h"
 #include "../Feature/ApplyDamageFeature.h"
 #include "../Feature/HealFeature.h"
+#include "../Skill/PassiveSkill.h"
+#include "../Skill/ActiveSkill.h"
 #endif
 
 namespace nsAWA {
@@ -22,6 +24,38 @@ namespace nsAWA {
 
 			//入力によって行動させるため、プレイヤーアクションクラスのポインタを受け取る。
 			m_playerAction = playerAction;
+
+#ifdef _DEBUG
+			//プレイヤーを探す。
+			auto player = FindGO<CPlayer>(CPlayer::m_kObjName_Player);
+
+			//毒機能を生成。
+			nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
+			poison->Init(
+				nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
+				player,
+				1
+			);
+
+			//ダメージ機能を生成。
+			nsFeature::CApplyDamageFeature* damage = new nsFeature::CApplyDamageFeature;
+			damage->Init(
+				12,			//レベル
+				10,			//威力
+				20,			//攻撃力
+				14,			//防御力
+				player,		//ターゲット
+				false		//ガードできる？
+			);
+
+			//アクティブスキルに機能を追加。
+			nsSkill::CActiveSkill* activeSkill = new nsSkill::CActiveSkill;
+			activeSkill->AddFeature(damage);
+			activeSkill->AddFeature(poison);
+
+			//プレイヤーにアクティブスキルを追加。
+			player->SetActiveSkill(EnActiveSkillListNumber::enActiveSkill_1, activeSkill);
+#endif
 		}
 
 		void CPlayerInput::Update() {
@@ -98,43 +132,33 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 #ifdef _DEBUG
-				//ダメージ。
-				nsFeature::CApplyDamageFeature damage;
-				damage.Init(
-					12,			//レベル
-					10,			//威力
-					20,			//攻撃力
-					14,			//防御力
-					player,		//ターゲット
-					false		//ガードできる？
-					);
-				damage.Create();
-#endif 
 				//スキル１使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
+#endif 
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
-#ifdef _DEBUG
-				//回復。
-				nsFeature::HealFeature heal;
-				heal.Init(player, nsFeature::EnHealTarget::enHP, 100);
-				heal.Create();
-#endif
 
 				//スキル２使用。
+#ifdef _DEBUG
+				//毒機能を生成。
+				nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
+				poison->Init(
+					nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
+					player,
+					1
+				);
+				//パッシブスキルに機能を追加。
+				nsSkill::CPassiveSkill* passiveSkill = new nsSkill::CPassiveSkill;
+				passiveSkill->AddFeature(poison);
+
+				//プレイヤーにパッシブスキルを設定。
+				player->AddPassiveSkill(passiveSkill);
+#endif
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
-#ifdef _DEBUG
-				//毒。
-				nsFeature::nsStatusChanger::CAbnormalStatus abnormalStatus;
-				abnormalStatus.Init(
-					nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
-					player,
-					1		//レベル
-				);
-				abnormalStatus.Create();
-#endif
+
 				//スキル３使用。
 			}
 

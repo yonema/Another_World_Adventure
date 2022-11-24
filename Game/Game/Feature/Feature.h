@@ -21,6 +21,13 @@ namespace nsAWA {
 		public:
 			virtual void Create() = 0;
 
+			virtual CFeature* CreateAndReturn() {
+
+				nsGameWindow::MessageBoxError(L"ê∂ê¨Ç≥ÇÍÇÈÇ‡ÇÃÇ™Ç†ÇËÇ‹ÇπÇÒÅB");
+
+				return nullptr;
+			}
+
 			bool Update(float deltaTime);
 
 			virtual float Apply(EnStatusRef statusRef) { return 1.0f; }

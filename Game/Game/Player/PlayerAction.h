@@ -11,6 +11,10 @@ namespace nsAWA {
 
 		class CPlayerStatus;
 	}
+	namespace nsSkill {
+
+		class CActiveSkill;
+	}
 
 	namespace nsPlayer {
 
@@ -22,6 +26,19 @@ namespace nsAWA {
 			enGuard,		//ガード
 
 			enStateNum		//ステート数
+		};
+
+		//アクティブスキルの番号
+		enum class EnActiveSkillListNumber {
+
+			enActiveSkill_1,	//スキル1
+			enActiveSkill_2,	//スキル2
+			enActiveSkill_3,	//スキル3
+			enActiveSkill_4,	//スキル4
+			enActiveSkill_5,	//スキル5
+			enActiveSkill_6,	//スキル6
+
+			enActiveSkill_Num,	//割り当てられるアクティブスキル数
 		};
 
 		//プレイヤーアクションクラス
@@ -37,6 +54,10 @@ namespace nsAWA {
 			void Rotate();
 
 			void Guard();
+
+			void SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill);
+
+			void UseActiveSkill(EnActiveSkillListNumber activeSkillNum);
 		private:
 			const CVector3 CalculateMoveAmount(float inputX, float inputZ);
 
@@ -86,6 +107,7 @@ namespace nsAWA {
 			float m_healSPTimer = 0.0f;							//SP自動回復用タイマー
 			float m_healGuardGaugeValueTimer = 0.0f;			//ガードゲージの値自動回復用タイマー
 			float m_dashSPTimer = 0.0f;							//ダッシュによるSPダメージタイマー
+			nsSkill::CActiveSkill* m_activeSkill[static_cast<int>(EnActiveSkillListNumber::enActiveSkill_Num)] = { nullptr };	//アクティブスキル
 
 			nsCamera::CMainCamera* m_mainCamera = nullptr;		//メインカメラのポインタ
 			CPlayerStatus* m_playerStatus = nullptr;			//プレイヤーステータスのポインタ

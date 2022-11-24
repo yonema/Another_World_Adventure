@@ -21,6 +21,9 @@ namespace nsAWA {
 			{
 			public:
 				void Create()override final;
+
+				CFeature* CreateAndReturn()override final;
+
 				void Init(
 					EnAbnormalStatusType abnormalStatusType,
 					IGameActor* target,

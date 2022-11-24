@@ -92,6 +92,9 @@
     <ClCompile Include="YonemaEngine\Graphics\Sprites\SpriteGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Sprites\TransSpriteGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\DisplayFPS.cpp" />
+    <ClCompile Include="Game\Skill\Skill.cpp" />
+    <ClCompile Include="Game\Skill\PassiveSkill.cpp" />
+    <ClCompile Include="Game\Skill\ActiveSkill.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
@@ -188,6 +191,9 @@
     <ClInclude Include="YonemaEngine\Graphics\Sprites\SpriteGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Sprites\TransSpriteGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\DisplayFPS.h" />
+    <ClInclude Include="Game\Skill\Skill.h" />
+    <ClInclude Include="Game\Skill\PassiveSkill.h" />
+    <ClInclude Include="Game\Skill\ActiveSkill.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
