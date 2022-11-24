@@ -170,6 +170,8 @@
     <ClCompile Include="Game\Player\PlayerStatus.cpp" />
     <ClCompile Include="Game\Monster\Monster.cpp" />
     <ClCompile Include="Game\Weapon\Weapon.cpp" />
+    <ClCompile Include="Game\Scenes\SpriteLevelTestScene.cpp" />
+    <ClCompile Include="Game\Level\Level2DImporter.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp" />
@@ -233,6 +235,7 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Level\Level2DSpriteData.h" />
     <ClInclude Include="Game\StatusChanger\Feature.h" />
     <ClInclude Include="Game\StatusChanger\ApplyDamageFeature.h" />
     <ClInclude Include="Game\StatusChanger\BuffDebuff.h" />
@@ -252,6 +255,8 @@
     <ClInclude Include="Game\Player\PlayerStatus.h" />
     <ClInclude Include="Game\Monster\Monster.h" />
     <ClInclude Include="Game\Weapon\Weapon.h" />
+    <ClInclude Include="Game\Scenes\SpriteLevelTestScene.h" />
+    <ClInclude Include="Game\Level\Level2DImporter.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Skelton.h" />

@@ -4,6 +4,7 @@
 #include "Player/Player.h"
 #include "Camera/MainCamera.h"
 #include "Monster/Monster.h"
+#include "Scenes/SpriteLevelTestScene.h"
 
 namespace nsAWA
 {
@@ -11,11 +12,12 @@ namespace nsAWA
 
 	bool CGame::Start()
 	{
+		nsScenes::SpriteLevelTestScene* spriteTestLevel = NewGO<nsScenes::SpriteLevelTestScene>("testscene");
 		//プレイヤーを生成。
-		m_player = NewGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+		//m_player = NewGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
 
 		//メインカメラを生成。
-		m_mainCamera = NewGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
+		//m_mainCamera = NewGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
 
 #ifdef _DEBUG
 		//csv読み込みがまだできないため、手動で設定。

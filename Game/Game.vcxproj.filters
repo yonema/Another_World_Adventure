@@ -85,6 +85,8 @@
     <ClCompile Include="Game\StatusChanger\BuffDebuff.cpp" />
     <ClCompile Include="Game\StatusChanger\ApplyDamageFeature.cpp" />
     <ClCompile Include="Game\StatusChanger\Feature.cpp" />
+    <ClCompile Include="Game\Scenes\SpriteLevelTestScene.cpp" />
+    <ClCompile Include="Game\Level\Level2DImporter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\StatusChanger\AbnormalStatus\AbnormalStatus.h" />
@@ -173,6 +175,9 @@
     <ClInclude Include="Game\StatusChanger\BuffDebuff.h" />
     <ClInclude Include="Game\StatusChanger\ApplyDamageFeature.h" />
     <ClInclude Include="Game\StatusChanger\Feature.h" />
+    <ClInclude Include="Game\Scenes\SpriteLevelTestScene.h" />
+    <ClInclude Include="Game\Level\Level2DImporter.h" />
+    <ClInclude Include="Game\Level\Level2DSpriteData.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
