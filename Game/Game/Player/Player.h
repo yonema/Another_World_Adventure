@@ -65,6 +65,8 @@ namespace nsAWA {
 			nsWeapon::CWeapon* GetWeapon()override final;
 
 			nsArmor::CArmor* GetArmor()override final;
+
+			void SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill);
 		private:
 			void CreatePlayerModel();
 
@@ -72,12 +74,12 @@ namespace nsAWA {
 
 			void CreateArmor();
 		private:
-			CModelRenderer* m_modelRenderer = nullptr;	//プレイヤーモデル
-			CPlayerInput m_input;						//入力
-			CPlayerAction m_action;						//アクション
-			CPlayerStatus m_status;						//ステータス
-			nsWeapon::CWeapon* m_weapon = nullptr;		//武器
-			nsArmor::CArmor* m_armor = nullptr;			//防具
+			CModelRenderer* m_modelRenderer = nullptr;				//プレイヤーモデル
+			CPlayerInput m_input;									//入力
+			CPlayerAction m_action;									//アクション
+			CPlayerStatus m_status;									//ステータス
+			nsWeapon::CWeapon* m_weapon = nullptr;					//武器
+			nsArmor::CArmor* m_armor = nullptr;						//防具
 
 #ifdef _DEBUG
 			CFontRenderer* m_fontRenderer = nullptr;

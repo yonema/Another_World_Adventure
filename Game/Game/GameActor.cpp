@@ -1,6 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "GameActor.h"
 #include "Feature/feature.h"
+#include "Skill/PassiveSkill.h"
 
 namespace nsAWA {
 
@@ -11,6 +12,9 @@ namespace nsAWA {
 	}
 
 	void IGameActor::Update(float deltaTime) {
+
+		//パッシブスキルを更新。
+		UpdatePassiveSkill();
 
 		//派生クラスを更新。
 		UpdateActor(deltaTime);
@@ -39,6 +43,26 @@ namespace nsAWA {
 
 			//次のイテレータに移る。
 			itr++;
+		}
+	}
+
+	void IGameActor::AddPassiveSkill(nsSkill::CPassiveSkill* passiveSkill) {
+
+		//最大可能装着数を超えてないなら。
+		if (m_passiveSkill.size() < m_passiveSkillMaxNum) {
+
+			//パッシブスキルを装着する。
+			m_passiveSkill.emplace_back(passiveSkill);
+		}
+	}
+
+	void IGameActor::UpdatePassiveSkill() {
+
+		//パッシブスキルを順に参照。
+		for (const auto& passiveSkill : m_passiveSkill) {
+
+			//更新。
+			passiveSkill->Update();
 		}
 	}
 }

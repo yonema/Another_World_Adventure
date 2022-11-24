@@ -17,6 +17,10 @@ namespace nsAWA {
 
 		class CArmor;
 	}
+	namespace nsSkill {
+
+		class CPassiveSkill;
+	}
 
 	//ゲームアクター
 	//ステータス変化などを付与される
@@ -37,6 +41,8 @@ namespace nsAWA {
 		virtual void HealHP(float healValue) = 0;
 		virtual void HealMP(float healValue) = 0;
 		virtual void HealSP(float healValue) = 0;
+
+		void AddPassiveSkill(nsSkill::CPassiveSkill* passiveSkill);
 	protected:
 
 		void Update(float deltaTime)override final;
@@ -45,8 +51,12 @@ namespace nsAWA {
 	private:
 
 		void UpdateFeature(float deltaTime);
+
+		void UpdatePassiveSkill();
 	private:
+		int m_passiveSkillMaxNum = 5;				//パッシブスキルの最大可能装着数
 		std::list<nsFeature::CFeature*> m_feature;	//ステータスを変化させるもののリスト
+		std::list<nsSkill::CPassiveSkill*> m_passiveSkill;	//パッシブスキル
 	};
 }
 
