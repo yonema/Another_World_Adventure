@@ -42,36 +42,36 @@ namespace nsAWA {
 		public:
 			void SetAttack(float attack) {
 
-				m_info.attack = attack;
+				m_sInfo.attack = attack;
 			}
 			float GetAttack()const {
 
-				return m_info.attack;
+				return m_sInfo.attack;
 			}
 
 			void SetIntelligence(float intelligence) {
 
-				m_info.intelligence = intelligence;
+				m_sInfo.intelligence = intelligence;
 			}
 			float GetIntelligence()const {
 
-				return m_info.intelligence;
+				return m_sInfo.intelligence;
 			}
 
 			void SetCritical(float critical) {
 
-				m_info.critical = critical;
+				m_sInfo.critical = critical;
 			}
 			float GetCritical()const {
 
-				return m_info.critical;
+				return m_sInfo.critical;
 			}
 
 
 		private:
 			
 			CModelRenderer* m_modelRenderer = nullptr;		//ƒ‚ƒfƒ‹
-			SWeaponInfo m_info;								//î•ñ
+			SWeaponInfo m_sInfo;							//î•ñ
 		};
 
 		//•Ší¶¬ƒNƒ‰ƒX

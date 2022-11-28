@@ -28,25 +28,25 @@ namespace nsAWA {
 		public:
 			float GetDeffence()const {
 
-				return m_info.defence;
+				return m_sInfo.defence;
 			}
 			void SetDeffence(float deffence) {
 
-				m_info.defence = deffence;
+				m_sInfo.defence = deffence;
 			}
 
 			float GetMind()const {
 
-				return m_info.mind;
+				return m_sInfo.mind;
 			}
 			void SetMind(float mind) {
 
-				m_info.mind = mind;
+				m_sInfo.mind = mind;
 			}
 		private:
 
 			CModelRenderer* m_modelRenderer = nullptr;		//ƒ‚ƒfƒ‹
-			SArmorInfo m_info;								//î•ñ
+			SArmorInfo m_sInfo;								//î•ñ
 		};
 
 		//–h‹ï¶¬ƒNƒ‰ƒX

@@ -8,8 +8,8 @@ namespace nsAWA {
 
 	namespace {
 
-		constexpr const char* const kPlayerModelFilePath = "Assets/Models/hoge.fbx";	//プレイヤーモデルのファイルパス
-		constexpr float kPlayerModelScale = 10.0f;	//プレイヤーモデルの拡大率
+		constexpr const char* const kPlayerModelFilePath = "Assets/Models/player.fbx";	//プレイヤーモデルのファイルパス
+		constexpr float kPlayerModelScale = 0.1f;	//プレイヤーモデルの拡大率
 	}
 
 	namespace nsPlayer {
@@ -17,6 +17,9 @@ namespace nsAWA {
 		const char* const CPlayer::m_kObjName_Player = "Player";
 
 		bool CPlayer::Start() {
+
+			//アニメーションを初期化。
+			m_animation.Init();
 
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();
@@ -124,6 +127,20 @@ namespace nsAWA {
 			modelInitData.modelFilePath = kPlayerModelFilePath;
 			modelInitData.modelFormat = nsGraphics::nsRenderers::EnModelFormat::enFBX;
 			modelInitData.vertexBias.AddRotationX(nsMath::YM_PIDIV2);
+			modelInitData.vertexBias.AddRotationZ(nsMath::YM_PI);
+
+			//アニメーションのデータを定義。
+			const char* animFilePath[static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum)];
+			*animFilePath = m_animation.GetAnimFilePath();
+
+			//アニメーションのデータを生成。
+			SAnimationInitData* animData = new SAnimationInitData(
+				static_cast<unsigned int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum),
+				animFilePath
+			);
+			
+			//アニメーションを初期化。
+			modelInitData.animInitData = animData;
 
 			//プレイヤーモデルを初期化。
 			m_modelRenderer->Init(modelInitData);

@@ -176,6 +176,9 @@
     <ClCompile Include="Game\Feature\HealFeature.cpp" />
     <ClCompile Include="Game\Skill\Skill.cpp" />
     <ClCompile Include="Game\Skill\PassiveSkill.cpp" />
+    <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimation.cpp" />
+    <ClCompile Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.cpp" />
+    <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationBase.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\DisplayFPS.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
@@ -269,6 +272,9 @@
     <ClInclude Include="Game\Feature\HealFeature.h" />
     <ClInclude Include="Game\Skill\Skill.h" />
     <ClInclude Include="Game\Skill\PassiveSkill.h" />
+    <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimation.h" />
+    <ClInclude Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.h" />
+    <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationBase.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\DisplayFPS.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
