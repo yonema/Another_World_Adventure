@@ -11,7 +11,7 @@ namespace nsAWA {
 			CreateModel(modelFilePath);
 
 			//•Šíî•ñ‚ğİ’èB
-			m_info = weaponInfo;
+			m_sInfo = weaponInfo;
 		}
 
 		void CWeapon::Release() {

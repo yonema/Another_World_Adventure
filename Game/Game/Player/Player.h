@@ -2,6 +2,7 @@
 #include "PlayerStatus.h"
 #include "PlayerAction.h"
 #include "PlayerInput.h"
+#include "PlayerAnimation/PlayerAnimation.h"
 #include "../GameActor.h"
 
 namespace nsAWA {
@@ -77,6 +78,7 @@ namespace nsAWA {
 			CModelRenderer* m_modelRenderer = nullptr;				//プレイヤーモデル
 			CPlayerInput m_input;									//入力
 			CPlayerAction m_action;									//アクション
+			nsPlayerAnimation::CPlayerAnimation m_animation;		//アニメーション
 			CPlayerStatus m_status;									//ステータス
 			nsWeapon::CWeapon* m_weapon = nullptr;					//武器
 			nsArmor::CArmor* m_armor = nullptr;						//防具
