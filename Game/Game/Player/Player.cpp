@@ -131,7 +131,13 @@ namespace nsAWA {
 
 			//アニメーションのデータを定義。
 			const char* animFilePath[static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum)];
-			*animFilePath = m_animation.GetAnimFilePath();
+
+			//アニメーションの数だけまわす。
+			for (int animIndex = 0; animIndex < static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum); animIndex++) {
+
+				//アニメーションを取り出し、格納。
+				animFilePath[animIndex] = m_animation.GetAnimFilePath()[animIndex];
+			}
 
 			//アニメーションのデータを生成。
 			SAnimationInitData* animData = new SAnimationInitData(
