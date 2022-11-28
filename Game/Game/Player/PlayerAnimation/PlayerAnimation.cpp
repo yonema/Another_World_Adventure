@@ -20,22 +20,10 @@ namespace nsAWA {
 
 				//各アニメーションを割り当てる。
 				m_playerAnimation[static_cast<int>(EnAnimType::enSword)] = new CPlayerSwordAnimation;
-
-				//アニメーションを初期化。
-				m_sAnimationInitData = new SAnimationInitData(
-					static_cast<unsigned int>(EnAnimName::enNum),
-					m_kAnimFilePaths
-				);
 			}
 
 			void CPlayerAnimation::Release() {
 
-				//アニメーションのデータを破棄。
-				if (m_sAnimationInitData != nullptr) {
-
-					delete m_sAnimationInitData;
-					m_sAnimationInitData = nullptr;
-				}
 			}
 
 			void CPlayerAnimation::UpdateAnimation(EnPlayerState playerState) {

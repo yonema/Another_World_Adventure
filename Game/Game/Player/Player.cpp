@@ -128,7 +128,19 @@ namespace nsAWA {
 			modelInitData.modelFormat = nsGraphics::nsRenderers::EnModelFormat::enFBX;
 			modelInitData.vertexBias.AddRotationX(nsMath::YM_PIDIV2);
 			modelInitData.vertexBias.AddRotationZ(nsMath::YM_PI);
-			modelInitData.animInitData = m_animation.GetAnimData();
+
+			//アニメーションのデータを定義。
+			const char* animFilePath[static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum)];
+			*animFilePath = m_animation.GetAnimFilePath();
+
+			//アニメーションのデータを生成。
+			SAnimationInitData* animData = new SAnimationInitData(
+				static_cast<unsigned int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum),
+				animFilePath
+			);
+			
+			//アニメーションを初期化。
+			modelInitData.animInitData = animData;
 
 			//プレイヤーモデルを初期化。
 			m_modelRenderer->Init(modelInitData);

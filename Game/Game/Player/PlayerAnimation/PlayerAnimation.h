@@ -39,10 +39,10 @@ namespace nsAWA {
 
 				void Init();
 
-				SAnimationInitData* GetAnimData() {
+				const char* GetAnimFilePath()const {
 
-					//アニメーションのデータをリターン。
-					return m_sAnimationInitData;
+					//アニメーションのファイルパスをリターン。
+					return *m_kAnimFilePaths;
 				}
 
 				void UpdateAnimation(EnPlayerState playerState);
@@ -57,7 +57,6 @@ namespace nsAWA {
 			private:
 				static const char* m_kAnimFilePaths[static_cast<int>(EnAnimName::enNum)];		//アニメーションのファイルパス
 
-				SAnimationInitData* m_sAnimationInitData = nullptr;	//アニメーションデータ
 				CModelRenderer* m_playerModel = nullptr;	//プレイヤーモデル
 				EnAnimType m_type = EnAnimType::enNone;		//アニメーションのタイプ
 				CPlayerAnimationBase* m_playerAnimation[static_cast<int>(EnAnimType::enNum)] = { nullptr };		//各アニメーション
