@@ -14,6 +14,7 @@ namespace nsAWA {
 				m_kAnimFilePaths[static_cast<int>(EnAnimName::enNum)] =
 			{
 				"Assets/Animations/Sword_Idle.fbx",
+				"Assets/Animations/Sword_Idle.fbx",
 			};
 
 			void CPlayerAnimation::Init() {

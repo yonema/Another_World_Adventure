@@ -31,7 +31,7 @@ namespace nsAWA {
 				enum class EnAnimName {
 
 					enSword_Idle,	//剣待機
-					//enAxe_Idle,	//剣待機
+					enAxe_Idle,	//剣待機
 					//enWand_Idle,	//剣待機
 
 					enNum			//アニメーション数
@@ -39,10 +39,10 @@ namespace nsAWA {
 
 				void Init();
 
-				const char* GetAnimFilePath()const {
+				const char** GetAnimFilePath()const {
 
 					//アニメーションのファイルパスをリターン。
-					return *m_kAnimFilePaths;
+					return m_kAnimFilePaths;
 				}
 
 				void UpdateAnimation(EnPlayerState playerState);
