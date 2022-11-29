@@ -98,6 +98,7 @@
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimation.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationBase.cpp" />
+    <ClCompile Include="Game\Item\Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimation.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationBase.h" />
+    <ClInclude Include="Game\Item\Item.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

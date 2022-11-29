@@ -4,6 +4,7 @@
 #include "Player/Player.h"
 #include "Camera/MainCamera.h"
 #include "Monster/Monster.h"
+#include "Item/Item.h"
 
 namespace nsAWA
 {
@@ -16,6 +17,13 @@ namespace nsAWA
 
 		//メインカメラを生成。
 		m_mainCamera = NewGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
+
+#ifdef _DEBUG
+
+		//アイテムを仮生成。
+		nsItem::CItem item;
+		item.Create();
+#endif
 
 #ifdef _DEBUG
 		//csv読み込みがまだできないため、手動で設定。

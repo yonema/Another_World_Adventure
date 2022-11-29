@@ -36,7 +36,7 @@ namespace nsAWA {
 
 			//•Šíƒ‚ƒfƒ‹‚ð‰Šú‰»B
 			m_modelRenderer->Init(modelInitData);
-			m_modelRenderer->SetScale(10.0f);
+			m_modelRenderer->SetScale(0.1f);
 		}
 
 		CWeapon* CWeaponBuilder::Create(const SWeaponInfo& weaponInfo, const char* modelFilePath) {
