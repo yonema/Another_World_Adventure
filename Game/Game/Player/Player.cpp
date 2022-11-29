@@ -180,26 +180,26 @@ namespace nsAWA {
 
 		void CPlayer::CreateWeapon() {
 
-
+#ifdef _DEBUG
+			////武器情報を定義。
+			//nsWeapon::SWeaponInfo weaponInfo;
+			//weaponInfo.attack = 100;
+			//weaponInfo.intelligence = 100;
+			//weaponInfo.critical = 10;
+			//weaponInfo.weaponType = nsWeapon::EnWeaponType::enSword;
+			//weaponInfo.name = "NewSword";
+			//
+			////武器モデルのファイルパスを定義。
+			//const char* weaponModelFilePath = "Assets/Models/sampleBox.fbx";
+			//
+			////武器生成クラスを使って武器を生成。
+			//nsWeapon::CWeaponBuilder weaponBuilder;
+			//m_weapon = weaponBuilder.Create(weaponInfo, weaponModelFilePath);
+#endif
 		}
 
 		void CPlayer::CreateArmor() {
 
-#ifdef _DEBUG
-
-			//防具情報を定義。
-			nsArmor::SArmorInfo armorInfo;
-			armorInfo.name = "sampleArmor";
-			armorInfo.defence= 100.0f;
-			armorInfo.mind = 20.0f;
-
-			//防具モデルのファイルパスを定義。（今回はサンプルボックスを使用...）
-			const char* armorModelFilePath = "Assets/Models/sampleBox.fbx";
-
-			//防具生成クラスを使って武器を生成。
-			nsArmor::CArmorBuilder armorBuilder;
-			m_armor = armorBuilder.Create(armorInfo, armorModelFilePath);
-#endif
 		}
 	}
 }
