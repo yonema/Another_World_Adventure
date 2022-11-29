@@ -20,10 +20,13 @@ namespace nsAWA {
 			constexpr const float kCanPlayerMoveInput = 0.001f;	//移動入力が判定される最低値
 		}
 
-		void CPlayerInput::Init(CPlayerAction* playerAction) {
+		void CPlayerInput::Init(CPlayerAction* playerAction, nsPlayerAnimation::CPlayerAnimation* playerAnimation) {
 
 			//入力によって行動させるため、プレイヤーアクションクラスのポインタを受け取る。
 			m_playerAction = playerAction;
+
+			//ステートを変化させるとともにアニメーションを再生するため、プレイヤーアニメーションクラスのポインタを受け取る。
+			m_playerAnimation = playerAnimation;
 
 #ifdef _DEBUG
 			//プレイヤーを探す。
@@ -55,10 +58,13 @@ namespace nsAWA {
 
 			//プレイヤーにアクティブスキルを追加。
 			player->SetActiveSkill(EnActiveSkillListNumber::enActiveSkill_1, activeSkill);
+
+			//入力可能に設定。
+			m_canInput = true;
 #endif
 		}
 
-		void CPlayerInput::Update() {
+		void CPlayerInput::Update(bool isAnimationPlaying) {
 
 			//移動・回転入力。
 			{
@@ -91,7 +97,7 @@ namespace nsAWA {
 					//回転。
 					m_playerAction->Rotate();
 				}
-				else {
+				else if(!isAnimationPlaying){
 
 					//待機状態に設定する。
 					m_playerAction->SetState(EnPlayerState::enIdle);
@@ -105,10 +111,28 @@ namespace nsAWA {
 				InputSkillAction();
 			}
 
+			//弱攻撃入力。
+			if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
+
+				//弱攻撃状態にする。
+				m_playerAction->SetState(EnPlayerState::enWeakAttack_A);
+			}
+
 			//強攻撃入力。
 			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
-				
+				//強攻撃状態にする。
+				m_playerAction->SetState(EnPlayerState::enStrongAttack);
+			}
+
+			//アイテム使用入力。
+			if (Input()->IsTrigger(EnActionMapping::enUseItem)) {
+
+				//アイテムを使用。未実装。
+				//UseItem();
+
+				//アイテム使用状態にする。
+				m_playerAction->SetState(EnPlayerState::enUseItem);
 			}
 
 			//ガード準備入力。
@@ -120,6 +144,13 @@ namespace nsAWA {
 					//ガード。
 					m_playerAction->Guard();
 				}
+			}
+
+			//もしステートに変更があったら。
+			if (m_playerAction->IsChangeState()) {
+
+				//流すアニメーションを変更する。
+				m_playerAnimation->PlayAnimation(m_playerAction->GetState());
 			}
 		}
 

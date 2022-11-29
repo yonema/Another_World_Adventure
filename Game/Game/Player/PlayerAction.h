@@ -23,7 +23,12 @@ namespace nsAWA {
 			enIdle,			//待機
 			enWalk,			//歩き
 			enDash,			//ダッシュ
+			enWeakAttack_A,	//弱攻撃A
+			enStrongAttack,	//強攻撃
+			enDamage,		//被弾
+			enDeath,		//死亡
 			enGuard,		//ガード
+			enUseItem,		//アイテム使用
 
 			enStateNum		//ステート数
 		};
@@ -91,16 +96,25 @@ namespace nsAWA {
 			void SetState(const EnPlayerState& state) {
 
 				m_state = state;
+
+				//ステートに変更があった。
+				m_isChangeState = true;
 			}
 			const EnPlayerState& GetState()const {
 
 				return m_state;
+			}
+
+			bool IsChangeState()const {
+
+				return m_isChangeState;
 			}
 		private:
 			CVector3 m_position = CVector3::Zero();				//座標
 			CQuaternion m_rotation = CQuaternion::Identity();	//回転
 			CVector3 m_forwardDirection = CVector3::Zero();		//前方向
 			CVector3 m_moveDirection = CVector3::Zero();		//移動方向
+			bool m_isChangeState = false;						//ステートがこのフレームで変更された？
 			EnPlayerState m_state = EnPlayerState::enIdle;		//ステート
 			float m_deltaTimeRef = 0.0f;						//そのフレームのdeltaTime
 			float m_healMPTimer = 0.0f;							//MP自動回復用タイマー

@@ -31,13 +31,22 @@ namespace nsAWA {
 				enum class EnAnimName {
 
 					enSword_Idle,	//剣待機
-					enAxe_Idle,	//剣待機
-					//enWand_Idle,	//剣待機
+					enSword_Walk,	//剣歩く
+					enSword_Dash,	//剣走る
+					enSword_WeakAttack_A,	//剣弱攻撃A
+					enSword_StrongAttack,	//剣強攻撃
+					enSword_Damage,	//剣被弾
+					enSword_Death,	//剣死亡
+					enSword_Guard,	//剣ガード
+					enSword_UseItem,	//剣アイテム使用
 
-					enNum			//アニメーション数
+					enNum,			//アニメーション数
+					enNone			//名前なし
 				};
 
 				void Init();
+
+				void PlayAnimation(EnPlayerState playerState);
 
 				const char** GetAnimFilePath()const {
 
@@ -45,7 +54,7 @@ namespace nsAWA {
 					return m_kAnimFilePaths;
 				}
 
-				void UpdateAnimation(EnPlayerState playerState);
+				void Update();
 
 				void SetPlayerModel(CModelRenderer* playerModel) {
 

@@ -6,6 +6,7 @@ namespace nsAWA {
 
 		//エイリアス宣言
 		enum class EnPlayerState;
+		class CPlayerInput;
 		namespace nsPlayerAnimation {
 
 			enum class EnAnimName;
@@ -18,6 +19,8 @@ namespace nsAWA {
 			{
 			public:
 				virtual void UpdateAnimation(CModelRenderer* PlayerModel, EnPlayerState playerState) = 0;
+			protected:
+				bool m_isPlaying = false;		//再生中？
 			};
 		}
 	}
