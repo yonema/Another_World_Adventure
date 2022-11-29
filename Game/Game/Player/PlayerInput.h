@@ -6,6 +6,11 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		class CPlayerAction;
+
+		namespace nsPlayerAnimation {
+
+			class CPlayerAnimation;
+		}
 	}
 
 	namespace nsPlayer {
@@ -14,13 +19,21 @@ namespace nsAWA {
 		class CPlayerInput : nsUtils::SNoncopyable
 		{
 		public:
-			void Init(CPlayerAction* playerAction);
+			void Init(CPlayerAction* playerAction, nsPlayerAnimation::CPlayerAnimation* playerAnimation);
 
-			void Update();
+			void Update(bool isAnimationPlaying);
+
+			void InputEnable() {
+
+				//入力を許可する。
+				m_canInput = true;
+			}
 		private:
 			void InputSkillAction();
 		private:
 			CPlayerAction* m_playerAction = nullptr;	//プレイヤーアクションのポインタ
+			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;	//プレイヤーアニメーションのポインタ
+			bool m_canInput = false;						//入力できる？
 		};
 	}
 }

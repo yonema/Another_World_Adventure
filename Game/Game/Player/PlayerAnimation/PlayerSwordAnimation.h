@@ -10,8 +10,7 @@ namespace nsAWA {
 			//プレイヤーの剣アニメーション
 			class CPlayerSwordAnimation : public CPlayerAnimationBase
 			{
-
-				void UpdateAnimation(CModelRenderer* PlayerModel, EnPlayerState playerState)override final;
+				void UpdateAnimation(CModelRenderer* playerModel, EnPlayerState playerState)override final;
 			};
 		}
 	}

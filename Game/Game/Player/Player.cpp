@@ -24,6 +24,9 @@ namespace nsAWA {
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();
 
+			//アニメーションに使用するモデルを伝える。
+			m_animation.SetPlayerModel(m_modelRenderer);
+
 			//武器を生成。
 			CreateWeapon();
 
@@ -34,7 +37,7 @@ namespace nsAWA {
 			m_status.Init();
 
 			//入力クラスを初期化。
-			m_input.Init(&m_action);
+			m_input.Init(&m_action, &m_animation);
 
 			//アクションクラスを初期化。
 			m_action.Init();
@@ -77,7 +80,10 @@ namespace nsAWA {
 			m_action.Update(deltaTime);
 
 			//入力クラスを更新。
-			m_input.Update();
+			m_input.Update(m_modelRenderer->IsPlaying());
+
+			//アニメーションを更新。
+			m_animation.Update();
 
 			//座標を設定。
 			m_modelRenderer->SetPosition(m_action.GetPosition());
@@ -108,6 +114,7 @@ namespace nsAWA {
 			else {
 				//ダメージをくらう。
 				m_status.DamageHP(power);
+				m_action.SetState(EnPlayerState::enDamage);
 			}
 		}
 

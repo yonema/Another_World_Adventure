@@ -10,8 +10,8 @@ namespace nsAWA {
 
 		namespace {
 
-			constexpr const float kMoveAmount_Walk = 20.0f;				//歩き状態の移動量
-			constexpr const float kMoveAmount_Dash = 30.0f;				//ダッシュ状態の移動量
+			constexpr const float kMoveAmount_Walk = 40.0f;				//歩き状態の移動量
+			constexpr const float kMoveAmount_Dash = 1.3f;				//ダッシュ状態の移動倍率
 			constexpr const float kRotationSlerpRate = 9.375f;			//回転の補間率
 			constexpr const float kAutoHealMPTimeInterval = 0.1f;		//MP自動回復間隔
 			constexpr const int kAutoHealMPValue = 1;					//MP自動回復量
@@ -55,6 +55,9 @@ namespace nsAWA {
 				//ガードゲージの値を自動回復。
 				AutoHealGuardGaugeValue();
 			}
+
+			//ステートの変更状況を初期化。
+			m_isChangeState = false;
 		}
 
 		void CPlayerAction::Move(float inputX, float inputZ) {
@@ -130,7 +133,7 @@ namespace nsAWA {
 			if (m_state == EnPlayerState::enDash) {
 
 				//走る速度を代入。
-				moveAmountf = kMoveAmount_Dash;
+				moveAmountf = kMoveAmount_Walk * kMoveAmount_Dash;
 			}
 			else {
 				//歩く速度を代入。
