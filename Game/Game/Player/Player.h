@@ -25,9 +25,9 @@ namespace nsAWA {
 		public:
 			static const char* const m_kObjName_Player;		//プレイヤークラスの名前
 		public:
-			bool Start()override final;
+			bool StartSub()override final;
 
-			void OnDestroy()override final;
+			void OnDestroySub()override final;
 
 			void UpdateActor(float deltaTime)override final;
 

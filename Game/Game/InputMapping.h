@@ -34,6 +34,9 @@ namespace nsYMEngine
 			enUseSkill_5,				//スキル５使用
 			enUseSkill_6,				//スキル６使用
 			enUseItem,					//アイテム使用
+			enItemSelectPreparation,	//アイテム選択準備
+			enItemSelectRight,	//次のアイテム選択
+			enItemSelectLeft,	//前のアイテム選択
 
 			enNumActions
 		};
@@ -80,7 +83,7 @@ namespace nsYMEngine
 			},
 			//enDashPreparation
 			{
-				{CGamepad::EnPadButton::enRB1},
+				{CGamepad::EnPadButton::enRB2},
 				{CKeyboard::EnKeyButton::en7}
 			},
 			// enGuardPreparation
@@ -129,6 +132,21 @@ namespace nsYMEngine
 				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
 			},
 			//enUseItem
+			{
+				{CGamepad::EnPadButton::enX},
+				{CKeyboard::EnKeyButton::enL}
+			},
+			//enItemSelectPreparation
+			{
+				{CGamepad::EnPadButton::enRB1},
+				{CKeyboard::EnKeyButton::en7}
+			},
+			//enItemSelectRight
+			{
+				{CGamepad::EnPadButton::enY},
+				{CKeyboard::EnKeyButton::enI}
+			},
+			//enItemSelectLeft
 			{
 				{CGamepad::EnPadButton::enX},
 				{CKeyboard::EnKeyButton::enL}

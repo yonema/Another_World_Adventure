@@ -99,6 +99,9 @@
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationBase.cpp" />
     <ClCompile Include="Game\Item\Item.cpp" />
+    <ClCompile Include="Game\Item\ImmediatelyItem.cpp" />
+    <ClCompile Include="Game\Item\ThrowItem.cpp" />
+    <ClCompile Include="Game\Item\ItemManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
@@ -202,6 +205,9 @@
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationBase.h" />
     <ClInclude Include="Game\Item\Item.h" />
+    <ClInclude Include="Game\Item\ImmediatelyItem.h" />
+    <ClInclude Include="Game\Item\ThrowItem.h" />
+    <ClInclude Include="Game\Item\ItemManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

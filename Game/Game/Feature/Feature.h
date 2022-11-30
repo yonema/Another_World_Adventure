@@ -23,6 +23,7 @@ namespace nsAWA {
 
 			virtual CFeature* CreateAndReturn() {
 
+				//一部の派生クラスで使用される関数のため、基底クラスのこの関数が呼ばれた場合はエラーを出力する。
 				nsGameWindow::MessageBoxError(L"生成されるものがありません。");
 
 				return nullptr;
