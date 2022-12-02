@@ -87,7 +87,7 @@ namespace nsAWA {
 			m_input.Update(m_modelRenderer->IsPlaying());
 
 			//アニメーションを更新。
-			m_animation.Update();
+			m_animation.Update(m_action.IsChangeState(), m_action.GetState());
 
 			//座標を設定。
 			m_modelRenderer->SetPosition(m_action.GetPosition());
@@ -98,26 +98,32 @@ namespace nsAWA {
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
 			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.4f %3.4f", m_status.GetHP(),m_status.GetMP());
+			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.4f %3.4f", m_status.GetHP(),m_status.GetGuardGaugeValue());
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}
 
-		void CPlayer::ApplyDamage(float power, bool canGuard) {
+		void CPlayer::ApplyDamage(float damage, float power, bool canGuard) {
 
-			//ガード中かつガードゲージの値が威力より高い。
+			//ガード中かつガードできる攻撃なら。
 			if (m_action.GetState() == EnPlayerState::enGuard
 				&& canGuard == true
-				&& m_status.GetGuardGaugeValue() >= power
 				)
 			{
 				//ガード成功。
 				//威力分だけガードゲージの値が減少する。
 				m_status.DamageGuardGaugeValue(power);
+
+				//ガードゲージが0になったら。
+				if (fabsf(m_status.GetGuardGaugeValue()) < FLT_EPSILON) {
+					
+					//スタン状態にする。
+					m_action.SetState(EnPlayerState::enStun);
+				}
 			}
 			else {
 				//ダメージをくらう。
-				m_status.DamageHP(power);
+				m_status.DamageHP(damage);
 				m_action.SetState(EnPlayerState::enDamage);
 			}
 		}

@@ -58,6 +58,10 @@ namespace nsAWA {
 
 					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_UseItem), 1.0f, false);
 					break;
+				case EnPlayerState::enStun:
+
+					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_Stun), 1.0f, true);
+					break;
 				}
 			}
 		}

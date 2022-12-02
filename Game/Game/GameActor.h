@@ -40,7 +40,7 @@ namespace nsAWA {
 		
 		virtual void OnDestroySub() {};
 
-		virtual void ApplyDamage(float power, bool canGuard = true) = 0;
+		virtual void ApplyDamage(float damage, float power = 0.0f, bool canGuard = true) = 0;
 
 		virtual void HealHP(float healValue) = 0;
 		virtual void HealMP(float healValue) = 0;

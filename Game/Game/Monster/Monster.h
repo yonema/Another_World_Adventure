@@ -37,7 +37,7 @@ namespace nsAWA {
 
 			void Create(const SMonsterInfo& monsterInfo);
 
-			void ApplyDamage(float power, bool canGuard = true)override final;
+			void ApplyDamage(float damage, float power = 0.0f, bool canGuard = true)override final;
 
 			void HealHP(float healValue)override final {};
 			void HealMP(float healValue)override final {};

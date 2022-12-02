@@ -15,14 +15,12 @@ namespace nsAWA {
 			constexpr const float kMoveAmount_Walk = 40.0f;				//歩き状態の移動量
 			constexpr const float kMoveAmount_Dash = 1.3f;				//ダッシュ状態の移動倍率
 			constexpr const float kRotationSlerpRate = 9.375f;			//回転の補間率
-			constexpr const float kAutoHealMPTimeInterval = 0.1f;		//MP自動回復間隔
-			constexpr const int kAutoHealMPValue = 1;					//MP自動回復量
-			constexpr const float kAutoHealSPTimeInterval = 0.1f;		//SP自動回復間隔
-			constexpr const int kAutoHealSPValue = 1;					//SP自動回復量
-			constexpr const float kAutoHealGuardGaugeInterval = 0.1f;	//ガードゲージの値自動回復間隔
-			constexpr const int kAutoHealGuardGaugeValueAmount = 1;		//ガードゲージの値自動回復量
-			constexpr const int kDashSPDamage = 2;						//ダッシュによるSP減少量
-			constexpr const float kDashSPTimeInterval = 0.1f;			//ダッシュによるSP減少間隔
+			constexpr const float kAutoHealMPValue = 10.0f;				//MP自動回復量（％/s）
+			constexpr const float kAutoHealSPValue = 10.0f;				//SP自動回復量（％/s）
+			constexpr const float kAutoHealGuardGaugeValue = 20.0f;		//ガードゲージの値自動回復量（％/s）
+			constexpr const float kDashSPDamage = 10.0f;				//ダッシュによるSP減少量（％/s）
+			constexpr const float kGuardGauge100 = 100.0f;				//ガードゲージの最大値（100と定義する）
+			constexpr const float kPerMax = 100.0f;						//最大％
 		}
 
 		void CPlayerAction::Init(
@@ -46,6 +44,9 @@ namespace nsAWA {
 
 		void CPlayerAction::Update(float deltaTime) {
 
+			//ステートの変更状況を初期化。
+			m_isChangeState = false;
+
 			//deltaTimeを更新(各関数で必要になるため)。
 			UpdateDeltaTime(deltaTime);
 
@@ -65,8 +66,14 @@ namespace nsAWA {
 				AutoHealGuardGaugeValue();
 			}
 
-			//ステートの変更状況を初期化。
-			m_isChangeState = false;
+			//スタン中かつガードゲージが100になったら（最大値をとらないのはバフデバフで最大値が変化する可能性があるため）
+			if (m_state == EnPlayerState::enStun
+				&& fabsf(m_playerStatus->GetGuardGaugeValue() - kGuardGauge100) < FLT_EPSILON
+				) {
+
+				//スタンを解除し、待機状態にする。
+				SetState(EnPlayerState::enIdle);
+			}
 		}
 
 		void CPlayerAction::Move(float inputX, float inputZ) {
@@ -220,66 +227,38 @@ namespace nsAWA {
 
 		void CPlayerAction::AutoHealMP() {
 
-			//タイマーを加算。
-			m_healMPTimer += m_deltaTimeRef;
+			//回復量を計算。
+			float healValue = m_playerStatus->GetMaxMP() * (kAutoHealMPValue / kPerMax) * m_deltaTimeRef;
 
-			//タイマーが一定間隔幅を超えたら。
-			if (m_healMPTimer >= kAutoHealMPTimeInterval) {
-
-				//MPを自動回復。
-				m_playerStatus->HealMP(kAutoHealMPValue);
-
-				//タイマーを減算。
-				m_healMPTimer -= kAutoHealMPTimeInterval;
-			}
+			//MPを自動回復。
+			m_playerStatus->HealMP(healValue);
 		}
 
 		void CPlayerAction::AutoHealSP() {
 
-			//タイマーを加算。
-			m_healSPTimer += m_deltaTimeRef;
+			//回復量を計算。
+			float healValue = m_playerStatus->GetMaxSP() * (kAutoHealSPValue / kPerMax) * m_deltaTimeRef;
 
-			//タイマーが一定間隔幅を超えたら。
-			if (m_healSPTimer >= kAutoHealSPTimeInterval) {
-
-				//SPを自動回復。
-				m_playerStatus->HealSP(kAutoHealSPValue);
-
-				//タイマーを減算。
-				m_healSPTimer -= kAutoHealSPTimeInterval;
-			}
+			//SPを自動回復。
+			m_playerStatus->HealSP(healValue);
 		}
 
 		void CPlayerAction::DamageSPDash() {
 
-			//タイマーを加算。
-			m_dashSPTimer += m_deltaTimeRef;
+			//消費量を計算。
+			float damageValue = m_playerStatus->GetMaxSP() * (kDashSPDamage / kPerMax) * m_deltaTimeRef;
 
-			//タイマーが一定間隔幅を超えたら。
-			if (m_dashSPTimer >= kDashSPTimeInterval) {
-
-				//SPを減少。
-				m_playerStatus->DamageSP(kDashSPDamage);
-
-				//タイマーを減算。
-				m_dashSPTimer -= kDashSPTimeInterval;
-			}
+			//SPを消費。
+			m_playerStatus->DamageSP(damageValue);
 		}
 
 		void CPlayerAction::AutoHealGuardGaugeValue() {
 
-			//タイマーを加算。
-			m_healGuardGaugeValueTimer += m_deltaTimeRef;
+			//回復量を計算。
+			float healValue = m_playerStatus->GetMaxGuardGaugeValue() * (kAutoHealGuardGaugeValue / kPerMax) * m_deltaTimeRef;
 
-			//タイマーが一定間隔幅を超えたら。
-			if (m_healGuardGaugeValueTimer >= kAutoHealGuardGaugeInterval) {
-
-				//ガードゲージの値を自動回復。
-				m_playerStatus->HealGuardGaugeValue(kAutoHealGuardGaugeValueAmount);
-
-				//タイマーを減算。
-				m_healGuardGaugeValueTimer -= kAutoHealGuardGaugeInterval;
-			}
+			//ガードゲージを自動回復。
+			m_playerStatus->HealGuardGaugeValue(healValue);
 		}
 	}
 }

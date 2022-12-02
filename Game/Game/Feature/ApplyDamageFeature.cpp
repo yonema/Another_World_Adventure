@@ -44,7 +44,7 @@ namespace nsAWA {
 			//理論ダメージ計算を行う。
 			damage = CalcDamage(m_level, m_power, m_attack, m_deffence);
 
-			//ランダム値を生成。
+			//ランダム値を生成。（未実装）
 			float random = 0.0f;
 			//今は固定で1.0とする。
 			random = 1.0f;
@@ -53,7 +53,7 @@ namespace nsAWA {
 			damage *= random;
 
 			//ターゲットにダメージを与える。
-			m_target->ApplyDamage(damage, m_canGuard);
+			m_target->ApplyDamage(damage, m_power, m_canGuard);
 		}
 	}
 }

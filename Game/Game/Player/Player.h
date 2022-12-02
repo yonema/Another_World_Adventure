@@ -31,7 +31,7 @@ namespace nsAWA {
 
 			void UpdateActor(float deltaTime)override final;
 
-			void ApplyDamage(float power, bool canGuard = true)override final;
+			void ApplyDamage(float damage, float power = 0.0f, bool canGuard = true)override final;
 
 			void HealHP(float healValue)override final {
 

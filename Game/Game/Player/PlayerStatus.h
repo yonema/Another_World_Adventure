@@ -35,13 +35,28 @@ namespace nsAWA {
 
 				return m_MP;
 			}
+			float GetMaxMP()const {
+
+				//最大MPをリターン。
+				return m_maxMP;
+			}
 			float GetSP()const {
 
 				return m_SP;
 			}
+			float GetMaxSP()const {
+
+				//最大SPをリターン。
+				return m_maxSP;
+			}
 			float GetGuardGaugeValue()const {
 
 				return m_guardGaugeValue;
+			}
+			float GetMaxGuardGaugeValue()const {
+
+				//ガードゲージの最大値をリターン。
+				return m_maxGuardGaugeValue;
 			}
 		private:
 			float m_HP = 0;					//HP

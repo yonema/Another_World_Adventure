@@ -39,6 +39,7 @@ namespace nsAWA {
 					enSword_Death,	//剣死亡
 					enSword_Guard,	//剣ガード
 					enSword_UseItem,	//剣アイテム使用
+					enSword_Stun,	//剣スタン
 
 					enNum,			//アニメーション数
 					enNone			//名前なし
@@ -54,7 +55,7 @@ namespace nsAWA {
 					return m_kAnimFilePaths;
 				}
 
-				void Update();
+				void Update(bool changeState, EnPlayerState playerState);
 
 				void SetPlayerModel(CModelRenderer* playerModel) {
 
