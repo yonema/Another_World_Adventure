@@ -33,7 +33,7 @@ namespace nsAWA {
 			m_name = monsterInfo.name;
 		}
 
-		void CMonster::ApplyDamage(float power, bool canGuard) {
+		void CMonster::ApplyDamage(float damage, float power, bool canGuard) {
 
 
 		}

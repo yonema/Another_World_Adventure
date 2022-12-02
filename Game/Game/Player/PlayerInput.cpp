@@ -40,17 +40,17 @@ namespace nsAWA {
 			nsFeature::CApplyDamageFeature* damage = new nsFeature::CApplyDamageFeature;
 			damage->Init(
 				12,			//レベル
-				10,			//威力
+				50,			//威力
 				20,			//攻撃力
 				14,			//防御力
 				player,		//ターゲット
-				false		//ガードできる？
+				true		//ガードできる？
 			);
 
 			//アクティブスキルに機能を追加。
 			nsSkill::CActiveSkill* activeSkill = new nsSkill::CActiveSkill;
 			activeSkill->AddFeature(damage);
-			activeSkill->SetUseMP(30);
+			activeSkill->SetUseMP(0);
 
 			//プレイヤーにアクティブスキルを追加。
 			player->SetActiveSkill(EnActiveSkillListNumber::enActiveSkill_1, activeSkill);
@@ -93,9 +93,10 @@ namespace nsAWA {
 					//回転。
 					m_playerAction->Rotate();
 				}
+				//アニメーションが再生されていないなら。
 				else if(!isAnimationPlaying){
 
-					//待機状態に設定する。
+					//待機状態に設定し、このフレームは待機アニメーションが流れるようにする。
 					m_playerAction->SetState(EnPlayerState::enIdle);
 				}
 			}
@@ -158,13 +159,6 @@ namespace nsAWA {
 					//ガード。
 					m_playerAction->Guard();
 				}
-			}
-
-			//もしステートに変更があったら。
-			if (m_playerAction->IsChangeState()) {
-
-				//流すアニメーションを変更する。
-				m_playerAnimation->PlayAnimation(m_playerAction->GetState());
 			}
 		}
 

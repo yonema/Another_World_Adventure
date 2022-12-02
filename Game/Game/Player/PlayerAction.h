@@ -37,8 +37,10 @@ namespace nsAWA {
 			enDeath,		//死亡
 			enGuard,		//ガード
 			enUseItem,		//アイテム使用
+			enStun,			//スタン
 
-			enStateNum		//ステート数
+			enStateNum,		//ステート数
+			enNone			//設定なし
 		};
 
 		//アクティブスキルの番号
@@ -133,12 +135,8 @@ namespace nsAWA {
 			CVector3 m_forwardDirection = CVector3::Zero();		//前方向
 			CVector3 m_moveDirection = CVector3::Zero();		//移動方向
 			bool m_isChangeState = false;						//ステートがこのフレームで変更された？
-			EnPlayerState m_state = EnPlayerState::enIdle;		//ステート
+			EnPlayerState m_state = EnPlayerState::enNone;		//ステート
 			float m_deltaTimeRef = 0.0f;						//そのフレームのdeltaTime
-			float m_healMPTimer = 0.0f;							//MP自動回復用タイマー
-			float m_healSPTimer = 0.0f;							//SP自動回復用タイマー
-			float m_healGuardGaugeValueTimer = 0.0f;			//ガードゲージの値自動回復用タイマー
-			float m_dashSPTimer = 0.0f;							//ダッシュによるSPダメージタイマー
 			nsSkill::CActiveSkill* m_activeSkill[static_cast<int>(EnActiveSkillListNumber::enActiveSkill_Num)] = { nullptr };	//アクティブスキル
 
 			nsCamera::CMainCamera* m_mainCamera = nullptr;		//メインカメラのポインタ

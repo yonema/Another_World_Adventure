@@ -22,6 +22,7 @@ namespace nsAWA {
 				"Assets/Animations/Sword_Death.fbx",
 				"Assets/Animations/Sword_Guard.fbx",
 				"Assets/Animations/Sword_UseItem.fbx",
+				"Assets/Animations/Sword_Stun.fbx",
 			};
 
 			void CPlayerAnimation::Init() {
@@ -40,9 +41,14 @@ namespace nsAWA {
 
 			}
 
-			void CPlayerAnimation::Update() {
+			void CPlayerAnimation::Update(bool changeState, EnPlayerState playerState) {
 
-				
+				//ステートに変更があったか。
+				if (changeState) {
+					
+					//ステートに対応するアニメーションを流す。
+					PlayAnimation(playerState);
+				}
 			}
 
 			void CPlayerAnimation::PlayAnimation(EnPlayerState playerState) {
