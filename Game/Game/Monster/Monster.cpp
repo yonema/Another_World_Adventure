@@ -1,6 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "../Status.h"
 #include "Monster.h"
+#include "MonsterList.h"
 
 namespace nsAWA {
 
@@ -21,7 +22,11 @@ namespace nsAWA {
 
 		void CMonster::UpdateActor(float deltaTime) {
 
+			//ステートの変更状況を初期化。
+			m_isChangeState = false;
 
+			//アニメーションを更新。
+			m_animation.Update(m_isChangeState, m_state);
 		}
 
 		void CMonster::Create(const SMonsterInfo& monsterInfo) {
@@ -31,6 +36,14 @@ namespace nsAWA {
 
 			//名前を設定。
 			m_name = monsterInfo.name;
+
+			//アニメーションを初期化。
+			m_animation.Init(m_modelRenderer, monsterInfo.monster);
+
+#ifdef _DEBUG
+			//仮に待機状態に設定。
+			SetState(EnMonsterState::enIdle);
+#endif
 		}
 
 		void CMonster::ApplyDamage(float damage, float power, bool canGuard) {
@@ -49,6 +62,28 @@ namespace nsAWA {
 			modelInitData.modelFormat = nsGraphics::nsRenderers::EnModelFormat::enFBX;
 			modelInitData.vertexBias.AddRotationX(-(nsMath::YM_PIDIV2));
 			modelInitData.vertexBias.AddRotationY(nsMath::YM_PI);
+			
+			//アニメーションの数を取得。
+			const int animNum = GetAnimationNum(monsterInfo.monster);
+
+			//アニメーションのファイルパスの配列を定義。
+			std::vector<const char*> animNumVec;
+
+			//アニメーションの数だけ回してファイルパスを格納。
+			for (int animIndex = 0; animIndex < animNum; animIndex++) {
+
+				//アニメーションのファイルパスを取得。
+				animNumVec.emplace_back(GetAnimationFilePath(monsterInfo.monster, animIndex));
+			}
+			
+			//アニメーションのデータを生成。
+			SAnimationInitData* animData = new SAnimationInitData(
+				static_cast<unsigned int>(animNum),
+				&animNumVec[0]
+			);
+
+			//アニメーションのデータを設定。
+			modelInitData.animInitData = animData;
 
 			//モンスターモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
@@ -57,19 +92,19 @@ namespace nsAWA {
 
 		CStatus* CMonster::GetStatus() {
 
-			//ステータスを受け取る。
+			//ステータスを取得。
 			return &m_status;
 		}
 
 		nsWeapon::CWeapon* CMonster::GetWeapon() {
 
-			//武器を受け取る。
+			//武器を取得。
 			return m_weapon;
 		}
 
 		nsArmor::CArmor* CMonster::GetArmor() {
 
-			//防具を受け取る。
+			//防具を取得。
 			return m_armor;
 		}
 	}

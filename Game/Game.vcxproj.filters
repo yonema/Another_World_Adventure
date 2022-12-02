@@ -105,6 +105,8 @@
     <ClCompile Include="Game\Feature\AbnormalStatus\Paralysis.cpp" />
     <ClCompile Include="Game\Skill\PassiveSkillManager.cpp" />
     <ClCompile Include="Game\Feature\FeatureManager.cpp" />
+    <ClCompile Include="Game\Monster\MonsterAnimation.cpp" />
+    <ClCompile Include="Game\Monster\MonsterList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
@@ -214,6 +216,8 @@
     <ClInclude Include="Game\Feature\AbnormalStatus\Paralysis.h" />
     <ClInclude Include="Game\Skill\PassiveSkillManager.h" />
     <ClInclude Include="Game\Feature\FeatureManager.h" />
+    <ClInclude Include="Game\Monster\MonsterAnimation.h" />
+    <ClInclude Include="Game\Monster\MonsterList.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game\Feature\FeatureManager.cpp" />
+    <ClCompile Include="Game\Monster\MonsterList.cpp" />
     <ClCompile Include="Game\Skill\ActiveSkill.cpp" />
     <ClCompile Include="Game\Samples\FontSample.cpp" />
     <ClCompile Include="Game\Samples\SampleMain.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="Game\Item\ItemManager.cpp" />
     <ClCompile Include="Game\Feature\AbnormalStatus\Paralysis.cpp" />
     <ClCompile Include="Game\Skill\PassiveSkillManager.cpp" />
+    <ClCompile Include="Game\Monster\MonsterAnimation.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\DisplayFPS.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
@@ -254,6 +256,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Feature\FeatureManager.h" />
+    <ClInclude Include="Game\Monster\MonsterList.h" />
     <ClInclude Include="Game\Skill\ActiveSkill.h" />
     <ClInclude Include="Game\FontTypeList.h" />
     <ClInclude Include="Game\Samples\FontSample.h" />
@@ -289,6 +292,7 @@
     <ClInclude Include="Game\Item\ItemManager.h" />
     <ClInclude Include="Game\Feature\AbnormalStatus\Paralysis.h" />
     <ClInclude Include="Game\Skill\PassiveSkillManager.h" />
+    <ClInclude Include="Game\Monster\MonsterAnimation.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\DisplayFPS.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
