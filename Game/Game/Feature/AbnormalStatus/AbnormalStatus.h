@@ -11,6 +11,7 @@ namespace nsAWA {
 			enum class EnAbnormalStatusType {
 
 				enPoison,	//“Å
+				enParalysis,	//–ƒáƒ
 
 				enNum,		//ó‘ÔˆÙí‚Ì”
 				enNone		//İ’è‚È‚µ
@@ -33,6 +34,12 @@ namespace nsAWA {
 				virtual void Init() {}
 
 				void Execute(float deltaTime)override {}
+
+				EnAbnormalStatusType GetType()const {
+
+					//ó‘ÔˆÙí‚Ìí—Ş‚ğƒŠƒ^[ƒ“B
+					return m_type;
+				}
 
 			private:
 				EnAbnormalStatusType m_type = EnAbnormalStatusType::enNone;	//ó‘ÔˆÙí‚Ìí—Ş

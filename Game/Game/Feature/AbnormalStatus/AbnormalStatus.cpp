@@ -1,7 +1,9 @@
 #include "YonemaEnginePreCompile.h"
 #include "../../GameActor.h"
+#include "../FeatureManager.h"
 #include "AbnormalStatus.h"
 #include "Poison.h"
+#include "Paralysis.h"
 
 namespace nsAWA {
 
@@ -46,6 +48,14 @@ namespace nsAWA {
 					//毒クラスを生成。
 					abnormalStatus = new CPoison;
 					break;
+
+					//麻痺。
+				case EnAbnormalStatusType::enParalysis:
+
+					//麻痺クラスを生成。
+					abnormalStatus = new CParalysis;
+					break;
+
 					//それ以外。
 				default:
 					nsGameWindow::MessageBoxError(L"状態異常が指定されていません。");
@@ -65,7 +75,7 @@ namespace nsAWA {
 				abnormalStatus->Init();
 
 				//ターゲットにも状態異常を設定。
-				abnormalStatus->m_target->AddStatusChanger(abnormalStatus);
+				abnormalStatus->m_target->GetFeatureManager()->AddStatusChanger(abnormalStatus);
 			}
 
 			CFeature* CAbnormalStatus::CreateAndReturn() {
@@ -90,6 +100,14 @@ namespace nsAWA {
 					//毒クラスを生成。
 					abnormalStatus = new CPoison;
 					break;
+
+					//麻痺。
+				case EnAbnormalStatusType::enParalysis:
+
+					//麻痺クラスを生成。
+					abnormalStatus = new CParalysis;
+					break;
+
 					//それ以外。
 				default:
 					nsGameWindow::MessageBoxError(L"状態異常が指定されていません。");
@@ -109,7 +127,7 @@ namespace nsAWA {
 				abnormalStatus->Init();
 
 				//ターゲットにも状態異常を設定。
-				abnormalStatus->m_target->AddStatusChanger(abnormalStatus);
+				abnormalStatus->m_target->GetFeatureManager()->AddStatusChanger(abnormalStatus);
 
 				//生成した状態異常をリターン。
 				return abnormalStatus;

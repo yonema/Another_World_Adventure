@@ -16,11 +16,24 @@ namespace nsAWA {
 			}
 
 			void AddFeature(nsFeature::CFeature* feature);
+
+			void SetUseMP(float useMP) {
+
+				//消費MPを設定。
+				m_useMP = useMP;
+			}
+
+			float GetUseMP() {
+
+				//消費MPをリターン。
+				return m_useMP;
+			}
 #ifdef _DEBUG
 			void Execute();
 #endif
 		private:
-			const char* m_animationName = nullptr;
+			const char* m_animationName = nullptr;		//アニメーションの名前
+			float m_useMP = 0.0f;	//消費MP
 		};
 	}
 }

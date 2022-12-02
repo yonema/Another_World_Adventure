@@ -2,7 +2,7 @@
 
 namespace nsAWA {
 
-	//エイリアス宣言
+	//前方宣言
 	namespace nsCamera {
 
 		class CCameraAction;

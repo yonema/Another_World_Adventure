@@ -4,6 +4,7 @@
 #include "../Camera/MainCamera.h"
 #include "../Skill/ActiveSkill.h"
 #include "../Item/ItemManager.h"
+#include "../Feature/FeatureManager.h"
 
 namespace nsAWA {
 
@@ -24,7 +25,11 @@ namespace nsAWA {
 			constexpr const float kDashSPTimeInterval = 0.1f;			//ダッシュによるSP減少間隔
 		}
 
-		void CPlayerAction::Init(CPlayerStatus* playerStatus, nsItem::CItemManager* playerItemManager) {
+		void CPlayerAction::Init(
+			CPlayerStatus* playerStatus, 
+			nsItem::CItemManager* playerItemManager,
+			nsFeature::CFeatureManager* playerFeatureManager
+		) {
 
 			//カメラを検索。
 			m_mainCamera = FindGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
@@ -34,6 +39,9 @@ namespace nsAWA {
 
 			//プレイヤーのアイテム管理クラスを保持。
 			m_playerItemManager = playerItemManager;
+
+			//プレイヤーのステータス変化管理クラスを保持。
+			m_playerFeatureManager = playerFeatureManager;
 		}
 
 		void CPlayerAction::Update(float deltaTime) {
@@ -137,8 +145,27 @@ namespace nsAWA {
 
 		void CPlayerAction::UseActiveSkill(EnActiveSkillListNumber activeSkillNum) {
 
-			//アクティブスキルを使用。
-			m_activeSkill[static_cast<int>(activeSkillNum)]->Execute();
+			//消費MPを取得。
+			float useMP = m_activeSkill[static_cast<int>(activeSkillNum)]->GetUseMP();
+
+			//MPが足りているなら。
+			if (m_playerStatus->GetMP() >= useMP) {
+
+				//MPを消費。
+				m_playerStatus->DamageMP(useMP);
+
+				//アクティブスキルが使用できない状態だったら。
+				if (!m_playerFeatureManager->CanUseActiveSkill()) {
+
+					//専用エフェクトを再生。（未実装）
+
+					//終了。
+					return;
+				}
+
+				//アクティブスキルを使用。
+				m_activeSkill[static_cast<int>(activeSkillNum)]->Execute();
+			}
 		}
 
 		const CVector3 CPlayerAction::CalculateMoveAmount(float inputX, float inputZ) {

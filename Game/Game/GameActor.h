@@ -2,13 +2,9 @@
 
 namespace nsAWA {
 
-	//エイリアス宣言
+	//前方宣言
 	class CStatus;
 	
-	namespace nsFeature{
-
-		class CFeature;
-	}
 	namespace nsWeapon {
 
 		class CWeapon;
@@ -17,9 +13,14 @@ namespace nsAWA {
 
 		class CArmor;
 	}
+	namespace nsFeature{
+
+		class CFeatureManager;
+	}
+	
 	namespace nsSkill {
 
-		class CPassiveSkill;
+		class CPassiveSkillManager;
 	}
 	namespace nsItem {
 
@@ -38,8 +39,6 @@ namespace nsAWA {
 		virtual bool StartSub() { return true; }
 		
 		virtual void OnDestroySub() {};
-		
-		void AddStatusChanger(nsFeature::CFeature* statusChanger);
 
 		virtual void ApplyDamage(float power, bool canGuard = true) = 0;
 
@@ -47,18 +46,10 @@ namespace nsAWA {
 		virtual void HealMP(float healValue) = 0;
 		virtual void HealSP(float healValue) = 0;
 
-		void AddPassiveSkill(nsSkill::CPassiveSkill* passiveSkill);
-
 	protected:
 		void Update(float deltaTime)override final;
 
 		virtual void UpdateActor(float deltaTime){}
-
-	private:
-
-		void UpdateFeature(float deltaTime);
-
-		void UpdatePassiveSkill();
 	public:
 		virtual CStatus* GetStatus() = 0;
 
@@ -78,11 +69,36 @@ namespace nsAWA {
 			//アイテムにアクセスするために、管理クラスを取得。
 			return m_itemManager;
 		}
+
+		nsSkill::CPassiveSkillManager* GetPassiveSkillManager() {
+
+			//パッシブスキル管理クラスが生成されていないなら。
+			if (m_passiveSkillManager == nullptr) {
+
+				//警告を出す。
+				nsGameWindow::MessageBoxError(L"パッシブスキル管理クラスが生成されていません。");
+			}
+
+			//パッシブスキルにアクセスするために、管理クラスを取得。
+			return m_passiveSkillManager;
+		}
+
+		nsFeature::CFeatureManager* GetFeatureManager() {
+
+			//ステータス変化管理クラスが生成されていないなら。
+			if (m_featureManager == nullptr) {
+
+				//警告を出す。
+				nsGameWindow::MessageBoxError(L"ステータス変化管理クラスが生成されていません。");
+			}
+
+			//ステータス変化のリストにアクセスするために、管理クラスを取得。
+			return m_featureManager;
+		}
 	private:
-		int m_passiveSkillMaxNum = 5;				//パッシブスキルの最大可能装着数
-		std::list<nsFeature::CFeature*> m_feature;	//ステータスを変化させるもののリスト
-		std::list<nsSkill::CPassiveSkill*> m_passiveSkill;	//パッシブスキル
 		nsItem::CItemManager* m_itemManager = nullptr;		//アイテム管理
+		nsSkill::CPassiveSkillManager* m_passiveSkillManager = nullptr;		//パッシブスキル管理
+		nsFeature::CFeatureManager* m_featureManager = nullptr;		//ステータス変化管理
 	};
 }
 

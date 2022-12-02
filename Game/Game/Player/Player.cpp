@@ -44,7 +44,7 @@ namespace nsAWA {
 			m_input.Init(&m_action, &m_animation);
 
 			//アクションクラスを初期化。
-			m_action.Init(&m_status, GetItemManager());
+			m_action.Init(&m_status, GetItemManager(), GetFeatureManager());
 
 			m_fontRenderer = NewGO<nsGraphics::nsFonts::CFontRenderer>();
 
@@ -98,7 +98,7 @@ namespace nsAWA {
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
 			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.4f", m_status.GetHP());
+			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.4f %3.4f", m_status.GetHP(),m_status.GetMP());
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}

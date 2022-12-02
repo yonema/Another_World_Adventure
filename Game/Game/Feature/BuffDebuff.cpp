@@ -1,5 +1,6 @@
 #include "YonemaEnginePreCompile.h"
 #include "../GameActor.h"
+#include "../Feature/FeatureManager.h"
 #include "BuffDebuff.h"
 
 namespace nsAWA {
@@ -44,7 +45,7 @@ namespace nsAWA {
 				buffDebuff->m_durationTime = m_durationTime;
 
 				//ターゲットにもバフデバフ情報を設定。
-				buffDebuff->m_target->AddStatusChanger(buffDebuff);
+				buffDebuff->m_target->GetFeatureManager()->AddStatusChanger(buffDebuff);
 			}
 
 			CFeature* CBuffDebuff::CreateAndReturn()
@@ -69,7 +70,7 @@ namespace nsAWA {
 				buffDebuff->m_durationTime = m_durationTime;
 
 				//ターゲットにもバフデバフ情報を設定。
-				buffDebuff->m_target->AddStatusChanger(buffDebuff);
+				buffDebuff->m_target->GetFeatureManager()->AddStatusChanger(buffDebuff);
 
 				//生成されたバフデバフ情報をリターン。
 				return buffDebuff;

@@ -7,7 +7,7 @@
 
 namespace nsAWA {
 
-	//エイリアス宣言
+	//前方宣言
 	namespace nsWeapon {
 
 		class CWeapon;

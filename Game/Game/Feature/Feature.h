@@ -2,6 +2,7 @@
 
 namespace nsAWA {
 
+	//‘O•ûéŒ¾
 	class IGameActor;
 
 	namespace nsFeature {
