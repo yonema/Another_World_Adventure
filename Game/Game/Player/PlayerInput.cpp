@@ -8,6 +8,7 @@
 #include "../Feature/ApplyDamageFeature.h"
 #include "../Feature/HealFeature.h"
 #include "../Skill/PassiveSkill.h"
+#include "../Skill/PassiveSkillManager.h"
 #include "../Skill/ActiveSkill.h"
 #include "../Item/ImmediatelyItem.h"
 #include "../Feature/AbnormalStatus/Poison.h"
@@ -35,14 +36,6 @@ namespace nsAWA {
 			//プレイヤーを探す。
 			auto player = FindGO<CPlayer>(CPlayer::m_kObjName_Player);
 
-			//毒機能を生成。
-			nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
-			poison->Init(
-				nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
-				player,
-				1
-			);
-
 			//ダメージ機能を生成。
 			nsFeature::CApplyDamageFeature* damage = new nsFeature::CApplyDamageFeature;
 			damage->Init(
@@ -57,7 +50,7 @@ namespace nsAWA {
 			//アクティブスキルに機能を追加。
 			nsSkill::CActiveSkill* activeSkill = new nsSkill::CActiveSkill;
 			activeSkill->AddFeature(damage);
-			activeSkill->AddFeature(poison);
+			activeSkill->SetUseMP(30);
 
 			//プレイヤーにアクティブスキルを追加。
 			player->SetActiveSkill(EnActiveSkillListNumber::enActiveSkill_1, activeSkill);
@@ -178,7 +171,7 @@ namespace nsAWA {
 		void CPlayerInput::InputSkillAction() {
 
 #ifdef _DEBUG
-			//プレイやーを探す。
+			//プレイヤーを探す。
 			auto player = FindGO<CPlayer>(CPlayer::m_kObjName_Player);
 #endif
 
@@ -193,19 +186,22 @@ namespace nsAWA {
 
 				//スキル２使用。
 #ifdef _DEBUG
-				//毒機能を生成。
-				nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
-				poison->Init(
-					nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
-					player,
-					1
-				);
-				//パッシブスキルに機能を追加。
-				nsSkill::CPassiveSkill* passiveSkill = new nsSkill::CPassiveSkill;
-				passiveSkill->AddFeature(poison);
+				//パッシブスキル（麻痺）を生成。
+				{
+					//麻痺機能を生成。
+					nsFeature::nsStatusChanger::CAbnormalStatus* paralysis = new nsFeature::nsStatusChanger::CAbnormalStatus;
+					paralysis->Init(
+						nsFeature::nsStatusChanger::EnAbnormalStatusType::enParalysis,
+						player,
+						1
+					);
+					//パッシブスキルに機能を追加。
+					nsSkill::CPassiveSkill* passiveSkill = new nsSkill::CPassiveSkill;
+					passiveSkill->AddFeature(paralysis);
 
-				//プレイヤーにパッシブスキルを設定。
-				player->AddPassiveSkill(passiveSkill);
+					//プレイヤーにパッシブスキルを設定。
+					player->GetPassiveSkillManager()->AddPassiveSkill(passiveSkill);
+				}
 #endif
 			}
 
@@ -214,23 +210,25 @@ namespace nsAWA {
 				//スキル３使用。
 
 #ifdef _DEBUG
-				//アイテムを仮生成。
-				nsItem::CImmediatelyItem* item = NewGO<nsItem::CImmediatelyItem>();
+				//アイテム（毒）を生成。
+				{
+					//アイテムを仮生成。
+					nsItem::CImmediatelyItem* item = NewGO<nsItem::CImmediatelyItem>();
 
-				//毒機能を生成。
-				nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
-				poison->Init(
-					nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
-					player,
-					1
-				);
+					//毒機能を生成。
+					nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
+					poison->Init(
+						nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
+						player,
+						1
+					);
 
-				//アイテムに機能を追加。
-				item->AddFeature(poison);
+					//アイテムに機能を追加。
+					item->AddFeature(poison);
 
-				//アイテムを追加。
-				player->GetItemManager()->AddItem(item);
-
+					//アイテムを追加。
+					player->GetItemManager()->AddItem(item);
+				}
 #endif
 			}
 

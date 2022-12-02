@@ -2,7 +2,7 @@
 
 namespace nsAWA {
 
-	//エイリアス宣言
+	//前方宣言
 	namespace nsCamera {
 
 		class CMainCamera;
@@ -18,6 +18,10 @@ namespace nsAWA {
 	namespace nsItem {
 
 		class CItemManager;
+	}
+	namespace nsFeature {
+
+		class CFeatureManager;
 	}
 
 	namespace nsPlayer {
@@ -54,7 +58,11 @@ namespace nsAWA {
 		class CPlayerAction : nsUtils::SNoncopyable
 		{
 		public:
-			void Init(CPlayerStatus* playerStatus, nsItem::CItemManager* playerItemManager);
+			void Init(
+				CPlayerStatus* playerStatus, 
+				nsItem::CItemManager* playerItemManager,
+				nsFeature::CFeatureManager* playerFeatureManager
+			);
 
 			void Update(float deltaTime);
 
@@ -136,6 +144,7 @@ namespace nsAWA {
 			nsCamera::CMainCamera* m_mainCamera = nullptr;		//メインカメラのポインタ
 			CPlayerStatus* m_playerStatus = nullptr;			//プレイヤーステータスのポインタ
 			nsItem::CItemManager* m_playerItemManager = nullptr;//プレイヤーのアイテム管理クラスのポインタ
+			nsFeature::CFeatureManager* m_playerFeatureManager = nullptr;	//プレイヤーのステータス変化管理クラスのポインタ
 		};
 	}
 }

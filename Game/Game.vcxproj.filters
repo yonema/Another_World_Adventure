@@ -102,6 +102,9 @@
     <ClCompile Include="Game\Item\ImmediatelyItem.cpp" />
     <ClCompile Include="Game\Item\ThrowItem.cpp" />
     <ClCompile Include="Game\Item\ItemManager.cpp" />
+    <ClCompile Include="Game\Feature\AbnormalStatus\Paralysis.cpp" />
+    <ClCompile Include="Game\Skill\PassiveSkillManager.cpp" />
+    <ClCompile Include="Game\Feature\FeatureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
@@ -208,6 +211,9 @@
     <ClInclude Include="Game\Item\ImmediatelyItem.h" />
     <ClInclude Include="Game\Item\ThrowItem.h" />
     <ClInclude Include="Game\Item\ItemManager.h" />
+    <ClInclude Include="Game\Feature\AbnormalStatus\Paralysis.h" />
+    <ClInclude Include="Game\Skill\PassiveSkillManager.h" />
+    <ClInclude Include="Game\Feature\FeatureManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

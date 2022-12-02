@@ -2,7 +2,7 @@
 
 namespace nsAWA {
 
-	//エイリアス宣言
+	//前方宣言
 	namespace nsItem {
 
 		class CItem;
@@ -58,7 +58,7 @@ namespace nsAWA {
 				if (m_selectItemNum < 0) {
 
 					//最後のアイテムを見る。
-					m_selectItemNum = m_itemList.size() - 1;
+					m_selectItemNum = static_cast<int>(m_itemList.size() - 1);
 				}
 			}
 

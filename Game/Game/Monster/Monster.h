@@ -4,6 +4,7 @@
 
 namespace nsAWA {
 
+	//前方宣言
 	namespace nsWeapon {
 
 		class CWeapon;
@@ -12,6 +13,7 @@ namespace nsAWA {
 
 		class CArmor;
 	}
+
 	namespace nsMonster {
 
 		//モンスター情報

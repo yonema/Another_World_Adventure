@@ -4,7 +4,7 @@ namespace nsAWA {
 
 	namespace nsPlayer {
 
-		//エイリアス宣言
+		//前方宣言
 		enum class EnPlayerState;
 		class CPlayerInput;
 		namespace nsPlayerAnimation {
