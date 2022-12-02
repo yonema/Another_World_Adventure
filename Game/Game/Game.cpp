@@ -6,6 +6,7 @@
 
 #ifdef _DEBUG
 #include "Monster/Monster.h"
+#include "Monster/MonsterList.h"
 #include "Item/ImmediatelyItem.h"
 #include "Feature/AbnormalStatus/Poison.h"
 #include "Item/ItemManager.h"
@@ -29,13 +30,14 @@ namespace nsAWA
 
 #ifdef _DEBUG
 		//csv読み込みがまだできないため、手動で設定。
-		//nsMonster::SMonsterInfo monsterInfo;
-		//monsterInfo.name = "Giyara";
-		//monsterInfo.modelFilePath = "Assets/Models/Giyara.fbx";
-		//
-		////情報を元にモンスターモデルを生成。
-		//auto monster = NewGO<nsMonster::CMonster>(nsMonster::CMonster::m_kObjName_Monster);
-		//monster->Create(monsterInfo);
+		nsMonster::SMonsterInfo monsterInfo;
+		monsterInfo.name = "Giyara";
+		monsterInfo.modelFilePath = "Assets/Models/Giyara.fbx";
+		monsterInfo.monster = nsMonster::EnMonsterList::enGiyara;
+		
+		//情報を元にモンスターモデルを生成。
+		auto monster = NewGO<nsMonster::CMonster>(nsMonster::CMonster::m_kObjName_Monster);
+		monster->Create(monsterInfo);
 #endif
 
 		return true;

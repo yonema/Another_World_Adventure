@@ -1,6 +1,7 @@
 #pragma once
 #include "../GameActor.h"
 #include "MonsterStatus.h"
+#include "MonsterAnimation.h"
 
 namespace nsAWA {
 
@@ -13,6 +14,11 @@ namespace nsAWA {
 
 		class CArmor;
 	}
+	namespace nsMonster {
+
+		enum class EnMonsterList;
+		enum class EnMonsterState;
+	}
 
 	namespace nsMonster {
 
@@ -21,6 +27,7 @@ namespace nsAWA {
 
 			const char* name;						//モンスター名
 			const char* modelFilePath = nullptr;	//モデルのファイルパス
+			EnMonsterList monster = static_cast<EnMonsterList>(-1);	//何のモンスターか
 		};
 
 		//モンスタークラス
@@ -43,6 +50,18 @@ namespace nsAWA {
 			void HealMP(float healValue)override final {};
 			void HealSP(float healValue)override final {};
 		public:
+			void SetState(EnMonsterState state) {
+
+				//ステートが変わったら。
+				if (m_state != state) {
+
+					//新しいステートを設定する。
+					m_state = state;
+
+					//ステートに変更があった。
+					m_isChangeState = true;
+				}
+			}
 
 			CStatus* GetStatus()override final;
 
@@ -55,6 +74,9 @@ namespace nsAWA {
 			const char* m_name = nullptr;
 			CModelRenderer* m_modelRenderer = nullptr;	//モデル
 			CMonsterStatus m_status;					//ステータス
+			CMonsterAnimation m_animation;				//アニメーション
+			EnMonsterState m_state = static_cast<EnMonsterState>(-1);	//ステート
+			bool m_isChangeState = false;	//ステートがこのフレームで変更された？
 			nsWeapon::CWeapon* m_weapon = nullptr;		//武器
 			nsArmor::CArmor* m_armor = nullptr;			//防具
 		};

@@ -47,8 +47,6 @@ namespace nsAWA {
 
 				void Init();
 
-				void PlayAnimation(EnPlayerState playerState);
-
 				const char** GetAnimFilePath()const {
 
 					//アニメーションのファイルパスをリターン。
@@ -64,6 +62,10 @@ namespace nsAWA {
 				}
 
 				void Release();
+
+			private:
+				void PlayAnimation(EnPlayerState playerState);
+
 			private:
 				static const char* m_kAnimFilePaths[static_cast<int>(EnAnimName::enNum)];		//アニメーションのファイルパス
 

@@ -115,10 +115,15 @@ namespace nsAWA {
 			
 			void SetState(const EnPlayerState& state) {
 
-				m_state = state;
+				//ステートが変わったら。
+				if (m_state != state) {
 
-				//ステートに変更があった。
-				m_isChangeState = true;
+					//新しいステートを設定する。
+					m_state = state;
+
+					//ステートに変更があった。
+					m_isChangeState = true;
+				}
 			}
 			const EnPlayerState& GetState()const {
 
