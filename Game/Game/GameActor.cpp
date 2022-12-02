@@ -2,8 +2,32 @@
 #include "GameActor.h"
 #include "Feature/feature.h"
 #include "Skill/PassiveSkill.h"
+#include "Item/ItemManager.h"
 
 namespace nsAWA {
+
+	bool IGameActor::Start() {
+
+		//アイテム管理クラスを生成。
+		m_itemManager = new nsItem::CItemManager;
+
+		//派生クラスの開始処理。
+		return StartSub();
+	}
+
+	void IGameActor::OnDestroy() {
+
+		//破棄処理。
+
+		if (m_itemManager != nullptr) {
+
+			//アイテム管理クラスを破棄。
+			delete m_itemManager;
+		}
+
+		//派生クラスの破棄処理.
+		OnDestroySub();
+	}
 
 	void IGameActor::AddStatusChanger(nsFeature::CFeature* statusChanger) {
 

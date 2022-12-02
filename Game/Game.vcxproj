@@ -180,6 +180,9 @@
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationBase.cpp" />
     <ClCompile Include="Game\Item\Item.cpp" />
+    <ClCompile Include="Game\Item\ImmediatelyItem.cpp" />
+    <ClCompile Include="Game\Item\ThrowItem.cpp" />
+    <ClCompile Include="Game\Item\ItemManager.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\DisplayFPS.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
@@ -277,6 +280,9 @@
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationBase.h" />
     <ClInclude Include="Game\Item\Item.h" />
+    <ClInclude Include="Game\Item\ImmediatelyItem.h" />
+    <ClInclude Include="Game\Item\ThrowItem.h" />
+    <ClInclude Include="Game\Item\ItemManager.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\DisplayFPS.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />

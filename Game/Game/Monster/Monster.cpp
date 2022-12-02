@@ -8,12 +8,12 @@ namespace nsAWA {
 
 		const char* const CMonster::m_kObjName_Monster = "Monster";
 
-		bool CMonster::Start() {
+		bool CMonster::StartSub() {
 
 			return true;
 		}
 
-		void CMonster::OnDestroy() {
+		void CMonster::OnDestroySub() {
 
 			//モンスターモデルを破棄。
 			DeleteGO(m_modelRenderer);

@@ -4,6 +4,10 @@
 #include "../Weapon/Weapon.h"
 #include "../Armor/Armor.h"
 
+#ifdef _DEBUG
+#include "../Monster/Monster.h"
+#endif
+
 namespace nsAWA {
 
 	namespace {
@@ -16,7 +20,7 @@ namespace nsAWA {
 
 		const char* const CPlayer::m_kObjName_Player = "Player";
 
-		bool CPlayer::Start() {
+		bool CPlayer::StartSub() {
 
 			//アニメーションを初期化。
 			m_animation.Init();
@@ -40,7 +44,7 @@ namespace nsAWA {
 			m_input.Init(&m_action, &m_animation);
 
 			//アクションクラスを初期化。
-			m_action.Init();
+			m_action.Init(&m_status, GetItemManager());
 
 			m_fontRenderer = NewGO<nsGraphics::nsFonts::CFontRenderer>();
 
@@ -62,7 +66,7 @@ namespace nsAWA {
 			return true;
 		}
 
-		void CPlayer::OnDestroy() {
+		void CPlayer::OnDestroySub() {
 
 			//プレイヤーモデルを破棄。
 			DeleteGO(m_modelRenderer);

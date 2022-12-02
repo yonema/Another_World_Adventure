@@ -15,6 +15,10 @@ namespace nsAWA {
 
 		class CActiveSkill;
 	}
+	namespace nsItem {
+
+		class CItemManager;
+	}
 
 	namespace nsPlayer {
 
@@ -50,7 +54,7 @@ namespace nsAWA {
 		class CPlayerAction : nsUtils::SNoncopyable
 		{
 		public:
-			void Init();
+			void Init(CPlayerStatus* playerStatus, nsItem::CItemManager* playerItemManager);
 
 			void Update(float deltaTime);
 
@@ -59,6 +63,12 @@ namespace nsAWA {
 			void Rotate();
 
 			void Guard();
+
+			void UseItem();
+
+			void AddSelectItemNum();
+
+			void SubSelectItemNum();
 
 			void SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill);
 
@@ -125,6 +135,7 @@ namespace nsAWA {
 
 			nsCamera::CMainCamera* m_mainCamera = nullptr;		//メインカメラのポインタ
 			CPlayerStatus* m_playerStatus = nullptr;			//プレイヤーステータスのポインタ
+			nsItem::CItemManager* m_playerItemManager = nullptr;//プレイヤーのアイテム管理クラスのポインタ
 		};
 	}
 }

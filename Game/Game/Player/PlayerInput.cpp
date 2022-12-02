@@ -9,6 +9,9 @@
 #include "../Feature/HealFeature.h"
 #include "../Skill/PassiveSkill.h"
 #include "../Skill/ActiveSkill.h"
+#include "../Item/ImmediatelyItem.h"
+#include "../Feature/AbnormalStatus/Poison.h"
+#include "../Item/ItemManager.h"
 #endif
 
 namespace nsAWA {
@@ -126,13 +129,31 @@ namespace nsAWA {
 			}
 
 			//アイテム使用入力。
-			if (Input()->IsTrigger(EnActionMapping::enUseItem)) {
+			if (Input()->IsTrigger(EnActionMapping::enUseItem)
+				&& !Input()->IsPress(EnActionMapping::enItemSelectPreparation)
+				&& !Input()->IsPress(EnActionMapping::enSkillPreparation)
+				) {
 
-				//アイテムを使用。未実装。
-				//UseItem();
+				//アイテムを使用。
+				m_playerAction->UseItem();
+			}
 
-				//アイテム使用状態にする。
-				m_playerAction->SetState(EnPlayerState::enUseItem);
+			//アイテム選択準備。
+			if (Input()->IsPress(EnActionMapping::enItemSelectPreparation)
+				&& !Input()->IsPress(EnActionMapping::enSkillPreparation)
+				) {
+
+				//次のアイテムを選ぶ。
+				if (Input()->IsTrigger(EnActionMapping::enItemSelectRight)) {
+
+					m_playerAction->AddSelectItemNum();
+				}
+
+				//前のアイテムを選ぶ。
+				if (Input()->IsTrigger(EnActionMapping::enItemSelectLeft)) {
+
+					m_playerAction->SubSelectItemNum();
+				}
 			}
 
 			//ガード準備入力。
@@ -191,6 +212,26 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
 
 				//スキル３使用。
+
+#ifdef _DEBUG
+				//アイテムを仮生成。
+				nsItem::CImmediatelyItem* item = NewGO<nsItem::CImmediatelyItem>();
+
+				//毒機能を生成。
+				nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
+				poison->Init(
+					nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
+					player,
+					1
+				);
+
+				//アイテムに機能を追加。
+				item->AddFeature(poison);
+
+				//アイテムを追加。
+				player->GetItemManager()->AddItem(item);
+
+#endif
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_4)) {

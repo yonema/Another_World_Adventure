@@ -3,8 +3,13 @@
 #include "../YonemaEngine.h"
 #include "Player/Player.h"
 #include "Camera/MainCamera.h"
+
+#ifdef _DEBUG
 #include "Monster/Monster.h"
-#include "Item/Item.h"
+#include "Item/ImmediatelyItem.h"
+#include "Feature/AbnormalStatus/Poison.h"
+#include "Item/ItemManager.h"
+#endif
 
 namespace nsAWA
 {
@@ -20,9 +25,6 @@ namespace nsAWA
 
 #ifdef _DEBUG
 
-		//アイテムを仮生成。
-		nsItem::CItem item;
-		item.Create();
 #endif
 
 #ifdef _DEBUG
