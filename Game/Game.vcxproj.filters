@@ -108,7 +108,21 @@
     <ClCompile Include="Game\Monster\MonsterAnimation.cpp" />
     <ClCompile Include="Game\Monster\MonsterList.cpp" />
     <ClCompile Include="Game\CSV\CCSVManager.cpp" />
-  </ItemGroup>
+<ClCompile Include="Game\Samples\CharacterControllerSample.cpp" />
+    <ClCompile Include="Game\Samples\PhysicsSample.cpp" />
+    <ClCompile Include="Game\Samples\TriggerSample.cpp" />
+    <ClCompile Include="YonemaEngine\DebugSystem\SimpleMover.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\ContactEvent.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\ContactReportCallback.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\ExtendedDataForRigidActor.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\PhysicsDynamicObject.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\PhysicsEngine.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\PhysicsObject.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\PhysicsStaticObject.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\PhysicsTriggerObject.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\RayCast.cpp" />  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
     <ClInclude Include="Application.h" />
@@ -219,8 +233,24 @@
     <ClInclude Include="Game\Feature\FeatureManager.h" />
     <ClInclude Include="Game\Monster\MonsterAnimation.h" />
     <ClInclude Include="Game\Monster\MonsterList.h" />
-    <ClInclude Include="Game\CSV\CCSVManager.h" />
-  </ItemGroup>
+<ClInclude Include="Game\CSV\CCSVManager.h" />
+ <ClInclude Include="Game\Samples\CharacterControllerSample.h" />
+    <ClInclude Include="Game\Samples\PhysicsSample.h" />
+    <ClInclude Include="Game\Samples\TriggerSample.h" />
+    <ClInclude Include="YonemaEngine\DebugSystem\SimpleMover.h" />
+    <ClInclude Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineRenderer.h" />
+    <ClInclude Include="YonemaEngine\Physics\ContactEvent.h" />
+    <ClInclude Include="YonemaEngine\Physics\ContactReportCallback.h" />
+    <ClInclude Include="YonemaEngine\Physics\ExtendedDataForRigidActor.h" />
+    <ClInclude Include="YonemaEngine\Physics\PhysicsCommonFunc.h" />
+    <ClInclude Include="YonemaEngine\Physics\PhysicsDynamicObject.h" />
+    <ClInclude Include="YonemaEngine\Physics\PhysicsEngine.h" />
+    <ClInclude Include="YonemaEngine\Physics\PhysicsObject.h" />
+    <ClInclude Include="YonemaEngine\Physics\PhysicsStaticObject.h" />
+    <ClInclude Include="YonemaEngine\Physics\PhysicsTriggerObject.h" />
+    <ClInclude Include="YonemaEngine\Physics\RayCast.h" />
+    <ClInclude Include="Game\PhysicsAttributes.h" />  </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
