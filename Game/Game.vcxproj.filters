@@ -108,7 +108,7 @@
     <ClCompile Include="Game\Monster\MonsterAnimation.cpp" />
     <ClCompile Include="Game\Monster\MonsterList.cpp" />
     <ClCompile Include="Game\CSV\CCSVManager.cpp" />
-<ClCompile Include="Game\Samples\CharacterControllerSample.cpp" />
+    <ClCompile Include="Game\Samples\CharacterControllerSample.cpp" />
     <ClCompile Include="Game\Samples\PhysicsSample.cpp" />
     <ClCompile Include="Game\Samples\TriggerSample.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\SimpleMover.cpp" />
@@ -122,7 +122,9 @@
     <ClCompile Include="YonemaEngine\Physics\PhysicsObject.cpp" />
     <ClCompile Include="YonemaEngine\Physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="YonemaEngine\Physics\PhysicsTriggerObject.cpp" />
-    <ClCompile Include="YonemaEngine\Physics\RayCast.cpp" />  </ItemGroup>
+    <ClCompile Include="YonemaEngine\Physics\RayCast.cpp" />
+    <ClCompile Include="Game\Samples\AnimationEventSample.cpp" />
+  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
     <ClInclude Include="Application.h" />
@@ -233,8 +235,8 @@
     <ClInclude Include="Game\Feature\FeatureManager.h" />
     <ClInclude Include="Game\Monster\MonsterAnimation.h" />
     <ClInclude Include="Game\Monster\MonsterList.h" />
-<ClInclude Include="Game\CSV\CCSVManager.h" />
- <ClInclude Include="Game\Samples\CharacterControllerSample.h" />
+    <ClInclude Include="Game\CSV\CCSVManager.h" />
+    <ClInclude Include="Game\Samples\CharacterControllerSample.h" />
     <ClInclude Include="Game\Samples\PhysicsSample.h" />
     <ClInclude Include="Game\Samples\TriggerSample.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\SimpleMover.h" />
@@ -250,7 +252,9 @@
     <ClInclude Include="YonemaEngine\Physics\PhysicsStaticObject.h" />
     <ClInclude Include="YonemaEngine\Physics\PhysicsTriggerObject.h" />
     <ClInclude Include="YonemaEngine\Physics\RayCast.h" />
-    <ClInclude Include="Game\PhysicsAttributes.h" />  </ItemGroup>
+    <ClInclude Include="Game\PhysicsAttributes.h" />
+    <ClInclude Include="Game\Samples\AnimationEventSample.h" />
+  </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
