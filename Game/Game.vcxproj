@@ -154,6 +154,7 @@
     <ClCompile Include="Game\CSV\CCSVManager.cpp" />
     <ClCompile Include="Game\Feature\FeatureManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterList.cpp" />
+    <ClCompile Include="Game\Samples\AnimationEventSample.cpp" />
     <ClCompile Include="Game\Samples\CharacterControllerSample.cpp" />
     <ClCompile Include="Game\Samples\PhysicsSample.cpp" />
     <ClCompile Include="Game\Samples\TriggerSample.cpp" />
@@ -275,6 +276,7 @@
     <ClInclude Include="Game\Feature\FeatureManager.h" />
     <ClInclude Include="Game\Monster\MonsterList.h" />
     <ClInclude Include="Game\PhysicsAttributes.h" />
+    <ClInclude Include="Game\Samples\AnimationEventSample.h" />
     <ClInclude Include="Game\Samples\CharacterControllerSample.h" />
     <ClInclude Include="Game\Samples\PhysicsSample.h" />
     <ClInclude Include="Game\Samples\TriggerSample.h" />
