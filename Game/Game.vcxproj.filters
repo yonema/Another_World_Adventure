@@ -124,6 +124,7 @@
     <ClCompile Include="YonemaEngine\Physics\PhysicsTriggerObject.cpp" />
     <ClCompile Include="YonemaEngine\Physics\RayCast.cpp" />
     <ClCompile Include="Game\Samples\AnimationEventSample.cpp" />
+    <ClCompile Include="Game\Samples\GetBoneMatrixSample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
@@ -254,6 +255,7 @@
     <ClInclude Include="YonemaEngine\Physics\RayCast.h" />
     <ClInclude Include="Game\PhysicsAttributes.h" />
     <ClInclude Include="Game\Samples\AnimationEventSample.h" />
+    <ClInclude Include="Game\Samples\GetBoneMatrixSample.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

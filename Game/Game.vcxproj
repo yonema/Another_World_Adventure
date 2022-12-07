@@ -156,6 +156,7 @@
     <ClCompile Include="Game\Monster\MonsterList.cpp" />
     <ClCompile Include="Game\Samples\AnimationEventSample.cpp" />
     <ClCompile Include="Game\Samples\CharacterControllerSample.cpp" />
+    <ClCompile Include="Game\Samples\GetBoneMatrixSample.cpp" />
     <ClCompile Include="Game\Samples\PhysicsSample.cpp" />
     <ClCompile Include="Game\Samples\TriggerSample.cpp" />
     <ClCompile Include="Game\Skill\ActiveSkill.cpp" />
@@ -278,6 +279,7 @@
     <ClInclude Include="Game\PhysicsAttributes.h" />
     <ClInclude Include="Game\Samples\AnimationEventSample.h" />
     <ClInclude Include="Game\Samples\CharacterControllerSample.h" />
+    <ClInclude Include="Game\Samples\GetBoneMatrixSample.h" />
     <ClInclude Include="Game\Samples\PhysicsSample.h" />
     <ClInclude Include="Game\Samples\TriggerSample.h" />
     <ClInclude Include="Game\Skill\ActiveSkill.h" />
