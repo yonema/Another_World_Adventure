@@ -28,8 +28,8 @@ namespace nsYMEngine
 		m_inputManager = new nsInput::CInputManager();
 		m_physicsWorld = nsPhysics::CPhysicsEngine::CreateInstance();
 
-		//NewGO<nsAWA::CGame>(EnGOPriority::enMid, "AWAGame");
-		NewGO<nsAWA::nsSamples::CSampleMain> ("SampleMain");
+		NewGO<nsAWA::CGame>(EnGOPriority::enMid, "AWAGame");
+		//NewGO<nsAWA::nsSamples::CSampleMain> ("SampleMain");
 
 #ifdef _DEBUG
 		m_displayFPS = NewGO<nsDebugSystem::CDisplayFPS>("DisplayFPS");
