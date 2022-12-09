@@ -24,7 +24,6 @@ namespace nsAWA {
 			float m_power = 0.0f;				//威力
 			float m_attack = 0.0f;				//攻撃力
 			float m_deffence = 0.0f;			//防御力
-			IGameActor* m_target = nullptr;		//ダメージ対象
 			bool m_canGuard = true;				//ガード可能？
 		};
 	}

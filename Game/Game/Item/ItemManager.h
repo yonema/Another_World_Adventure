@@ -3,6 +3,7 @@
 namespace nsAWA {
 
 	//前方宣言
+	class IGameActor;
 	namespace nsItem {
 
 		class CItem;
@@ -13,64 +14,35 @@ namespace nsAWA {
 		//アイテム管理クラス
 		class CItemManager : nsUtils::SNoncopyable
 		{
-		public:
-			void AddItem(nsItem::CItem* item) {
+		private:
+			//手持ちのアイテム情報
+			struct SHasItem {
 
-				//アイテムリストにアイテムを追加。
-				m_itemList.emplace_back(item);
+				std::string name = "";	//名前
+				int hasNum = 0;			//所持数
+			};
+		public:
+
+			void Init(IGameActor* target) {
+
+				//ターゲットを設定。
+				m_target = target;
 			}
 
 			void UseItem();
 
-			void AddSelectItemNum() {
-
-				//リストが空なら。
-				if (!HasItem()) {
-
-					//終了。
-					return;
-				}
-
-				//次のアイテムを見る。
-				m_selectItemNum++;
-
-				//アイテムのリストのサイズ以上なら。
-				if (m_selectItemNum >= m_itemList.size()) {
-
-					//最初のアイテムを見る。
-					m_selectItemNum = 0;
-				}
-			}
-
-			void SubSelectItemNum() {
-
-				//リストが空なら。
-				if (!HasItem()) {
-
-					//終了。
-					return;
-				}
-
-				//前のアイテムを見る。
-				m_selectItemNum--;
-
-				//マイナス値になっていたら。
-				if (m_selectItemNum < 0) {
-
-					//最後のアイテムを見る。
-					m_selectItemNum = static_cast<int>(m_itemList.size() - 1);
-				}
-			}
+			void AddItem(std::string itemName, int getNum = 1);
 
 			bool HasItem()const {
 
-				//アイテムを持っているかどうかを返す。
-				return m_itemList.size() != 0;
+				//サイズが0より大きいかどうかをリターン。
+				return m_sItemList.size() > 0;
 			}
 
 		private:
 			int m_selectItemNum = 0;			//選択中のアイテム番号
-			std::vector<CItem*> m_itemList;		//アイテムリスト
+			std::list<SHasItem> m_sItemList;	//アイテムリスト
+			IGameActor* m_target = nullptr;		//ターゲット
 		};
 	}
 }

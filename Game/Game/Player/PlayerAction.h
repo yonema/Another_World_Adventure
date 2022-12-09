@@ -112,6 +112,11 @@ namespace nsAWA {
 
 				return m_rotation;
 			}
+
+			const CVector3& GetForwardDirection()const {
+
+				return m_forwardDirection;
+			}
 			
 			void SetState(const EnPlayerState& state) {
 

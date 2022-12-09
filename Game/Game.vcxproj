@@ -151,7 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game\CSV\CCSVManager.cpp" />
+    <ClCompile Include="Game\BackGround\BackGround.cpp" />
+    <ClCompile Include="Game\Feature\FeatureBuilder.cpp" />
+    <ClCompile Include="Game\GameActorCollider.cpp" />
+    <ClCompile Include="Game\Item\AllItemList.cpp" />
+    <ClCompile Include="Game\CSV\CSVManager.cpp" />
     <ClCompile Include="Game\Feature\FeatureManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterList.cpp" />
     <ClCompile Include="Game\Samples\AnimationEventSample.cpp" />
@@ -188,12 +192,14 @@
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationBase.cpp" />
     <ClCompile Include="Game\Item\Item.cpp" />
-    <ClCompile Include="Game\Item\ImmediatelyItem.cpp" />
+    <ClCompile Include="Game\Item\SelfItem.cpp" />
     <ClCompile Include="Game\Item\ThrowItem.cpp" />
     <ClCompile Include="Game\Item\ItemManager.cpp" />
     <ClCompile Include="Game\Feature\AbnormalStatus\Paralysis.cpp" />
     <ClCompile Include="Game\Skill\PassiveSkillManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterAnimation.cpp" />
+    <ClCompile Include="Game\Player\PlayerCollider.cpp" />
+    <ClCompile Include="Game\Item\ItemCollision.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\DisplayFPS.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\SimpleMover.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
@@ -273,7 +279,11 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game\CSV\CCSVManager.h" />
+    <ClInclude Include="Game\BackGround\BackGround.h" />
+    <ClInclude Include="Game\Feature\FeatureBuilder.h" />
+    <ClInclude Include="Game\GameActorCollider.h" />
+    <ClInclude Include="Game\Item\AllItemList.h" />
+    <ClInclude Include="Game\CSV\CSVManager.h" />
     <ClInclude Include="Game\Feature\FeatureManager.h" />
     <ClInclude Include="Game\Monster\MonsterList.h" />
     <ClInclude Include="Game\PhysicsAttributes.h" />
@@ -312,12 +322,14 @@
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationBase.h" />
     <ClInclude Include="Game\Item\Item.h" />
-    <ClInclude Include="Game\Item\ImmediatelyItem.h" />
+    <ClInclude Include="Game\Item\SelfItem.h" />
     <ClInclude Include="Game\Item\ThrowItem.h" />
     <ClInclude Include="Game\Item\ItemManager.h" />
     <ClInclude Include="Game\Feature\AbnormalStatus\Paralysis.h" />
     <ClInclude Include="Game\Skill\PassiveSkillManager.h" />
     <ClInclude Include="Game\Monster\MonsterAnimation.h" />
+    <ClInclude Include="Game\Player\PlayerCollider.h" />
+    <ClInclude Include="Game\Item\ItemCollision.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\DisplayFPS.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\SimpleMover.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />

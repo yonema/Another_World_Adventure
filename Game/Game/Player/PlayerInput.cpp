@@ -10,9 +10,11 @@
 #include "../Skill/PassiveSkill.h"
 #include "../Skill/PassiveSkillManager.h"
 #include "../Skill/ActiveSkill.h"
-#include "../Item/ImmediatelyItem.h"
+#include "../Item/SelfItem.h"
+#include "../Item/ThrowItem.h"
 #include "../Feature/AbnormalStatus/Poison.h"
 #include "../Item/ItemManager.h"
+#include "../CSV/CSVManager.h"
 #endif
 
 namespace nsAWA {
@@ -119,7 +121,7 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
 				//強攻撃状態にする。
-				m_playerAction->SetState(EnPlayerState::enStrongAttack);
+				//m_playerAction->SetState(EnPlayerState::enStrongAttack);
 			}
 
 			//アイテム使用入力。
@@ -207,7 +209,7 @@ namespace nsAWA {
 				//アイテム（毒）を生成。
 				{
 					//アイテムを仮生成。
-					nsItem::CImmediatelyItem* item = NewGO<nsItem::CImmediatelyItem>();
+					nsItem::CThrowItem* item = NewGO<nsItem::CThrowItem>();
 
 					//毒機能を生成。
 					nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
@@ -217,11 +219,15 @@ namespace nsAWA {
 						1
 					);
 
+					//投げ開始座標を設定。
+					item->SetStartPosition(player->GetPosition());
+					item->SetThrowDirection(player->GetForwardDirection());
+
 					//アイテムに機能を追加。
-					item->AddFeature(poison);
+					//item->AddFeature(poison);
 
 					//アイテムを追加。
-					player->GetItemManager()->AddItem(item);
+					//player->GetItemManager()->AddItem(item);
 				}
 #endif
 			}
@@ -229,6 +235,11 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_4)) {
 
 				//スキル４使用。
+
+#ifdef _DEBUG
+				//プレイヤーにアイテムを与える。
+				player->GetItemManager()->AddItem("ポーション", 2);
+#endif
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_5)) {
