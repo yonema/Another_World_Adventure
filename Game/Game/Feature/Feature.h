@@ -22,6 +22,8 @@ namespace nsAWA {
 		public:
 			virtual void Create() = 0;
 
+			void Release();
+
 			virtual CFeature* CreateAndReturn() {
 
 				//一部の派生クラスで使用される関数のため、基底クラスのこの関数が呼ばれた場合はエラーを出力する。
@@ -40,11 +42,18 @@ namespace nsAWA {
 				m_durationTime = durationTime;
 			}
 
+			void SetTarget(IGameActor* target) {
+
+				//効果の対象を設定。
+				m_target = target;
+			}
+
 		protected:
-			virtual void Execute(float deltaTime) {}
+			virtual void Execute(float deltaTime){}
 
 		protected:
 			float m_durationTime = 0.0f;	//持続時間
+			IGameActor* m_target = nullptr;	//効果の対象
 		};
 	}
 }

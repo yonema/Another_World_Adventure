@@ -123,10 +123,10 @@ namespace nsAWA {
 
 			//アイテムを持っていたら。
 			if (m_playerItemManager->HasItem()) {
-
+			
 				//選択中のアイテムを使用。
 				m_playerItemManager->UseItem();
-
+			
 				//アイテム使用状態にする。
 				SetState(EnPlayerState::enUseItem);
 			}
@@ -135,13 +135,13 @@ namespace nsAWA {
 		void CPlayerAction::AddSelectItemNum() {
 
 			//次のアイテムを選択。
-			m_playerItemManager->AddSelectItemNum();
+			//m_playerItemManager->AddSelectItemNum();
 		}
 
 		void CPlayerAction::SubSelectItemNum() {
 
 			//前のアイテムを選択。
-			m_playerItemManager->SubSelectItemNum();
+			//m_playerItemManager->SubSelectItemNum();
 		}
 
 		void CPlayerAction::SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill) {

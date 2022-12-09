@@ -49,6 +49,18 @@ namespace nsAWA {
 			void HealHP(float healValue)override final {};
 			void HealMP(float healValue)override final {};
 			void HealSP(float healValue)override final {};
+
+			const CVector3& GetPosition()const override final {
+
+				//座標を取得。（未実装）
+				return CVector3::Zero();
+			}
+
+			const CVector3& GetForwardDirection()const override final {
+
+				//前方向を取得。（未実装）
+				return CVector3::Zero();
+			}
 		public:
 			void SetState(EnMonsterState state) {
 

@@ -3,6 +3,7 @@
 #include "PlayerAction.h"
 #include "PlayerInput.h"
 #include "PlayerAnimation/PlayerAnimation.h"
+#include "PlayerCollider.h"
 #include "../GameActor.h"
 
 namespace nsAWA {
@@ -49,7 +50,7 @@ namespace nsAWA {
 				m_status.HealSP(healValue);
 			}
 		public:
-			const CVector3& GetPosition()const {
+			const CVector3& GetPosition()const override final {
 
 				//座標を取得。
 				return m_action.GetPosition();
@@ -61,11 +62,22 @@ namespace nsAWA {
 				return m_action.GetRotation();
 			}
 
+			const CVector3& GetForwardDirection()const override final {
+
+				return m_action.GetForwardDirection();
+			}
+
 			CPlayerStatus* GetStatus()override final;
 
 			nsWeapon::CWeapon* GetWeapon()override final;
 
 			nsArmor::CArmor* GetArmor()override final;
+
+			CGameActorCollider* GetGameActorCollider() {
+
+				//アクターの当たり判定を取得。
+				return &m_collider;
+			}
 
 			void SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill);
 		private:
@@ -82,6 +94,7 @@ namespace nsAWA {
 			CPlayerStatus m_status;									//ステータス
 			nsWeapon::CWeapon* m_weapon = nullptr;					//武器
 			nsArmor::CArmor* m_armor = nullptr;						//防具
+			CPlayerCollider m_collider;								//プレイヤーの当たり判定
 
 #ifdef _DEBUG
 			CFontRenderer* m_fontRenderer = nullptr;

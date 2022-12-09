@@ -11,6 +11,8 @@ namespace nsYMEngine
 			enNone,
 			enGround,
 			enWall,
+			enPlayer,
+			enItemRigidBody
 
 			// ‚±‚±‚©‚ç‰º‚ÉŠg’£‚µ‚Ä‚¢‚Á‚Ä‚­‚¾‚³‚¢B
 		};

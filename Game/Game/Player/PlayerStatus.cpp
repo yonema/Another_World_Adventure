@@ -23,7 +23,7 @@ namespace nsAWA {
 			//...
 #ifdef _DEBUG
 			//今回は仮にHP、最大HPを定数で入力。
-			m_HP = kLev1MaxHP;
+			m_HP = kLev1MaxHP / 2.0f;
 			m_maxHP = kLev1MaxHP;
 
 			//今回は仮にMP、最大MPを定数で入力。

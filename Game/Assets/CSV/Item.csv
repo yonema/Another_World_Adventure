@@ -1,0 +1,4 @@
+NAME,ƒ|[ƒVƒ‡ƒ“,,,,
+TYPE,Self,,,,
+FEATURE,heal,player,hp,const,100
+FEATURE,damage,player,hp,const,100

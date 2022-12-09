@@ -99,7 +99,7 @@
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationBase.cpp" />
     <ClCompile Include="Game\Item\Item.cpp" />
-    <ClCompile Include="Game\Item\ImmediatelyItem.cpp" />
+    <ClCompile Include="Game\Item\SelfItem.cpp" />
     <ClCompile Include="Game\Item\ThrowItem.cpp" />
     <ClCompile Include="Game\Item\ItemManager.cpp" />
     <ClCompile Include="Game\Feature\AbnormalStatus\Paralysis.cpp" />
@@ -107,8 +107,7 @@
     <ClCompile Include="Game\Feature\FeatureManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterAnimation.cpp" />
     <ClCompile Include="Game\Monster\MonsterList.cpp" />
-    <ClCompile Include="Game\CSV\CCSVManager.cpp" />
-    <ClCompile Include="Game\Samples\CharacterControllerSample.cpp" />
+    <ClCompile Include="Game\CSV\CSVManager.cpp" />
     <ClCompile Include="Game\Samples\PhysicsSample.cpp" />
     <ClCompile Include="Game\Samples\TriggerSample.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\SimpleMover.cpp" />
@@ -122,11 +121,13 @@
     <ClCompile Include="YonemaEngine\Physics\PhysicsObject.cpp" />
     <ClCompile Include="YonemaEngine\Physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="YonemaEngine\Physics\PhysicsTriggerObject.cpp" />
-    <ClCompile Include="YonemaEngine\Physics\RayCast.cpp" />
-    <ClCompile Include="Game\Samples\AnimationEventSample.cpp" />
-    <ClCompile Include="Game\Samples\GetBoneMatrixSample.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+<ClCompile Include="Game\Samples\AnimationEventSample.cpp" />
+    <ClCompile Include="Game\Samples\GetBoneMatrixSample.cpp" /> <ClCompile Include="Game\Player\PlayerCollider.cpp" />
+    <ClCompile Include="Game\Item\ItemCollision.cpp" />
+    <ClCompile Include="Game\Item\AllItemList.cpp" />
+    <ClCompile Include="Game\GameActorCollider.cpp" />
+    <ClCompile Include="Game\Feature\FeatureBuilder.cpp" />
+    <ClCompile Include="Game\BackGround\BackGround.cpp" />  <ItemGroup>
     <ClInclude Include="Game\Feature\AbnormalStatus\AbnormalStatus.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Game\GameActor.h" />
@@ -228,7 +229,7 @@
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationBase.h" />
     <ClInclude Include="Game\Item\Item.h" />
-    <ClInclude Include="Game\Item\ImmediatelyItem.h" />
+    <ClInclude Include="Game\Item\SelfItem.h" />
     <ClInclude Include="Game\Item\ThrowItem.h" />
     <ClInclude Include="Game\Item\ItemManager.h" />
     <ClInclude Include="Game\Feature\AbnormalStatus\Paralysis.h" />
@@ -236,8 +237,7 @@
     <ClInclude Include="Game\Feature\FeatureManager.h" />
     <ClInclude Include="Game\Monster\MonsterAnimation.h" />
     <ClInclude Include="Game\Monster\MonsterList.h" />
-    <ClInclude Include="Game\CSV\CCSVManager.h" />
-    <ClInclude Include="Game\Samples\CharacterControllerSample.h" />
+<ClInclude Include="Game\CSV\CSVManager.h" />
     <ClInclude Include="Game\Samples\PhysicsSample.h" />
     <ClInclude Include="Game\Samples\TriggerSample.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\SimpleMover.h" />
@@ -253,11 +253,13 @@
     <ClInclude Include="YonemaEngine\Physics\PhysicsStaticObject.h" />
     <ClInclude Include="YonemaEngine\Physics\PhysicsTriggerObject.h" />
     <ClInclude Include="YonemaEngine\Physics\RayCast.h" />
-    <ClInclude Include="Game\PhysicsAttributes.h" />
-    <ClInclude Include="Game\Samples\AnimationEventSample.h" />
-    <ClInclude Include="Game\Samples\GetBoneMatrixSample.h" />
-  </ItemGroup>
-  <ItemGroup>
+<ClInclude Include="Game\Samples\AnimationEventSample.h" />
+    <ClInclude Include="Game\Samples\GetBoneMatrixSample.h" /><ClInclude Include="Game\Player\PlayerCollider.h" />
+    <ClInclude Include="Game\Item\ItemCollision.h" />
+    <ClInclude Include="Game\Item\AllItemList.h" />
+    <ClInclude Include="Game\GameActorCollider.h" />
+    <ClInclude Include="Game\Feature\FeatureBuilder.h" />
+    <ClInclude Include="Game\BackGround\BackGround.h" />  <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>

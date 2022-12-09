@@ -20,6 +20,7 @@ namespace nsAWA {
 				if (isDead) {
 
 					//このステータス変化を破棄。
+					(*itr)->Release();
 					itr = m_feature.erase(itr);
 
 					//破棄されたことにより、既に次のイテレータが入っているので移る処理をスキップ。

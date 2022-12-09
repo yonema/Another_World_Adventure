@@ -54,6 +54,9 @@ namespace nsAWA {
 
 			//ターゲットにダメージを与える。
 			m_target->ApplyDamage(damage, m_power, m_canGuard);
+
+			//破棄。
+			Release();
 		}
 	}
 }

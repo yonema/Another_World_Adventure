@@ -11,9 +11,13 @@ namespace nsAWA {
 		//アイテム管理クラスを生成。
 		m_itemManager = new nsItem::CItemManager;
 
+		//アイテム管理クラスを初期化。
+		m_itemManager->Init(this);
+
 		//パッシブスキル管理クラスを生成。
 		m_passiveSkillManager = new nsSkill::CPassiveSkillManager;
 
+		//効果管理クラスを生成。
 		m_featureManager = new nsFeature::CFeatureManager;
 
 		//派生クラスの開始処理。

@@ -4,6 +4,7 @@ namespace nsAWA {
 
 	//前方宣言
 	class CStatus;
+	class CGameActorCollider;
 	
 	namespace nsWeapon {
 
@@ -57,6 +58,10 @@ namespace nsAWA {
 
 		virtual nsArmor::CArmor* GetArmor() = 0;
 
+		virtual const CVector3& GetForwardDirection()const = 0;
+
+		virtual const CVector3& GetPosition()const = 0;
+
 		nsItem::CItemManager* GetItemManager() {
 
 			//アイテム管理クラスが生成されていないなら。
@@ -95,6 +100,9 @@ namespace nsAWA {
 			//ステータス変化のリストにアクセスするために、管理クラスを取得。
 			return m_featureManager;
 		}
+
+		virtual CGameActorCollider* GetGameActorCollider() = 0;
+
 	private:
 		nsItem::CItemManager* m_itemManager = nullptr;		//アイテム管理
 		nsSkill::CPassiveSkillManager* m_passiveSkillManager = nullptr;		//パッシブスキル管理

@@ -1,8 +1,11 @@
 #pragma once
+#include "AllItemList.h"
 
 namespace nsAWA {
 
 	//前方宣言
+	class IGameActor;
+
 	namespace nsFeature {
 
 		class CFeature;
@@ -10,49 +13,65 @@ namespace nsAWA {
 
 	namespace nsItem {
 
+		//アイテムのタイプ
+		enum class EnItemType {
+
+			enSelf,			//自身に使用
+			enThrow,		//投げる
+
+			enNum,			//種類数
+			enNone = -1		//設定なし
+		};
+
 		//アイテムクラス
 		class CItem : public IGameObject
 		{
 		public:
-
-			bool Start()override final;
-
-			void OnDestroy()override final;
-
-			void Update(float deltaTime)override final;
-
 			virtual void Use() = 0;
 
-			void AddFeature(nsFeature::CFeature* feature) {
+		public:
+			void SetItemInfo(const SItemInfo& itemInfo) {
 
-				//効果をリストに追加。
-				m_featureList.emplace_back(feature);
+				//アイテム情報を設定。
+				m_itemInfo = itemInfo;
+			}
+
+			void SetItemName(std::string name) {
+
+				//名前を設定。
+				m_itemInfo.name = name;
+			}
+
+			std::string GetItemName()const {
+
+				//名前を取得。
+				return m_itemInfo.name;
+			}
+
+			void SetType(std::string type) {
+
+				//タイプを設定。
+				m_itemInfo.itemType = type;
+			}
+			
+			std::string GetType()const {
+
+				//タイプを取得。
+				return m_itemInfo.itemType;
+			}
+
+			void SetTarget(IGameActor* target) {
+
+				//ターゲットを設定。
+				m_target = target;
 			}
 
 		protected:
-			void ExecuteFeature();
-
-		public:
-			void SetName(const char* name) {
-
-				//名前を設定。
-				m_name = name;
-			}
-
-			const char* GetName()const {
-
-				//名前を取得。
-				return m_name;
-			}
+			void CreateFeature();
 
 		private:
-			const char* m_name = nullptr;	//名前
-			CModelRenderer* m_itemModel = nullptr;	//モデル
-			CQuaternion m_rotation = CQuaternion::Identity();	//モデルの回転
-
-			std::list<nsFeature::CFeature*> m_featureList;	//効果のリスト
-			float m_getValidTimer = 0.0f;	//取得有効時間タイマー
-			bool m_isGet = false;	//取得されている？
+			SItemInfo m_itemInfo;	//アイテム情報
+			IGameActor* m_target;
 		};
 	}
 }

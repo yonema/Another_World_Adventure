@@ -14,6 +14,7 @@ namespace nsAWA {
 
 		constexpr const char* const kPlayerModelFilePath = "Assets/Models/player.fbx";	//プレイヤーモデルのファイルパス
 		constexpr float kPlayerModelScale = 0.1f;	//プレイヤーモデルの拡大率
+		constexpr const char* const kPlayerModelTextureRootPath = "player";	//プレイヤーモデルのテクスチャのパス
 	}
 
 	namespace nsPlayer {
@@ -46,9 +47,12 @@ namespace nsAWA {
 			//アクションクラスを初期化。
 			m_action.Init(&m_status, GetItemManager(), GetFeatureManager());
 
-			m_fontRenderer = NewGO<nsGraphics::nsFonts::CFontRenderer>();
+			//当たり判定を初期化。
+			m_collider.Init(this);
 
 #ifdef _DEBUG
+			m_fontRenderer = NewGO<nsGraphics::nsFonts::CFontRenderer>();
+
 			//フォントの情報を設定。
 			nsGraphics::nsFonts::CFontRenderer::SFontParameter fontParam(
 				L"",
@@ -76,6 +80,15 @@ namespace nsAWA {
 				m_weapon->Release();
 				m_weapon = nullptr;
 			}
+
+			//防具を破棄。
+			if (m_armor != nullptr) {
+				m_armor->Release();
+				m_armor = nullptr;
+			}
+
+			//当たり判定を破棄。
+			m_collider.Release();
 		}
 
 		void CPlayer::UpdateActor(float deltaTime) {
@@ -94,6 +107,9 @@ namespace nsAWA {
 
 			//回転情報を設定。
 			m_modelRenderer->SetRotation(m_action.GetRotation());
+
+			//トリガーを更新。
+			m_collider.Update();
 
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
@@ -143,6 +159,7 @@ namespace nsAWA {
 			SModelInitData modelInitData;
 			modelInitData.modelFilePath = kPlayerModelFilePath;
 			modelInitData.modelFormat = nsGraphics::nsRenderers::EnModelFormat::enFBX;
+			modelInitData.textureRootPath = kPlayerModelTextureRootPath;
 			modelInitData.vertexBias.AddRotationX(nsMath::YM_PIDIV2);
 			modelInitData.vertexBias.AddRotationZ(nsMath::YM_PI);
 

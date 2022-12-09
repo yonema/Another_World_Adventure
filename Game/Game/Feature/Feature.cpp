@@ -5,6 +5,12 @@ namespace nsAWA {
 
 	namespace nsFeature {
 
+		void CFeature::Release() {
+
+			//自身を破棄。
+			delete this;
+		}
+
 		bool CFeature::Update(float deltaTime) {
 
 			//効果を発動。
@@ -22,9 +28,6 @@ namespace nsAWA {
 
 			//持続時間が0秒になったら。
 			if (fabsf(m_durationTime) <= FLT_EPSILON) {
-
-				//自身を破棄。
-				delete this;
 
 				//終了したとして知らせる。
 				return true;
