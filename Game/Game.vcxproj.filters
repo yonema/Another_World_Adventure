@@ -67,10 +67,6 @@
     <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineRenderer.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.cpp" />
     <ClCompile Include="Game\Feature\AbnormalStatus\Poison.cpp" />
     <ClCompile Include="Game\Status.cpp" />
     <ClCompile Include="Game\Monster\MonsterStatus.cpp" />
@@ -91,7 +87,6 @@
     <ClCompile Include="YonemaEngine\Graphics\Renderers\Renderer.cpp" />
     <ClCompile Include="YonemaEngine\GameObject\GameObject.cpp" />
     <ClCompile Include="YonemaEngine\GameObject\GameObjectManager.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Renderers\GenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.cpp" />
@@ -121,8 +116,6 @@
     <ClCompile Include="YonemaEngine\Math\Vector3.cpp" />
     <ClCompile Include="YonemaEngine\Math\Matrix.cpp" />
     <ClCompile Include="YonemaEngine\Math\Vector4.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\PMDModels\PMDGenericRenderer.cpp" />
-    <ClCompile Include="YonemaEngine\Graphics\PMDModels\PMDRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\Texture.cpp" />
     <ClCompile Include="YonemaEngine\GameWindow\MessageBox.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\GraphicsEngine.cpp" />
@@ -133,6 +126,10 @@
     <ClCompile Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.cpp" />
     <ClCompile Include="YonemaEngine\Utils\Random.cpp" />
     <ClCompile Include="Game\Player\PlayerWeaponManager.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Models\AssimpCommon.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Models\BasicGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Models\BasicModelRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -194,10 +191,6 @@
     <ClInclude Include="YonemaEngine\Graphics\AssimpCommonHeader.h" />
     <ClInclude Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineRenderer.h" />
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererAssimp.h" />
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXGenericRendererFBX_SDK.h" />
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererAssimp.h" />
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRendererFBX_SDK.h" />
     <ClInclude Include="Game\Feature\AbnormalStatus\Poison.h" />
     <ClInclude Include="Game\Status.h" />
     <ClInclude Include="Game\Monster\MonsterStatus.h" />
@@ -222,7 +215,6 @@
     <ClInclude Include="YonemaEngine\CommonLibrary\CommonLibrary.h" />
     <ClInclude Include="YonemaEngine\GameObject\GameObject.h" />
     <ClInclude Include="YonemaEngine\GameObject\GameObjectManager.h" />
-    <ClInclude Include="YonemaEngine\Graphics\FBXModels\FBXRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\SimplePostEffectGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Renderers\GenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\CommandList.h" />
@@ -256,8 +248,6 @@
     <ClInclude Include="YonemaEngine\Math\Vector3.h" />
     <ClInclude Include="YonemaEngine\Math\Matrix.h" />
     <ClInclude Include="YonemaEngine\Math\Vector4.h" />
-    <ClInclude Include="YonemaEngine\Graphics\PMDModels\PMDGenericRenderer.h" />
-    <ClInclude Include="YonemaEngine\Graphics\PMDModels\PMDRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\Texture.h" />
     <ClInclude Include="YonemaEngine\GameWindow\MessageBox.h" />
     <ClInclude Include="YonemaEngine\Time\Timer.h" />
@@ -272,6 +262,10 @@
     <ClInclude Include="YonemaEngine\CommonLibrary\CommonFunctionLibrary.h" />
     <ClInclude Include="YonemaEngine\Utils\Random.h" />
     <ClInclude Include="Game\Player\PlayerWeaponManager.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Models\AssimpCommon.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Models\BasicGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Models\BasicModelRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
