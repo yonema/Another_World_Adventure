@@ -49,7 +49,8 @@ namespace nsAWA {
 			void ClearItemInfoBase(SItemInfo& itemInfoBase);
 
 		private:
-			std::list<SItemInfo> m_allItemList;
+			std::list<SItemInfo> m_allItemList;		//全てのアイテムの情報
+			SItemInfo m_itemList;					//空のアイテム情報
 		};
 
 		//アイテム生成クラス

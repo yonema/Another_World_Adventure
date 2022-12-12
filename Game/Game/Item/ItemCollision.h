@@ -32,7 +32,7 @@ namespace nsAWA {
 
 		public:
 
-			const CVector3& GetPosition()const {
+			CVector3 GetPosition()const {
 
 				//„‘Ì‚ÌÀ•W‚ğæ“¾B
 				return m_rigidBody.GetPosition();

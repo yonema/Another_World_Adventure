@@ -132,6 +132,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.cpp" />
     <ClCompile Include="YonemaEngine\Utils\Random.cpp" />
+    <ClCompile Include="Game\Player\PlayerWeaponManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -270,6 +271,7 @@
     <ClInclude Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.h" />
     <ClInclude Include="YonemaEngine\CommonLibrary\CommonFunctionLibrary.h" />
     <ClInclude Include="YonemaEngine\Utils\Random.h" />
+    <ClInclude Include="Game\Player\PlayerWeaponManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

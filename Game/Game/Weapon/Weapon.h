@@ -67,6 +67,42 @@ namespace nsAWA {
 				return m_sInfo.critical;
 			}
 
+			void SetPosition(const CVector3& position) {
+
+				//À•W‚ðÝ’èB
+				m_modelRenderer->SetPosition(position);
+			}
+
+			const CVector3& GetPosition()const {
+
+				//À•W‚ðŽæ“¾B
+				return m_modelRenderer->GetPosition();
+			}
+
+			void SetRotation(const CQuaternion& rotation) {
+
+				//‰ñ“]‚ðÝ’èB
+				m_modelRenderer->SetRotation(rotation);
+			}
+
+			const CQuaternion& GetRotation()const {
+
+				//‰ñ“]‚ðŽæ“¾B
+				return m_modelRenderer->GetRotation();
+			}
+
+			void SetScale(const CVector3& scale) {
+
+				//Šg‘å—¦‚ðÝ’èB
+				m_modelRenderer->SetScale(scale);
+			}
+
+			const CVector3& GetScale()const {
+
+				//Šg‘å—¦‚ðŽæ“¾B
+				m_modelRenderer->GetScale();
+			}
+
 
 		private:
 			

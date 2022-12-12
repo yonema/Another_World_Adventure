@@ -4,6 +4,7 @@
 #include "PlayerInput.h"
 #include "PlayerAnimation/PlayerAnimation.h"
 #include "PlayerCollider.h"
+#include "PlayerWeaponManager.h"
 #include "../GameActor.h"
 
 namespace nsAWA {
@@ -92,9 +93,9 @@ namespace nsAWA {
 			CPlayerAction m_action;									//アクション
 			nsPlayerAnimation::CPlayerAnimation m_animation;		//アニメーション
 			CPlayerStatus m_status;									//ステータス
-			nsWeapon::CWeapon* m_weapon = nullptr;					//武器
 			nsArmor::CArmor* m_armor = nullptr;						//防具
 			CPlayerCollider m_collider;								//プレイヤーの当たり判定
+			CPlayerWeaponManager m_weaponManager;					//武器管理クラス
 
 #ifdef _DEBUG
 			CFontRenderer* m_fontRenderer = nullptr;
