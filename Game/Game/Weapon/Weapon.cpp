@@ -31,7 +31,6 @@ namespace nsAWA {
 			//武器モデルの初期化データを定義。
 			SModelInitData modelInitData;
 			modelInitData.modelFilePath = modelFilePath;
-			modelInitData.modelFormat = nsGraphics::nsRenderers::EnModelFormat::enFBX;
 			modelInitData.vertexBias.SetRotationX(nsMath::YM_PIDIV2);
 
 			//武器モデルを初期化。
