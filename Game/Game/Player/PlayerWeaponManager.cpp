@@ -26,10 +26,10 @@ namespace nsAWA {
 			//武器を持たせるボーンのIDを取得。
 			m_weaponBaseBoneID = m_playerModel->FindBoneId(kPlayerWeaponBaseBoneID);
 
-			//ボーンのIDが入っていないなら。
-			if (m_weaponBaseBoneID == 0) {
+			//UINTの最大値が返ってきたら。
+			if (m_weaponBaseBoneID == UINT_MAX) {
 
-				//エラー出力。
+				//ボーンのIDが入っていないので、エラー出力。
 				nsGameWindow::MessageBoxError(L"CPlayerWeaponManager : ボーンの取得に失敗しました。");
 				return;
 			}

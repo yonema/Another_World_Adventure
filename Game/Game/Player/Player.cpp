@@ -161,7 +161,6 @@ namespace nsAWA {
 			//プレイヤーモデルの初期化データを定義。
 			SModelInitData modelInitData;
 			modelInitData.modelFilePath = kPlayerModelFilePath;
-			modelInitData.modelFormat = nsGraphics::nsRenderers::EnModelFormat::enFBX;
 			modelInitData.textureRootPath = kPlayerModelTextureRootPath;
 			modelInitData.vertexBias.AddRotationX(nsMath::YM_PIDIV2);
 			modelInitData.vertexBias.AddRotationZ(nsMath::YM_PI);
