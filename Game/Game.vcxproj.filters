@@ -125,6 +125,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.cpp" />
     <ClCompile Include="YonemaEngine\Utils\Random.cpp" />
+    <ClCompile Include="Game\Player\PlayerWeaponManager.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\AssimpCommon.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\BasicGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\BasicModelRenderer.cpp" />
@@ -260,6 +261,7 @@
     <ClInclude Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.h" />
     <ClInclude Include="YonemaEngine\CommonLibrary\CommonFunctionLibrary.h" />
     <ClInclude Include="YonemaEngine\Utils\Random.h" />
+    <ClInclude Include="Game\Player\PlayerWeaponManager.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\AssimpCommon.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\BasicGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\BasicModelRenderer.h" />

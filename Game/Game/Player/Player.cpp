@@ -32,6 +32,9 @@ namespace nsAWA {
 			//アニメーションに使用するモデルを伝える。
 			m_animation.SetPlayerModel(m_modelRenderer);
 
+			//武器管理クラスを初期化。
+			m_weaponManager.Init(m_modelRenderer);
+
 			//武器を生成。
 			CreateWeapon();
 
@@ -76,10 +79,7 @@ namespace nsAWA {
 			DeleteGO(m_modelRenderer);
 
 			//武器を破棄。
-			if (m_weapon != nullptr) {
-				m_weapon->Release();
-				m_weapon = nullptr;
-			}
+			m_weaponManager.Release();
 
 			//防具を破棄。
 			if (m_armor != nullptr) {
@@ -101,6 +101,9 @@ namespace nsAWA {
 
 			//アニメーションを更新。
 			m_animation.Update(m_action.IsChangeState(), m_action.GetState());
+
+			//武器管理クラスを更新。
+			m_weaponManager.Update();
 
 			//座標を設定。
 			m_modelRenderer->SetPosition(m_action.GetPosition());
@@ -196,7 +199,7 @@ namespace nsAWA {
 		nsWeapon::CWeapon* CPlayer::GetWeapon() {
 
 			//武器を受け取る。
-			return m_weapon;
+			return m_weaponManager.GetWeapon();
 		}
 
 		nsArmor::CArmor* CPlayer::GetArmor() {
@@ -208,20 +211,16 @@ namespace nsAWA {
 		void CPlayer::CreateWeapon() {
 
 #ifdef _DEBUG
-			////武器情報を定義。
-			//nsWeapon::SWeaponInfo weaponInfo;
-			//weaponInfo.attack = 100;
-			//weaponInfo.intelligence = 100;
-			//weaponInfo.critical = 10;
-			//weaponInfo.weaponType = nsWeapon::EnWeaponType::enSword;
-			//weaponInfo.name = "NewSword";
-			//
-			////武器モデルのファイルパスを定義。
-			//const char* weaponModelFilePath = "Assets/Models/sampleBox.fbx";
-			//
-			////武器生成クラスを使って武器を生成。
-			//nsWeapon::CWeaponBuilder weaponBuilder;
-			//m_weapon = weaponBuilder.Create(weaponInfo, weaponModelFilePath);
+			//武器情報を定義。
+			nsWeapon::SWeaponInfo weaponInfo;
+			weaponInfo.attack = 100;
+			weaponInfo.intelligence = 100;
+			weaponInfo.critical = 10;
+			weaponInfo.weaponType = nsWeapon::EnWeaponType::enSword;
+			weaponInfo.name = "NewSword";
+			
+			//武器情報を設定。
+			m_weaponManager.ChangeWeapon(weaponInfo);
 #endif
 		}
 
