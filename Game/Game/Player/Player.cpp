@@ -24,13 +24,13 @@ namespace nsAWA {
 		bool CPlayer::StartSub() {
 
 			//アニメーションを初期化。
-			m_animation.Init();
+			m_animation.Init(&m_input);
 
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();
 
 			//アニメーションに使用するモデルを伝える。
-			m_animation.SetPlayerModel(m_modelRenderer);
+			m_animation.SetPlayerModelAndAnimEvent(m_modelRenderer);
 
 			//武器管理クラスを初期化。
 			m_weaponManager.Init(m_modelRenderer);
@@ -117,7 +117,7 @@ namespace nsAWA {
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
 			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.4f %3.4f", m_status.GetHP(),m_status.GetGuardGaugeValue());
+			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.4f %s", m_status.GetHP(),m_input.GetCoolTime() ? L"true" : L"false");
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}

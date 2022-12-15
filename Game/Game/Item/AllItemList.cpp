@@ -4,7 +4,6 @@
 #include "../Utils/StringManipulation.h"
 #include "SelfItem.h"
 #include "ThrowItem.h"
-
 #include "../Feature/HealFeature.h"
 #include "../Feature/ApplyDamageFeature.h"
 
@@ -14,7 +13,7 @@ namespace nsAWA {
 
 		namespace {
 
-			constexpr const wchar_t* const kItemCSVFilePath = L"Assets/CSV/test.csv";	//アイテム情報が入ったCSVファイルのファイルパス
+			constexpr const wchar_t* const kItemCSVFilePath = L"Assets/CSV/item.csv";	//アイテム情報が入ったCSVファイルのファイルパス
 			constexpr const char* const kItemInfoDelimiter = "*";	//アイテム情報の区切り
 		}
 
@@ -28,6 +27,7 @@ namespace nsAWA {
 
 			//アイテム情報を生成。
 			CreateItemInfo(csvManager.GetCsvData());
+			int a = 0;
 		}
 
 		void CAllItemList::CreateItemInfo(std::list<std::vector<std::string>> itemInfo) {

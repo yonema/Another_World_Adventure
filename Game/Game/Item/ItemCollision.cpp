@@ -109,9 +109,10 @@ namespace nsAWA {
 				//効果範囲トリガーを有効化。
 				m_featureTrigger.Activate();
 				m_featureTrigger.SetPosition(m_rigidBody.GetPosition());
-				//元の判定は破棄。（未実装）
-				//m_rigidBody.Deactivate();
-				//m_trigger.Deactivate();
+
+				//元の判定は破棄。
+				m_rigidBody.Deactivate();
+				m_trigger.Deactivate();
 				
 				//何かに当たった。
 				m_isHit = true;

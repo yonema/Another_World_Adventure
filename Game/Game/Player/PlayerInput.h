@@ -28,12 +28,32 @@ namespace nsAWA {
 				//入力を許可する。
 				m_canInput = true;
 			}
+
+			void CoolTimeOn() {
+
+				//クールタイム中にする。
+				m_isCoolTime = true;
+			}
+
+			void CoolTimeOff() {
+
+				//クールタイムを外す。
+				m_isCoolTime = false;
+			}
+
+			bool GetCoolTime()const {
+
+				return m_isCoolTime;
+			}
+
 		private:
 			void InputSkillAction();
+
 		private:
 			CPlayerAction* m_playerAction = nullptr;	//プレイヤーアクションのポインタ
 			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;	//プレイヤーアニメーションのポインタ
 			bool m_canInput = false;						//入力できる？
+			bool m_isCoolTime = false;		//クールタイム中？
 		};
 	}
 }

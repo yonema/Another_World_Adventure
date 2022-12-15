@@ -51,6 +51,7 @@ namespace nsAWA {
 		void Update(float deltaTime)override final;
 
 		virtual void UpdateActor(float deltaTime){}
+
 	public:
 		virtual CStatus* GetStatus() = 0;
 

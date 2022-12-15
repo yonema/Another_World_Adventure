@@ -130,6 +130,7 @@
     <ClCompile Include="YonemaEngine\Graphics\Models\BasicGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\BasicModelRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.cpp" />
+    <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -266,6 +267,7 @@
     <ClInclude Include="YonemaEngine\Graphics\Models\BasicGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\BasicModelRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.h" />
+    <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

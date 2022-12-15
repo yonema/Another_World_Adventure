@@ -64,6 +64,9 @@ namespace nsAWA {
 
 		void CPlayerInput::Update(bool isAnimationPlaying) {
 
+			//クールタイム中なら早期リターン。
+			if (m_isCoolTime) { return; }
+
 			//移動・回転入力。
 			{
 				//入力を受け取る。

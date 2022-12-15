@@ -1,4 +1,4 @@
-NAME,ポーション,,,,
-TYPE,Self,,,,
-FEATURE,heal,player,hp,const,100
-FEATURE,damage,player,hp,const,100
+NAME,ポーション,,,
+TYPE,Self,,,
+FEATURE,Heal,HP,const,200
+*,,,,
