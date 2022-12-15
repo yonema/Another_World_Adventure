@@ -6,6 +6,7 @@ namespace nsAWA {
 
 		//前方宣言
 		enum class EnPlayerState;
+		class CPlayerInput;
 		namespace nsPlayerAnimation {
 
 			class CPlayerAnimationBase;
@@ -45,7 +46,7 @@ namespace nsAWA {
 					enNone			//名前なし
 				};
 
-				void Init();
+				void Init(CPlayerInput* playerInput);
 
 				const char** GetAnimFilePath()const {
 
@@ -55,11 +56,7 @@ namespace nsAWA {
 
 				void Update(bool changeState, EnPlayerState playerState);
 
-				void SetPlayerModel(CModelRenderer* playerModel) {
-
-					//プレイヤーモデルを設定。
-					m_playerModel = playerModel;
-				}
+				void SetPlayerModelAndAnimEvent(CModelRenderer* playerModel);
 
 				void Release();
 
@@ -72,6 +69,7 @@ namespace nsAWA {
 				CModelRenderer* m_playerModel = nullptr;	//プレイヤーモデル
 				EnAnimType m_type = EnAnimType::enNone;		//アニメーションのタイプ
 				CPlayerAnimationBase* m_playerAnimation[static_cast<int>(EnAnimType::enNum)] = { nullptr };		//各アニメーション
+				CPlayerInput* m_playerInput = nullptr;		//プレイヤー入力クラスのポインタ
 			};
 		}
 	}

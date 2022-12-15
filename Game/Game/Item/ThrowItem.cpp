@@ -38,6 +38,7 @@ namespace nsAWA {
 
 				//アイテムモデルを破棄。
 				DeleteGO(m_itemModel);
+				m_itemModel = nullptr;
 			}
 
 			//モデルが生成されているなら。

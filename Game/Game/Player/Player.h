@@ -50,6 +50,7 @@ namespace nsAWA {
 				//SP‚ğ‰ñ•œB
 				m_status.HealSP(healValue);
 			}
+
 		public:
 			const CVector3& GetPosition()const override final {
 
