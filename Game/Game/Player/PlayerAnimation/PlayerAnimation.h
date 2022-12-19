@@ -51,9 +51,10 @@ namespace nsAWA {
 				//アニメーション情報
 				enum class EnAnimInfo {
 
-					enFilePath,		//ファイルパス
-					enSpeed,		//速度
-					enLoopFlag		//ループフラグ
+					enFilePath,			//ファイルパス
+					enSpeed,			//速度
+					enLoopFlag,			//ループフラグ
+					enAnimationEvent	//アニメーションイベント
 				};
 
 				//アニメーションデータ
@@ -62,6 +63,7 @@ namespace nsAWA {
 					EnAnimName animName = EnAnimName::enNone;	//アニメーションの番号
 					float speed = 0.0f;							//速度
 					bool enLoopFlag = false;					//ループフラグ
+					std::list<std::string> animationEvent;		//アニメーションイベント
 				};
 			public:
 				void Init(CPlayerInput* playerInput);
