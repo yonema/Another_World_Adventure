@@ -166,13 +166,13 @@ namespace nsAWA {
 			modelInitData.vertexBias.AddRotationZ(nsMath::YM_PI);
 
 			//アニメーションのデータを定義。
-			const char* animFilePath[static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum)];
+			const char* animFilePath[static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum)] = { nullptr };
 
 			//アニメーションの数だけまわす。
 			for (int animIndex = 0; animIndex < static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum); animIndex++) {
 
 				//アニメーションを取り出し、格納。
-				animFilePath[animIndex] = m_animation.GetAnimFilePath()[animIndex];
+				animFilePath[animIndex] = m_animation.GetAnimFilePath()[animIndex].c_str();
 			}
 
 			//アニメーションのデータを生成。

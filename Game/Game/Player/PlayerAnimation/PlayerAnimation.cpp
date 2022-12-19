@@ -2,7 +2,8 @@
 #include "PlayerAnimation.h"
 #include "PlayerAnimationBase.h"
 #include "PlayerSwordAnimation.h"
-#include "../PlayerInput.h"
+
+#include "../../CSV/CSVManager.h"
 
 namespace nsAWA {
 
@@ -10,29 +11,25 @@ namespace nsAWA {
 
 		namespace nsPlayerAnimation {
 
+			namespace {
+
+				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/Animation.csv";	//プレイヤーのアニメーションのCSVファイルパス
+			}
+
 			//アニメーションのファイルパスを定義。
-			const char* CPlayerAnimation::
-				m_kAnimFilePaths[static_cast<int>(EnAnimName::enNum)] =
-			{
-				"Assets/Animations/Sword_Idle.fbx",
-				"Assets/Animations/Sword_Walk.fbx",
-				"Assets/Animations/Sword_Dash.fbx",
-				"Assets/Animations/Sword_WeakAttack_A.fbx",
-				"Assets/Animations/Sword_StrongAttack.fbx",
-				"Assets/Animations/Sword_Damage.fbx",
-				"Assets/Animations/Sword_Death.fbx",
-				"Assets/Animations/Sword_Guard.fbx",
-				"Assets/Animations/Samples/Sword_UseItemTest.fbx",
-				"Assets/Animations/Sword_Stun.fbx",
-			};
+			std::string CPlayerAnimation::
+				m_animFilePaths[static_cast<int>(EnAnimName::enNum)] = {};
 
 			void CPlayerAnimation::Init(CPlayerInput* playerInput) {
+
+				//アニメーションデータを読み込む。
+				LoadAnimation();
 
 				//各アニメーションを割り当てる。
 				m_playerAnimation[static_cast<int>(EnAnimType::enSword)] = new CPlayerSwordAnimation;
 
-				//入力クラスのポインタを取得。
-				m_playerInput = playerInput;
+				//アニメーションイベントクラスを初期化。
+				m_animationEvent.Init(playerInput);
 #ifdef _DEBUG
 				//剣タイプに設定。
 				m_type = EnAnimType::enSword;
@@ -49,12 +46,12 @@ namespace nsAWA {
 
 				m_playerModel->AddAnimationEventFunc(
 					static_cast<unsigned int>(EnAnimName::enSword_UseItem),
-					[&]() {m_playerInput->CoolTimeOn(); }
+					[&]() {m_animationEvent.CoolTimeOn(); }
 				);
 
 				m_playerModel->AddAnimationEventFunc(
 					static_cast<unsigned int>(EnAnimName::enSword_UseItem),
-					[&]() {m_playerInput->CoolTimeOff(); }
+					[&]() {m_animationEvent.CoolTimeOff(); }
 				);
 			}
 
@@ -83,6 +80,58 @@ namespace nsAWA {
 					//更新。
 					m_playerAnimation[static_cast<int>(EnAnimType::enSword)]->UpdateAnimation(m_playerModel, playerState);
 					break;
+				}
+			}
+
+			void CPlayerAnimation::LoadAnimation() {
+
+				//CSV管理クラスを生成。
+				nsCSV::CCsvManager csvManager;
+
+				//プレイヤーアニメーションのCSVを読み込む。
+				csvManager.LoadCSV(kPlayerAnimationCSVFilePath);
+
+				//データカウントを初期化。
+				int dataIndex = 0;
+
+				//アニメーション情報を取り出す。
+				for (const auto& anim : csvManager.GetCsvData()) {
+
+					//アニメーションデータの雛形を生成。
+					SAnimData animData;
+
+					//ファイルパスを取得。
+					m_animFilePaths[dataIndex] += "Assets/Animations/";
+					m_animFilePaths[dataIndex] += anim[static_cast<int>(EnAnimInfo::enFilePath)];
+					m_animFilePaths[dataIndex] += ".fbx";
+
+					//番号を取得。
+					animData.animName = static_cast<EnAnimName>(dataIndex);
+
+					//速度を取得。
+					animData.speed = std::stof(anim[static_cast<int>(EnAnimInfo::enSpeed)]);
+
+					//ループフラグの文字列を取得。
+					std::string loopFlag = anim[static_cast<int>(EnAnimInfo::enLoopFlag)];
+
+					//文字列からループフラグを設定。
+					if (loopFlag == "TRUE") {
+
+						animData.enLoopFlag = true;
+					}
+					else if (loopFlag == "FALSE") {
+
+						animData.enLoopFlag = false;
+					}
+					else {
+						nsGameWindow::MessageBoxError(L"アニメーションのループ情報が正しくありません。");
+					}
+
+					//データを格納。
+					m_animDataList.emplace_back(animData);
+
+					//データカウントを進める。
+					dataIndex++;
 				}
 			}
 		}
