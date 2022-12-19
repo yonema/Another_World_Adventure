@@ -7,10 +7,6 @@ namespace nsAWA {
 		//‘O•ûéŒ¾
 		enum class EnPlayerState;
 		class CPlayerInput;
-		namespace nsPlayerAnimation {
-
-			enum class EnAnimName;
-		}
 
 		namespace nsPlayerAnimation {
 

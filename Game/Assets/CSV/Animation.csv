@@ -1,3 +1,10 @@
-Sword_Idle,1,True
-Sword_Run,1,True
-Sword_Damage,1,False
+Sword_Idle,1,TRUE
+Sword_Walk,1,TRUE
+Sword_Dash,1,FALSE
+Sword_WeakAttack_A,1,FALSE
+Sword_StrongAttack,1,FALSE
+Sword_Damage,1,FALSE
+Sword_Death,1,FALSE
+Sword_Guard,1,TRUE
+Sword_UseItem,1,FALSE
+Sword_Stun,1,FALSE

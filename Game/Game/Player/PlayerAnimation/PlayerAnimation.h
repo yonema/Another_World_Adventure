@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerAnimationEvent.h"
 
 namespace nsAWA {
 
@@ -6,7 +7,6 @@ namespace nsAWA {
 
 		//前方宣言
 		enum class EnPlayerState;
-		class CPlayerInput;
 		namespace nsPlayerAnimation {
 
 			class CPlayerAnimationBase;
@@ -27,6 +27,7 @@ namespace nsAWA {
 					enNum,		//タイプの数
 					enNone		//設定なし
 				};
+
 			public:
 				//アニメーションの名前（全て）
 				enum class EnAnimName {
@@ -45,13 +46,30 @@ namespace nsAWA {
 					enNum,			//アニメーション数
 					enNone			//名前なし
 				};
+			private:
 
+				//アニメーション情報
+				enum class EnAnimInfo {
+
+					enFilePath,		//ファイルパス
+					enSpeed,		//速度
+					enLoopFlag		//ループフラグ
+				};
+
+				//アニメーションデータ
+				struct SAnimData {
+
+					EnAnimName animName = EnAnimName::enNone;	//アニメーションの番号
+					float speed = 0.0f;							//速度
+					bool enLoopFlag = false;					//ループフラグ
+				};
+			public:
 				void Init(CPlayerInput* playerInput);
 
-				const char** GetAnimFilePath()const {
+				std::string* GetAnimFilePath()const {
 
 					//アニメーションのファイルパスをリターン。
-					return m_kAnimFilePaths;
+					return m_animFilePaths;
 				}
 
 				void Update(bool changeState, EnPlayerState playerState);
@@ -63,13 +81,17 @@ namespace nsAWA {
 			private:
 				void PlayAnimation(EnPlayerState playerState);
 
+				void LoadAnimation();
+
 			private:
-				static const char* m_kAnimFilePaths[static_cast<int>(EnAnimName::enNum)];		//アニメーションのファイルパス
+				static std::string m_animFilePaths[static_cast<int>(EnAnimName::enNum)];		//アニメーションのファイルパス
 
 				CModelRenderer* m_playerModel = nullptr;	//プレイヤーモデル
 				EnAnimType m_type = EnAnimType::enNone;		//アニメーションのタイプ
 				CPlayerAnimationBase* m_playerAnimation[static_cast<int>(EnAnimType::enNum)] = { nullptr };		//各アニメーション
-				CPlayerInput* m_playerInput = nullptr;		//プレイヤー入力クラスのポインタ
+				CPlayerAnimationEvent m_animationEvent;		//プレイヤーのアニメーションイベント
+
+				std::vector<SAnimData> m_animDataList;	//アニメーションデータ
 			};
 		}
 	}
