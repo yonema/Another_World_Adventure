@@ -26,6 +26,24 @@ namespace nsAWA {
 
 				void CoolTimeOff();
 
+				void GetAnimationEvent(const std::string& animationEventName) {
+
+					//イベントの名前から対応するメンバ関数を呼び出す。
+
+					if (animationEventName == "CoolTimeOn") {
+
+						CoolTimeOn();
+					}
+					else if (animationEventName == "CoolTimeOff") {
+
+						CoolTimeOff();
+					}
+					else {
+
+						nsGameWindow::MessageBoxWarning(L"アニメーションイベント名に誤りがあります。");
+					}
+				}
+
 			private:
 				CPlayerInput* m_playerInput = nullptr;	//プレイヤー入力クラス
 			};

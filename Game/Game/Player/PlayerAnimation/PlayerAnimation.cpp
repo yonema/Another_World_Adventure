@@ -42,17 +42,26 @@ namespace nsAWA {
 				//プレイヤーモデルを設定。
 				m_playerModel = playerModel;
 
-				m_playerModel->ReserveAnimationEventFuncArray(static_cast<unsigned int>(EnAnimName::enSword_UseItem), 2);
+				for (const auto& animData : m_animDataList) {
 
-				m_playerModel->AddAnimationEventFunc(
-					static_cast<unsigned int>(EnAnimName::enSword_UseItem),
-					[&]() {m_animationEvent.CoolTimeOn(); }
-				);
+					//このアニメーションのイベント数を伝える。
+					m_playerModel->ReserveAnimationEventFuncArray(static_cast<int>(animData.animName), animData.animationEvent.size());
 
-				m_playerModel->AddAnimationEventFunc(
-					static_cast<unsigned int>(EnAnimName::enSword_UseItem),
-					[&]() {m_animationEvent.CoolTimeOff(); }
-				);
+					//アニメーションイベントを順に参照。
+					for (const auto& animEventName : animData.animationEvent) {
+					
+						//アニメーションイベントを順に参照。
+						m_playerModel->AddAnimationEventFunc(
+							static_cast<unsigned int>(animData.animName),
+							[&]() {m_animationEvent.GetAnimationEvent(animEventName); }
+						);
+					}
+				}
+
+				//m_playerModel->AddAnimationEventFunc(
+				//	static_cast<unsigned int>(EnAnimName::enSword_UseItem),
+				//	[&]() {m_animationEvent.CoolTimeOff(); }
+				//);
 			}
 
 			void CPlayerAnimation::Release() {
@@ -125,6 +134,13 @@ namespace nsAWA {
 					}
 					else {
 						nsGameWindow::MessageBoxError(L"アニメーションのループ情報が正しくありません。");
+					}
+
+					//アニメーションイベント情報を格納。
+					for (int animationEvent = static_cast<int>(EnAnimInfo::enAnimationEvent); animationEvent < anim.size(); animationEvent++) {
+
+						//リストに追加。
+						animData.animationEvent.emplace_back(anim[animationEvent]);
 					}
 
 					//データを格納。

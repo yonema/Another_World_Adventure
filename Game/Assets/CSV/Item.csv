@@ -1,4 +1,8 @@
-NAME,ポーション,,,
-TYPE,Self,,,
-FEATURE,Heal,HP,const,200
-*,,,,
+NAME,ポーション
+TYPE,Throw
+FEATURE,Heal,HP,const,100
+*
+NAME,エーテル
+TYPE,Throw
+FEATURE,Heal,MP,const,100
+*
