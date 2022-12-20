@@ -9,12 +9,14 @@ namespace nsYMEngine
 		enum class EnPhysicsAttributes
 		{
 			enNone,
+			enCharacterController,
 			enGround,
 			enWall,
-			enPlayer,
-			enItemRigidBody
+
 
 			// ‚±‚±‚©‚ç‰º‚ÉŠg’£‚µ‚Ä‚¢‚Á‚Ä‚­‚¾‚³‚¢B
+			enPlayer,
+			enItemRigidBody
 		};
 	}
 }

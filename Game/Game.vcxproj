@@ -247,6 +247,7 @@
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Camera.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.cpp" />
+    <ClCompile Include="YonemaEngine\Physics\CharacterController.cpp" />
     <ClCompile Include="YonemaEngine\Physics\ContactEvent.cpp" />
     <ClCompile Include="YonemaEngine\Physics\ContactReportCallback.cpp" />
     <ClCompile Include="YonemaEngine\Physics\ExtendedDataForRigidActor.cpp" />
@@ -384,6 +385,7 @@
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Camera.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.h" />
+    <ClInclude Include="YonemaEngine\Physics\CharacterController.h" />
     <ClInclude Include="YonemaEngine\Physics\ContactEvent.h" />
     <ClInclude Include="YonemaEngine\Physics\ContactReportCallback.h" />
     <ClInclude Include="YonemaEngine\Physics\ExtendedDataForRigidActor.h" />
