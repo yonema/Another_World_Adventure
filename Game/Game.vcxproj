@@ -163,6 +163,7 @@
     <ClCompile Include="Game\Samples\EffectSample.cpp" />
     <ClCompile Include="Game\Samples\GetBoneMatrixSample.cpp" />
     <ClCompile Include="Game\Samples\PhysicsSample.cpp" />
+    <ClCompile Include="Game\Samples\SoundSample.cpp" />
     <ClCompile Include="Game\Samples\TriggerSample.cpp" />
     <ClCompile Include="Game\Skill\ActiveSkill.cpp" />
     <ClCompile Include="Game\Samples\FontSample.cpp" />
@@ -250,6 +251,7 @@
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Camera.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.cpp" />
+    <ClCompile Include="YonemaEngine\Memory\ResourceBankTable.cpp" />
     <ClCompile Include="YonemaEngine\Physics\CharacterController.cpp" />
     <ClCompile Include="YonemaEngine\Physics\ContactEvent.cpp" />
     <ClCompile Include="YonemaEngine\Physics\ContactReportCallback.cpp" />
@@ -260,6 +262,10 @@
     <ClCompile Include="YonemaEngine\Physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="YonemaEngine\Physics\PhysicsTriggerObject.cpp" />
     <ClCompile Include="YonemaEngine\Physics\RayCast.cpp" />
+    <ClCompile Include="YonemaEngine\Sound\SoundEngine.cpp" />
+    <ClCompile Include="YonemaEngine\Sound\SoundPlayer.cpp" />
+    <ClCompile Include="YonemaEngine\Sound\SoundSource.cpp" />
+    <ClCompile Include="YonemaEngine\Sound\WaveFile.cpp" />
     <ClCompile Include="YonemaEngine\Time\GameTime.cpp" />
     <ClCompile Include="YonemaEngine\Math\Quaternion.cpp" />
     <ClCompile Include="YonemaEngine\Math\Vector2.cpp" />
@@ -296,6 +302,7 @@
     <ClInclude Include="Game\Samples\EffectSample.h" />
     <ClInclude Include="Game\Samples\GetBoneMatrixSample.h" />
     <ClInclude Include="Game\Samples\PhysicsSample.h" />
+    <ClInclude Include="Game\Samples\SoundSample.h" />
     <ClInclude Include="Game\Samples\TriggerSample.h" />
     <ClInclude Include="Game\Skill\ActiveSkill.h" />
     <ClInclude Include="Game\FontTypeList.h" />
@@ -319,6 +326,7 @@
     <ClInclude Include="Game\Camera\MainCamera.h" />
     <ClInclude Include="Game\Player\PlayerStatus.h" />
     <ClInclude Include="Game\Monster\Monster.h" />
+    <ClInclude Include="Game\SubmixType.h" />
     <ClInclude Include="Game\Weapon\Weapon.h" />
     <ClInclude Include="Game\Feature\HealFeature.h" />
     <ClInclude Include="Game\Skill\Skill.h" />
@@ -391,6 +399,7 @@
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Camera.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.h" />
+    <ClInclude Include="YonemaEngine\Memory\ResourceBankTable.h" />
     <ClInclude Include="YonemaEngine\Physics\CharacterController.h" />
     <ClInclude Include="YonemaEngine\Physics\ContactEvent.h" />
     <ClInclude Include="YonemaEngine\Physics\ContactReportCallback.h" />
@@ -402,6 +411,10 @@
     <ClInclude Include="YonemaEngine\Physics\PhysicsStaticObject.h" />
     <ClInclude Include="YonemaEngine\Physics\PhysicsTriggerObject.h" />
     <ClInclude Include="YonemaEngine\Physics\RayCast.h" />
+    <ClInclude Include="YonemaEngine\Sound\SoundEngine.h" />
+    <ClInclude Include="YonemaEngine\Sound\SoundPlayer.h" />
+    <ClInclude Include="YonemaEngine\Sound\SoundSource.h" />
+    <ClInclude Include="YonemaEngine\Sound\WaveFile.h" />
     <ClInclude Include="YonemaEngine\Time\GameTime.h" />
     <ClInclude Include="YonemaEngine\Math\Math.h" />
     <ClInclude Include="YonemaEngine\Math\Quaternion.h" />
