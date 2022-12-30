@@ -131,8 +131,7 @@
     <ClCompile Include="YonemaEngine\Graphics\Models\BasicModelRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.cpp" />
-    <ClCompile Include="YonemaEngine\Physics\CharacterController.cpp" />
-    <ClCompile Include="YonemaEngine\Effect\EffectEngine.cpp" />
+<ClCompile Include="Game\CreateTrigger.cpp" /> <ClCompile Include="YonemaEngine\Effect\EffectEngine.cpp" />
     <ClCompile Include="YonemaEngine\Effect\EffectPlayer.cpp" />
     <ClCompile Include="Game\Samples\EffectSample.cpp" />
     <ClCompile Include="Game\Samples\SoundSample.cpp" />
@@ -148,8 +147,7 @@
     <ClCompile Include="YonemaEngine\AI\Navigations\PathFinding.cpp" />
     <ClCompile Include="YonemaEngine\Geometries\BSPTree.cpp" />
     <ClCompile Include="YonemaEngine\Level3D\Level3D.cpp" />
-    <ClCompile Include="YonemaEngine\Level3D\LevelChip.cpp" />
-  </ItemGroup>
+    <ClCompile Include="YonemaEngine\Level3D\LevelChip.cpp" />  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
     <ClInclude Include="Game\Feature\FeatureBuilder.h" />
@@ -286,7 +284,7 @@
     <ClInclude Include="YonemaEngine\Graphics\Models\BasicModelRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.h" />
-    <ClInclude Include="YonemaEngine\Physics\CharacterController.h" />
+<ClInclude Include="Game\CreateTrigger.h" /><ClInclude Include="YonemaEngine\Physics\CharacterController.h" />
     <ClInclude Include="YonemaEngine\Effect\EffectEngine.h" />
     <ClInclude Include="YonemaEngine\Effect\EffectPlayer.h" />
     <ClInclude Include="Game\Samples\EffectSample.h" />
@@ -305,8 +303,7 @@
     <ClInclude Include="YonemaEngine\Geometries\BSPTree.h" />
     <ClInclude Include="YonemaEngine\Geometries\EigenJacobiMethod.h" />
     <ClInclude Include="YonemaEngine\Level3D\Level3D.h" />
-    <ClInclude Include="YonemaEngine\Level3D\LevelChip.h" />
-  </ItemGroup>
+    <ClInclude Include="YonemaEngine\Level3D\LevelChip.h" />  </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>

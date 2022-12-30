@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerAnimation.h"
 
 namespace nsAWA {
 
@@ -14,9 +15,17 @@ namespace nsAWA {
 			class CPlayerAnimationBase : nsUtils::SNoncopyable
 			{
 			public:
+				void Init(const std::vector<CPlayerAnimation::SAnimData>& animList) {
+
+					//アニメーションデータを取得。
+					m_animDataList = animList;
+				}
+
 				virtual void UpdateAnimation(CModelRenderer* PlayerModel, EnPlayerState playerState) = 0;
+
 			protected:
 				bool m_isPlaying = false;		//再生中？
+				std::vector<CPlayerAnimation::SAnimData> m_animDataList;
 			};
 		}
 	}

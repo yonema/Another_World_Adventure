@@ -104,7 +104,9 @@ namespace nsAWA {
 			}
 
 			//投げたアイテムがプレイヤー以外の何か（自身の剛体を除く）と接触した。
-			if (otherData->GetPhysicsAttribute() != EnPhysicsAttributes::enPlayer)
+			if (otherData->GetPhysicsAttribute() != EnPhysicsAttributes::enPlayer
+				&& otherData->GetPhysicsAttribute() != EnPhysicsAttributes::enPlayerAttack
+				)
 			{
 				//効果範囲トリガーを有効化。
 				m_featureTrigger.Activate();

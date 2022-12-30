@@ -44,9 +44,6 @@ namespace nsAWA {
 
 		void CPlayerAction::Update(float deltaTime) {
 
-			//ステートの変更状況を初期化。
-			m_isChangeState = false;
-
 			//deltaTimeを更新(各関数で必要になるため)。
 			UpdateDeltaTime(deltaTime);
 

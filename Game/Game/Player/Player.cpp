@@ -24,7 +24,7 @@ namespace nsAWA {
 		bool CPlayer::StartSub() {
 
 			//アニメーションを初期化。
-			m_animation.Init(&m_input);
+			m_animation.Init(&m_input, &m_action);
 
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();
@@ -93,11 +93,14 @@ namespace nsAWA {
 
 		void CPlayer::UpdateActor(float deltaTime) {
 
-			//プレイヤーアクションクラスを更新。
-			m_action.Update(deltaTime);
+			//ステートの変更状況を初期化。
+			m_action.ResetChangeState();
 
 			//入力クラスを更新。
 			m_input.Update(m_modelRenderer->IsPlaying());
+
+			//プレイヤーアクションクラスを更新。
+			m_action.Update(deltaTime);
 
 			//アニメーションを更新。
 			m_animation.Update(m_action.IsChangeState(), m_action.GetState());
