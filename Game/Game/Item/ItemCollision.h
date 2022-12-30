@@ -10,6 +10,7 @@ namespace nsAWA {
 		class CItemCollision : nsUtils::SNoncopyable
 		{
 		public:
+			
 			void Init(const CVector3& position);
 
 			void Release();

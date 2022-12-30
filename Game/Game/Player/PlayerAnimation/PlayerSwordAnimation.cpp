@@ -15,54 +15,63 @@ namespace nsAWA {
 				//現在のアニメーションの再生状況を取得する。
 				m_isPlaying = playerModel->IsPlaying();
 
+				CPlayerAnimation::EnAnimName animNameRef = CPlayerAnimation::EnAnimName::enNone;
+
 				//ステートに応じてアニメーションを再生。
 				switch (playerState) {
 
 					//待機。
 				case EnPlayerState::enIdle:
 
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_Idle), 1.0f, true);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_Idle;
 					break;
 					//歩く。
 				case EnPlayerState::enWalk:
 
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_Walk), 1.0f, true);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_Walk;
 					break;
 					//走る。
 				case EnPlayerState::enDash:
 
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_Dash), 1.0f, true);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_Dash;
 					break;
 					//弱攻撃A。
 				case EnPlayerState::enWeakAttack_A:
 				
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_WeakAttack_A), 1.0f, false);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_WeakAttack_A;
 					break;
 				case EnPlayerState::enStrongAttack:
 
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_StrongAttack), 1.0f, false);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_StrongAttack;
 					break;
 				case EnPlayerState::enDamage:
 
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_Damage), 1.0f, false);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_Damage;
 					break;
 				case EnPlayerState::enDeath:
 
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_Death), 1.0f, false);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_Death;
 					break;
 				case EnPlayerState::enGuard:
 
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_Guard), 1.0f, true);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_Guard;
 					break;
 				case EnPlayerState::enUseItem:
 
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_UseItem), 1.0f, false);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_UseItem;
 					break;
 				case EnPlayerState::enStun:
 
-					playerModel->PlayAnimation(static_cast<unsigned int>(CPlayerAnimation::EnAnimName::enSword_Stun), 1.0f, true);
+					animNameRef = CPlayerAnimation::EnAnimName::enSword_Stun;
 					break;
 				}
+
+				//アニメーションを再生。
+				playerModel->PlayAnimation(
+					static_cast<unsigned int>(m_animDataList[static_cast<unsigned int>(animNameRef)].animName),
+					m_animDataList[static_cast<unsigned int>(animNameRef)].speed,
+					m_animDataList[static_cast<unsigned int>(animNameRef)].enLoopFlag
+				);
 			}
 		}
 	}

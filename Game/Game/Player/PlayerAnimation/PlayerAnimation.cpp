@@ -13,23 +13,26 @@ namespace nsAWA {
 
 			namespace {
 
-				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/Animation.csv";	//プレイヤーのアニメーションのCSVファイルパス
+				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/AnimationTest.csv";	//プレイヤーのアニメーションのCSVファイルパス
+				constexpr const wchar_t* const kPlayerAnimationEventCSVFilePath = L"Assets/CSV/AnimationEventTest.csv";	//プレイヤーのアニメーションのイベントのCSVファイルパス
+				constexpr int kCSVTitleData = 0;		//CSVデータの見出し情報。
 			}
 
 			//アニメーションのファイルパスを定義。
 			std::string CPlayerAnimation::
 				m_animFilePaths[static_cast<int>(EnAnimName::enNum)] = {};
 
-			void CPlayerAnimation::Init(CPlayerInput* playerInput) {
+			void CPlayerAnimation::Init(CPlayerInput* playerInput, CPlayerAction* playerAction) {
 
 				//アニメーションデータを読み込む。
 				LoadAnimation();
 
-				//各アニメーションを割り当てる。
+				//各アニメーションを初期化。
 				m_playerAnimation[static_cast<int>(EnAnimType::enSword)] = new CPlayerSwordAnimation;
+				m_playerAnimation[static_cast<int>(EnAnimType::enSword)]->Init(m_animDataList);
 
 				//アニメーションイベントクラスを初期化。
-				m_animationEvent.Init(playerInput);
+				m_animationEvent.Init(playerInput, playerAction);
 #ifdef _DEBUG
 				//剣タイプに設定。
 				m_type = EnAnimType::enSword;
@@ -43,25 +46,23 @@ namespace nsAWA {
 				m_playerModel = playerModel;
 
 				for (const auto& animData : m_animDataList) {
-
+				
 					//このアニメーションのイベント数を伝える。
-					m_playerModel->ReserveAnimationEventFuncArray(static_cast<int>(animData.animName), animData.animationEvent.size());
-
+					m_playerModel->ReserveAnimationEventFuncArray(static_cast<int>(animData.animName), static_cast<int>(animData.animationEvent.size()));
+				
 					//アニメーションイベントを順に参照。
-					for (const auto& animEventName : animData.animationEvent) {
+					for (const auto& animEventData : animData.animationEvent) {
 					
-						//アニメーションイベントを順に参照。
+						//アニメーションイベントを追加。
 						m_playerModel->AddAnimationEventFunc(
 							static_cast<unsigned int>(animData.animName),
-							[&]() {m_animationEvent.GetAnimationEvent(animEventName); }
+							[&]() {m_animationEvent.GetAnimationEvent(
+								animEventData.eventName,
+								animEventData.eventData);
+							}
 						);
 					}
 				}
-
-				//m_playerModel->AddAnimationEventFunc(
-				//	static_cast<unsigned int>(EnAnimName::enSword_UseItem),
-				//	[&]() {m_animationEvent.CoolTimeOff(); }
-				//);
 			}
 
 			void CPlayerAnimation::Release() {
@@ -103,51 +104,122 @@ namespace nsAWA {
 				//データカウントを初期化。
 				int dataIndex = 0;
 
+				std::string topData = "";
+
+				//アニメーションデータの雛形を生成。
+				SAnimData animDataBase;
+
 				//アニメーション情報を取り出す。
-				for (const auto& anim : csvManager.GetCsvData()) {
+				for (const auto& animData : csvManager.GetCsvData()) {
 
-					//アニメーションデータの雛形を生成。
-					SAnimData animData;
+					if (animData[kCSVTitleData] == "*") {
 
-					//ファイルパスを取得。
-					m_animFilePaths[dataIndex] += "Assets/Animations/";
-					m_animFilePaths[dataIndex] += anim[static_cast<int>(EnAnimInfo::enFilePath)];
-					m_animFilePaths[dataIndex] += ".fbx";
+						//アニメーション情報の終端なので情報を追加。
 
-					//番号を取得。
-					animData.animName = static_cast<EnAnimName>(dataIndex);
+						//データを格納。
+						m_animDataList.emplace_back(animDataBase);
 
-					//速度を取得。
-					animData.speed = std::stof(anim[static_cast<int>(EnAnimInfo::enSpeed)]);
+						//データを進める。
+						dataIndex++;
 
-					//ループフラグの文字列を取得。
-					std::string loopFlag = anim[static_cast<int>(EnAnimInfo::enLoopFlag)];
+						//アニメーションデータの雛形を初期化。
+						SAnimData clearData;
+						animDataBase = clearData;
 
-					//文字列からループフラグを設定。
-					if (loopFlag == "TRUE") {
-
-						animData.enLoopFlag = true;
-					}
-					else if (loopFlag == "FALSE") {
-
-						animData.enLoopFlag = false;
-					}
-					else {
-						nsGameWindow::MessageBoxError(L"アニメーションのループ情報が正しくありません。");
+						//次へ。
+						continue;
 					}
 
-					//アニメーションイベント情報を格納。
-					for (int animationEvent = static_cast<int>(EnAnimInfo::enAnimationEvent); animationEvent < anim.size(); animationEvent++) {
+					if (animData[kCSVTitleData] == "NAME") {
 
-						//リストに追加。
-						animData.animationEvent.emplace_back(anim[animationEvent]);
+						//ファイルパスを取得、設定。
+						m_animFilePaths[dataIndex] += "Assets/Animations/";
+						m_animFilePaths[dataIndex] += animData[1];
+						m_animFilePaths[dataIndex] += ".fbx";
+
+						//番号を取得。
+						animDataBase.animName = static_cast<EnAnimName>(dataIndex);
 					}
 
-					//データを格納。
-					m_animDataList.emplace_back(animData);
+					if (animData[kCSVTitleData] == "SPEED") {
 
-					//データカウントを進める。
-					dataIndex++;
+						//速さを取得。
+						animDataBase.speed = std::stof(animData[1]);
+					}
+
+					if (animData[kCSVTitleData] == "LOOP") {
+
+						//ループフラグを取得。
+						animDataBase.enLoopFlag = animData[1] == "TRUE" ? true : false;
+					}
+
+					if (animData[kCSVTitleData] == "EVENT") {
+
+						SAnimationEventData animEventData;
+
+						//イベントを取得。
+						animEventData.eventName = animData[1];
+						animEventData.hasEventMaterial = animData[2] == "TRUE" ? true : false;
+
+						animDataBase.animationEvent.emplace_back(animEventData);
+					}
+				}
+
+				//CSVデータを初期化。
+				csvManager.ClearCSV();
+
+				//アニメーションイベントのCSVを読み込む。
+				csvManager.LoadCSV(kPlayerAnimationEventCSVFilePath);
+
+				//アニメーションイベントを追加するための雛形を初期化。
+				std::list<std::list<std::vector<std::string>>> animEventDataList;
+				std::list<std::vector<std::string>> animEventData;
+
+				//アニメーションイベントのデータをリスト化。
+				for (const auto& animEventStr : csvManager.GetCsvData()) {
+
+					//一つのデータの終端なら。
+					if (animEventStr[0] == "*") {
+
+						//リストにイベントデータを追加。
+						animEventDataList.emplace_back(animEventData);
+
+						//雛形のデータを破棄。
+						animEventData.clear();
+
+						//次へ。
+						continue;
+					}
+
+					//イベントの情報を追加。
+					animEventData.emplace_back(animEventStr);
+				}
+
+				//アニメーションデータを順に参照。
+				for (auto& animData : m_animDataList) {
+
+					//アニメーションイベントを順に参照。
+					for (auto& animEvent : animData.animationEvent) {
+
+						//イベント情報が必要ないなら。
+						if (!animEvent.hasEventMaterial) {
+
+							//次のイベントへ。
+							continue;
+						}
+						//イベントに情報が必要なら。
+						else {
+							
+							//アニメーションイベントデータの先頭情報を取り出す。
+							auto animEventDataItr = animEventDataList.begin();
+
+							//データを格納。
+							animEvent.eventData = *animEventDataItr;
+
+							//先頭情報を破棄。
+							animEventDataList.erase(animEventDataItr);
+						}
+					}
 				}
 			}
 		}

@@ -116,6 +116,8 @@ namespace nsAWA {
 			//ŽãUŒ‚“ü—ÍB
 			if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
 
+				CoolTimeOn();
+
 				//ŽãUŒ‚ó‘Ô‚É‚·‚éB
 				m_playerAction->SetState(EnPlayerState::enWeakAttack_A);
 			}

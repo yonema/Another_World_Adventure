@@ -130,6 +130,12 @@ namespace nsAWA {
 					m_isChangeState = true;
 				}
 			}
+
+			void ResetChangeState() {
+
+				//ステートの変更状況を初期化。
+				m_isChangeState = false;
+			}
 			const EnPlayerState& GetState()const {
 
 				return m_state;

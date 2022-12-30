@@ -6,46 +6,47 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		class CPlayerInput;
+		class CPlayerAction;
 	}
 
 	namespace nsPlayer {
 
 		namespace nsPlayerAnimation {
 
+			//エイリアス宣言
+			using AnimationEventDataStr = std::list<std::vector<std::string>>;
+
+			//アニメーションイベントデータ
+			struct SAnimationEventData {
+				
+				std::string eventName = "NoName";					//イベント名
+				bool hasEventMaterial = false;						//イベントに必要な材料がある？
+				AnimationEventDataStr eventData;					//イベント材料
+			};
 			//プレイヤーアニメーションイベントクラス
 			class CPlayerAnimationEvent : nsUtils::SNoncopyable
 			{
 			public:
-				void Init(CPlayerInput* playerInput) {
+				void Init(CPlayerInput* playerInput, CPlayerAction* playerAction) {
 
 					//各ポインタを格納。
 					m_playerInput = playerInput;
+					m_playerAction = playerAction;
 				}
 
 				void CoolTimeOn();
 
 				void CoolTimeOff();
 
-				void GetAnimationEvent(const std::string& animationEventName) {
+				void CreateTrigger(const AnimationEventDataStr& animEventDataStr);
 
-					//イベントの名前から対応するメンバ関数を呼び出す。
-
-					if (animationEventName == "CoolTimeOn") {
-
-						CoolTimeOn();
-					}
-					else if (animationEventName == "CoolTimeOff") {
-
-						CoolTimeOff();
-					}
-					else {
-
-						nsGameWindow::MessageBoxWarning(L"アニメーションイベント名に誤りがあります。");
-					}
-				}
+				void GetAnimationEvent(const std::string& animationEventName,
+					const AnimationEventDataStr& animationEventData
+					);
 
 			private:
 				CPlayerInput* m_playerInput = nullptr;	//プレイヤー入力クラス
+				CPlayerAction* m_playerAction = nullptr;//プレイヤーアクションクラス
 			};
 		}
 	}
