@@ -141,6 +141,14 @@
     <ClCompile Include="YonemaEngine\Sound\SoundSource.cpp" />
     <ClCompile Include="YonemaEngine\Sound\WaveFile.cpp" />
     <ClCompile Include="YonemaEngine\Memory\ResourceBankTable.cpp" />
+    <ClCompile Include="Game\Samples\NavMeshSample.cpp" />
+    <ClCompile Include="YonemaEngine\AI\Navigations\NavCell.cpp" />
+    <ClCompile Include="YonemaEngine\AI\Navigations\NavMesh.cpp" />
+    <ClCompile Include="YonemaEngine\AI\Navigations\Path.cpp" />
+    <ClCompile Include="YonemaEngine\AI\Navigations\PathFinding.cpp" />
+    <ClCompile Include="YonemaEngine\Geometries\BSPTree.cpp" />
+    <ClCompile Include="YonemaEngine\Level3D\Level3D.cpp" />
+    <ClCompile Include="YonemaEngine\Level3D\LevelChip.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -289,6 +297,15 @@
     <ClInclude Include="YonemaEngine\Sound\SoundSource.h" />
     <ClInclude Include="YonemaEngine\Sound\WaveFile.h" />
     <ClInclude Include="YonemaEngine\Memory\ResourceBankTable.h" />
+    <ClInclude Include="Game\Samples\NavMeshSample.h" />
+    <ClInclude Include="YonemaEngine\AI\Navigations\NavCell.h" />
+    <ClInclude Include="YonemaEngine\AI\Navigations\NavMesh.h" />
+    <ClInclude Include="YonemaEngine\AI\Navigations\Path.h" />
+    <ClInclude Include="YonemaEngine\AI\Navigations\PathFinding.h" />
+    <ClInclude Include="YonemaEngine\Geometries\BSPTree.h" />
+    <ClInclude Include="YonemaEngine\Geometries\EigenJacobiMethod.h" />
+    <ClInclude Include="YonemaEngine\Level3D\Level3D.h" />
+    <ClInclude Include="YonemaEngine\Level3D\LevelChip.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

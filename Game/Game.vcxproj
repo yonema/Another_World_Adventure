@@ -162,6 +162,7 @@
     <ClCompile Include="Game\Samples\CharacterControllerSample.cpp" />
     <ClCompile Include="Game\Samples\EffectSample.cpp" />
     <ClCompile Include="Game\Samples\GetBoneMatrixSample.cpp" />
+    <ClCompile Include="Game\Samples\NavMeshSample.cpp" />
     <ClCompile Include="Game\Samples\PhysicsSample.cpp" />
     <ClCompile Include="Game\Samples\SoundSample.cpp" />
     <ClCompile Include="Game\Samples\TriggerSample.cpp" />
@@ -204,10 +205,15 @@
     <ClCompile Include="Game\Item\ItemCollision.cpp" />
     <ClCompile Include="Game\Player\PlayerWeaponManager.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.cpp" />
+    <ClCompile Include="YonemaEngine\AI\Navigations\NavCell.cpp" />
+    <ClCompile Include="YonemaEngine\AI\Navigations\NavMesh.cpp" />
+    <ClCompile Include="YonemaEngine\AI\Navigations\Path.cpp" />
+    <ClCompile Include="YonemaEngine\AI\Navigations\PathFinding.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\DisplayFPS.cpp" />
     <ClCompile Include="YonemaEngine\DebugSystem\SimpleMover.cpp" />
     <ClCompile Include="YonemaEngine\Effect\EffectEngine.cpp" />
     <ClCompile Include="YonemaEngine\Effect\EffectPlayer.cpp" />
+    <ClCompile Include="YonemaEngine\Geometries\BSPTree.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp" />
@@ -251,6 +257,8 @@
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Camera.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.cpp" />
+    <ClCompile Include="YonemaEngine\Level3D\Level3D.cpp" />
+    <ClCompile Include="YonemaEngine\Level3D\LevelChip.cpp" />
     <ClCompile Include="YonemaEngine\Memory\ResourceBankTable.cpp" />
     <ClCompile Include="YonemaEngine\Physics\CharacterController.cpp" />
     <ClCompile Include="YonemaEngine\Physics\ContactEvent.cpp" />
@@ -301,6 +309,7 @@
     <ClInclude Include="Game\Samples\CharacterControllerSample.h" />
     <ClInclude Include="Game\Samples\EffectSample.h" />
     <ClInclude Include="Game\Samples\GetBoneMatrixSample.h" />
+    <ClInclude Include="Game\Samples\NavMeshSample.h" />
     <ClInclude Include="Game\Samples\PhysicsSample.h" />
     <ClInclude Include="Game\Samples\SoundSample.h" />
     <ClInclude Include="Game\Samples\TriggerSample.h" />
@@ -345,10 +354,16 @@
     <ClInclude Include="Game\Item\ItemCollision.h" />
     <ClInclude Include="Game\Player\PlayerWeaponManager.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.h" />
+    <ClInclude Include="YonemaEngine\AI\Navigations\NavCell.h" />
+    <ClInclude Include="YonemaEngine\AI\Navigations\NavMesh.h" />
+    <ClInclude Include="YonemaEngine\AI\Navigations\Path.h" />
+    <ClInclude Include="YonemaEngine\AI\Navigations\PathFinding.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\DisplayFPS.h" />
     <ClInclude Include="YonemaEngine\DebugSystem\SimpleMover.h" />
     <ClInclude Include="YonemaEngine\Effect\EffectEngine.h" />
     <ClInclude Include="YonemaEngine\Effect\EffectPlayer.h" />
+    <ClInclude Include="YonemaEngine\Geometries\BSPTree.h" />
+    <ClInclude Include="YonemaEngine\Geometries\EigenJacobiMethod.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Skelton.h" />
@@ -399,6 +414,8 @@
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\ConstantBuffer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Camera.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\RenderTarget.h" />
+    <ClInclude Include="YonemaEngine\Level3D\Level3D.h" />
+    <ClInclude Include="YonemaEngine\Level3D\LevelChip.h" />
     <ClInclude Include="YonemaEngine\Memory\ResourceBankTable.h" />
     <ClInclude Include="YonemaEngine\Physics\CharacterController.h" />
     <ClInclude Include="YonemaEngine\Physics\ContactEvent.h" />
