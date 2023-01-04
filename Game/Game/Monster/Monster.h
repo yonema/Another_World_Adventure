@@ -35,6 +35,7 @@ namespace nsAWA {
 		{
 		public:
 			static const char* const m_kObjName_Monster;		//モンスタークラスの名前
+
 		public:
 			bool StartSub()override final;
 
@@ -80,8 +81,16 @@ namespace nsAWA {
 			nsWeapon::CWeapon* GetWeapon()override final;
 
 			nsArmor::CArmor* GetArmor()override final;
+
+			CGameActorCollider* GetGameActorCollider() {
+
+				CGameActorCollider* col = nullptr;
+				return col;
+			}
+
 		private:
 			void CreateMonsterModel(const SMonsterInfo& monsterInfo);
+
 		private:
 			const char* m_name = nullptr;
 			CModelRenderer* m_modelRenderer = nullptr;	//モデル

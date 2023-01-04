@@ -56,9 +56,6 @@ namespace nsAWA {
 
 			//プレイヤーにアクティブスキルを追加。
 			player->SetActiveSkill(EnActiveSkillListNumber::enActiveSkill_1, activeSkill);
-
-			//入力可能に設定。
-			m_canInput = true;
 #endif
 		}
 
@@ -256,6 +253,12 @@ namespace nsAWA {
 
 				//スキル６使用。
 			}
+		}
+
+		void CPlayerInput::ChangeState() {
+
+			//ステート状況を変更する。
+			m_playerAction->ChangeState();
 		}
 	}
 }

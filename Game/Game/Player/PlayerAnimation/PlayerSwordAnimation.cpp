@@ -67,7 +67,7 @@ namespace nsAWA {
 				}
 
 				//アニメーションを再生。
-				playerModel->PlayAnimation(
+				playerModel->PlayAnimationFromBeginning(
 					static_cast<unsigned int>(m_animDataList[static_cast<unsigned int>(animNameRef)].animName),
 					m_animDataList[static_cast<unsigned int>(animNameRef)].speed,
 					m_animDataList[static_cast<unsigned int>(animNameRef)].enLoopFlag
