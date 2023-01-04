@@ -23,12 +23,6 @@ namespace nsAWA {
 
 			void Update(bool isAnimationPlaying);
 
-			void InputEnable() {
-
-				//入力を許可する。
-				m_canInput = true;
-			}
-
 			void CoolTimeOn() {
 
 				//クールタイム中にする。
@@ -46,13 +40,14 @@ namespace nsAWA {
 				return m_isCoolTime;
 			}
 
+			void ChangeState();
+
 		private:
 			void InputSkillAction();
 
 		private:
 			CPlayerAction* m_playerAction = nullptr;	//プレイヤーアクションのポインタ
 			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;	//プレイヤーアニメーションのポインタ
-			bool m_canInput = false;						//入力できる？
 			bool m_isCoolTime = false;		//クールタイム中？
 		};
 	}

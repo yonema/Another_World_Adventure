@@ -22,6 +22,9 @@ namespace nsAWA {
 
 				//クールタイムをOFFにする。
 				m_playerInput->CoolTimeOff();
+
+				//ステートを初期化する。
+				m_playerInput->ChangeState();
 			}
 
 			void CPlayerAnimationEvent::CreateTrigger(const AnimationEventDataStr& animEventDataStr) {

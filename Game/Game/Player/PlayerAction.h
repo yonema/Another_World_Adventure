@@ -136,6 +136,14 @@ namespace nsAWA {
 				//ステートの変更状況を初期化。
 				m_isChangeState = false;
 			}
+
+			void ChangeState() {
+
+				//ステートを初期化する。
+				m_state = EnPlayerState::enNone;
+				m_isChangeState = true;
+			}
+
 			const EnPlayerState& GetState()const {
 
 				return m_state;
