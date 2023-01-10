@@ -47,15 +47,6 @@ namespace nsAWA {
 					enNone			//名前なし
 				};
 
-				//アニメーション情報
-				enum class EnAnimInfo {
-
-					enFilePath,			//ファイルパス
-					enSpeed,			//速度
-					enLoopFlag,			//ループフラグ
-					enAnimationEvent	//アニメーションイベント
-				};
-
 				//アニメーションデータ
 				struct SAnimData {
 

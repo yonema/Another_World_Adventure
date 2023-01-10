@@ -1,64 +1,56 @@
 #pragma once
+#include "MonsterAnimation.h"
 
 namespace nsAWA {
 
-	/**
-	 * @brief モンスターのステートとリスト
-	*/
 	namespace nsMonster {
 
-		//モンスターのステート
-		enum class EnMonsterState {
+		//前方宣言
+		class CMonster;
+		struct SAnimData;
 
-			enIdle,		//待機
+		//モンスターデータ
+		struct SMonsterInitData {
 
-			enNum,		//ステートの数
-			enNone = -1	//設定なし
+			std::string name = "NoName";				//名前
+			std::string modelFilePath = "NoFilePath";	//モデルのファイルパス
+			std::vector<std::string> animationFilePath;	//アニメーションのファイルパスのリスト
+			std::vector<SAnimData> animDataList;		//アニメーションデータ
 		};
+		//モンスターリスト
+		class CMonsterList : public nsUtils::SNoncopyable {
 
-		//モンスターのリスト
-		enum class EnMonsterList {
+			
+		public:
+			static CMonsterList* GetInstance() {
 
-			enGiyara,		//ギヤラ
+				//インスタンスを生成。
+				static CMonsterList* instance = new CMonsterList;
 
-			enNum,			//モンスターの種類の数
-			enNone = -1		//設定なし
+				//インスタンスをリターン。
+				return instance;
+			}
+
+			static void DeleteInstance() {
+
+				//インスタンスを破棄。
+				delete GetInstance();
+			}
+
+			void CreateMonsterList();
+
+			CMonster* CreateMonster(const std::string& monsterName);
+
+		private:
+			void AddMonsterInitData(const SMonsterInitData& monsterData) {
+
+				//モンスターデータを追加。
+				m_monsterDataList.emplace_back(monsterData);
+			}
+
+		private:
+
+			std::list<SMonsterInitData> m_monsterDataList;	//モンスターデータのリスト
 		};
-
-	}
-
-	/**
-	 * @brief ギヤラ
-	*/
-	namespace nsMonster {
-
-		//ギヤラのアニメーション
-		enum class EnGiyaraAnimation {
-
-			enIdle,			//待機
-
-			enNum,			//アニメーションの数
-			enNone = -1		//設定なし
-		};
-
-		//ギヤラのアニメーションのファイルパス
-		constexpr const char* kGiyaraAnimFilePaths[static_cast<int>(EnGiyaraAnimation::enNum)] = {
-
-			"Assets/Animations/Monster/Giyara/Giyara_Idle.fbx",
-		};
-
-		int GetGiyaraAnimationIndex(EnMonsterState state);
-	}
-
-	/**
-	 * @brief 共通のゲッター
-	*/
-	namespace nsMonster {
-
-		int GetAnimationNum(EnMonsterList monster);
-
-		const char* GetAnimationFilePath(EnMonsterList monster, int animIndex);
-
-		int GetAnimationIndex(EnMonsterList monster, EnMonsterState state);
 	}
 }
