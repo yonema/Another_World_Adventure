@@ -38,6 +38,7 @@ namespace nsYMEngine
 				const nsAnimations::SAnimationInitData* animInitData = nullptr;
 				nsPhysics::SMeshGeometryBuffer* physicsMeshGeomBuffer = nullptr;
 				const char* textureRootPath = nullptr;
+				bool enableNodeTransform = false;
 			};
 
 			class CModelRenderer : public nsGameObject::IGameObject
