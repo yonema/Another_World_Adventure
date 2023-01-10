@@ -71,7 +71,7 @@ namespace nsAWA {
 
 		private:
 			SItemInfo m_itemInfo;	//ƒAƒCƒeƒ€î•ñ
-			IGameActor* m_target;
+			IGameActor* m_target = nullptr;
 		};
 	}
 }

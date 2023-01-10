@@ -38,20 +38,8 @@ namespace nsAWA {
 			//プレイヤーを探す。
 			auto player = FindGO<CPlayer>(CPlayer::m_kObjName_Player);
 
-			//ダメージ機能を生成。
-			nsFeature::CApplyDamageFeature* damage = new nsFeature::CApplyDamageFeature;
-			damage->Init(
-				12,			//レベル
-				50,			//威力
-				20,			//攻撃力
-				14,			//防御力
-				player,		//ターゲット
-				true		//ガードできる？
-			);
-
 			//アクティブスキルに機能を追加。
 			nsSkill::CActiveSkill* activeSkill = new nsSkill::CActiveSkill;
-			activeSkill->AddFeature(damage);
 			activeSkill->SetUseMP(0);
 
 			//プレイヤーにアクティブスキルを追加。

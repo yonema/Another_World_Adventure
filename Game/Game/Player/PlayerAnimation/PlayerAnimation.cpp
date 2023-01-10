@@ -1,4 +1,5 @@
 #include "YonemaEnginePreCompile.h"
+#include "../../GameActor.h"
 #include "PlayerAnimation.h"
 #include "PlayerAnimationBase.h"
 #include "PlayerSwordAnimation.h"
@@ -22,7 +23,7 @@ namespace nsAWA {
 			std::string CPlayerAnimation::
 				m_animFilePaths[static_cast<int>(EnAnimName::enNum)] = {};
 
-			void CPlayerAnimation::Init(CPlayerInput* playerInput, CPlayerAction* playerAction) {
+			void CPlayerAnimation::Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction) {
 
 				//アニメーションデータを読み込む。
 				LoadAnimation();
@@ -32,7 +33,7 @@ namespace nsAWA {
 				m_playerAnimation[static_cast<int>(EnAnimType::enSword)]->Init(m_animDataList);
 
 				//アニメーションイベントクラスを初期化。
-				m_animationEvent.Init(playerInput, playerAction);
+				m_animationEvent.Init(player, playerInput, playerAction);
 #ifdef _DEBUG
 				//剣タイプに設定。
 				m_type = EnAnimType::enSword;
@@ -133,7 +134,7 @@ namespace nsAWA {
 					if (animData[kCSVTitleData] == "NAME") {
 
 						//ファイルパスを取得、設定。
-						m_animFilePaths[dataIndex] += "Assets/Animations/";
+						m_animFilePaths[dataIndex] += "Assets/Animations/Player/";
 						m_animFilePaths[dataIndex] += animData[1];
 						m_animFilePaths[dataIndex] += ".fbx";
 

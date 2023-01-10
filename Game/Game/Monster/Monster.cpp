@@ -49,6 +49,9 @@ namespace nsAWA {
 				monsterInfo.animationFilePath
 			);
 
+			//“–‚½‚è”»’è‚ğ‰Šú‰»B
+			m_collider.Init(this);
+
 #ifdef _DEBUG
 			//‰¼‚É‘Ò‹@ó‘Ô‚Éİ’èB
 			SetState(EnMonsterState::enIdle);

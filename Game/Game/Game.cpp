@@ -42,19 +42,22 @@ namespace nsAWA
 		//モンスターリストを生成。
 		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
 
+#ifdef _DEBUG
+		nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+#endif
 		return true;
 	}
 
 	void CGame::Update(float deltaTime)
 	{
 
-#ifdef _DEBUG
-		//ギヤラを出現させる。
-		if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
-
-			nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
-		}
-#endif
+//#ifdef _DEBUG
+//		//ギヤラを出現させる。
+//		if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
+//
+//			nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+//		}
+//#endif
 	}
 
 	void CGame::OnDestroy()

@@ -24,7 +24,7 @@ namespace nsAWA {
 		bool CPlayer::StartSub() {
 
 			//アニメーションを初期化。
-			m_animation.Init(&m_input, &m_action);
+			m_animation.Init(this, &m_input, &m_action);
 
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();

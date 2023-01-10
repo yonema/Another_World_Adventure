@@ -1,11 +1,11 @@
 #pragma once
+#include "../GameActor.h"
 #include "PlayerStatus.h"
 #include "PlayerAction.h"
 #include "PlayerInput.h"
 #include "PlayerAnimation/PlayerAnimation.h"
 #include "PlayerCollider.h"
 #include "PlayerWeaponManager.h"
-#include "../GameActor.h"
 
 namespace nsAWA {
 
