@@ -5,6 +5,7 @@
 #include "Camera/MainCamera.h"
 #include "BackGround/BackGround.h"
 #include "Item/AllItemList.h"
+#include "Monster/MonsterList.h"
 
 #ifdef _DEBUG
 #include "Monster/Monster.h"
@@ -38,22 +39,22 @@ namespace nsAWA
 		//アイテムリストを生成。
 		nsItem::CAllItemList::GetInstance()->LoadAllItemList();
 
-		//csv読み込みがまだできないため、手動で設定。
-		nsMonster::SMonsterInfo monsterInfo;
-		monsterInfo.name = "Giyara";
-		monsterInfo.modelFilePath = "Assets/Models/Giyara.fbx";
-		monsterInfo.monster = nsMonster::EnMonsterList::enGiyara;
-		
-		//情報を元にモンスターモデルを生成。
-		auto monster = NewGO<nsMonster::CMonster>(nsMonster::CMonster::m_kObjName_Monster);
-		monster->Create(monsterInfo);
+		//モンスターリストを生成。
+		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
 
 		return true;
 	}
 
 	void CGame::Update(float deltaTime)
 	{
-		
+
+#ifdef _DEBUG
+		//ギヤラを出現させる。
+		if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
+
+			nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+		}
+#endif
 	}
 
 	void CGame::OnDestroy()

@@ -1,89 +1,101 @@
 #include "MonsterList.h"
+#include "Monster.h"
+#include "../CSV/CSVManager.h"
+#include "../Utils/StringManipulation.h"
+#include "MonsterAnimation.h"
 
 namespace nsAWA {
 
-	//ギヤラ
 	namespace nsMonster {
 
-		int GetGiyaraAnimationIndex(EnMonsterState state) {
+		namespace {
 
-			//アニメーションのindexを定義。
-			EnGiyaraAnimation animIndex = EnGiyaraAnimation::enNone;
-
-			//ステートから対応するアニメーションのindexを取得。
-			switch (state) {
-
-				//待機
-			case EnMonsterState::enIdle:
-
-				//待機アニメーションを設定。
-				animIndex = EnGiyaraAnimation::enIdle;
-				break;
-
-				//それ以外
-			default:
-				//設定なしに設定。
-				animIndex = EnGiyaraAnimation::enNone;
-				break;
-			}
-
-			//int型に変換してindexをリターン。
-			return static_cast<int>(animIndex);
-		}
-	}
-
-	//共通のゲッター
-	namespace nsMonster {
-
-		int GetAnimationNum(EnMonsterList monster) {
-
-			//モンスターの種類から適切なアニメーション数をリターン。
-			switch (monster) {
-
-			case EnMonsterList::enGiyara:
-				return static_cast<int>(EnGiyaraAnimation::enNum);
-			default:
-
-				nsGameWindow::MessageBoxError(L"モンスターの指定が正しくありません。");
-				return -1;
-			}
+			constexpr const wchar_t* const kMonsterNameCSVFilePath = L"Assets/CSV/MonsterList.csv";		//モンスターの名前のリストのCSVのファイルパス
 		}
 
-		const char* GetAnimationFilePath(EnMonsterList monster, int animIndex) {
+		void CMonsterList::CreateMonsterList() {
 
-			//モンスターの種類から適切なファイルパスをリターン。
-			switch (monster) {
+			//モンスターの名前のリストを読み込む。
+			nsCSV::CCsvManager monsterNameCsvManager;
+			monsterNameCsvManager.LoadCSV(kMonsterNameCSVFilePath);
 
-				//ギヤラ
-			case EnMonsterList::enGiyara:
+			//モンスターの名前からモンスター情報を読み込み、保持する。
+			for (const auto& monsterList : monsterNameCsvManager.GetCsvData()) {
 
-				//ギヤラのアニメーションのファイルパスをリターン。
-				return kGiyaraAnimFilePaths[animIndex];
+				for (const auto& monsterName : monsterList) {
 
-			default:
+					//モンスターデータの雛形を生成。
+					SMonsterInitData monsterInitData;
 
-				nsGameWindow::MessageBoxError(L"モンスターの指定が正しくありません。");
-				return nullptr;
+					//名前を設定。
+					monsterInitData.name = monsterName;
+
+					monsterInitData.modelFilePath = "Assets/Models/Monsters/";
+					monsterInitData.modelFilePath += monsterName;
+					monsterInitData.modelFilePath += ".fbx";
+
+					//アニメーション情報が入ったCSVファイルのパスを設定。
+					std::string animCSVFilePath = "Assets/Animations/Monster/";
+					animCSVFilePath += monsterName + "/";
+					animCSVFilePath += monsterName + "_Animation.csv";
+
+					//アニメーションイベント情報が入ったCSVファイルのパスを設定。
+					std::string animEventCSVFilePath = "Assets/Animations/Monster/";
+					animEventCSVFilePath += monsterName + "/";
+					animEventCSVFilePath += monsterName + "_AnimationEvent.csv";
+
+					//アニメーションをロード。
+					CMonsterAnimation monsterAnimation;
+					monsterAnimation.LoadAnimation(
+						monsterName,
+						nsUtils::GetWideStringFromString(animCSVFilePath).c_str(),
+						nsUtils::GetWideStringFromString(animEventCSVFilePath).c_str()
+					);
+
+					//アニメーションデータのリストを取得、設定。
+					monsterInitData.animDataList = monsterAnimation.GetAnimDataList();
+
+					//アニメーションのファイルパスのリストを取得、設定。
+					monsterInitData.animationFilePath = monsterAnimation.GetAnimFilePathArray();
+
+					//モンスターデータを追加。
+					AddMonsterInitData(monsterInitData);
+				}
 			}
 		}
 
-		int GetAnimationIndex(EnMonsterList monster, EnMonsterState state) {
+		CMonster* CMonsterList::CreateMonster(const std::string& monsterName) {
 
-			//モンスターの種類とステートからから適切なアニメーションをリターン。
-			switch (monster) {
+			CMonster* monster = nullptr;
+			//モンスターのリストを順に参照。
+			for (const auto& monsterData : m_monsterDataList) {
 
-				//ギヤラ
-			case EnMonsterList::enGiyara:
+				//同じ名前のモンスターを検索。
+				if (monsterData.name == monsterName) {
 
-				//ギヤラの対応アニメーションをリターン。
-				return GetGiyaraAnimationIndex(state);
+					//モンスターデータを初期化。
+					SMonsterInitData monsterInitData;
+					monsterInitData.name = monsterData.name.c_str();
+					monsterInitData.animDataList = monsterData.animDataList;
+					monsterInitData.animationFilePath = monsterData.animationFilePath;
+					monsterInitData.modelFilePath = monsterData.modelFilePath;
 
-				//それ以外
-			default:
-
-				nsGameWindow::MessageBoxError(L"モンスターの指定が正しくありません。");
-				return -1;
+					//モンスターを生成。
+					monster = NewGO<CMonster>(nsMonster::CMonster::m_kObjName_Monster);
+					monster->Create(monsterInitData);
+				}
 			}
+
+			//モンスターが見つからなかったら。
+			if (monster == nullptr) {
+
+				std::string errMsg = "モンスターの検索に失敗しました。 : ";
+				errMsg += monsterName;
+				nsGameWindow::MessageBoxError(nsUtils::GetWideStringFromString(errMsg).c_str());
+			}
+
+			//モンスターをリターン。
+			return monster;
 		}
 	}
 }

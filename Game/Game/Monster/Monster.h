@@ -18,16 +18,24 @@ namespace nsAWA {
 
 		enum class EnMonsterList;
 		enum class EnMonsterState;
+		struct SMonsterInitData;
 	}
 
 	namespace nsMonster {
 
-		//モンスター情報
-		struct SMonsterInfo {
+		//モンスターのステート
+		enum class EnMonsterState {
 
-			const char* name;						//モンスター名
-			const char* modelFilePath = nullptr;	//モデルのファイルパス
-			EnMonsterList monster = static_cast<EnMonsterList>(-1);	//何のモンスターか
+			enIdle,				//待機
+			enWalk,				//歩く
+			enRun,				//走る
+			enWeakAttack,		//弱攻撃
+			enStrongAttack,		//強攻撃
+			enDamage,			//被弾
+			enDeath,			//死亡
+
+			enNum,		//ステートの数
+			enNone = -1	//設定なし
 		};
 
 		//モンスタークラス
@@ -43,7 +51,7 @@ namespace nsAWA {
 
 			void UpdateActor(float deltaTime)override final;
 
-			void Create(const SMonsterInfo& monsterInfo);
+			void Create(const SMonsterInitData& monsterInfo);
 
 			void ApplyDamage(float damage, float power = 0.0f, bool canGuard = true)override final;
 
@@ -89,7 +97,7 @@ namespace nsAWA {
 			}
 
 		private:
-			void CreateMonsterModel(const SMonsterInfo& monsterInfo);
+			void CreateMonsterModel(const SMonsterInitData& monsterInfo);
 
 		private:
 			const char* m_name = nullptr;

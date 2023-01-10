@@ -13,8 +13,8 @@ namespace nsAWA {
 
 			namespace {
 
-				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/AnimationTest.csv";	//プレイヤーのアニメーションのCSVファイルパス
-				constexpr const wchar_t* const kPlayerAnimationEventCSVFilePath = L"Assets/CSV/AnimationEventTest.csv";	//プレイヤーのアニメーションのイベントのCSVファイルパス
+				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/Animation.csv";	//プレイヤーのアニメーションのCSVファイルパス
+				constexpr const wchar_t* const kPlayerAnimationEventCSVFilePath = L"Assets/CSV/AnimationEvent.csv";	//プレイヤーのアニメーションのイベントのCSVファイルパス
 				constexpr int kCSVTitleData = 0;		//CSVデータの見出し情報。
 			}
 
