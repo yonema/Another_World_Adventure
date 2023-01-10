@@ -56,7 +56,7 @@ namespace nsAWA {
 					std::vector<SAnimationEventData> animationEvent;			//アニメーションイベント
 				};
 			public:
-				void Init(CPlayerInput* playerInput, CPlayerAction* playerAction);
+				void Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction);
 
 				std::string* GetAnimFilePath()const {
 

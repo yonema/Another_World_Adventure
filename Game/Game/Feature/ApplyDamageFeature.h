@@ -9,17 +9,20 @@ namespace nsAWA {
 		class CApplyDamageFeature : public CFeature
 		{
 		public:
-			void Init(
-				int level,
-				int power,
-				float attack,
-				float deffence,
-				IGameActor* target,
-				bool canGuard
-			);
+			
+			/**
+			 * @brief 通常ダメージ
+			*/
+			void Init(IGameActor* creator, IGameActor* target, float power, const std::string& attackType, bool canGuard);
+
+			/**
+			 * @brief 固定ダメージ
+			*/
+			void Init(const std::string& damageType, IGameActor* target, float damage, bool canGuard);
 
 			void Create()override final;
 		private:
+			float m_damage = 0.0f;				//ダメージ
 			float m_level = 0.0f;				//レベル
 			float m_power = 0.0f;				//威力
 			float m_attack = 0.0f;				//攻撃力

@@ -27,10 +27,11 @@ namespace nsAWA {
 				m_playerInput->ChangeState();
 			}
 
-			void CPlayerAnimationEvent::CreateTrigger(const AnimationEventDataStr& animEventDataStr) {
+			void CPlayerAnimationEvent::CreateTrigger(IGameActor* creator, const AnimationEventDataStr& animEventDataStr) {
 
 				auto trigger = NewGO<CCreateTrigger>();
 				trigger->Create(
+					creator,
 					animEventDataStr,
 					m_playerAction->GetPosition(),
 					m_playerAction->GetForwardDirection()
@@ -53,7 +54,7 @@ namespace nsAWA {
 				}
 				else if (animationEventName == "CreateTrigger") {
 
-					CreateTrigger(animationEventData);
+					CreateTrigger(m_player,animationEventData);
 				}
 				else {
 

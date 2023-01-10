@@ -206,6 +206,7 @@
     <ClCompile Include="Game\Item\ItemCollision.cpp" />
     <ClCompile Include="Game\Player\PlayerWeaponManager.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.cpp" />
+    <ClCompile Include="Game\Monster\MonsterCollider.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavCell.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavMesh.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\Path.cpp" />
@@ -356,6 +357,7 @@
     <ClInclude Include="Game\Item\ItemCollision.h" />
     <ClInclude Include="Game\Player\PlayerWeaponManager.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.h" />
+    <ClInclude Include="Game\Monster\MonsterCollider.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavCell.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavMesh.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\Path.h" />

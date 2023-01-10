@@ -10,10 +10,14 @@ namespace nsAWA {
 		constexpr float kTriggerDurationTimer = 0.5f;	//トリガーの持続時間
 	}
 
-	void CCreateTrigger::Create(std::list<std::vector<std::string>> triggerMaterial,
+	void CCreateTrigger::Create(
+		IGameActor* creator,
+		std::list<std::vector<std::string>> triggerMaterial,
 		const CVector3& position,
 		const CVector3& forwardDirection
 	) {
+		//生成者を設定。
+		m_creator = creator;
 
 		//トリガー情報を設定。
 		for (auto& material : triggerMaterial) {
@@ -108,7 +112,7 @@ namespace nsAWA {
 
 			//効果を生成。
 			nsFeature::CFeatureBuilder featureBuilder;
-			featureBuilder.CreateFeature(rGameActorCollider->GetGameActor(), m_triggerInfo.m_featureList);
+			featureBuilder.CreateFeature(m_creator, rGameActorCollider->GetGameActor(), m_triggerInfo.m_featureList);
 		}
 	}
 }

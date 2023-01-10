@@ -2,6 +2,7 @@
 #include "../GameActor.h"
 #include "MonsterStatus.h"
 #include "MonsterAnimation.h"
+#include "MonsterCollider.h"
 
 namespace nsAWA {
 
@@ -102,6 +103,7 @@ namespace nsAWA {
 		private:
 			const char* m_name = nullptr;
 			CModelRenderer* m_modelRenderer = nullptr;	//モデル
+			CMonsterCollider m_collider;				//コライダー
 			CMonsterStatus m_status;					//ステータス
 			CMonsterAnimation m_animation;				//アニメーション
 			EnMonsterState m_state = static_cast<EnMonsterState>(-1);	//ステート
