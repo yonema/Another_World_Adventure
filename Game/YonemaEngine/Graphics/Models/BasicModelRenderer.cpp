@@ -1,6 +1,7 @@
 #include "BasicModelRenderer.h"
 #include "../GraphicsEngine.h"
 #include "AssimpCommon.h"
+#include "../../Thread/LoadModelThread.h"
 #include "../../Utils/StringManipulation.h"
 #include "../../Utils/AlignSize.h"
 
@@ -12,6 +13,12 @@ namespace nsYMEngine
 		{
 			void CBasicModelRenderer::Draw(nsDx12Wrappers::CCommandList* commandList)
 			{
+				if (m_loadingState != EnLoadingState::enAfterLoading)
+				{
+					int a = 1;
+					return;
+				}
+
 				// モデルごとの定数バッファのセット
 				ID3D12DescriptorHeap* modelDescHeaps[] = { m_modelDH.Get() };
 				commandList->SetDescriptorHeaps(1, modelDescHeaps);
@@ -69,6 +76,9 @@ namespace nsYMEngine
 
 			void CBasicModelRenderer::Release()
 			{
+				m_isImportedModelScene = false;
+				m_loadingState = EnLoadingState::enBeforeLoading;
+
 				for (auto& materialDH : m_materialDHs)
 				{
 					if (materialDH)
@@ -112,6 +122,25 @@ namespace nsYMEngine
 
 			bool CBasicModelRenderer::Init(const nsRenderers::SModelInitData& modelInitData) noexcept
 			{
+				m_isImportedModelScene = false;
+
+				if (modelInitData.enableLoadingAsynchronous)
+				{
+					m_loadingState = EnLoadingState::enNowLoading;
+					m_modelInitDataRef = &modelInitData;
+					nsThread::CLoadModelThread::GetInstance()->PushLoadModelProcess(
+						nsThread::CLoadModelThread::EnLoadProcessType::enLoadModel,
+						this
+					);
+
+					return true;
+				}
+				else
+				{
+					m_loadingState = EnLoadingState::enAfterLoading;
+					m_isImportedModelScene = true;
+				}
+
 				Assimp::Importer* importer = nullptr;
 				const aiScene* scene = nullptr;
 
@@ -127,6 +156,50 @@ namespace nsYMEngine
 				}
 
 				InitSkeltalAnimation(modelInitData, scene);
+
+				InitAfterImportScene(modelInitData, scene);
+
+				
+				
+				return true;
+			}
+
+			bool CBasicModelRenderer::InitAsynchronous() noexcept
+			{
+				if (nsAssimpCommon::ImportScene(
+					m_modelInitDataRef->modelFilePath,
+					m_importerForLoadAsynchronous,
+					m_sceneForLoadAsynchronous,
+					nsAssimpCommon::g_kBasicRemoveComponentFlags,
+					nsAssimpCommon::g_kBasicPostprocessFlags
+				) != true)
+				{
+					return false;
+				}
+
+				InitSkeltalAnimation(*m_modelInitDataRef, m_sceneForLoadAsynchronous);
+
+				m_isImportedModelScene = true;
+
+				return true;
+			}
+
+			void CBasicModelRenderer::InitAfterImportScene()
+			{
+				InitAfterImportScene(*m_modelInitDataRef, m_sceneForLoadAsynchronous);
+
+				return;
+			}
+
+			void CBasicModelRenderer::InitAfterImportScene(
+				const nsRenderers::SModelInitData& modelInitData,
+				const aiScene* scene
+			)
+			{
+				if (scene == nullptr)
+				{
+					return;
+				}
 
 				const auto kNumMeshes = scene->mNumMeshes;
 				unsigned int numVertices = 0;
@@ -154,7 +227,7 @@ namespace nsYMEngine
 				CreateMaterialSRV();
 				m_bias.MakeRotationFromQuaternion(modelInitData.vertexBias);
 
-				if (IsSkeltalAnimationValid() && 
+				if (IsSkeltalAnimationValid() &&
 					modelInitData.rendererType == nsRenderers::CRendererTable::EnRendererType::enBasicModel)
 				{
 					SetRenderType(nsRenderers::CRendererTable::EnRendererType::enSkinModel);
@@ -164,8 +237,19 @@ namespace nsYMEngine
 					SetRenderType(modelInitData.rendererType);
 				}
 				EnableDrawing();
-				
-				return true;
+
+				if (m_importerForLoadAsynchronous)
+				{
+					m_importerForLoadAsynchronous->FreeScene();
+					m_sceneForLoadAsynchronous = nullptr;
+
+					delete m_importerForLoadAsynchronous;
+					m_importerForLoadAsynchronous = nullptr;
+				}
+
+
+
+				return;
 			}
 
 			bool CBasicModelRenderer::InitSkeltalAnimation(
@@ -179,7 +263,11 @@ namespace nsYMEngine
 					m_skelton->Init(*scene->mRootNode);
 					m_animator = new nsAnimations::CAnimator();
 					isSkeltalAnimation = 
-						m_animator->Init(*modelInitData.animInitData, m_skelton);
+						m_animator->Init(
+							*modelInitData.animInitData,
+							m_skelton, 
+							modelInitData.enableLoadingAsynchronous
+						);
 				}
 
 				return isSkeltalAnimation;
@@ -680,6 +768,33 @@ namespace nsYMEngine
 
 				return boneNameToIdx->second;
 			}
+
+			void CBasicModelRenderer::CheckLoaded() noexcept
+			{
+				if (m_loadingState != EnLoadingState::enNowLoading)
+				{
+					return;
+				}
+
+				if (m_isImportedModelScene != true)
+				{
+					return;
+				}
+
+				if (m_animator)
+				{
+					if (m_animator->IsLoaded() != true)
+					{
+						return;
+					}
+				}
+
+				m_loadingState = EnLoadingState::enAfterLoading;
+
+
+				return;
+			}
+
 
 
 		}
