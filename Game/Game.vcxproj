@@ -163,6 +163,7 @@
     <ClCompile Include="Game\Samples\CharacterControllerSample.cpp" />
     <ClCompile Include="Game\Samples\EffectSample.cpp" />
     <ClCompile Include="Game\Samples\GetBoneMatrixSample.cpp" />
+    <ClCompile Include="Game\Samples\LoadAsynchronousSample.cpp" />
     <ClCompile Include="Game\Samples\ModelRendererSample.cpp" />
     <ClCompile Include="Game\Samples\NavMeshSample.cpp" />
     <ClCompile Include="Game\Samples\PhysicsSample.cpp" />
@@ -277,6 +278,7 @@
     <ClCompile Include="YonemaEngine\Sound\SoundPlayer.cpp" />
     <ClCompile Include="YonemaEngine\Sound\SoundSource.cpp" />
     <ClCompile Include="YonemaEngine\Sound\WaveFile.cpp" />
+    <ClCompile Include="YonemaEngine\Thread\LoadtModelThread.cpp" />
     <ClCompile Include="YonemaEngine\Time\GameTime.cpp" />
     <ClCompile Include="YonemaEngine\Math\Quaternion.cpp" />
     <ClCompile Include="YonemaEngine\Math\Vector2.cpp" />
@@ -313,6 +315,7 @@
     <ClInclude Include="Game\Samples\CharacterControllerSample.h" />
     <ClInclude Include="Game\Samples\EffectSample.h" />
     <ClInclude Include="Game\Samples\GetBoneMatrixSample.h" />
+    <ClInclude Include="Game\Samples\LoadAsynchronousSample.h" />
     <ClInclude Include="Game\Samples\ModelRendererSample.h" />
     <ClInclude Include="Game\Samples\NavMeshSample.h" />
     <ClInclude Include="Game\Samples\PhysicsSample.h" />
@@ -438,6 +441,7 @@
     <ClInclude Include="YonemaEngine\Sound\SoundPlayer.h" />
     <ClInclude Include="YonemaEngine\Sound\SoundSource.h" />
     <ClInclude Include="YonemaEngine\Sound\WaveFile.h" />
+    <ClInclude Include="YonemaEngine\Thread\LoadModelThread.h" />
     <ClInclude Include="YonemaEngine\Time\GameTime.h" />
     <ClInclude Include="YonemaEngine\Math\Math.h" />
     <ClInclude Include="YonemaEngine\Math\Quaternion.h" />

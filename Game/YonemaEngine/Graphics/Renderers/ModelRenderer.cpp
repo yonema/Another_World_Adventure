@@ -10,13 +10,31 @@ namespace nsYMEngine
 		{
 			bool CModelRenderer::Start()
 			{
+				if (m_renderer->GetLoadingState() != EnLoadingState::enAfterLoading)
+				{
+					return true;
+				}
+
 				UpdateWorldMatrix();
 				m_renderer->PlayAnimation(0);
+
 				return true;
 			}
 
 			void CModelRenderer::Update(float deltaTime)
 			{
+				if (m_enableLoadingAsynchronous)
+				{
+					m_renderer->CheckLoaded();
+
+					if (m_renderer->GetLoadingState() != EnLoadingState::enAfterLoading)
+					{
+						return;
+					}
+					m_renderer->InitAfterImportScene();
+					m_renderer->PlayAnimation(0);
+					m_enableLoadingAsynchronous = false;
+				}
 				UpdateWorldMatrix();
 
 				m_renderer->UpdateAnimation(deltaTime);
@@ -34,9 +52,15 @@ namespace nsYMEngine
 
 			void CModelRenderer::Init(const SModelInitData& modelInitData) noexcept
 			{
-				CreateRenderer(modelInitData);
+				m_modelInitData = modelInitData;
+				m_enableLoadingAsynchronous = modelInitData.enableLoadingAsynchronous;
 
-				UpdateWorldMatrix();
+				CreateRenderer(m_modelInitData);
+
+				if (m_enableLoadingAsynchronous != true)
+				{
+					UpdateWorldMatrix();
+				}
 
 				return;
 			}
