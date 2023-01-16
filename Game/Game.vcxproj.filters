@@ -163,6 +163,9 @@
     <ClCompile Include="Game\Monster\AI\AITask\AITaskWait.cpp" />
     <ClCompile Include="Game\Monster\MonsterAnimationEvent.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskAttack.cpp" />
+    <ClCompile Include="Game\Samples\ModelRendererSample.cpp" />
+    <ClCompile Include="Game\Samples\LoadAsynchronousSample.cpp" />
+    <ClCompile Include="YonemaEngine\Thread\LoadtModelThread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -336,6 +339,9 @@
     <ClInclude Include="Game\Monster\AI\AITask\AITaskWait.h" />
     <ClInclude Include="Game\Monster\MonsterAnimationEvent.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskAttack.h" />
+    <ClInclude Include="Game\Samples\ModelRendererSample.h" />
+    <ClInclude Include="Game\Samples\LoadAsynchronousSample.h" />
+    <ClInclude Include="YonemaEngine\Thread\LoadModelThread.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

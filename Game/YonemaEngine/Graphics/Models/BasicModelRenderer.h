@@ -15,9 +15,13 @@ namespace nsYMEngine
 }
 
 // Assimp
-
+namespace Assimp
+{
+	class Importer;
+}
 struct aiScene;
 struct aiMaterial;
+struct aiNode;
 
 
 namespace nsYMEngine
@@ -64,7 +68,7 @@ namespace nsYMEngine
 
 					std::vector<SVertex> vertices = {};
 					std::vector<uint16_t> indices = {};
-					std::string diffuseMapFilePath = {};
+					nsMath::CMatrix mNodeTransformInv = nsMath::CMatrix::Identity();
 				};
 
 				/**
@@ -97,6 +101,13 @@ namespace nsYMEngine
 			public:
 				CBasicModelRenderer(const nsRenderers::SModelInitData& modelInitData);
 				~CBasicModelRenderer();
+
+				void InitAfterImportScene(
+					const nsRenderers::SModelInitData& modelInitData,
+					const aiScene* scene
+				);
+
+				void InitAfterImportScene();
 
 				void Release();
 
@@ -184,13 +195,23 @@ namespace nsYMEngine
 					return m_animator && m_skelton;
 				}
 
+				constexpr EnLoadingState GetLoadingState() const noexcept
+				{
+					return m_loadingState;
+				}
+
+				void CheckLoaded() noexcept;
+
+				bool InitAsynchronous() noexcept;
+
 			private:
 				bool Init(const nsRenderers::SModelInitData& modelInitData) noexcept;
 
 				void Terminate() noexcept;
 
 				bool InitSkeltalAnimation(
-					const nsRenderers::SModelInitData& modelInitData, const aiScene* scene) noexcept;
+					const nsRenderers::SModelInitData& modelInitData,
+					const aiScene* scene) noexcept;
 
 				void InitMeshInfoArray(
 					const aiScene* scene,
@@ -201,9 +222,18 @@ namespace nsYMEngine
 				) noexcept;
 
 				void LoadMeshes(
+					const nsRenderers::SModelInitData& modelInitData,
 					const aiScene* scene,
 					std::vector<SMesh>* destMeshesOut,
 					const unsigned int numMeshes
+				) noexcept;
+
+				void LoadMeshPerNode(
+					const nsRenderers::SModelInitData& modelInitData,
+					aiNode* node,
+					const aiScene* scene,
+					const nsMath::CMatrix& parentTransform,
+					std::list<SMesh>* dstMeshesListOut
 				) noexcept;
 
 				void LoadMesh(SMesh* dstMesh, const aiMesh& srcMesh, unsigned int meshIdx) noexcept;
@@ -256,6 +286,13 @@ namespace nsYMEngine
 				std::vector<nsMath::CMatrix> m_boneMatrices;
 				nsAnimations::CSkelton* m_skelton = nullptr;
 				nsAnimations::CAnimator* m_animator = nullptr;
+
+				EnLoadingState m_loadingState = EnLoadingState::enBeforeLoading;
+				bool m_isImportedModelScene = false;
+				Assimp::Importer* m_importerForLoadAsynchronous = nullptr;
+				const aiScene* m_sceneForLoadAsynchronous = nullptr;
+
+				const nsRenderers::SModelInitData* m_modelInitDataRef = nullptr;
 			};
 
 		}

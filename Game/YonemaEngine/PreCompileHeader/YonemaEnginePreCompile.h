@@ -26,6 +26,8 @@
 #include <strsafe.h>
 #include <typeinfo>
 #include <random>
+#include <thread>
+#include <mutex>
 
 // DirectX12
 #pragma comment(lib, "d3d12.lib")
@@ -59,6 +61,7 @@
 
 
 #include "../Utils/Noncopyable.h"
+#include "../Utils/StringManipulation.h"
 #include "../Math/Math.h"
 #include "../Math/Vector2.h"
 #include "../Math/Vector3.h"
