@@ -104,6 +104,13 @@ namespace nsAWA {
 
 			void CMonsterAIController::Update(float deltaTime) {
 
+				//クールタイム中なら。
+				if (m_isCoolTime) {
+
+					//早期リターン。
+					return;
+				}
+
 				//デルタタイムを更新。
 				m_deltaTimeRef = deltaTime;
 

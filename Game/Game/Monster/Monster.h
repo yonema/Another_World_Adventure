@@ -95,8 +95,8 @@ namespace nsAWA {
 
 			const CVector3& GetForwardDirection()const override final {
 
-				//前方向を取得。（未実装）
-				return CVector3::Zero();
+				//前方向を取得。
+				return m_forwardDirection;
 			}
 		public:
 			void SetState(const EnMonsterState& state) {

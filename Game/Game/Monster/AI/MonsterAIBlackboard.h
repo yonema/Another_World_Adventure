@@ -16,6 +16,7 @@ namespace nsAWA {
 				IGameActor* m_gameActor = nullptr;	//ゲームアクターのポインタ
 				CVector3 m_targetPosition = CVector3::Zero();		//目標の座標
 				float m_waitTimer = 0.0f;		//待機時間
+				bool m_canAttack = false;		//攻撃できる？
 			};
 		}
 	}
