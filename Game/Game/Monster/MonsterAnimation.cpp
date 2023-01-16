@@ -28,6 +28,25 @@ namespace nsAWA {
 
 			//アニメーションファイルパスを設定。
 			m_animFilePathArray = animFilePathArray;
+
+			for (const auto& animData : m_animDataList) {
+
+				//このアニメーションのイベント数を伝える。
+				m_monsterModel->ReserveAnimationEventFuncArray(static_cast<int>(animData.animNum), static_cast<int>(animData.animationEvent.size()));
+
+				//アニメーションイベントを順に参照。
+				for (const auto& animEventData : animData.animationEvent) {
+
+					//アニメーションイベントを追加。
+					m_monsterModel->AddAnimationEventFunc(
+						static_cast<unsigned int>(animData.animNum),
+						[&]() {m_animationEvent.GetAnimationEvent(
+							animEventData.eventName,
+							animEventData.eventMaterial);
+						}
+					);
+				}
+			}
 		}
 
 		void CMonsterAnimation::Update(bool changeState, EnMonsterState state) {
@@ -54,7 +73,7 @@ namespace nsAWA {
 			else {
 			
 				//対応するアニメーションを再生。
-				m_monsterModel->PlayAnimation(
+				m_monsterModel->PlayAnimationFromBeginning(
 					animationData.animNum,
 					animationData.speed,
 					animationData.isLoopAnim

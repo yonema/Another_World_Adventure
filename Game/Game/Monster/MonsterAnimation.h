@@ -1,4 +1,5 @@
 #pragma once
+#include "MonsterAnimationEvent.h"
 
 namespace nsAWA {
 
@@ -7,6 +8,11 @@ namespace nsAWA {
 
 		enum class EnMonsterState;
 		enum class EnMonsterList;
+
+		namespace nsMonsterAI {
+
+			class CMonsterAIController;
+		}
 	}
 
 	namespace nsMonster {
@@ -43,6 +49,12 @@ namespace nsAWA {
 				const std::vector<std::string>& animFilePathArray
 			);
 
+			void InitAnimationEvent(CMonster* monster, nsMonsterAI::CMonsterAIController* aiController) {
+
+				//アニメーションイベントを初期化。
+				m_animationEvent.Init(monster, aiController);
+			}
+
 			void Update(bool changeState, EnMonsterState state);
 
 			void LoadAnimation(
@@ -71,6 +83,7 @@ namespace nsAWA {
 
 		private:
 			CModelRenderer* m_monsterModel = nullptr;	//モンスターモデル
+			CMonsterAnimationEvent m_animationEvent;	//アニメーションイベント
 			std::vector<SAnimData> m_animDataList;	//アニメーションデータ
 			std::vector<std::string> m_animFilePathArray;	//アニメーションのファイルパスの配列
 		};
