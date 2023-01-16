@@ -23,24 +23,25 @@ namespace nsAWA {
 				//移動方向を取得。
 				CVector3 moveDirection = blackboard.m_targetPosition - m_AIController->GetPosition();
 
-				//目的地にたどり着いたら。
-				if (moveDirection.Length() < successDistance) {
-
-					//終了。
-					return false;
-				}
-
 				//正規化。
-				moveDirection.Normalize();
+				CVector3 moveDirectionNormal = moveDirection;
+				moveDirectionNormal.Normalize();
 
 				//移動量を計算。
-				CVector3 moveAmount = moveDirection * moveSpeed * m_AIController->GetDeltaTimeRef();
+				CVector3 moveAmount = moveDirectionNormal * moveSpeed * m_AIController->GetDeltaTimeRef();
 
 				//移動。
 				m_AIController->SetPosition(m_AIController->GetPosition() + moveAmount);
 
 				//ステートを設定。
 				m_AIController->SetState(EnMonsterState::enWalk);
+
+				//目的地にたどり着いたら。
+				if (moveDirection.Length() < successDistance) {
+
+					//終了。
+					return false;
+				}
 
 				//成功。
 				return true;

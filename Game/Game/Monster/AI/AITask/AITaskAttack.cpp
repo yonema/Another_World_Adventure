@@ -34,9 +34,13 @@ namespace nsAWA {
 					//警告ウィンドウを出力。
 					nsGameWindow::MessageBoxError(nsUtils::GetWideStringFromString(errorMsg).c_str());
 #endif // _DEBUG
-					//ステートを設定。
-					m_AIController->SetState(state);
 				}
+
+				//ステートを設定。
+				m_AIController->SetState(state);
+
+				//クールタイムをONに設定。
+				m_AIController->CoolTimeOn();
 
 				//成功。
 				return true;
