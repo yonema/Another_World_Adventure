@@ -154,6 +154,7 @@
     <ClCompile Include="Game\Samples\ModelRendererSample.cpp" />
     <ClCompile Include="Game\Samples\LoadAsynchronousSample.cpp" />
     <ClCompile Include="YonemaEngine\Thread\LoadtModelThread.cpp" />
+    <ClCompile Include="YonemaEngine\Level2D\Level2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -316,6 +317,8 @@
     <ClInclude Include="Game\Samples\ModelRendererSample.h" />
     <ClInclude Include="Game\Samples\LoadAsynchronousSample.h" />
     <ClInclude Include="YonemaEngine\Thread\LoadModelThread.h" />
+    <ClInclude Include="YonemaEngine\Level2D\Level2D.h" />
+    <ClInclude Include="YonemaEngine\Level2D\Level2DSpriteData.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
