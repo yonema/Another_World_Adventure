@@ -20,6 +20,13 @@ namespace nsYMEngine
 			char engineVer;
 			fread(&engineVer, 1, 1, fp);
 
+			if (engineVer != 'y')
+			{
+				//ファイルがこのエンジンに対応していない。
+				nsGameWindow::MessageBoxWarning(L"ファイルのバージョンが異なります。");
+				return;
+			}
+
 			int spriteNum;
 			fread(&spriteNum, sizeof(int), 1, fp);
 
