@@ -12,7 +12,7 @@ namespace nsAWA {
 
 			//理論ダメージ計算式
 			constexpr float CalcDamage(
-				float level,
+				int level,
 				float power,
 				float attack,
 				float deffence

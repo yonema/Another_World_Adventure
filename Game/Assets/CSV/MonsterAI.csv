@@ -1,0 +1,8 @@
+Selector,RootAI,2,,
+Sequence,PlayerChase,4,,
+Task,FindGameActor,0,Player,
+Task,SetTargetPosition,0,TargetActor,
+Task,RotateToTargetPosition,0,,
+Task,Move,0,15,10
+Sequence,Attack,1,,
+Task,Attack,0,Weak,

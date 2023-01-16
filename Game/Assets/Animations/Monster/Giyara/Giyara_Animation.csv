@@ -1,6 +1,6 @@
 NAME,Giyara_Idle,
 SPEED,1,
-LOOP,FALSE,
+LOOP,TRUE,
 *,,
 NAME,Giyara_Walk,
 SPEED,1,
