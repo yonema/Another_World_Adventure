@@ -13,6 +13,7 @@
 #include "Item/SelfItem.h"
 #include "Feature/AbnormalStatus/Poison.h"
 #include "Item/ItemManager.h"
+#include "Monster/AI/MonsterAIController.h"
 #endif
 
 namespace nsAWA

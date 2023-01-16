@@ -30,8 +30,20 @@ namespace nsAWA {
 			//ステートの変更状況を初期化。
 			m_isChangeState = false;
 
+			//AIコントローラーを更新。
+			m_AIContoller.Update(deltaTime);
+
+			//コライダーを更新。
+			m_collider.Update();
+
 			//アニメーションを更新。
-			//m_animation.Update(m_isChangeState, m_state);
+			m_animation.Update(m_isChangeState, m_state);
+
+			//座標を設定。
+			m_modelRenderer->SetPosition(m_position);
+
+			//回転を設定。
+			m_modelRenderer->SetRotation(m_rotation);
 		}
 
 		void CMonster::Create(const SMonsterInitData& monsterInfo) {
@@ -42,12 +54,18 @@ namespace nsAWA {
 			//名前を設定。
 			m_name = monsterInfo.name.c_str();
 
+			//アニメーションイベントを初期化。
+			m_animation.InitAnimationEvent(this, &m_AIContoller);
+
 			//アニメーションを初期化。
 			m_animation.Init(
 				m_modelRenderer,
 				monsterInfo.animDataList,
 				monsterInfo.animationFilePath
 			);
+
+			//AIコントローラーを初期化。
+			m_AIContoller.Init(this);
 
 			//当たり判定を初期化。
 			m_collider.Init(this);
@@ -76,7 +94,7 @@ namespace nsAWA {
 			modelInitData.vertexBias.AddRotationY(nsMath::YM_PI);
 			
 			//アニメーションの数を取得。
-			const int animNum = monsterInfo.animationFilePath.size();
+			const int animNum = static_cast<int>(monsterInfo.animationFilePath.size());
 
 			//アニメーションのファイルパスの配列を定義。
 			std::vector<const char*> animNumVec;

@@ -151,6 +151,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskAttack.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskWait.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskMove.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskSetTargetPosition.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskRotateToTargetPosition.cpp" />
+    <ClCompile Include="Game\Monster\AI\AISelector.cpp" />
+    <ClCompile Include="Game\Monster\AI\AISequence.cpp" />
+    <ClCompile Include="Game\Monster\AI\AIPart.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskFindGameActor.cpp" />
     <ClCompile Include="Game\CreateTrigger.cpp" />
     <ClCompile Include="Game\BackGround\BackGround.cpp" />
     <ClCompile Include="Game\Feature\FeatureBuilder.cpp" />
@@ -209,6 +218,9 @@
     <ClCompile Include="Game\Player\PlayerWeaponManager.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.cpp" />
     <ClCompile Include="Game\Monster\MonsterCollider.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\MonsterAITask.cpp" />
+    <ClCompile Include="Game\Monster\AI\MonsterAIController.cpp" />
+    <ClCompile Include="Game\Monster\MonsterAnimationEvent.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavCell.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavMesh.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\Path.cpp" />
@@ -302,6 +314,17 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskAttack.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskWait.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskMove.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskSetTargetPosition.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskRotateToTargetPosition.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskBuilder.h" />
+    <ClInclude Include="Game\Monster\AI\MonsterAIBlackboard.h" />
+    <ClInclude Include="Game\Monster\AI\AISelector.h" />
+    <ClInclude Include="Game\Monster\AI\AISequence.h" />
+    <ClInclude Include="Game\Monster\AI\AIPart.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskFindGameActor.h" />
     <ClInclude Include="Game\CreateTrigger.h" />
     <ClInclude Include="Game\BackGround\BackGround.h" />
     <ClInclude Include="Game\Feature\FeatureBuilder.h" />
@@ -363,6 +386,9 @@
     <ClInclude Include="Game\Player\PlayerWeaponManager.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationEvent.h" />
     <ClInclude Include="Game\Monster\MonsterCollider.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\MonsterAITask.h" />
+    <ClInclude Include="Game\Monster\AI\MonsterAIController.h" />
+    <ClInclude Include="Game\Monster\MonsterAnimationEvent.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavCell.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavMesh.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\Path.h" />
