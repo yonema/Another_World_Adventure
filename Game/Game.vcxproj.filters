@@ -172,6 +172,7 @@
     <ClCompile Include="Game\Monster\AI\AITask\AITaskSetFlag.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskIsButtle.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskStandBy.cpp" />
+    <ClCompile Include="YonemaEngine\Level2D\Level2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -354,6 +355,8 @@
     <ClInclude Include="Game\Monster\AI\AITask\AITaskSetFlag.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskIsButtle.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskStandBy.h" />
+    <ClInclude Include="YonemaEngine\Level2D\Level2D.h" />
+    <ClInclude Include="YonemaEngine\Level2D\Level2DSpriteData.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
