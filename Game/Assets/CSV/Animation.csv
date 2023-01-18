@@ -6,11 +6,11 @@ NAME,Sword_Walk,
 SPEED,1,
 LOOP,TRUE,
 *,,
-NAME,Sword_Dash,
+NAME,Sword_Run,
 SPEED,1,
 LOOP,TRUE,
 *,,
-NAME,Sword_WeakAttack_A,
+NAME,Sword_WeakAttack,
 SPEED,1,
 LOOP,FALSE,
 EVENT,CoolTimeOn,FALSE
@@ -45,4 +45,11 @@ EVENT,CoolTimeOff,FALSE
 NAME,Sword_Stun,
 SPEED,1,
 LOOP,TRUE,
+*,,
+NAME,Sword_JumpAttack,
+SPEED,1,
+LOOP,FALSE,
+EVENT,CoolTimeOn,FALSE
+EVENT,CreateTrigger,TRUE
+EVENT,CoolTimeOff,FALSE
 *,,

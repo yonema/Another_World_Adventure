@@ -38,9 +38,10 @@ namespace nsAWA {
 			//プレイヤーを探す。
 			auto player = FindGO<CPlayer>(CPlayer::m_kObjName_Player);
 
-			//アクティブスキルに機能を追加。
+			//アクティブスキルを追加。
 			nsSkill::CActiveSkill* activeSkill = new nsSkill::CActiveSkill;
 			activeSkill->SetUseMP(0);
+			activeSkill->SetName("JumpAttack");
 
 			//プレイヤーにアクティブスキルを追加。
 			player->SetActiveSkill(EnActiveSkillListNumber::enActiveSkill_1, activeSkill);
@@ -67,7 +68,7 @@ namespace nsAWA {
 					if (Input()->IsPress(EnActionMapping::enDashPreparation)) {
 
 						//ダッシュ状態にする。
-						m_playerAction->SetState(EnPlayerState::enDash);
+						m_playerAction->SetState(EnPlayerState::enRun);
 					}
 					else {
 						//歩き状態にする。
@@ -105,7 +106,7 @@ namespace nsAWA {
 				CoolTimeOn();
 
 				//弱攻撃状態にする。
-				m_playerAction->SetState(EnPlayerState::enWeakAttack_A);
+				m_playerAction->SetState(EnPlayerState::enWeakAttack);
 			}
 
 			//強攻撃入力。
@@ -167,6 +168,9 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 #ifdef _DEBUG
+				//クールタイム中に設定。
+				CoolTimeOn();
+
 				//スキル１使用。
 				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
 #endif 
