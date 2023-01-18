@@ -101,6 +101,7 @@ namespace nsAWA {
 			//弱攻撃入力。
 			if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
 
+				//クールタイムをONにする。
 				CoolTimeOn();
 
 				//弱攻撃状態にする。
@@ -110,8 +111,11 @@ namespace nsAWA {
 			//強攻撃入力。
 			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
+				//クールタイムをONにする。
+				CoolTimeOn();
+
 				//強攻撃状態にする。
-				//m_playerAction->SetState(EnPlayerState::enStrongAttack);
+				m_playerAction->SetState(EnPlayerState::enStrongAttack);
 			}
 
 			//アイテム使用入力。

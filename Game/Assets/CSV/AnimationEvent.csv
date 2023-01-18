@@ -1,4 +1,8 @@
 SIZE,Medium,,,,
 POSITION,0,8,10,,
-FEATURE,Damage,Const,Const,200,TRUE
+FEATURE,Damage,Normal,Physical,50,TRUE
+*,,,,,
+SIZE,Large,,,,
+POSITION,0,8,10,,
+FEATURE,Damage,Normal,Physical,50,TRUE
 *,,,,,
