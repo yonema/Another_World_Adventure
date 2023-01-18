@@ -9,14 +9,6 @@ namespace nsAWA {
 		class CActiveSkill : public CSkill
 		{
 		public:
-			void SetAnimationName(const char* animationName) {
-
-				//対応するスキルのアニメーションの名前を設定。
-				m_animationName = animationName;
-			}
-
-			void AddFeature(nsFeature::CFeature* feature);
-
 			void SetUseMP(float useMP) {
 
 				//消費MPを設定。
@@ -32,7 +24,6 @@ namespace nsAWA {
 			void Execute();
 #endif
 		private:
-			const char* m_animationName = nullptr;		//アニメーションの名前
 			float m_useMP = 0.0f;	//消費MP
 		};
 	}

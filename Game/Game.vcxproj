@@ -210,8 +210,6 @@
     <ClCompile Include="Game\Skill\Skill.cpp" />
     <ClCompile Include="Game\Skill\PassiveSkill.cpp" />
     <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimation.cpp" />
-    <ClCompile Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.cpp" />
-    <ClCompile Include="Game\Player\PlayerAnimation\PlayerAnimationBase.cpp" />
     <ClCompile Include="Game\Item\Item.cpp" />
     <ClCompile Include="Game\Item\SelfItem.cpp" />
     <ClCompile Include="Game\Item\ThrowItem.cpp" />
@@ -385,8 +383,6 @@
     <ClInclude Include="Game\Skill\Skill.h" />
     <ClInclude Include="Game\Skill\PassiveSkill.h" />
     <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimation.h" />
-    <ClInclude Include="Game\Player\PlayerAnimation\PlayerSwordAnimation.h" />
-    <ClInclude Include="Game\Player\PlayerAnimation\PlayerAnimationBase.h" />
     <ClInclude Include="Game\Item\Item.h" />
     <ClInclude Include="Game\Item\SelfItem.h" />
     <ClInclude Include="Game\Item\ThrowItem.h" />

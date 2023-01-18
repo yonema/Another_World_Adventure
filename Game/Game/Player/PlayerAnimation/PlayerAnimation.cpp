@@ -1,8 +1,9 @@
 #include "YonemaEnginePreCompile.h"
 #include "../../GameActor.h"
+#include "PlayerAnimationEvent.h"
 #include "PlayerAnimation.h"
-#include "PlayerAnimationBase.h"
-#include "PlayerSwordAnimation.h"
+#include "../PlayerAction.h"
+#include "../../Skill/ActiveSkill.h"
 
 #include "../../CSV/CSVManager.h"
 
@@ -19,18 +20,10 @@ namespace nsAWA {
 				constexpr int kCSVTitleData = 0;		//CSVデータの見出し情報。
 			}
 
-			//アニメーションのファイルパスを定義。
-			std::string CPlayerAnimation::
-				m_animFilePaths[static_cast<int>(EnAnimName::enNum)] = {};
-
 			void CPlayerAnimation::Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction) {
 
 				//アニメーションデータを読み込む。
 				LoadAnimation();
-
-				//各アニメーションを初期化。
-				m_playerAnimation[static_cast<int>(EnAnimType::enSword)] = new CPlayerSwordAnimation;
-				m_playerAnimation[static_cast<int>(EnAnimType::enSword)]->Init(m_animDataList);
 
 				//アニメーションイベントクラスを初期化。
 				m_animationEvent.Init(player, playerInput, playerAction);
@@ -49,14 +42,14 @@ namespace nsAWA {
 				for (const auto& animData : m_animDataList) {
 				
 					//このアニメーションのイベント数を伝える。
-					m_playerModel->ReserveAnimationEventFuncArray(static_cast<int>(animData.animName), static_cast<int>(animData.animationEvent.size()));
+					m_playerModel->ReserveAnimationEventFuncArray(animData.animNum, static_cast<int>(animData.animationEvent.size()));
 				
 					//アニメーションイベントを順に参照。
 					for (const auto& animEventData : animData.animationEvent) {
 					
 						//アニメーションイベントを追加。
 						m_playerModel->AddAnimationEventFunc(
-							static_cast<unsigned int>(animData.animName),
+							animData.animNum,
 							[&]() {m_animationEvent.GetAnimationEvent(
 								animEventData.eventName,
 								animEventData.eventData);
@@ -82,15 +75,127 @@ namespace nsAWA {
 
 			void CPlayerAnimation::PlayAnimation(EnPlayerState playerState) {
 
-				//アニメーションタイプからどのアニメーションクラスを使うか決める。
+				//ステートから対応アニメーションのindexを取得。
+				const SAnimData& animationData = GetAnimationData(playerState);
+
+				//対応するアニメーションがないなら。
+				if (animationData.animNum == -1) {
+
+					//再生できないので早期リターン。
+					return;
+				}
+				else {
+
+					//対応するアニメーションを再生。
+					m_playerModel->PlayAnimationFromBeginning(
+						animationData.animNum,
+						animationData.speed,
+						animationData.isLoopAnim
+					);
+				}
+			}
+
+			const SAnimData& CPlayerAnimation::GetAnimationData(EnPlayerState playerState) {
+
+				std::string stateStr = "NoStr";
+
+				//プレイヤーのタイプからアニメーションの先頭文字列を選択する。
 				switch (m_type) {
 
-					//剣アニメーションクラス。
 				case EnAnimType::enSword:
 
-					//更新。
-					m_playerAnimation[static_cast<int>(EnAnimType::enSword)]->UpdateAnimation(m_playerModel, playerState);
+					stateStr = "Sword_";
 					break;
+				case EnAnimType::enAxe:
+
+					stateStr = "Axe_";
+					break;
+				case EnAnimType::enWand:
+
+					stateStr = "Wand_";
+					break;
+				}
+
+				//ステートを文字列に変換して合成。
+				switch (playerState) {
+
+				case EnPlayerState::enIdle:
+					stateStr += "Idle";
+					break;
+				case EnPlayerState::enWalk:
+					stateStr += "Walk";
+					break;
+				case EnPlayerState::enRun:
+					stateStr += "Run";
+					break;
+				case EnPlayerState::enWeakAttack:
+					stateStr += "WeakAttack";
+					break;
+				case EnPlayerState::enStrongAttack:
+					stateStr += "StrongAttack";
+					break;
+				case EnPlayerState::enUseActiveSkill:
+
+					//アクティブスキルならスキルの名前を取得。
+					stateStr += GetActiveSkillName();
+
+					//スキル情報を初期化。
+					m_activeSkill = nullptr;
+					break;
+				case EnPlayerState::enDamage:
+					stateStr += "Damage";
+					break;
+				case EnPlayerState::enDeath:
+					stateStr += "Death";
+					break;
+				case EnPlayerState::enGuard:
+					stateStr += "Guard";
+					break;
+				case EnPlayerState::enUseItem:
+					stateStr += "UseItem";
+					break;
+				case EnPlayerState::enStun:
+					stateStr += "Stun";
+					break;
+				}
+
+				//アニメーションリストから対応するアニメーションの番号を検索。
+				for (const auto& animation : m_animDataList) {
+
+					//同じ名前のアニメーションが見つかった。
+					if (animation.animName == stateStr) {
+
+						//そのアニメーションをリターン。
+						return animation;
+					}
+				}
+
+				//見つからなかった。
+				std::string errMsg = "対応するアニメーションが見つかりませんでした。 : ";
+				errMsg += stateStr;
+				nsGameWindow::MessageBoxError(nsUtils::GetWideStringFromString(errMsg).c_str());
+
+				//仮に終端をリターン。
+				return *m_animDataList.end();
+			}
+
+			const std::string& CPlayerAnimation::GetActiveSkillName()const {
+
+				//アクティブスキルの名前を取得。
+				if (m_activeSkill != nullptr) {
+
+					return m_activeSkill->GetName();
+				}
+				else {
+#ifdef _DEBUG
+					//見つからなかった。
+					std::string errorMsg = "CPlayerAnimation : アクティブスキルの予約がされていません。";
+
+					//警告ウィンドウを出力。
+					nsGameWindow::MessageBoxError(nsUtils::GetWideStringFromString(errorMsg).c_str());
+
+					return "NoName";
+#endif // _DEBUG
 				}
 			}
 
@@ -134,12 +239,18 @@ namespace nsAWA {
 					if (animData[kCSVTitleData] == "NAME") {
 
 						//ファイルパスを取得、設定。
-						m_animFilePaths[dataIndex] += "Assets/Animations/Player/";
-						m_animFilePaths[dataIndex] += animData[1];
-						m_animFilePaths[dataIndex] += ".fbx";
+						std::string filePath = "Assets/Animations/Player/";
+						filePath += animData[1];
+						filePath += ".fbx";
+
+						//アニメーションのファイルパスを配列に追加。
+						m_animFilePathArray.emplace_back(filePath);
+
+						//アニメーションの名前を取得。
+						animDataBase.animName = animData[1];
 
 						//番号を取得。
-						animDataBase.animName = static_cast<EnAnimName>(dataIndex);
+						animDataBase.animNum = dataIndex;
 					}
 
 					if (animData[kCSVTitleData] == "SPEED") {
@@ -151,7 +262,7 @@ namespace nsAWA {
 					if (animData[kCSVTitleData] == "LOOP") {
 
 						//ループフラグを取得。
-						animDataBase.enLoopFlag = animData[1] == "TRUE" ? true : false;
+						animDataBase.isLoopAnim = animData[1] == "TRUE" ? true : false;
 					}
 
 					if (animData[kCSVTitleData] == "EVENT") {

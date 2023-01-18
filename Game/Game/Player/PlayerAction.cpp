@@ -26,7 +26,8 @@ namespace nsAWA {
 		void CPlayerAction::Init(
 			CPlayerStatus* playerStatus, 
 			nsItem::CItemManager* playerItemManager,
-			nsFeature::CFeatureManager* playerFeatureManager
+			nsFeature::CFeatureManager* playerFeatureManager,
+			nsPlayerAnimation::CPlayerAnimation* playerAnimation
 		) {
 
 			//カメラを検索。
@@ -40,6 +41,9 @@ namespace nsAWA {
 
 			//プレイヤーのステータス変化管理クラスを保持。
 			m_playerFeatureManager = playerFeatureManager;
+
+			//プレイヤーアニメーションのポインタを取得。
+			m_playerAnimation = playerAnimation;
 		}
 
 		void CPlayerAction::Update(float deltaTime) {
@@ -76,7 +80,7 @@ namespace nsAWA {
 		void CPlayerAction::Move(float inputX, float inputZ) {
 
 			//ダッシュ状態か。
-			if (m_state == EnPlayerState::enDash) {
+			if (m_state == EnPlayerState::enRun) {
 
 				//ダッシュにより、SPを減少させる。
 				DamageSPDash();
@@ -152,24 +156,30 @@ namespace nsAWA {
 			//消費MPを取得。
 			float useMP = m_activeSkill[static_cast<int>(activeSkillNum)]->GetUseMP();
 
-			//MPが足りているなら。
-			if (m_playerStatus->GetMP() >= useMP) {
+			//MPが足りないなら。
+			if (m_playerStatus->GetMP() < useMP) {
 
-				//MPを消費。
-				m_playerStatus->DamageMP(useMP);
-
-				//アクティブスキルが使用できない状態だったら。
-				if (!m_playerFeatureManager->CanUseActiveSkill()) {
-
-					//専用エフェクトを再生。（未実装）
-
-					//終了。
-					return;
-				}
-
-				//アクティブスキルを使用。
-				m_activeSkill[static_cast<int>(activeSkillNum)]->Execute();
+				//早期リターン。
+				return;
 			}
+
+			//MPを消費。
+			m_playerStatus->DamageMP(useMP);
+
+			//アクティブスキルが使用できない状態だったら。
+			if (!m_playerFeatureManager->CanUseActiveSkill()) {
+
+				//専用エフェクトを再生。（未実装）
+
+				//終了。
+				return;
+			}
+
+			//アクティブスキルのアニメーションを予約。
+			m_playerAnimation->ReserveActiveSkillAnimation(m_activeSkill[static_cast<int>(activeSkillNum)]);
+
+			//アクティブスキル使用状態に。
+			SetState(EnPlayerState::enUseActiveSkill);
 		}
 
 		const CVector3 CPlayerAction::CalculateMoveAmount(float inputX, float inputZ) {
@@ -188,7 +198,7 @@ namespace nsAWA {
 			float moveAmountf = 0.0f;
 
 			//ダッシュ状態か。
-			if (m_state == EnPlayerState::enDash) {
+			if (m_state == EnPlayerState::enRun) {
 
 				//走る速度を代入。
 				moveAmountf = kMoveAmount_Walk * kMoveAmount_Dash;

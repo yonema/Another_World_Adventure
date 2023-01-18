@@ -48,7 +48,7 @@ namespace nsAWA {
 			m_input.Init(&m_action, &m_animation);
 
 			//アクションクラスを初期化。
-			m_action.Init(&m_status, GetItemManager(), GetFeatureManager());
+			m_action.Init(&m_status, GetItemManager(), GetFeatureManager(),&m_animation);
 
 			//当たり判定を初期化。
 			m_collider.Init(this);
@@ -168,20 +168,24 @@ namespace nsAWA {
 			modelInitData.vertexBias.AddRotationX(nsMath::YM_PIDIV2);
 			modelInitData.vertexBias.AddRotationZ(nsMath::YM_PI);
 
-			//アニメーションのデータを定義。
-			const char* animFilePath[static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum)] = { nullptr };
 
-			//アニメーションの数だけまわす。
-			for (int animIndex = 0; animIndex < static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum); animIndex++) {
+			//アニメーションの数を取得。
+			const int animNum = static_cast<int>(m_animation.GetAnimFilePath().size());
 
-				//アニメーションを取り出し、格納。
-				animFilePath[animIndex] = m_animation.GetAnimFilePath()[animIndex].c_str();
+			//アニメーションのファイルパスの配列を定義。
+			std::vector<const char*> animNumVec;
+
+			//アニメーションの数だけ回してファイルパスを格納。
+			for (int animIndex = 0; animIndex < animNum; animIndex++) {
+
+				//アニメーションのファイルパスを取得。
+				animNumVec.emplace_back(m_animation.GetAnimFilePath()[animIndex].c_str());
 			}
 
 			//アニメーションのデータを生成。
 			SAnimationInitData* animData = new SAnimationInitData(
-				static_cast<unsigned int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum),
-				animFilePath
+				static_cast<unsigned int>(animNum),
+				animNumVec.data()
 			);
 			
 			//アニメーションを初期化。

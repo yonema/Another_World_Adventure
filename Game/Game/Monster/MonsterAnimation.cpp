@@ -128,7 +128,7 @@ namespace nsAWA {
 				//同じ名前のアニメーションが見つかった。
 				if (animation.animName == stateStr) {
 
-					//そのアニメーションの番号をリターン。
+					//そのアニメーションをリターン。
 					return animation;
 				}
 			}

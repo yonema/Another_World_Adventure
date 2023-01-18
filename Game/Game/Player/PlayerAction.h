@@ -10,6 +10,11 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		class CPlayerStatus;
+
+		namespace nsPlayerAnimation {
+
+			class CPlayerAnimation;
+		}
 	}
 	namespace nsSkill {
 
@@ -30,9 +35,10 @@ namespace nsAWA {
 		enum class EnPlayerState {								
 			enIdle,			//待機
 			enWalk,			//歩き
-			enDash,			//ダッシュ
-			enWeakAttack_A,	//弱攻撃A
+			enRun,			//ダッシュ
+			enWeakAttack,	//弱攻撃
 			enStrongAttack,	//強攻撃
+			enUseActiveSkill,//アクティブスキル
 			enDamage,		//被弾
 			enDeath,		//死亡
 			enGuard,		//ガード
@@ -63,7 +69,8 @@ namespace nsAWA {
 			void Init(
 				CPlayerStatus* playerStatus, 
 				nsItem::CItemManager* playerItemManager,
-				nsFeature::CFeatureManager* playerFeatureManager
+				nsFeature::CFeatureManager* playerFeatureManager,
+				nsPlayerAnimation::CPlayerAnimation* playerAnimation
 			);
 
 			void Update(float deltaTime);
@@ -165,6 +172,7 @@ namespace nsAWA {
 
 			nsCamera::CMainCamera* m_mainCamera = nullptr;		//メインカメラのポインタ
 			CPlayerStatus* m_playerStatus = nullptr;			//プレイヤーステータスのポインタ
+			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;		//プレイヤーアニメーション
 			nsItem::CItemManager* m_playerItemManager = nullptr;//プレイヤーのアイテム管理クラスのポインタ
 			nsFeature::CFeatureManager* m_playerFeatureManager = nullptr;	//プレイヤーのステータス変化管理クラスのポインタ
 		};

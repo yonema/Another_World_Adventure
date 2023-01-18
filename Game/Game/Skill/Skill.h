@@ -14,12 +14,25 @@ namespace nsAWA {
 		class CSkill : nsUtils::SNoncopyable
 		{
 		public:
-			virtual void AddFeature(nsFeature::CFeature* feature) = 0;
+			virtual void AddFeature(nsFeature::CFeature* feature) {};
+
+			void SetName(const std::string& name) {
+
+				//名前を設定。
+				m_name = name;
+			}
+
+			const std::string& GetName()const {
+
+				//名前を取得。
+				return m_name;
+			}
 
 		protected:
 			void Create(nsFeature::CFeature* feature);
+
 		protected:
-			const char* m_name = nullptr;					//名前
+			std::string m_name = "NoName";					//名前
 			std::list<nsFeature::CFeature*> m_featureList;	//効果のリスト
 		};
 	}
