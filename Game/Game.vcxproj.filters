@@ -173,6 +173,10 @@
     <ClCompile Include="Game\Monster\AI\AITask\AITaskIsButtle.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskStandBy.cpp" />
     <ClCompile Include="YonemaEngine\Level2D\Level2D.cpp" />
+    <ClCompile Include="Game\Samples\DrawInstancingSample.cpp" />
+    <ClCompile Include="Game\Samples\DrawWorldSample.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -357,6 +361,10 @@
     <ClInclude Include="Game\Monster\AI\AITask\AITaskStandBy.h" />
     <ClInclude Include="YonemaEngine\Level2D\Level2D.h" />
     <ClInclude Include="YonemaEngine\Level2D\Level2DSpriteData.h" />
+    <ClInclude Include="Game\Samples\DrawInstancingSample.h" />
+    <ClInclude Include="Game\Samples\DrawWorldSample.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

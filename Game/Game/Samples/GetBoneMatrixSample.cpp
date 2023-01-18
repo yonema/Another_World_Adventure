@@ -11,13 +11,13 @@ namespace nsAWA
 		const char* CGetBoneMatrixSample::
 			m_kHumanAnimFilePaths[static_cast<int>(EnHumanAnimType::enNum)] = 
 		{
-			"Assets/Animations/Sword_Idle.fbx"
+			"Assets/Animations/Player/Sword_Idle.fbx",
 		};
 		const char* const CGetBoneMatrixSample::m_kHumanRightHandBoneName = "J_Bip_R_Hand";
 
 		// MonsterData
 		const char* CGetBoneMatrixSample::m_kMonsterModelFilePath = 
-			"Assets/Models/Giyara.fbx";
+			"Assets/Models/Monsters/Giyara.fbx";
 		const char* CGetBoneMatrixSample::
 			m_kMonsterAnimFilePaths[static_cast<int>(EnMonsterAnimType::enNum)] =
 		{
