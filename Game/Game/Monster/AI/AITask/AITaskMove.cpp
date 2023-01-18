@@ -10,6 +10,9 @@ namespace nsAWA {
 
 			bool CAITaskMove::Execute(SMonsterAIBlackboard& blackboard, const std::vector<std::string>& partInfo) {
 
+				//ステートを設定。
+				m_AIController->SetState(EnMonsterState::enWalk);
+
 				//移動速度を取得。
 				float moveSpeed = std::stof(partInfo[0]);
 
@@ -23,6 +26,13 @@ namespace nsAWA {
 				//移動方向を取得。
 				CVector3 moveDirection = blackboard.m_targetPosition - m_AIController->GetPosition();
 
+				//目的地にたどり着いたら。
+				if (moveDirection.Length() < successDistance) {
+
+					//終了。
+					return false;
+				}
+
 				//正規化。
 				CVector3 moveDirectionNormal = moveDirection;
 				moveDirectionNormal.Normalize();
@@ -32,16 +42,6 @@ namespace nsAWA {
 
 				//移動。
 				m_AIController->SetPosition(m_AIController->GetPosition() + moveAmount);
-
-				//ステートを設定。
-				m_AIController->SetState(EnMonsterState::enWalk);
-
-				//目的地にたどり着いたら。
-				if (moveDirection.Length() < successDistance) {
-
-					//終了。
-					return false;
-				}
 
 				//成功。
 				return true;

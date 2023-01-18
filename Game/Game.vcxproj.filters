@@ -166,6 +166,12 @@
     <ClCompile Include="Game\Samples\ModelRendererSample.cpp" />
     <ClCompile Include="Game\Samples\LoadAsynchronousSample.cpp" />
     <ClCompile Include="YonemaEngine\Thread\LoadtModelThread.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskBark.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskFindTarget.cpp" />
+    <ClCompile Include="Game\Monster\AI\AIDecorator.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskSetFlag.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskIsButtle.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskStandBy.cpp" />
     <ClCompile Include="YonemaEngine\Level2D\Level2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +349,12 @@
     <ClInclude Include="Game\Samples\ModelRendererSample.h" />
     <ClInclude Include="Game\Samples\LoadAsynchronousSample.h" />
     <ClInclude Include="YonemaEngine\Thread\LoadModelThread.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskBark.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskFindTarget.h" />
+    <ClInclude Include="Game\Monster\AI\AIDecorator.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskSetFlag.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskIsButtle.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskStandBy.h" />
     <ClInclude Include="YonemaEngine\Level2D\Level2D.h" />
     <ClInclude Include="YonemaEngine\Level2D\Level2DSpriteData.h" />
   </ItemGroup>

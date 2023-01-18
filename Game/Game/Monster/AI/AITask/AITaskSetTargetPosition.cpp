@@ -17,7 +17,7 @@ namespace nsAWA {
 				if (moveTargetName == "TargetActor") {
 
 					//アクター。
-					blackboard.m_targetPosition = blackboard.m_gameActor->GetPosition();
+					blackboard.m_targetPosition = blackboard.m_targetActor->GetPosition();
 				}
 				else if (moveTargetName == "Forward") {
 

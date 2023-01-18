@@ -77,7 +77,7 @@ namespace nsAWA {
 				CMonster* m_owner = nullptr;	//モンスター（自身）のポインタ
 				SMonsterAIBlackboard m_blackboard;	//ブラックボード
 				CAIPart* m_rootNode = nullptr;		//ルートノード
-				CAIPart* m_waitNode = nullptr;	//待機タスク
+				CAIPart* m_waitNode = nullptr;		//待機タスク
 				float m_deltaTimeRef = 0.0f;		//デルタタイム
 				bool m_isCoolTime = false;			//クールタイム中？
 			};

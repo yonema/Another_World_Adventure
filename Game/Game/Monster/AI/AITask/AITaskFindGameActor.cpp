@@ -13,19 +13,19 @@ namespace nsAWA {
 			bool CAITaskFindGameActor::Execute(SMonsterAIBlackboard& blackboard, const std::vector<std::string>& partInfo) {
 
 				//ゲームアクターを検索。
-				if (blackboard.m_gameActor == nullptr) {
+				if (blackboard.m_targetActor == nullptr) {
 
 					//アクターの名前を取得。
 					std::string actorName = partInfo[0];
 
 					if (actorName == "Player") {
 
-						blackboard.m_gameActor = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+						blackboard.m_targetActor = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
 					}
 				}
 
 				//ゲームアクターが見つからなかったら。
-				if (blackboard.m_gameActor == nullptr) {
+				if (blackboard.m_targetActor == nullptr) {
 
 					//アクターの名前を取得。
 					std::string actorName = partInfo[0];

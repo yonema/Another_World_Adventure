@@ -7,6 +7,7 @@
 #include "AITask/AITaskWait.h"
 #include "AISequence.h"
 #include "AISelector.h"
+#include "AIDecorator.h"
 
 namespace nsAWA {
 
@@ -56,11 +57,33 @@ namespace nsAWA {
 
 						//シーケンスを生成。
 						aiPart = new CAISequence;
+
+						//デコレーターを追加。
+						CAIDecoratorBuilder m_decoratorBuilder;
+
+						if ((*itr).size() > 0) {
+
+							for (const auto& decoratorStr : (*itr)) {
+
+								aiPart->AddDecorator(m_decoratorBuilder.CreateDecorator(decoratorStr, &m_blackboard));
+							}
+						}
 					}
 					else if (type == "Selector") {
 
 						//セレクターを生成。
 						aiPart = new CAISelector;
+
+						//デコレーターを追加。
+						CAIDecoratorBuilder m_decoratorBuilder;
+
+						if ((*itr).size() > 0) {
+
+							for (const auto& decoratorStr : (*itr)) {
+
+								aiPart->AddDecorator(m_decoratorBuilder.CreateDecorator(decoratorStr, &m_blackboard));
+							}
+						}
 					}
 					else if (type == "Task") {
 

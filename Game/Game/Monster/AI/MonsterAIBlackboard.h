@@ -13,10 +13,11 @@ namespace nsAWA {
 			//AIで使用する情報を記憶する。
 			struct SMonsterAIBlackboard : nsUtils::SNoncopyable
 			{
-				IGameActor* m_gameActor = nullptr;	//ゲームアクターのポインタ
+				IGameActor* m_targetActor = nullptr;	//ゲームアクターのポインタ
 				CVector3 m_targetPosition = CVector3::Zero();		//目標の座標
 				float m_waitTimer = 0.0f;		//待機時間
 				bool m_canAttack = false;		//攻撃できる？
+				bool m_isfindingTarget = false;		//ターゲットを見つけた？
 			};
 		}
 	}
