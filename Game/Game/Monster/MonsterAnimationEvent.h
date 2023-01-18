@@ -49,6 +49,8 @@ namespace nsAWA {
 
 			void CreateTrigger(IGameActor* creator, const AnimationEventDataStr& animEventDataStr);
 
+			void Release();
+
 		private:
 			CMonster* m_monster = nullptr;		//自身のポインタ
 			nsMonsterAI::CMonsterAIController* m_aiController = nullptr;		//AIコントローラー

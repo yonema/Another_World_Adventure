@@ -35,6 +35,12 @@ namespace nsAWA {
 
 			void ApplyDamage(float damage, float power = 0.0f, bool canGuard = true)override final;
 
+			bool IsDeath()const override final {
+
+				//HPが0以下かどうかをリターン。
+				return m_status.GetHP() <= 0.0f;
+			}
+
 			void HealHP(float healValue)override final {
 
 				//HPを回復。

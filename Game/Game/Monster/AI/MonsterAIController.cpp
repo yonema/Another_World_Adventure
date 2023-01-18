@@ -31,6 +31,15 @@ namespace nsAWA {
 				m_rootNode = CreateAIPart(strData);
 			}
 
+			void CMonsterAIController::Release() {
+
+				if (m_rootNode != nullptr) {
+
+					//ノードを破棄。
+					m_rootNode->Release();
+				}
+			}
+
 			CAIPart* CMonsterAIController::CreateAIPart(AIPartsDataStr& AIPartsData) {
 
 				//先頭のイテレータを取得。

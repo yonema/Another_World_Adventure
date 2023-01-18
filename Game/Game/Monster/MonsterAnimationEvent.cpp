@@ -28,6 +28,10 @@ namespace nsAWA {
 
 				CreateTrigger(m_monster, animationEventData);
 			}
+			else if (animationEventName == "Release") {
+
+				Release();
+			}
 			else {
 
 				std::string errorMsg = "アニメーションイベントが正しく呼ばれていません。 : ";
@@ -59,6 +63,12 @@ namespace nsAWA {
 				creator->GetPosition(),
 				creator->GetForwardDirection()
 			);
+		}
+
+		void CMonsterAnimationEvent::Release() {
+
+			//自身を破棄。
+			DeleteGO(m_monster);
 		}
 	}
 }

@@ -9,6 +9,11 @@ namespace nsAWA {
 		class CMonsterStatus : public CStatus
 		{
 		public:
+			void Init();
+
+			void HealHP(float value);
+			void DamageHP(float value);
+
 			int GetLevel()const {
 
 				return m_level;

@@ -57,7 +57,7 @@ namespace nsAWA {
 					);
 				}
 				else if (featureStr[0] == "Damage") {
-					//[1]Type
+					//[1]Normal or Const
 					
 
 					//Œø‰Ê‚ğ‰Šú‰»B

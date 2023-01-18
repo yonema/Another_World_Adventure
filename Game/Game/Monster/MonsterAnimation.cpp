@@ -49,6 +49,14 @@ namespace nsAWA {
 			}
 		}
 
+		void CMonsterAnimation::Release() {
+
+			//データを破棄。
+			m_animDataList.clear();
+
+			m_animFilePathArray.clear();
+		}
+
 		void CMonsterAnimation::Update(bool changeState, EnMonsterState state) {
 
 			//ステートに変更があったら。
