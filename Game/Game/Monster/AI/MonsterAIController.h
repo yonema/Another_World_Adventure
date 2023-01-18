@@ -24,6 +24,8 @@ namespace nsAWA {
 			public:
 				void Init(CMonster* owner);
 
+				void Release();
+
 				CAIPart* CreateAIPart(AIPartsDataStr& AIPartsData);
 
 				void Update(float deltaTime);

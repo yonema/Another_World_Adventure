@@ -49,6 +49,8 @@ namespace nsAWA {
 				const std::vector<std::string>& animFilePathArray
 			);
 
+			void Release();
+
 			void InitAnimationEvent(CMonster* monster, nsMonsterAI::CMonsterAIController* aiController) {
 
 				//アニメーションイベントを初期化。

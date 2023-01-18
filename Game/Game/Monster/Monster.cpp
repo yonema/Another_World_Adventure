@@ -16,6 +16,9 @@ namespace nsAWA {
 
 		bool CMonster::StartSub() {
 
+			//ステータスを初期化。
+			m_status.Init();
+
 			return true;
 		}
 
@@ -23,12 +26,34 @@ namespace nsAWA {
 
 			//モンスターモデルを破棄。
 			DeleteGO(m_modelRenderer);
+
+			//アニメーションを破棄。
+			m_animation.Release();
+
+			//コライダーを破棄。
+			m_collider.Release();
+
+			//AIコントローラーを破棄。
+			m_AIContoller.Release();
 		}
 
 		void CMonster::UpdateActor(float deltaTime) {
 
 			//ステートの変更状況を初期化。
 			m_isChangeState = false;
+
+			//死んでいるなら。
+			if (IsDeath()) {
+
+				//死亡状態に。
+				SetState(EnMonsterState::enDeath);
+
+				//アニメーションを更新。
+				m_animation.Update(m_isChangeState, m_state);
+
+				//これ以上は何もせず終了。
+				return;
+			}
 
 			//AIコントローラーを更新。
 			m_AIContoller.Update(deltaTime);
@@ -78,7 +103,8 @@ namespace nsAWA {
 
 		void CMonster::ApplyDamage(float damage, float power, bool canGuard) {
 
-
+			//ダメージをくらう。
+			m_status.DamageHP(damage);
 		}
 
 		void CMonster::CreateMonsterModel(const SMonsterInitData& monsterInfo) {

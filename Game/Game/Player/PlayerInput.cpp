@@ -84,7 +84,7 @@ namespace nsAWA {
 					m_playerAction->Rotate();
 				}
 				//アニメーションが再生されていないなら。
-				else if(!isAnimationPlaying){
+				else{
 
 					//待機状態に設定し、このフレームは待機アニメーションが流れるようにする。
 					m_playerAction->SetState(EnPlayerState::enIdle);

@@ -47,6 +47,8 @@ namespace nsAWA {
 		virtual void HealMP(float healValue) = 0;
 		virtual void HealSP(float healValue) = 0;
 
+		virtual bool IsDeath()const = 0;
+
 	protected:
 		void Update(float deltaTime)override final;
 
