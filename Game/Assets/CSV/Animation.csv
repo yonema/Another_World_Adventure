@@ -20,6 +20,9 @@ EVENT,CoolTimeOff,FALSE
 NAME,Sword_StrongAttack,
 SPEED,1,
 LOOP,FALSE,
+EVENT,CoolTimeOn,FALSE
+EVENT,CreateTrigger,TRUE
+EVENT,CoolTimeOff,FALSE
 *,,
 NAME,Sword_Damage,
 SPEED,1,

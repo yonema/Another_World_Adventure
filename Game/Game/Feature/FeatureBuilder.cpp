@@ -67,7 +67,7 @@ namespace nsAWA {
 					if (featureStr[1] == "Normal") {
 
 						//[2]Physical or Magic
-						//[3]damage
+						//[3]power
 						//[4]canGuard
 
 						dynamic_cast<nsFeature::CApplyDamageFeature*>(feature)->Init(
