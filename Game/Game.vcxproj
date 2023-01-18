@@ -151,6 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskStandBy.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskIsButtle.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskSetFlag.cpp" />
+    <ClCompile Include="Game\Monster\AI\AIDecorator.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskFindTarget.cpp" />
+    <ClCompile Include="Game\Monster\AI\AITask\AITaskBark.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskAttack.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskWait.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskMove.cpp" />
@@ -314,6 +320,12 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskStandBy.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskIsButtle.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskSetFlag.h" />
+    <ClInclude Include="Game\Monster\AI\AIDecorator.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskFindTarget.h" />
+    <ClInclude Include="Game\Monster\AI\AITask\AITaskBark.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskAttack.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskWait.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskMove.h" />

@@ -31,6 +31,7 @@ namespace nsAWA {
 			enIdle,				//‘Ò‹@
 			enWalk,				//•à‚­
 			enRun,				//‘–‚é
+			enBark,				//–i‚¦‚é
 			enWeakAttack,		//ãUŒ‚
 			enStrongAttack,		//‹­UŒ‚
 			enDamage,			//”í’e

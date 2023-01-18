@@ -44,7 +44,8 @@ namespace nsAWA
 		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
 
 #ifdef _DEBUG
-		nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+		nsMonster::CMonster* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+		monster->SetPosition({ 0.0f,0.0f,100.0f });
 #endif
 		return true;
 	}

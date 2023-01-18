@@ -1,11 +1,15 @@
 #pragma once
-#include "../Utils/StringManipulation.h"
 #include "AITaskFindGameActor.h"
 #include "AITaskMove.h"
 #include "AITaskRotateToTargetPosition.h"
 #include "AITaskSetTargetPosition.h"
 #include "AITaskWait.h"
 #include "AITaskAttack.h"
+#include "AITaskBark.h"
+#include "AITaskIsButtle.h"
+#include "AITaskSetFlag.h"
+#include "AITaskStandBy.h"
+#include "AITaskFindTarget.h"
 
 namespace nsAWA {
 
@@ -50,6 +54,26 @@ namespace nsAWA {
 					else if (taskName == "Attack") {
 
 						monsterAITask = new CAITaskAttack;
+					}
+					else if (taskName == "Bark") {
+
+						monsterAITask = new CAITaskBark;
+					}
+					else if (taskName == "SetFlag") {
+
+						monsterAITask = new CAITaskSetFlag;
+					}
+					else if (taskName == "IsButtle") {
+
+						monsterAITask = new CAITaskIsButtle;
+					}
+					else if (taskName == "StandBy") {
+
+						monsterAITask = new CAITaskStandBy;
+					}
+					else if (taskName == "FindTarget") {
+
+						monsterAITask = new CAITaskFindTarget;
 					}
 					else {
 

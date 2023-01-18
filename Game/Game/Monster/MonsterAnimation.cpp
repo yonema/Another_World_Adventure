@@ -97,6 +97,9 @@ namespace nsAWA {
 			case EnMonsterState::enRun:
 				stateStr = "Run";
 				break;
+			case EnMonsterState::enBark:
+				stateStr = "Bark";
+				break;
 			case EnMonsterState::enWeakAttack:
 				stateStr = "WeakAttack";
 				break;

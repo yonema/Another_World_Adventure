@@ -8,6 +8,9 @@ namespace nsAWA {
 
 		namespace nsMonsterAI {
 
+			//前方宣言
+			class CAIDecorator;
+
 			//AIの部品クラス
 			class CAIPart : nsUtils::SNoncopyable
 			{
@@ -22,7 +25,11 @@ namespace nsAWA {
 					m_AIPartList.emplace_back(AIPart);
 				}
 
-				
+				void AddDecorator(CAIDecorator* decorator) {
+
+					//デコレーターをリストに追加。
+					m_decoratorList.emplace_back(decorator);
+				}
 
 			public:
 				void SetName(const std::string& name) {
@@ -55,9 +62,10 @@ namespace nsAWA {
 					m_AIController = AIcontroller;
 				}
 			protected:
-				std::string m_name = "NoName";			//名前
-				std::list<CAIPart*> m_AIPartList;		//AI部品のリスト
-				std::vector<std::string> m_partInfo;	//情報
+				std::string m_name = "NoName";					//名前
+				std::list<CAIPart*> m_AIPartList;				//AI部品のリスト
+				std::list<CAIDecorator*> m_decoratorList;		//デコレーターのリスト
+				std::vector<std::string> m_partInfo;			//情報
 				CMonsterAIController* m_AIController = nullptr;	//AIコントローラー
 			};
 		}
