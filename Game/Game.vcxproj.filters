@@ -175,6 +175,8 @@
     <ClCompile Include="Game\Samples\DrawWorldSample.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Geometries\AABB.cpp" />
+    <ClCompile Include="YonemaEngine\Geometries\GeometryData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -361,6 +363,8 @@
     <ClInclude Include="Game\Samples\DrawWorldSample.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Geometries\AABB.h" />
+    <ClInclude Include="YonemaEngine\Geometries\GeometryData.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
