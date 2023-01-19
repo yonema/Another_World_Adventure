@@ -12,6 +12,21 @@ namespace nsAWA {
 
 		namespace nsPlayerAnimation {
 
+			namespace {
+
+				constexpr float kMoveSpeed = 60.0f;		//アクティブスキルによる移動速度
+			}
+
+			void CPlayerAnimationEvent::Update() {
+
+				//イベントによって動くフラグが立っているなら。
+				if (m_isMoving) {
+
+					//移動
+					Move();
+				}
+			}
+
 			void CPlayerAnimationEvent::CoolTimeOn() {
 
 				//クールタイムをONにする。
@@ -38,6 +53,27 @@ namespace nsAWA {
 				);
 			}
 
+			void CPlayerAnimationEvent::MoveStart() {
+
+				//移動フラグをON。
+				m_isMoving = true;
+			}
+
+			void CPlayerAnimationEvent::MoveEnd() {
+
+				//移動フラグをOFF。
+				m_isMoving = false;
+			}
+
+			void CPlayerAnimationEvent::Move() {
+
+				//前方向を取得。
+				CVector3 forwardDirection = m_playerAction->GetForwardDirection();
+
+				//移動。
+				m_playerAction->Move(forwardDirection.x, forwardDirection.z, kMoveSpeed);
+			}
+
 			void CPlayerAnimationEvent::GetAnimationEvent(const std::string& animationEventName,
 			const AnimationEventDataStr& animationEventData
 			) {
@@ -55,6 +91,14 @@ namespace nsAWA {
 				else if (animationEventName == "CreateTrigger") {
 
 					CreateTrigger(m_player,animationEventData);
+				}
+				else if (animationEventName == "MoveStart") {
+
+					MoveStart();
+				}
+				else if (animationEventName == "MoveEnd") {
+
+					MoveEnd();
 				}
 				else {
 

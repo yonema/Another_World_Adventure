@@ -75,7 +75,7 @@ namespace nsAWA {
 
 			void Update(float deltaTime);
 
-			void Move(float inputX,float inputZ);
+			void Move(float inputX,float inputZ, float speed = 0.0f);
 
 			void Rotate();
 
@@ -91,7 +91,7 @@ namespace nsAWA {
 
 			void UseActiveSkill(EnActiveSkillListNumber activeSkillNum);
 		private:
-			const CVector3 CalculateMoveAmount(float inputX, float inputZ);
+			const CVector3 CalculateMoveAmount(float inputX, float inputZ, float speed);
 
 			void UpdateDeltaTime(float deltaTime) {
 

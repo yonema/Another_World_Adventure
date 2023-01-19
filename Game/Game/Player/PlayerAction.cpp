@@ -77,7 +77,7 @@ namespace nsAWA {
 			}
 		}
 
-		void CPlayerAction::Move(float inputX, float inputZ) {
+		void CPlayerAction::Move(float inputX, float inputZ, float speed) {
 
 			//ダッシュ状態か。
 			if (m_state == EnPlayerState::enRun) {
@@ -87,7 +87,7 @@ namespace nsAWA {
 			}
 
 			//移動量を計算。
-			CVector3 moveAmount = CalculateMoveAmount(inputX, inputZ);
+			CVector3 moveAmount = CalculateMoveAmount(inputX, inputZ, speed);
 
 			//移動方向を計算。
 			m_moveDirection = moveAmount;
@@ -182,7 +182,7 @@ namespace nsAWA {
 			SetState(EnPlayerState::enUseActiveSkill);
 		}
 
-		const CVector3 CPlayerAction::CalculateMoveAmount(float inputX, float inputZ) {
+		const CVector3 CPlayerAction::CalculateMoveAmount(float inputX, float inputZ, float speed) {
 
 			//カメラの前方向、右方向を取得。
 			auto cameraForward = m_mainCamera->GetForwardDirection();
@@ -202,6 +202,10 @@ namespace nsAWA {
 
 				//走る速度を代入。
 				moveAmountf = kMoveAmount_Walk * kMoveAmount_Dash;
+			}
+			else if (speed > FLT_EPSILON) {
+
+				moveAmountf = speed;
 			}
 			else {
 				//歩く速度を代入。
