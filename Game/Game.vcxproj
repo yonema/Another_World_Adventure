@@ -235,7 +235,9 @@
     <ClCompile Include="YonemaEngine\DebugSystem\SimpleMover.cpp" />
     <ClCompile Include="YonemaEngine\Effect\EffectEngine.cpp" />
     <ClCompile Include="YonemaEngine\Effect\EffectPlayer.cpp" />
+    <ClCompile Include="YonemaEngine\Geometries\AABB.cpp" />
     <ClCompile Include="YonemaEngine\Geometries\BSPTree.cpp" />
+    <ClCompile Include="YonemaEngine\Geometries\GeometryData.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp" />
@@ -412,8 +414,10 @@
     <ClInclude Include="YonemaEngine\DebugSystem\SimpleMover.h" />
     <ClInclude Include="YonemaEngine\Effect\EffectEngine.h" />
     <ClInclude Include="YonemaEngine\Effect\EffectPlayer.h" />
+    <ClInclude Include="YonemaEngine\Geometries\AABB.h" />
     <ClInclude Include="YonemaEngine\Geometries\BSPTree.h" />
     <ClInclude Include="YonemaEngine\Geometries\EigenJacobiMethod.h" />
+    <ClInclude Include="YonemaEngine\Geometries\GeometryData.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Skelton.h" />
