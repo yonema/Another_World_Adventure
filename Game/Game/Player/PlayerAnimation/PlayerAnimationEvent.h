@@ -36,11 +36,19 @@ namespace nsAWA {
 					m_playerAction = playerAction;
 				}
 
+				void Update();
+
 				void CoolTimeOn();
 
 				void CoolTimeOff();
 
 				void CreateTrigger(IGameActor* creator, const AnimationEventDataStr& animEventDataStr);
+
+				void MoveStart();
+
+				void MoveEnd();
+
+				void Move();
 
 				void GetAnimationEvent(const std::string& animationEventName,
 					const AnimationEventDataStr& animationEventData
@@ -50,6 +58,7 @@ namespace nsAWA {
 				IGameActor* m_player = nullptr;			//プレイヤーのポインタ
 				CPlayerInput* m_playerInput = nullptr;	//プレイヤー入力クラス
 				CPlayerAction* m_playerAction = nullptr;//プレイヤーアクションクラス
+				bool m_isMoving = false;				//イベントによって移動している？
 			};
 		}
 	}

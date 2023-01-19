@@ -25,6 +25,12 @@ namespace nsAWA {
 			//親のゲームアクターを取得。
 			return m_gameActor;
 		}
+
+		const CPhysicsTriggerObject* GetTrigger()const {
+
+			//トリガーを取得。
+			return &m_trigger;
+		}
 	private:
 		CPhysicsDynamicObject m_rigidBody;				//剛体
 		CPhysicsTriggerObject m_trigger;				//トリガー

@@ -71,6 +71,9 @@ namespace nsAWA {
 					//ステートに対応するアニメーションを流す。
 					PlayAnimation(playerState);
 				}
+
+				//アニメーションイベントを更新。
+				m_animationEvent.Update();
 			}
 
 			void CPlayerAnimation::PlayAnimation(EnPlayerState playerState) {

@@ -2,6 +2,7 @@
 #include "CreateTrigger.h"
 #include "Feature/FeatureBuilder.h"
 #include "GameActorCollider.h"
+#include "GameActor.h"
 
 namespace nsAWA {
 
@@ -106,6 +107,13 @@ namespace nsAWA {
 
 		//トリガーに入ったオブジェクトがIGameActorのコライダーかどうか調べる。
 		auto rGameActorCollider = otherData->GetOwner<CGameActorCollider>();
+
+		//自身のコライダーに入ったなら。
+		if (rGameActorCollider == m_creator->GetGameActorCollider()) {
+
+			//終了。
+			return;
+		}
 
 		//IGameActorのコライダーだったら。
 		if (rGameActorCollider != nullptr) {
