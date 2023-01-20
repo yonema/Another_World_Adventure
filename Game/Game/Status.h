@@ -23,6 +23,12 @@ namespace nsAWA {
 			m_winceValue += addValue;
 		}
 
+		void SubWinceValue(float subValue) {
+
+			//ひるみ値を減算。
+			m_winceValue -= subValue;
+		}
+
 		float GetWinceValue()const {
 
 			//ひるみ値を取得。
