@@ -15,10 +15,10 @@ namespace nsAWA {
 
 			namespace {
 
-				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/Animation.csv";	//プレイヤーのアニメーションのCSVファイルパス
-				constexpr const wchar_t* const kPlayerAnimationEventCSVFilePath = L"Assets/CSV/AnimationEvent.csv";	//プレイヤーのアニメーションのイベントのCSVファイルパス
-				constexpr int kCSVTitleData = 0;		//CSVデータの見出し情報。
+				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/Player/Animation.csv";	//プレイヤーのアニメーションのCSVファイルパス
+				constexpr const wchar_t* const kPlayerAnimationEventCSVFilePath = L"Assets/CSV/Player/AnimationEvent.csv";	//プレイヤーのアニメーションのイベントのCSVファイルパス
 				constexpr const float kCanPlayerInput = 0.001f;	//入力が判定される最低値
+				const std::string kErrorStr = "ErrorStr";	//エラー出力文字列
 			}
 
 			void CPlayerAnimation::Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction) {
@@ -205,7 +205,7 @@ namespace nsAWA {
 					//警告ウィンドウを出力。
 					nsGameWindow::MessageBoxError(nsUtils::GetWideStringFromString(errorMsg).c_str());
 
-					return "NoName";
+					return kErrorStr;
 #endif // _DEBUG
 				}
 			}
@@ -221,7 +221,7 @@ namespace nsAWA {
 				//データカウントを初期化。
 				int dataIndex = 0;
 
-				std::string topData = "";
+				
 
 				//アニメーションデータの雛形を生成。
 				SAnimData animDataBase;
@@ -229,7 +229,10 @@ namespace nsAWA {
 				//アニメーション情報を取り出す。
 				for (const auto& animData : csvManager.GetCsvData()) {
 
-					if (animData[kCSVTitleData] == "*") {
+					//見出しを取得。
+					std::string titleData = animData[0];
+
+					if (titleData == "*") {
 
 						//アニメーション情報の終端なので情報を追加。
 
@@ -247,7 +250,7 @@ namespace nsAWA {
 						continue;
 					}
 
-					if (animData[kCSVTitleData] == "NAME") {
+					if (titleData == "NAME") {
 
 						//ファイルパスを取得、設定。
 						std::string filePath = "Assets/Animations/Player/";
@@ -264,19 +267,19 @@ namespace nsAWA {
 						animDataBase.animNum = dataIndex;
 					}
 
-					if (animData[kCSVTitleData] == "SPEED") {
+					if (titleData == "SPEED") {
 
 						//速さを取得。
 						animDataBase.speed = std::stof(animData[1]);
 					}
 
-					if (animData[kCSVTitleData] == "LOOP") {
+					if (titleData == "LOOP") {
 
 						//ループフラグを取得。
 						animDataBase.isLoopAnim = animData[1] == "TRUE" ? true : false;
 					}
 
-					if (animData[kCSVTitleData] == "EVENT") {
+					if (titleData == "EVENT") {
 
 						SAnimationEventData animEventData;
 

@@ -16,9 +16,6 @@ namespace nsAWA {
 
 		bool CMonster::StartSub() {
 
-			//ステータスを初期化。
-			m_status.Init();
-
 			return true;
 		}
 
@@ -77,7 +74,10 @@ namespace nsAWA {
 			CreateMonsterModel(monsterInfo);
 
 			//名前を設定。
-			m_name = monsterInfo.name.c_str();
+			m_name = monsterInfo.name;
+
+			//ステータスを初期化。
+			m_status.Init(m_name);
 
 			//アニメーションイベントを初期化。
 			m_animation.InitAnimationEvent(this, &m_AIContoller);
@@ -95,16 +95,17 @@ namespace nsAWA {
 			//当たり判定を初期化。
 			m_collider.Init(this);
 
-#ifdef _DEBUG
-			//仮に待機状態に設定。
+			//待機状態に設定。
 			SetState(EnMonsterState::enIdle);
-#endif
 		}
 
 		void CMonster::ApplyDamage(float damage, float power, bool canGuard) {
 
 			//ダメージをくらう。
 			m_status.DamageHP(damage);
+
+			//プレイヤーを発見。
+			m_AIContoller.FindPlayer();
 		}
 
 		void CMonster::CreateMonsterModel(const SMonsterInitData& monsterInfo) {

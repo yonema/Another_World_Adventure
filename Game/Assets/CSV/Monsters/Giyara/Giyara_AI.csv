@@ -4,7 +4,8 @@ Selector,NoName,2,,
 Task,IsButtle,0,,
 Task,SetFlag,0,IsFindingTarget,FALSE
 Selector,NoName,2,IsFindingTarget,
-Sequence,ChasePlayer,3,,
+Sequence,ChasePlayer,4,,
+Task,FindGameActor,0,Player,
 Task,SetTargetPosition,0,TargetActor,
 Task,RotateToTargetPosition,0,,
 Task,Move,0,15,10

@@ -75,6 +75,12 @@ namespace nsAWA {
 					m_isCoolTime = false;
 				}
 
+				void FindPlayer() {
+
+					//プレイヤーを発見。
+					m_blackboard.m_isfindingTarget = true;
+				}
+
 			private:
 				CMonster* m_owner = nullptr;	//モンスター（自身）のポインタ
 				SMonsterAIBlackboard m_blackboard;	//ブラックボード

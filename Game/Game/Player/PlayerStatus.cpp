@@ -34,6 +34,8 @@ namespace nsAWA {
 			m_maxMP = kLev1MaxMP;
 
 			m_attack = 20.0f;
+
+			m_intelligence = 20.0f;
 #endif
 			//SP‚ğİ’èB
 			m_SP = kMaxSP;

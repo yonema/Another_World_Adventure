@@ -1,36 +1,72 @@
 #include "YonemaEnginePreCompile.h"
 #include "MonsterStatus.h"
+#include "../CSV/CSVManager.h"
 
 namespace nsAWA {
 
 	namespace nsMonster {
 
-		namespace {
+		void CMonsterStatus::Init(const std::string& monsterName) {
 
-#ifdef _DEBUG
-			//仮の定数。後ほどcsvで入力するコードを書く。
-			constexpr const float kLev1MaxHP = 200.0f;			//仮のHP最大値。
-			constexpr const float kLev1MaxMP = 100.0f;			//仮のHP最大値。
-#endif
-		}
+			//ステータス情報が入ったCSVファイルのパスを設定。
+			std::string monsterStatusCSVFilePath = "Assets/CSV/Monsters/";
+			monsterStatusCSVFilePath += monsterName + "/";
+			monsterStatusCSVFilePath += monsterName + "_Status.csv";
 
-		void CMonsterStatus::Init() {
+			//CSVをロード。
+			nsCSV::CCsvManager csvManager;
+			csvManager.LoadCSV(nsUtils::GetWideStringFromString(monsterStatusCSVFilePath).c_str());
 
-#ifdef _DEBUG
-			//今回は仮にレベル１でスタート。
-			m_level = 1;
+			//CSVデータを順に参照。
+			for (const auto& lineData : csvManager.GetCsvData()) {
 
-			//今回は仮にHP、最大HPを定数で入力。
-			m_HP = kLev1MaxHP / 2.0f;
-			m_maxHP = kLev1MaxHP;
+				//見出し情報を取得。
+				std::string title = lineData[0];
 
-			//今回は仮にMP、最大MPを定数で入力。
-			m_MP = kLev1MaxMP;
-			m_maxMP = kLev1MaxMP;
+				//値を取得。
+				std::string value = lineData[1];
 
-			//今回は仮に攻撃力を定数で入力。
-			m_attack = 20.0f;
-#endif
+				//データを取得。
+				{
+					if (title == "LEVEL") {
+
+						//レベルを取得。
+						m_level = std::stoi(value);
+					}
+					else if (title == "HP") {
+
+						//最大HPとHPを取得。
+						m_maxHP = std::stof(value);
+						m_HP = std::stof(value);
+					}
+					else if (title == "ATK") {
+
+						//物理攻撃力を取得。
+						m_attack = std::stof(value);
+					}
+					else if (title == "INT") {
+
+						//魔法攻撃力を取得。
+						m_intelligence = std::stof(value);
+					}
+					else if (title == "DEF") {
+
+						//物理防御力を取得。
+						m_defence = std::stof(value);
+					}
+					else if (title == "MND") {
+
+						//魔法防御力を取得。
+						m_mind = std::stof(value);
+					}
+					else if (title == "WINCE") {
+
+						//ひるみ値を取得。
+						m_winceValue = 0.0f;
+						m_winceDelimiter = std::stof(value);
+					}
+				}
+			}
 		}
 
 		void CMonsterStatus::HealHP(float value) {

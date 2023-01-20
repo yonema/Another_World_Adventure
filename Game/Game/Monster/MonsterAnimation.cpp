@@ -189,7 +189,7 @@ namespace nsAWA {
 				if (animData[kCSVTitleData] == "NAME") {
 
 					//ファイルパスを取得、設定。
-					std::string filePath = "Assets/Animations/Monster/";
+					std::string filePath = "Assets/Animations/Monsters/";
 					filePath = filePath + monsterName + "/";
 					filePath = filePath + animData[1] + ".fbx";
 

@@ -9,6 +9,8 @@ namespace nsAWA {
 
 		namespace {
 			constexpr float kMaxPer = 100.0f;	//最大％
+			constexpr float kRandomDamageMax = 1.0f;	//最大火力倍率
+			constexpr float kRandomDamageMin = 0.85f;	//最低火力倍率
 
 			//理論ダメージ計算式
 			constexpr float CalcDamage(
@@ -41,14 +43,12 @@ namespace nsAWA {
 			//ダメージ計算。
 			m_damage = CalcDamage(level, power, attack, defence);
 
-			//ランダム値を生成。（未実装）
-			float random = 0.0f;
-
-			//今は固定で1.0とする。
-			random = 1.0f;
+			//乱数値を生成。
+			nsUtils::CRandom random;
+			float randomDamage = random.GetRangeFloat(kRandomDamageMin, kRandomDamageMax);
 
 			//乱数値をダメージに乗算。
-			m_damage *= random;
+			m_damage *= randomDamage;
 
 			//ガードできるかどうかを設定。
 			m_canGuard = canGuard;
