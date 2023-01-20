@@ -36,9 +36,6 @@ namespace nsAWA {
 
 		void CMonster::UpdateActor(float deltaTime) {
 
-			//ステートの変更状況を初期化。
-			m_isChangeState = false;
-
 			//死んでいるなら。
 			if (IsDeath()) {
 
@@ -47,6 +44,9 @@ namespace nsAWA {
 
 				//アニメーションを更新。
 				m_animation.Update(m_isChangeState, m_state);
+
+				//ステートの変更状況を初期化。
+				m_isChangeState = false;
 
 				//これ以上は何もせず終了。
 				return;
@@ -59,13 +59,16 @@ namespace nsAWA {
 			m_collider.Update();
 
 			//アニメーションを更新。
-			m_animation.Update(m_isChangeState, m_state);
+			m_animation.Update(m_isChangeState, m_state);		
 
 			//座標を設定。
 			m_modelRenderer->SetPosition(m_position);
 
 			//回転を設定。
 			m_modelRenderer->SetRotation(m_rotation);
+
+			//ステートの変更状況を初期化。
+			m_isChangeState = false;
 		}
 
 		void CMonster::Create(const SMonsterInitData& monsterInfo) {
@@ -103,6 +106,26 @@ namespace nsAWA {
 
 			//ダメージをくらう。
 			m_status.DamageHP(damage);
+
+			//ひるみ値を加算。
+			m_status.AddWinceValue(damage);
+
+			//ひるみ値がひるみ値の区切りを超えていたら。
+			if (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {
+
+				//ダメージ状態に設定。
+				SetState(EnMonsterState::enDamage);
+
+				//クールタイムをONに設定。
+				m_AIContoller.CoolTimeOn();
+
+				//一回ひるんだので、二回以上のひるみは無効とする。
+				while (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {
+
+					//ひるみ値を減算。
+					m_status.SubWinceValue(m_status.GetWinceDelimiter());
+				}
+			}
 
 			//プレイヤーを発見。
 			m_AIContoller.FindPlayer();

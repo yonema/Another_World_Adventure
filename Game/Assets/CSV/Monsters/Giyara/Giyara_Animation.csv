@@ -33,6 +33,8 @@ EVENT,CoolTimeOff,FALSE
 NAME,Giyara_Damage,
 SPEED,1,
 LOOP,FALSE,
+EVENT,CoolTimeOn,FALSE
+EVENT,CoolTimeOff,FALSE
 *,,
 NAME,Giyara_Death,
 SPEED,0.45,
