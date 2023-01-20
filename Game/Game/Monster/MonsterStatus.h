@@ -9,7 +9,7 @@ namespace nsAWA {
 		class CMonsterStatus : public CStatus
 		{
 		public:
-			void Init();
+			void Init(const std::string& monsterName);
 
 			void HealHP(float value);
 			void DamageHP(float value);
@@ -27,22 +27,6 @@ namespace nsAWA {
 
 				return m_maxHP;
 			}
-			float GetMP()const {
-
-				return m_MP;
-			}
-			float GetMaxMP()const {
-
-				return m_maxMP;
-			}
-			float GetSP()const {
-
-				return m_SP;
-			}
-			float GetMaxSP()const {
-
-				return m_maxSP;
-			}
 
 			float GetAttack(const std::string& attackType)const {
 
@@ -50,7 +34,7 @@ namespace nsAWA {
 
 					return m_attack;
 				}
-				else if (attackType == "magic") {
+				else if (attackType == "Magical") {
 
 					return m_intelligence;
 				}
@@ -66,7 +50,7 @@ namespace nsAWA {
 
 					return m_defence;
 				}
-				else if (defenceType == "magic") {
+				else if (defenceType == "Magical") {
 
 					return m_mind;
 				}
@@ -81,16 +65,10 @@ namespace nsAWA {
 			int m_level = 0;
 			float m_HP = 0.0f;
 			float m_maxHP = 0.0f;
-			float m_MP = 0.0f;
-			float m_maxMP = 0.0f;
-			float m_SP = 0.0f;
-			float m_maxSP = 0.0f;
 
 			float m_attack = 0.0f;				//•¨—UŒ‚—Í
 			float m_intelligence = 0.0f;		//–‚–@UŒ‚—Í
-#ifdef _DEBUG
-			float m_defence = 20.0f;				//•¨—–hŒä—Í
-#endif
+			float m_defence = 0.0f;				//•¨—–hŒä—Í
 			//float m_defence = 0.0f;				//•¨—–hŒä—Í
 			float m_mind = 0.0f;				//–‚–@–hŒä—Í
 		};

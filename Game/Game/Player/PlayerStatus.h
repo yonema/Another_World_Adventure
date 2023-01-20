@@ -71,7 +71,7 @@ namespace nsAWA {
 
 					return m_attack;
 				}
-				else if (attackType == "magic") {
+				else if (attackType == "Magical") {
 
 					return m_intelligence;
 				}
@@ -87,7 +87,7 @@ namespace nsAWA {
 
 					return m_defence;
 				}
-				else if (defenceType == "magic") {
+				else if (defenceType == "Magical") {
 
 					return m_mind;
 				}

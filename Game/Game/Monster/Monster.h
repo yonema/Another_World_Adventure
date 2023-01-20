@@ -141,11 +141,17 @@ namespace nsAWA {
 				return col;
 			}
 
+			const std::string& GetName()const {
+
+				//名前を取得。
+				return m_name;
+			}
+
 		private:
 			void CreateMonsterModel(const SMonsterInitData& monsterInfo);
 
 		private:
-			const char* m_name = nullptr;				//名前
+			std::string m_name = "NoName";				//名前
 			CModelRenderer* m_modelRenderer = nullptr;	//モデル
 
 			CVector3 m_position = CVector3::Zero();		//座標

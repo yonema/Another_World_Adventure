@@ -10,7 +10,7 @@ namespace nsAWA {
 
 		namespace {
 
-			constexpr const wchar_t* const kMonsterNameCSVFilePath = L"Assets/CSV/MonsterList.csv";		//モンスターの名前のリストのCSVのファイルパス
+			constexpr const wchar_t* const kMonsterNameCSVFilePath = L"Assets/CSV/Monsters/MonsterList.csv";		//モンスターの名前のリストのCSVのファイルパス
 		}
 
 		void CMonsterList::CreateMonsterList() {
@@ -35,12 +35,12 @@ namespace nsAWA {
 					monsterInitData.modelFilePath += ".fbx";
 
 					//アニメーション情報が入ったCSVファイルのパスを設定。
-					std::string animCSVFilePath = "Assets/Animations/Monster/";
+					std::string animCSVFilePath = "Assets/CSV/Monsters/";
 					animCSVFilePath += monsterName + "/";
 					animCSVFilePath += monsterName + "_Animation.csv";
 
 					//アニメーションイベント情報が入ったCSVファイルのパスを設定。
-					std::string animEventCSVFilePath = "Assets/Animations/Monster/";
+					std::string animEventCSVFilePath = "Assets/CSV/Monsters/";
 					animEventCSVFilePath += monsterName + "/";
 					animEventCSVFilePath += monsterName + "_AnimationEvent.csv";
 
@@ -75,7 +75,7 @@ namespace nsAWA {
 
 					//モンスターデータを初期化。
 					SMonsterInitData monsterInitData;
-					monsterInitData.name = monsterData.name.c_str();
+					monsterInitData.name = monsterData.name;
 					monsterInitData.animDataList = monsterData.animDataList;
 					monsterInitData.animationFilePath = monsterData.animationFilePath;
 					monsterInitData.modelFilePath = monsterData.modelFilePath;
