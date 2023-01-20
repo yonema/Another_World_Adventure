@@ -15,6 +15,7 @@ namespace nsAWA {
 			namespace {
 
 				constexpr float kMoveSpeed = 60.0f;		//アクティブスキルによる移動速度
+				constexpr const float kCanPlayerMoveInput = 0.001f;	//移動入力が判定される最低値
 			}
 
 			void CPlayerAnimationEvent::Update() {
@@ -55,11 +56,19 @@ namespace nsAWA {
 
 			void CPlayerAnimationEvent::MoveStart() {
 
+				//入力を受け取る。
+				m_playerMoveInput.x = Input()->GetVirtualAxis(EnAxisMapping::enRight);
+				m_playerMoveInput.z = Input()->GetVirtualAxis(EnAxisMapping::enForward);
+
 				//移動フラグをON。
 				m_isMoving = true;
 			}
 
 			void CPlayerAnimationEvent::MoveEnd() {
+
+				//入力情報を初期化。
+				m_playerMoveInput.x = 0.0f;
+				m_playerMoveInput.z = 0.0f;
 
 				//移動フラグをOFF。
 				m_isMoving = false;
@@ -67,11 +76,26 @@ namespace nsAWA {
 
 			void CPlayerAnimationEvent::Move() {
 
-				//前方向を取得。
-				CVector3 forwardDirection = m_playerAction->GetForwardDirection();
+				//どの方向に入力されていたか。
+				if (std::fabsf(m_playerMoveInput.x) > kCanPlayerMoveInput
+					|| std::fabsf(m_playerMoveInput.z) > kCanPlayerMoveInput
+				){
+					//回転。
+					m_playerAction->Rotate(
+						false	//補間なし
+					);
 
-				//移動。
-				m_playerAction->Move(forwardDirection.x, forwardDirection.z, kMoveSpeed);
+					//移動。
+					m_playerAction->Move(m_playerMoveInput.x, m_playerMoveInput.z, kMoveSpeed);
+				}
+				else {
+
+					//前方向を取得。
+					m_playerMoveInput = m_playerAction->GetForwardDirection();
+
+					//移動。
+					m_playerAction->Move(m_playerMoveInput.x, m_playerMoveInput.z, kMoveSpeed);
+				}
 			}
 
 			void CPlayerAnimationEvent::GetAnimationEvent(const std::string& animationEventName,

@@ -119,6 +119,16 @@ namespace nsAWA {
 				m_playerAction->SetState(EnPlayerState::enStrongAttack);
 			}
 
+			//ステップ入力。
+			if (Input()->IsTrigger(EnActionMapping::enStep)) {
+
+				//クールタイムをONにする。
+				CoolTimeOn();
+
+				//ステップ状態にする。
+				m_playerAction->SetState(EnPlayerState::enStep);
+			}
+
 			//アイテム使用入力。
 			if (Input()->IsTrigger(EnActionMapping::enUseItem)
 				&& !Input()->IsPress(EnActionMapping::enItemSelectPreparation)

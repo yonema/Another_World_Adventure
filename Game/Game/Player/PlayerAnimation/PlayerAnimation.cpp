@@ -18,6 +18,7 @@ namespace nsAWA {
 				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/Animation.csv";	//プレイヤーのアニメーションのCSVファイルパス
 				constexpr const wchar_t* const kPlayerAnimationEventCSVFilePath = L"Assets/CSV/AnimationEvent.csv";	//プレイヤーのアニメーションのイベントのCSVファイルパス
 				constexpr int kCSVTitleData = 0;		//CSVデータの見出し情報。
+				constexpr const float kCanPlayerInput = 0.001f;	//入力が判定される最低値
 			}
 
 			void CPlayerAnimation::Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction) {
@@ -61,6 +62,10 @@ namespace nsAWA {
 
 			void CPlayerAnimation::Release() {
 
+				//データを破棄。
+				m_animDataList.clear();
+
+				m_animFilePathArray.clear();
 			}
 
 			void CPlayerAnimation::Update(bool changeState, EnPlayerState playerState) {
@@ -130,6 +135,9 @@ namespace nsAWA {
 					break;
 				case EnPlayerState::enRun:
 					stateStr += "Run";
+					break;
+				case EnPlayerState::enStep:
+					stateStr += "ForwardStep";
 					break;
 				case EnPlayerState::enWeakAttack:
 					stateStr += "WeakAttack";

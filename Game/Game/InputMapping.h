@@ -24,6 +24,7 @@ namespace nsYMEngine
 			enWeakAttack,				//弱攻撃
 			enStrongAttack,				//強攻撃
 			enDashPreparation,			//ダッシュ準備
+			enStep,						//ステップ
 			enGuardPreparation,			//ガード準備
 			enGuard,					//ガード
 			enSkillPreparation,			//スキル準備
@@ -85,6 +86,11 @@ namespace nsYMEngine
 			{
 				{CGamepad::EnPadButton::enRB2},
 				{CKeyboard::EnKeyButton::en7}
+			},
+			//enStep
+			{
+				{CGamepad::EnPadButton::enA},
+				{CKeyboard::EnKeyButton::enJ}
 			},
 			// enGuardPreparation
 			{

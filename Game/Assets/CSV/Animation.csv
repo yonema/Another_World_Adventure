@@ -10,6 +10,14 @@ NAME,Sword_Run,
 SPEED,1,
 LOOP,TRUE,
 *,,
+NAME,Sword_ForwardStep,
+SPEED,1.4,
+LOOP,TRUE,
+EVENT,CoolTimeOn,FALSE
+EVENT,MoveStart,FALSE
+EVENT,MoveEnd,FALSE
+EVENT,CoolTimeOff,FALSE
+*,,
 NAME,Sword_WeakAttack,
 SPEED,1,
 LOOP,FALSE,
