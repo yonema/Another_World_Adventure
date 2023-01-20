@@ -78,6 +78,9 @@ namespace nsAWA {
 			//プレイヤーモデルを破棄。
 			DeleteGO(m_modelRenderer);
 
+			//アニメーションを破棄。
+			m_animation.Release();
+
 			//武器を破棄。
 			m_weaponManager.Release();
 

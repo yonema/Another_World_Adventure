@@ -38,6 +38,7 @@ namespace nsAWA {
 			enRun,			//ダッシュ
 			enWeakAttack,	//弱攻撃
 			enStrongAttack,	//強攻撃
+			enStep,			//ステップ
 			enUseActiveSkill,//アクティブスキル
 			enDamage,		//被弾
 			enDeath,		//死亡
@@ -77,7 +78,7 @@ namespace nsAWA {
 
 			void Move(float inputX,float inputZ, float speed = 0.0f);
 
-			void Rotate();
+			void Rotate(bool slerp = true);
 
 			void Guard();
 

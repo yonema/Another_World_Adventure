@@ -98,7 +98,7 @@ namespace nsAWA {
 			m_position += moveAmount;
 		}
 
-		void CPlayerAction::Rotate() {
+		void CPlayerAction::Rotate(bool slerp) {
 
 			//入力による回転角度を求める。
 			float angle = atan2(-m_moveDirection.x, m_moveDirection.z);
@@ -107,11 +107,19 @@ namespace nsAWA {
 			CQuaternion rotSource = CQuaternion::Identity();
 			rotSource.SetRotation(CVector3::AxisY(), -angle);
 
-			//回転速度の補間率を求める。
-			float rotationSlerpRate = kRotationSlerpRate * m_deltaTimeRef;
+			//補間する？
+			if (slerp) {
+				//回転速度の補間率を求める。
+				float rotationSlerpRate = kRotationSlerpRate * m_deltaTimeRef;
 
-			//線形補間。
-			m_rotation.Slerp(rotationSlerpRate, m_rotation, rotSource);
+				//線形補間。
+				m_rotation.Slerp(rotationSlerpRate, m_rotation, rotSource);
+			}
+			else {
+
+				//そのまま設定。
+				m_rotation = rotSource;
+			}
 		}
 
 		void CPlayerAction::Guard() {

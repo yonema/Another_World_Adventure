@@ -59,6 +59,7 @@ namespace nsAWA {
 				CPlayerInput* m_playerInput = nullptr;	//プレイヤー入力クラス
 				CPlayerAction* m_playerAction = nullptr;//プレイヤーアクションクラス
 				bool m_isMoving = false;				//イベントによって移動している？
+				CVector3 m_playerMoveInput = CVector3::Zero();	//プレイヤーの入力方向
 			};
 		}
 	}
