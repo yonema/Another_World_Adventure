@@ -177,6 +177,7 @@
     <ClCompile Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Geometries\AABB.cpp" />
     <ClCompile Include="YonemaEngine\Geometries\GeometryData.cpp" />
+    <ClCompile Include="Game\Samples\ShareAnimationSample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -365,6 +366,7 @@
     <ClInclude Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Geometries\AABB.h" />
     <ClInclude Include="YonemaEngine\Geometries\GeometryData.h" />
+    <ClInclude Include="Game\Samples\ShareAnimationSample.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

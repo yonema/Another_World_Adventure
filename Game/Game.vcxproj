@@ -184,6 +184,7 @@
     <ClCompile Include="Game\Samples\ModelRendererSample.cpp" />
     <ClCompile Include="Game\Samples\NavMeshSample.cpp" />
     <ClCompile Include="Game\Samples\PhysicsSample.cpp" />
+    <ClCompile Include="Game\Samples\ShareAnimationSample.cpp" />
     <ClCompile Include="Game\Samples\SoundSample.cpp" />
     <ClCompile Include="Game\Samples\TriggerSample.cpp" />
     <ClCompile Include="Game\Skill\ActiveSkill.cpp" />
@@ -361,6 +362,7 @@
     <ClInclude Include="Game\Samples\ModelRendererSample.h" />
     <ClInclude Include="Game\Samples\NavMeshSample.h" />
     <ClInclude Include="Game\Samples\PhysicsSample.h" />
+    <ClInclude Include="Game\Samples\ShareAnimationSample.h" />
     <ClInclude Include="Game\Samples\SoundSample.h" />
     <ClInclude Include="Game\Samples\TriggerSample.h" />
     <ClInclude Include="Game\Skill\ActiveSkill.h" />
