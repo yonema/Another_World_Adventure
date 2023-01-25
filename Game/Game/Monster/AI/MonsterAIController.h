@@ -30,10 +30,9 @@ namespace nsAWA {
 
 				void Update(float deltaTime);
 
-			private:
+			public:
 				void UpdateForwardDirection();
 
-			public:
 				void SetPosition(const CVector3& position);
 
 				const CVector3& GetPosition()const;
