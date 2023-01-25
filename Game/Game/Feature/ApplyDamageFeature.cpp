@@ -2,6 +2,7 @@
 #include "ApplyDamageFeature.h"
 #include "../GameActor.h"
 #include "../Status.h"
+#include "../ShakeActor.h"
 
 namespace nsAWA {
 
@@ -89,6 +90,10 @@ namespace nsAWA {
 			m_target->HitStop(0.1f);
 
 			m_creator->HitStop(0.1f);
+
+			//—¼Ò‚ğ—h‚ç‚·B
+			NewGO<CShakeActor>()->Init(m_target, 0.1f);
+			NewGO<CShakeActor>()->Init(m_creator, 0.1f);
 
 			//”jŠüB
 			Release();

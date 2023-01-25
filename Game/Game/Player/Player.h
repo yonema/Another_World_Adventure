@@ -64,6 +64,12 @@ namespace nsAWA {
 				return m_action.GetPosition();
 			}
 
+			void SetPosition(const CVector3& position)override final {
+
+				//À•W‚ğİ’èB
+				m_action.SetPosition(position);
+			}
+
 			const CQuaternion& GetRotation()const {
 
 				//‰ñ“]î•ñ‚ğæ“¾B
