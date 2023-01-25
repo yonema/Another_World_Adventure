@@ -61,7 +61,7 @@ namespace nsAWA {
 			bool IsDeath()const override final {
 
 				//HP‚ª0ˆÈ‰º‚©‚Ç‚¤‚©‚ğƒŠƒ^[ƒ“B
-				return m_status.GetHP() <= 0.0f;
+				return m_status.GetHP() <= FLT_EPSILON;
 			}
 
 			void HealHP(float healValue)override final {

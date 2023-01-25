@@ -57,6 +57,9 @@ namespace nsAWA {
 
 			//“–‚½‚è”»’è‚ğ”jŠüB
 			m_triggerBox.Release();
+
+			//”jŠü‚³‚ê‚½B
+			m_released = true;
 		}
 	}
 }

@@ -37,6 +37,8 @@ EVENT,CoolTimeOff,FALSE
 NAME,Sword_Damage,
 SPEED,1,
 LOOP,FALSE,
+EVENT,CoolTimeOn,FALSE
+EVENT,CoolTimeOff,FALSE
 *,,
 NAME,Sword_Death,
 SPEED,1,

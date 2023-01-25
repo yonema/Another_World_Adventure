@@ -97,6 +97,10 @@ namespace nsAWA {
 					return FLT_MAX;
 				}
 			}
+
+		private:
+			void LoadStatus();
+
 		private:
 			int m_level = 0;					//ƒŒƒxƒ‹
 			float m_HP = 0.0f;					//HP
