@@ -96,8 +96,27 @@ namespace nsAWA {
 
 		void CPlayer::UpdateActor(float deltaTime) {
 
-			//ステートの変更状況を初期化。
-			m_action.ResetChangeState();
+			//死んでいるなら。
+			if (IsDeath()) {
+
+				//死亡状態に。
+				m_action.SetState(EnPlayerState::enDeath);
+
+				//アニメーションを更新。
+				m_animation.Update(m_action.IsChangeState(), m_action.GetState());
+
+				//ステートの変更状況を初期化。
+				m_action.ResetChangeState();
+
+				//コライダーを破棄。
+				if (!m_collider.IsReleased()) {
+
+					m_collider.Release();
+				}
+
+				//これ以上は何もせず終了。
+				return;
+			}
 
 			//入力クラスを更新。
 			m_input.Update(m_modelRenderer->IsPlaying());
@@ -107,6 +126,9 @@ namespace nsAWA {
 
 			//アニメーションを更新。
 			m_animation.Update(m_action.IsChangeState(), m_action.GetState());
+
+			//ステートの変更状況を初期化。
+			m_action.ResetChangeState();
 
 			//武器管理クラスを更新。
 			m_weaponManager.Update();
@@ -149,7 +171,26 @@ namespace nsAWA {
 			else {
 				//ダメージをくらう。
 				m_status.DamageHP(damage);
-				m_action.SetState(EnPlayerState::enDamage);
+
+				//ひるみ値を加算。
+				m_status.AddWinceValue(damage);
+
+				//ひるみ値がひるみ値の区切りを超えていたら。
+				if (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {
+
+					//ダメージ状態に設定。
+					m_action.SetState(EnPlayerState::enDamage);
+
+					//クールタイムをONに設定。
+					m_input.CoolTimeOn();
+
+					//一回ひるんだので、二回以上のひるみは無効とする。
+					while (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {
+
+						//ひるみ値を減算。
+						m_status.SubWinceValue(m_status.GetWinceDelimiter());
+					}
+				}
 			}
 		}
 

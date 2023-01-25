@@ -48,6 +48,12 @@ namespace nsAWA {
 				//ステートの変更状況を初期化。
 				m_isChangeState = false;
 
+				//コライダーを破棄。
+				if (!m_collider.IsReleased()) {
+
+					m_collider.Release();
+				}
+
 				//これ以上は何もせず終了。
 				return;
 			}
