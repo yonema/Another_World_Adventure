@@ -82,12 +82,12 @@ namespace nsAWA {
 				//アニメーションファイルパスを取得。
 				return m_animFilePathArray;
 			}
-
 		private:
 			CModelRenderer* m_monsterModel = nullptr;	//モンスターモデル
 			CMonsterAnimationEvent m_animationEvent;	//アニメーションイベント
 			std::vector<SAnimData> m_animDataList;	//アニメーションデータ
 			std::vector<std::string> m_animFilePathArray;	//アニメーションのファイルパスの配列
+			float m_hitStopTimer = 0.0f;	//ヒットストップの時間
 		};
 	}
 }

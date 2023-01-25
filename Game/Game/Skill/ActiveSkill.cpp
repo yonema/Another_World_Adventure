@@ -6,11 +6,5 @@ namespace nsAWA {
 
 	namespace nsSkill {
 
-#ifdef _DEBUG
-		void CActiveSkill::Execute() {
-
-			
-		}
-#endif
 	}
 }

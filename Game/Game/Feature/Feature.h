@@ -48,12 +48,19 @@ namespace nsAWA {
 				m_target = target;
 			}
 
+			void SetCreator(IGameActor* creator) {
+
+				//Œø‰Ê‚Ì¶¬Ò‚ğİ’èB
+				m_creator = creator;
+			}
+
 		protected:
 			virtual void Execute(float deltaTime){}
 
 		protected:
 			float m_durationTime = 0.0f;	//‘±ŠÔ
 			IGameActor* m_target = nullptr;	//Œø‰Ê‚Ì‘ÎÛ
+			IGameActor* m_creator = nullptr;//Œø‰Ê‚Ì¶¬Ò
 		};
 	}
 }

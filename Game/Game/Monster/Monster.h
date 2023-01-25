@@ -72,8 +72,6 @@ namespace nsAWA {
 			void HealMP(float healValue)override final {};
 			void HealSP(float healValue)override final {};
 
-			
-
 			void SetPosition(const CVector3& position) {
 
 				//座標を設定。
@@ -152,7 +150,6 @@ namespace nsAWA {
 
 		private:
 			std::string m_name = "NoName";				//名前
-			CModelRenderer* m_modelRenderer = nullptr;	//モデル
 
 			CVector3 m_position = CVector3::Zero();		//座標
 			CQuaternion m_rotation = CQuaternion::Identity();	//回転

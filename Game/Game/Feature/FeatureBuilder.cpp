@@ -101,6 +101,9 @@ namespace nsAWA {
 				//ターゲットを設定。
 				feature->SetTarget(target);
 
+				//効果の生成者を設定。
+				feature->SetCreator(creator);
+
 				//効果を生成。
 				feature->Create();
 			}

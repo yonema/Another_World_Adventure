@@ -73,7 +73,6 @@ namespace nsAWA {
 				const std::string& GetActiveSkillName()const;
 
 			private:
-
 				CModelRenderer* m_playerModel = nullptr;	//プレイヤーモデル
 				EnAnimType m_type = EnAnimType::enNone;		//アニメーションのタイプ
 				CPlayerAnimationEvent m_animationEvent;		//プレイヤーのアニメーションイベント
