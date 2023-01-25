@@ -5,6 +5,7 @@
 #include "Renderers/Renderer.h"
 #include "Fonts/FontEngine.h"
 #include "../Effect/EffectEngine.h"
+#include "../Memory/ResourceBankTable.h"
 
 
 namespace nsYMEngine
@@ -129,10 +130,7 @@ namespace nsYMEngine
 			m_pBaseRenderTargetSprite = &m_simplePostEffectRenderTargetSprite;
 
 
-			m_whiteTexture = new nsDx12Wrappers::CTexture();
-			m_blackTexture = new nsDx12Wrappers::CTexture();
-			m_whiteTexture->Init("Assets/Images/Presets/white.jpg");
-			m_blackTexture->Init("Assets/Images/Presets/black.jpg");
+			m_defaultTextures.Init();
 
 			m_mainCamera.SetPosition({ 0.0f,10.0f,-25.0f });
 			m_mainCamera.SetTargetPosition({ 0.0f,10.0f,0.0f });
@@ -154,14 +152,9 @@ namespace nsYMEngine
 			{
 				delete m_gfxMemForDirectXTK;
 			}
-			if (m_whiteTexture)
-			{
-				delete m_whiteTexture;
-			}
-			if (m_blackTexture)
-			{
-				delete m_blackTexture;
-			}
+
+			m_defaultTextures.Release();
+
 			nsFonts::CFontEngine::DeleteInstance();
 			m_sceneDataDH.Release();
 			m_sceneDataCB.Release();
@@ -172,11 +165,13 @@ namespace nsYMEngine
 			if (m_fence)
 			{
 				m_fence->Release();
+				m_fence = nullptr;
 			}
 			m_frameBuffer.Release();
 			if (m_commandQueue)
 			{
 				m_commandQueue->Release();
+				m_commandQueue = nullptr;
 			}
 			m_commandList.Release();
 			if (m_commandAllocator)
@@ -186,6 +181,7 @@ namespace nsYMEngine
 			if (m_device)
 			{
 				m_device->Release();
+				m_device = nullptr;
 			}
 
 			return;
@@ -281,6 +277,20 @@ namespace nsYMEngine
 
 			// Skinƒ‚ƒfƒ‹•`‰æ
 			for (auto renderer : m_rendererTable.GetRendererList(RendererType::enSkinModel))
+			{
+				renderer->DrawWrapper(&m_commandList);
+			}
+
+			// Instancingƒ‚ƒfƒ‹‚Ì•`‰æÝ’è
+			m_commandList.SetGraphicsRootSignatureAndPipelineState(
+				m_rendererTable.GetRootSignature(
+					RendererType::enInstancingModel),
+				m_rendererTable.GetPipelineState(
+					RendererType::enInstancingModel)
+			);
+
+			// Instancingƒ‚ƒfƒ‹•`‰æ
+			for (auto renderer : m_rendererTable.GetRendererList(RendererType::enInstancingModel))
 			{
 				renderer->DrawWrapper(&m_commandList);
 			}

@@ -48,13 +48,14 @@ namespace nsYMEngine
 				constexpr CAnimationClip() = default;
 				~CAnimationClip();
 
-				bool Init(const char* animFilePath, CSkelton* pSkelton);
+				bool Init(const char* animFilePath, bool registerAnimBank);
 
 				void Release();
 
 				void CalcAndGetAnimatedBoneTransforms(
 					float timeInSeconds,
 					std::vector<nsMath::CMatrix>* pMTransforms,
+					CSkelton* pSkelton,
 					unsigned int animIdx = 0,
 					bool isLoop = true
 				) noexcept;
@@ -87,6 +88,16 @@ namespace nsYMEngine
 					return m_isLoaded;
 				}
 
+				constexpr bool IsShared() const noexcept
+				{
+					return m_isShared;
+				}
+
+				constexpr void SetIsShared(bool isShared) noexcept
+				{
+					m_isShared = isShared;
+				}
+
 			private:
 
 				void Terminate();
@@ -100,11 +111,15 @@ namespace nsYMEngine
 					float animTimeTicks,
 					const aiNode& node,
 					const nsMath::CMatrix& parentTransform,
-					const aiAnimation& animation
+					const aiAnimation& animation,
+					CSkelton* pSkelton,
+					unsigned int animIdx
 				) noexcept;
 
 				const aiNodeAnim* FindNodeAnim(
-					const aiAnimation& Animation, const std::string& NodeName) const noexcept;
+					const aiAnimation& Animation,
+					const std::string& NodeName,
+					unsigned int animIdx) const noexcept;
 
 				void CalcLocalTransform(
 					nsAssimpCommon::SLocalTransform& localTransform,
@@ -127,22 +142,27 @@ namespace nsYMEngine
 				unsigned int FindPosition(float animTimeTicks, const aiNodeAnim& nodeAnim) const noexcept;
 
 
+				bool FindAnimKeyEventNode(const aiNode& node);
 
 				void ReadAnimKeyEventNode(
 					float animTimeTicks,
 					const aiNode& node,
-					const aiAnimation& animation
+					const aiAnimation& animation,
+					unsigned int animIdx
 				) noexcept;
 
 			private:
 				Assimp::Importer* m_importer = nullptr;
 				const aiScene* m_scene = nullptr;
-				CSkelton* m_skeltonRef = nullptr;
 				bool m_isPlayedAnimationToEnd = false;
 				unsigned int m_prevAnimEventIdx = 0;
 				int m_animLoopCounter = 0;
 				std::vector<std::function<void(void)>> m_animationEventFuncArray = {};
 				bool m_isLoaded = false;
+				bool m_isShared = false;
+				std::vector<std::unordered_map<std::string, const aiNodeAnim*>>
+					m_nodeAnimMapArray = {};
+				const aiNode* m_animEventNode = nullptr;
 			};
 
 		}

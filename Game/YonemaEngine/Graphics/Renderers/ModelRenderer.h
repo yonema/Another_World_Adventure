@@ -1,16 +1,10 @@
 #pragma once
 #include "RendererTable.h"
 #include "../Models/BasicModelRenderer.h"
+#include "../Animations/Animator.h"
 
 namespace nsYMEngine
 {
-	namespace nsGraphics
-	{
-		namespace nsAnimations
-		{
-			struct SAnimationInitData;
-		}
-	}
 	namespace nsPhysics
 	{
 		class IPhysicsObject;
@@ -25,17 +19,46 @@ namespace nsYMEngine
 	{
 		namespace nsRenderers
 		{
+			enum class EnModelInitDataFlags
+			{
+				enNodeTransform,
+				enLoadingAsynchronous,
+				enRegisterAnimationBank,
+				enRegisterTextureBank,
+				enNum
+			};
+
 			struct SModelInitData
 			{
+			private:
+				static const 
+					std::bitset<static_cast<int>(EnModelInitDataFlags::enNum)> kDefaultFlags;
+
+			public:
+				constexpr SModelInitData() = default;
+				~SModelInitData() = default;
+
+				inline void SetFlags(EnModelInitDataFlags enFlags, bool value= true) noexcept
+				{
+					flags.set(static_cast<int>(enFlags), value);
+				}
+
+				inline bool GetFlags(EnModelInitDataFlags enFlags) const noexcept
+				{
+					return flags.test(static_cast<int>(enFlags));
+				}
+
 				const char* modelFilePath = nullptr;
 				CRendererTable::EnRendererType rendererType = 
 					CRendererTable::EnRendererType::enBasicModel;
 				nsMath::CQuaternion vertexBias = nsMath::CQuaternion::Identity();
-				const nsAnimations::SAnimationInitData* animInitData = nullptr;
+				nsAnimations::SAnimationInitData animInitData = {};
 				nsPhysics::SMeshGeometryBuffer* physicsMeshGeomBuffer = nullptr;
+				unsigned int maxInstance = 1;
 				const char* textureRootPath = nullptr;
-				bool enableNodeTransform = false;
-				bool enableLoadingAsynchronous = false;
+
+			private:
+				std::bitset<static_cast<int>(EnModelInitDataFlags::enNum)> flags = kDefaultFlags;
 			};
 
 			class CModelRenderer : public nsGameObject::IGameObject
@@ -86,6 +109,13 @@ namespace nsYMEngine
 					return m_scale;
 				}
 
+				constexpr std::vector<nsMath::CMatrix>* GetWorldMatrixArrayRef() noexcept
+				{
+					return &m_worldMatrixArray;
+				}
+
+				void UpdateWorldMatrixArray() noexcept;
+
 				/**
 				 * @brief アニメーションを再生する。アニメーションが設定されていなかったら何もしません。
 				 * @param animIdx 再生するアニメーションのインデックス。SAnimationInitDataで設定した順番で登録されています。
@@ -109,6 +139,14 @@ namespace nsYMEngine
 						SetAnimationSpeed(animSpeed);
 						SetIsAnimationLoop(isLoop);
 						m_renderer->PlayAnimationFromBeginning(animIdx);
+					}
+				}
+
+				inline void PlayAnimationFromMiddle(unsigned int animIdx, float timer) noexcept
+				{
+					if (m_renderer)
+					{
+						m_renderer->PlayAnimationFromMiddle(animIdx, timer);
 					}
 				}
 
@@ -149,6 +187,11 @@ namespace nsYMEngine
 					{
 						m_renderer->SetAnimationSpeed(animSpeed);
 					}
+				}
+
+				constexpr float GetAnimationSpeed() const noexcept
+				{
+					return m_renderer ? m_renderer->GetAnimationSpeed() : 1.0f;
 				}
 
 				/**
@@ -237,8 +280,10 @@ namespace nsYMEngine
 				nsMath::CVector3 m_position = nsMath::CVector3::Zero();
 				nsMath::CQuaternion m_rotation = nsMath::CQuaternion::Identity();
 				nsMath::CVector3 m_scale = nsMath::CVector3::One();
+				std::vector<nsMath::CMatrix> m_worldMatrixArray = {};
 
 				bool m_enableLoadingAsynchronous = false;
+
 				SModelInitData m_modelInitData = {};
 			};
 

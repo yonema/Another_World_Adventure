@@ -6,8 +6,8 @@ namespace nsYMEngine
 		namespace nsModels
 		{
 			const wchar_t* const CSkinGenericRenderer::m_kVsFilePath =
-				L"Assets/Shaders/Models/SkinModelVertexShader.hlsl";
-			const char* const CSkinGenericRenderer::m_kVsEntryFuncName = "VSMain";
+				L"Assets/Shaders/Models/BasicModelVertexShader.hlsl";
+			const char* const CSkinGenericRenderer::m_kVsEntryFuncName = "VSMainForSkinning";
 			const wchar_t* const CSkinGenericRenderer::m_kPsFilePath =
 				L"Assets/Shaders/Models/BasicModelPixelShader.hlsl";
 			const char* const CSkinGenericRenderer::m_kPsEntryFuncName = "PSMain";

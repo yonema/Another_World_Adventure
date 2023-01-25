@@ -89,7 +89,12 @@ namespace nsYMEngine
 				nsAssimpCommon::AiMatrixToMyMatrix(mGlobalTransform, &m_mGlobalTransformInv);
 				m_mGlobalTransformInv.Inverse();
 
+
 				InitializeRequiredNodeMap(rootNode);
+
+				std::string nodeName(rootNode.mName.C_Str());
+
+				m_rootNodeInfo = &m_requiredNodeMap[nodeName];
 
 				return;
 			}
@@ -224,6 +229,11 @@ namespace nsYMEngine
 						return;
 					}
 
+					if (requiredNodeItr->second.isRequired)
+					{
+						break;
+					}
+
 					requiredNodeItr->second.isRequired = true;
 					pParent = requiredNodeItr->second.pNode->mParent;
 
@@ -242,6 +252,23 @@ namespace nsYMEngine
 
 				return;
 			}
+
+
+			void CSkelton::InitSkeltonLength(const aiNode& node)
+			{
+				std::string nodeName(node.mName.data);
+
+				auto itr = m_boneNameToIndexMap.find(nodeName);
+
+				if (itr != m_boneNameToIndexMap.end())
+				{
+					unsigned int boneIdx = itr->second;
+					/*m_boneInfo[BoneIndex].FinalTransformation =
+						m_globalInverseTransform * GlobalTransformation * m_boneInfo[BoneIndex].OffsetMatrix;*/
+					//pSkelton->SetBoneFinalTransformMatrix(boneIdx, mGlobalTransform);
+				}
+			}
+
 
 		
 		}

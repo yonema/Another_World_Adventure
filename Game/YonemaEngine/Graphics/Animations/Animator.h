@@ -20,7 +20,7 @@ namespace nsYMEngine
 	{
 		namespace nsAnimations
 		{
-			struct SAnimationInitData : private nsUtils::SNoncopyable
+			struct SAnimationInitData
 			{
 				constexpr SAnimationInitData() = default;
 
@@ -28,6 +28,8 @@ namespace nsYMEngine
 					unsigned int numAnimations,
 					const char* animationFilePaths[]
 				);
+
+				~SAnimationInitData() = default;
 
 				void Init(
 					unsigned int numAnims,
@@ -47,7 +49,8 @@ namespace nsYMEngine
 				bool Init(
 					const SAnimationInitData& animInitData,
 					CSkelton* pSkelton,
-					bool loadingAsynchronous
+					bool loadingAsynchronous,
+					bool regiseterAnimBank
 				);
 
 				void Release();
@@ -55,6 +58,8 @@ namespace nsYMEngine
 				void PlayAnimation(unsigned int animIdx) noexcept;
 
 				void PlayAnimationFromBeginning(unsigned int animIdx) noexcept;
+
+				void PlayAnimationFromMiddle(unsigned int animIdx, float timer) noexcept;
 
 				void CalcAndGetAnimatedBoneTransforms(
 					std::vector<nsMath::CMatrix>* pMTransforms) noexcept;
@@ -65,6 +70,11 @@ namespace nsYMEngine
 				{
 					animSpeed >= 0.0f ?
 						m_animationSpeed = animSpeed : m_animationSpeed = m_animationSpeed;
+				}
+
+				constexpr float GetAnimationSpeed() const noexcept
+				{
+					return m_animationSpeed;
 				}
 
 				constexpr bool IsPlaying() const noexcept
@@ -127,7 +137,8 @@ namespace nsYMEngine
 				bool InitAnimationClips(
 					const SAnimationInitData& animInitData,
 					CSkelton* pSkelton,
-					bool loadingAsynchronous
+					bool loadingAsynchronous,
+					bool regiseterAnimBank
 				);
 
 

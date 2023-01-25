@@ -4,6 +4,7 @@
 #include "AnimationEventSample.h"
 #include "GetBoneMatrixSample.h"
 #include "LoadAsynchronousSample.h"
+#include "DrawInstancingSample.h"
 #include "SpriteSample.h"
 #include "FontSample.h"
 #include "EffectSample.h"
@@ -12,6 +13,8 @@
 #include "PhysicsSample.h"
 #include "TriggerSample.h"
 #include "CharacterControllerSample.h"
+#include "DrawWorldSample.h"
+#include "ShareAnimationSample.h"
 
 namespace nsAWA
 {
@@ -26,6 +29,8 @@ namespace nsAWA
 				enAnimationEvent,
 				enGetBoneMatrix,
 				enLoadAsynchronous,
+				enDrawInstancing,
+				enShareAnimation,
 				enSprite,
 				enFont,
 				enEffect,
@@ -34,9 +39,10 @@ namespace nsAWA
 				enPhysics,
 				enTrigger,
 				enCharacterController,
+				enDrawWorld,
 			};
 
-			constexpr EnSampleIdx g_kSampleIdx = EnSampleIdx::enLoadAsynchronous;
+			constexpr EnSampleIdx g_kSampleIdx = EnSampleIdx::enAnimationEvent;
 		}
 
 		bool CSampleMain::Start()
@@ -57,6 +63,12 @@ namespace nsAWA
 				break;
 			case EnSampleIdx::enLoadAsynchronous:
 				m_sampleGO = NewGO<CLoadAsynchronousSample>("LoadAsynchronousSample");
+				break;
+			case EnSampleIdx::enDrawInstancing:
+				m_sampleGO = NewGO<CDrawInstancingSample>("DrawInstancingSample");
+				break;
+			case EnSampleIdx::enShareAnimation:
+				m_sampleGO = NewGO<CShareAnimationSample>("ShareAnimationSample");
 				break;
 			case EnSampleIdx::enSprite:
 				m_sampleGO = NewGO<CSpriteSample>("SpriteSample");
@@ -81,6 +93,9 @@ namespace nsAWA
 				break;
 			case EnSampleIdx::enCharacterController:
 				m_sampleGO = NewGO<CCharacterControllerSample>("CharacterControllerSample");
+				break;
+			case EnSampleIdx::enDrawWorld:
+				m_sampleGO = NewGO<CDrawWorldSample>("DrawWorldSample");
 				break;
 			default:
 				m_sampleGO = NewGO<CModelRendererSample>("ModelRendererSample");

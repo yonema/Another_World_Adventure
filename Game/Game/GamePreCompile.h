@@ -39,11 +39,12 @@ using EnAxisMapping = nsInput::EnAxisMapping;
 // モデル
 using CModelRenderer = nsGraphics::nsRenderers::CModelRenderer;
 using SModelInitData = nsGraphics::nsRenderers::SModelInitData;
-using SAnimationInitData = nsGraphics::nsAnimations::SAnimationInitData;
+using EnModelInitDataFlags = nsGraphics::nsRenderers::EnModelInitDataFlags;
 
 // スプライト
 using CSpriteRenderer = nsGraphics::nsRenderers::CSpriteRenderer;
 using SSpriteInitData = nsGraphics::nsSprites::SSpriteInitData;
+using EnAlphaBlendMode = nsGraphics::nsSprites::EnAlphaBlendMode;
 
 // フォント
 using CFontRenderer = nsGraphics::nsFonts::CFontRenderer;
