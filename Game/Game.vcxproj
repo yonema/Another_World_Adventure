@@ -247,6 +247,7 @@
     <ClCompile Include="Game\Feature\AbnormalStatus\Poison.cpp" />
     <ClCompile Include="Game\Status.cpp" />
     <ClCompile Include="Game\Monster\MonsterStatus.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\DefaultTextures.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Fonts\FontEngine.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Fonts\FontRenderer.cpp" />
@@ -429,6 +430,7 @@
     <ClInclude Include="Game\Feature\AbnormalStatus\Poison.h" />
     <ClInclude Include="Game\Status.h" />
     <ClInclude Include="Game\Monster\MonsterStatus.h" />
+    <ClInclude Include="YonemaEngine\Graphics\DefaultTextures.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Fonts\FontEngine.h" />
     <ClInclude Include="YonemaEngine\Graphics\Fonts\FontRenderer.h" />
