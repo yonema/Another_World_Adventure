@@ -49,6 +49,15 @@ namespace nsAWA {
 
 		virtual bool IsDeath()const = 0;
 
+		void HitStop(float hitStopTime) {
+
+			//ヒットストップの時間を設定。
+			m_hitStopTimer = hitStopTime;
+
+			//アニメーションを止める。
+			StopAnimation();
+		}
+
 	protected:
 		void Update(float deltaTime)override final;
 
@@ -107,9 +116,19 @@ namespace nsAWA {
 		virtual CGameActorCollider* GetGameActorCollider() = 0;
 
 	private:
+		void StopAnimation() {
+
+			//アニメーションを止める。
+			m_modelRenderer->SetAnimationSpeed(0.0f);
+		}
+	protected:
+		CModelRenderer* m_modelRenderer = nullptr;	//モデル
+
+	private:
 		nsItem::CItemManager* m_itemManager = nullptr;		//アイテム管理
 		nsSkill::CPassiveSkillManager* m_passiveSkillManager = nullptr;		//パッシブスキル管理
 		nsFeature::CFeatureManager* m_featureManager = nullptr;		//ステータス変化管理
+		float m_hitStopTimer = 0.0f;	//ヒットストップの時間
 	};
 }
 

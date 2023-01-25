@@ -79,7 +79,7 @@ namespace nsAWA {
 				return;
 			}
 			else {
-			
+
 				//対応するアニメーションを再生。
 				m_monsterModel->PlayAnimationFromBeginning(
 					animationData.animNum,

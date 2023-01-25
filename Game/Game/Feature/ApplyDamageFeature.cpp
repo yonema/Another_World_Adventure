@@ -85,6 +85,11 @@ namespace nsAWA {
 			//ターゲットにダメージを与える。
 			m_target->ApplyDamage(m_damage, m_power, m_canGuard);
 
+			//両者をヒットストップ。
+			m_target->HitStop(0.1f);
+
+			m_creator->HitStop(0.1f);
+
 			//破棄。
 			Release();
 		}

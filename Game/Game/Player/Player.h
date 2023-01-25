@@ -95,7 +95,6 @@ namespace nsAWA {
 
 			void CreateArmor();
 		private:
-			CModelRenderer* m_modelRenderer = nullptr;				//プレイヤーモデル
 			CPlayerInput m_input;									//入力
 			CPlayerAction m_action;									//アクション
 			nsPlayerAnimation::CPlayerAnimation m_animation;		//アニメーション
