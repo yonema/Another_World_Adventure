@@ -15,8 +15,8 @@ namespace nsAWA {
 
 			namespace {
 
-				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/Player/Animation.csv";	//プレイヤーのアニメーションのCSVファイルパス
-				constexpr const wchar_t* const kPlayerAnimationEventCSVFilePath = L"Assets/CSV/Player/AnimationEvent.csv";	//プレイヤーのアニメーションのイベントのCSVファイルパス
+				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/Player/Test/Animation.csv";	//プレイヤーのアニメーションのCSVファイルパス
+				constexpr const wchar_t* const kPlayerAnimationEventCSVFilePath = L"Assets/CSV/Player/Test/AnimationEvent.csv";	//プレイヤーのアニメーションのイベントのCSVファイルパス
 				constexpr const float kCanPlayerInput = 0.001f;	//入力が判定される最低値
 				const std::string kErrorStr = "ErrorStr";	//エラー出力文字列
 			}

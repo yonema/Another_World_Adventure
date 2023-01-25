@@ -171,6 +171,7 @@
     <ClCompile Include="Game\Monster\AI\AITask\AITaskIsButtle.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskStandBy.cpp" />
     <ClCompile Include="YonemaEngine\Level2D\Level2D.cpp" />
+    <ClCompile Include="Game\ShakeActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -353,6 +354,7 @@
     <ClInclude Include="Game\Monster\AI\AITask\AITaskStandBy.h" />
     <ClInclude Include="YonemaEngine\Level2D\Level2D.h" />
     <ClInclude Include="YonemaEngine\Level2D\Level2DSpriteData.h" />
+    <ClInclude Include="Game\ShakeActor.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

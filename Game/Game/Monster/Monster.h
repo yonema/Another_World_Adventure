@@ -72,7 +72,7 @@ namespace nsAWA {
 			void HealMP(float healValue)override final {};
 			void HealSP(float healValue)override final {};
 
-			void SetPosition(const CVector3& position) {
+			void SetPosition(const CVector3& position)override final {
 
 				//ç¿ïWÇê›íËÅB
 				m_position = position;

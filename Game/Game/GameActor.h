@@ -72,6 +72,8 @@ namespace nsAWA {
 
 		virtual const CVector3& GetForwardDirection()const = 0;
 
+		virtual void SetPosition(const CVector3& position) = 0;
+
 		virtual const CVector3& GetPosition()const = 0;
 
 		nsItem::CItemManager* GetItemManager() {

@@ -110,6 +110,12 @@ namespace nsAWA {
 
 			void AutoHealGuardGaugeValue();
 		public:
+			void SetPosition(const CVector3& position) {
+
+				//座標を設定。
+				m_position = position;
+			}
+
 			const CVector3& GetPosition()const {
 
 				//座標を取得。
