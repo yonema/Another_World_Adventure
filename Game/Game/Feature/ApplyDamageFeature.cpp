@@ -45,8 +45,7 @@ namespace nsAWA {
 			m_damage = CalcDamage(level, power, attack, defence);
 
 			//乱数値を生成。
-			nsUtils::CRandom random;
-			float randomDamage = random.GetRangeFloat(kRandomDamageMin, kRandomDamageMax);
+			float randomDamage = Random()->GetRangeFloat(kRandomDamageMin, kRandomDamageMax);
 
 			//乱数値をダメージに乗算。
 			m_damage *= randomDamage;
@@ -88,7 +87,6 @@ namespace nsAWA {
 
 			//両者をヒットストップ。
 			m_target->HitStop(0.1f);
-
 			m_creator->HitStop(0.1f);
 
 			//両者を揺らす。

@@ -32,9 +32,8 @@ namespace nsAWA {
 				else if (moveTargetName == "Random") {
 
 					//ƒ‰ƒ“ƒ_ƒ€B
-					nsUtils::CRandom random;
-					float randomVecX = random.GetRangeFloat(-1.0f, 1.0f);
-					float randomVecZ = random.GetRangeFloat(-1.0f, 1.0f);
+					float randomVecX = Random()->GetRangeFloat(-1.0f, 1.0f);
+					float randomVecZ = Random()->GetRangeFloat(-1.0f, 1.0f);
 
 					blackboard.m_targetPosition = { randomVecX , 0.0f,randomVecZ };
 				}

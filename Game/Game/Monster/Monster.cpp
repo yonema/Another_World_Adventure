@@ -67,12 +67,6 @@ namespace nsAWA {
 			//アニメーションを更新。
 			m_animation.Update(m_isChangeState, m_state);		
 
-			//座標を設定。
-			m_modelRenderer->SetPosition(m_position);
-
-			//回転を設定。
-			m_modelRenderer->SetRotation(m_rotation);
-
 			//ステートの変更状況を初期化。
 			m_isChangeState = false;
 		}

@@ -58,29 +58,6 @@ namespace nsAWA {
 			}
 
 		public:
-			const CVector3& GetPosition()const override final {
-
-				//座標を取得。
-				return m_action.GetPosition();
-			}
-
-			void SetPosition(const CVector3& position)override final {
-
-				//座標を設定。
-				m_action.SetPosition(position);
-			}
-
-			const CQuaternion& GetRotation()const {
-
-				//回転情報を取得。
-				return m_action.GetRotation();
-			}
-
-			const CVector3& GetForwardDirection()const override final {
-
-				return m_action.GetForwardDirection();
-			}
-
 			CPlayerStatus* GetStatus()override final;
 
 			nsWeapon::CWeapon* GetWeapon()override final;

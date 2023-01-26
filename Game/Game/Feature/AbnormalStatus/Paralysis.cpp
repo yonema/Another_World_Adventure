@@ -24,8 +24,7 @@ namespace nsAWA {
 				//アクティブスキルが使用できるかを抽選。
 				{
 					//しきい値を抽選。
-					nsUtils::CRandom random;
-					int canAttackPer = random.GetRangeInt(0, kPerMax);
+					int canAttackPer = Random()->GetRangeInt(0, kPerMax);
 
 					//抽選された値がアクティブスキルが使用できる確率（％）より小さいなら。
 					if (canAttackPer < kCanAttackPer) {

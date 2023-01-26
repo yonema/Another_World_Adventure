@@ -49,8 +49,8 @@ namespace nsAWA {
 				trigger->Create(
 					creator,
 					animEventDataStr,
-					m_playerAction->GetPosition(),
-					m_playerAction->GetForwardDirection()
+					m_player->GetPosition(),
+					m_player->GetForwardDirection()
 				);
 			}
 
@@ -91,7 +91,7 @@ namespace nsAWA {
 				else {
 
 					//‘O•ûŒü‚ðŽæ“¾B
-					m_playerMoveInput = m_playerAction->GetForwardDirection();
+					m_playerMoveInput = m_player->GetForwardDirection();
 
 					//ˆÚ“®B
 					m_playerAction->Move(m_playerMoveInput.x, m_playerMoveInput.z, kMoveSpeed);
