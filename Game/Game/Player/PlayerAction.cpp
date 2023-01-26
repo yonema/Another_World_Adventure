@@ -24,11 +24,18 @@ namespace nsAWA {
 		}
 
 		void CPlayerAction::Init(
+			CVector3& position,
+			CQuaternion& rotation,
 			CPlayerStatus* playerStatus, 
 			nsItem::CItemManager* playerItemManager,
 			nsFeature::CFeatureManager* playerFeatureManager,
 			nsPlayerAnimation::CPlayerAnimation* playerAnimation
 		) {
+			//座標を取得。
+			m_position = &position;
+
+			//回転を取得。
+			m_rotation = &rotation;
 
 			//カメラを検索。
 			m_mainCamera = FindGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
@@ -50,9 +57,6 @@ namespace nsAWA {
 
 			//deltaTimeを更新(各関数で必要になるため)。
 			UpdateDeltaTime(deltaTime);
-
-			//前方向を更新。
-			UpdateForwardDirection();
 
 			//MPを自動回復。
 			AutoHealMP();
@@ -95,7 +99,7 @@ namespace nsAWA {
 			m_moveDirection.Normalize();
 
 			//移動。
-			m_position += moveAmount;
+			*m_position += moveAmount;
 		}
 
 		void CPlayerAction::Rotate(bool slerp) {
@@ -113,12 +117,12 @@ namespace nsAWA {
 				float rotationSlerpRate = kRotationSlerpRate * m_deltaTimeRef;
 
 				//線形補間。
-				m_rotation.Slerp(rotationSlerpRate, m_rotation, rotSource);
+				(*m_rotation).Slerp(rotationSlerpRate, *m_rotation, rotSource);
 			}
 			else {
 
 				//そのまま設定。
-				m_rotation = rotSource;
+				*m_rotation = rotSource;
 			}
 		}
 
@@ -227,21 +231,6 @@ namespace nsAWA {
 
 			//リターン。
 			return moveAmount;
-		}
-
-		void CPlayerAction::UpdateForwardDirection() {
-
-			//回転行列を計算。
-			auto mRot = CMatrix::Identity();
-			mRot.MakeRotationFromQuaternion(m_rotation);
-
-			//前方向を設定。
-			m_forwardDirection.x = mRot.m_fMat[2][0];
-			m_forwardDirection.y = mRot.m_fMat[2][1];
-			m_forwardDirection.z = mRot.m_fMat[2][2];
-
-			//正規化。
-			m_forwardDirection.Normalize();
 		}
 
 		void CPlayerAction::AutoHealMP() {

@@ -70,11 +70,55 @@ namespace nsAWA {
 
 		virtual nsArmor::CArmor* GetArmor() = 0;
 
-		virtual const CVector3& GetForwardDirection()const = 0;
+		void SetPosition(const CVector3& position) {
 
-		virtual void SetPosition(const CVector3& position) = 0;
+			//座標を設定。
+			m_position = position;
+		}
 
-		virtual const CVector3& GetPosition()const = 0;
+		const CVector3& GetPosition()const {
+
+			//座標を取得。
+			return m_position;
+		}
+
+		void SetPositionOffset(const CVector3& offset) {
+
+			//座標をオフセットを設定。
+			m_positionOffset = offset;
+		}
+
+		const CVector3& GetPositionOffset()const {
+
+			//座標のオフセットを取得。
+			return m_positionOffset;
+		}
+
+		const CVector3& GetPositionAndPositionOffset()const {
+
+			//座標をオフセット込みで取得。
+			return m_position + m_positionOffset;
+		}
+
+		void SetRotation(const CQuaternion& rotation) {
+
+			//回転を設定。
+			m_rotation = rotation;
+		}
+
+		const CQuaternion& GetRotation()const {
+
+			//回転を取得。
+			return m_rotation;
+		}
+
+		void UpdateForwardDirection();
+
+		const CVector3& GetForwardDirection()const {
+
+			//前方向を取得。
+			return m_forwardDirection;
+		}
 
 		nsItem::CItemManager* GetItemManager() {
 
@@ -125,6 +169,10 @@ namespace nsAWA {
 		}
 	protected:
 		CModelRenderer* m_modelRenderer = nullptr;	//モデル
+		CVector3 m_position = CVector3::Zero();		//座標
+		CVector3 m_forwardDirection = CVector3::Zero();		//前方向
+		CQuaternion m_rotation = CQuaternion::Identity();	//回転
+		CVector3 m_positionOffset = CVector3::Zero();//座標のオフセット
 
 	private:
 		nsItem::CItemManager* m_itemManager = nullptr;		//アイテム管理

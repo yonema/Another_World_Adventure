@@ -68,6 +68,8 @@ namespace nsAWA {
 		{
 		public:
 			void Init(
+				CVector3& position,
+				CQuaternion& rotation,
 				CPlayerStatus* playerStatus, 
 				nsItem::CItemManager* playerItemManager,
 				nsFeature::CFeatureManager* playerFeatureManager,
@@ -100,8 +102,6 @@ namespace nsAWA {
 				m_deltaTimeRef = deltaTime;
 			}
 
-			void UpdateForwardDirection();
-
 			void AutoHealMP();
 
 			void AutoHealSP();
@@ -109,29 +109,8 @@ namespace nsAWA {
 			void DamageSPDash();
 
 			void AutoHealGuardGaugeValue();
+
 		public:
-			void SetPosition(const CVector3& position) {
-
-				//座標を設定。
-				m_position = position;
-			}
-
-			const CVector3& GetPosition()const {
-
-				//座標を取得。
-				return m_position;
-			}
-
-			const CQuaternion& GetRotation()const {
-
-				return m_rotation;
-			}
-
-			const CVector3& GetForwardDirection()const {
-
-				return m_forwardDirection;
-			}
-			
 			void SetState(const EnPlayerState& state) {
 
 				//ステートが変わったら。
@@ -168,9 +147,8 @@ namespace nsAWA {
 				return m_isChangeState;
 			}
 		private:
-			CVector3 m_position = CVector3::Zero();				//座標
-			CQuaternion m_rotation = CQuaternion::Identity();	//回転
-			CVector3 m_forwardDirection = CVector3::Zero();		//前方向
+			CVector3* m_position = nullptr;						//座標
+			CQuaternion* m_rotation = nullptr;					//回転
 			CVector3 m_moveDirection = CVector3::Zero();		//移動方向
 			bool m_isChangeState = false;						//ステートがこのフレームで変更された？
 			EnPlayerState m_state = EnPlayerState::enNone;		//ステート

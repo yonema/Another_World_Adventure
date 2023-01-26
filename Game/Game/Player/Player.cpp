@@ -48,7 +48,7 @@ namespace nsAWA {
 			m_input.Init(&m_action, &m_animation);
 
 			//アクションクラスを初期化。
-			m_action.Init(&m_status, GetItemManager(), GetFeatureManager(),&m_animation);
+			m_action.Init(m_position, m_rotation, &m_status, GetItemManager(), GetFeatureManager(),&m_animation);
 
 			//当たり判定を初期化。
 			m_collider.Init(this);
@@ -132,12 +132,6 @@ namespace nsAWA {
 
 			//武器管理クラスを更新。
 			m_weaponManager.Update();
-
-			//座標を設定。
-			m_modelRenderer->SetPosition(m_action.GetPosition());
-
-			//回転情報を設定。
-			m_modelRenderer->SetRotation(m_action.GetRotation());
 
 			//トリガーを更新。
 			m_collider.Update();

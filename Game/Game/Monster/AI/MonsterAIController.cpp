@@ -154,9 +154,6 @@ namespace nsAWA {
 				//デルタタイムを更新。
 				m_deltaTimeRef = deltaTime;
 
-				//回転情報を更新。
-				UpdateForwardDirection();
-
 				//待機タスクが実行中なら。
 				if (m_waitNode != nullptr) {
 
@@ -209,23 +206,8 @@ namespace nsAWA {
 
 			void CMonsterAIController::UpdateForwardDirection() {
 
-				//回転行列を計算。
-				auto mRot = CMatrix::Identity();
-				mRot.MakeRotationFromQuaternion(m_owner->GetRotation());
-
-				//前方向を取得。
-				CVector3 forwardDirection = m_owner->GetForwardDirection();
-
-				//前方向を設定。
-				forwardDirection.x = mRot.m_fMat[2][0];
-				forwardDirection.y = mRot.m_fMat[2][1];
-				forwardDirection.z = mRot.m_fMat[2][2];
-
-				//正規化。
-				forwardDirection.Normalize();
-
-				//前方向を設定。
-				m_owner->SetForwardDirection(forwardDirection);
+				//前方向を更新。
+				m_owner->UpdateForwardDirection();
 			}
 
 			void CMonsterAIController::SetState(const EnMonsterState& state) {

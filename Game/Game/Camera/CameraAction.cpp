@@ -29,11 +29,15 @@ namespace nsAWA {
 			//プレイヤーの座標を取得。
 			CVector3 playerPosition = player->GetPosition();
 
+			//プレイヤーの揺れとは反対にオフセットを設定。
+			CVector3 cameraPositionOffset = player->GetPositionOffset();
+			cameraPositionOffset *= -1.0f;
+
 			//注視点を調整。
 			playerPosition.y += kAddPlayerPosition;
 
 			//注視点を設定。
-			m_targetPosition = playerPosition;
+			m_targetPosition = playerPosition + cameraPositionOffset;
 
 			//視点を設定。
 			m_position = m_targetPosition + m_addCameraVec;

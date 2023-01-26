@@ -8,7 +8,7 @@ namespace nsAWA {
 
 	namespace {
 
-		constexpr float kTriggerDurationTimer = 0.5f;	//トリガーの持続時間
+		constexpr float kTriggerDurationTimer = 0.2f;	//トリガーの持続時間
 	}
 
 	void CCreateTrigger::Create(

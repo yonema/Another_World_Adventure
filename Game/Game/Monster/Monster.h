@@ -72,41 +72,12 @@ namespace nsAWA {
 			void HealMP(float healValue)override final {};
 			void HealSP(float healValue)override final {};
 
-			void SetPosition(const CVector3& position)override final {
-
-				//座標を設定。
-				m_position = position;
-			}
-
-			const CVector3& GetPosition()const override final {
-
-				//座標を取得。
-				return m_position;
-			}
-
-			void SetRotation(const CQuaternion& rotation) {
-
-				//回転を設定。
-				m_rotation = rotation;
-			}
-
-			const CQuaternion& GetRotation()const {
-
-				//回転を取得。
-				return m_rotation;
-			}
-
 			void SetForwardDirection(const CVector3& forwardDirection) {
 
 				//前方向を設定。
 				m_forwardDirection = forwardDirection;
 			}
 
-			const CVector3& GetForwardDirection()const override final {
-
-				//前方向を取得。
-				return m_forwardDirection;
-			}
 		public:
 			void SetState(const EnMonsterState& state) {
 
@@ -150,10 +121,6 @@ namespace nsAWA {
 
 		private:
 			std::string m_name = "NoName";				//名前
-
-			CVector3 m_position = CVector3::Zero();		//座標
-			CQuaternion m_rotation = CQuaternion::Identity();	//回転
-			CVector3 m_forwardDirection = CVector3::Zero();		//前方向
 
 			CMonsterCollider m_collider;				//コライダー
 			CMonsterStatus m_status;					//ステータス

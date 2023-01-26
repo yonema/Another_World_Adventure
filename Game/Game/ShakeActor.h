@@ -16,6 +16,7 @@ namespace nsAWA {
 	private:
 		IGameActor* m_shakeActor = nullptr;	//揺らすアクター
 		float m_shakeTime = 0.0f;				//揺れの時間
+		CVector3 m_shakeVector = CVector3::Zero();//揺れ幅
 		CVector3 m_actorOldPosition = CVector3::Zero();	//アクターの元座標
 	};
 }
