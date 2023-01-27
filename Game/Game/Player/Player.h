@@ -58,6 +58,12 @@ namespace nsAWA {
 			}
 
 		public:
+			CPlayerAction& GetPlayerAction() {
+
+				//プレイヤーアクションクラスを取得。
+				return m_action;
+			}
+
 			CPlayerStatus* GetStatus()override final;
 
 			nsWeapon::CWeapon* GetWeapon()override final;
@@ -70,7 +76,8 @@ namespace nsAWA {
 				return &m_collider;
 			}
 
-			void SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill);
+			void SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill);
+
 		private:
 			void CreatePlayerModel();
 

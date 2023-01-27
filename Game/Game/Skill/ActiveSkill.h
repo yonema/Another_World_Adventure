@@ -20,6 +20,8 @@ namespace nsAWA {
 				//Á”ïMP‚ğƒŠƒ^[ƒ“B
 				return m_useMP;
 			}
+		public:
+			static const int m_kActiveSkillNumMax;
 		private:
 			float m_useMP = 0.0f;	//Á”ïMP
 		};

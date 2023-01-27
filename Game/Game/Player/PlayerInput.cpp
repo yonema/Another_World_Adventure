@@ -15,6 +15,7 @@
 #include "../Feature/AbnormalStatus/Poison.h"
 #include "../Item/ItemManager.h"
 #include "../CSV/CSVManager.h"
+#include "../Skill/SkillManager.h"
 #endif
 
 namespace nsAWA {
@@ -33,19 +34,6 @@ namespace nsAWA {
 
 			//ステートを変化させるとともにアニメーションを再生するため、プレイヤーアニメーションクラスのポインタを受け取る。
 			m_playerAnimation = playerAnimation;
-
-#ifdef _DEBUG
-			//プレイヤーを探す。
-			auto player = FindGO<CPlayer>(CPlayer::m_kObjName_Player);
-
-			//アクティブスキルを追加。
-			nsSkill::CActiveSkill* activeSkill = new nsSkill::CActiveSkill;
-			activeSkill->SetUseMP(0);
-			activeSkill->SetName("JumpAttack");
-
-			//プレイヤーにアクティブスキルを追加。
-			player->SetActiveSkill(EnActiveSkillListNumber::enActiveSkill_1, activeSkill);
-#endif
 		}
 
 		void CPlayerInput::Update(bool isAnimationPlaying) {
@@ -99,46 +87,6 @@ namespace nsAWA {
 				InputSkillAction();
 			}
 
-			//弱攻撃入力。
-			if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
-
-				//クールタイムをONにする。
-				CoolTimeOn();
-
-				//弱攻撃状態にする。
-				m_playerAction->SetState(EnPlayerState::enWeakAttack);
-			}
-
-			//強攻撃入力。
-			if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
-
-				//クールタイムをONにする。
-				CoolTimeOn();
-
-				//強攻撃状態にする。
-				m_playerAction->SetState(EnPlayerState::enStrongAttack);
-			}
-
-			//ステップ入力。
-			if (Input()->IsTrigger(EnActionMapping::enStep)) {
-
-				//クールタイムをONにする。
-				CoolTimeOn();
-
-				//ステップ状態にする。
-				m_playerAction->SetState(EnPlayerState::enStep);
-			}
-
-			//アイテム使用入力。
-			if (Input()->IsTrigger(EnActionMapping::enUseItem)
-				&& !Input()->IsPress(EnActionMapping::enItemSelectPreparation)
-				&& !Input()->IsPress(EnActionMapping::enSkillPreparation)
-				) {
-
-				//アイテムを使用。
-				m_playerAction->UseItem();
-			}
-
 			//アイテム選択準備。
 			if (Input()->IsPress(EnActionMapping::enItemSelectPreparation)
 				&& !Input()->IsPress(EnActionMapping::enSkillPreparation)
@@ -154,6 +102,51 @@ namespace nsAWA {
 				if (Input()->IsTrigger(EnActionMapping::enItemSelectLeft)) {
 
 					m_playerAction->SubSelectItemNum();
+				}
+			}
+
+			//スキル準備入力がされていないかつ
+			if (!Input()->IsPress(EnActionMapping::enSkillPreparation)) {
+
+				//弱攻撃入力。
+				if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
+
+					//クールタイムをONにする。
+					CoolTimeOn();
+
+					//弱攻撃状態にする。
+					m_playerAction->SetState(EnPlayerState::enWeakAttack);
+				}
+
+				//強攻撃入力。
+				if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
+
+					//クールタイムをONにする。
+					CoolTimeOn();
+
+					//強攻撃状態にする。
+					m_playerAction->SetState(EnPlayerState::enStrongAttack);
+				}
+
+				//ステップ入力。
+				if (Input()->IsTrigger(EnActionMapping::enStep)
+					) {
+
+					//クールタイムをONにする。
+					CoolTimeOn();
+
+					//ステップ状態にする。
+					m_playerAction->SetState(EnPlayerState::enStep);
+				}
+
+				//アイテム使用入力。
+				if (Input()->IsTrigger(EnActionMapping::enUseItem)
+					&& !Input()->IsPress(EnActionMapping::enItemSelectPreparation)
+					&& !Input()->IsPress(EnActionMapping::enSkillPreparation)
+					) {
+
+					//アイテムを使用。
+					m_playerAction->UseItem();
 				}
 			}
 
@@ -178,11 +171,17 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 #ifdef _DEBUG
-				//クールタイム中に設定。
-				CoolTimeOn();
 
-				//スキル１使用。
-				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
+				//アクティブスキルを設定。
+				nsSkill::CSkillManager skillManager;
+				skillManager.SetActiveSkill(0, "JumpAttack");
+
+
+				////クールタイム中に設定。
+				//CoolTimeOn();
+				//
+				////スキル１使用。
+				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
 #endif 
 			}
 
@@ -190,22 +189,26 @@ namespace nsAWA {
 
 				//スキル２使用。
 #ifdef _DEBUG
-				//パッシブスキル（麻痺）を生成。
-				{
-					//麻痺機能を生成。
-					nsFeature::nsStatusChanger::CAbnormalStatus* paralysis = new nsFeature::nsStatusChanger::CAbnormalStatus;
-					paralysis->Init(
-						nsFeature::nsStatusChanger::EnAbnormalStatusType::enParalysis,
-						player,
-						1
-					);
-					//パッシブスキルに機能を追加。
-					nsSkill::CPassiveSkill* passiveSkill = new nsSkill::CPassiveSkill;
-					passiveSkill->AddFeature(paralysis);
+				//アクティブスキルを設定。
+				nsSkill::CSkillManager skillManager;
+				skillManager.SetActiveSkill(0, "SwordAttack");
 
-					//プレイヤーにパッシブスキルを設定。
-					player->GetPassiveSkillManager()->AddPassiveSkill(passiveSkill);
-				}
+				////パッシブスキル（麻痺）を生成。
+				//{
+				//	//麻痺機能を生成。
+				//	nsFeature::nsStatusChanger::CAbnormalStatus* paralysis = new nsFeature::nsStatusChanger::CAbnormalStatus;
+				//	paralysis->Init(
+				//		nsFeature::nsStatusChanger::EnAbnormalStatusType::enParalysis,
+				//		player,
+				//		1
+				//	);
+				//	//パッシブスキルに機能を追加。
+				//	nsSkill::CPassiveSkill* passiveSkill = new nsSkill::CPassiveSkill;
+				//	passiveSkill->AddFeature(paralysis);
+
+				//	//プレイヤーにパッシブスキルを設定。
+				//	player->GetPassiveSkillManager()->AddPassiveSkill(passiveSkill);
+				//}
 #endif
 			}
 
