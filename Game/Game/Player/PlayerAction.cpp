@@ -157,11 +157,32 @@ namespace nsAWA {
 			//m_playerItemManager->SubSelectItemNum();
 		}
 
-		void CPlayerAction::SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill) {
+		void CPlayerAction::SetActiveSkill(int activeSkillNum, nsSkill::CActiveSkill* activeSkill) {
 
-			//アクティブスキルを設定。
-			m_activeSkill[static_cast<int>(activeSkillNum)] = activeSkill;
+			//現在登録しているアクティブスキルを破棄。
+			if (m_activeSkill[activeSkillNum] != nullptr) {
+
+				delete m_activeSkill[activeSkillNum];
+				m_activeSkill[activeSkillNum] = nullptr;
+			}
+
+			//新たにアクティブスキルを設定。
+			m_activeSkill[activeSkillNum] = activeSkill;
 		}
+
+#ifdef _DEBUG
+
+		const std::string& CPlayerAction::GetActiveSkillName()const {
+
+			if (m_activeSkill[0] == nullptr) {
+
+				return "NoSkill";
+			}
+
+			return m_activeSkill[0]->GetName();
+		}
+#endif // _DEBUG
+
 
 		void CPlayerAction::UseActiveSkill(EnActiveSkillListNumber activeSkillNum) {
 

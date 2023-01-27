@@ -17,7 +17,7 @@ EVENT,CoolTimeOn,FALSE
 EVENT,CoolTimeOff,FALSE
 *,,
 NAME,Giyara_WeakAttack,
-SPEED,0.7,
+SPEED,0.5,
 LOOP,FALSE,
 EVENT,CoolTimeOn,FALSE
 EVENT,CreateTrigger,TRUE

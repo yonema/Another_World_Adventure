@@ -226,6 +226,9 @@
     <ClCompile Include="Game\Monster\AI\MonsterAIController.cpp" />
     <ClCompile Include="Game\Monster\MonsterAnimationEvent.cpp" />
     <ClCompile Include="Game\ShakeActor.cpp" />
+    <ClCompile Include="Game\Player\PlayerSkillChanger.cpp" />
+    <ClCompile Include="Game\Skill\ActiveSkillList.cpp" />
+    <ClCompile Include="Game\Skill\SkillManager.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavCell.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavMesh.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\Path.cpp" />
@@ -400,6 +403,9 @@
     <ClInclude Include="Game\Monster\AI\MonsterAIController.h" />
     <ClInclude Include="Game\Monster\MonsterAnimationEvent.h" />
     <ClInclude Include="Game\ShakeActor.h" />
+    <ClInclude Include="Game\Player\PlayerSkillChanger.h" />
+    <ClInclude Include="Game\Skill\ActiveSkillList.h" />
+    <ClInclude Include="Game\Skill\SkillManager.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavCell.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavMesh.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\Path.h" />

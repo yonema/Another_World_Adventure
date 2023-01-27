@@ -6,5 +6,6 @@ namespace nsAWA {
 
 	namespace nsSkill {
 
+		const int CActiveSkill::m_kActiveSkillNumMax = 6;	//アクティブスキルの最大セット数
 	}
 }

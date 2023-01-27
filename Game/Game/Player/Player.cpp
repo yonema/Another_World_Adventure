@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "../Weapon/Weapon.h"
 #include "../Armor/Armor.h"
+#include "../Skill/ActiveSkillList.h"
 
 #ifdef _DEBUG
 #include "../Monster/Monster.h"
@@ -138,8 +139,8 @@ namespace nsAWA {
 
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
-			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.4f %s", m_status.GetHP(),m_input.GetCoolTime() ? L"true" : L"false");
+			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32); 
+			StringCbPrintf(m_dispText, dispTextSize, L"Skill = %s %s", nsUtils::GetWideStringFromString(m_action.GetActiveSkillName()).c_str(),m_input.GetCoolTime() ? L"true" : L"false");
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}
@@ -188,10 +189,10 @@ namespace nsAWA {
 			}
 		}
 
-		void CPlayer::SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill) {
+		void CPlayer::SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill) {
 
 			//アクティブスキルを設定。
-			m_action.SetActiveSkill(activeSkillNum, activeSkill);
+			m_action.SetActiveSkill(setNum, activeSkill);
 		}
 
 		void CPlayer::CreatePlayerModel() {

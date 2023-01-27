@@ -90,7 +90,14 @@ namespace nsAWA {
 
 			void SubSelectItemNum();
 
-			void SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill);
+			void SetActiveSkill(int activeSkillNum, nsSkill::CActiveSkill* activeSkill);
+
+#ifdef _DEBUG
+			const std::string& GetActiveSkillName()const;
+
+#endif // _DEBUG
+
+
 
 			void UseActiveSkill(EnActiveSkillListNumber activeSkillNum);
 		private:

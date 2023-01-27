@@ -6,6 +6,7 @@
 #include "BackGround/BackGround.h"
 #include "Item/AllItemList.h"
 #include "Monster/MonsterList.h"
+#include "Skill/ActiveSkillList.h"
 
 #ifdef _DEBUG
 #include "Monster/Monster.h"
@@ -45,6 +46,9 @@ namespace nsAWA
 
 		//モンスターリストを生成。
 		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
+
+		//アクティブスキルのリストを生成。
+		nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
 
 #ifdef _DEBUG
 		nsMonster::CMonster* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
