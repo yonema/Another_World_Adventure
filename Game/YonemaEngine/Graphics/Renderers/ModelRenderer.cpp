@@ -8,6 +8,11 @@ namespace nsYMEngine
 	{
 		namespace nsRenderers
 		{
+			const std::bitset<static_cast<int>(EnModelInitDataFlags::enNum)> 
+				SModelInitData::kDefaultFlags(std::string("0000"));
+
+
+
 			bool CModelRenderer::Start()
 			{
 				if (m_renderer->GetLoadingState() != EnLoadingState::enAfterLoading)
@@ -35,7 +40,12 @@ namespace nsYMEngine
 					m_renderer->PlayAnimation(0);
 					m_enableLoadingAsynchronous = false;
 				}
+
 				UpdateWorldMatrix();
+				if (m_modelInitData.maxInstance > 1)
+				{
+					UpdateWorldMatrixArray();
+				}
 
 				m_renderer->UpdateAnimation(deltaTime);
 
@@ -53,13 +63,31 @@ namespace nsYMEngine
 			void CModelRenderer::Init(const SModelInitData& modelInitData) noexcept
 			{
 				m_modelInitData = modelInitData;
-				m_enableLoadingAsynchronous = modelInitData.enableLoadingAsynchronous;
+				m_enableLoadingAsynchronous = 
+					modelInitData.GetFlags(EnModelInitDataFlags::enLoadingAsynchronous);
+
+				if (m_modelInitData.maxInstance > 1)
+				{
+					if (m_worldMatrixArray.empty() != true)
+					{
+						m_worldMatrixArray.clear();
+					}
+					m_worldMatrixArray.resize(m_modelInitData.maxInstance);
+					for (auto& worldMatrix : m_worldMatrixArray)
+					{
+						worldMatrix = nsMath::CMatrix::Identity();
+					}
+				}
 
 				CreateRenderer(m_modelInitData);
 
 				if (m_enableLoadingAsynchronous != true)
 				{
 					UpdateWorldMatrix();
+				}
+				if (m_renderer && m_modelInitData.maxInstance > 1)
+				{
+					m_renderer->SetNumInstances(m_modelInitData.maxInstance);
 				}
 
 				return;
@@ -107,6 +135,24 @@ namespace nsYMEngine
 
 				return;
 			}
+
+			void CModelRenderer::UpdateWorldMatrixArray() noexcept
+			{
+				if (m_renderer == nullptr)
+				{
+					return;
+				}
+
+				if (m_worldMatrixArray.empty())
+				{
+					return;
+				}
+
+				m_renderer->UpdateWorldMatrixArray(m_worldMatrixArray);
+
+				return;
+			}
+
 		}
 	}
 }

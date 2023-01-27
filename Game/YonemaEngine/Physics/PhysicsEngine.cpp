@@ -83,6 +83,7 @@ namespace nsYMEngine
 		void CPhysicsEngine::Terminate()
 		{
 			// 破棄する前に同期する。
+			m_scene->simulate(0.001f);
 			m_scene->fetchResults(true);
 
 			CExtendedDataForRigidActor::DeleteAllExtendedData();
@@ -236,7 +237,7 @@ namespace nsYMEngine
 
 		void CPhysicsEngine::Update(float deltaTime)
 		{
-			m_scene->simulate(deltaTime);
+			m_scene->simulate(std::max(0.0001f, deltaTime));
 			m_scene->fetchResults(true);
 
 			for (auto& physicsTriggerObject : m_physicsTriggerObjectList)
@@ -269,7 +270,8 @@ namespace nsYMEngine
 		)
 		{
 			nsMath::CVector3 toPos = origin + (normalDir * distance);
-			m_myDebugLineArray.emplace_back(
+
+			PushDebugLine(
 				SMyDebugLine(
 					origin,
 					{ color.r, color.g, color.b },
@@ -277,11 +279,6 @@ namespace nsYMEngine
 					{ color.r, color.g, color.b }
 				)
 			);
-			if (m_myDebugLineArray.size() > m_kMaxMyDebugLine)
-			{
-				nsGameWindow::MessageBoxError(L"レイの数が多すぎます。");
-				std::abort();
-			}
 
 			return m_scene->raycast(
 				physx::PxVec3(origin.x, origin.y, origin.z),

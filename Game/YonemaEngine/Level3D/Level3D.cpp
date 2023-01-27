@@ -28,8 +28,9 @@ namespace nsYMEngine
 				filePath,
 				importer,
 				scene,
-				nsGraphics::nsAssimpCommon::g_kNavMeshRemoveComponentFlags,
-				nsGraphics::nsAssimpCommon::g_kNavMeshPostprocessFlags
+				nsGraphics::nsAssimpCommon::g_kLevel3DRemoveComponentFlags,
+				nsGraphics::nsAssimpCommon::g_kLevel3DPostprocessFlags,
+				false
 			) != true)
 			{
 				return false;
@@ -48,10 +49,6 @@ namespace nsYMEngine
 				nsMath::CQuaternion rotation;
 				nsGraphics::nsAssimpCommon::AiMatrixToMyMatrix(
 					levelChip->mTransformation, &mTransformation);
-				nsMath::CMatrix mTrans, mRot, mScale;
-				mTrans.MakeTranslation(translation);
-				mRot.MakeRotationFromQuaternion(rotation);
-				mScale.MakeScaling(scaling);
 				mTransformation = initData.mBias * mTransformation;
 
 				nsMath::CalcTRSFromMatrix(translation, rotation, scaling, mTransformation);
@@ -100,7 +97,10 @@ namespace nsYMEngine
 				}
 			}
 
-
+			for (auto& levelChip : m_levelChipMap)
+			{
+				levelChip.second->Init(levelChip.first.c_str());
+			}
 
 			return true;
 		}
@@ -112,9 +112,17 @@ namespace nsYMEngine
 			const char* filePath
 		) noexcept
 		{
+			auto itr = m_levelChipMap.find(filePath);
+			if (itr != m_levelChipMap.end())
+			{
+				itr->second->AddInstance(chipData, initData);
+				return;
+			}
+
 			//フックされなかったので、マップチップを作成する。
-			auto levelChip = std::make_shared<CLevelChip>(chipData, initData, filePath);
-			m_levelChipList.emplace_back(levelChip);
+			auto levelChip = std::make_shared<CLevelChip>();
+			m_levelChipMap.emplace(filePath, levelChip);
+			levelChip->AddInstance(chipData, initData);
 
 			return;
 		}

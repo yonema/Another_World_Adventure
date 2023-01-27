@@ -175,6 +175,14 @@
     <ClCompile Include="Game\Player\PlayerSkillChanger.cpp" />
     <ClCompile Include="Game\Skill\ActiveSkillList.cpp" />
     <ClCompile Include="Game\Skill\SkillManager.cpp" />
+    <ClCompile Include="Game\Samples\DrawInstancingSample.cpp" />
+    <ClCompile Include="Game\Samples\DrawWorldSample.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Geometries\AABB.cpp" />
+    <ClCompile Include="YonemaEngine\Geometries\GeometryData.cpp" />
+    <ClCompile Include="Game\Samples\ShareAnimationSample.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\DefaultTextures.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -361,6 +369,14 @@
     <ClInclude Include="Game\Player\PlayerSkillChanger.h" />
     <ClInclude Include="Game\Skill\ActiveSkillList.h" />
     <ClInclude Include="Game\Skill\SkillManager.h" />
+    <ClInclude Include="Game\Samples\DrawInstancingSample.h" />
+    <ClInclude Include="Game\Samples\DrawWorldSample.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Geometries\AABB.h" />
+    <ClInclude Include="YonemaEngine\Geometries\GeometryData.h" />
+    <ClInclude Include="Game\Samples\ShareAnimationSample.h" />
+    <ClInclude Include="YonemaEngine\Graphics\DefaultTextures.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

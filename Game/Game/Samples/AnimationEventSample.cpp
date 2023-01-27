@@ -16,17 +16,16 @@ namespace nsAWA
 		{
 			// InitModel
 			{
-				SAnimationInitData animInitData(
-					static_cast<unsigned int>(EnAnimType::enNum), m_kAnimFilePaths);
-
 				SModelInitData modelInitData;
 				modelInitData.modelFilePath = m_kModelFilePath;
-				modelInitData.animInitData = &animInitData;
+				modelInitData.vertexBias.SetRotationXDeg(90.0f);
+				modelInitData.animInitData.Init(
+					static_cast<unsigned int>(EnAnimType::enNum), m_kAnimFilePaths);
 
 				m_modelRenderer = NewGO<CModelRenderer>("SkeltalAnimationSampleModel");
 				m_modelRenderer->Init(modelInitData);
 				m_modelRenderer->SetPosition({ 0.0f, 4.0f, 0.0f });
-				m_modelRenderer->SetScale(0.1f);
+				m_modelRenderer->SetScale(0.001f);
 				m_modelRenderer->SetIsAnimationLoop(true);
 				m_modelRenderer->SetAnimationSpeed(1.5f);
 				m_modelRenderer->PlayAnimation(static_cast<unsigned int>(EnAnimType::enAnimWithEvent));
