@@ -259,8 +259,11 @@
     <ClCompile Include="YonemaEngine\Graphics\Models\AssimpCommon.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\BasicGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\BasicModelRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Models\BasicNonCullingGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Models\InstancingNonCullingGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Models\SkinNonCullingGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Sprites\Sprite.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Sprites\SpriteGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Sprites\TransSpriteGenericRenderer.cpp" />
@@ -446,8 +449,11 @@
     <ClInclude Include="YonemaEngine\Graphics\Models\AssimpCommon.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\BasicGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\BasicModelRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Models\BasicNonCullingGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\InstancingGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Models\InstancingNonCullingGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Models\SkinNonCullingGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Sprites\Sprite.h" />
     <ClInclude Include="YonemaEngine\Graphics\Sprites\SpriteGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Sprites\TransSpriteGenericRenderer.h" />
