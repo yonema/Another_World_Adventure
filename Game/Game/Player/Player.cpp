@@ -7,6 +7,7 @@
 
 #ifdef _DEBUG
 #include "../Monster/Monster.h"
+#include "PlayerManager.h"
 #endif
 
 namespace nsAWA {
@@ -36,11 +37,15 @@ namespace nsAWA {
 			//武器管理クラスを初期化。
 			m_weaponManager.Init(m_modelRenderer);
 
-			//武器を生成。
-			CreateWeapon();
+#ifdef _DEBUG
+			//武器を設定。
+			CPlayerManager playerManager;
+			if (playerManager.FindPlayer()) {
 
-			//防具を生成。
-			CreateArmor();
+				playerManager.SetWeapon("NewSword");
+			}
+
+#endif // DEBUG
 
 			//ステータスを初期化。
 			m_status.Init();
@@ -195,6 +200,12 @@ namespace nsAWA {
 			m_action.SetActiveSkill(setNum, activeSkill);
 		}
 
+		void CPlayer::SetWeapon(nsWeapon::CWeapon* weapon) {
+
+			//武器を設定。
+			m_weaponManager.ChangeWeapon(weapon);
+		}
+
 		void CPlayer::CreatePlayerModel() {
 
 			//プレイヤーモデルを生成。
@@ -248,26 +259,6 @@ namespace nsAWA {
 
 			//防具を受け取る。
 			return m_armor;
-		}
-
-		void CPlayer::CreateWeapon() {
-
-#ifdef _DEBUG
-			//武器情報を定義。
-			nsWeapon::SWeaponInfo weaponInfo;
-			weaponInfo.attack = 100;
-			weaponInfo.intelligence = 100;
-			weaponInfo.critical = 10;
-			weaponInfo.weaponType = nsWeapon::EnWeaponType::enSword;
-			weaponInfo.name = "NewSword";
-			
-			//武器情報を設定。
-			m_weaponManager.ChangeWeapon(weaponInfo);
-#endif
-		}
-
-		void CPlayer::CreateArmor() {
-
 		}
 	}
 }

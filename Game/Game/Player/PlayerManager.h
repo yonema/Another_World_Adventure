@@ -6,17 +6,16 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		class CPlayer;
-	}
 
-	namespace nsSkill {
-
-		//スキル管理クラス
-		class CSkillManager : nsUtils::SNoncopyable
+		//プレイヤー管理クラス
+		class CPlayerManager : nsUtils::SNoncopyable
 		{
 		public:
-			void FindPlayer();
+			bool FindPlayer();
 
 			void SetActiveSkill(int setNum, const std::string& activeSkillName);
+
+			void SetWeapon(const std::string& weaponName);
 
 		private:
 			nsPlayer::CPlayer* m_player = nullptr;	//プレイヤーのポインタ

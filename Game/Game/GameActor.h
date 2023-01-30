@@ -49,13 +49,10 @@ namespace nsAWA {
 
 		virtual bool IsDeath()const = 0;
 
-		void HitStop(float hitStopTime) {
+		void SetHitStop(bool flag) {
 
-			//ヒットストップの時間を設定。
-			m_hitStopTimer = hitStopTime;
-
-			//アニメーションを止める。
-			StopAnimation();
+			//ヒットストップのフラグを設定。
+			m_isHitStop = flag;
 		}
 
 	protected:
@@ -161,11 +158,10 @@ namespace nsAWA {
 
 		virtual CGameActorCollider* GetGameActorCollider() = 0;
 
-	private:
-		void StopAnimation() {
+		CModelRenderer* GetModelRenderer() {
 
-			//アニメーションを止める。
-			m_modelRenderer->SetAnimationSpeed(0.0f);
+			//モデルを取得。
+			return m_modelRenderer;
 		}
 	protected:
 		CModelRenderer* m_modelRenderer = nullptr;	//モデル
@@ -173,12 +169,12 @@ namespace nsAWA {
 		CVector3 m_forwardDirection = CVector3::Zero();		//前方向
 		CQuaternion m_rotation = CQuaternion::Identity();	//回転
 		CVector3 m_positionOffset = CVector3::Zero();//座標のオフセット
+		bool m_isHitStop = false;						//ヒットストップ中？
 
 	private:
 		nsItem::CItemManager* m_itemManager = nullptr;		//アイテム管理
 		nsSkill::CPassiveSkillManager* m_passiveSkillManager = nullptr;		//パッシブスキル管理
 		nsFeature::CFeatureManager* m_featureManager = nullptr;		//ステータス変化管理
-		float m_hitStopTimer = 0.0f;	//ヒットストップの時間
 	};
 }
 

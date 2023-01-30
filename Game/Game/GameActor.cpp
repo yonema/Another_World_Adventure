@@ -62,24 +62,13 @@ namespace nsAWA {
 	void IGameActor::Update(float deltaTime) {
 
 		//ヒットストップ中なら。
-		if (m_hitStopTimer > FLT_EPSILON) {
-
-			//タイマーを更新。
-			m_hitStopTimer -= deltaTime;
+		if (m_isHitStop) {
 
 			//モデルの座標を設定。
 			m_modelRenderer->SetPosition(m_position + m_positionOffset);
 
 			//終了。
 			return;
-		}
-		else {
-
-			//ヒットストップタイマーを初期化。
-			m_hitStopTimer = 0.0f;
-
-			//アニメーション速度を元に戻す。
-			m_modelRenderer->SetAnimationSpeed(1.0f);
 		}
 
 		//前方向を更新。

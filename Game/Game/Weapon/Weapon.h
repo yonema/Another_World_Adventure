@@ -18,8 +18,9 @@ namespace nsAWA {
 		//武器情報
 		struct SWeaponInfo {
 
+			std::string modelFilePath = "NoPath";				//モデルのファイルパス
 			EnWeaponType weaponType = EnWeaponType::enNone;	//武器の種類
-			const char* name = nullptr;		//名前
+			std::string name = "NoName";	//名前
 			float attack = 0.0f;			//物理攻撃力
 			float intelligence = 0.0f;		//魔法攻撃力
 			float critical = 0.0f;			//クリティカル率
@@ -35,7 +36,7 @@ namespace nsAWA {
 			void Release();
 		private:
 
-			void Create(const SWeaponInfo& weaponInfo, const char* modelFilePath);
+			void Create(const SWeaponInfo& weaponInfo);
 
 			void CreateModel(const char* modelFilePath);
 
@@ -114,7 +115,7 @@ namespace nsAWA {
 		class CWeaponBuilder : nsUtils::SNoncopyable {
 
 		public:
-			CWeapon* Create(const SWeaponInfo& weaponInfo, const char* modelFilePath);
+			CWeapon* CreateWeapon(const std::string& weaponName);
 		};
 	}
 }

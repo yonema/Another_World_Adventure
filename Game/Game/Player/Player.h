@@ -78,12 +78,11 @@ namespace nsAWA {
 
 			void SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill);
 
+			void SetWeapon(nsWeapon::CWeapon* weapon);
+
 		private:
 			void CreatePlayerModel();
 
-			void CreateWeapon();
-
-			void CreateArmor();
 		private:
 			CPlayerInput m_input;									//“ü—Í
 			CPlayerAction m_action;									//ƒAƒNƒVƒ‡ƒ“

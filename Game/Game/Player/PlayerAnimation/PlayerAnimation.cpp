@@ -18,7 +18,6 @@ namespace nsAWA {
 				constexpr const wchar_t* const kPlayerAnimationCSVFilePath = L"Assets/CSV/Player/Test/Animation.csv";	//プレイヤーのアニメーションのCSVファイルパス
 				constexpr const wchar_t* const kPlayerAnimationEventCSVFilePath = L"Assets/CSV/Player/Test/AnimationEvent.csv";	//プレイヤーのアニメーションのイベントのCSVファイルパス
 				constexpr const float kCanPlayerInput = 0.001f;	//入力が判定される最低値
-				const std::string kErrorStr = "ErrorStr";	//エラー出力文字列
 			}
 
 			void CPlayerAnimation::Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction) {
@@ -186,8 +185,7 @@ namespace nsAWA {
 				errMsg += stateStr;
 				nsGameWindow::MessageBoxError(nsUtils::GetWideStringFromString(errMsg).c_str());
 
-				//仮に終端をリターン。
-				return *m_animDataList.end();
+				std::abort();
 			}
 
 			const std::string& CPlayerAnimation::GetActiveSkillName()const {
@@ -205,7 +203,7 @@ namespace nsAWA {
 					//警告ウィンドウを出力。
 					nsGameWindow::MessageBoxError(nsUtils::GetWideStringFromString(errorMsg).c_str());
 
-					return kErrorStr;
+					std::abort();
 #endif // _DEBUG
 				}
 			}
@@ -220,8 +218,6 @@ namespace nsAWA {
 
 				//データカウントを初期化。
 				int dataIndex = 0;
-
-				
 
 				//アニメーションデータの雛形を生成。
 				SAnimData animDataBase;

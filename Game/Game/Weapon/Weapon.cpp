@@ -1,14 +1,15 @@
 #include "YonemaEnginePreCompile.h"
 #include "Weapon.h"
+#include "WeaponList.h"
 
 namespace nsAWA {
 
 	namespace nsWeapon {
 
-		void CWeapon::Create(const SWeaponInfo& weaponInfo, const char* modelFilePath) {
+		void CWeapon::Create(const SWeaponInfo& weaponInfo) {
 
 			//武器モデルを生成。
-			CreateModel(modelFilePath);
+			CreateModel(weaponInfo.modelFilePath.c_str());
 
 			//武器情報を設定。
 			m_sInfo = weaponInfo;
@@ -38,11 +39,16 @@ namespace nsAWA {
 			m_modelRenderer->SetScale(0.1f);
 		}
 
-		CWeapon* CWeaponBuilder::Create(const SWeaponInfo& weaponInfo, const char* modelFilePath) {
+		CWeapon* CWeaponBuilder::CreateWeapon(const std::string& weaponName) {
+
+			//武器の雛形を生成。
+			CWeapon* weapon = new CWeapon;
+
+			//名前から武器データを取得。
+			SWeaponInfo weaponInfo = CWeaponList::GetInstance()->GetWeaponData(weaponName);
 
 			//武器を生成。
-			CWeapon* weapon = new CWeapon;
-			weapon->Create(weaponInfo, modelFilePath);
+			weapon->Create(weaponInfo);
 
 			//生成された武器を返す。
 			return weapon;
