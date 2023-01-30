@@ -248,6 +248,8 @@
     <ClCompile Include="YonemaEngine\Graphics\Animations\AnimationClip.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Animator.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations\Skelton.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\UpdateAnimationController.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\UpdateAnimationManager.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineRenderer.cpp" />
     <ClCompile Include="Game\Feature\AbnormalStatus\Poison.cpp" />
@@ -439,6 +441,8 @@
     <ClInclude Include="YonemaEngine\Graphics\Animations\AnimationClip.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Animator.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations\Skelton.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\UpdateAnimationController.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\UpdateAnimationManager.h" />
     <ClInclude Include="YonemaEngine\Graphics\AssimpCommonHeader.h" />
     <ClInclude Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\DebugRenderers\PhysicsDebugLineRenderer.h" />
