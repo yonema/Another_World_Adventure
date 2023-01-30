@@ -18,19 +18,20 @@ namespace nsAWA
 
 		bool CSkeltalAnimationSample::Start()
 		{
-			SAnimationInitData animInitData(
-				static_cast<unsigned int>(EnAnimType::enNum), m_kAnimFilePaths);
-
 			SModelInitData modelInitData;
 			modelInitData.modelFilePath = m_kModelFilePath;
 			//modelInitData.vertexBias.SetRotationX(nsMath::YM_PIDIV2);
-			modelInitData.animInitData = &animInitData;
+			modelInitData.animInitData.Init(
+				static_cast<unsigned int>(EnAnimType::enNum), m_kAnimFilePaths);
 
 			m_modelRenderer = NewGO<CModelRenderer>("SkeltalAnimationSampleModel");
 			m_modelRenderer->SetPosition({ 0.0f, 4.0f, 0.0f });
 			m_modelRenderer->SetScale(0.1f);
 			m_modelRenderer->Init(modelInitData);
 			m_modelRenderer->SetIsAnimationLoop(false);
+
+			MainCamera()->SetFarClip(10000.0f);
+
 
 			return true;
 		}

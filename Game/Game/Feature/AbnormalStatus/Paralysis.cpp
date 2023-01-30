@@ -1,6 +1,5 @@
 #include "YonemaEnginePreCompile.h"
 #include "Paralysis.h"
-#include <random>
 
 namespace nsAWA {
 
@@ -24,12 +23,8 @@ namespace nsAWA {
 
 				//アクティブスキルが使用できるかを抽選。
 				{
-					//２種の乱数生成器を生成。ランダムデバイスからseed値を決定し、高速な乱数生成器を用いて乱数を生成する。
-					std::random_device rd;
-					std::mt19937_64 mt(rd());
-
 					//しきい値を抽選。
-					int canAttackPer = mt() % kPerMax;
+					int canAttackPer = Random()->GetRangeInt(0, kPerMax);
 
 					//抽選された値がアクティブスキルが使用できる確率（％）より小さいなら。
 					if (canAttackPer < kCanAttackPer) {

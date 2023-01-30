@@ -47,6 +47,17 @@ namespace nsAWA {
 		virtual void HealMP(float healValue) = 0;
 		virtual void HealSP(float healValue) = 0;
 
+		virtual bool IsDeath()const = 0;
+
+		void HitStop(float hitStopTime) {
+
+			//ヒットストップの時間を設定。
+			m_hitStopTimer = hitStopTime;
+
+			//アニメーションを止める。
+			StopAnimation();
+		}
+
 	protected:
 		void Update(float deltaTime)override final;
 
@@ -59,9 +70,55 @@ namespace nsAWA {
 
 		virtual nsArmor::CArmor* GetArmor() = 0;
 
-		virtual const CVector3& GetForwardDirection()const = 0;
+		void SetPosition(const CVector3& position) {
 
-		virtual const CVector3& GetPosition()const = 0;
+			//座標を設定。
+			m_position = position;
+		}
+
+		const CVector3& GetPosition()const {
+
+			//座標を取得。
+			return m_position;
+		}
+
+		void SetPositionOffset(const CVector3& offset) {
+
+			//座標をオフセットを設定。
+			m_positionOffset = offset;
+		}
+
+		const CVector3& GetPositionOffset()const {
+
+			//座標のオフセットを取得。
+			return m_positionOffset;
+		}
+
+		const CVector3& GetPositionAndPositionOffset()const {
+
+			//座標をオフセット込みで取得。
+			return m_position + m_positionOffset;
+		}
+
+		void SetRotation(const CQuaternion& rotation) {
+
+			//回転を設定。
+			m_rotation = rotation;
+		}
+
+		const CQuaternion& GetRotation()const {
+
+			//回転を取得。
+			return m_rotation;
+		}
+
+		void UpdateForwardDirection();
+
+		const CVector3& GetForwardDirection()const {
+
+			//前方向を取得。
+			return m_forwardDirection;
+		}
 
 		nsItem::CItemManager* GetItemManager() {
 
@@ -105,9 +162,23 @@ namespace nsAWA {
 		virtual CGameActorCollider* GetGameActorCollider() = 0;
 
 	private:
+		void StopAnimation() {
+
+			//アニメーションを止める。
+			m_modelRenderer->SetAnimationSpeed(0.0f);
+		}
+	protected:
+		CModelRenderer* m_modelRenderer = nullptr;	//モデル
+		CVector3 m_position = CVector3::Zero();		//座標
+		CVector3 m_forwardDirection = CVector3::Zero();		//前方向
+		CQuaternion m_rotation = CQuaternion::Identity();	//回転
+		CVector3 m_positionOffset = CVector3::Zero();//座標のオフセット
+
+	private:
 		nsItem::CItemManager* m_itemManager = nullptr;		//アイテム管理
 		nsSkill::CPassiveSkillManager* m_passiveSkillManager = nullptr;		//パッシブスキル管理
 		nsFeature::CFeatureManager* m_featureManager = nullptr;		//ステータス変化管理
+		float m_hitStopTimer = 0.0f;	//ヒットストップの時間
 	};
 }
 

@@ -22,6 +22,7 @@ namespace nsAWA {
 		class CAllItemList : nsUtils::SNoncopyable
 		{
 		public:
+
 			static CAllItemList* GetInstance() {
 
 				//インスタンスをリターン。

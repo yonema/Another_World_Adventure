@@ -21,6 +21,7 @@
 #include "../YonemaEngine/AI/Navigations/Path.h"
 #include "../YonemaEngine/AI/Navigations/PathFinding.h"
 #include "../YonemaEngine/Level3D/Level3D.h"
+#include "../YonemaEngine/Level2D/Level2D.h"
 
 // エイリアス宣言
 
@@ -38,11 +39,12 @@ using EnAxisMapping = nsInput::EnAxisMapping;
 // モデル
 using CModelRenderer = nsGraphics::nsRenderers::CModelRenderer;
 using SModelInitData = nsGraphics::nsRenderers::SModelInitData;
-using SAnimationInitData = nsGraphics::nsAnimations::SAnimationInitData;
+using EnModelInitDataFlags = nsGraphics::nsRenderers::EnModelInitDataFlags;
 
 // スプライト
 using CSpriteRenderer = nsGraphics::nsRenderers::CSpriteRenderer;
 using SSpriteInitData = nsGraphics::nsSprites::SSpriteInitData;
+using EnAlphaBlendMode = nsGraphics::nsSprites::EnAlphaBlendMode;
 
 // フォント
 using CFontRenderer = nsGraphics::nsFonts::CFontRenderer;

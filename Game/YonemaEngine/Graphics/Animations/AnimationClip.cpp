@@ -3,6 +3,7 @@
 #include "Skelton.h"
 #include "../../Utils/StringManipulation.h"
 #include "../../Utils/AlignSize.h"
+#include "../../Memory/ResourceBankTable.h"
 
 namespace nsYMEngine
 {
@@ -27,6 +28,7 @@ namespace nsYMEngine
 
 			void CAnimationClip::Release()
 			{
+				m_isLoaded = false;
 				if (m_importer)
 				{
 					m_importer->FreeScene();
@@ -37,11 +39,43 @@ namespace nsYMEngine
 			}
 
 
-			bool CAnimationClip::Init(const char* animFilePath, CSkelton* pSkelton)
+			bool CAnimationClip::Init(const char* animFilePath, bool registerAnimBank)
 			{
+				m_isLoaded = false;
+
 				ImportScene(animFilePath);
 
-				m_skeltonRef = pSkelton;
+				m_isLoaded = true;
+
+				if (registerAnimBank)
+				{
+					auto& animClipBank =
+						nsMemory::CResourceBankTable::GetInstance()->GetAnimationClipBank();
+					auto* animClip = animClipBank.Get(animFilePath);
+					if (animClip == nullptr)
+					{
+						SetIsShared(true);
+						// AnimBankに未登録のため、新規に登録する。
+						animClipBank.Register(animFilePath, this);
+					}
+				}
+
+
+				m_nodeAnimMapArray.resize(m_scene->mNumAnimations);
+
+				for (unsigned int animIdx = 0; animIdx < m_scene->mNumAnimations; animIdx++)
+				{
+					auto* anim = m_scene->mAnimations[animIdx];
+					auto& nodeAnimMap = m_nodeAnimMapArray[animIdx];
+					for (unsigned int channelIdx = 0; channelIdx < anim->mNumChannels; channelIdx++)
+					{
+						const aiNodeAnim* pNodeAnim = anim->mChannels[channelIdx];
+						nodeAnimMap[pNodeAnim->mNodeName.data] = 
+							pNodeAnim;
+					}
+				}
+
+				FindAnimKeyEventNode(*m_scene->mRootNode);
 
 				return true;
 			}
@@ -49,7 +83,8 @@ namespace nsYMEngine
 			bool CAnimationClip::ImportScene(const char* animFilePath)
 			{
 				bool res = nsAssimpCommon::ImportScene(
-					animFilePath, m_importer,
+					animFilePath,
+					m_importer,
 					m_scene,
 					nsAssimpCommon::g_kAnimationRemoveFlags,
 					nsAssimpCommon::g_kAnimationPostprocessFlags
@@ -62,11 +97,12 @@ namespace nsYMEngine
 			void CAnimationClip::CalcAndGetAnimatedBoneTransforms(
 				float timeInSeconds,
 				std::vector<nsMath::CMatrix>* pMTransforms,
+				CSkelton* pSkelton,
 				unsigned int animIdx,
 				bool isLoop
 			) noexcept
 			{
-				if (m_skeltonRef == nullptr)
+				if (pSkelton == nullptr)
 				{
 					return;
 				}
@@ -84,10 +120,25 @@ namespace nsYMEngine
 				float animTimeTicks = CalcAnimationTimeTicks(timeInSeconds, animIdx, isLoop);
 				const aiAnimation& animation = *m_scene->mAnimations[animIdx];
 
+				/*ReadNodeHierarchy(
+					animTimeTicks, *m_scene->mRootNode, nsMath::CMatrix::Identity(), animation, pSkelton);*/
 				ReadNodeHierarchy(
-					animTimeTicks, *m_scene->mRootNode, nsMath::CMatrix::Identity(), animation);
+					animTimeTicks,
+					*(pSkelton->GetRootNode()->pNode),
+					nsMath::CMatrix::Identity(), 
+					animation,
+					pSkelton,
+					animIdx
+				);
 
-				const auto& boneInfoArray = m_skeltonRef->GetBoneInfoArray();
+				if (m_animEventNode)
+				{
+					ReadAnimKeyEventNode(
+						animTimeTicks, *m_animEventNode, animation, animIdx);
+				}
+
+
+				const auto& boneInfoArray = pSkelton->GetBoneInfoArray();
 				unsigned int numBoneInfoArray = static_cast<unsigned int>(boneInfoArray.size());
 				
 				if (pMTransforms->size() < numBoneInfoArray)
@@ -158,14 +209,16 @@ namespace nsYMEngine
 				float animTimeTicks,
 				const aiNode& node,
 				const nsMath::CMatrix& parentTransform,
-				const aiAnimation& animation
+				const aiAnimation& animation,
+				CSkelton* pSkelton,
+				unsigned int animIdx
 			) noexcept
 			{
 				nsMath::CMatrix mNodeTransform;
 				nsAssimpCommon::AiMatrixToMyMatrix(node.mTransformation, &mNodeTransform);
 
 				std::string nodeName(node.mName.data);
-				const aiNodeAnim* pNodeAnim = FindNodeAnim(animation, nodeName);
+				const aiNodeAnim* pNodeAnim = FindNodeAnim(animation, nodeName, animIdx);
 
 				if (pNodeAnim)
 				{
@@ -189,38 +242,57 @@ namespace nsYMEngine
 						localTransform.translation.y,
 						localTransform.translation.z);
 
+
 					// Combine the above transformations
 					//NodeTransformation = TranslationM * RotationM * ScalingM;
 					mNodeTransform = mScale * mRot * mTrans;
 				}
 
 				//nsMath::CMatrix GlobalTransformation = ParentTransform * NodeTransformation;
-				nsMath::CMatrix mGlobalTransform = mNodeTransform * parentTransform;
+				nsMath::CMatrix mGlobalTransform = nsMath::CMatrix::Identity();
 
-				const auto& boneNameToIndexMap = m_skeltonRef->GetBoneNameToIndexMap();
-				if (boneNameToIndexMap.count(nodeName) > 0)
+				const auto& boneNameToIndexMap = pSkelton->GetBoneNameToIndexMap();
+				auto itr = boneNameToIndexMap.find(nodeName);
+				if (itr != boneNameToIndexMap.end())
 				{
-					unsigned int boneIdx = boneNameToIndexMap.at(nodeName);
+					unsigned int boneIdx = itr->second;
+
+					if (pNodeAnim)
+					{
+						// アニメーションがあるボーンだけ、アニメーションスケールを適用する。
+						float scale = pSkelton->GetAnimationScaled(
+							nodeName, boneIdx);
+						mNodeTransform.m_vec4Mat[3].x *= scale;
+						mNodeTransform.m_vec4Mat[3].y *= scale;
+						mNodeTransform.m_vec4Mat[3].z *= scale;
+					}
+
+					mGlobalTransform = mNodeTransform * parentTransform;
 					/*m_boneInfo[BoneIndex].FinalTransformation =
 						m_globalInverseTransform * GlobalTransformation * m_boneInfo[BoneIndex].OffsetMatrix;*/
-					m_skeltonRef->SetBoneFinalTransformMatrix(boneIdx, mGlobalTransform);
+					pSkelton->SetBoneFinalTransformMatrix(boneIdx, mGlobalTransform);
+				}
+				else
+				{
+					mGlobalTransform = mNodeTransform * parentTransform;
 				}
 
 				for (unsigned int childIdx = 0; childIdx < node.mNumChildren; childIdx++)
 				{
 					std::string childName(node.mChildren[childIdx]->mName.data);
 
-					const auto& requiredNodeMap = m_skeltonRef->GetRequiredNodeMap();
+					const auto& requiredNodeMap = pSkelton->GetRequiredNodeMap();
 					const auto& it = requiredNodeMap.find(childName);
 
 					if (it == requiredNodeMap.end())
 					{
-						if (childName == m_kAnimEventKeyNodeName)
-						{
-							ReadAnimKeyEventNode(animTimeTicks, *node.mChildren[childIdx], animation);
+						//if (childName == m_kAnimEventKeyNodeName)
+						//{
+						//	ReadAnimKeyEventNode(
+						//		animTimeTicks, *node.mChildren[childIdx], animation, animIdx);
 
-							continue;
-						}
+						//	continue;
+						//}
 #ifdef _DEBUG
 						char buffer[256];
 						sprintf_s(buffer, "Child %s cannot be found in the required node map\n", childName.c_str());
@@ -231,7 +303,14 @@ namespace nsYMEngine
 
 					if (it->second.isRequired)
 					{
-						ReadNodeHierarchy(animTimeTicks, *node.mChildren[childIdx], mGlobalTransform, animation);
+						ReadNodeHierarchy(
+							animTimeTicks,
+							*node.mChildren[childIdx],
+							mGlobalTransform,
+							animation,
+							pSkelton,
+							animIdx
+						);
 					}
 				}
 
@@ -241,17 +320,29 @@ namespace nsYMEngine
 
 
 			const aiNodeAnim* CAnimationClip::FindNodeAnim(
-				const aiAnimation& Animation, const std::string& NodeName) const noexcept
+				const aiAnimation& Animation,
+				const std::string& NodeName,
+				unsigned int animIdx
+			) const noexcept
 			{
-				for (unsigned channelIdx = 0; channelIdx < Animation.mNumChannels; channelIdx++)
-				{
-					const aiNodeAnim* pNodeAnim = Animation.mChannels[channelIdx];
+				// クソ遅いのでunordered_mapに変更
 
-					if (std::string(pNodeAnim->mNodeName.data) == NodeName)
-					{
-						return pNodeAnim;
-					}
+				auto itr = m_nodeAnimMapArray[animIdx].find(NodeName);
+
+				if (itr != m_nodeAnimMapArray[animIdx].end())
+				{
+					return itr->second;
 				}
+
+				//for (unsigned channelIdx = 0; channelIdx < Animation.mNumChannels; channelIdx++)
+				//{
+				//	const aiNodeAnim* pNodeAnim = Animation.mChannels[channelIdx];
+
+				//	if (std::string(pNodeAnim->mNodeName.data) == NodeName)
+				//	{
+				//		return pNodeAnim;
+				//	}
+				//}
 
 				return nullptr;
 			}
@@ -433,12 +524,33 @@ namespace nsYMEngine
 
 
 
+			bool CAnimationClip::FindAnimKeyEventNode(const aiNode& node)
+			{
+				static const aiString kAnimEventKeyNodeName(m_kAnimEventKeyNodeName.c_str());
+
+				if (node.mName == kAnimEventKeyNodeName)
+				{
+					m_animEventNode = &node;
+					return true;
+				}
+
+				for (unsigned int childIdx = 0; childIdx < node.mNumChildren; childIdx++)
+				{
+					if (FindAnimKeyEventNode(*node.mChildren[childIdx]))
+					{
+						return true;
+					}
+				}
+
+				return false;
+			}
 
 
 			void CAnimationClip::ReadAnimKeyEventNode(
 				float animTimeTicks,
 				const aiNode& node,
-				const aiAnimation& animation
+				const aiAnimation& animation,
+				unsigned int animIdx
 			) noexcept
 			{
 				if (IsPlayedAnimationToEnd())
@@ -448,7 +560,7 @@ namespace nsYMEngine
 				}
 
 				std::string nodeName(node.mName.data);
-				const aiNodeAnim* pNodeAnim = FindNodeAnim(animation, nodeName);
+				const aiNodeAnim* pNodeAnim = FindNodeAnim(animation, nodeName, animIdx);
 
 				if (pNodeAnim == nullptr)
 				{

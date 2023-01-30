@@ -24,10 +24,18 @@ namespace nsAWA {
 		}
 
 		void CPlayerAction::Init(
+			CVector3& position,
+			CQuaternion& rotation,
 			CPlayerStatus* playerStatus, 
 			nsItem::CItemManager* playerItemManager,
-			nsFeature::CFeatureManager* playerFeatureManager
+			nsFeature::CFeatureManager* playerFeatureManager,
+			nsPlayerAnimation::CPlayerAnimation* playerAnimation
 		) {
+			//座標を取得。
+			m_position = &position;
+
+			//回転を取得。
+			m_rotation = &rotation;
 
 			//カメラを検索。
 			m_mainCamera = FindGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
@@ -40,15 +48,15 @@ namespace nsAWA {
 
 			//プレイヤーのステータス変化管理クラスを保持。
 			m_playerFeatureManager = playerFeatureManager;
+
+			//プレイヤーアニメーションのポインタを取得。
+			m_playerAnimation = playerAnimation;
 		}
 
 		void CPlayerAction::Update(float deltaTime) {
 
 			//deltaTimeを更新(各関数で必要になるため)。
 			UpdateDeltaTime(deltaTime);
-
-			//前方向を更新。
-			UpdateForwardDirection();
 
 			//MPを自動回復。
 			AutoHealMP();
@@ -73,17 +81,17 @@ namespace nsAWA {
 			}
 		}
 
-		void CPlayerAction::Move(float inputX, float inputZ) {
+		void CPlayerAction::Move(float inputX, float inputZ, float speed) {
 
 			//ダッシュ状態か。
-			if (m_state == EnPlayerState::enDash) {
+			if (m_state == EnPlayerState::enRun) {
 
 				//ダッシュにより、SPを減少させる。
 				DamageSPDash();
 			}
 
 			//移動量を計算。
-			CVector3 moveAmount = CalculateMoveAmount(inputX, inputZ);
+			CVector3 moveAmount = CalculateMoveAmount(inputX, inputZ, speed);
 
 			//移動方向を計算。
 			m_moveDirection = moveAmount;
@@ -91,10 +99,10 @@ namespace nsAWA {
 			m_moveDirection.Normalize();
 
 			//移動。
-			m_position += moveAmount;
+			*m_position += moveAmount;
 		}
 
-		void CPlayerAction::Rotate() {
+		void CPlayerAction::Rotate(bool slerp) {
 
 			//入力による回転角度を求める。
 			float angle = atan2(-m_moveDirection.x, m_moveDirection.z);
@@ -103,11 +111,19 @@ namespace nsAWA {
 			CQuaternion rotSource = CQuaternion::Identity();
 			rotSource.SetRotation(CVector3::AxisY(), -angle);
 
-			//回転速度の補間率を求める。
-			float rotationSlerpRate = kRotationSlerpRate * m_deltaTimeRef;
+			//補間する？
+			if (slerp) {
+				//回転速度の補間率を求める。
+				float rotationSlerpRate = kRotationSlerpRate * m_deltaTimeRef;
 
-			//線形補間。
-			m_rotation.Slerp(rotationSlerpRate, m_rotation, rotSource);
+				//線形補間。
+				(*m_rotation).Slerp(rotationSlerpRate, *m_rotation, rotSource);
+			}
+			else {
+
+				//そのまま設定。
+				*m_rotation = rotSource;
+			}
 		}
 
 		void CPlayerAction::Guard() {
@@ -141,38 +157,65 @@ namespace nsAWA {
 			//m_playerItemManager->SubSelectItemNum();
 		}
 
-		void CPlayerAction::SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill) {
+		void CPlayerAction::SetActiveSkill(int activeSkillNum, nsSkill::CActiveSkill* activeSkill) {
 
-			//アクティブスキルを設定。
-			m_activeSkill[static_cast<int>(activeSkillNum)] = activeSkill;
+			//現在登録しているアクティブスキルを破棄。
+			if (m_activeSkill[activeSkillNum] != nullptr) {
+
+				delete m_activeSkill[activeSkillNum];
+				m_activeSkill[activeSkillNum] = nullptr;
+			}
+
+			//新たにアクティブスキルを設定。
+			m_activeSkill[activeSkillNum] = activeSkill;
 		}
+
+#ifdef _DEBUG
+
+		const std::string& CPlayerAction::GetActiveSkillName()const {
+
+			if (m_activeSkill[0] == nullptr) {
+
+				return "NoSkill";
+			}
+
+			return m_activeSkill[0]->GetName();
+		}
+#endif // _DEBUG
+
 
 		void CPlayerAction::UseActiveSkill(EnActiveSkillListNumber activeSkillNum) {
 
 			//消費MPを取得。
 			float useMP = m_activeSkill[static_cast<int>(activeSkillNum)]->GetUseMP();
 
-			//MPが足りているなら。
-			if (m_playerStatus->GetMP() >= useMP) {
+			//MPが足りないなら。
+			if (m_playerStatus->GetMP() < useMP) {
 
-				//MPを消費。
-				m_playerStatus->DamageMP(useMP);
-
-				//アクティブスキルが使用できない状態だったら。
-				if (!m_playerFeatureManager->CanUseActiveSkill()) {
-
-					//専用エフェクトを再生。（未実装）
-
-					//終了。
-					return;
-				}
-
-				//アクティブスキルを使用。
-				m_activeSkill[static_cast<int>(activeSkillNum)]->Execute();
+				//早期リターン。
+				return;
 			}
+
+			//MPを消費。
+			m_playerStatus->DamageMP(useMP);
+
+			//アクティブスキルが使用できない状態だったら。
+			if (!m_playerFeatureManager->CanUseActiveSkill()) {
+
+				//専用エフェクトを再生。（未実装）
+
+				//終了。
+				return;
+			}
+
+			//アクティブスキルのアニメーションを予約。
+			m_playerAnimation->ReserveActiveSkillAnimation(m_activeSkill[static_cast<int>(activeSkillNum)]);
+
+			//アクティブスキル使用状態に。
+			SetState(EnPlayerState::enUseActiveSkill);
 		}
 
-		const CVector3 CPlayerAction::CalculateMoveAmount(float inputX, float inputZ) {
+		const CVector3 CPlayerAction::CalculateMoveAmount(float inputX, float inputZ, float speed) {
 
 			//カメラの前方向、右方向を取得。
 			auto cameraForward = m_mainCamera->GetForwardDirection();
@@ -188,10 +231,14 @@ namespace nsAWA {
 			float moveAmountf = 0.0f;
 
 			//ダッシュ状態か。
-			if (m_state == EnPlayerState::enDash) {
+			if (m_state == EnPlayerState::enRun) {
 
 				//走る速度を代入。
 				moveAmountf = kMoveAmount_Walk * kMoveAmount_Dash;
+			}
+			else if (speed > FLT_EPSILON) {
+
+				moveAmountf = speed;
 			}
 			else {
 				//歩く速度を代入。
@@ -205,21 +252,6 @@ namespace nsAWA {
 
 			//リターン。
 			return moveAmount;
-		}
-
-		void CPlayerAction::UpdateForwardDirection() {
-
-			//回転行列を計算。
-			auto mRot = CMatrix::Identity();
-			mRot.MakeRotationFromQuaternion(m_rotation);
-
-			//前方向を設定。
-			m_forwardDirection.x = mRot.m_fMat[2][0];
-			m_forwardDirection.y = mRot.m_fMat[2][1];
-			m_forwardDirection.z = mRot.m_fMat[2][2];
-
-			//正規化。
-			m_forwardDirection.Normalize();
 		}
 
 		void CPlayerAction::AutoHealMP() {

@@ -1,0 +1,12 @@
+SIZE,Medium,,,,
+POSITION,0,8,10,,
+FEATURE,Damage,Normal,Magical,20,TRUE
+*,,,,,
+SIZE,Large,,,,
+POSITION,0,8,10,,
+FEATURE,Damage,Normal,Physical,50,TRUE
+*,,,,,
+SIZE,Large,,,,
+POSITION,0,8,10,,
+FEATURE,Damage,Normal,Physical,50,TRUE
+*,,,,,

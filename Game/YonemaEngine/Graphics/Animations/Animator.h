@@ -20,13 +20,20 @@ namespace nsYMEngine
 	{
 		namespace nsAnimations
 		{
-			struct SAnimationInitData : private nsUtils::SNoncopyable
+			struct SAnimationInitData
 			{
 				constexpr SAnimationInitData() = default;
 
 				SAnimationInitData(
 					unsigned int numAnimations,
 					const char* animationFilePaths[]
+				);
+
+				~SAnimationInitData() = default;
+
+				void Init(
+					unsigned int numAnims,
+					const char* animFilePaths[]
 				);
 
 				unsigned int numAnimations = 0;
@@ -39,13 +46,20 @@ namespace nsYMEngine
 				constexpr CAnimator() = default;
 				~CAnimator();
 
-				bool Init(const SAnimationInitData& animInitData, CSkelton* pSkelton);
+				bool Init(
+					const SAnimationInitData& animInitData,
+					CSkelton* pSkelton,
+					bool loadingAsynchronous,
+					bool regiseterAnimBank
+				);
 
 				void Release();
 
 				void PlayAnimation(unsigned int animIdx) noexcept;
 
 				void PlayAnimationFromBeginning(unsigned int animIdx) noexcept;
+
+				void PlayAnimationFromMiddle(unsigned int animIdx, float timer) noexcept;
 
 				void CalcAndGetAnimatedBoneTransforms(
 					std::vector<nsMath::CMatrix>* pMTransforms) noexcept;
@@ -56,6 +70,11 @@ namespace nsYMEngine
 				{
 					animSpeed >= 0.0f ?
 						m_animationSpeed = animSpeed : m_animationSpeed = m_animationSpeed;
+				}
+
+				constexpr float GetAnimationSpeed() const noexcept
+				{
+					return m_animationSpeed;
 				}
 
 				constexpr bool IsPlaying() const noexcept
@@ -93,11 +112,34 @@ namespace nsYMEngine
 					m_animationClips[animIdx]->AddAnimationEventFunc(animationEventFunc);
 				}
 
+				inline bool IsLoaded() const noexcept
+				{
+					if (m_animationClips.empty())
+					{
+						return true;
+					}
+
+					for (const auto* animClip : m_animationClips)
+					{
+						if (animClip->IsLoaded() != true)
+						{
+							return false;
+						}
+					}
+
+					return true;
+				}
+
 			private:
 
 				void Terminate();
 
-				bool InitAnimationClips(const SAnimationInitData& animInitData, CSkelton* pSkelton);
+				bool InitAnimationClips(
+					const SAnimationInitData& animInitData,
+					CSkelton* pSkelton,
+					bool loadingAsynchronous,
+					bool regiseterAnimBank
+				);
 
 
 			private:
@@ -107,6 +149,7 @@ namespace nsYMEngine
 				bool m_isPlaying = true;	// çÏê¨ÇµÇΩèuä‘Ç©ÇÁçƒê∂äJén
 				float m_animationSpeed = 1.0f;
 				bool m_isLoop = true;
+				CSkelton* m_pSkelton = nullptr;
 			};
 
 		}

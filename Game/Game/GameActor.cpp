@@ -44,13 +44,58 @@ namespace nsAWA {
 		OnDestroySub();
 	}
 
+	void IGameActor::UpdateForwardDirection() {
+
+		//回転行列を計算。
+		auto mRot = CMatrix::Identity();
+		mRot.MakeRotationFromQuaternion(m_rotation);
+
+		//前方向を設定。
+		m_forwardDirection.x = mRot.m_fMat[2][0];
+		m_forwardDirection.y = mRot.m_fMat[2][1];
+		m_forwardDirection.z = mRot.m_fMat[2][2];
+
+		//正規化。
+		m_forwardDirection.Normalize();
+	}
+
 	void IGameActor::Update(float deltaTime) {
+
+		//ヒットストップ中なら。
+		if (m_hitStopTimer > FLT_EPSILON) {
+
+			//タイマーを更新。
+			m_hitStopTimer -= deltaTime;
+
+			//モデルの座標を設定。
+			m_modelRenderer->SetPosition(m_position + m_positionOffset);
+
+			//終了。
+			return;
+		}
+		else {
+
+			//ヒットストップタイマーを初期化。
+			m_hitStopTimer = 0.0f;
+
+			//アニメーション速度を元に戻す。
+			m_modelRenderer->SetAnimationSpeed(1.0f);
+		}
+
+		//前方向を更新。
+		UpdateForwardDirection();
 
 		//パッシブスキルを更新。
 		m_passiveSkillManager->UpdatePassiveSkill();
 
 		//派生クラスを更新。
 		UpdateActor(deltaTime);
+
+		//モデルの座標を設定。
+		m_modelRenderer->SetPosition(m_position + m_positionOffset);
+
+		//回転情報を設定。
+		m_modelRenderer->SetRotation(m_rotation);
 
 		//ステータス変化を更新。
 		m_featureManager->UpdateFeature(deltaTime);

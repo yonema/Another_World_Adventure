@@ -24,6 +24,7 @@ namespace nsYMEngine
 			enWeakAttack,				//弱攻撃
 			enStrongAttack,				//強攻撃
 			enDashPreparation,			//ダッシュ準備
+			enStep,						//ステップ
 			enGuardPreparation,			//ガード準備
 			enGuard,					//ガード
 			enSkillPreparation,			//スキル準備
@@ -86,6 +87,11 @@ namespace nsYMEngine
 				{CGamepad::EnPadButton::enRB2},
 				{CKeyboard::EnKeyButton::en7}
 			},
+			//enStep
+			{
+				{CGamepad::EnPadButton::enA},
+				{CKeyboard::EnKeyButton::enJ}
+			},
 			// enGuardPreparation
 			{
 				{CGamepad::EnPadButton::enRB1},
@@ -99,37 +105,37 @@ namespace nsYMEngine
 			//enSkillPreparation
 			{
 				{CGamepad::EnPadButton::enLB1},
-				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+				{CKeyboard::EnKeyButton::enB}
 			},
 			//enUseSkill_1
 			{
 				{CGamepad::EnPadButton::enA},
-				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+				{CKeyboard::EnKeyButton::enJ}
 			},
 			//enUseSkill_2
 			{
 				{CGamepad::EnPadButton::enB},
-				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+				{CKeyboard::EnKeyButton::enK}
 			},
 			//enUseSkill_3
 			{
 				{CGamepad::EnPadButton::enX},
-				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+				{CKeyboard::EnKeyButton::enL}
 			},
 			//enUseSkill_4
 			{
 				{CGamepad::EnPadButton::enY},
-				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+				{CKeyboard::EnKeyButton::enI}
 			},
 			//enUseSkill_5
 			{
 				{CGamepad::EnPadButton::enRB1},
-				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+				{CKeyboard::EnKeyButton::en7}
 			},
 			//enUseSkill_6
 			{
 				{CGamepad::EnPadButton::enRB2},
-				{CKeyboard::EnKeyButton::enSpace,CKeyboard::EnKeyButton::enLShift}	//後で変更
+				{CKeyboard::EnKeyButton::en8}
 			},
 			//enUseItem
 			{

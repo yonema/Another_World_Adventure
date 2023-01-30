@@ -38,10 +38,10 @@ namespace nsYMEngine
 				aiProcess_GenSmoothNormals			|	// 全ての頂点になめらかな法線を生成
 				aiProcess_LimitBoneWeights			|	// 1つの頂点に影響を与えるボーンの最大数を制限
 				aiProcess_ImproveCacheLocality		|	// 頂点キャッシュの局所性を高めるために三角形の順序を変更
-				aiProcess_RemoveRedundantMaterials	|	// 冗長なマテリアルの消去
-				aiProcess_FindInvalidData			|	// 無効なデータを探し、消去・修正
-				aiProcess_GenUVCoords				|	// UV以外のマッピングをUVへ変換
-				aiProcess_OptimizeMeshes			|	// メッシュを最適化して数を減らす
+				//aiProcess_RemoveRedundantMaterials	|	// 冗長なマテリアルの消去
+				//aiProcess_FindInvalidData			|	// 無効なデータを探し、消去・修正
+				//aiProcess_GenUVCoords				|	// UV以外のマッピングをUVへ変換
+				//aiProcess_OptimizeMeshes			|	// メッシュを最適化して数を減らす
 				aiProcess_FlipUVs					|	// UV座標のY座標を反転する。DirectXの場合必須。
 				aiProcess_FlipWindingOrder;				// CCWをCWにする。背面を右回りでカリングする。DirectXの場合必須。
 
@@ -79,6 +79,25 @@ namespace nsYMEngine
 				aiProcess_RemoveComponent |
 				aiProcess_GenNormals;
 
+			static constexpr unsigned int g_kLevel3DRemoveComponentFlags = 
+				aiComponent_NORMALS |
+				aiComponent_TANGENTS_AND_BITANGENTS |
+				aiComponent_COLORS |
+				aiComponent_TEXCOORDS |
+				aiComponent_BONEWEIGHTS |
+				aiComponent_ANIMATIONS |
+				aiComponent_TEXTURES |
+				aiComponent_LIGHTS |
+				aiComponent_CAMERAS |
+				aiComponent_MESHES |
+				aiComponent_MATERIALS;
+
+			static constexpr unsigned int g_kLevel3DPostprocessFlags =
+				aiProcess_JoinIdenticalVertices |
+				aiProcess_MakeLeftHanded |
+				aiProcess_Triangulate |
+				aiProcess_RemoveComponent;
+
 
 			//////// Functions ////////
 
@@ -87,7 +106,8 @@ namespace nsYMEngine
 				Assimp::Importer*& pImporter,
 				const aiScene*& pScene,
 				unsigned int removeFlags = 0,
-				unsigned int postprocessFlag = 0
+				unsigned int postprocessFlag = 0,
+				bool removeLineAndPoint = true
 			);
 
 			static inline void AiMatrixToMyMatrix(

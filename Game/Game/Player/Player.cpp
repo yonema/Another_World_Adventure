@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "../Weapon/Weapon.h"
 #include "../Armor/Armor.h"
+#include "../Skill/ActiveSkillList.h"
 
 #ifdef _DEBUG
 #include "../Monster/Monster.h"
@@ -24,7 +25,7 @@ namespace nsAWA {
 		bool CPlayer::StartSub() {
 
 			//アニメーションを初期化。
-			m_animation.Init(&m_input, &m_action);
+			m_animation.Init(this, &m_input, &m_action);
 
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();
@@ -48,7 +49,7 @@ namespace nsAWA {
 			m_input.Init(&m_action, &m_animation);
 
 			//アクションクラスを初期化。
-			m_action.Init(&m_status, GetItemManager(), GetFeatureManager());
+			m_action.Init(m_position, m_rotation, &m_status, GetItemManager(), GetFeatureManager(),&m_animation);
 
 			//当たり判定を初期化。
 			m_collider.Init(this);
@@ -78,6 +79,9 @@ namespace nsAWA {
 			//プレイヤーモデルを破棄。
 			DeleteGO(m_modelRenderer);
 
+			//アニメーションを破棄。
+			m_animation.Release();
+
 			//武器を破棄。
 			m_weaponManager.Release();
 
@@ -93,8 +97,27 @@ namespace nsAWA {
 
 		void CPlayer::UpdateActor(float deltaTime) {
 
-			//ステートの変更状況を初期化。
-			m_action.ResetChangeState();
+			//死んでいるなら。
+			if (IsDeath()) {
+
+				//死亡状態に。
+				m_action.SetState(EnPlayerState::enDeath);
+
+				//アニメーションを更新。
+				m_animation.Update(m_action.IsChangeState(), m_action.GetState());
+
+				//ステートの変更状況を初期化。
+				m_action.ResetChangeState();
+
+				//コライダーを破棄。
+				if (!m_collider.IsReleased()) {
+
+					m_collider.Release();
+				}
+
+				//これ以上は何もせず終了。
+				return;
+			}
 
 			//入力クラスを更新。
 			m_input.Update(m_modelRenderer->IsPlaying());
@@ -105,22 +128,19 @@ namespace nsAWA {
 			//アニメーションを更新。
 			m_animation.Update(m_action.IsChangeState(), m_action.GetState());
 
+			//ステートの変更状況を初期化。
+			m_action.ResetChangeState();
+
 			//武器管理クラスを更新。
 			m_weaponManager.Update();
-
-			//座標を設定。
-			m_modelRenderer->SetPosition(m_action.GetPosition());
-
-			//回転情報を設定。
-			m_modelRenderer->SetRotation(m_action.GetRotation());
 
 			//トリガーを更新。
 			m_collider.Update();
 
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
-			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.4f %s", m_status.GetHP(),m_input.GetCoolTime() ? L"true" : L"false");
+			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32); 
+			StringCbPrintf(m_dispText, dispTextSize, L"Skill = %s %s", nsUtils::GetWideStringFromString(m_action.GetActiveSkillName()).c_str(),m_input.GetCoolTime() ? L"true" : L"false");
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}
@@ -146,14 +166,33 @@ namespace nsAWA {
 			else {
 				//ダメージをくらう。
 				m_status.DamageHP(damage);
-				m_action.SetState(EnPlayerState::enDamage);
+
+				//ひるみ値を加算。
+				m_status.AddWinceValue(damage);
+
+				//ひるみ値がひるみ値の区切りを超えていたら。
+				if (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {
+
+					//ダメージ状態に設定。
+					m_action.SetState(EnPlayerState::enDamage);
+
+					//クールタイムをONに設定。
+					m_input.CoolTimeOn();
+
+					//一回ひるんだので、二回以上のひるみは無効とする。
+					while (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {
+
+						//ひるみ値を減算。
+						m_status.SubWinceValue(m_status.GetWinceDelimiter());
+					}
+				}
 			}
 		}
 
-		void CPlayer::SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill) {
+		void CPlayer::SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill) {
 
 			//アクティブスキルを設定。
-			m_action.SetActiveSkill(activeSkillNum, activeSkill);
+			m_action.SetActiveSkill(setNum, activeSkill);
 		}
 
 		void CPlayer::CreatePlayerModel() {
@@ -168,20 +207,24 @@ namespace nsAWA {
 			modelInitData.vertexBias.AddRotationX(nsMath::YM_PIDIV2);
 			modelInitData.vertexBias.AddRotationZ(nsMath::YM_PI);
 
-			//アニメーションのデータを定義。
-			const char* animFilePath[static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum)] = { nullptr };
 
-			//アニメーションの数だけまわす。
-			for (int animIndex = 0; animIndex < static_cast<int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum); animIndex++) {
+			//アニメーションの数を取得。
+			const int animNum = static_cast<int>(m_animation.GetAnimFilePath().size());
 
-				//アニメーションを取り出し、格納。
-				animFilePath[animIndex] = m_animation.GetAnimFilePath()[animIndex].c_str();
+			//アニメーションのファイルパスの配列を定義。
+			std::vector<const char*> animNumVec;
+
+			//アニメーションの数だけ回してファイルパスを格納。
+			for (int animIndex = 0; animIndex < animNum; animIndex++) {
+
+				//アニメーションのファイルパスを取得。
+				animNumVec.emplace_back(m_animation.GetAnimFilePath()[animIndex].c_str());
 			}
 
 			//アニメーションのデータを生成。
 			SAnimationInitData* animData = new SAnimationInitData(
-				static_cast<unsigned int>(nsPlayerAnimation::CPlayerAnimation::EnAnimName::enNum),
-				animFilePath
+				static_cast<unsigned int>(animNum),
+				animNumVec.data()
 			);
 			
 			//アニメーションを初期化。

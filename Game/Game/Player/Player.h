@@ -1,11 +1,11 @@
 #pragma once
+#include "../GameActor.h"
 #include "PlayerStatus.h"
 #include "PlayerAction.h"
 #include "PlayerInput.h"
 #include "PlayerAnimation/PlayerAnimation.h"
 #include "PlayerCollider.h"
 #include "PlayerWeaponManager.h"
-#include "../GameActor.h"
 
 namespace nsAWA {
 
@@ -35,6 +35,12 @@ namespace nsAWA {
 
 			void ApplyDamage(float damage, float power = 0.0f, bool canGuard = true)override final;
 
+			bool IsDeath()const override final {
+
+				//HPが0以下かどうかをリターン。
+				return m_status.GetHP() <= FLT_EPSILON;
+			}
+
 			void HealHP(float healValue)override final {
 
 				//HPを回復。
@@ -52,21 +58,10 @@ namespace nsAWA {
 			}
 
 		public:
-			const CVector3& GetPosition()const override final {
+			CPlayerAction& GetPlayerAction() {
 
-				//座標を取得。
-				return m_action.GetPosition();
-			}
-
-			const CQuaternion& GetRotation()const {
-
-				//回転情報を取得。
-				return m_action.GetRotation();
-			}
-
-			const CVector3& GetForwardDirection()const override final {
-
-				return m_action.GetForwardDirection();
+				//プレイヤーアクションクラスを取得。
+				return m_action;
 			}
 
 			CPlayerStatus* GetStatus()override final;
@@ -81,7 +76,8 @@ namespace nsAWA {
 				return &m_collider;
 			}
 
-			void SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill);
+			void SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill);
+
 		private:
 			void CreatePlayerModel();
 
@@ -89,7 +85,6 @@ namespace nsAWA {
 
 			void CreateArmor();
 		private:
-			CModelRenderer* m_modelRenderer = nullptr;				//プレイヤーモデル
 			CPlayerInput m_input;									//入力
 			CPlayerAction m_action;									//アクション
 			nsPlayerAnimation::CPlayerAnimation m_animation;		//アニメーション

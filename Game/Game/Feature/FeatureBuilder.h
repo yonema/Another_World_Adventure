@@ -10,7 +10,7 @@ namespace nsAWA {
 		class CFeatureBuilder : nsUtils::SNoncopyable
 		{
 		public:
-			void CreateFeature(IGameActor* target, std::list<std::vector<std::string>> featureList);
+			void CreateFeature(IGameActor* creator, IGameActor* target, std::list<std::vector<std::string>> featureList);
 		};
 	}
 }

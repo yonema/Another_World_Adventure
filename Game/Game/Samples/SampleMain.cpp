@@ -1,61 +1,104 @@
 #include "SampleMain.h"
+#include "ModelRendererSample.h"
 #include "SkeltalAnimationSample.h"
-#include "SpriteSample.h"
-#include "FontSample.h"
-#include "PhysicsSample.h"
-#include "TriggerSample.h"
-#include "CharacterControllerSample.h"
 #include "AnimationEventSample.h"
 #include "GetBoneMatrixSample.h"
+#include "LoadAsynchronousSample.h"
+#include "DrawInstancingSample.h"
+#include "SpriteSample.h"
+#include "FontSample.h"
 #include "EffectSample.h"
 #include "SoundSample.h"
 #include "NavMeshSample.h"
+#include "PhysicsSample.h"
+#include "TriggerSample.h"
+#include "CharacterControllerSample.h"
+#include "DrawWorldSample.h"
+#include "ShareAnimationSample.h"
 
 namespace nsAWA
 {
 	namespace nsSamples
 	{
+		namespace
+		{
+			enum class EnSampleIdx
+			{
+				enModelRenderer,
+				enSkeltalAnimation,
+				enAnimationEvent,
+				enGetBoneMatrix,
+				enLoadAsynchronous,
+				enDrawInstancing,
+				enShareAnimation,
+				enSprite,
+				enFont,
+				enEffect,
+				enSound,
+				enNavMesh,
+				enPhysics,
+				enTrigger,
+				enCharacterController,
+				enDrawWorld,
+			};
+
+			constexpr EnSampleIdx g_kSampleIdx = EnSampleIdx::enShareAnimation;
+		}
+
 		bool CSampleMain::Start()
 		{
-			constexpr int kSampleIdx = 0;
-
-			switch (kSampleIdx)
+			switch (g_kSampleIdx)
 			{
-			case 0:
-				m_sampleGO = NewGO<CSkeltalAnimationSample>(EnGOPriority::enMid, "SkeltalAnimationSample");
+			case EnSampleIdx::enModelRenderer:
+				m_sampleGO = NewGO<CModelRendererSample>("ModelRendererSample");
 				break;
-			case 1:
-				m_sampleGO = NewGO<CSpriteSample>(EnGOPriority::enMid, "SpriteSample");
+			case EnSampleIdx::enSkeltalAnimation:
+				m_sampleGO = NewGO<CSkeltalAnimationSample>("SkeltalAnimationSample");
 				break;
-			case 2:
-				m_sampleGO = NewGO<CFontSample>(EnGOPriority::enMid, "FontSample");
+			case EnSampleIdx::enAnimationEvent:
+				m_sampleGO = NewGO<CAnimationEventSample>("AnimationEventSample");
 				break;
-			case 3:
-				m_sampleGO = NewGO<CPhysicsSample>(EnGOPriority::enMid, "PhysicsSample");
+			case EnSampleIdx::enGetBoneMatrix:
+				m_sampleGO = NewGO<CGetBoneMatrixSample>("GetBoneMatrixSample");
 				break;
-			case 4:
-				m_sampleGO = NewGO<CTriggerSample>(EnGOPriority::enMid, "TriggerSample");
+			case EnSampleIdx::enLoadAsynchronous:
+				m_sampleGO = NewGO<CLoadAsynchronousSample>("LoadAsynchronousSample");
 				break;
-			case 5:
-				m_sampleGO = NewGO<CCharacterControllerSample>(EnGOPriority::enMid, "CharacterControllerSample");
+			case EnSampleIdx::enDrawInstancing:
+				m_sampleGO = NewGO<CDrawInstancingSample>("DrawInstancingSample");
 				break;
-			case 6:
-				m_sampleGO = NewGO<CAnimationEventSample>(EnGOPriority::enMid, "AnimationEventSample");
+			case EnSampleIdx::enShareAnimation:
+				m_sampleGO = NewGO<CShareAnimationSample>("ShareAnimationSample");
 				break;
-			case 7:
-				m_sampleGO = NewGO<CGetBoneMatrixSample>(EnGOPriority::enMid, "GetBoneMatrixSample");
+			case EnSampleIdx::enSprite:
+				m_sampleGO = NewGO<CSpriteSample>("SpriteSample");
 				break;
-			case 8:
-				m_sampleGO = NewGO<CEffectSample>(EnGOPriority::enMid, "EffectSample");
+			case EnSampleIdx::enFont:
+				m_sampleGO = NewGO<CFontSample>("FontSample");
 				break;
-			case 9:
-				m_sampleGO = NewGO<CSoundSample>(EnGOPriority::enMid, "SoundSample");
+			case EnSampleIdx::enEffect:
+				m_sampleGO = NewGO<CEffectSample>("EffectSample");
 				break;
-			case 10:
-				m_sampleGO = NewGO<CNavMeshSample>(EnGOPriority::enMid, "NavMeshSample");
+			case EnSampleIdx::enSound:
+				m_sampleGO = NewGO<CSoundSample>("SoundSample");
+				break;
+			case EnSampleIdx::enNavMesh:
+				m_sampleGO = NewGO<CNavMeshSample>("NavMeshSample");
+				break;
+			case EnSampleIdx::enPhysics:
+				m_sampleGO = NewGO<CPhysicsSample>("PhysicsSample");
+				break;
+			case EnSampleIdx::enTrigger:
+				m_sampleGO = NewGO<CTriggerSample>("TriggerSample");
+				break;
+			case EnSampleIdx::enCharacterController:
+				m_sampleGO = NewGO<CCharacterControllerSample>("CharacterControllerSample");
+				break;
+			case EnSampleIdx::enDrawWorld:
+				m_sampleGO = NewGO<CDrawWorldSample>("DrawWorldSample");
 				break;
 			default:
-				m_sampleGO = NewGO<CSkeltalAnimationSample>(EnGOPriority::enMid, "SkeltalAnimationSample");
+				m_sampleGO = NewGO<CModelRendererSample>("ModelRendererSample");
 				break;
 			}
 

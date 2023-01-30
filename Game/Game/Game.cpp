@@ -5,6 +5,8 @@
 #include "Camera/MainCamera.h"
 #include "BackGround/BackGround.h"
 #include "Item/AllItemList.h"
+#include "Monster/MonsterList.h"
+#include "Skill/ActiveSkillList.h"
 
 #ifdef _DEBUG
 #include "Monster/Monster.h"
@@ -12,6 +14,7 @@
 #include "Item/SelfItem.h"
 #include "Feature/AbnormalStatus/Poison.h"
 #include "Item/ItemManager.h"
+#include "Monster/AI/MonsterAIController.h"
 #endif
 
 namespace nsAWA
@@ -24,6 +27,9 @@ namespace nsAWA
 		//ワイヤーフレームを可視化。
 		EnableDebugDrawPhysicsLine();
 		SetCullingBoxForDebugDrawLine(100.0f, nsMath::CVector3::Zero());
+
+		// ラインのカリングボックスの自動カメラフィット機能の有効化。
+		EnableAutoFitCullingBoxToMainCamera();
 #endif
 
 		//プレイヤーを生成。
@@ -38,22 +44,29 @@ namespace nsAWA
 		//アイテムリストを生成。
 		nsItem::CAllItemList::GetInstance()->LoadAllItemList();
 
-		//csv読み込みがまだできないため、手動で設定。
-		nsMonster::SMonsterInfo monsterInfo;
-		monsterInfo.name = "Giyara";
-		monsterInfo.modelFilePath = "Assets/Models/Giyara.fbx";
-		monsterInfo.monster = nsMonster::EnMonsterList::enGiyara;
-		
-		//情報を元にモンスターモデルを生成。
-		auto monster = NewGO<nsMonster::CMonster>(nsMonster::CMonster::m_kObjName_Monster);
-		monster->Create(monsterInfo);
+		//モンスターリストを生成。
+		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
 
+		//アクティブスキルのリストを生成。
+		nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
+
+#ifdef _DEBUG
+		nsMonster::CMonster* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+		monster->SetPosition({ 0.0f,0.0f,100.0f });
+#endif
 		return true;
 	}
 
 	void CGame::Update(float deltaTime)
 	{
-		
+
+//#ifdef _DEBUG
+//		//ギヤラを出現させる。
+//		if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
+//
+//			nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+//		}
+//#endif
 	}
 
 	void CGame::OnDestroy()

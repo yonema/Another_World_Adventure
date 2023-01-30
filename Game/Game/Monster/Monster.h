@@ -2,6 +2,8 @@
 #include "../GameActor.h"
 #include "MonsterStatus.h"
 #include "MonsterAnimation.h"
+#include "MonsterCollider.h"
+#include "AI/MonsterAIController.h"
 
 namespace nsAWA {
 
@@ -18,16 +20,25 @@ namespace nsAWA {
 
 		enum class EnMonsterList;
 		enum class EnMonsterState;
+		struct SMonsterInitData;
 	}
 
 	namespace nsMonster {
 
-		//モンスター情報
-		struct SMonsterInfo {
+		//モンスターのステート
+		enum class EnMonsterState {
 
-			const char* name;						//モンスター名
-			const char* modelFilePath = nullptr;	//モデルのファイルパス
-			EnMonsterList monster = static_cast<EnMonsterList>(-1);	//何のモンスターか
+			enIdle,				//待機
+			enWalk,				//歩く
+			enRun,				//走る
+			enBark,				//吠える
+			enWeakAttack,		//弱攻撃
+			enStrongAttack,		//強攻撃
+			enDamage,			//被弾
+			enDeath,			//死亡
+
+			enNum,		//ステートの数
+			enNone = -1	//設定なし
 		};
 
 		//モンスタークラス
@@ -43,27 +54,32 @@ namespace nsAWA {
 
 			void UpdateActor(float deltaTime)override final;
 
-			void Create(const SMonsterInfo& monsterInfo);
+			void Create(const SMonsterInitData& monsterInfo);
 
 			void ApplyDamage(float damage, float power = 0.0f, bool canGuard = true)override final;
 
-			void HealHP(float healValue)override final {};
+			bool IsDeath()const override final {
+
+				//HPが0以下かどうかをリターン。
+				return m_status.GetHP() <= FLT_EPSILON;
+			}
+
+			void HealHP(float healValue)override final {
+
+				//HPを回復。
+				m_status.HealHP(healValue);
+			}
 			void HealMP(float healValue)override final {};
 			void HealSP(float healValue)override final {};
 
-			const CVector3& GetPosition()const override final {
+			void SetForwardDirection(const CVector3& forwardDirection) {
 
-				//座標を取得。（未実装）
-				return CVector3::Zero();
+				//前方向を設定。
+				m_forwardDirection = forwardDirection;
 			}
 
-			const CVector3& GetForwardDirection()const override final {
-
-				//前方向を取得。（未実装）
-				return CVector3::Zero();
-			}
 		public:
-			void SetState(EnMonsterState state) {
+			void SetState(const EnMonsterState& state) {
 
 				//ステートが変わったら。
 				if (m_state != state) {
@@ -74,6 +90,12 @@ namespace nsAWA {
 					//ステートに変更があった。
 					m_isChangeState = true;
 				}
+			}
+
+			const EnMonsterState& GetState()const {
+
+				//ステートを取得。
+				return m_state;
 			}
 
 			CStatus* GetStatus()override final;
@@ -88,14 +110,22 @@ namespace nsAWA {
 				return col;
 			}
 
-		private:
-			void CreateMonsterModel(const SMonsterInfo& monsterInfo);
+			const std::string& GetName()const {
+
+				//名前を取得。
+				return m_name;
+			}
 
 		private:
-			const char* m_name = nullptr;
-			CModelRenderer* m_modelRenderer = nullptr;	//モデル
+			void CreateMonsterModel(const SMonsterInitData& monsterInfo);
+
+		private:
+			std::string m_name = "NoName";				//名前
+
+			CMonsterCollider m_collider;				//コライダー
 			CMonsterStatus m_status;					//ステータス
 			CMonsterAnimation m_animation;				//アニメーション
+			nsMonsterAI::CMonsterAIController m_AIContoller;	//AIコントローラー
 			EnMonsterState m_state = static_cast<EnMonsterState>(-1);	//ステート
 			bool m_isChangeState = false;	//ステートがこのフレームで変更された？
 			nsWeapon::CWeapon* m_weapon = nullptr;		//武器

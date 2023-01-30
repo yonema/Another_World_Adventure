@@ -3,6 +3,7 @@
 namespace nsAWA {
 
 	//前方宣言
+	class IGameActor;
 	namespace nsPlayer {
 
 		class CPlayerInput;
@@ -27,26 +28,38 @@ namespace nsAWA {
 			class CPlayerAnimationEvent : nsUtils::SNoncopyable
 			{
 			public:
-				void Init(CPlayerInput* playerInput, CPlayerAction* playerAction) {
+				void Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction) {
 
 					//各ポインタを格納。
+					m_player = player;
 					m_playerInput = playerInput;
 					m_playerAction = playerAction;
 				}
+
+				void Update();
 
 				void CoolTimeOn();
 
 				void CoolTimeOff();
 
-				void CreateTrigger(const AnimationEventDataStr& animEventDataStr);
+				void CreateTrigger(IGameActor* creator, const AnimationEventDataStr& animEventDataStr);
+
+				void MoveStart();
+
+				void MoveEnd();
+
+				void Move();
 
 				void GetAnimationEvent(const std::string& animationEventName,
 					const AnimationEventDataStr& animationEventData
 					);
 
 			private:
+				IGameActor* m_player = nullptr;			//プレイヤーのポインタ
 				CPlayerInput* m_playerInput = nullptr;	//プレイヤー入力クラス
 				CPlayerAction* m_playerAction = nullptr;//プレイヤーアクションクラス
+				bool m_isMoving = false;				//イベントによって移動している？
+				CVector3 m_playerMoveInput = CVector3::Zero();	//プレイヤーの入力方向
 			};
 		}
 	}

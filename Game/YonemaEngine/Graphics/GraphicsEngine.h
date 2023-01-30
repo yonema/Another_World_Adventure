@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "Sprites/Sprite.h"
 #include "Renderers/RendererTable.h"
+#include "DefaultTextures.h"
 
 namespace nsYMEngine
 {
@@ -119,14 +120,9 @@ namespace nsYMEngine
 				return &m_fenceVal;
 			}
 
-			constexpr nsDx12Wrappers::CTexture* GetWhiteTexture() noexcept
+			constexpr auto& GetDefaultTextures() noexcept
 			{
-				return m_whiteTexture;
-			}
-
-			constexpr nsDx12Wrappers::CTexture* GetBlackTexture() noexcept
-			{
-				return m_blackTexture;
+				return m_defaultTextures;
 			}
 
 			constexpr const nsMath::CMatrix& GetMatrixViewProj() const noexcept
@@ -221,8 +217,7 @@ namespace nsYMEngine
 			nsDx12Wrappers::CDescriptorHeap m_sceneDataDH;
 			nsRenderers::CRendererTable m_rendererTable;
 			CCamera m_mainCamera;
-			nsDx12Wrappers::CTexture* m_whiteTexture = nullptr;
-			nsDx12Wrappers::CTexture* m_blackTexture = nullptr;
+			CDefaultTextures m_defaultTextures = {};
 			unsigned int m_descriptorSizeOfCbvSrvUav = 0;
 			unsigned int m_descriptorSizeOfRtv = 0;
 

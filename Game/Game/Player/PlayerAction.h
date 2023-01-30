@@ -10,6 +10,11 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		class CPlayerStatus;
+
+		namespace nsPlayerAnimation {
+
+			class CPlayerAnimation;
+		}
 	}
 	namespace nsSkill {
 
@@ -30,9 +35,11 @@ namespace nsAWA {
 		enum class EnPlayerState {								
 			enIdle,			//待機
 			enWalk,			//歩き
-			enDash,			//ダッシュ
-			enWeakAttack_A,	//弱攻撃A
+			enRun,			//ダッシュ
+			enWeakAttack,	//弱攻撃
 			enStrongAttack,	//強攻撃
+			enStep,			//ステップ
+			enUseActiveSkill,//アクティブスキル
 			enDamage,		//被弾
 			enDeath,		//死亡
 			enGuard,		//ガード
@@ -61,16 +68,19 @@ namespace nsAWA {
 		{
 		public:
 			void Init(
+				CVector3& position,
+				CQuaternion& rotation,
 				CPlayerStatus* playerStatus, 
 				nsItem::CItemManager* playerItemManager,
-				nsFeature::CFeatureManager* playerFeatureManager
+				nsFeature::CFeatureManager* playerFeatureManager,
+				nsPlayerAnimation::CPlayerAnimation* playerAnimation
 			);
 
 			void Update(float deltaTime);
 
-			void Move(float inputX,float inputZ);
+			void Move(float inputX,float inputZ, float speed = 0.0f);
 
-			void Rotate();
+			void Rotate(bool slerp = true);
 
 			void Guard();
 
@@ -80,19 +90,24 @@ namespace nsAWA {
 
 			void SubSelectItemNum();
 
-			void SetActiveSkill(EnActiveSkillListNumber activeSkillNum, nsSkill::CActiveSkill* activeSkill);
+			void SetActiveSkill(int activeSkillNum, nsSkill::CActiveSkill* activeSkill);
+
+#ifdef _DEBUG
+			const std::string& GetActiveSkillName()const;
+
+#endif // _DEBUG
+
+
 
 			void UseActiveSkill(EnActiveSkillListNumber activeSkillNum);
 		private:
-			const CVector3 CalculateMoveAmount(float inputX, float inputZ);
+			const CVector3 CalculateMoveAmount(float inputX, float inputZ, float speed);
 
 			void UpdateDeltaTime(float deltaTime) {
 
 				//deltaTimeを更新。
 				m_deltaTimeRef = deltaTime;
 			}
-
-			void UpdateForwardDirection();
 
 			void AutoHealMP();
 
@@ -101,23 +116,8 @@ namespace nsAWA {
 			void DamageSPDash();
 
 			void AutoHealGuardGaugeValue();
+
 		public:
-			const CVector3& GetPosition()const {
-
-				//座標を取得。
-				return m_position;
-			}
-
-			const CQuaternion& GetRotation()const {
-
-				return m_rotation;
-			}
-
-			const CVector3& GetForwardDirection()const {
-
-				return m_forwardDirection;
-			}
-			
 			void SetState(const EnPlayerState& state) {
 
 				//ステートが変わったら。
@@ -154,9 +154,8 @@ namespace nsAWA {
 				return m_isChangeState;
 			}
 		private:
-			CVector3 m_position = CVector3::Zero();				//座標
-			CQuaternion m_rotation = CQuaternion::Identity();	//回転
-			CVector3 m_forwardDirection = CVector3::Zero();		//前方向
+			CVector3* m_position = nullptr;						//座標
+			CQuaternion* m_rotation = nullptr;					//回転
 			CVector3 m_moveDirection = CVector3::Zero();		//移動方向
 			bool m_isChangeState = false;						//ステートがこのフレームで変更された？
 			EnPlayerState m_state = EnPlayerState::enNone;		//ステート
@@ -165,6 +164,7 @@ namespace nsAWA {
 
 			nsCamera::CMainCamera* m_mainCamera = nullptr;		//メインカメラのポインタ
 			CPlayerStatus* m_playerStatus = nullptr;			//プレイヤーステータスのポインタ
+			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;		//プレイヤーアニメーション
 			nsItem::CItemManager* m_playerItemManager = nullptr;//プレイヤーのアイテム管理クラスのポインタ
 			nsFeature::CFeatureManager* m_playerFeatureManager = nullptr;	//プレイヤーのステータス変化管理クラスのポインタ
 		};

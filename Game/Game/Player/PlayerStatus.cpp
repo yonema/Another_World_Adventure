@@ -1,5 +1,6 @@
 #include "YonemaEnginePreCompile.h"
 #include "PlayerStatus.h"
+#include "../CSV/CSVManager.h"
 
 namespace nsAWA {
 
@@ -7,36 +8,100 @@ namespace nsAWA {
 
 		namespace {
 
-#ifdef _DEBUG
-			//仮の定数。後ほどcsvで入力するコードを書く。
-			constexpr const float kLev1MaxHP = 200.0f;			//仮のHP最大値。
-			constexpr const float kLev1MaxMP = 100.0f;			//仮のHP最大値。
-			constexpr const float kMaxSP = 100.0f;				//SP最大値。
-			constexpr const float kMaxGuardGaugeValue = 100.0f;	//ガードゲージの最大値。
-#endif
+			constexpr const wchar_t* kPlayerStatusCSVFilePath = L"Assets/CSV/Player/Player_Status.csv";	//プレイヤーステータスのCSVのファイルパス
+			constexpr float kPlayerWinceDelimiter = 30.0f;	//プレイヤーのひるみ値の区切り（％）
+			constexpr float kPerMax = 100.0f;			//最大％
 		}
 
 		void CPlayerStatus::Init() {
 
 			//ステータスロード処理。
-			//LoadStatus();
-			//...
+			LoadStatus();
+
 #ifdef _DEBUG
-			//今回は仮にHP、最大HPを定数で入力。
-			m_HP = kLev1MaxHP / 2.0f;
-			m_maxHP = kLev1MaxHP;
 
-			//今回は仮にMP、最大MPを定数で入力。
-			m_MP = kLev1MaxMP;
-			m_maxMP = kLev1MaxMP;
+			m_attack = 2.0f;
+
+			m_intelligence = 2.0f;
+
+			m_defence = 2.0f;
+			m_mind = 2.0f;
 #endif
-			//SPを設定。
-			m_SP = kMaxSP;
-			m_maxSP = kMaxSP;
+			
+		}
 
-			//ガードゲージの値を設定。
-			m_guardGaugeValue = kMaxGuardGaugeValue;
-			m_maxGuardGaugeValue = kMaxGuardGaugeValue;
+		void CPlayerStatus::LoadStatus() {
+
+			//CSVをロード。
+			nsCSV::CCsvManager csvManager;
+			csvManager.LoadCSV(kPlayerStatusCSVFilePath);
+
+			//CSVデータを順に参照。
+			for (const auto& lineData : csvManager.GetCsvData()) {
+
+				//見出し情報を取得。
+				std::string title = lineData[0];
+
+				//値を取得。
+				std::string value = lineData[1];
+
+				//データを取得。
+				{
+					if (title == "LEVEL") {
+
+						//レベルを取得。
+						m_level = std::stoi(value);
+					}
+					else if (title == "HP") {
+
+						//HPを取得。
+						m_HP = std::stof(value);
+					}
+					else if (title == "MAXHP") {
+
+						//最大HPを取得。
+						m_maxHP = std::stof(value);
+					}
+					else if (title == "MP") {
+
+						//MPを取得。
+						m_MP = std::stof(value);
+					}
+					else if (title == "MAXMP") {
+
+						//最大MPを取得。
+						m_maxMP = std::stof(value);
+					}
+					else if (title == "SP") {
+
+						//SPを取得。
+						m_SP = std::stof(value);
+					}
+					else if (title == "MAXSP") {
+
+						//最大SPを取得。
+						m_maxSP = std::stof(value);
+					}
+					else if (title == "GG") {
+
+						//ガードゲージの値を取得。
+						m_guardGaugeValue = std::stof(value);
+					}
+					else if (title == "MAXGG") {
+
+						//ガードゲージの最大値を取得。
+						m_maxGuardGaugeValue = std::stof(value);
+					}
+					else if (title == "WINCE") {
+
+						//ひるみ値を取得。
+						m_winceValue = std::stof(value);
+					}
+
+					//プレイヤーのひるみ値の区切りを設定。
+					m_winceDelimiter = m_maxHP * kPlayerWinceDelimiter / kPerMax;
+				}
+			}
 		}
 
 		void CPlayerStatus::HealHP(float value) {

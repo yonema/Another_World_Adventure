@@ -43,9 +43,10 @@ namespace nsYMEngine
 						mFinalTransform(nsMath::CMatrix::Identity())
 					{};
 
-					nsMath::CMatrix mOffset;
-					nsMath::CMatrix mGlobalTransform;
-					nsMath::CMatrix mFinalTransform;
+					nsMath::CMatrix mOffset = nsMath::CMatrix::Identity();
+					nsMath::CMatrix mGlobalTransform = nsMath::CMatrix::Identity();
+					nsMath::CMatrix mFinalTransform = nsMath::CMatrix::Identity();
+					float length = 0.0f;
 				};
 
 				struct SVertexBoneData
@@ -80,7 +81,8 @@ namespace nsYMEngine
 					unsigned int numMeshes, 
 					const aiMesh* const* const& meshes,
 					const std::vector<unsigned int>& baseVertexNoArray,
-					unsigned int numVerteices
+					unsigned int numVerteices,
+					const std::string& retargetSkeltonName
 				);
 
 				_CONSTEXPR20_CONTAINER unsigned short GetVertexBoneID(
@@ -113,15 +115,19 @@ namespace nsYMEngine
 					unsigned int boneIdx, const nsMath::CMatrix& mGlobalTransform) noexcept
 				{
 					m_boneInfoArray[boneIdx].mGlobalTransform = mGlobalTransform;
-					nsMath::CVector3 scale;
-					scale.x = mGlobalTransform.m_vec4Mat[0].Length();
-					scale.y = mGlobalTransform.m_vec4Mat[1].Length();
-					scale.z = mGlobalTransform.m_vec4Mat[2].Length();
 					m_boneInfoArray[boneIdx].mFinalTransform = 
 						m_boneInfoArray[boneIdx].mOffset * 
 						mGlobalTransform * 
 						m_mGlobalTransformInv;
 				}
+
+				constexpr auto* GetRootNode() noexcept
+				{
+					return m_rootNodeInfo;
+				}
+
+				float GetAnimationScaled(
+					const std::string& nodeName, unsigned int boneIdx) const noexcept;
 
 			private:
 
@@ -137,15 +143,27 @@ namespace nsYMEngine
 
 				void MarkRequiredNodesForBone(const aiBone& bone);
 
+				const aiNode* PreInitSkelton(const aiNode& node) const noexcept;
+
+				void InitSkeltonLength(
+					const aiNode& node, 
+					const nsMath::CMatrix& parentTransform,
+					std::unordered_map<std::string, float>* pRetargetBase = nullptr
+				);
+
 
 			private:
+				static std::unordered_map<std::string, std::unordered_map<std::string, float>>
+					m_retargetScaleBase;
 				nsMath::CMatrix m_mGlobalTransformInv;
 				std::unordered_map<std::string, SNodeInfo> m_requiredNodeMap = {};
+				SNodeInfo* m_rootNodeInfo = nullptr;
 				std::vector<SBoneInfo> m_boneInfoArray = {};
 				std::unordered_map<std::string, unsigned int> m_boneNameToIndexMap = {};
 				std::vector<SBasicMeshInfo>* m_meshesInfo = nullptr;
 				std::vector<unsigned int> m_baseVertexNoArray = {};
 				std::vector<SVertexBoneData> m_vertexBoneDataArray = {};
+				const std::string* m_retargetSkeltonName = nullptr;
 			};
 
 		}

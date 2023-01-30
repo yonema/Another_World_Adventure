@@ -2,12 +2,13 @@
 #include "FeatureBuilder.h"
 #include "Feature.h"
 #include "HealFeature.h"
+#include "ApplyDamageFeature.h"
 
 namespace nsAWA {
 
 	namespace nsFeature {
 
-		void CFeatureBuilder::CreateFeature(IGameActor* target, std::list<std::vector<std::string>> featureList) {
+		void CFeatureBuilder::CreateFeature(IGameActor* creator, IGameActor* target, std::list<std::vector<std::string>> featureList) {
 
 			//効果のリストを順に参照。
 			for (const auto& featureStr : featureList) {
@@ -55,18 +56,56 @@ namespace nsAWA {
 						healValue
 					);
 				}
+				else if (featureStr[0] == "Damage") {
+					//[1]Normal or Const
+					
+
+					//効果を初期化。
+					feature = new nsFeature::CApplyDamageFeature;
+
+					//通常ダメージ
+					if (featureStr[1] == "Normal") {
+
+						//[2]Physical or Magic
+						//[3]power
+						//[4]canGuard
+
+						dynamic_cast<nsFeature::CApplyDamageFeature*>(feature)->Init(
+							creator,
+							target,
+							std::stof(featureStr[3]),
+							featureStr[2],
+							featureStr[4] == "TRUE" ? true : false
+						);
+					}
+					//固定ダメージ
+					else if (featureStr[1] == "Const") {
+
+						//[2]Const or Ratio
+						//[3]damage
+						//[4]canGuard
+
+						dynamic_cast<nsFeature::CApplyDamageFeature*>(feature)->Init(
+							featureStr[2],
+							target,
+							std::stof(featureStr[3]),
+							featureStr[4] == "TRUE" ? true : false
+						);
+					}
+					else {
+
+						nsGameWindow::MessageBoxError(L"ダメージタイプの設定が不適切です。");
+					}
+				}
 
 				//ターゲットを設定。
 				feature->SetTarget(target);
 
+				//効果の生成者を設定。
+				feature->SetCreator(creator);
+
 				//効果を生成。
 				feature->Create();
-				//if (featureStr[0] == "Dagame") {
-				//	//[1]Type
-				//	//[2]How
-				//	//[3]Value
-				//
-				//}
 			}
 		}
 	}

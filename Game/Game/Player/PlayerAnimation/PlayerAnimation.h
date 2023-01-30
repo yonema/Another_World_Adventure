@@ -3,96 +3,83 @@
 
 namespace nsAWA {
 
+	//前方宣言
+	namespace nsSkill {
+
+		class CActiveSkill;
+	}
 	namespace nsPlayer {
-
-		//前方宣言
+		
 		enum class EnPlayerState;
-		namespace nsPlayerAnimation {
+	}
 
-			class CPlayerAnimationBase;
-		}
+	namespace nsPlayer {
 		
 		namespace nsPlayerAnimation {
 
-			//プレイヤーアニメーション
+			//アニメーションのタイプ
+			enum class EnAnimType {
+
+				enSword,	//剣
+				enAxe,		//斧
+				enWand,		//杖
+
+				enNum,		//タイプの数
+				enNone		//設定なし
+
+			};
+
+			//アニメーションデータ
+			struct SAnimData {
+
+				std::string animName = "NoName";	//アニメーション名
+				int animNum = -1;					//アニメーションの番号
+				float speed = 0.0f;							//速度
+				bool isLoopAnim = false;					//ループフラグ
+				std::vector<SAnimationEventData> animationEvent;			//アニメーションイベント
+			};
+
+			//プレイヤーアニメーションクラス
 			class CPlayerAnimation : nsUtils::SNoncopyable
 			{
-				//アニメーションのタイプ
-				enum class EnAnimType {
-
-					enSword,	//剣
-					enAxe,		//斧
-					enWand,		//杖
-
-					enNum,		//タイプの数
-					enNone		//設定なし
-				};
-
 			public:
-				//アニメーションの名前（全て）
-				enum class EnAnimName {
+				void Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction);
 
-					enSword_Idle,	//剣待機
-					enSword_Walk,	//剣歩く
-					enSword_Dash,	//剣走る
-					enSword_WeakAttack_A,	//剣弱攻撃A
-					enSword_StrongAttack,	//剣強攻撃
-					enSword_Damage,	//剣被弾
-					enSword_Death,	//剣死亡
-					enSword_Guard,	//剣ガード
-					enSword_UseItem,	//剣アイテム使用
-					enSword_Stun,	//剣スタン
+				void Release();
 
-					enNum,			//アニメーション数
-					enNone			//名前なし
-				};
-
-				//アニメーション情報
-				enum class EnAnimInfo {
-
-					enFilePath,			//ファイルパス
-					enSpeed,			//速度
-					enLoopFlag,			//ループフラグ
-					enAnimationEvent	//アニメーションイベント
-				};
-
-				//アニメーションデータ
-				struct SAnimData {
-
-					EnAnimName animName = EnAnimName::enNone;	//アニメーションの番号
-					float speed = 0.0f;							//速度
-					bool enLoopFlag = false;					//ループフラグ
-					std::vector<SAnimationEventData> animationEvent;			//アニメーションイベント
-				};
-			public:
-				void Init(CPlayerInput* playerInput, CPlayerAction* playerAction);
-
-				std::string* GetAnimFilePath()const {
+				const std::vector<std::string>& GetAnimFilePath()const {
 
 					//アニメーションのファイルパスをリターン。
-					return m_animFilePaths;
+					return m_animFilePathArray;
 				}
 
 				void Update(bool changeState, EnPlayerState playerState);
 
 				void SetPlayerModelAndAnimEvent(CModelRenderer* playerModel);
 
-				void Release();
+				void ReserveActiveSkillAnimation(nsSkill::CActiveSkill* activeSkill) {
+
+					//アクティブスキルのアニメーション再生を予約するため、情報を取得。
+					m_activeSkill = activeSkill;
+				}
 
 			private:
 				void PlayAnimation(EnPlayerState playerState);
 
+				const SAnimData& GetAnimationData(EnPlayerState playerState);
+
 				void LoadAnimation();
 
-			private:
-				static std::string m_animFilePaths[static_cast<int>(EnAnimName::enNum)];		//アニメーションのファイルパス
+				const std::string& GetActiveSkillName()const;
 
+			private:
 				CModelRenderer* m_playerModel = nullptr;	//プレイヤーモデル
 				EnAnimType m_type = EnAnimType::enNone;		//アニメーションのタイプ
-				CPlayerAnimationBase* m_playerAnimation[static_cast<int>(EnAnimType::enNum)] = { nullptr };		//各アニメーション
 				CPlayerAnimationEvent m_animationEvent;		//プレイヤーのアニメーションイベント
+				nsSkill::CActiveSkill* m_activeSkill = nullptr;	//アクティブスキルのポインタ
 
 				std::vector<SAnimData> m_animDataList;	//アニメーションデータ
+				std::vector<std::string> m_animFilePathArray;	//アニメーションのファイルパスの配列
 			};
 		}
 	}

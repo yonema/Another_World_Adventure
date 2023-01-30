@@ -13,7 +13,7 @@ namespace nsAWA {
 			nsFeature::CFeatureBuilder featureBuilder;
 
 			//Œø‰Ê‚ğ¶¬B
-			featureBuilder.CreateFeature(m_target, m_itemInfo.featureList);
+			featureBuilder.CreateFeature(nullptr, m_target, m_itemInfo.featureList);
 		}
 	}
 }

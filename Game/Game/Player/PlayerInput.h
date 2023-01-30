@@ -49,6 +49,7 @@ namespace nsAWA {
 			CPlayerAction* m_playerAction = nullptr;	//プレイヤーアクションのポインタ
 			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;	//プレイヤーアニメーションのポインタ
 			bool m_isCoolTime = false;		//クールタイム中？
+			float m_magicTime = 0.0f;		//魔法スキルの詠唱時間
 		};
 	}
 }
