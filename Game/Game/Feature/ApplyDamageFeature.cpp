@@ -3,6 +3,7 @@
 #include "../GameActor.h"
 #include "../Status.h"
 #include "../ShakeActor.h"
+#include "../HitStop.h"
 
 namespace nsAWA {
 
@@ -12,6 +13,8 @@ namespace nsAWA {
 			constexpr float kMaxPer = 100.0f;	//最大％
 			constexpr float kRandomDamageMax = 1.0f;	//最大火力倍率
 			constexpr float kRandomDamageMin = 0.85f;	//最低火力倍率
+			constexpr float kHitStopTime = 0.15f;		//ヒットストップ時間
+			constexpr float kCameraShakeAmount = 0.1f;		//カメラシェイク量
 
 			//理論ダメージ計算式
 			constexpr float CalcDamage(
@@ -85,13 +88,17 @@ namespace nsAWA {
 			//ターゲットにダメージを与える。
 			m_target->ApplyDamage(m_damage, m_power, m_canGuard);
 
-			//両者をヒットストップ。
-			m_target->HitStop(0.1f);
-			m_creator->HitStop(0.1f);
+			IGameActor* gameActorArray[] = { m_target ,m_creator };
 
-			//両者を揺らす。
-			NewGO<CShakeActor>()->Init(m_target, 0.1f);
-			NewGO<CShakeActor>()->Init(m_creator, 0.1f);
+			//対象に対して様々な効果を与える。
+			for (const auto& gameActor : gameActorArray) {
+
+				//ヒットストップ。
+				NewGO<CHitStop>()->Init(gameActor, kHitStopTime);
+
+				//揺らす。
+				NewGO<CShakeActor>()->Init(gameActor, kCameraShakeAmount);
+			}
 
 			//破棄。
 			Release();

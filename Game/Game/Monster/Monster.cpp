@@ -140,8 +140,6 @@ namespace nsAWA {
 			SModelInitData modelInitData;
 			modelInitData.modelFilePath = monsterInfo.modelFilePath.c_str();
 			modelInitData.textureRootPath = kMonsterModelTextureRootPath;
-			modelInitData.vertexBias.AddRotationX(-(nsMath::YM_PIDIV2));
-			modelInitData.vertexBias.AddRotationY(nsMath::YM_PI);
 			
 			//アニメーションの数を取得。
 			const int animNum = static_cast<int>(monsterInfo.animationFilePath.size());
@@ -156,14 +154,11 @@ namespace nsAWA {
 				animNumVec.emplace_back(monsterInfo.animationFilePath[animIndex].c_str());
 			}
 			
-			//アニメーションのデータを生成。
-			SAnimationInitData* animData = new SAnimationInitData(
+			//アニメーションを初期化。
+			modelInitData.animInitData.Init(
 				static_cast<unsigned int>(animNum),
 				animNumVec.data()
 			);
-
-			//アニメーションのデータを設定。
-			modelInitData.animInitData = animData;
 			
 			//モンスターモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
