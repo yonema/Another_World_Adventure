@@ -80,6 +80,8 @@ namespace nsAWA {
 
 			void SetWeapon(nsWeapon::CWeapon* weapon);
 
+			void SetArmor(nsArmor::CArmor* armor);
+
 		private:
 			void CreatePlayerModel();
 

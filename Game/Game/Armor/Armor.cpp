@@ -1,14 +1,12 @@
 #include "YonemaEnginePreCompile.h"
 #include "Armor.h"
+#include "ArmorList.h"
 
 namespace nsAWA {
 
 	namespace nsArmor {
 
-		void CArmor::Create(const SArmorInfo& armorInfo, const char* modelFilePath) {
-
-			//防具モデルを生成。
-			CreateModel(modelFilePath);
+		void CArmor::Create(const SArmorInfo& armorInfo) {
 
 			//防具情報を設定。
 			m_sInfo = armorInfo;
@@ -16,33 +14,20 @@ namespace nsAWA {
 
 		void CArmor::Release() {
 
-			//防具モデルを破棄。
-			DeleteGO(m_modelRenderer);
-
 			//自身を破棄。
 			delete this;
 		}
 
-		void CArmor::CreateModel(const char* modelFilePath) {
+		CArmor* CArmorBuilder::CreateArmor(const std::string& armorName) {
 
-			//防具モデルを生成。
-			m_modelRenderer = NewGO<CModelRenderer>();
-
-			//防具モデルの初期化データを定義。
-			SModelInitData modelInitData;
-			modelInitData.modelFilePath = modelFilePath;
-			modelInitData.vertexBias.SetRotationX(nsMath::YM_PIDIV2);
-
-			//防具モデルを初期化。
-			m_modelRenderer->Init(modelInitData);
-			m_modelRenderer->SetScale(0.1f);
-		}
-
-		CArmor* CArmorBuilder::Create(const SArmorInfo& armorInfo, const char* modelFilePath) {
-
-			//防具を生成。
+			//防具の雛形を生成。
 			CArmor* armor = new CArmor;
-			armor->Create(armorInfo, modelFilePath);
+
+			//名前から防具データを取得。
+			SArmorInfo armorInfo = CArmorList::GetInstance()->GetArmorData(armorName);
+			
+			//防具を生成。
+			armor->Create(armorInfo);
 
 			//生成された防具を返す。
 			return armor;

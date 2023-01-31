@@ -17,6 +17,8 @@ namespace nsAWA {
 
 			void SetWeapon(const std::string& weaponName);
 
+			void SetArmor(const std::string& armorName);
+
 		private:
 			nsPlayer::CPlayer* m_player = nullptr;	//プレイヤーのポインタ
 		};

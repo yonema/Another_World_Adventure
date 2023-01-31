@@ -190,6 +190,7 @@
     <ClCompile Include="YonemaEngine\Graphics\Animations\UpdateAnimationManager.cpp" />
     <ClCompile Include="Game\Weapon\WeaponList.cpp" />
     <ClCompile Include="Game\HitStop.cpp" />
+    <ClCompile Include="Game\Armor\ArmorList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -391,6 +392,7 @@
     <ClInclude Include="YonemaEngine\Graphics\Animations\UpdateAnimationManager.h" />
     <ClInclude Include="Game\Weapon\WeaponList.h" />
     <ClInclude Include="Game\HitStop.h" />
+    <ClInclude Include="Game\Armor\ArmorList.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
