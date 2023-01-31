@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Armor\ArmorList.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskStandBy.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskIsButtle.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskSetFlag.cpp" />
@@ -336,6 +337,7 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Armor\ArmorList.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskStandBy.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskIsButtle.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskSetFlag.h" />

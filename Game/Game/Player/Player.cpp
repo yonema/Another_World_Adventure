@@ -43,6 +43,7 @@ namespace nsAWA {
 			if (playerManager.FindPlayer()) {
 
 				playerManager.SetWeapon("NewSword");
+				playerManager.SetArmor("NewArmor");
 			}
 
 #endif // DEBUG
@@ -204,6 +205,20 @@ namespace nsAWA {
 
 			//•Ší‚ğİ’èB
 			m_weaponManager.ChangeWeapon(weapon);
+		}
+
+		void CPlayer::SetArmor(nsArmor::CArmor* armor) {
+
+			//Šù‚É–h‹ïî•ñ‚ª“ü‚Á‚Ä‚¢‚½‚çB
+			if (m_armor != nullptr) {
+
+				//–h‹ï‚ğ”jŠüB
+				m_armor->Release();
+				m_armor = nullptr;
+			}
+
+			//–h‹ï‚ğİ’èB
+			m_armor = armor;
 		}
 
 		void CPlayer::CreatePlayerModel() {

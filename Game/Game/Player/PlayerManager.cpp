@@ -3,8 +3,8 @@
 #include "Player.h"
 #include "../Skill/ActiveSkillList.h"
 #include "../Skill/ActiveSkill.h"
-#include "../Weapon/WeaponList.h"
 #include "../Weapon/Weapon.h"
+#include "../Armor/Armor.h"
 
 namespace nsAWA {
 
@@ -63,6 +63,18 @@ namespace nsAWA {
 
 			//•Ší‚ðÝ’èB
 			m_player->SetWeapon(weapon);
+		}
+
+		void CPlayerManager::SetArmor(const std::string& armorName) {
+
+			//–h‹ï\’zƒNƒ‰ƒX‚ð¶¬B
+			nsArmor::CArmorBuilder armorBuilder;
+
+			//–h‹ï‚ð¶¬B
+			nsArmor::CArmor* armor = armorBuilder.CreateArmor(armorName);
+
+			//–h‹ï‚ðÝ’èB
+			m_player->SetArmor(armor);
 		}
 	}
 }
