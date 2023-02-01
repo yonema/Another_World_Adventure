@@ -33,6 +33,33 @@ namespace nsAWA {
 			}
 		}
 
+		void CCsvManager::SaveCSV(const wchar_t* csvFilePath, const std::list<std::vector<std::string>>& m_csvData) {
+
+			//wchar_tからcharに変換。
+			char objName[256];
+			size_t ret;
+			wcstombs_s(&ret, objName, 256, csvFilePath, _TRUNCATE);
+
+			//前回のデータファイルを削除する。
+			remove(objName);
+
+			//書き込むCSVファイルを開く。
+			std::ofstream ofs(objName);
+
+			//書き込むデータを順に参照。
+			for (const auto& dataList : m_csvData) {
+
+				for (const auto& data : dataList) {
+
+					//書き込む。
+					ofs << data << ',';
+				}
+
+				//改行。
+				ofs << std::endl;
+			}
+		}
+
 		std::vector<std::string> CCsvManager::Split(std::string& input, char delimiter) {
 
 			//getline()関数を使うため、文字列をistringstream型に変換。

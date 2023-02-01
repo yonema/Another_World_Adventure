@@ -4,6 +4,7 @@
 #include "../Weapon/Weapon.h"
 #include "../Armor/Armor.h"
 #include "../Skill/ActiveSkillList.h"
+#include "../UserData.h"
 
 #ifdef _DEBUG
 #include "../Monster/Monster.h"
@@ -77,6 +78,10 @@ namespace nsAWA {
 			//初期化。
 			m_fontRenderer->Init(fontParam);
 #endif
+			//データをロード。
+			CUserData userData;
+			userData.Load();
+
 			return true;
 		}
 

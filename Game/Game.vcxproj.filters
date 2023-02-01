@@ -191,6 +191,7 @@
     <ClCompile Include="Game\HitStop.cpp" />
     <ClCompile Include="Game\Armor\ArmorList.cpp" />
     <ClCompile Include="YonemaEngine\Effect\EffectSound.cpp" />
+    <ClCompile Include="Game\UserData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -393,6 +394,7 @@
     <ClInclude Include="Game\HitStop.h" />
     <ClInclude Include="Game\Armor\ArmorList.h" />
     <ClInclude Include="YonemaEngine\Effect\EffectSound.h" />
+    <ClInclude Include="Game\UserData.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

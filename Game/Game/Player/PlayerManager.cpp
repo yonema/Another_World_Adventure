@@ -75,7 +75,7 @@ namespace nsAWA {
 				break;
 			}
 
-			for (const auto& activeSkill : nsSkill::CActiveSkillList::GetInstance()->GetActiveSkillData()) {
+			for (const auto& activeSkill : m_canUseActiveSkillDataList) {
 
 				//武器種とタイプがあっているか、魔法スキルなら。
 				if (activeSkill.type == typeName || activeSkill.type == "Magic") {

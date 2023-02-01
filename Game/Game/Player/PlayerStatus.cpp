@@ -8,15 +8,13 @@ namespace nsAWA {
 
 		namespace {
 
-			constexpr const wchar_t* kPlayerStatusCSVFilePath = L"Assets/CSV/Player/Player_Status.csv";	//プレイヤーステータスのCSVのファイルパス
 			constexpr float kPlayerWinceDelimiter = 30.0f;	//プレイヤーのひるみ値の区切り（％）
 			constexpr float kPerMax = 100.0f;			//最大％
+			constexpr float kSPValue = 100.0f;			//SP量
+			constexpr float kGGValue = 100.0f;			//ガードゲージ量
 		}
 
 		void CPlayerStatus::Init() {
-
-			//ステータスロード処理。
-			LoadStatus();
 
 #ifdef _DEBUG
 
@@ -30,78 +28,22 @@ namespace nsAWA {
 			
 		}
 
-		void CPlayerStatus::LoadStatus() {
+		void CPlayerStatus::LoadStatus(const std::vector<std::string>& statusDataStr) {
 
-			//CSVをロード。
-			nsCSV::CCsvManager csvManager;
-			csvManager.LoadCSV(kPlayerStatusCSVFilePath);
+			//ステータスをロード。
+			m_level = std::stoi(statusDataStr[0]);
+			m_HP = std::stof(statusDataStr[1]);
+			m_maxHP = std::stof(statusDataStr[2]);
+			m_MP = std::stof(statusDataStr[3]);
+			m_maxMP = std::stof(statusDataStr[4]);
+			m_SP = kSPValue;
+			m_maxSP = kSPValue;
+			m_guardGaugeValue = kGGValue;
+			m_maxGuardGaugeValue = kGGValue;
+			m_winceValue = 0.0f;
 
-			//CSVデータを順に参照。
-			for (const auto& lineData : csvManager.GetCsvData()) {
-
-				//見出し情報を取得。
-				std::string title = lineData[0];
-
-				//値を取得。
-				std::string value = lineData[1];
-
-				//データを取得。
-				{
-					if (title == "LEVEL") {
-
-						//レベルを取得。
-						m_level = std::stoi(value);
-					}
-					else if (title == "HP") {
-
-						//HPを取得。
-						m_HP = std::stof(value);
-					}
-					else if (title == "MAXHP") {
-
-						//最大HPを取得。
-						m_maxHP = std::stof(value);
-					}
-					else if (title == "MP") {
-
-						//MPを取得。
-						m_MP = std::stof(value);
-					}
-					else if (title == "MAXMP") {
-
-						//最大MPを取得。
-						m_maxMP = std::stof(value);
-					}
-					else if (title == "SP") {
-
-						//SPを取得。
-						m_SP = std::stof(value);
-					}
-					else if (title == "MAXSP") {
-
-						//最大SPを取得。
-						m_maxSP = std::stof(value);
-					}
-					else if (title == "GG") {
-
-						//ガードゲージの値を取得。
-						m_guardGaugeValue = std::stof(value);
-					}
-					else if (title == "MAXGG") {
-
-						//ガードゲージの最大値を取得。
-						m_maxGuardGaugeValue = std::stof(value);
-					}
-					else if (title == "WINCE") {
-
-						//ひるみ値を取得。
-						m_winceValue = std::stof(value);
-					}
-
-					//プレイヤーのひるみ値の区切りを設定。
-					m_winceDelimiter = m_maxHP * kPlayerWinceDelimiter / kPerMax;
-				}
-			}
+			//プレイヤーのひるみ値の区切りを設定。
+			m_winceDelimiter = m_maxHP * kPlayerWinceDelimiter / kPerMax;
 		}
 
 		void CPlayerStatus::HealHP(float value) {
