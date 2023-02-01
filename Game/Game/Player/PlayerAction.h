@@ -92,12 +92,7 @@ namespace nsAWA {
 
 			void SetActiveSkill(int activeSkillNum, nsSkill::CActiveSkill* activeSkill);
 
-#ifdef _DEBUG
-			const std::string& GetActiveSkillName()const;
-
-#endif // _DEBUG
-
-
+			nsSkill::CActiveSkill* GetActiveSkill(int activeSkillNum)const;
 
 			void UseActiveSkill(EnActiveSkillListNumber activeSkillNum);
 		private:

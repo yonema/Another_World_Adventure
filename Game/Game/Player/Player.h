@@ -66,9 +66,9 @@ namespace nsAWA {
 
 			CPlayerStatus* GetStatus()override final;
 
-			nsWeapon::CWeapon* GetWeapon()override final;
+			nsWeapon::CWeapon* GetWeapon();
 
-			nsArmor::CArmor* GetArmor()override final;
+			nsArmor::CArmor* GetArmor();
 
 			CGameActorCollider* GetGameActorCollider() {
 
@@ -77,6 +77,8 @@ namespace nsAWA {
 			}
 
 			void SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill);
+
+			nsSkill::CActiveSkill* GetActiveSkill(int skillNum)const;
 
 			void SetWeapon(nsWeapon::CWeapon* weapon);
 

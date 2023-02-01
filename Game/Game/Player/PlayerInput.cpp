@@ -175,7 +175,7 @@ namespace nsAWA {
 				//アクティブスキルを設定。
 				CPlayerManager playerManager;
 				if (playerManager.FindPlayer()) {
-
+					std::list<nsSkill::SActiveSkillData> list = playerManager.GetCanUseActiveSkillList();
 					playerManager.SetActiveSkill(0, "JumpAttack");
 				}
 
@@ -184,6 +184,8 @@ namespace nsAWA {
 				//
 				////スキル１使用。
 				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
+
+				
 #endif 
 			}
 

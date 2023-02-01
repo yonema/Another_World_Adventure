@@ -145,9 +145,9 @@ namespace nsAWA {
 
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
-			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32); 
-			StringCbPrintf(m_dispText, dispTextSize, L"Skill = %s %s", nsUtils::GetWideStringFromString(m_action.GetActiveSkillName()).c_str(),m_input.GetCoolTime() ? L"true" : L"false");
-			m_fontRenderer->SetText(m_dispText);
+			//size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32); 
+			//StringCbPrintf(m_dispText, dispTextSize, L"Skill = %s %s", nsUtils::GetWideStringFromString(m_action.GetActiveSkillName()).c_str(),m_input.GetCoolTime() ? L"true" : L"false");
+			//m_fontRenderer->SetText(m_dispText);
 #endif
 		}
 
@@ -199,6 +199,12 @@ namespace nsAWA {
 
 			//アクティブスキルを設定。
 			m_action.SetActiveSkill(setNum, activeSkill);
+		}
+
+		nsSkill::CActiveSkill* CPlayer::GetActiveSkill(int skillNum)const {
+
+			//アクティブスキルを取得。
+			return m_action.GetActiveSkill(skillNum);
 		}
 
 		void CPlayer::SetWeapon(nsWeapon::CWeapon* weapon) {

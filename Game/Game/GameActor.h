@@ -63,10 +63,6 @@ namespace nsAWA {
 	public:
 		virtual CStatus* GetStatus() = 0;
 
-		virtual nsWeapon::CWeapon* GetWeapon() = 0;
-
-		virtual nsArmor::CArmor* GetArmor() = 0;
-
 		void SetPosition(const CVector3& position) {
 
 			//À•W‚ğİ’èB

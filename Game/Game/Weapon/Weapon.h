@@ -104,6 +104,11 @@ namespace nsAWA {
 				m_modelRenderer->GetScale();
 			}
 
+			EnWeaponType GetWeaponType()const {
+
+				//•Šíí‚ğæ“¾B
+				return m_sInfo.weaponType;
+			}
 
 		private:
 			
