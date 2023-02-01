@@ -235,6 +235,7 @@
     <ClCompile Include="Game\Weapon\WeaponList.cpp" />
     <ClCompile Include="Game\HitStop.cpp" />
     <ClCompile Include="Game\UserData.cpp" />
+    <ClCompile Include="Game\LoadGame.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavCell.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavMesh.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\Path.cpp" />
@@ -429,6 +430,7 @@
     <ClInclude Include="Game\Weapon\WeaponList.h" />
     <ClInclude Include="Game\HitStop.h" />
     <ClInclude Include="Game\UserData.h" />
+    <ClInclude Include="Game\LoadGame.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavCell.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavMesh.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\Path.h" />
