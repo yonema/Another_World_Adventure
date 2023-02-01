@@ -10,8 +10,9 @@ namespace nsAWA {
 		//アクティブスキルのデータ
 		struct SActiveSkillData {
 
+			std::string type = "NoType";	//スキルタイプ
 			std::string name = "NoName";	//名前
-			int useMP = 0;					//消費MP
+			float useMP = 0.0f;				//消費MP
 		};
 
 		//アクティブスキルのリスト
@@ -35,6 +36,12 @@ namespace nsAWA {
 			void LoadActiveSkillList();
 
 			const SActiveSkillData& GetActiveSkillData(const std::string& activeSkillName);
+
+			const std::list<SActiveSkillData>& GetActiveSkillData() {
+
+				//アクティブスキルのリストを取得。
+				return m_activeSkillList;
+			}
 
 		private:
 			void AddActiveSkill(const SActiveSkillData& activeSkillData) {

@@ -230,7 +230,6 @@
     <ClCompile Include="Game\Monster\AI\MonsterAIController.cpp" />
     <ClCompile Include="Game\Monster\MonsterAnimationEvent.cpp" />
     <ClCompile Include="Game\ShakeActor.cpp" />
-    <ClCompile Include="Game\Player\PlayerSkillChanger.cpp" />
     <ClCompile Include="Game\Skill\ActiveSkillList.cpp" />
     <ClCompile Include="Game\Player\PlayerManager.cpp" />
     <ClCompile Include="Game\Weapon\WeaponList.cpp" />
@@ -424,7 +423,6 @@
     <ClInclude Include="Game\Monster\AI\MonsterAIController.h" />
     <ClInclude Include="Game\Monster\MonsterAnimationEvent.h" />
     <ClInclude Include="Game\ShakeActor.h" />
-    <ClInclude Include="Game\Player\PlayerSkillChanger.h" />
     <ClInclude Include="Game\Skill\ActiveSkillList.h" />
     <ClInclude Include="Game\Player\PlayerManager.h" />
     <ClInclude Include="Game\Weapon\WeaponList.h" />

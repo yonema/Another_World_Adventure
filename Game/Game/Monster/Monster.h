@@ -100,10 +100,6 @@ namespace nsAWA {
 
 			CStatus* GetStatus()override final;
 
-			nsWeapon::CWeapon* GetWeapon()override final;
-
-			nsArmor::CArmor* GetArmor()override final;
-
 			CGameActorCollider* GetGameActorCollider() {
 
 				CGameActorCollider* col = nullptr;
@@ -128,8 +124,6 @@ namespace nsAWA {
 			nsMonsterAI::CMonsterAIController m_AIContoller;	//AIコントローラー
 			EnMonsterState m_state = static_cast<EnMonsterState>(-1);	//ステート
 			bool m_isChangeState = false;	//ステートがこのフレームで変更された？
-			nsWeapon::CWeapon* m_weapon = nullptr;		//武器
-			nsArmor::CArmor* m_armor = nullptr;			//防具
 		};
 	}
 }

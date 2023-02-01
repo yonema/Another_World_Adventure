@@ -1,4 +1,5 @@
 #pragma once
+#include "../Skill/ActiveSkillList.h"
 
 namespace nsAWA {
 
@@ -15,9 +16,14 @@ namespace nsAWA {
 
 			void SetActiveSkill(int setNum, const std::string& activeSkillName);
 
+			std::list<nsSkill::SActiveSkillData> GetCanUseActiveSkillList();
+			
 			void SetWeapon(const std::string& weaponName);
 
 			void SetArmor(const std::string& armorName);
+
+		private:
+			void ResetActiveSkill();
 
 		private:
 			nsPlayer::CPlayer* m_player = nullptr;	//プレイヤーのポインタ

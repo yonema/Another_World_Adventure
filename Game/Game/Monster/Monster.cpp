@@ -170,17 +170,5 @@ namespace nsAWA {
 			//ステータスを取得。
 			return &m_status;
 		}
-
-		nsWeapon::CWeapon* CMonster::GetWeapon() {
-
-			//武器を取得。
-			return m_weapon;
-		}
-
-		nsArmor::CArmor* CMonster::GetArmor() {
-
-			//防具を取得。
-			return m_armor;
-		}
 	}
 }

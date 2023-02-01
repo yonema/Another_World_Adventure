@@ -53,6 +53,87 @@ namespace nsAWA {
 			m_player->SetActiveSkill(setNum, activeSkill);
 		}
 
+		std::list<nsSkill::SActiveSkillData> CPlayerManager::GetCanUseActiveSkillList() {
+
+			//使用可能なアクティブスキルのリストを定義。
+			std::list<nsSkill::SActiveSkillData> canUseActiveSkillList;
+
+			//武器種を取得。
+			nsWeapon::EnWeaponType type = m_player->GetWeapon()->GetWeaponType();
+			std::string typeName = "NoTypeName";
+
+			switch (type) {
+
+			case nsWeapon::EnWeaponType::enSword:
+				typeName = "Sword";
+				break;
+			case nsWeapon::EnWeaponType::enAxe:
+				typeName = "Axe";
+				break;
+			case nsWeapon::EnWeaponType::enWand:
+				typeName = "Wand";
+				break;
+			}
+
+			for (const auto& activeSkill : nsSkill::CActiveSkillList::GetInstance()->GetActiveSkillData()) {
+
+				//武器種とタイプがあっているか、魔法スキルなら。
+				if (activeSkill.type == typeName || activeSkill.type == "Magic") {
+
+					//使えるアクティブスキルとして設定。
+					canUseActiveSkillList.emplace_back(activeSkill);
+				}
+			}
+
+			//使えるアクティブスキルのデータをリターン。
+			return canUseActiveSkillList;
+		}
+
+		void CPlayerManager::ResetActiveSkill() {
+
+			//武器種を取得。
+			nsWeapon::EnWeaponType weaponType = m_player->GetWeapon()->GetWeaponType();
+
+			//武器種からタイプを定義。
+			nsSkill::CActiveSkill::EnActiveSkillType activeSkillType = nsSkill::CActiveSkill::EnActiveSkillType::enNone;
+
+			switch (weaponType) {
+
+			case nsWeapon::EnWeaponType::enSword:
+				activeSkillType = nsSkill::CActiveSkill::EnActiveSkillType::enSword;
+				break;
+			case nsWeapon::EnWeaponType::enAxe:
+				activeSkillType = nsSkill::CActiveSkill::EnActiveSkillType::enAxe;
+				break;
+			case nsWeapon::EnWeaponType::enWand:
+				activeSkillType = nsSkill::CActiveSkill::EnActiveSkillType::enWand;
+				break;
+			}
+
+			//アクティブスキルを順に参照。
+			for (int activeSkillNum = 0; activeSkillNum < nsSkill::CActiveSkill::m_kActiveSkillNumMax; activeSkillNum++) {
+
+				//アクティブスキルを取得。
+				nsSkill::CActiveSkill* activeSkill = m_player->GetActiveSkill(activeSkillNum);
+
+				//アクティブスキルが設定されていなかったら。
+				if (activeSkill == nullptr) {
+
+					//次へ。
+					continue;
+				}
+
+				//設定中のアクティブスキルが魔法スキルじゃなく、
+				//武器種と一致していなかったら。
+				if (activeSkill->GetType() != nsSkill::CActiveSkill::EnActiveSkillType::enMagic
+					&& activeSkillType != activeSkill->GetType()) {
+
+					//そのアクティブスキルを外す。
+					m_player->SetActiveSkill(activeSkillNum, nullptr);
+				}
+			}
+		}
+
 		void CPlayerManager::SetWeapon(const std::string& weaponName) {
 
 			//武器構築クラスを生成。
@@ -63,6 +144,9 @@ namespace nsAWA {
 
 			//武器を設定。
 			m_player->SetWeapon(weapon);
+
+			//アクティブスキルの設定を更新。
+			ResetActiveSkill();
 		}
 
 		void CPlayerManager::SetArmor(const std::string& armorName) {
