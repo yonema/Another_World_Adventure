@@ -66,9 +66,9 @@ namespace nsAWA {
 
 			CPlayerStatus* GetStatus()override final;
 
-			nsWeapon::CWeapon* GetWeapon()override final;
+			nsWeapon::CWeapon* GetWeapon();
 
-			nsArmor::CArmor* GetArmor()override final;
+			nsArmor::CArmor* GetArmor();
 
 			CGameActorCollider* GetGameActorCollider() {
 
@@ -77,19 +77,22 @@ namespace nsAWA {
 			}
 
 			// UIの処理で追加、セットしてるアクティブスキルの名前を取得
-			const std::string& GetActiveSkillName(const int skillNum) const
-			{
-				return m_action.GetActiveSkillName(skillNum);
-			}
+			//const std::string& GetActiveSkillName(const int skillNum) const
+			//{
+			//	return m_action.GetActiveSkillName(skillNum);
+			//}
 
 			void SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill);
+
+			nsSkill::CActiveSkill* GetActiveSkill(int skillNum)const;
+
+			void SetWeapon(nsWeapon::CWeapon* weapon);
+
+			void SetArmor(nsArmor::CArmor* armor);
 
 		private:
 			void CreatePlayerModel();
 
-			void CreateWeapon();
-
-			void CreateArmor();
 		private:
 			CPlayerInput m_input;									//入力
 			CPlayerAction m_action;									//アクション

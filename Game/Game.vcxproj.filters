@@ -172,9 +172,8 @@
     <ClCompile Include="Game\Monster\AI\AITask\AITaskStandBy.cpp" />
     <ClCompile Include="YonemaEngine\Level2D\Level2D.cpp" />
     <ClCompile Include="Game\ShakeActor.cpp" />
-    <ClCompile Include="Game\Player\PlayerSkillChanger.cpp" />
     <ClCompile Include="Game\Skill\ActiveSkillList.cpp" />
-    <ClCompile Include="Game\Skill\SkillManager.cpp" />
+    <ClCompile Include="Game\Player\PlayerManager.cpp" />
     <ClCompile Include="Game\Samples\DrawInstancingSample.cpp" />
     <ClCompile Include="Game\Samples\DrawWorldSample.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.cpp" />
@@ -186,6 +185,12 @@
     <ClCompile Include="YonemaEngine\Graphics\Models\BasicNonCullingGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\InstancingNonCullingGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\SkinNonCullingGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\UpdateAnimationController.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations\UpdateAnimationManager.cpp" />
+    <ClCompile Include="Game\Weapon\WeaponList.cpp" />
+    <ClCompile Include="Game\HitStop.cpp" />
+    <ClCompile Include="Game\Armor\ArmorList.cpp" />
+    <ClCompile Include="YonemaEngine\Effect\EffectSound.cpp" />
     <ClCompile Include="Game\UI\Battle\Enemy\EnemyBattleStatusUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Enemy\EnemyBreakUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Enemy\EnemyHPUI.cpp" />
@@ -395,9 +400,8 @@
     <ClInclude Include="YonemaEngine\Level2D\Level2D.h" />
     <ClInclude Include="YonemaEngine\Level2D\Level2DSpriteData.h" />
     <ClInclude Include="Game\ShakeActor.h" />
-    <ClInclude Include="Game\Player\PlayerSkillChanger.h" />
     <ClInclude Include="Game\Skill\ActiveSkillList.h" />
-    <ClInclude Include="Game\Skill\SkillManager.h" />
+    <ClInclude Include="Game\Player\PlayerManager.h" />
     <ClInclude Include="Game\Samples\DrawInstancingSample.h" />
     <ClInclude Include="Game\Samples\DrawWorldSample.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\StructuredBuffer.h" />
@@ -409,6 +413,12 @@
     <ClInclude Include="YonemaEngine\Graphics\Models\BasicNonCullingGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\InstancingNonCullingGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\SkinNonCullingGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\UpdateAnimationController.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations\UpdateAnimationManager.h" />
+    <ClInclude Include="Game\Weapon\WeaponList.h" />
+    <ClInclude Include="Game\HitStop.h" />
+    <ClInclude Include="Game\Armor\ArmorList.h" />
+    <ClInclude Include="YonemaEngine\Effect\EffectSound.h" />
     <ClInclude Include="Game\UI\Battle\Enemy\EnemyBattleStatusUI.h" />
     <ClInclude Include="Game\UI\Battle\Enemy\EnemyBreakUI.h" />
     <ClInclude Include="Game\UI\Battle\Enemy\EnemyHPUI.h" />

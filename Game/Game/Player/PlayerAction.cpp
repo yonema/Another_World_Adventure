@@ -170,19 +170,19 @@ namespace nsAWA {
 			m_activeSkill[activeSkillNum] = activeSkill;
 		}
 
-#ifdef _DEBUG
+		nsSkill::CActiveSkill* CPlayerAction::GetActiveSkill(int activeSkillNum)const {
 
-		const std::string& CPlayerAction::GetActiveSkillName()const {
+			//範囲外の番号指定をしていたら。
+			if (activeSkillNum > nsSkill::CActiveSkill::m_kActiveSkillNumMax) {
 
-			if (m_activeSkill[0] == nullptr) {
-
-				return "NoSkill";
+				//エラー出力。
+				nsGameWindow::MessageBoxError(L"範囲外のアクティブスキル番号です。");
+				std::abort();
 			}
 
-			return m_activeSkill[0]->GetName();
+			//アクティブスキルを取得。
+			return m_activeSkill[activeSkillNum];
 		}
-#endif // _DEBUG
-
 
 		void CPlayerAction::UseActiveSkill(EnActiveSkillListNumber activeSkillNum) {
 

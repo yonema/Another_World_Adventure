@@ -7,6 +7,7 @@
 
 #ifdef _DEBUG
 #include "../Monster/Monster.h"
+#include "PlayerManager.h"
 #endif
 
 namespace nsAWA {
@@ -36,11 +37,16 @@ namespace nsAWA {
 			//武器管理クラスを初期化。
 			m_weaponManager.Init(m_modelRenderer);
 
-			//武器を生成。
-			CreateWeapon();
+#ifdef _DEBUG
+			//武器を設定。
+			CPlayerManager playerManager;
+			if (playerManager.FindPlayer()) {
 
-			//防具を生成。
-			CreateArmor();
+				playerManager.SetWeapon("NewSword");
+				playerManager.SetArmor("NewArmor");
+			}
+
+#endif // DEBUG
 
 			//ステータスを初期化。
 			m_status.Init();
@@ -139,9 +145,9 @@ namespace nsAWA {
 
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
-			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32); 
-			StringCbPrintf(m_dispText, dispTextSize, L"Skill = %s %s", nsUtils::GetWideStringFromString(m_action.GetActiveSkillName()).c_str(),m_input.GetCoolTime() ? L"true" : L"false");
-			m_fontRenderer->SetText(m_dispText);
+			//size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32); 
+			//StringCbPrintf(m_dispText, dispTextSize, L"Skill = %s %s", nsUtils::GetWideStringFromString(m_action.GetActiveSkillName()).c_str(),m_input.GetCoolTime() ? L"true" : L"false");
+			//m_fontRenderer->SetText(m_dispText);
 #endif
 		}
 
@@ -195,6 +201,32 @@ namespace nsAWA {
 			m_action.SetActiveSkill(setNum, activeSkill);
 		}
 
+		nsSkill::CActiveSkill* CPlayer::GetActiveSkill(int skillNum)const {
+
+			//アクティブスキルを取得。
+			return m_action.GetActiveSkill(skillNum);
+		}
+
+		void CPlayer::SetWeapon(nsWeapon::CWeapon* weapon) {
+
+			//武器を設定。
+			m_weaponManager.ChangeWeapon(weapon);
+		}
+
+		void CPlayer::SetArmor(nsArmor::CArmor* armor) {
+
+			//既に防具情報が入っていたら。
+			if (m_armor != nullptr) {
+
+				//防具を破棄。
+				m_armor->Release();
+				m_armor = nullptr;
+			}
+
+			//防具を設定。
+			m_armor = armor;
+		}
+
 		void CPlayer::CreatePlayerModel() {
 
 			//プレイヤーモデルを生成。
@@ -220,12 +252,13 @@ namespace nsAWA {
 				//アニメーションのファイルパスを取得。
 				animNumVec.emplace_back(m_animation.GetAnimFilePath()[animIndex].c_str());
 			}
-			
+
 			//アニメーションを初期化。
 			modelInitData.animInitData.Init(
 				static_cast<unsigned int>(animNum),
 				animNumVec.data()
-			);;
+			);
+
 			//プレイヤーモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
 			m_modelRenderer->SetScale(kPlayerModelScale);
@@ -247,26 +280,6 @@ namespace nsAWA {
 
 			//防具を受け取る。
 			return m_armor;
-		}
-
-		void CPlayer::CreateWeapon() {
-
-#ifdef _DEBUG
-			//武器情報を定義。
-			nsWeapon::SWeaponInfo weaponInfo;
-			weaponInfo.attack = 100;
-			weaponInfo.intelligence = 100;
-			weaponInfo.critical = 10;
-			weaponInfo.weaponType = nsWeapon::EnWeaponType::enSword;
-			weaponInfo.name = "NewSword";
-			
-			//武器情報を設定。
-			m_weaponManager.ChangeWeapon(weaponInfo);
-#endif
-		}
-
-		void CPlayer::CreateArmor() {
-
 		}
 	}
 }

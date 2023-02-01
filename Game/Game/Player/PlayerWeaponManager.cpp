@@ -59,7 +59,7 @@ namespace nsAWA {
 			m_weapon->SetScale(boneScale);
 		}
 
-		void CPlayerWeaponManager::ChangeWeapon(const nsWeapon::SWeaponInfo& weaponInfo) {
+		void CPlayerWeaponManager::ChangeWeapon(nsWeapon::CWeapon* weapon) {
 
 			//既に武器情報が入っていたら。
 			if (m_weapon != nullptr) {
@@ -69,16 +69,8 @@ namespace nsAWA {
 				m_weapon = nullptr;
 			}
 
-#ifdef _DEBUG
-			//仮にモデルのファイルパスは自分で定義。
-			const char* weaponModelFilePath = "Assets/Models/Sword.fbx";
-
-			//武器構築クラスを生成。
-			nsWeapon::CWeaponBuilder weaponBuilder;
-
-			//武器情報を元に武器を生成。
-			m_weapon = weaponBuilder.Create(weaponInfo, weaponModelFilePath);
-#endif
+			//武器を設定。
+			m_weapon = weapon;
 		}
 	}
 }

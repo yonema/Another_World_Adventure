@@ -1,3 +1,10 @@
-JumpAttack,,30
-SwordAttack,,50
-RushAttack,,70
+Sword,JumpAttack,30
+Sword,SwordAttack,50
+Sword,RushAttack,70
+Axe,JumpAttack,30
+Axe,SwordAttack,50
+Axe,RushAttack,70
+Wand,SwordAttack,50
+Wand,RushAttack,70
+Magic,SwordAttack,50
+Magic,RushAttack,70

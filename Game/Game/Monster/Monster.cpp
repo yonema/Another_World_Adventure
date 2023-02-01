@@ -140,8 +140,6 @@ namespace nsAWA {
 			SModelInitData modelInitData;
 			modelInitData.modelFilePath = monsterInfo.modelFilePath.c_str();
 			modelInitData.textureRootPath = kMonsterModelTextureRootPath;
-			modelInitData.vertexBias.AddRotationX(-(nsMath::YM_PIDIV2));
-			modelInitData.vertexBias.AddRotationY(nsMath::YM_PI);
 			
 			//アニメーションの数を取得。
 			const int animNum = static_cast<int>(monsterInfo.animationFilePath.size());
@@ -161,7 +159,7 @@ namespace nsAWA {
 			modelInitData.animInitData.Init(
 				static_cast<unsigned int>(animNum),
 				animNumVec.data()
-			);;
+			);
 			
 			//モンスターモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
@@ -172,18 +170,6 @@ namespace nsAWA {
 
 			//ステータスを取得。
 			return &m_status;
-		}
-
-		nsWeapon::CWeapon* CMonster::GetWeapon() {
-
-			//武器を取得。
-			return m_weapon;
-		}
-
-		nsArmor::CArmor* CMonster::GetArmor() {
-
-			//防具を取得。
-			return m_armor;
 		}
 	}
 }

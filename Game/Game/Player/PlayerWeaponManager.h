@@ -24,7 +24,7 @@ namespace nsAWA {
 
 			void Update();
 
-			void ChangeWeapon(const nsWeapon::SWeaponInfo& weaponInfo);
+			void ChangeWeapon(nsWeapon::CWeapon* weapon);
 
 		public:
 			nsWeapon::CWeapon* GetWeapon()const {

@@ -1,0 +1,12 @@
+NAME,NewArmor
+DEF,2
+MND,2
+*,
+NAME,NormalArmor
+DEF,3
+MND,3
+*,
+NAME,SpecialArmor
+DEF,1
+MND,10
+*,

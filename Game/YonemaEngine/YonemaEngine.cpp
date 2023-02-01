@@ -5,6 +5,7 @@
 #include "Effect/EffectEngine.h"
 #include "Sound/SoundEngine.h"
 #include "Memory/ResourceBankTable.h"
+#include "Graphics/Animations/UpdateAnimationManager.h"
 #include "Utils/Random.h"
 #include "Thread/LoadModelThread.h"
 #include "DebugSystem/DisplayFPS.h"
@@ -35,9 +36,11 @@ namespace nsYMEngine
 		m_gameObjectManager = nsGameObject::CGameObjectManager::CreateInstance();
 		m_inputManager = new nsInput::CInputManager();
 		m_physicsWorld = nsPhysics::CPhysicsEngine::CreateInstance();
-		m_effectEngine = nsEffect::CEffectEngine::CreateInstance();
+		// サウンドエンジンはエフェクトエンジンより先に生成する
 		m_soundEngine = nsSound::CSoundEngine::CreateInstance();
+		m_effectEngine = nsEffect::CEffectEngine::CreateInstance();
 		m_loadModelThread = nsThread::CLoadModelThread::CreateInstance();
+		m_updateAnimationManager = nsGraphics::nsAnimations::CUpdateAnimationManager::CreateInstance();
 
 		NewGO<nsAWA::CGame>(EnGOPriority::enMid, "AWAGame");
 		//NewGO<nsAWA::nsSamples::CSampleMain> ("SampleMain");
@@ -70,11 +73,11 @@ namespace nsYMEngine
 		nsGameObject::CGameObjectManager::DeleteInstance();
 		m_gameObjectManager = nullptr;
 
-
-		nsSound::CSoundEngine::DeleteInstance();
-		m_soundEngine = nullptr;
+		nsGraphics::nsAnimations::CUpdateAnimationManager::DeleteInstance();
 		nsEffect::CEffectEngine::DeleteInstance();
 		m_effectEngine = nullptr;
+		nsSound::CSoundEngine::DeleteInstance();
+		m_soundEngine = nullptr;
 		nsPhysics::CPhysicsEngine::DeleteInstance();
 		m_physicsWorld = nullptr;
 		if (m_inputManager)
@@ -102,6 +105,8 @@ namespace nsYMEngine
 		m_inputManager->Update(deltaTime);
 
 		m_gameObjectManager->Update(deltaTime);
+
+		m_updateAnimationManager->Update();
 
 		m_physicsWorld->Update(deltaTime);
 

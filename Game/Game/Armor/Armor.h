@@ -7,7 +7,7 @@ namespace nsAWA {
 		//ñhãÔèÓïÒ
 		struct SArmorInfo {
 
-			const char* name = nullptr;		//ñºëO
+			std::string name = "NoName";		//ñºëO
 			float defence = 0.0f;			//ï®óùñhå‰óÕ
 			float mind = 0.0f;				//ñÇñ@ñhå‰óÕ
 		};
@@ -22,9 +22,7 @@ namespace nsAWA {
 			void Release();
 		private:
 
-			void Create(const SArmorInfo& armorInfo, const char* modelFilePath);
-
-			void CreateModel(const char* modelFilePath);
+			void Create(const SArmorInfo& armorInfo);
 		public:
 			float GetDeffence()const {
 
@@ -44,8 +42,6 @@ namespace nsAWA {
 				m_sInfo.mind = mind;
 			}
 		private:
-
-			CModelRenderer* m_modelRenderer = nullptr;		//ÉÇÉfÉã
 			SArmorInfo m_sInfo;								//èÓïÒ
 		};
 
@@ -53,7 +49,7 @@ namespace nsAWA {
 		class CArmorBuilder : nsUtils::SNoncopyable {
 
 		public:
-			CArmor* Create(const SArmorInfo& armorInfo, const char* modelFilePath);
+			CArmor* CreateArmor(const std::string& armorName);
 		};
 	}
 }
