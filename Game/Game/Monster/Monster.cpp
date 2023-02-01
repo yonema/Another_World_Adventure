@@ -155,15 +155,13 @@ namespace nsAWA {
 				//アニメーションのファイルパスを取得。
 				animNumVec.emplace_back(monsterInfo.animationFilePath[animIndex].c_str());
 			}
-			
-			//アニメーションのデータを生成。
-			SAnimationInitData* animData = new SAnimationInitData(
-				static_cast<unsigned int>(animNum),
-				animNumVec.data()
-			);
+		
 
 			//アニメーションのデータを設定。
-			modelInitData.animInitData = animData;
+			modelInitData.animInitData.Init(
+				static_cast<unsigned int>(animNum),
+				animNumVec.data()
+			);;
 			
 			//モンスターモデルを初期化。
 			m_modelRenderer->Init(modelInitData);

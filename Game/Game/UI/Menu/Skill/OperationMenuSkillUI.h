@@ -21,9 +21,7 @@ namespace nsAWA
             void Animation(); // UIのアニメーション
 
         private:
-            void LoadNowSetSkill();
-
-            void LoadSelectionSetSkill();
+            void LoadSkillData();
 
         private:
             void OperationActiveOrPassive();
@@ -78,13 +76,17 @@ namespace nsAWA
 
 
         private: // constant data member
-
+            static const int m_kActiveSkillMaxNum = 6;
+            static const int m_kPassiveSkillMaxNum = 4;
 
         private: // data member
             bool m_flagEndProcessing = false;
 
-            std::vector<int> m_nowSetSkill;
-            std::vector<int> m_selectionSetSkill;
+            std::vector<std::string> m_nowSetSkill;
+            //std::vector<int> m_selectionSetSkill;
+            std::vector<std::string> m_selectionSetSkill;
+
+            //std::list<std::vector<std::string>> m_selectionSetSkill;
 
             // スキル選択時のカーソルの位置
             int m_cursorPositionSelectionSetSkill = 0;

@@ -96,6 +96,11 @@ namespace nsAWA {
 			const std::string& GetActiveSkillName()const;
 
 #endif // _DEBUG
+			// UIの処理で追加、セットしてるアクティブスキルの名前を取得
+			const std::string& GetActiveSkillName(const int skillNum) const
+			{
+				return m_activeSkill[skillNum]->GetName();
+			}
 
 
 

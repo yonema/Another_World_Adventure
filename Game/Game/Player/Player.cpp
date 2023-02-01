@@ -220,16 +220,12 @@ namespace nsAWA {
 				//アニメーションのファイルパスを取得。
 				animNumVec.emplace_back(m_animation.GetAnimFilePath()[animIndex].c_str());
 			}
-
-			//アニメーションのデータを生成。
-			SAnimationInitData* animData = new SAnimationInitData(
-				static_cast<unsigned int>(animNum),
-				animNumVec.data()
-			);
 			
 			//アニメーションを初期化。
-			modelInitData.animInitData = animData;
-
+			modelInitData.animInitData.Init(
+				static_cast<unsigned int>(animNum),
+				animNumVec.data()
+			);;
 			//プレイヤーモデルを初期化。
 			m_modelRenderer->Init(modelInitData);
 			m_modelRenderer->SetScale(kPlayerModelScale);

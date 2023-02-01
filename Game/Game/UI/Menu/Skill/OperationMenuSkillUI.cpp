@@ -1,6 +1,10 @@
 #include "YonemaEnginePreCompile.h"
 #include "OperationMenuSkillUI.h"
 
+#include "../../../Skill/SkillManager.h"
+#include "../../../CSV/CSVManager.h"
+#include "../../../Player/Player.h"
+
 namespace nsAWA
 {
     namespace nsUI
@@ -45,23 +49,59 @@ namespace nsAWA
         // Load
         ////////////////////////////////////////////////////////////
 
-        void COperationMenuSkillUI::LoadNowSetSkill()
+        void COperationMenuSkillUI::LoadSkillData()
         {
-            // ここで、現在セットしてるスキルの情報を取得
+            // ここで、現在セットしてるスキルを取得
+            // プレイヤーを検索
+            auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+            if (player == nullptr) {
+                nsGameWindow::MessageBoxWarning(L"COperationMenuSkillUI : player が見つかりませんでした。");
+            }
+            // アクティブ
             if (EnActiveOrPassive::enActive == m_activeOrPassive) {
-
+                // 要素数を決定
+                m_nowSetSkill.resize(m_kActiveSkillMaxNum);
+                // 名前を代入
+                for (int skillNum = 0; m_kActiveSkillMaxNum > skillNum; ++skillNum) {
+                    m_nowSetSkill[skillNum] = player->GetActiveSkillName(skillNum);
+                }
             }
+            // パッシブ
             else if (EnActiveOrPassive::enPassive == m_activeOrPassive) {
-
+                // 要素数を決定
+                m_nowSetSkill.resize(m_kPassiveSkillMaxNum);
+                // 名前を代入
+                for (int skillNum = 0; m_kPassiveSkillMaxNum > skillNum; ++skillNum) {
+                    m_nowSetSkill[skillNum] = player->GetActiveSkillName(skillNum);
+                }
             }
 
+            // ここで、所持してるスキル全部を取得
+            // アクティブ
+            if (EnActiveOrPassive::enActive == m_activeOrPassive) {
+                nsCSV::CCsvManager csvManager;
+                csvManager.LoadCSV(L"Assets/CSV/Player/ActiveSkillList.csv");
+                std::list<std::vector<std::string>> csvData;
+                csvData = csvManager.GetCsvData();
+
+                for (auto& forData : csvData) {
+                    m_selectionSetSkill.push_back(forData[0]);
+                }
+            }
+            // パッシブ
+            else if (EnActiveOrPassive::enPassive == m_activeOrPassive) {
+                nsCSV::CCsvManager csvManager;
+                csvManager.LoadCSV(L"Assets/CSV/Player/PassiveSkillList.csv");
+                std::list<std::vector<std::string>> csvData;
+                csvData = csvManager.GetCsvData();
+
+                for (auto& forData : csvData) {
+                    m_selectionSetSkill.push_back(forData[0]);
+                }
+            }
         }
 
-        void COperationMenuSkillUI::LoadSelectionSetSkill()
-        {
-            // ここで、現在持っているスキルすべての情報を取得
 
-        }
 
         ////////////////////////////////////////////////////////////
         // Operation
@@ -72,8 +112,7 @@ namespace nsAWA
             // 決定
             if (true == Input()->IsTrigger(EnActionMapping::enDecision)) {
                 // ここで、スキルの情報の読み込みをおこなう
-                LoadNowSetSkill();
-                LoadSelectionSetSkill();
+                LoadSkillData();
 
                 m_windowStatus = EnWindowStatus::enNowSetSkill;
             }
@@ -162,8 +201,12 @@ namespace nsAWA
         {
             // m_nowSetSkillFrameのところに、
             // 選択したスキルを入れ替える
-            
 
+            // 選択したスキル欄のところのスキルを入れ替える
+            nsSkill::CSkillManager skillManager;
+            skillManager.SetActiveSkill(
+                static_cast<int>(m_nowSetSkillFrame), m_selectionSetSkill[m_cursorPositionSelectionSetSkill]
+            );
         }
     }
 }
