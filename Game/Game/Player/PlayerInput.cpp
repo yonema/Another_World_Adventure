@@ -16,6 +16,7 @@
 #include "../Item/ItemManager.h"
 #include "../CSV/CSVManager.h"
 #include "PlayerManager.h"
+#include "../UserData.h"
 #endif
 
 namespace nsAWA {
@@ -172,20 +173,15 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 #ifdef _DEBUG
 
-				//アクティブスキルを設定。
-				CPlayerManager playerManager;
-				if (playerManager.FindPlayer()) {
-					std::list<nsSkill::SActiveSkillData> list = playerManager.GetCanUseActiveSkillList();
-					playerManager.SetActiveSkill(0, "JumpAttack");
-				}
+				//データを保存。
+				CUserData userData;
+				userData.Save();
 
 				////クールタイム中に設定。
 				//CoolTimeOn();
 				//
 				////スキル１使用。
 				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
-
-				
 #endif 
 			}
 
@@ -193,12 +189,6 @@ namespace nsAWA {
 
 				//スキル２使用。
 #ifdef _DEBUG
-				//アクティブスキルを設定。
-				CPlayerManager playerManager;
-				if (playerManager.FindPlayer()) {
-
-					playerManager.SetActiveSkill(0, "SwordAttack");
-				}
 
 				////パッシブスキル（麻痺）を生成。
 				//{

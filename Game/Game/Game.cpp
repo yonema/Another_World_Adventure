@@ -25,6 +25,7 @@ namespace nsAWA
 
 	bool CGame::Start()
 	{
+
 #ifdef _DEBUG
 		//ワイヤーフレームを可視化。
 		EnableDebugDrawPhysicsLine();
