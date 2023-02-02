@@ -10,6 +10,8 @@ namespace nsAWA {
 		public:
 			void LoadCSV(const wchar_t* csvFilePath);
 
+			void SaveCSV(const wchar_t* csvFilePath, const std::list<std::vector<std::string>>& m_csvData);
+
 			void ClearCSV() {
 
 				//データを破棄。

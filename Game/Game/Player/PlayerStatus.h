@@ -24,6 +24,8 @@ namespace nsAWA {
 			void DamageGuardGaugeValue(float value);
 		public:
 
+			void LoadStatus(const std::vector<std::string>& statusDataStr);
+
 			int GetLevel()const {
 
 				return m_level;
@@ -97,10 +99,6 @@ namespace nsAWA {
 					return FLT_MAX;
 				}
 			}
-
-		private:
-			void LoadStatus();
-
 		private:
 			int m_level = 0;					//ƒŒƒxƒ‹
 			float m_HP = 0.0f;					//HP

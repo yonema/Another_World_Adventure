@@ -152,6 +152,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game\UI\FontArrayUI.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Renderers\AnimatedSpriteRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2DData.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2D.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2DFrameData.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2DImporter.cpp" />
     <ClCompile Include="Game\Armor\ArmorList.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskStandBy.cpp" />
     <ClCompile Include="Game\Monster\AI\AITask\AITaskIsButtle.cpp" />
@@ -261,6 +266,10 @@
     <ClCompile Include="Game\Player\PlayerManager.cpp" />
     <ClCompile Include="Game\Weapon\WeaponList.cpp" />
     <ClCompile Include="Game\HitStop.cpp" />
+    <ClCompile Include="Game\UserData.cpp" />
+    <ClCompile Include="Game\LoadGame.cpp" />
+    <ClCompile Include="Game\Magic\MagicBuilder.cpp" />
+    <ClCompile Include="Game\Magic\MagicBallOne.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavCell.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavMesh.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\Path.cpp" />
@@ -367,6 +376,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\UI\FontArrayUI.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\AnimatedSpriteRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2DData.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2D.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2DFrameData.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2DImporter.h" />
     <ClInclude Include="Game\Armor\ArmorList.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskStandBy.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskIsButtle.h" />
@@ -481,6 +495,10 @@
     <ClInclude Include="Game\Player\PlayerManager.h" />
     <ClInclude Include="Game\Weapon\WeaponList.h" />
     <ClInclude Include="Game\HitStop.h" />
+    <ClInclude Include="Game\UserData.h" />
+    <ClInclude Include="Game\LoadGame.h" />
+    <ClInclude Include="Game\Magic\MagicBuilder.h" />
+    <ClInclude Include="Game\Magic\MagicBallOne.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavCell.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavMesh.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\Path.h" />

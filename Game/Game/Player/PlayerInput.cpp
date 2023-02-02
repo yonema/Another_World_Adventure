@@ -1,6 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "PlayerInput.h"
 #include "PlayerAction.h"
+#include "PlayerManager.h"
 
 #ifdef _DEBUG
 #include "../Player/Player.h"
@@ -15,7 +16,8 @@
 #include "../Feature/AbnormalStatus/Poison.h"
 #include "../Item/ItemManager.h"
 #include "../CSV/CSVManager.h"
-#include "PlayerManager.h"
+#include "../UserData.h"
+#include "../Magic/MagicBallOne.h"
 #endif
 
 namespace nsAWA {
@@ -92,21 +94,26 @@ namespace nsAWA {
 				&& !Input()->IsPress(EnActionMapping::enSkillPreparation)
 				) {
 
+				//アイテム管理クラスを取得。
+				auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
+
 				//次のアイテムを選ぶ。
 				if (Input()->IsTrigger(EnActionMapping::enItemSelectRight)) {
 
-					m_playerAction->AddSelectItemNum();
+					itemManager->NextItem();
 				}
 
 				//前のアイテムを選ぶ。
 				if (Input()->IsTrigger(EnActionMapping::enItemSelectLeft)) {
 
-					m_playerAction->SubSelectItemNum();
+					itemManager->BackItem();
 				}
 			}
 
-			//スキル準備入力がされていないかつ
-			if (!Input()->IsPress(EnActionMapping::enSkillPreparation)) {
+			//R1,L1がともに押されていないなら。
+			if (!Input()->IsPress(EnActionMapping::enSkillPreparation)
+				&& !Input()->IsPress(EnActionMapping::enItemSelectPreparation)
+				) {
 
 				//弱攻撃入力。
 				if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
@@ -172,20 +179,15 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 #ifdef _DEBUG
 
-				//アクティブスキルを設定。
-				CPlayerManager playerManager;
-				if (playerManager.FindPlayer()) {
-					std::list<nsSkill::SActiveSkillData> list = playerManager.GetCanUseActiveSkillList();
-					playerManager.SetActiveSkill(0, "JumpAttack");
-				}
+				//データを保存。
+				CUserData userData;
+				userData.Save();
 
 				////クールタイム中に設定。
 				//CoolTimeOn();
 				//
 				////スキル１使用。
 				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
-
-				
 #endif 
 			}
 
@@ -193,12 +195,8 @@ namespace nsAWA {
 
 				//スキル２使用。
 #ifdef _DEBUG
-				//アクティブスキルを設定。
-				CPlayerManager playerManager;
-				if (playerManager.FindPlayer()) {
-
-					playerManager.SetActiveSkill(0, "SwordAttack");
-				}
+				nsMagic::CMagicBallOne* magic = NewGO<nsMagic::CMagicBallOne>();
+				magic->Init("hoge", player->GetPosition(), player->GetForwardDirection());
 
 				////パッシブスキル（麻痺）を生成。
 				//{
@@ -255,8 +253,10 @@ namespace nsAWA {
 				//スキル４使用。
 
 #ifdef _DEBUG
+				//アイテム管理クラスを取得。
+				auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
 				//プレイヤーにアイテムを与える。
-				player->GetItemManager()->AddItem("ポーション", 2);
+				itemManager->AddItem("刀削麺", 2);
 #endif
 			}
 

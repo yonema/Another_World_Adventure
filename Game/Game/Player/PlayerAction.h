@@ -71,7 +71,6 @@ namespace nsAWA {
 				CVector3& position,
 				CQuaternion& rotation,
 				CPlayerStatus* playerStatus, 
-				nsItem::CItemManager* playerItemManager,
 				nsFeature::CFeatureManager* playerFeatureManager,
 				nsPlayerAnimation::CPlayerAnimation* playerAnimation
 			);
@@ -85,10 +84,6 @@ namespace nsAWA {
 			void Guard();
 
 			void UseItem();
-
-			void AddSelectItemNum();
-
-			void SubSelectItemNum();
 
 			void SetActiveSkill(int activeSkillNum, nsSkill::CActiveSkill* activeSkill);
 
@@ -156,6 +151,7 @@ namespace nsAWA {
 
 				return m_isChangeState;
 			}
+
 		private:
 			CVector3* m_position = nullptr;						//座標
 			CQuaternion* m_rotation = nullptr;					//回転
@@ -168,7 +164,6 @@ namespace nsAWA {
 			nsCamera::CMainCamera* m_mainCamera = nullptr;		//メインカメラのポインタ
 			CPlayerStatus* m_playerStatus = nullptr;			//プレイヤーステータスのポインタ
 			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;		//プレイヤーアニメーション
-			nsItem::CItemManager* m_playerItemManager = nullptr;//プレイヤーのアイテム管理クラスのポインタ
 			nsFeature::CFeatureManager* m_playerFeatureManager = nullptr;	//プレイヤーのステータス変化管理クラスのポインタ
 		};
 	}

@@ -37,6 +37,15 @@ namespace nsAWA {
 			}
 		}
 
+		void CPlayerManager::SetPlayer(CPlayer* player) {
+
+			//プレイヤーを設定。
+			m_player = player;
+
+			//アイテム管理クラスのターゲットを設定。
+			m_itemManager.SetTatget(player);
+		}
+
 		void CPlayerManager::SetActiveSkill(int setNum, const std::string& activeSkillName) {
 
 			//設定番号をチェック。
@@ -75,7 +84,7 @@ namespace nsAWA {
 				break;
 			}
 
-			for (const auto& activeSkill : nsSkill::CActiveSkillList::GetInstance()->GetActiveSkillData()) {
+			for (const auto& activeSkill : m_canUseActiveSkillDataList) {
 
 				//武器種とタイプがあっているか、魔法スキルなら。
 				if (activeSkill.type == typeName || activeSkill.type == "Magic") {
