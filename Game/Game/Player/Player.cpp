@@ -26,6 +26,9 @@ namespace nsAWA {
 
 		bool CPlayer::StartSub() {
 
+			//プレイヤー管理クラスに自身を設定。
+			CPlayerManager::GetInstance()->SetPlayer(this);
+
 			//アニメーションを初期化。
 			m_animation.Init(this, &m_input, &m_action);
 
@@ -56,7 +59,7 @@ namespace nsAWA {
 			m_input.Init(&m_action, &m_animation);
 
 			//アクションクラスを初期化。
-			m_action.Init(m_position, m_rotation, &m_status, GetItemManager(), GetFeatureManager(),&m_animation);
+			m_action.Init(m_position, m_rotation, &m_status, GetFeatureManager(),&m_animation);
 
 			//当たり判定を初期化。
 			m_collider.Init(this);
@@ -150,9 +153,11 @@ namespace nsAWA {
 
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
-			//size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32); 
-			//StringCbPrintf(m_dispText, dispTextSize, L"Skill = %s %s", nsUtils::GetWideStringFromString(m_action.GetActiveSkillName()).c_str(),m_input.GetCoolTime() ? L"true" : L"false");
-			//m_fontRenderer->SetText(m_dispText);
+			auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
+
+			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
+			StringCbPrintf(m_dispText, dispTextSize, L"Item = %s %d", nsUtils::GetWideStringFromString(itemManager->GetItemName()).c_str(), itemManager->GetItemNum());
+			m_fontRenderer->SetText(m_dispText);
 #endif
 		}
 

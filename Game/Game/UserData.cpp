@@ -30,6 +30,9 @@ namespace nsAWA {
 		//使用可能なアクティブスキルのリストを保存。
 		SaveCanUseActiveSkillList(player);
 
+		//アイテムを保存。
+		SaveItem();
+
 		//データを保存。
 		csvManager.SaveCSV(kUserDataCSVFilePath, m_userData);
 	}
@@ -41,6 +44,11 @@ namespace nsAWA {
 
 		//プレイヤーを検索。
 		auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+
+		if (!player) {
+
+			nsGameWindow::MessageBoxError(L"UserData : プレイヤーが見つかりませんでした。");
+		}
 
 		//ユーザーデータ格納用のCSVをロード。
 		nsCSV::CCsvManager csvManager;
@@ -54,10 +62,27 @@ namespace nsAWA {
 		player->GetStatus()->LoadStatus(*itr);
 		itr++;
 
+		//プレイヤー管理クラスを取得。
+		auto playerManager = nsPlayer::CPlayerManager::GetInstance();
+		playerManager->SetPlayer(player);
+
 		//使用可能なアクティブスキルのリストをロード。
 		for (const auto& data : *itr) {
 
-			nsPlayer::CPlayerManager::GetInstance()->AddCanUseActiveSkill(data);
+			playerManager->AddCanUseActiveSkill(data);
+		}
+		itr++;
+
+		//アイテムのリストをロード。
+		auto playerItemManager = playerManager->GetItemManager();
+
+		
+		for (int dataNum = 0; dataNum < (*itr).size(); dataNum++) {
+
+			std::string name = (*itr)[dataNum];
+			int num = std::stoi((*itr)[++dataNum]);
+
+			playerItemManager->AddItem(name, num, true);
 		}
 	}
 
@@ -77,10 +102,16 @@ namespace nsAWA {
 
 	void CUserData::SaveCanUseActiveSkillList(nsPlayer::CPlayer* player) {
 
+		//プレイヤーを検索。
+		if (!nsPlayer::CPlayerManager::GetInstance()->FindPlayer()) {
+
+			return;
+		}
+
 		//使用可能なアクティブスキルのリストを保存する。
 		std::vector<std::string> canUseActiveSkillData;
-
-		for (const auto& activeSkill : nsPlayer::CPlayerManager::GetInstance()->GetCanUseActiveSkillList()) {
+		
+		for (const auto& activeSkill : nsPlayer::CPlayerManager::GetInstance()->GetCanUseActiveSkillListAll()) {
 
 			//スキル名をリストに追加。
 			canUseActiveSkillData.emplace_back(activeSkill.name);
@@ -88,5 +119,31 @@ namespace nsAWA {
 
 		//ユーザーデータに追加。
 		m_userData.emplace_back(canUseActiveSkillData);
+	}
+
+	void CUserData::SaveItem() {
+
+		//プレイヤーを検索。
+		if (!nsPlayer::CPlayerManager::GetInstance()->FindPlayer()) {
+
+			return;
+		}
+
+		//アイテムのリストを保存する。
+		std::vector<std::string> itemData;
+
+		//アイテム管理クラスを取得。
+		auto itemManager = nsPlayer::CPlayerManager::GetInstance()->GetItemManager();
+
+		//アイテムを順に参照。
+		for (const auto& item : itemManager->GetItemList()) {
+
+			//アイテム情報を格納。
+			itemData.emplace_back(item.name);
+			itemData.emplace_back(std::to_string(item.hasNum));
+		}
+
+		//ユーザーデータに追加。
+		m_userData.emplace_back(itemData);
 	}
 }

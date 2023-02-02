@@ -25,13 +25,6 @@ namespace nsAWA {
 			
 			//使いたいアイテムのイテレータを取り出す。
 			auto itr = m_sItemList.begin();
-
-			//選択中のアイテムを参照する。
-			for (int num = 0; num < m_selectItemNum; num++) {
-
-				//選択番号の数だけイテレータを進める。
-				itr++;
-			}
 			
 			//アイテムを生成。
 			CItemBuilder itemBuilder;
@@ -68,7 +61,7 @@ namespace nsAWA {
 			}
 		}
 
-		void CItemManager::AddItem(std::string itemName, int getNum) {
+		void CItemManager::AddItem(std::string itemName, int getNum, bool back) {
 
 			//リストに名前があるか検索。
 			bool isFound = CAllItemList::GetInstance()->IsFoundName(itemName);
@@ -99,8 +92,15 @@ namespace nsAWA {
 			item.name = itemName;	//名前
 			item.hasNum = getNum;	//所持数
 
-			//新たにアイテム情報を追加。
-			m_sItemList.emplace_back(item);
+
+			if (back) {
+				//新たにアイテム情報を追加。
+				m_sItemList.emplace_back(item);
+			}
+			else {
+				//新たにアイテム情報を追加。
+				m_sItemList.emplace_front(item);
+			}
 		}
 	}
 }

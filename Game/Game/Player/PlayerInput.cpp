@@ -1,6 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "PlayerInput.h"
 #include "PlayerAction.h"
+#include "PlayerManager.h"
 
 #ifdef _DEBUG
 #include "../Player/Player.h"
@@ -15,7 +16,6 @@
 #include "../Feature/AbnormalStatus/Poison.h"
 #include "../Item/ItemManager.h"
 #include "../CSV/CSVManager.h"
-#include "PlayerManager.h"
 #include "../UserData.h"
 #endif
 
@@ -93,21 +93,26 @@ namespace nsAWA {
 				&& !Input()->IsPress(EnActionMapping::enSkillPreparation)
 				) {
 
+				//アイテム管理クラスを取得。
+				auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
+
 				//次のアイテムを選ぶ。
 				if (Input()->IsTrigger(EnActionMapping::enItemSelectRight)) {
 
-					m_playerAction->AddSelectItemNum();
+					itemManager->NextItem();
 				}
 
 				//前のアイテムを選ぶ。
 				if (Input()->IsTrigger(EnActionMapping::enItemSelectLeft)) {
 
-					m_playerAction->SubSelectItemNum();
+					itemManager->BackItem();
 				}
 			}
 
-			//スキル準備入力がされていないかつ
-			if (!Input()->IsPress(EnActionMapping::enSkillPreparation)) {
+			//R1,L1がともに押されていないなら。
+			if (!Input()->IsPress(EnActionMapping::enSkillPreparation)
+				&& !Input()->IsPress(EnActionMapping::enItemSelectPreparation)
+				) {
 
 				//弱攻撃入力。
 				if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
@@ -189,6 +194,9 @@ namespace nsAWA {
 
 				//スキル２使用。
 #ifdef _DEBUG
+				//ファイヤーを覚える。
+				auto playerManager = CPlayerManager::GetInstance();
+				playerManager->AddCanUseActiveSkill("Fire");
 
 				////パッシブスキル（麻痺）を生成。
 				//{
@@ -245,8 +253,10 @@ namespace nsAWA {
 				//スキル４使用。
 
 #ifdef _DEBUG
+				//アイテム管理クラスを取得。
+				auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
 				//プレイヤーにアイテムを与える。
-				player->GetItemManager()->AddItem("ポーション", 2);
+				itemManager->AddItem("刀削麺", 2);
 #endif
 			}
 

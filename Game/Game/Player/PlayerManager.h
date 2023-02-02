@@ -1,5 +1,6 @@
 #pragma once
 #include "../Skill/ActiveSkillList.h"
+#include "../Item/ItemManager.h"
 
 namespace nsAWA {
 
@@ -28,11 +29,25 @@ namespace nsAWA {
 				delete GetInstance();
 			}
 
+			void Init(IGameActor* player) {
+
+				//アイテム管理クラスを初期化。
+				m_itemManager.Init(player);
+			}
+
 			bool FindPlayer();
+
+			void SetPlayer(CPlayer* player);
 
 			void SetActiveSkill(int setNum, const std::string& activeSkillName);
 
 			std::list<nsSkill::SActiveSkillData> GetCanUseActiveSkillList();
+
+			std::list<nsSkill::SActiveSkillData> GetCanUseActiveSkillListAll() {
+
+				//全ての使用可能なアクティブスキルのリストをリターン。
+				return m_canUseActiveSkillDataList;
+			}
 			
 			void SetWeapon(const std::string& weaponName);
 
@@ -58,12 +73,18 @@ namespace nsAWA {
 				m_canUseActiveSkillDataList.emplace_back(activeSkillData);
 			}
 
+			nsItem::CItemManager* GetItemManager() {
+
+				//アイテム管理クラスをリターン。
+				return &m_itemManager;
+			}
 		private:
 			void ResetActiveSkill();
 
 		private:
 			nsPlayer::CPlayer* m_player = nullptr;	//プレイヤーのポインタ
 			std::list<nsSkill::SActiveSkillData> m_canUseActiveSkillDataList;	//使用可能なアクティブスキルの名前のリスト
+			nsItem::CItemManager m_itemManager;		//アイテム管理クラス
 		};
 	}
 }
