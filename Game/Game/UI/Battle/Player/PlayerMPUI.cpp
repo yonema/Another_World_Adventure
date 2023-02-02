@@ -7,59 +7,83 @@ namespace nsAWA
 {
     namespace nsUI
     {
+        const char* CPlayerMPUI::m_kLevel2DFilePath =
+            "Assets/Level2D/MP_Bar.tdl";
+
         const char* CPlayerMPUI::m_kSpriteMPBarFilePath = 
-            "Assets/Image/FitnessBar/Player/Bar_MP.png";
+            "Assets/Images/FitnessBar/Player/Bar_MP.png";
         const char* CPlayerMPUI::m_kSpriteFrameFilePath =
-            "Assets/Image/FitnessBar/Common/BarFrame.png";
+            "Assets/Images/FitnessBar/Common/BarFrame.png";
         const char* CPlayerMPUI::m_kSpriteBaseFilePath =
-            "Assets/Image/FitnessBar/Common/BarGroundwork.png";
+            "Assets/Images/FitnessBar/Common/BarGroundwork.png";
 
         bool CPlayerMPUI::Start()
         {
             return true;
         }
 
-        void CPlayerMPUI::LoadLevel(const char* tdlFilePath)
+        void CPlayerMPUI::LoadLevel()
         {
-            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
+            m_level.Load(m_kLevel2DFilePath, [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
-                //オブジェクトネームが"player_kari"と同じだったら
-                    if ("" == imgData.Name)
+                // MPバー
+                    if ("MP_Bar" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteMPBar = NewGO<CSpriteUI>();
-                        m_spriteMPBar->LoadSprite(m_kSpriteMPBarFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteMPBar->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteMPBar->SetPivot(imgData.Pivot);
+                        m_spriteMPBar->LoadSprite(
+                            m_kSpriteMPBarFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteMPBar->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのMPバーの枠
-                    if ("" == imgData.Name)
+                    if ("MP_BarFrame" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteFrame = NewGO<CSpriteUI>();
-                        m_spriteFrame->LoadSprite(m_kSpriteFrameFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteFrame->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteFrame->SetPivot(imgData.Pivot);
+                        m_spriteFrame->LoadSprite(
+                            m_kSpriteFrameFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteFrame->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのMPバーの下地
-                    if ("" == imgData.Name)
+                    if ("MP_BarGroundwork" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
-                        m_spriteBase->LoadSprite(m_kSpriteBaseFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteBase->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteBase->SetPivot(imgData.Pivot);
+                        m_spriteBase->LoadSprite(
+                            m_kSpriteBaseFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteBase->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+
                         // フックしたので、trueを返す
                         return true;
                     }
@@ -85,7 +109,7 @@ namespace nsAWA
         void CPlayerMPUI::Animation()
         {
             // ゲージの長さ（横幅）を適用
-            m_spriteMPBar->SetScale({ m_barWidthSize,1.0f,1.0f });
+            //m_spriteMPBar->SetScale({ m_barWidthSize,1.0f,1.0f });
         }
     }
 }

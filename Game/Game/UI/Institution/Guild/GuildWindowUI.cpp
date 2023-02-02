@@ -9,8 +9,8 @@ namespace nsAWA
     {
         const char* CGuildWindowUI::m_kSpriteWindowFilePath[EnWindowNumber::enMaxWindowNumber] =
         {
-            "Assets/Image/Institution/Guild/Window_1.png",
-            "Assets/Image/Institution/Guild/Window_2.png"
+            "Assets/Images/Institution/Guild/Window_1.png",
+            "Assets/Images/Institution/Guild/Window_2.png"
         };
 
         bool CGuildWindowUI::Start()

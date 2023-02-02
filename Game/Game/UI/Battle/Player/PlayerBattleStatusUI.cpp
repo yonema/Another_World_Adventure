@@ -10,30 +10,40 @@ namespace nsAWA
 {
     namespace nsUI
     {
+        const char* CPlayerBattleStatusUI::m_kLevel2DFilePath =
+            "Assets/Level2D/PlayerStatusBase.tdl";
+
         const char* CPlayerBattleStatusUI::m_kSpritePlayerStatusBaseFilePath =
-            "Assets/Image/FitnessBar/Player/PlayerStatusBase.png";
+            "Assets/Images/FitnessBar/Player/PlayerStatusBase.png";
 
         bool CPlayerBattleStatusUI::Start()
         {
             return true;
         }
 
-        void CPlayerBattleStatusUI::LoadLevel(const char* tdlFilePath)
+        void CPlayerBattleStatusUI::LoadLevel()
         {
             // プレイヤーのバトルステータスの土台
-            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
+            m_level.Load(m_kLevel2DFilePath, [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                     // プレイヤーステータスの土台部分
-                    if ("" == imgData.Name)
+                    if ("PlayerStatusBase" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spritePlayerStatusBase = NewGO<CSpriteUI>();
-                        m_spritePlayerStatusBase->LoadSprite(m_kSpritePlayerStatusBaseFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spritePlayerStatusBase->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spritePlayerStatusBase->SetPivot(imgData.Pivot);
+                        m_spritePlayerStatusBase->LoadSprite(
+                            m_kSpritePlayerStatusBaseFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spritePlayerStatusBase->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+                        
                         // フックしたので、trueを返す
                         return true;
                     }
@@ -41,15 +51,15 @@ namespace nsAWA
 
             // プレイヤーのHPゲージ
             m_playerHPUI = NewGO<CPlayerHPUI>();
-            m_playerHPUI->LoadLevel(tdlFilePath);
+            m_playerHPUI->LoadLevel();
 
             // プレイヤーのMPゲージ
             m_playerMPUI = NewGO<CPlayerMPUI>();
-            m_playerMPUI->LoadLevel(tdlFilePath);
+            m_playerMPUI->LoadLevel();
 
             // プレイヤーのSPゲージ
             m_playerSPUI = NewGO<CPlayerSPUI>();
-            m_playerSPUI->LoadLevel(tdlFilePath);
+            m_playerSPUI->LoadLevel();
         }
 
         void CPlayerBattleStatusUI::OnDestroy()

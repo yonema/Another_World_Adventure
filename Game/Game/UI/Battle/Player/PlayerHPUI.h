@@ -23,7 +23,7 @@ namespace nsAWA
             ~CPlayerHPUI() = default;
 
         public:
-            void LoadLevel(const char* tdlFilePath);
+            void LoadLevel();
 
         private:
             void Animation(); // UIのアニメーション
@@ -67,6 +67,9 @@ namespace nsAWA
             static const float m_kStartDecreaseBarAnimationTimeAmount;
             // 減少アニメーションの減少量
             static const float m_kDecreaseBarDecreaseAmount;
+
+            static const char* m_kLevel2DFilePath;
+
 
         private: // data member
             // 実装されたら、下のやつを追加

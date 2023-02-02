@@ -7,16 +7,19 @@ namespace nsAWA
 {
     namespace nsUI
     {
+        const char* CPlayerHPUI::m_kLevel2DFilePath =
+            "Assets/Level2D/HP_Bar.tdl";
+
         const char* CPlayerHPUI::m_kSpriteHPBarFilePath =
-            "Assets/Image/FitnessBar/Common/Bar_HP.png";
+            "Assets/Images/FitnessBar/Common/Bar_HP.png";
         const char* CPlayerHPUI::m_kSpriteFrameFilePath =
-            "Assets/Image/FitnessBar/Common/BarFrame.png";
+            "Assets/Images/FitnessBar/Common/BarFrame.png";
         const char* CPlayerHPUI::m_kSpriteBaseFilePath =
-            "Assets/Image/FitnessBar/Common/BarGroundwork.png";
+            "Assets/Images/FitnessBar/Common/BarGroundwork.png";
         const char* CPlayerHPUI::m_kSpriteDangerFilePath =
-            "Assets/Image/FitnessBar/Common/Bar_HP_Danger.png";
+            "Assets/Images/FitnessBar/Common/Bar_HP_Danger.png";
         const char* CPlayerHPUI::m_kSpriteDecreaaseFilePath =
-            "ファイルパス";
+            "Assets/Images/FitnessBar/Common/Bar_HP_DecreaseAnimation.png";
 
         // ピンチ判定ライン
         const float CPlayerHPUI::m_kDangerLine = 0.3f;
@@ -30,75 +33,110 @@ namespace nsAWA
             return true;
         }
 
-        void CPlayerHPUI::LoadLevel(const char* tdlFilePath)
+        void CPlayerHPUI::LoadLevel()
         {
-            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
+            m_level.Load(m_kLevel2DFilePath, [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                 // プレイヤーのHPバー
-                    if ("" == imgData.Name)
+                    if ("HP_Bar" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteHPBar = NewGO<CSpriteUI>();
-                        m_spriteHPBar->LoadSprite(m_kSpriteHPBarFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteHPBar->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteHPBar->SetPivot(imgData.Pivot);
+                        m_spriteHPBar->LoadSprite(
+                            m_kSpriteHPBarFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteHPBar->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのHPバーの枠
-                    if ("" == imgData.Name)
+                    if ("HP_BarFrame" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteFrame = NewGO<CSpriteUI>();
-                        m_spriteFrame->LoadSprite(m_kSpriteFrameFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteFrame->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteFrame->SetPivot(imgData.Pivot);
+                        m_spriteFrame->LoadSprite(
+                            m_kSpriteFrameFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteFrame->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのHPバーの下地
-                    if ("" == imgData.Name)
+                    if ("HP_BarGroundwork" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
-                        m_spriteBase->LoadSprite(m_kSpriteBaseFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteBase->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteBase->SetPivot(imgData.Pivot);
+                        m_spriteBase->LoadSprite(
+                            m_kSpriteBaseFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteBase->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのHPバーのピンチ時のやつ
-                    if ("" == imgData.Name)
+                    if ("HP_DangerBar" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteDanger = NewGO<CSpriteUI>();
-                        m_spriteDanger->LoadSprite(m_kSpriteDangerFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteDanger->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteDanger->SetPivot(imgData.Pivot);
+                        m_spriteDanger->LoadSprite(
+                            m_kSpriteDangerFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteDanger->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+
                         // 非表示にする
                         m_spriteDanger->Deactivate();
                         // フックしたので、trueを返す
                         return true;
                     }
                     // HPバーのディレイアニメーション用のUI
-                    if ("" == imgData.Name)
+                    if ("HP_DecreaseAnimationBar" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteDecrease = NewGO<CSpriteUI>();
-                        m_spriteDecrease->LoadSprite(m_kSpriteDecreaaseFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteDecrease->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteDecrease->SetPivot(imgData.Pivot);
+                        m_spriteDecrease->LoadSprite(
+                            m_kSpriteDecreaaseFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteDecrease->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+
                         // フックしたので、trueを返す
                         return true;
                     }
@@ -136,9 +174,9 @@ namespace nsAWA
             }
 
             // ゲージの長さ（横幅）を適用
-            m_spriteHPBar->SetScale({ m_barWidthSize,1.0f,1.0f });
-            m_spriteDanger->SetScale({ m_barWidthSize,1.0f,1.0f });
-            m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,1.0f,1.0f });
+            //m_spriteHPBar->SetScale({ m_barWidthSize,1.0f,1.0f });
+            //m_spriteDanger->SetScale({ m_barWidthSize,1.0f,1.0f });
+            //m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,1.0f,1.0f });
 
             m_oldDecreaseBarWidthSize = m_decreaseBarWidthSize;
         }

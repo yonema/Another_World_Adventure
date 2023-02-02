@@ -9,8 +9,8 @@ namespace nsAWA
     {
         const char* CMenuStatusWindowUI::m_kSpriteWindowFilePath[EnWindowNumber::enMaxWindowNumber] =
         {
-            "Assets/Image/Menu/Status/Window_1.png",
-            "Assets/Image/Menu/Status/Window_2.png"
+            "Assets/Images/Menu/Status/Window_1.png",
+            "Assets/Images/Menu/Status/Window_2.png"
         };
 
         bool CMenuStatusWindowUI::Start()

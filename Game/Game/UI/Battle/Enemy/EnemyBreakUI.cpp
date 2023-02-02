@@ -8,13 +8,13 @@ namespace nsAWA
     namespace nsUI
     {
         const char* CEnemyBreakUI::m_kSpriteBreakBarFilePath =
-            "Assets/Image/FitnessBar/Enemy/Gauge_Break.png";
+            "Assets/Images/FitnessBar/Enemy/Gauge_Break.png";
         const char* CEnemyBreakUI::m_kSpriteBreakFilePath =
-            "Assets/Image/FitnessBar/Enemy/Break_GaugeMax.png";
+            "Assets/Images/FitnessBar/Enemy/Break_GaugeMax.png";
         const char* CEnemyBreakUI::m_kSpriteBreakReductionFilePath =
-            "Assets/Image/FitnessBar/Enemy/Break_GaugeDecrease.png";
+            "Assets/Images/FitnessBar/Enemy/Break_GaugeDecrease.png";
         const char* CEnemyBreakUI::m_kSpriteBaseFilePath =
-            "Assets/Image/FitnessBar/Enemy/Gauge_Break_Groundwork.png";
+            "Assets/Images/FitnessBar/Enemy/Gauge_Break_Groundwork.png";
 
         bool CEnemyBreakUI::Start()
         {

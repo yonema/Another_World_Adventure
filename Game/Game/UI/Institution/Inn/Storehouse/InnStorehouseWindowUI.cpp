@@ -9,10 +9,10 @@ namespace nsAWA
     {
         const char* CInnStorehouseWindowUI::m_kSpriteWindowFilePath[EnWindowNumber::enMaxWindowNumber] =
         {
-            "Assets/Image/Institution/Inn/Storehouse/Window_1.png",
-            "Assets/Image/Institution/Inn/Storehouse/Window_2.png",
-            "Assets/Image/Institution/Inn/Storehouse/Window_3.png",
-            "Assets/Image/Institution/Inn/Storehouse/Window_4.png"
+            "Assets/Images/Institution/Inn/Storehouse/Window_1.png",
+            "Assets/Images/Institution/Inn/Storehouse/Window_2.png",
+            "Assets/Images/Institution/Inn/Storehouse/Window_3.png",
+            "Assets/Images/Institution/Inn/Storehouse/Window_4.png"
         };
 
         bool CInnStorehouseWindowUI::Start()

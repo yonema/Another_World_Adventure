@@ -9,9 +9,9 @@ namespace nsAWA
     {
         const char* CInnMealWindowUI::m_kSpriteWindowFilePath[EnWindowNumber::enMaxWindowNumber] =
         {
-            "Assets/Image/Institution/Inn/Meal/Window_1.png",
-            "Assets/Image/Institution/Inn/Meal/Window_2.png",
-            "Assets/Image/Institution/Inn/Meal/Window_3.png"
+            "Assets/Images/Institution/Inn/Meal/Window_1.png",
+            "Assets/Images/Institution/Inn/Meal/Window_2.png",
+            "Assets/Images/Institution/Inn/Meal/Window_3.png"
         };
 
         bool CInnMealWindowUI::Start()

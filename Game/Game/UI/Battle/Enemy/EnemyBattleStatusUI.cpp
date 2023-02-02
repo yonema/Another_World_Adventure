@@ -10,7 +10,7 @@ namespace nsAWA
     namespace nsUI
     {
         const char* CEnemyBattleStatusUI::m_kSpriteEnemyStatusBaseFilePath = 
-            "Assets/Image/FitnessBar/Enemy/EnemyStatusBase.png";
+            "Assets/Images/FitnessBar/Enemy/EnemyStatusBase.png";
 
         bool CEnemyBattleStatusUI::Start()
         {

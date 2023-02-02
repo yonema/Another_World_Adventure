@@ -9,8 +9,8 @@ namespace nsAWA
     {
         const char* CMenuQuestWindowUI::m_kSpriteWindowFilePath[EnWindowNumber::enMaxWindowNumber] =
         {
-            "Assets/Image/Menu/Quest/Window_1.png",
-            "Assets/Image/Menu/Quest/Window_2.png"
+            "Assets/Images/Menu/Quest/Window_1.png",
+            "Assets/Images/Menu/Quest/Window_2.png"
         };
 
         bool CMenuQuestWindowUI::Start()

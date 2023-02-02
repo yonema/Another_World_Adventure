@@ -8,13 +8,13 @@ namespace nsAWA
     namespace nsUI
     {
         const char* CEnemyHPUI::m_kSpriteHPBarFilePath = 
-            "Assets/Image/FitnessBar/Common/Bar_HP.png";
+            "Assets/Images/FitnessBar/Common/Bar_HP.png";
         const char* CEnemyHPUI::m_kSpriteFrameFilePath =
-            "Assets/Image/FitnessBar/Common/BarFrame.png";
+            "Assets/Images/FitnessBar/Common/BarFrame.png";
         const char* CEnemyHPUI::m_kSpriteBaseFilePath =
-            "Assets/Image/FitnessBar/Common/BarGroundwork.png";
+            "Assets/Images/FitnessBar/Common/BarGroundwork.png";
         const char* CEnemyHPUI::m_kSpriteDangerFilePath =
-            "Assets/Image/FitnessBar/Common/Bar_HP_Danger.png";
+            "Assets/Images/FitnessBar/Common/Bar_HP_Danger.png";
 
         bool CEnemyHPUI::Start()
         {

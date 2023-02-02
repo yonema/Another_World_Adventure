@@ -23,7 +23,7 @@ namespace nsAWA
             ~CPlayerBattleStatusUI() = default;
 
         public:
-            void LoadLevel(const char* tdlFilePath);
+            void LoadLevel();
 
 
         public: // Set function
@@ -44,6 +44,7 @@ namespace nsAWA
 
         private:
             static const char* m_kSpritePlayerStatusBaseFilePath;
+            static const char* m_kLevel2DFilePath;
 
 
         private: // data member

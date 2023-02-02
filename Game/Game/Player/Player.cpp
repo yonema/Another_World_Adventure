@@ -9,6 +9,7 @@
 #include "../Monster/Monster.h"
 #include "PlayerManager.h"
 #endif
+#include "../UI/Battle/Player/PlayerBattleStatusUI.h"
 
 namespace nsAWA {
 
@@ -77,6 +78,11 @@ namespace nsAWA {
 			//‰Šú‰»B
 			m_fontRenderer->Init(fontParam);
 #endif
+			// UI‚Ìˆ—
+			m_playerBattleStatusUI = NewGO<nsUI::CPlayerBattleStatusUI>();
+			m_playerBattleStatusUI->LoadLevel();
+
+
 			return true;
 		}
 
@@ -99,6 +105,9 @@ namespace nsAWA {
 
 			//“–‚½‚è”»’è‚ğ”jŠüB
 			m_collider.Release();
+
+			// UI‚ğ”jŠüB
+			DeleteGO(m_playerBattleStatusUI);
 		}
 
 		void CPlayer::UpdateActor(float deltaTime) {

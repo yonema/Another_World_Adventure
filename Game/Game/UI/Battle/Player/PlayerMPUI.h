@@ -23,7 +23,7 @@ namespace nsAWA
             ~CPlayerMPUI() = default;
 
         public:
-            void LoadLevel(const char* tdlFilePath);
+            void LoadLevel();
 
         private:
             void Animation(); // UIのアニメーション
@@ -44,6 +44,9 @@ namespace nsAWA
             static const char* m_kSpriteMPBarFilePath;
             static const char* m_kSpriteFrameFilePath;
             static const char* m_kSpriteBaseFilePath;
+
+            static const char* m_kLevel2DFilePath;
+
 
         private: // data member
             // 実装されたら、下のやつを追加

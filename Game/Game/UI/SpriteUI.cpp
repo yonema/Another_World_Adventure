@@ -10,14 +10,20 @@ namespace nsAWA
             return true;
         }
 
-        void CSpriteUI::LoadSprite(const char* tdlFilePath)
+        void CSpriteUI::LoadSprite(
+            const char* tdlFilePath,
+            const CVector2& spriteSize,
+            const EnGOPriority priority,
+            const EnAlphaBlendMode alphaBlendMode
+        )
         {
             SSpriteInitData spriteInitData;
             spriteInitData.filePath = tdlFilePath;
-            // スプライトサイズは仮
-            spriteInitData.spriteSize = { 100.0f,100.0f };
+            spriteInitData.spriteSize = spriteSize;
+            spriteInitData.alphaBlendMode = alphaBlendMode;
+
             // 画像の読み込み
-            m_spriteRenderer = NewGO<CSpriteRenderer>();
+            m_spriteRenderer = NewGO<CSpriteRenderer>(priority);
             m_spriteRenderer->Init(spriteInitData);
         }
 

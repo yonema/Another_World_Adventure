@@ -21,7 +21,23 @@ namespace nsAWA
 
         public:
             // ‰æ‘œ‚Ì“Ç‚Ýž‚Ýˆ—
-            void LoadSprite(const char* tdlFilePath);
+            void LoadSprite(
+                const char* tdlFilePath,
+                const CVector2& spriteSize = { 100.0f,100.0f },
+                const EnGOPriority priority = EnGOPriority::enMid,
+                const EnAlphaBlendMode alphaBlendMode = EnAlphaBlendMode::enNone
+                );
+
+            void LoadInitData(
+                const CVector2& position,
+                const CVector2& scale,
+                const CVector2& pivot
+            )
+            {
+                m_spriteRenderer->SetPosition(position);
+                m_spriteRenderer->SetScale({ scale.x,scale.y,1.0f });
+                m_spriteRenderer->SetPivot(pivot);
+            }
 
 
         public: // Set function

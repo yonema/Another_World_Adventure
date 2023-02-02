@@ -9,14 +9,14 @@ namespace nsAWA
     {
         const char* CButtonUI::m_kSpriteButtonFilePath[EnButtonUI::enMaxButtonUI] =
         {
-            "Assets/Image/ButtonRelated/Button_A.png",
-            "Assets/Image/ButtonRelated/Button_B.png",
-            "Assets/Image/ButtonRelated/Button_X.png",
-            "Assets/Image/ButtonRelated/Button_Y.png",
-            "Assets/Image/ButtonRelated/Button_L.png",
-            "Assets/Image/ButtonRelated/Button_R.png",
-            "Assets/Image/ButtonRelated/Trigger_L.png",
-            "Assets/Image/ButtonRelated/Trigger_R.png",
+            "Assets/Images/ButtonRelated/Button_A.png",
+            "Assets/Images/ButtonRelated/Button_B.png",
+            "Assets/Images/ButtonRelated/Button_X.png",
+            "Assets/Images/ButtonRelated/Button_Y.png",
+            "Assets/Images/ButtonRelated/Button_L.png",
+            "Assets/Images/ButtonRelated/Button_R.png",
+            "Assets/Images/ButtonRelated/Trigger_L.png",
+            "Assets/Images/ButtonRelated/Trigger_R.png",
         };
 
         bool CButtonUI::Start()

@@ -9,11 +9,11 @@ namespace nsAWA
     {
         const char* CBlacksmithWindowUI::m_kSpriteWindowFilePath[EnWindowNumber::enMaxWindowNumber] =
         {
-            "Assets/Image/Institution/Blacksmith/Window_1.png",
-            "Assets/Image/Institution/Blacksmith/Window_2.png",
-            "Assets/Image/Institution/Blacksmith/Window_3.png",
-            "Assets/Image/Institution/Blacksmith/Window_4.png",
-            "Assets/Image/Institution/Blacksmith/Window_5.png"
+            "Assets/Images/Institution/Blacksmith/Window_1.png",
+            "Assets/Images/Institution/Blacksmith/Window_2.png",
+            "Assets/Images/Institution/Blacksmith/Window_3.png",
+            "Assets/Images/Institution/Blacksmith/Window_4.png",
+            "Assets/Images/Institution/Blacksmith/Window_5.png"
         };
 
         bool CBlacksmithWindowUI::Start()

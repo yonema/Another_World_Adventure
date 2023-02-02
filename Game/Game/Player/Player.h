@@ -18,6 +18,10 @@ namespace nsAWA {
 
 		class CArmor;
 	}
+	namespace nsUI {
+		
+		class CPlayerBattleStatusUI;
+	}
 
 	namespace nsPlayer {
 
@@ -76,12 +80,6 @@ namespace nsAWA {
 				return &m_collider;
 			}
 
-			// UIの処理で追加、セットしてるアクティブスキルの名前を取得
-			//const std::string& GetActiveSkillName(const int skillNum) const
-			//{
-			//	return m_action.GetActiveSkillName(skillNum);
-			//}
-
 			void SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill);
 
 			nsSkill::CActiveSkill* GetActiveSkill(int skillNum)const;
@@ -106,6 +104,8 @@ namespace nsAWA {
 			CFontRenderer* m_fontRenderer = nullptr;
 			wchar_t m_dispText[32] = {};
 #endif		
+			nsUI::CPlayerBattleStatusUI* m_playerBattleStatusUI = nullptr;
+
 		};
 	}
 }
