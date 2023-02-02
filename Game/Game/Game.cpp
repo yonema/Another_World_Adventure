@@ -1,6 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "Game.h"
 #include "LoadGame.h"
+#include "Samples/EffectSample.h"
 
 
 namespace nsAWA
@@ -11,6 +12,8 @@ namespace nsAWA
 	{
 		//ゲームをロード。
 		NewGO<CLoadGame>();
+
+		NewGO<nsSamples::CEffectSample>();
 
 		return true;
 	}

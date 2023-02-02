@@ -143,6 +143,7 @@ namespace nsAWA {
 
 				return m_isChangeState;
 			}
+
 		private:
 			CVector3* m_position = nullptr;						//À•W
 			CQuaternion* m_rotation = nullptr;					//‰ñ“]
