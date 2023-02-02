@@ -21,6 +21,8 @@ namespace nsAWA {
 
 		void SaveCanUseActiveSkillList(nsPlayer::CPlayer* player);
 
+		void SaveItem();
+
 	private:
 		std::list<std::vector<std::string>> m_userData;		//ユーザーデータ
 	};

@@ -37,6 +37,15 @@ namespace nsAWA {
 			}
 		}
 
+		void CPlayerManager::SetPlayer(CPlayer* player) {
+
+			//プレイヤーを設定。
+			m_player = player;
+
+			//アイテム管理クラスのターゲットを設定。
+			m_itemManager.SetTatget(player);
+		}
+
 		void CPlayerManager::SetActiveSkill(int setNum, const std::string& activeSkillName) {
 
 			//設定番号をチェック。

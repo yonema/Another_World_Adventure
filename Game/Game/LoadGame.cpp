@@ -66,7 +66,6 @@ namespace nsAWA {
 
 	void CLoadGame::Update(float deltaTime)
 	{
-
 		//#ifdef _DEBUG
 		//		//ƒMƒ„ƒ‰‚ðoŒ»‚³‚¹‚éB
 		//		if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {

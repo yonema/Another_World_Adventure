@@ -8,12 +8,6 @@ namespace nsAWA {
 
 	bool IGameActor::Start() {
 
-		//アイテム管理クラスを生成。
-		m_itemManager = new nsItem::CItemManager;
-
-		//アイテム管理クラスを初期化。
-		m_itemManager->Init(this);
-
 		//パッシブスキル管理クラスを生成。
 		m_passiveSkillManager = new nsSkill::CPassiveSkillManager;
 
@@ -25,14 +19,6 @@ namespace nsAWA {
 	}
 
 	void IGameActor::OnDestroy() {
-
-		//破棄処理。
-
-		if (m_itemManager != nullptr) {
-
-			//アイテム管理クラスを破棄。
-			delete m_itemManager;
-		}
 
 		if (m_passiveSkillManager != nullptr) {
 

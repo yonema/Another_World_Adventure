@@ -113,19 +113,6 @@ namespace nsAWA {
 			return m_forwardDirection;
 		}
 
-		nsItem::CItemManager* GetItemManager() {
-
-			//アイテム管理クラスが生成されていないなら。
-			if (m_itemManager == nullptr) {
-
-				//警告を出す。
-				nsGameWindow::MessageBoxError(L"アイテム管理クラスが生成されていません。");
-			}
-
-			//アイテムにアクセスするために、管理クラスを取得。
-			return m_itemManager;
-		}
-
 		nsSkill::CPassiveSkillManager* GetPassiveSkillManager() {
 
 			//パッシブスキル管理クラスが生成されていないなら。
@@ -168,7 +155,6 @@ namespace nsAWA {
 		bool m_isHitStop = false;						//ヒットストップ中？
 
 	private:
-		nsItem::CItemManager* m_itemManager = nullptr;		//アイテム管理
 		nsSkill::CPassiveSkillManager* m_passiveSkillManager = nullptr;		//パッシブスキル管理
 		nsFeature::CFeatureManager* m_featureManager = nullptr;		//ステータス変化管理
 	};

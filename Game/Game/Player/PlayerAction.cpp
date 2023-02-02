@@ -3,7 +3,7 @@
 #include "PlayerAction.h"
 #include "../Camera/MainCamera.h"
 #include "../Skill/ActiveSkill.h"
-#include "../Item/ItemManager.h"
+#include "PlayerManager.h"
 #include "../Feature/FeatureManager.h"
 
 namespace nsAWA {
@@ -27,7 +27,6 @@ namespace nsAWA {
 			CVector3& position,
 			CQuaternion& rotation,
 			CPlayerStatus* playerStatus, 
-			nsItem::CItemManager* playerItemManager,
 			nsFeature::CFeatureManager* playerFeatureManager,
 			nsPlayerAnimation::CPlayerAnimation* playerAnimation
 		) {
@@ -42,9 +41,6 @@ namespace nsAWA {
 
 			//プレイヤーのステータスを保持。
 			m_playerStatus = playerStatus;
-
-			//プレイヤーのアイテム管理クラスを保持。
-			m_playerItemManager = playerItemManager;
 
 			//プレイヤーのステータス変化管理クラスを保持。
 			m_playerFeatureManager = playerFeatureManager;
@@ -134,27 +130,18 @@ namespace nsAWA {
 
 		void CPlayerAction::UseItem() {
 
+			//アイテム管理クラスを取得。
+			auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
+
 			//アイテムを持っていたら。
-			if (m_playerItemManager->HasItem()) {
+			if (itemManager->HasItem()) {
 			
 				//選択中のアイテムを使用。
-				m_playerItemManager->UseItem();
+				itemManager->UseItem();
 			
 				//アイテム使用状態にする。
 				SetState(EnPlayerState::enUseItem);
 			}
-		}
-
-		void CPlayerAction::AddSelectItemNum() {
-
-			//次のアイテムを選択。
-			//m_playerItemManager->AddSelectItemNum();
-		}
-
-		void CPlayerAction::SubSelectItemNum() {
-
-			//前のアイテムを選択。
-			//m_playerItemManager->SubSelectItemNum();
 		}
 
 		void CPlayerAction::SetActiveSkill(int activeSkillNum, nsSkill::CActiveSkill* activeSkill) {

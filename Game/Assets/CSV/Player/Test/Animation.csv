@@ -27,3 +27,9 @@ NAME,Sword_Death,
 SPEED,1,
 LOOP,FALSE,
 *,,
+NAME,Sword_UseItem,
+SPEED,1,
+LOOP,FALSE,
+EVENT,CoolTimeOn,FALSE
+EVENT,CoolTimeOff,FALSE
+*,,
