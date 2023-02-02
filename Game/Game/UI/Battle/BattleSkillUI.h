@@ -30,7 +30,7 @@ namespace nsAWA
 
         private: // data member
             // À‘•‚³‚ê‚½‚çA‰º‚Ì‚â‚Â‚ğ’Ç‰Á
-            // C2DLevel m_level;
+            nsLevel2D::CLevel2D m_level;
 
             CSkillIconUI* m_skillIconUI[m_kSkillIconMaxNum] = { nullptr };
         };

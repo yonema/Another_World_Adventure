@@ -26,11 +26,11 @@ namespace nsAWA
 
         void CButtonUI::LoadLevel(const char* tdlFilePath)
         {
-            m_level.Init(tklFilePath, [&](LevelObjectData& imgData)
+            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                     // Aボタン
-                    if (imgData.EqualObjectName(L"Aボタン") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enA, imgData);
@@ -38,7 +38,7 @@ namespace nsAWA
                         return true;
                     }
                     // Bボタン
-                    if (imgData.EqualObjectName(L"Bボタン") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enB, imgData);
@@ -46,7 +46,7 @@ namespace nsAWA
                         return true;
                     }
                     // Xボタン
-                    if (imgData.EqualObjectName(L"Xボタン") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enX, imgData);
@@ -54,7 +54,7 @@ namespace nsAWA
                         return true;
                     }
                     // Yボタン
-                    if (imgData.EqualObjectName(L"Yボタン") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enY, imgData);
@@ -62,7 +62,7 @@ namespace nsAWA
                         return true;
                     }
                     // Lボタン
-                    if (imgData.EqualObjectName(L"Lボタン") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enBL, imgData);
@@ -70,7 +70,7 @@ namespace nsAWA
                         return true;
                     }
                     // Rボタン
-                    if (imgData.EqualObjectName(L"Rボタン") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enBR, imgData);
@@ -78,7 +78,7 @@ namespace nsAWA
                         return true;
                     }
                     // Lトリガー
-                    if (imgData.EqualObjectName(L"Lトリガー") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enTL, imgData);
@@ -86,7 +86,7 @@ namespace nsAWA
                         return true;
                     }
                     // Rトリガー
-                    if (imgData.EqualObjectName(L"Rトリガー") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enTR, imgData);
@@ -96,15 +96,15 @@ namespace nsAWA
                 });
         }
 
-        void CButtonUI::LoadButtonSprite(const int buttonUINum, LevelObjectData& imgData)
+        void CButtonUI::LoadButtonSprite(const int buttonUINum, const nsLevel2D::SLevel2DSpriteData& imgData)
         {
             // UIクラスを作成
             m_spriteButton = NewGO<CSpriteUI>();
             m_spriteButton->LoadSprite(m_kSpriteButtonFilePath[buttonUINum]);
             // ポジションをロードした画像と同じにする
-            m_spriteButton->SetPosition(imgData.position);
+            m_spriteButton->SetPosition(imgData.Position);
             // ピボットをロードした画像と同じにする
-            m_spriteButton->SetPivot(imgData.pivot);
+            m_spriteButton->SetPivot(imgData.Pivot);
         }
 
         void CButtonUI::OnDestroy()

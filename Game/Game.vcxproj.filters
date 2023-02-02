@@ -217,6 +217,7 @@
     <ClCompile Include="Game\UI\Story\ConversationWindowUI.cpp" />
     <ClCompile Include="Game\UI\FontUI.cpp" />
     <ClCompile Include="Game\UI\SpriteUI.cpp" />
+    <ClCompile Include="Game\UI\FontArrayUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -445,6 +446,7 @@
     <ClInclude Include="Game\UI\Story\ConversationWindowUI.h" />
     <ClInclude Include="Game\UI\FontUI.h" />
     <ClInclude Include="Game\UI\SpriteUI.h" />
+    <ClInclude Include="Game\UI\FontArrayUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

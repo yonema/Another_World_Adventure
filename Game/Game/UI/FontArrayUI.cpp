@@ -1,21 +1,17 @@
 #include "YonemaEnginePreCompile.h"
-#include "FontUI.h"
+#include "FontArrayUI.h"
 
 namespace nsAWA
 {
     namespace nsUI
     {
-        bool CFontUI::Start()
+        bool CFontArrayUI::Start()
         {
             return true;
         }
 
-        void CFontUI::LoadFont(const wchar_t* text, EnFontType fontType)
+        void CFontArrayUI::NewLoadFont(const wchar_t* text, EnFontType fontType)
         {
-            if (nullptr != m_fontRenderer) {
-                return;
-            }
-            
             SFontParameter fontParam;
             fontParam.text = text;
             fontParam.position.x = 0.0f;
@@ -24,16 +20,18 @@ namespace nsAWA
             fontParam.pivot.y = 0.0f;
             fontParam.anchor = EnAnchors::enMiddleCenter;
 
-            m_fontRenderer = NewGO<CFontRenderer>();
-            m_fontRenderer->Init(fontParam, fontType);
+            m_fontRenderers.push_back(NewGO<CFontRenderer>());
+            m_fontRenderers.back()->Init(fontParam, fontType);
         }
 
-        void CFontUI::OnDestroy()
+        void CFontArrayUI::OnDestroy()
         {
-            DeleteGO(m_fontRenderer);
+            for (auto forNum : m_fontRenderers) {
+                DeleteGO(forNum);
+            }
         }
 
-        void CFontUI::Update(float deltaTime)
+        void CFontArrayUI::Update(float deltaTime)
         {
             // ñàÉtÉåÅ[ÉÄÇÃèàóùÇÇ±Ç±Ç…
 

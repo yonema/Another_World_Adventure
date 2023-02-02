@@ -26,7 +26,7 @@ namespace nsAWA
              * @param buttonUINum ボタンの画像の識別用番号
              * @param imgData レベルデータ
             */
-            void LoadButtonSprite(const int buttonUINum, LevelObjectData& imgData);
+            void LoadButtonSprite(const int buttonUINum, const nsLevel2D::SLevel2DSpriteData& imgData);
 
         private:
             void Animation(); // UIのアニメーション
@@ -54,6 +54,8 @@ namespace nsAWA
            
             
         private: // data member
+            nsLevel2D::CLevel2D m_level;
+
             // ボタンの画像
             CSpriteUI* m_spriteButton = nullptr;
         };

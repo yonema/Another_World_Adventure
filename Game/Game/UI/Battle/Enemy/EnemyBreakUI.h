@@ -42,13 +42,7 @@ namespace nsAWA
              * @brief UIの位置を取得
              * @param position 敵の位置
             */
-            void SetUIPosition(const CVector2& position)
-            {
-                m_spriteBreakBar->SetPosition(position + m_correctionAmountBreakBar);
-                m_spriteBreak->SetPosition(position + m_correctionAmountBreak);
-                m_spriteBreakReduction->SetPosition(position + m_correctionAmountBreakReduction);
-                m_spriteBase->SetPosition(position + m_correctionAmountBase);
-            }
+            void SetUIPosition(const CVector2& position);
 
         private:
             static const char* m_kSpriteBreakBarFilePath;
@@ -58,7 +52,7 @@ namespace nsAWA
 
         private: // data member
             // 実装されたら、下のやつを追加
-            // C2DLevel m_level;
+            nsLevel2D::CLevel2D m_level;
 
             CSpriteUI* m_spriteBreakBar = nullptr; // ブレイクゲージ
             CSpriteUI* m_spriteBreak = nullptr; // ブレイク時のBreak!

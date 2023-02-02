@@ -17,19 +17,19 @@ namespace nsAWA
 
         void CConversationWindowUI::LoadLevel(const char* tdlFilePath)
         {
-            m_level.Init(tklFilePath, [&](LevelObjectData& imgData)
+            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                     // ウィンドウ１
-                    if (imgData.EqualObjectName(L"ウィンドウ１") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteWindow = NewGO<CSpriteUI>();
                         m_spriteWindow->LoadSprite(m_kSpriteWindowFilePath);
                         // ポジションをロードした画像と同じにする
-                        m_spriteWindow->SetPosition(imgData.position);
+                        m_spriteWindow->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteWindow->SetPivot(imgData.pivot);
+                        m_spriteWindow->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }

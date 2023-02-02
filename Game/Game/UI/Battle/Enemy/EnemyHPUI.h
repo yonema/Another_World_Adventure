@@ -43,13 +43,7 @@ namespace nsAWA
              * @brief UIの位置を取得
              * @param position 敵の位置
             */
-            void SetUIPosition(const CVector2& position)
-            {
-                m_spriteHPBar->SetPosition(position + m_correctionAmountHPBar);
-                m_spriteFrame->SetPosition(position + m_correctionAmountFrame);
-                m_spriteBase->SetPosition(position + m_correctionAmountBase);
-                m_spriteDanger->SetPosition(position + m_correctionAmountDanger);
-            }
+            void SetUIPosition(const CVector2& position);
 
         private:
             static const char* m_kSpriteHPBarFilePath;
@@ -61,7 +55,7 @@ namespace nsAWA
 
         private: // data member
             // 実装されたら、下のやつを追加
-            // C2DLevel m_level;
+            nsLevel2D::CLevel2D m_level;
 
             CSpriteUI* m_spriteHPBar = nullptr; // HPバー
             CSpriteUI* m_spriteFrame = nullptr; // バーの枠

@@ -2,8 +2,15 @@
 
 namespace nsAWA
 {
+    namespace nsSkill
+    {
+        struct SActiveSkillData;
+    }
+
     namespace nsUI
     {
+        class CFontArrayUI;
+        
         class COperationMenuSkillUI : public IGameObject
         {
         public:
@@ -82,9 +89,12 @@ namespace nsAWA
         private: // data member
             bool m_flagEndProcessing = false;
 
-            std::vector<std::string> m_nowSetSkill;
+            std::vector<std::string> m_nowSetSkillName;
             //std::vector<int> m_selectionSetSkill;
             std::vector<std::string> m_selectionSetSkill;
+
+            std::list<nsSkill::SActiveSkillData> m_selectionSetSkillData;
+            CFontArrayUI* m_fontSelectionSetSkillName;
 
             //std::list<std::vector<std::string>> m_selectionSetSkill;
 

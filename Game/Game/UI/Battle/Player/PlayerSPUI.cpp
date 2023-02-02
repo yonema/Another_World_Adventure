@@ -21,45 +21,45 @@ namespace nsAWA
 
         void CPlayerSPUI::LoadLevel(const char* tdlFilePath)
         {
-            m_level.Init(tklFilePath, [&](LevelObjectData& imgData)
+            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                 //オブジェクトネームが"player_kari"と同じだったら
-                    if (imgData.EqualObjectName(L"プレイヤーのSPバー") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteSPBar = NewGO<CSpriteUI>();
                         m_spriteSPBar->LoadSprite(m_kSpriteSPBarFilePath);
                         // ポジションをロードした画像と同じにする
-                        m_spriteSPBar->SetPosition(imgData.position);
+                        m_spriteSPBar->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteSPBar->SetPivot(imgData.pivot);
+                        m_spriteSPBar->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのSPバーの枠
-                    if (imgData.EqualObjectName(L"プレイヤーのSPバーの枠") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteFrame = NewGO<CSpriteUI>();
                         m_spriteFrame->LoadSprite(m_kSpriteFrameFilePath);
                         // ポジションをロードした画像と同じにする
-                        m_spriteFrame->SetPosition(imgData.position);
+                        m_spriteFrame->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteFrame->SetPivot(imgData.pivot);
+                        m_spriteFrame->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのSPバーの下地
-                    if (imgData.EqualObjectName(L"プレイヤーのSPの下地") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
                         m_spriteBase->LoadSprite(m_kSpriteBaseFilePath);
                         // ポジションをロードした画像と同じにする
-                        m_spriteBase->SetPosition(imgData.position);
+                        m_spriteBase->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteBase->SetPivot(imgData.pivot);
+                        m_spriteBase->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }

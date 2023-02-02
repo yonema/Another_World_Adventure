@@ -21,11 +21,11 @@ namespace nsAWA
 
         void CMenuItemWindowUI::LoadLevel(const char* tdlFilePath)
         {
-            m_level.Init(tklFilePath, [&](LevelObjectData& imgData)
+            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                     // ウィンドウ１
-                    if (imgData.EqualObjectName(L"ウィンドウ１") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_1, imgData);
@@ -33,7 +33,7 @@ namespace nsAWA
                         return true;
                     }
                     // ウィンドウ２
-                    if (imgData.EqualObjectName(L"ウィンドウ２") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_2, imgData);
@@ -41,7 +41,7 @@ namespace nsAWA
                         return true;
                     }
                     // ウィンドウ３
-                    if (imgData.EqualObjectName(L"ウィンドウ３") == true)
+                    if ("" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_3, imgData);
@@ -51,15 +51,15 @@ namespace nsAWA
                 });
         }
 
-        void CMenuItemWindowUI::LoadWindowSprite(const int windowNum, LevelObjectData& imgData)
+        void CMenuItemWindowUI::LoadWindowSprite(const int windowNum, const nsLevel2D::SLevel2DSpriteData& imgData)
         {
             // UIクラスを作成
             m_spriteWindow[windowNum] = NewGO<CSpriteUI>();
             m_spriteWindow[windowNum]->LoadSprite(m_kSpriteWindowFilePath[windowNum]);
             // ポジションをロードした画像と同じにする
-            m_spriteWindow[windowNum]->SetPosition(imgData.position);
+            m_spriteWindow[windowNum]->SetPosition(imgData.Position);
             // ピボットをロードした画像と同じにする
-            m_spriteWindow[windowNum]->SetPivot(imgData.pivot);
+            m_spriteWindow[windowNum]->SetPivot(imgData.Pivot);
         }
 
         void CMenuItemWindowUI::OnDestroy()

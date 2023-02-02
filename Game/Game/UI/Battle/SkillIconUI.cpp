@@ -14,31 +14,31 @@ namespace nsAWA
 
         void CSkillIconUI::LoadLevel(const char* tdlFilePath)
         {
-            m_level.Init(tklFilePath, [&](LevelObjectData& imgData)
+            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
                 //スキルアイコンの土台
-                    if (imgData.EqualObjectName(L"スキルアイコンの土台") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
                         m_spriteBase->LoadSprite("ファイルパス");
                         // ポジションをロードした画像と同じにする
-                        m_spriteBase->SetPosition(imgData.position);
+                        m_spriteBase->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteBase->SetPivot(imgData.pivot);
+                        m_spriteBase->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }
                     // スキルアイコンのイラスト
-                    if (imgData.EqualObjectName(L"スキルアイコンのイラスト") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteSkill = NewGO<CSpriteUI>();
                         m_spriteSkill->LoadSprite("ファイルパス");
                         // ポジションをロードした画像と同じにする
-                        m_spriteSkill->SetPosition(imgData.position);
+                        m_spriteSkill->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteSkill->SetPivot(imgData.pivot);
+                        m_spriteSkill->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }

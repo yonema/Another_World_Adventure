@@ -32,73 +32,73 @@ namespace nsAWA
 
         void CPlayerHPUI::LoadLevel(const char* tdlFilePath)
         {
-            m_level.Init(tklFilePath, [&](LevelObjectData& imgData)
+            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
-                //オブジェクトネームが"player_kari"と同じだったら
-                    if (imgData.EqualObjectName(L"プレイヤーのHPバー") == true)
+                // プレイヤーのHPバー
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteHPBar = NewGO<CSpriteUI>();
                         m_spriteHPBar->LoadSprite(m_kSpriteHPBarFilePath);
                         // ポジションをロードした画像と同じにする
-                        m_spriteHPBar->SetPosition(imgData.position);
+                        m_spriteHPBar->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteHPBar->SetPivot(imgData.pivot);
+                        m_spriteHPBar->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのHPバーの枠
-                    if (imgData.EqualObjectName(L"プレイヤーのHPバーの枠") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteFrame = NewGO<CSpriteUI>();
                         m_spriteFrame->LoadSprite(m_kSpriteFrameFilePath);
                         // ポジションをロードした画像と同じにする
-                        m_spriteFrame->SetPosition(imgData.position);
+                        m_spriteFrame->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteFrame->SetPivot(imgData.pivot);
+                        m_spriteFrame->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのHPバーの下地
-                    if (imgData.EqualObjectName(L"プレイヤーのHPの下地") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
                         m_spriteBase->LoadSprite(m_kSpriteBaseFilePath);
                         // ポジションをロードした画像と同じにする
-                        m_spriteBase->SetPosition(imgData.position);
+                        m_spriteBase->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteBase->SetPivot(imgData.pivot);
+                        m_spriteBase->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }
                     // プレイヤーのHPバーのピンチ時のやつ
-                    if (imgData.EqualObjectName(L"プレイヤーのHPのピンチ時") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteDanger = NewGO<CSpriteUI>();
                         m_spriteDanger->LoadSprite(m_kSpriteDangerFilePath);
                         // ポジションをロードした画像と同じにする
-                        m_spriteDanger->SetPosition(imgData.position);
+                        m_spriteDanger->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteDanger->SetPivot(imgData.pivot);
+                        m_spriteDanger->SetPivot(imgData.Pivot);
                         // 非表示にする
                         m_spriteDanger->Deactivate();
                         // フックしたので、trueを返す
                         return true;
                     }
                     // HPバーのディレイアニメーション用のUI
-                    if (imgData.EqualObjectName(L"文字列") == true)
+                    if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteDecrease = NewGO<CSpriteUI>();
                         m_spriteDecrease->LoadSprite(m_kSpriteDecreaaseFilePath);
                         // ポジションをロードした画像と同じにする
-                        m_spriteDecrease->SetPosition(imgData.position);
+                        m_spriteDecrease->SetPosition(imgData.Position);
                         // ピボットをロードした画像と同じにする
-                        m_spriteDecrease->SetPivot(imgData.pivot);
+                        m_spriteDecrease->SetPivot(imgData.Pivot);
                         // フックしたので、trueを返す
                         return true;
                     }

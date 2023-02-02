@@ -32,26 +32,12 @@ namespace nsAWA
              * @param maxHP 体力の最大値
              * @param breakBar ブレイクゲージの現在量
             */
-            void SetUIEnemyStatus(const float hp, const float maxHP, const float breakBar)
-            {
-                m_enemyHPUI->SetUIEnemyHPStatus(hp, maxHP);
-                m_enemyBreakUI->SetUIEnemyBreakStatus(breakBar);
-            }
+            void SetUIEnemyStatus(const float hp, const float maxHP, const float breakBar);
             /**
              * @brief UIの位置を取得
              * @param position 敵の位置
             */
-            void SetUIEnemyPosition(const CVector2& position)
-            {
-                // これだと、全部一か所にまとまるので、
-                // 補正値を追加で入れること
-                m_spriteEnemyStatusBase->SetPosition(
-                    { position.x,position.y + m_kUIPositionCorrectionAmountY }
-                );
-
-                m_enemyHPUI->SetUIPosition(position);
-                m_enemyBreakUI->SetUIPosition(position);
-            }
+            void SetUIEnemyPosition(const CVector2& position);
 
 
         private: // constant data member
@@ -61,7 +47,7 @@ namespace nsAWA
 
         private: // data member
             // 実装されたら、下のやつを追加
-            // C2DLevel m_level;
+            nsLevel2D::CLevel2D m_level;
 
             CSpriteUI* m_spriteEnemyStatusBase = nullptr; // 敵のステータス
 

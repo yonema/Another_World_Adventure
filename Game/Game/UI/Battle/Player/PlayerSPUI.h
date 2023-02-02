@@ -47,7 +47,7 @@ namespace nsAWA
 
         private: // data member
             // 実装されたら、下のやつを追加
-            // C2DLevel m_level;
+            nsLevel2D::CLevel2D m_level;
 
             CSpriteUI* m_spriteSPBar = nullptr; // HPバー
             CSpriteUI* m_spriteFrame = nullptr; // バーの枠

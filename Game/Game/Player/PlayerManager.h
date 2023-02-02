@@ -22,6 +22,11 @@ namespace nsAWA {
 
 			void SetArmor(const std::string& armorName);
 
+
+		public:
+			const std::string& GetActiveSkillName(const int skillNam);
+
+
 		private:
 			void ResetActiveSkill();
 

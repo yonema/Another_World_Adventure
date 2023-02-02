@@ -40,12 +40,7 @@ namespace nsAWA
                 const float hp, const float maxHP,
                 const float mp, const float maxMP,
                 const float sp, const float maxSP
-            )
-            {
-                m_playerHPUI->SetUIPlayerHPStatus(hp, maxHP);
-                m_playerMPUI->SetUIPlayerMPStatus(mp, maxMP);
-                m_playerSPUI->SetUIPlayerSPStatus(sp, maxSP);
-            }
+            );
 
         private:
             static const char* m_kSpritePlayerStatusBaseFilePath;
@@ -53,7 +48,7 @@ namespace nsAWA
 
         private: // data member
             // À‘•‚³‚ê‚½‚çA‰º‚Ì‚â‚Â‚ğ’Ç‰Á
-            // C2DLevel m_level;
+            nsLevel2D::CLevel2D m_level;
 
             CSpriteUI* m_spritePlayerStatusBase = nullptr;
 

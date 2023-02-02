@@ -26,7 +26,7 @@ namespace nsAWA
              * @param buttonUINum ウィンドウの識別用番号
              * @param imgData レベルデータ
             */
-            void LoadWindowSprite(const int windowNum, LevelObjectData& imgData);
+            void LoadWindowSprite(const int windowNum, const nsLevel2D::SLevel2DSpriteData& imgData);
 
         private:
             void Animation(); // UIのアニメーション
@@ -46,6 +46,8 @@ namespace nsAWA
 
 
         private: // data member
+            nsLevel2D::CLevel2D m_level;
+
             // ボタンの画像
             CSpriteUI* m_spriteWindow[EnWindowNumber::enMaxWindowNumber] = { nullptr };
         };
