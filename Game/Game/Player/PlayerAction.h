@@ -89,6 +89,14 @@ namespace nsAWA {
 
 			nsSkill::CActiveSkill* GetActiveSkill(int activeSkillNum)const;
 
+			// UIの処理で追加、セットしてるアクティブスキルの名前を取得
+			//const std::string& GetActiveSkillName(const int skillNum) const
+			//{
+			//	return m_activeSkill[skillNum]->GetName();
+			//}
+
+
+
 			void UseActiveSkill(EnActiveSkillListNumber activeSkillNum);
 		private:
 			const CVector3 CalculateMoveAmount(float inputX, float inputZ, float speed);
