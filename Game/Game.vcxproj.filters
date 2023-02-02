@@ -193,6 +193,8 @@
     <ClCompile Include="YonemaEngine\Effect\EffectSound.cpp" />
     <ClCompile Include="Game\UserData.cpp" />
     <ClCompile Include="Game\LoadGame.cpp" />
+    <ClCompile Include="Game\Magic\MagicBuilder.cpp" />
+    <ClCompile Include="Game\Magic\MagicBallOne.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -397,6 +399,8 @@
     <ClInclude Include="YonemaEngine\Effect\EffectSound.h" />
     <ClInclude Include="Game\UserData.h" />
     <ClInclude Include="Game\LoadGame.h" />
+    <ClInclude Include="Game\Magic\MagicBuilder.h" />
+    <ClInclude Include="Game\Magic\MagicBallOne.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

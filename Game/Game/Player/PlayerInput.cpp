@@ -17,6 +17,7 @@
 #include "../Item/ItemManager.h"
 #include "../CSV/CSVManager.h"
 #include "../UserData.h"
+#include "../Magic/MagicBallOne.h"
 #endif
 
 namespace nsAWA {
@@ -194,9 +195,8 @@ namespace nsAWA {
 
 				//スキル２使用。
 #ifdef _DEBUG
-				//ファイヤーを覚える。
-				auto playerManager = CPlayerManager::GetInstance();
-				playerManager->AddCanUseActiveSkill("Fire");
+				nsMagic::CMagicBallOne* magic = NewGO<nsMagic::CMagicBallOne>();
+				magic->Init("hoge", player->GetPosition(), player->GetForwardDirection());
 
 				////パッシブスキル（麻痺）を生成。
 				//{

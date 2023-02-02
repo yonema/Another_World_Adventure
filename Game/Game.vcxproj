@@ -236,6 +236,8 @@
     <ClCompile Include="Game\HitStop.cpp" />
     <ClCompile Include="Game\UserData.cpp" />
     <ClCompile Include="Game\LoadGame.cpp" />
+    <ClCompile Include="Game\Magic\MagicBuilder.cpp" />
+    <ClCompile Include="Game\Magic\MagicBallOne.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavCell.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\NavMesh.cpp" />
     <ClCompile Include="YonemaEngine\AI\Navigations\Path.cpp" />
@@ -431,6 +433,8 @@
     <ClInclude Include="Game\HitStop.h" />
     <ClInclude Include="Game\UserData.h" />
     <ClInclude Include="Game\LoadGame.h" />
+    <ClInclude Include="Game\Magic\MagicBuilder.h" />
+    <ClInclude Include="Game\Magic\MagicBallOne.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavCell.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\NavMesh.h" />
     <ClInclude Include="YonemaEngine\AI\Navigations\Path.h" />
