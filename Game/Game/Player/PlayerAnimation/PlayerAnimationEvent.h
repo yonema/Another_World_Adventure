@@ -8,6 +8,11 @@ namespace nsAWA {
 
 		class CPlayerInput;
 		class CPlayerAction;
+
+		namespace nsPlayerAnimation {
+
+			class CPlayerAnimation;
+		}
 	}
 
 	namespace nsPlayer {
@@ -28,12 +33,13 @@ namespace nsAWA {
 			class CPlayerAnimationEvent : nsUtils::SNoncopyable
 			{
 			public:
-				void Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction) {
+				void Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction, CPlayerAnimation* playerAnimation) {
 
 					//各ポインタを格納。
 					m_player = player;
 					m_playerInput = playerInput;
 					m_playerAction = playerAction;
+					m_playerAnimation = playerAnimation;
 				}
 
 				void Update();
@@ -50,6 +56,8 @@ namespace nsAWA {
 
 				void Move();
 
+				void CreateMagic();
+
 				void GetAnimationEvent(const std::string& animationEventName,
 					const AnimationEventDataStr& animationEventData
 					);
@@ -58,6 +66,7 @@ namespace nsAWA {
 				IGameActor* m_player = nullptr;			//プレイヤーのポインタ
 				CPlayerInput* m_playerInput = nullptr;	//プレイヤー入力クラス
 				CPlayerAction* m_playerAction = nullptr;//プレイヤーアクションクラス
+				CPlayerAnimation* m_playerAnimation = nullptr;//プレイヤーアニメーションクラス
 				bool m_isMoving = false;				//イベントによって移動している？
 				CVector3 m_playerMoveInput = CVector3::Zero();	//プレイヤーの入力方向
 			};
