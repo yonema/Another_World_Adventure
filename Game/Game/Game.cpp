@@ -13,8 +13,6 @@ namespace nsAWA
 		//ゲームをロード。
 		NewGO<CLoadGame>();
 
-		NewGO<nsSamples::CEffectSample>();
-
 		return true;
 	}
 
