@@ -17,6 +17,8 @@ namespace nsAWA
         const char* CPlayerMPUI::m_kSpriteBaseFilePath =
             "Assets/Images/FitnessBar/Common/BarGroundwork.png";
 
+        const float CPlayerMPUI::m_kMaxBarWidthSize = 0.5f;
+
         bool CPlayerMPUI::Start()
         {
             return true;
@@ -109,7 +111,7 @@ namespace nsAWA
         void CPlayerMPUI::Animation()
         {
             // ゲージの長さ（横幅）を適用
-            //m_spriteMPBar->SetScale({ m_barWidthSize,1.0f,1.0f });
+            m_spriteMPBar->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
         }
     }
 }

@@ -178,9 +178,9 @@ namespace nsAWA
             //}
 
             // ゲージの長さ（横幅）を適用m_decreaseBarWidthSize
-            m_spriteHPBar->SetScale({ m_decreaseBarWidthSize,0.5f,1.0f });
-            //m_spriteDanger->SetScale({ m_barWidthSize,0.5f,1.0f });
-            m_spriteDecrease->SetScale({ m_barWidthSize,0.5f,1.0f });
+            m_spriteHPBar->SetScale({ m_decreaseBarWidthSize,m_kMaxBarWidthSize,1.0f });
+            //m_spriteDanger->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
+            m_spriteDecrease->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
 
             m_oldDecreaseBarWidthSize = m_decreaseBarWidthSize;
         }
