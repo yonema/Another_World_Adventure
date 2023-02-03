@@ -28,6 +28,8 @@ namespace nsAWA
         // 減少アニメーションの減少量
         const float CPlayerHPUI::m_kDecreaseBarDecreaseAmount = 0.01f;
 
+        const float CPlayerHPUI::m_kMaxBarWidthSize = 0.5f;
+
         bool CPlayerHPUI::Start()
         {
             return true;
@@ -102,21 +104,21 @@ namespace nsAWA
                     if ("HP_DangerBar" == imgData.Name)
                     {
                         // UIクラスを作成
-                        m_spriteDanger = NewGO<CSpriteUI>();
-                        m_spriteDanger->LoadSprite(
-                            m_kSpriteDangerFilePath,
-                            imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
-                            EnAlphaBlendMode::enTrans
-                        );
-                        m_spriteDanger->LoadInitData(
-                            imgData.Position,
-                            imgData.Scale,
-                            imgData.Pivot
-                        );
+                        //m_spriteDanger = NewGO<CSpriteUI>();
+                        //m_spriteDanger->LoadSprite(
+                        //    m_kSpriteDangerFilePath,
+                        //    imgData.SpriteSize,
+                        //    static_cast<EnGOPriority>(imgData.Priority),
+                        //    EnAlphaBlendMode::enTrans
+                        //);
+                        //m_spriteDanger->LoadInitData(
+                        //    imgData.Position,
+                        //    imgData.Scale,
+                        //    imgData.Pivot
+                        //);
 
-                        // 非表示にする
-                        m_spriteDanger->Deactivate();
+                        //// 非表示にする
+                        //m_spriteDanger->Deactivate();
                         // フックしたので、trueを返す
                         return true;
                     }
@@ -124,18 +126,20 @@ namespace nsAWA
                     if ("HP_DecreaseAnimationBar" == imgData.Name)
                     {
                         // UIクラスを作成
-                        m_spriteDecrease = NewGO<CSpriteUI>();
-                        m_spriteDecrease->LoadSprite(
-                            m_kSpriteDecreaaseFilePath,
-                            imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
-                            EnAlphaBlendMode::enTrans
-                        );
-                        m_spriteDecrease->LoadInitData(
-                            imgData.Position,
-                            imgData.Scale,
-                            imgData.Pivot
-                        );
+                        //m_spriteDecrease = NewGO<CSpriteUI>();
+                        //m_spriteDecrease->LoadSprite(
+                        //    m_kSpriteDecreaaseFilePath,
+                        //    imgData.SpriteSize,
+                        //    static_cast<EnGOPriority>(imgData.Priority),
+                        //    EnAlphaBlendMode::enTrans
+                        //);
+                        //m_spriteDecrease->LoadInitData(
+                        //    imgData.Position,
+                        //    imgData.Scale,
+                        //    imgData.Pivot
+                        //);
+
+                        //m_spriteDecrease->Deactivate();
 
                         // フックしたので、trueを返す
                         return true;
@@ -163,20 +167,20 @@ namespace nsAWA
         void CPlayerHPUI::Animation()
         {
             // 遅れて減少するゲージのアニメーション
-            DecreaseBarAnimation();
+            //DecreaseBarAnimation();
 
             // HPが３割を切っているかを確認
-            if (m_kDangerLine > m_barWidthSize) {
-                ChangeDangerUI(true);
-            }
-            else {
-                ChangeDangerUI(false);
-            }
+            //if (m_kDangerLine > m_barWidthSize) {
+            //    ChangeDangerUI(true);
+            //}
+            //else {
+            //    ChangeDangerUI(false);
+            //}
 
             // ゲージの長さ（横幅）を適用
-            //m_spriteHPBar->SetScale({ m_barWidthSize,1.0f,1.0f });
-            //m_spriteDanger->SetScale({ m_barWidthSize,1.0f,1.0f });
-            //m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,1.0f,1.0f });
+            m_spriteHPBar->SetScale({ m_barWidthSize,0.5f,1.0f });
+            //m_spriteDanger->SetScale({ m_barWidthSize,0.5f,1.0f });
+            //m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,0.5f,1.0f });
 
             m_oldDecreaseBarWidthSize = m_decreaseBarWidthSize;
         }

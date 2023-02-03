@@ -11,7 +11,7 @@ namespace nsAWA
             "Assets/Level2D/SP_Bar.tdl";
 
         const char* CPlayerSPUI::m_kSpriteSPBarFilePath =
-            "Assets/Level2D/Sprites/Bar_SP.png";
+            "Assets/Images/FitnessBar/Player/Bar_SP.png";
         const char* CPlayerSPUI::m_kSpriteFrameFilePath =
             "Assets/Images/FitnessBar/Common/BarFrame.png";
         const char* CPlayerSPUI::m_kSpriteBaseFilePath =
