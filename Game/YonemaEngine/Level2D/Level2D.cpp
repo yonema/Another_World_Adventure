@@ -27,14 +27,14 @@ namespace nsYMEngine
 				return;
 			}
 
-			int spriteNum;
+			int spriteNum = 0;
 			fread(&spriteNum, sizeof(int), 1, fp);
 
 			for (int i = 0;i < spriteNum;i++)
 			{
 				SLevel2DSpriteData spriteData;
 
-				int pathLen;
+				int pathLen = 0;
 				fread(&pathLen, sizeof(int), 1, fp);
 
 				std::unique_ptr<char[]> path = std::make_unique<char[]>(pathLen + 1);
@@ -43,7 +43,7 @@ namespace nsYMEngine
 				spriteData.Path = "Assets/2DLevel/Sprites/";
 				spriteData.Path += path.get();
 
-				int nameLen;
+				int nameLen = 0;
 				fread(&nameLen, sizeof(int), 1, fp);
 
 				std::unique_ptr<char[]> name = std::make_unique<char[]>(nameLen + 1);
@@ -81,12 +81,20 @@ namespace nsYMEngine
 
 				ConvertToEngineCoordinate(spriteData);
 
-				int animNum;
+				int animNum = 0;
 				fread(&animNum, sizeof(int), 1, fp);
 
 				for (int j = 0;j < animNum;j++)
 				{
-					//アニメーション読み込み
+					int animNameLength = 0;
+					fread(&animNameLength, sizeof(int), 1, fp);
+
+					std::unique_ptr<char[]> animName = std::make_unique<char[]>(animNameLength + 1);
+					fread(animName.get(), animNameLength + 1, 1, fp);
+
+					std::string animPath = "Assets/Animations2D/";
+					animPath += animName.get();
+					animPath += ".tda";
 				}
 
 				//Hook実行
