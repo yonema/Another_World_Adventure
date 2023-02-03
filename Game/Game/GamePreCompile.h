@@ -76,6 +76,7 @@ using CPathFinding = nsAI::nsNavigations::CPathFinding;
 
 // ƒŒƒxƒ‹3D
 using CLevel3D = nsLevel3D::CLevel3D;
+using CLevel2D = nsLevel2D::CLevel2D;
 using SLevelChipData = nsLevel3D::SLevelChipData;
 using SLevel3DInitData = nsLevel3D::SLevel3DinitData;
 
