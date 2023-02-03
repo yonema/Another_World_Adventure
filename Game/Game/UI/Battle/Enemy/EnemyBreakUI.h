@@ -23,7 +23,7 @@ namespace nsAWA
             ~CEnemyBreakUI() = default;
 
         public:
-            void LoadLevel(const char* tdlFilePath, const CVector2& basePosition);
+            void LoadLevel(const CVector2& basePosition);
 
         private:
             void Animation(); // UIのアニメーション
@@ -49,6 +49,8 @@ namespace nsAWA
             static const char* m_kSpriteBreakFilePath;
             static const char* m_kSpriteBreakReductionFilePath;
             static const char* m_kSpriteBaseFilePath;
+
+            static const char* m_kLevel2DFilePath;
 
         private: // data member
             // 実装されたら、下のやつを追加

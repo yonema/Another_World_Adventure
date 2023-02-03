@@ -22,7 +22,7 @@ namespace nsAWA
             ~CEnemyBattleStatusUI() = default;
 
         public:
-            void LoadLevel(const char* tdlFilePath);
+            void LoadLevel();
 
 
         public: // Set function
@@ -37,13 +37,15 @@ namespace nsAWA
              * @brief UIの位置を取得
              * @param position 敵の位置
             */
-            void SetUIEnemyPosition(const CVector2& position);
+            void SetUIEnemyPosition(const CVector3& position);
 
 
         private: // constant data member
             // UIの取得した敵の位置に対しての補正値（Y座標）
-            static constexpr float m_kUIPositionCorrectionAmountY = 100.0f;
+            static constexpr float m_kUIPositionCorrectionAmountY = -100.0f;
             static const char* m_kSpriteEnemyStatusBaseFilePath;
+
+            static const char* m_kLevel2DFilePath;
 
         private: // data member
             // 実装されたら、下のやつを追加
@@ -55,6 +57,8 @@ namespace nsAWA
             CEnemyBreakUI* m_enemyBreakUI = nullptr; // 敵のブレイクゲージ
 
             CVector2 m_basePosition = CVector2::Zero(); // UIの基準となる位置
+
+            CVector2 m_setUIEnemyPosition = CVector2::Zero();
         };
     }
 }

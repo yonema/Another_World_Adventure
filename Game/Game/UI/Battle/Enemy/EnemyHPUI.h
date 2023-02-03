@@ -23,7 +23,7 @@ namespace nsAWA
             ~CEnemyHPUI() = default;
 
         public:
-            void LoadLevel(const char* tdlFilePath, const CVector2& basePosition);
+            void LoadLevel(const CVector2& basePosition);
 
         private:
             void Animation(); // UIのアニメーション
@@ -50,6 +50,11 @@ namespace nsAWA
             static const char* m_kSpriteFrameFilePath;
             static const char* m_kSpriteBaseFilePath;
             static const char* m_kSpriteDangerFilePath;
+            static const char* m_kSpriteDecreaaseFilePath;
+
+            static const char* m_kLevel2DFilePath;
+
+            static const float m_kMaxBarWidthSize;
 
 
 
@@ -61,6 +66,7 @@ namespace nsAWA
             CSpriteUI* m_spriteFrame = nullptr; // バーの枠
             CSpriteUI* m_spriteBase = nullptr; // HPバーの下地
             CSpriteUI* m_spriteDanger = nullptr; // ピンチ時のHPバー
+            CSpriteUI* m_spriteDecrease = nullptr; // HPバーのディレイアニメーションバー
 
             // UIの位置の補正値
             CVector2 m_correctionAmountHPBar = CVector2::Zero();
@@ -68,7 +74,7 @@ namespace nsAWA
             CVector2 m_correctionAmountBase = CVector2::Zero();
             CVector2 m_correctionAmountDanger = CVector2::Zero();
 
-            float m_barWidthSize = 1.0f; // プレイヤーの体力バーの横幅の倍率
+            float m_barWidthSize = m_kMaxBarWidthSize; // プレイヤーの体力バーの横幅の倍率
 
         };
     }

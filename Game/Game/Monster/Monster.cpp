@@ -3,6 +3,8 @@
 #include "Monster.h"
 #include "MonsterList.h"
 
+#include "../UI/Battle/Enemy/EnemyBattleStatusUI.h"
+
 namespace nsAWA {
 
 	namespace nsMonster {
@@ -69,6 +71,12 @@ namespace nsAWA {
 
 			//ステートの変更状況を初期化。
 			m_isChangeState = false;
+
+			// UIの処理
+			m_enemyBattleStatusUI->SetUIEnemyStatus(
+				m_status.GetHP(), m_status.GetMaxHP(), 0.0f
+			);
+			m_enemyBattleStatusUI->SetUIEnemyPosition(m_position);
 		}
 
 		void CMonster::Create(const SMonsterInitData& monsterInfo) {
@@ -100,6 +108,10 @@ namespace nsAWA {
 
 			//待機状態に設定。
 			SetState(EnMonsterState::enIdle);
+
+			// UIの処理
+			m_enemyBattleStatusUI = NewGO<nsUI::CEnemyBattleStatusUI>();
+			m_enemyBattleStatusUI->LoadLevel();
 		}
 
 		void CMonster::ApplyDamage(float damage, float power, bool canGuard) {
