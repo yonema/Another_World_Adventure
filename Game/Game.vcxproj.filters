@@ -229,6 +229,15 @@
     <ClCompile Include="Game\Magic\MagicList.cpp" />
     <ClCompile Include="Game\Magic\MagicBase.cpp" />
     <ClCompile Include="Game\Magic\MagicBallSide.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapInstancingGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapSkinGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowModelRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -470,6 +479,15 @@
     <ClInclude Include="Game\Magic\MagicList.h" />
     <ClInclude Include="Game\Magic\MagicBase.h" />
     <ClInclude Include="Game\Magic\MagicBallSide.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapInstancingGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapSkinGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowModelRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.h" />
+    <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
