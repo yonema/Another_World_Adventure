@@ -7,11 +7,11 @@ namespace nsYMEngine
 		{
 			struct SAnimation2DFrameData
 			{
-				CVector2 Position = CVector2(0.0f,0.0f);			//座標
-				float RotateDeg = 0.0f;								//回転角度
-				CVector2 Scale = CVector2(1.0f, 1.0f);				//拡大率
-				CVector4 MulColor = CVector4(1.0f, 1.0f,1.0f,1.0f);	//乗算カラー
-				CVector2 Pivot = CVector2(0.5f, 0.5f);				//ピボット
+				nsMath::CVector2 Position = nsMath::CVector2(0.0f, 0.0f);				//座標
+				float RotateDeg = 0.0f;													//回転角度
+				nsMath::CVector2 Scale = nsMath::CVector2(1.0f, 1.0f);					//拡大率
+				nsMath::CVector4 MulColor = nsMath::CVector4(1.0f, 1.0f, 1.0f, 1.0f);	//乗算カラー
+				nsMath::CVector2 Pivot = nsMath::CVector2(0.5f, 0.5f);					//ピボット
 			};
 		}
 	}

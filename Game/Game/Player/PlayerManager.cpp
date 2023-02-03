@@ -169,5 +169,15 @@ namespace nsAWA {
 			//–h‹ï‚ðÝ’èB
 			m_player->SetArmor(armor);
 		}
+
+		const std::string& CPlayerManager::GetActiveSkillName(const int skillNam)
+		{
+			if (false == FindPlayer()) {
+				nsGameWindow::MessageBoxWarning(L"CPlayerManager : player ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+				return "";
+			}
+
+			return m_player->GetActiveSkill(skillNam)->GetName();
+		}
 	}
 }

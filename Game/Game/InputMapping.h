@@ -39,6 +39,10 @@ namespace nsYMEngine
 			enItemSelectRight,	//次のアイテム選択
 			enItemSelectLeft,	//前のアイテム選択
 
+			// UI
+			enDecision, // 決定
+			enCancel, // キャンセル
+
 			enNumActions
 		};
 
@@ -156,6 +160,17 @@ namespace nsYMEngine
 			{
 				{CGamepad::EnPadButton::enX},
 				{CKeyboard::EnKeyButton::enL}
+			},
+
+			//enDecision
+			{
+				{CGamepad::EnPadButton::enA},
+				{CKeyboard::EnKeyButton::enJ}
+			},
+			//enCancel
+			{
+				{CGamepad::EnPadButton::enB},
+				{CKeyboard::EnKeyButton::enK}
 			},
 		};
 

@@ -18,6 +18,10 @@ namespace nsAWA {
 
 		class CArmor;
 	}
+	namespace nsUI {
+		
+		class CPlayerBattleStatusUI;
+	}
 
 	namespace nsPlayer {
 
@@ -100,6 +104,8 @@ namespace nsAWA {
 			CFontRenderer* m_fontRenderer = nullptr;
 			wchar_t m_dispText[32] = {};
 #endif		
+			nsUI::CPlayerBattleStatusUI* m_playerBattleStatusUI = nullptr;
+
 		};
 	}
 }

@@ -153,8 +153,9 @@ namespace nsAWA {
 				//アニメーションのファイルパスを取得。
 				animNumVec.emplace_back(monsterInfo.animationFilePath[animIndex].c_str());
 			}
-			
-			//アニメーションを初期化。
+		
+
+			//アニメーションのデータを設定。
 			modelInitData.animInitData.Init(
 				static_cast<unsigned int>(animNum),
 				animNumVec.data()
