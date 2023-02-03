@@ -63,6 +63,12 @@ namespace nsAWA {
 					m_activeSkill = activeSkill;
 				}
 
+				nsSkill::CActiveSkill* GetReserveActiveSkillInfo()const {
+
+					//予約中のスキルの情報を取得する。
+					return m_activeSkill;
+				}
+
 			private:
 				void PlayAnimation(EnPlayerState playerState);
 
@@ -70,7 +76,7 @@ namespace nsAWA {
 
 				void LoadAnimation();
 
-				const std::string& GetActiveSkillName()const;
+				void SetActiveSkillName(std::string& name);
 
 			private:
 				CModelRenderer* m_playerModel = nullptr;	//プレイヤーモデル

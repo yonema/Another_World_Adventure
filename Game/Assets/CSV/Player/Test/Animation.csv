@@ -33,3 +33,10 @@ LOOP,FALSE,
 EVENT,CoolTimeOn,FALSE
 EVENT,CoolTimeOff,FALSE
 *,,
+NAME,Magic,
+SPEED,1,
+LOOP,FALSE,
+EVENT,CoolTimeOn,FALSE
+EVENT,CreateMagic,FALSE
+EVENT,CoolTimeOff,FALSE
+*,,

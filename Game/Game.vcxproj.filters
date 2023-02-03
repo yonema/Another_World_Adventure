@@ -193,13 +193,14 @@
     <ClCompile Include="YonemaEngine\Effect\EffectSound.cpp" />
     <ClCompile Include="Game\UserData.cpp" />
     <ClCompile Include="Game\LoadGame.cpp" />
-    <ClCompile Include="Game\Magic\MagicBuilder.cpp" />
     <ClCompile Include="Game\Magic\MagicBallOne.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2DImporter.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2DFrameData.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2D.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2DData.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Renderers\AnimatedSpriteRenderer.cpp" />
+    <ClCompile Include="Game\Magic\MagicList.cpp" />
+    <ClCompile Include="Game\Magic\MagicBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -405,11 +406,13 @@
     <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2DFrameData.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2D.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2DData.h" />
-    <ClInclude Include="YonemaEngine\Graphics\Renderers\AnimatedSpriteRenderer.h" />    <ClInclude Include="YonemaEngine\Effect\EffectSound.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Renderers\AnimatedSpriteRenderer.h" />
+    <ClInclude Include="YonemaEngine\Effect\EffectSound.h" />
     <ClInclude Include="Game\UserData.h" />
     <ClInclude Include="Game\LoadGame.h" />
-    <ClInclude Include="Game\Magic\MagicBuilder.h" />
     <ClInclude Include="Game\Magic\MagicBallOne.h" />
+    <ClInclude Include="Game\Magic\MagicList.h" />
+    <ClInclude Include="Game\Magic\MagicBase.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
