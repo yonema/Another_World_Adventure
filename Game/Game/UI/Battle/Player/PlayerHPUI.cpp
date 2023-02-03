@@ -23,10 +23,10 @@ namespace nsAWA
 
         // ピンチ判定ライン
         const float CPlayerHPUI::m_kDangerLine = 0.3f;
-        const float CPlayerHPUI::m_kStartDecreaseBarAnimationTime = 1.0f;
+        const float CPlayerHPUI::m_kStartDecreaseBarAnimationTime = 5.0f;
         const float CPlayerHPUI::m_kStartDecreaseBarAnimationTimeAmount = 0.1f;
         // 減少アニメーションの減少量
-        const float CPlayerHPUI::m_kDecreaseBarDecreaseAmount = 0.01f;
+        const float CPlayerHPUI::m_kDecreaseBarDecreaseAmount = 0.005f;
 
         const float CPlayerHPUI::m_kMaxBarWidthSize = 0.5f;
 
@@ -126,18 +126,18 @@ namespace nsAWA
                     if ("HP_DecreaseAnimationBar" == imgData.Name)
                     {
                         // UIクラスを作成
-                        //m_spriteDecrease = NewGO<CSpriteUI>();
-                        //m_spriteDecrease->LoadSprite(
-                        //    m_kSpriteDecreaaseFilePath,
-                        //    imgData.SpriteSize,
-                        //    static_cast<EnGOPriority>(imgData.Priority),
-                        //    EnAlphaBlendMode::enTrans
-                        //);
-                        //m_spriteDecrease->LoadInitData(
-                        //    imgData.Position,
-                        //    imgData.Scale,
-                        //    imgData.Pivot
-                        //);
+                        m_spriteDecrease = NewGO<CSpriteUI>();
+                        m_spriteDecrease->LoadSprite(
+                            m_kSpriteDecreaaseFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnGOPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteDecrease->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
 
                         //m_spriteDecrease->Deactivate();
 
@@ -167,7 +167,7 @@ namespace nsAWA
         void CPlayerHPUI::Animation()
         {
             // 遅れて減少するゲージのアニメーション
-            //DecreaseBarAnimation();
+            DecreaseBarAnimation();
 
             // HPが３割を切っているかを確認
             //if (m_kDangerLine > m_barWidthSize) {
@@ -177,10 +177,10 @@ namespace nsAWA
             //    ChangeDangerUI(false);
             //}
 
-            // ゲージの長さ（横幅）を適用
-            m_spriteHPBar->SetScale({ m_barWidthSize,0.5f,1.0f });
+            // ゲージの長さ（横幅）を適用m_decreaseBarWidthSize
+            m_spriteHPBar->SetScale({ m_decreaseBarWidthSize,0.5f,1.0f });
             //m_spriteDanger->SetScale({ m_barWidthSize,0.5f,1.0f });
-            //m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,0.5f,1.0f });
+            m_spriteDecrease->SetScale({ m_barWidthSize,0.5f,1.0f });
 
             m_oldDecreaseBarWidthSize = m_decreaseBarWidthSize;
         }
