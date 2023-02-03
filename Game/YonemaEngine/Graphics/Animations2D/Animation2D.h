@@ -65,7 +65,7 @@ namespace nsYMEngine
 				 * @brief アニメーション再生前の座標を保存しておく
 				 * @param position アニメーション再生前の座標
 				*/
-				void SetDefaultPosition(const CVector2& position)
+				void SetDefaultPosition(const nsMath::CVector2& position)
 				{
 					m_defaultPosition = position;
 					m_currentPosition = position;
@@ -82,8 +82,8 @@ namespace nsYMEngine
 				SAnimation2DData* m_animationData;
 
 				//再生に関するデータ
-				CVector2 m_defaultPosition = CVector2(0.0f, 0.0f);	//再生開始時の座標
-				CVector2 m_currentPosition = CVector2(0.0f, 0.0f);	//再生されている現在の座標
+				nsMath::CVector2 m_defaultPosition = nsMath::CVector2(0.0f, 0.0f);	//再生開始時の座標
+				nsMath::CVector2 m_currentPosition = nsMath::CVector2(0.0f, 0.0f);	//再生されている現在の座標
 				SAnimation2DFrameData m_playingFrameData;			//再生中のアニメーションのフレームデータ
 				bool m_isPlaying = false;							//再生中?
 				int m_currentFrame = 0;								//再生中のフレーム数
