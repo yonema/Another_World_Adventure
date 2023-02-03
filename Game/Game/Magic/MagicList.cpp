@@ -2,6 +2,7 @@
 #include "MagicList.h"
 #include "../CSV/CSVManager.h"
 #include "MagicBallOne.h"
+#include "MagicBallSide.h"
 
 namespace nsAWA {
 
@@ -100,6 +101,10 @@ namespace nsAWA {
 			if (magicType == "One") {
 
 				magic = NewGO<CMagicBallOne>();
+			}
+			else if (magicType == "Side") {
+
+				magic = NewGO<CMagicBallSide>();
 			}
 
 			//ñºëOÇê›íËÅB

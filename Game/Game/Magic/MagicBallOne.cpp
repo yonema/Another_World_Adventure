@@ -8,7 +8,7 @@ namespace nsAWA {
 
 		namespace {
 
-			constexpr float kTriggerRadius = 2.0f;	//トリガーの半径
+			constexpr float kTriggerRadius = 5.0f;	//トリガーの半径
 			constexpr float kDurationTime = 1.0f;	//持続時間
 			constexpr float kMoveAmount = 50.0f;	//移動量
 			constexpr float kAddPositionY = 10.0f;	//調整用加算座標
@@ -18,11 +18,15 @@ namespace nsAWA {
 		bool CMagicBallOne::Start() {
 
 			//座標を調整。
-			m_position.y += kAddPositionY;
-			m_position += m_moveDirection * kAddPositionMoveDirection;
+			CVector3 position = GetPosition();
+			position.y += kAddPositionY;
+			position += GetMoveDirection() * kAddPositionMoveDirection;
+
+			//座標を設定。
+			SetPosition(position);
 
 			//当たり判定を初期化。
-			m_trigger.InitAsSphere(kTriggerRadius, m_position);
+			m_trigger.InitAsSphere(kTriggerRadius, GetPosition());
 
 			//TriggerEnterのコールバック関数を設定。
 			m_trigger.SetOnTriggerEnterFunc(
@@ -38,7 +42,7 @@ namespace nsAWA {
 			m_mainEffect->Init(nsUtils::GetWideStringFromString(mainEffectFilePath).c_str());
 
 			//エフェクトの座標を設定。
-			m_mainEffect->SetPosition(m_position);
+			m_mainEffect->SetPosition(position);
 
 			//エフェクトを再生。
 			m_mainEffect->Play();
@@ -76,9 +80,13 @@ namespace nsAWA {
 			}
 
 			//座標を更新。
-			m_position += m_moveDirection * kMoveAmount * deltaTime;
-			m_mainEffect->SetPosition(m_position);
-			m_trigger.SetPosition(m_position);
+			CVector3 position = GetPosition();
+			position += GetMoveDirection() * kMoveAmount * deltaTime;
+
+			//座標を設定。
+			SetPosition(position);
+			m_mainEffect->SetPosition(GetPosition());
+			m_trigger.SetPosition(GetPosition());
 		}
 
 		void CMagicBallOne::OnTriggerEnter(CExtendedDataForRigidActor* otherData) {
@@ -89,8 +97,11 @@ namespace nsAWA {
 			//トリガーに入ったオブジェクトがIGameActorのコライダーかどうか調べる。
 			auto rGameActorCollider = otherData->GetOwner<CGameActorCollider>();
 
-			//ターゲットに対して効果を発動。
-			ExecuteFeature(rGameActorCollider->GetGameActor());
+			if (rGameActorCollider != nullptr) {
+
+				//ターゲットに対して効果を発動。
+				ExecuteFeature(rGameActorCollider->GetGameActor());
+			}
 
 			//エンドエフェクトを生成。
 			m_endEffect = NewGO<CEffectPlayer>();

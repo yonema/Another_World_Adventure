@@ -154,6 +154,7 @@
     <ClCompile Include="Game\Magic\MagicList.cpp" />
     <ClCompile Include="Game\Magic\MagicBase.cpp" />
     <ClCompile Include="Game\UI\FontArrayUI.cpp" />
+    <ClCompile Include="Game\Magic\MagicBallSide.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Renderers\AnimatedSpriteRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2DData.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2D.cpp" />
@@ -379,6 +380,7 @@
     <ClInclude Include="Game\Magic\MagicList.h" />
     <ClInclude Include="Game\Magic\MagicBase.h" />
     <ClInclude Include="Game\UI\FontArrayUI.h" />
+    <ClInclude Include="Game\Magic\MagicBallSide.h" />
     <ClInclude Include="YonemaEngine\Graphics\Renderers\AnimatedSpriteRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2DData.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2D.h" />
