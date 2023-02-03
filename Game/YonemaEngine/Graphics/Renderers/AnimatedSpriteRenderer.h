@@ -186,10 +186,10 @@ namespace nsYMEngine
 				*/
 				void AnimFrameDataToSprite(const nsGraphics::nsAnimations2D::SAnimation2DFrameData frameData)
 				{
-					CQuaternion qRot;
+					nsMath::CQuaternion qRot;
 					qRot.AddRotationZDeg(frameData.RotateDeg);
 					m_rotation = qRot;
-					m_scale = CVector3(frameData.Scale.x, frameData.Scale.y, 1.0f);
+					m_scale = nsMath::CVector3(frameData.Scale.x, frameData.Scale.y, 1.0f);
 					if (m_sprite)
 					{
 						m_sprite->SetMulColor(frameData.MulColor);

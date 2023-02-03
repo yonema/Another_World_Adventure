@@ -5,6 +5,7 @@
 #include "../YonemaEngine/Graphics/Renderers/ModelRenderer.h"
 #include "../YonemaEngine/Graphics/Animations/Animator.h"
 #include "../YonemaEngine/Graphics/Renderers/SpriteRenderer.h"
+#include "../YonemaEngine/Graphics/Renderers/AnimatedSpriteRenderer.h"
 #include "../YonemaEngine/Graphics/Sprites/Sprite.h"
 #include "../YonemaEngine/Graphics/Fonts/FontRenderer.h"
 #include "../YonemaEngine/Physics/PhysicsEngine.h"
@@ -45,6 +46,7 @@ using EnModelInitDataFlags = nsGraphics::nsRenderers::EnModelInitDataFlags;
 using CSpriteRenderer = nsGraphics::nsRenderers::CSpriteRenderer;
 using SSpriteInitData = nsGraphics::nsSprites::SSpriteInitData;
 using EnAlphaBlendMode = nsGraphics::nsSprites::EnAlphaBlendMode;
+using CAnimatedSpriteRenderer = nsGraphics::nsRenderers::CAnimatedSpriteRenderer;
 
 // ƒtƒHƒ“ƒg
 using CFontRenderer = nsGraphics::nsFonts::CFontRenderer;
