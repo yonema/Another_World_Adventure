@@ -27,23 +27,23 @@ namespace nsYMEngine
 				return;
 			}
 
-			int spriteNum = 0;
+			int spriteNum;
 			fread(&spriteNum, sizeof(int), 1, fp);
 
 			for (int i = 0;i < spriteNum;i++)
 			{
 				SLevel2DSpriteData spriteData;
 
-				int pathLen = 0;
+				int pathLen;
 				fread(&pathLen, sizeof(int), 1, fp);
 
 				std::unique_ptr<char[]> path = std::make_unique<char[]>(pathLen + 1);
 				fread(path.get(), pathLen + 1, 1, fp);
 
-				spriteData.Path = "Assets/Level2D/Sprites/";
+				spriteData.Path = "Assets/2DLevel/Sprites/";
 				spriteData.Path += path.get();
 
-				int nameLen = 0;
+				int nameLen;
 				fread(&nameLen, sizeof(int), 1, fp);
 
 				std::unique_ptr<char[]> name = std::make_unique<char[]>(nameLen + 1);
@@ -65,18 +65,13 @@ namespace nsYMEngine
 
 				fread(&spriteData.Scale.y, sizeof(float), 1, fp);
 
-				int MulColor255A = 255, MulColor255R = 255, MulColor255G = 255, MulColor255B = 255;
-				fread(&MulColor255A, sizeof(int), 1, fp);
-				fread(&MulColor255R, sizeof(int), 1, fp);
-				fread(&MulColor255G, sizeof(int), 1, fp);
-				fread(&MulColor255B, sizeof(int), 1, fp);
+				fread(&spriteData.MulColor.a, sizeof(int), 1, fp);
 
-				float NormalizedA = static_cast<float>(MulColor255A) / 255.0f;
-				float NormalizedR = static_cast<float>(MulColor255R) / 255.0f;
-				float NormalizedG = static_cast<float>(MulColor255G) / 255.0f;
-				float NormalizedB = static_cast<float>(MulColor255B) / 255.0f;
+				fread(&spriteData.MulColor.r, sizeof(int), 1, fp);
 
-				spriteData.MulColor = CVector4(NormalizedR, NormalizedG, NormalizedB, NormalizedA);
+				fread(&spriteData.MulColor.g, sizeof(int), 1, fp);
+
+				fread(&spriteData.MulColor.b, sizeof(int), 1, fp);
 
 				fread(&spriteData.Pivot.x, sizeof(float), 1, fp);
 
@@ -86,24 +81,12 @@ namespace nsYMEngine
 
 				ConvertToEngineCoordinate(spriteData);
 
-				int animNum = 0;
+				int animNum;
 				fread(&animNum, sizeof(int), 1, fp);
-
-				spriteData.animPathVector.reserve(animNum);
 
 				for (int j = 0;j < animNum;j++)
 				{
-					int animNameLength = 0;
-					fread(&animNameLength, sizeof(int), 1, fp);
-
-					std::unique_ptr<char[]> animName = std::make_unique<char[]>(animNameLength + 1);
-					fread(animName.get(), animNameLength + 1, 1, fp);
-
-					std::string animPath = "Assets/Animations2D/";
-					animPath += animName.get();
-					animPath += ".tda";
-
-					spriteData.animPathVector.emplace_back(animPath);
+					//アニメーション読み込み
 				}
 
 				//Hook実行
@@ -126,9 +109,9 @@ namespace nsYMEngine
 			spriteData.Position.y *= -1.0f;
 		}
 
-		CAnimatedSpriteRenderer* CLevel2D::CreateNewSpriteFromData(const SLevel2DSpriteData& spriteData)
+		CSpriteRenderer* CLevel2D::CreateNewSpriteFromData(const SLevel2DSpriteData& spriteData)
 		{
-			CAnimatedSpriteRenderer* newSprite = NewGO<CAnimatedSpriteRenderer>(static_cast<EnGOPriority>(spriteData.Priority), spriteData.Name.c_str());
+			CSpriteRenderer* newSprite = NewGO<CSpriteRenderer>(static_cast<EnGOPriority>(spriteData.Priority), spriteData.Name.c_str());
 			
 			SSpriteInitData spriteInitData;
 			spriteInitData.filePath = spriteData.Path.c_str();
@@ -145,15 +128,9 @@ namespace nsYMEngine
 
 			newSprite->SetScale(CVector3(spriteData.Scale.x,spriteData.Scale.y,1.0f));
 
-			newSprite->SetMulColor(spriteData.MulColor);
+			//newSprite->SetMultipleColor(spriteData.MulColor / 255);
 
 			newSprite->SetPivot(spriteData.Pivot);
-
-			//アニメーションの登録
-			for (std::string animPath : spriteData.animPathVector)
-			{
-				newSprite->InitAnimation(animPath.c_str());
-			}
 
 			return newSprite;
 		}
