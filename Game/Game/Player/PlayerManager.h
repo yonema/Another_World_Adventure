@@ -4,34 +4,34 @@
 
 namespace nsAWA {
 
-	//å‰æ–¹å®£è¨€
+	//‘O•ûéŒ¾
 	namespace nsPlayer {
 
 		class CPlayer;
 
-		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç®¡ç†ã‚¯ãƒ©ã‚¹
+		//ƒvƒŒƒCƒ„[ŠÇ—ƒNƒ‰ƒX
 		class CPlayerManager : nsUtils::SNoncopyable
 		{
 		public:
 
 			static CPlayerManager* GetInstance() {
 
-				//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã€‚
+				//ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬B
 				static CPlayerManager* instance = new CPlayerManager;
 
-				//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã€‚
+				//ƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾B
 				return instance;
 			}
 
 			void DeleteInstance() {
 
-				//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç ´æ£„ã€‚
+				//ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ”jŠüB
 				delete GetInstance();
 			}
 
 			void Init(IGameActor* player) {
 
-				//ã‚¢ã‚¤ãƒ†ãƒ ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’åˆæœŸåŒ–ã€‚
+				//ƒAƒCƒeƒ€ŠÇ—ƒNƒ‰ƒX‚ğ‰Šú‰»B
 				m_itemManager.Init(player);
 			}
 
@@ -45,7 +45,7 @@ namespace nsAWA {
 
 			std::list<nsSkill::SActiveSkillData> GetCanUseActiveSkillListAll() {
 
-				//å…¨ã¦ã®ä½¿ç”¨å¯èƒ½ãªã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®ãƒªã‚¹ãƒˆã‚’ãƒªã‚¿ãƒ¼ãƒ³ã€‚
+				//‘S‚Ä‚Ìg—p‰Â”\‚ÈƒAƒNƒeƒBƒuƒXƒLƒ‹‚ÌƒŠƒXƒg‚ğƒŠƒ^[ƒ“B
 				return m_canUseActiveSkillDataList;
 			}
 			
@@ -62,27 +62,27 @@ namespace nsAWA {
 
 			void AddCanUseActiveSkill(const std::string& skillName) {
 
-				//ä½¿ç”¨å¯èƒ½ãªã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰é †ã«å‚ç…§ã€‚
+				//g—p‰Â”\‚ÈƒAƒNƒeƒBƒuƒXƒLƒ‹‚ğƒŠƒXƒg‚©‚ç‡‚ÉQÆB
 				for (const auto& activeSkillData : m_canUseActiveSkillDataList) {
 
-					//åŒã˜åå‰ã®ã‚¹ã‚­ãƒ«ãŒã‚ã‚‹ãªã‚‰ã€‚
+					//“¯‚¶–¼‘O‚ÌƒXƒLƒ‹‚ª‚ ‚é‚È‚çB
 					if (activeSkillData.name == skillName) {
 
-						//è¿½åŠ ã™ã‚‹å¿…è¦ãŒãªã„ã®ã§çµ‚äº†ã€‚
+						//’Ç‰Á‚·‚é•K—v‚ª‚È‚¢‚Ì‚ÅI—¹B
 						return;
 					}
 				}
 				
-				//åå‰ã‹ã‚‰ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã€‚
+				//–¼‘O‚©‚çƒAƒNƒeƒBƒuƒXƒLƒ‹‚Ìƒf[ƒ^‚ğæ“¾B
 				nsSkill::SActiveSkillData activeSkillData = nsSkill::CActiveSkillList::GetInstance()->GetActiveSkillData(skillName);
 
-				//ä½¿ç”¨å¯èƒ½ãªã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®ãƒ‡ãƒ¼ã‚¿ã‚’ãƒªã‚¹ãƒˆã«è¿½åŠ ã€‚
+				//g—p‰Â”\‚ÈƒAƒNƒeƒBƒuƒXƒLƒ‹‚Ìƒf[ƒ^‚ğƒŠƒXƒg‚É’Ç‰ÁB
 				m_canUseActiveSkillDataList.emplace_back(activeSkillData);
 			}
 
 			nsItem::CItemManager* GetItemManager() {
 
-				//ã‚¢ã‚¤ãƒ†ãƒ ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’ãƒªã‚¿ãƒ¼ãƒ³ã€‚
+				//ƒAƒCƒeƒ€ŠÇ—ƒNƒ‰ƒX‚ğƒŠƒ^[ƒ“B
 				return &m_itemManager;
 			}
 
@@ -90,9 +90,9 @@ namespace nsAWA {
 			void ResetActiveSkill();
 
 		private:
-			nsPlayer::CPlayer* m_player = nullptr;	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿
-			std::list<nsSkill::SActiveSkillData> m_canUseActiveSkillDataList;	//ä½¿ç”¨å¯èƒ½ãªã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®åå‰ã®ãƒªã‚¹ãƒˆ
-			nsItem::CItemManager m_itemManager;		//ã‚¢ã‚¤ãƒ†ãƒ ç®¡ç†ã‚¯ãƒ©ã‚¹
+			nsPlayer::CPlayer* m_player = nullptr;	//ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^
+			std::list<nsSkill::SActiveSkillData> m_canUseActiveSkillDataList;	//g—p‰Â”\‚ÈƒAƒNƒeƒBƒuƒXƒLƒ‹‚Ì–¼‘O‚ÌƒŠƒXƒg
+			nsItem::CItemManager m_itemManager;		//ƒAƒCƒeƒ€ŠÇ—ƒNƒ‰ƒX
 		};
 	}
 }

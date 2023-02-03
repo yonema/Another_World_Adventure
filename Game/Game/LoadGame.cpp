@@ -9,6 +9,7 @@
 #include "Skill/ActiveSkillList.h"
 #include "Weapon/WeaponList.h"
 #include "Armor/ArmorList.h"
+#include "Magic/MagicList.h"
 
 #ifdef _DEBUG
 #include "Monster/Monster.h"
@@ -56,6 +57,9 @@ namespace nsAWA {
 
 		//防具のリストを生成。
 		nsArmor::CArmorList::GetInstance()->LoadArmorList();
+
+		//魔法のリストを生成。
+		nsMagic::CMagicList::GetInstance()->LoadMagicList();
 
 #ifdef _DEBUG
 		nsMonster::CMonster* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");

@@ -36,6 +36,12 @@ namespace nsAWA {
 
 			//ステートを変化させるとともにアニメーションを再生するため、プレイヤーアニメーションクラスのポインタを受け取る。
 			m_playerAnimation = playerAnimation;
+
+#ifdef _DEBUG
+
+			CPlayerManager::GetInstance()->SetActiveSkill(0, "Fire");
+#endif // _DEBUG
+
 		}
 
 		void CPlayerInput::Update(bool isAnimationPlaying) {
@@ -179,15 +185,11 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 #ifdef _DEBUG
 
-				//データを保存。
-				CUserData userData;
-				userData.Save();
+				//クールタイム中に設定。
+				CoolTimeOn();
 
-				////クールタイム中に設定。
-				//CoolTimeOn();
-				//
-				////スキル１使用。
-				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
+				//スキル１使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
 #endif 
 			}
 
@@ -195,8 +197,6 @@ namespace nsAWA {
 
 				//スキル２使用。
 #ifdef _DEBUG
-				nsMagic::CMagicBallOne* magic = NewGO<nsMagic::CMagicBallOne>();
-				magic->Init("hoge", player->GetPosition(), player->GetForwardDirection());
 
 				////パッシブスキル（麻痺）を生成。
 				//{

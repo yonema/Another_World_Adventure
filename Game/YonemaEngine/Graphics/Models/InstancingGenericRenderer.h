@@ -18,7 +18,7 @@ namespace nsYMEngine
 			private:
 				inline std::wstring CreateRootSignatureName() const noexcept override
 				{
-					return L"SkinGenericRenderer";
+					return L"InstancingGenericRenderer";
 				}
 
 				bool CreateShader(
@@ -28,7 +28,7 @@ namespace nsYMEngine
 
 				inline std::wstring CreatePipelineStateName() const noexcept override
 				{
-					return L"SkinGenericRenderer";
+					return L"InstancingGenericRenderer";
 				}
 
 			public:

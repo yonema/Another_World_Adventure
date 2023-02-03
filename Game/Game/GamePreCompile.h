@@ -46,6 +46,7 @@ using EnModelInitDataFlags = nsGraphics::nsRenderers::EnModelInitDataFlags;
 using CSpriteRenderer = nsGraphics::nsRenderers::CSpriteRenderer;
 using SSpriteInitData = nsGraphics::nsSprites::SSpriteInitData;
 using EnAlphaBlendMode = nsGraphics::nsSprites::EnAlphaBlendMode;
+using EnRendererPriority = nsGraphics::nsRenderers::EnRendererPriority;
 using CAnimatedSpriteRenderer = nsGraphics::nsRenderers::CAnimatedSpriteRenderer;
 
 // フォント
@@ -76,6 +77,7 @@ using CPathFinding = nsAI::nsNavigations::CPathFinding;
 
 // レベル3D
 using CLevel3D = nsLevel3D::CLevel3D;
+using CLevel2D = nsLevel2D::CLevel2D;
 using SLevelChipData = nsLevel3D::SLevelChipData;
 using SLevel3DInitData = nsLevel3D::SLevel3DinitData;
 

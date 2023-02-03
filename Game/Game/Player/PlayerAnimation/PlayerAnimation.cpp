@@ -26,7 +26,7 @@ namespace nsAWA {
 				LoadAnimation();
 
 				//アニメーションイベントクラスを初期化。
-				m_animationEvent.Init(player, playerInput, playerAction);
+				m_animationEvent.Init(player, playerInput, playerAction, this);
 #ifdef _DEBUG
 				//剣タイプに設定。
 				m_type = EnAnimType::enSword;
@@ -146,11 +146,8 @@ namespace nsAWA {
 					break;
 				case EnPlayerState::enUseActiveSkill:
 
-					//アクティブスキルならスキルの名前を取得。
-					stateStr += GetActiveSkillName();
-
-					//スキル情報を初期化。
-					m_activeSkill = nullptr;
+					//アクティブスキルならスキルの名前を設定。
+					SetActiveSkillName(stateStr);
 					break;
 				case EnPlayerState::enDamage:
 					stateStr += "Damage";
@@ -188,12 +185,23 @@ namespace nsAWA {
 				std::abort();
 			}
 
-			const std::string& CPlayerAnimation::GetActiveSkillName()const {
+			void CPlayerAnimation::SetActiveSkillName(std::string& name) {
 
 				//アクティブスキルの名前を取得。
 				if (m_activeSkill != nullptr) {
 
-					return m_activeSkill->GetName();
+					if (m_activeSkill->GetType() == nsSkill::CActiveSkill::EnActiveSkillType::enMagic) {
+
+						name = "Magic";
+
+						//終了。
+						return;
+					}
+
+					name += m_activeSkill->GetName();
+
+					//終了。
+					return;
 				}
 				else {
 #ifdef _DEBUG

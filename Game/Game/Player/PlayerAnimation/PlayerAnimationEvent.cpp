@@ -3,8 +3,12 @@
 #include "../../GameActor.h"
 #include "../PlayerInput.h"
 #include "../PlayerAction.h"
+#include "PlayerAnimation.h"
 #include "../Utils/StringManipulation.h"
 #include "../../CreateTrigger.h"
+#include "../../Skill/ActiveSkill.h"
+#include "../../Magic/MagicList.h"
+#include "../../Magic/MagicBase.h"
 
 namespace nsAWA {
 
@@ -98,6 +102,25 @@ namespace nsAWA {
 				}
 			}
 
+			void CPlayerAnimationEvent::CreateMagic() {
+
+				//現在使用中の魔法スキルの名前を取得する。
+				std::string magicName = m_playerAnimation->GetReserveActiveSkillInfo()->GetName();
+
+				//魔法を生成。
+				nsMagic::CMagicBuilder magicBuilder;
+				auto magic = magicBuilder.CreateMagic(magicName);
+
+				//発動者を設定。
+				magic->SetOwner(m_player);
+
+				//座標を設定。
+				magic->SetPosition(m_player->GetPosition());
+
+				//射出方向を設定。
+				magic->SetMoveDirection(m_player->GetForwardDirection());
+			}
+
 			void CPlayerAnimationEvent::GetAnimationEvent(const std::string& animationEventName,
 			const AnimationEventDataStr& animationEventData
 			) {
@@ -123,6 +146,10 @@ namespace nsAWA {
 				else if (animationEventName == "MoveEnd") {
 
 					MoveEnd();
+				}
+				else if (animationEventName == "CreateMagic") {
+
+					CreateMagic();
 				}
 				else {
 
