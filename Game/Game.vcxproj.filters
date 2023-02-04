@@ -488,6 +488,7 @@
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.h" />
+    <ClInclude Include="Game\RendererPriority.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

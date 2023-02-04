@@ -388,6 +388,7 @@
   <ItemGroup>
     <ClInclude Include="Game\Magic\MagicList.h" />
     <ClInclude Include="Game\Magic\MagicBase.h" />
+    <ClInclude Include="Game\RendererPriority.h" />
     <ClInclude Include="Game\UI\FontArrayUI.h" />
     <ClInclude Include="Game\Magic\MagicBallSide.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.h" />
