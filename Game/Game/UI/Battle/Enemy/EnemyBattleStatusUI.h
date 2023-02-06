@@ -37,7 +37,7 @@ namespace nsAWA
              * @brief UIの位置を取得
              * @param position 敵の位置
             */
-            void SetUIEnemyPosition(const CVector3& position);
+            void SetUIEnemyPosition(const CVector2& position);
 
 
         private: // constant data member
@@ -57,6 +57,8 @@ namespace nsAWA
             CEnemyBreakUI* m_enemyBreakUI = nullptr; // 敵のブレイクゲージ
 
             CVector2 m_basePosition = CVector2::Zero(); // UIの基準となる位置
+
+            CVector2 m_initialPosition = CVector2::Zero(); // UIの初期位置
 
             CVector2 m_setUIEnemyPosition = CVector2::Zero();
         };

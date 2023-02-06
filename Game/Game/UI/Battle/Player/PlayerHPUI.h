@@ -86,7 +86,6 @@ namespace nsAWA
             float m_barWidthSize = m_kMaxBarWidthSize; // プレイヤーの体力バーの横幅の倍率
             float m_decreaseBarWidthSize = m_kMaxBarWidthSize; // あとから追って減るゲージの横幅の倍率
             float m_startDecreaseBarAnimationTimer = 0.0f; // あとから追ってゲージが減るアニメーションのタイマー
-            bool m_flagDecreaseBarAnimation = false; // あとから追ってゲージが減るアニメーションをするか
 
             float m_oldDecreaseBarWidthSize = m_kMaxBarWidthSize; // ゲージが減少する前の横幅の倍率
         };

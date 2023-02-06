@@ -44,7 +44,7 @@ namespace nsAWA
                         );
 
                         // 土台部分以外のUIの位置の基準になる位置を取得
-                        m_basePosition = imgData.Position;
+                        m_initialPosition = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
@@ -84,15 +84,18 @@ namespace nsAWA
             //m_enemyBreakUI->SetUIEnemyBreakStatus(breakBar);
         }
 
-        void CEnemyBattleStatusUI::SetUIEnemyPosition(const CVector3& position)
+        void CEnemyBattleStatusUI::SetUIEnemyPosition(const CVector2& position)
         {
             // これだと、全部一か所にまとまるので、
             // 補正値を追加で入れること
             m_spriteEnemyStatusBase->SetPosition(
-                { position.x,position.y + m_kUIPositionCorrectionAmountY }
+                {
+                    position.x + m_initialPosition.x,
+                    position.y + m_kUIPositionCorrectionAmountY + m_initialPosition.y
+                }
             );
 
-            m_setUIEnemyPosition = { position.x,position.y };
+            m_setUIEnemyPosition = { position.x,position.y + m_kUIPositionCorrectionAmountY };
 
             m_enemyHPUI->SetUIPosition(m_setUIEnemyPosition);
             //m_enemyBreakUI->SetUIPosition(m_setUIEnemyPosition);

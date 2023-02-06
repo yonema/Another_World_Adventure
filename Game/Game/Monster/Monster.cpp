@@ -38,6 +38,15 @@ namespace nsAWA {
 
 		void CMonster::UpdateActor(float deltaTime) {
 
+			// UIの処理
+			m_enemyBattleStatusUI->SetUIEnemyStatus(
+				m_status.GetHP(), m_status.GetMaxHP(), 0.0f
+			);
+			// nsGraphics::CCamera::CalcScreenPositionFromWorldPosition()
+			m_enemyBattleStatusUI->SetUIEnemyPosition(MainCamera()->CalcScreenPositionFromWorldPosition(m_position));
+			
+
+
 			//死んでいるなら。
 			if (IsDeath()) {
 
@@ -71,12 +80,6 @@ namespace nsAWA {
 
 			//ステートの変更状況を初期化。
 			m_isChangeState = false;
-
-			// UIの処理
-			m_enemyBattleStatusUI->SetUIEnemyStatus(
-				m_status.GetHP(), m_status.GetMaxHP(), 0.0f
-			);
-			m_enemyBattleStatusUI->SetUIEnemyPosition(m_position);
 		}
 
 		void CMonster::Create(const SMonsterInitData& monsterInfo) {

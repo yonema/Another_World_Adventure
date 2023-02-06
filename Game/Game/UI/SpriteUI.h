@@ -73,6 +73,25 @@ namespace nsAWA
             }
 
 
+            /**
+             * @brief 現在の描画フラグを取得
+             * @return 
+            */
+            const bool IsDrawingFlag() const
+            {
+                return m_spriteRenderer->IsDrawingFlag();
+            }
+
+            /**
+             * @brief 描画するかどうかのフラグを変更
+             * @param isDrawingFlag 
+            */
+            void SetDrawingFlag(const bool isDrawingFlag)
+            {
+                m_spriteRenderer->SetDrawingFlag(isDrawingFlag);
+            }
+
+
 
         private: // data member
             CSpriteRenderer* m_spriteRenderer = nullptr; // UIの画像データ

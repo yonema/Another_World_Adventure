@@ -22,7 +22,7 @@ namespace nsAWA
             "Assets/Images/FitnessBar/Common/Bar_HP_DecreaseAnimation.png";
 
         // ピンチ判定ライン
-        const float CPlayerHPUI::m_kDangerLine = 0.3f;
+        const float CPlayerHPUI::m_kDangerLine = 0.3f * m_kMaxBarWidthSize;
         const float CPlayerHPUI::m_kStartDecreaseBarAnimationTime = 5.0f;
         const float CPlayerHPUI::m_kStartDecreaseBarAnimationTimeAmount = 0.1f;
         // 減少アニメーションの減少量
@@ -118,7 +118,7 @@ namespace nsAWA
                         );
 
                         // 非表示にする
-                        m_spriteDanger->Deactivate();
+                        m_spriteDanger->SetDrawingFlag(false);
                         // フックしたので、trueを返す
                         return true;
                     }
@@ -139,8 +139,6 @@ namespace nsAWA
                             imgData.Pivot
                         );
 
-                        //m_spriteDecrease->Deactivate();
-
                         // フックしたので、trueを返す
                         return true;
                     }
@@ -155,6 +153,7 @@ namespace nsAWA
             DeleteGO(m_spriteFrame);
             DeleteGO(m_spriteBase);
             DeleteGO(m_spriteDanger);
+            DeleteGO(m_spriteDecrease);
         }
 
         void CPlayerHPUI::Update(float deltaTime)
@@ -172,19 +171,19 @@ namespace nsAWA
             DecreaseBarAnimation();
 
             // HPが３割を切っているかを確認
-            //if (m_kDangerLine > m_barWidthSize) {
-            //    ChangeDangerUI(true);
-            //}
-            //else {
-            //    ChangeDangerUI(false);
-            //}
+            if (m_kDangerLine > m_barWidthSize) {
+                ChangeDangerUI(true);
+            }
+            else {
+                ChangeDangerUI(false);
+            }
 
             // ゲージの長さ（横幅）を適用
             m_spriteHPBar->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
-            //m_spriteDanger->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
+            m_spriteDanger->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
             m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,m_kMaxBarWidthSize,1.0f });
 
-            m_oldDecreaseBarWidthSize = m_decreaseBarWidthSize;
+            m_oldDecreaseBarWidthSize = m_barWidthSize;
         }
 
         void CPlayerHPUI::ChangeDangerUI(const bool flagDanger)
@@ -192,17 +191,17 @@ namespace nsAWA
             // ピンチ状態のとき
             if (true == flagDanger) {
                 // ピンチ状態のUIが非表示なら
-                if (false == m_spriteDanger->IsActive()) {
-                    m_spriteDanger->Activate();
-                    m_spriteHPBar->Deactivate();
+                if (false == m_spriteDanger->IsDrawingFlag()) {
+                    m_spriteDanger->SetDrawingFlag(true);
+                    m_spriteHPBar->SetDrawingFlag(false);
                 }
             }
             // ピンチ状態ではないとき
             else {
                 // ピンチ状態のUIが表示状態なら
-                if (true == m_spriteDanger->IsActive()) {
-                    m_spriteDanger->Deactivate();
-                    m_spriteHPBar->Activate();
+                if (true == m_spriteDanger->IsDrawingFlag()) {
+                    m_spriteDanger->SetDrawingFlag(false);
+                    m_spriteHPBar->SetDrawingFlag(true);
                 }
             }
         }

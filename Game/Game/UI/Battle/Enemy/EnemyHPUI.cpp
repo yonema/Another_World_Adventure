@@ -23,6 +23,13 @@ namespace nsAWA
 
         const float CEnemyHPUI::m_kMaxBarWidthSize = 0.3f;
 
+        const float CEnemyHPUI::m_kDangerLine = 0.3f * m_kMaxBarWidthSize;
+
+        const float CEnemyHPUI::m_kStartDecreaseBarAnimationTime = 5.0f;
+        const float CEnemyHPUI::m_kStartDecreaseBarAnimationTimeAmount = 0.1f;
+        // 減少アニメーションの減少量
+        const float CEnemyHPUI::m_kDecreaseBarDecreaseAmount = 0.005f;
+
         bool CEnemyHPUI::Start()
         {
             return true;
@@ -51,7 +58,7 @@ namespace nsAWA
                         );
 
                         // UI位置の補正値を取得
-                        m_correctionAmountHPBar = imgData.Position;
+                        m_initialPositionHPBar = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
@@ -74,7 +81,7 @@ namespace nsAWA
                         );
 
                         // UI位置の補正値を取得
-                        m_correctionAmountFrame = basePosition - imgData.Position;
+                        m_initialPositionFrame = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
@@ -97,7 +104,7 @@ namespace nsAWA
                         );
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBase = basePosition - imgData.Position;
+                        m_initialPositionBase = imgData.Position;
                         
                         // フックしたので、trueを返す
                         return true;
@@ -122,13 +129,13 @@ namespace nsAWA
                         m_spriteDanger->Deactivate();
 
                         // UI位置の補正値を取得
-                        m_correctionAmountDanger = basePosition - imgData.Position;
+                        m_initialPositionDanger = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
                     }
                     // HPバーのディレイアニメーション用のUI
-                    else if ("HP_DecreaseAnimationBar" == imgData.Name)
+                    else if ("Bar_HP_DecreaseAnimation" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteDecrease = NewGO<CSpriteUI>();
@@ -146,7 +153,7 @@ namespace nsAWA
                         //m_spriteDecrease->Deactivate();
 
                         // UI位置の補正値を取得
-                        m_correctionAmountDanger = basePosition - imgData.Position;
+                        m_initialPositionDecrease = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
@@ -175,16 +182,83 @@ namespace nsAWA
 
         void CEnemyHPUI::Animation()
         {
+            // 遅れて減少するゲージのアニメーション
+            DecreaseBarAnimation();
+
+            // HPが３割を切っているかを確認
+            if (m_kDangerLine > m_barWidthSize) {
+                ChangeDangerUI(true);
+            }
+            else {
+                ChangeDangerUI(false);
+            }
+
             // ゲージの長さ（横幅）を適用
             m_spriteHPBar->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
+            m_spriteDanger->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
+            m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,m_kMaxBarWidthSize,1.0f });
+
+            m_oldDecreaseBarWidthSize = m_barWidthSize;
+        }
+
+        void CEnemyHPUI::ChangeDangerUI(const bool flagDanger)
+        {
+            // ピンチ状態のとき
+            if (true == flagDanger) {
+                // ピンチ状態のUIが非表示なら
+                if (false == m_spriteDanger->IsDrawingFlag()) {
+                    m_spriteDanger->SetDrawingFlag(true);
+                    m_spriteHPBar->SetDrawingFlag(false);
+                }
+            }
+            // ピンチ状態ではないとき
+            else {
+                // ピンチ状態のUIが表示状態なら
+                if (true == m_spriteDanger->IsDrawingFlag()) {
+                    m_spriteDanger->SetDrawingFlag(false);
+                    m_spriteHPBar->SetDrawingFlag(true);
+                }
+            }
+        }
+
+        const bool CEnemyHPUI::StartDecreaseBarAnimationTimer()
+        {
+            // タイマーが設定時間を超えたか
+            if (m_kStartDecreaseBarAnimationTime <= m_startDecreaseBarAnimationTimer) {
+                return true;
+            }
+
+            // タイマーを進める
+            m_startDecreaseBarAnimationTimer += m_kStartDecreaseBarAnimationTimeAmount;
+
+            return false;
+        }
+
+        void CEnemyHPUI::DecreaseBarAnimation()
+        {
+            // 古い情報がリアルタイムのより少ない場合
+            if (m_decreaseBarWidthSize <= m_barWidthSize) {
+                m_decreaseBarWidthSize = m_barWidthSize;
+                return;
+            }
+
+            // アニメーションを始めるまでのタイマー
+            if (false == StartDecreaseBarAnimationTimer()) {
+                return;
+            }
+
+            // 古いバーがリアルタイムのバーに徐々に近づくアニメーション
+            // ※アニメーション速度は速めで！
+            m_decreaseBarWidthSize -= m_kDecreaseBarDecreaseAmount;
         }
 
         void CEnemyHPUI::SetUIPosition(const CVector2& position)
         {
-            m_spriteHPBar->SetPosition(position + m_correctionAmountHPBar);
-            m_spriteFrame->SetPosition(position + m_correctionAmountFrame);
-            m_spriteBase->SetPosition(position + m_correctionAmountBase);
-            m_spriteDanger->SetPosition(position + m_correctionAmountDanger);
+            m_spriteHPBar->SetPosition(position + m_initialPositionHPBar);
+            m_spriteFrame->SetPosition(position + m_initialPositionFrame);
+            m_spriteBase->SetPosition(position + m_initialPositionBase);
+            m_spriteDanger->SetPosition(position + m_initialPositionDanger);
+            m_spriteDecrease->SetPosition(position + m_initialPositionDecrease);
         }
     }
 }
