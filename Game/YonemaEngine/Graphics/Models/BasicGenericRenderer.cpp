@@ -32,6 +32,8 @@ namespace nsYMEngine
 					static_cast<unsigned int>(EnDescRangeType::enSrvForBoneMatrixArray);
 				constexpr unsigned int kRangeNoForWorldMatrixArraySRV =
 					static_cast<unsigned int>(EnDescRangeType::enSrvForWorldMatrixArray);
+				constexpr unsigned int kRangeNoForShadowMapSRV =
+					static_cast<unsigned int>(EnDescRangeType::enSRVForShadowMap);
 				constexpr unsigned int kRangeNoForMaterialSRV =
 					static_cast<unsigned int>(EnDescRangeType::enSrvForMaterial);
 
@@ -42,6 +44,9 @@ namespace nsYMEngine
 					D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, numSRVs++);
 				pDescTblRanges->at(kRangeNoForWorldMatrixArraySRV).Init(
 					D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, numSRVs++);
+				pDescTblRanges->at(kRangeNoForShadowMapSRV).Init(
+					D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, numSRVs++);
+				// diffuse‚Ænormal‚Ì2–‡
 				pDescTblRanges->at(kRangeNoForMaterialSRV).Init(
 					D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 2, numSRVs++);
 
@@ -54,6 +59,8 @@ namespace nsYMEngine
 					static_cast<unsigned int>(EnRootParameterType::enBoneMatrixArray);
 				constexpr unsigned int kParamNoForWorldMatrixArray =
 					static_cast<unsigned int>(EnRootParameterType::enWorldMatrixArray);
+				constexpr unsigned int kParamNoForShadowMap =
+					static_cast<unsigned int>(EnRootParameterType::enShadowMap);
 				constexpr unsigned int kParamNoForMaterial =
 					static_cast<unsigned int>(EnRootParameterType::enMaterial);
 
@@ -62,7 +69,7 @@ namespace nsYMEngine
 				pRootParameters->at(kParamNoForModel).InitAsDescriptorTable(
 					1,
 					&pDescTblRanges->at(kRangeNoForModelCB),
-					D3D12_SHADER_VISIBILITY_VERTEX
+					D3D12_SHADER_VISIBILITY_ALL
 				);
 				pRootParameters->at(kParamNoForBoneMatrixArray).InitAsDescriptorTable(
 					1,
@@ -73,6 +80,11 @@ namespace nsYMEngine
 					1,
 					&pDescTblRanges->at(kRangeNoForWorldMatrixArraySRV),
 					D3D12_SHADER_VISIBILITY_VERTEX
+				);
+				pRootParameters->at(kParamNoForShadowMap).InitAsDescriptorTable(
+					1,
+					&pDescTblRanges->at(kRangeNoForShadowMapSRV),
+					D3D12_SHADER_VISIBILITY_PIXEL
 				);
 				pRootParameters->at(kParamNoForMaterial).InitAsDescriptorTable(
 					1,

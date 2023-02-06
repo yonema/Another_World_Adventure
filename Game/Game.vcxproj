@@ -156,6 +156,10 @@
     <ClCompile Include="Game\UI\FontArrayUI.cpp" />
     <ClCompile Include="Game\Magic\MagicBallSide.cpp" />
     <ClCompile Include="Game\Magic\MagicBallForward.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Renderers\AnimatedSpriteRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2DData.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Animations2D\Animation2D.cpp" />
@@ -308,6 +312,11 @@
     <ClCompile Include="YonemaEngine\Graphics\Models\InstancingNonCullingGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Models\SkinNonCullingGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapInstancingGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapSkinGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowModelRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Sprites\Sprite.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Sprites\SpriteGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Sprites\TransSpriteGenericRenderer.cpp" />
@@ -380,9 +389,14 @@
   <ItemGroup>
     <ClInclude Include="Game\Magic\MagicList.h" />
     <ClInclude Include="Game\Magic\MagicBase.h" />
+    <ClInclude Include="Game\RendererPriority.h" />
     <ClInclude Include="Game\UI\FontArrayUI.h" />
     <ClInclude Include="Game\Magic\MagicBallSide.h" />
     <ClInclude Include="Game\Magic\MagicBallForward.h" />
+    <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.h" />
+    <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Renderers\AnimatedSpriteRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2DData.h" />
     <ClInclude Include="YonemaEngine\Graphics\Animations2D\Animation2D.h" />
@@ -542,6 +556,11 @@
     <ClInclude Include="YonemaEngine\Graphics\Models\InstancingNonCullingGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\SkinGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Models\SkinNonCullingGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapInstancingGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapSkinGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowModelRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Sprites\Sprite.h" />
     <ClInclude Include="YonemaEngine\Graphics\Sprites\SpriteGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Sprites\TransSpriteGenericRenderer.h" />

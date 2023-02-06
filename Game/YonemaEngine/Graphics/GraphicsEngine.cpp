@@ -121,7 +121,7 @@ namespace nsYMEngine
 			m_simplePostEffectRenderTargetSprite.Init(initData);
 			m_rendererTable.RegisterRenderer(RendererType::enSimplePostEffect, &m_mainRenderTargetSprite);
 
-			//m_shadowMapRenderer.Init();
+			m_shadowMapRenderer.Init();
 
 			// 初期化が終わったら、DXGIFactoryはもういらないため破棄する。
 			dxgiFactory->Release();
@@ -139,7 +139,6 @@ namespace nsYMEngine
 			m_mainCamera.SetUpDirection(nsMath::CVector3::Up());
 			m_mainCamera.UpdateCameraParam();
 
-			CreateSeceneConstantBuff();
 
 			m_gfxMemForDirectXTK = new DirectX::GraphicsMemory(m_device);
 
@@ -158,9 +157,7 @@ namespace nsYMEngine
 			m_defaultTextures.Release();
 
 			nsFonts::CFontEngine::DeleteInstance();
-			m_sceneDataDH.Release();
-			m_sceneDataCB.Release();
-			//m_shadowMapRenderer.Release();
+			m_shadowMapRenderer.Release();
 			m_simplePostEffectRenderTargetSprite.Release();
 			m_simplePostEffectRenderTarget.Release();
 			m_mainRenderTargetSprite.Release();
@@ -194,11 +191,9 @@ namespace nsYMEngine
 		{
 			m_mainCamera.UpdateCameraParam();
 
-			auto mappedSceneData = 
-				static_cast<SSceneDataMatrix*>(m_sceneDataCB.GetMappedConstantBuffer());
-			mappedSceneData->mView = m_mainCamera.GetViewMatirx();;
-			mappedSceneData->mProj = m_mainCamera.GetProjectionMatirx();
-			mappedSceneData->cameraPosWS = m_mainCamera.GetPosition();
+			nsMath::CVector3 lightDir(-0.5f, -1.0f, -0.5f);
+			lightDir.Normalize();
+			m_shadowMapRenderer.Update(lightDir);
 
 			return;
 		}
@@ -239,7 +234,7 @@ namespace nsYMEngine
 
 		void CGraphicsEngine::DrawToShadowMap()
 		{
-			//m_shadowMapRenderer.Draw();
+			m_shadowMapRenderer.ExecuteDraw(&m_commandList, &m_rendererTable);
 
 			return;
 		}
@@ -255,14 +250,15 @@ namespace nsYMEngine
 			m_commandList.TransitionFromShaderResourceToRenderTarget(m_mainRenderTarget);
 			m_commandList.SetRenderTargets(1, rtArray, dsvH);
 
-			// 画面クリア
-			m_commandList.ClearRenderTargetViews(1, rtArray);
-			m_commandList.ClearDepthStencilView(dsvH);
-
 			// ビューポートとシザリング矩形はフレームバッファと同じものを使用。
 			m_commandList.SetViewportAndScissorRect(
 				m_frameBuffer.GetViewport(), m_frameBuffer.GetScissorRect());
 
+			// 画面クリア
+			m_commandList.ClearRenderTargetViews(1, rtArray);
+			m_commandList.ClearDepthStencilView(dsvH);
+
+			// トポロジを設定
 			m_commandList.SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 			using CRendererTable = nsRenderers::CRendererTable;
@@ -277,9 +273,12 @@ namespace nsYMEngine
 					m_rendererTable.GetPipelineState(rendererType)
 				);
 
-				for (auto renderer : m_rendererTable.GetRendererList(rendererType))
+				for (auto& rendererList : m_rendererTable.GetRendererListArray(rendererType))
 				{
-					renderer->DrawWrapper(&m_commandList);
+					for (auto& renderer : rendererList)
+					{
+						renderer->DrawWrapper(&m_commandList);
+					}
 				}
 			}
 
@@ -298,6 +297,7 @@ namespace nsYMEngine
 			// 描画先を設定
 			m_commandList.TransitionFromShaderResourceToRenderTarget(m_simplePostEffectRenderTarget);
 			m_commandList.SetRenderTarget(m_simplePostEffectRenderTarget);
+			m_commandList.SetViewportAndScissorRect(m_simplePostEffectRenderTarget);
 
 			// 画面クリア
 			m_commandList.ClearRenderTargetAndDepthStencilView(m_simplePostEffectRenderTarget);
@@ -314,9 +314,12 @@ namespace nsYMEngine
 					RendererType::enSimplePostEffect)
 			);
 			// シンプルなポストエフェクトをかけて描画
-			for (auto renderer : m_rendererTable.GetRendererList(RendererType::enSimplePostEffect))
+			for (auto& rendererList : m_rendererTable.GetRendererListArray(RendererType::enSimplePostEffect))
 			{
-				renderer->DrawWrapper(&m_commandList);
+				for (auto& renderer : rendererList)
+				{
+					renderer->DrawWrapper(&m_commandList);
+				}
 			}
 
 			// 描画終了
@@ -353,13 +356,16 @@ namespace nsYMEngine
 					RendererType::enCollisionRenderer)
 			);
 
-			for (auto renderer : m_rendererTable.GetRendererList(RendererType::enCollisionRenderer))
+			for (auto& rendererList : m_rendererTable.GetRendererListArray(RendererType::enCollisionRenderer))
 			{
-				renderer->DrawWrapper(&m_commandList);
+				for (auto& renderer : rendererList)
+				{
+					renderer->DrawWrapper(&m_commandList);
+				}
 			}
 
 			// 描画終了
-			m_commandList.TransitionFromRenderTargetToPresent(m_simplePostEffectRenderTarget);
+			m_commandList.TransitionFromRenderTargetToShaderResource(m_simplePostEffectRenderTarget);
 #endif // _DEBUG
 			return;
 		}
@@ -371,8 +377,11 @@ namespace nsYMEngine
 			m_frameBuffer.SwapBackBuffer();
 
 			// 描画先を設定
-			m_commandList.TransitionFromPresentToRenderTarget(m_frameBuffer);
+			m_commandList.TransitionFromShaderResourceToRenderTarget(
+				m_frameBuffer.GetCurrentRenerTarget());
 			m_commandList.SetRenderTarget(m_frameBuffer);
+			m_commandList.SetViewportAndScissorRect(
+				m_frameBuffer.GetViewport(), m_frameBuffer.GetScissorRect());
 
 			// 画面クリア
 			m_commandList.ClearRenderTargetAndDepthStencilView(m_frameBuffer);
@@ -394,9 +403,12 @@ namespace nsYMEngine
 			m_pBaseRenderTargetSprite->Draw(&m_commandList);
 
 			// 不透明スプライト描画
-			for (auto renderer : m_rendererTable.GetRendererList(RendererType::enSprite))
+			for (auto& rendererList : m_rendererTable.GetRendererListArray(RendererType::enSprite))
 			{
-				renderer->DrawWrapper(&m_commandList);
+				for (auto& renderer : rendererList)
+				{
+					renderer->DrawWrapper(&m_commandList);
+				}
 			}
 
 			// 半透明スプライトの描画設定
@@ -407,9 +419,12 @@ namespace nsYMEngine
 					RendererType::enTransSprite)
 			);
 			// 半透明スプライト描画
-			for (auto renderer : m_rendererTable.GetRendererList(RendererType::enTransSprite))
+			for (auto& rendererList : m_rendererTable.GetRendererListArray(RendererType::enTransSprite))
 			{
-				renderer->DrawWrapper(&m_commandList);
+				for (auto& renderer : rendererList)
+				{
+					renderer->DrawWrapper(&m_commandList);
+				}
 			}
 
 			// 描画終了
@@ -677,29 +692,6 @@ namespace nsYMEngine
 			);
 
 			return res;
-		}
-
-		bool CGraphicsEngine::CreateSeceneConstantBuff()
-		{
-			// 〇定数バッファの作成
-			m_sceneDataCB.Init(sizeof(SSceneDataMatrix), L"SceneData");
-
-			// 〇マップされたデータにデータをコピー
-			auto mappedSceneData = 
-				static_cast<SSceneDataMatrix*>(m_sceneDataCB.GetMappedConstantBuffer());
-			mappedSceneData->mView = m_mainCamera.GetViewMatirx();
-			mappedSceneData->mProj = m_mainCamera.GetViewMatirx();
-			mappedSceneData->cameraPosWS = m_mainCamera.GetPosition();
-
-			// 〇ディスクリプタヒープの作成
-			constexpr unsigned int numDescHeaps = 1;
-			m_sceneDataDH.InitAsCbvSrvUav(numDescHeaps, L"SceneData");
-
-			// 〇定数バッファビューの作成
-			auto heapHandle = m_sceneDataDH.GetCPUHandle();
-			m_sceneDataCB.CreateConstantBufferView(heapHandle);
-
-			return true;
 		}
 
 
