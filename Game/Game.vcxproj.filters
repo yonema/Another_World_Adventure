@@ -229,6 +229,7 @@
     <ClCompile Include="Game\Magic\MagicList.cpp" />
     <ClCompile Include="Game\Magic\MagicBase.cpp" />
     <ClCompile Include="Game\Magic\MagicBallSide.cpp" />
+    <ClCompile Include="Game\Magic\MagicBallForward.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapInstancingGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Shadow\ShadowMapRenderer.cpp" />
@@ -479,6 +480,7 @@
     <ClInclude Include="Game\Magic\MagicList.h" />
     <ClInclude Include="Game\Magic\MagicBase.h" />
     <ClInclude Include="Game\Magic\MagicBallSide.h" />
+    <ClInclude Include="Game\Magic\MagicBallForward.h" />
     <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapInstancingGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Shadow\ShadowMapRenderer.h" />
