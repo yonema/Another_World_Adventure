@@ -240,6 +240,8 @@
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.cpp" />
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
+    <ClCompile Include="Game\Samples\LODSample.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -493,6 +495,8 @@
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.h" />
     <ClInclude Include="Game\RendererPriority.h" />
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
+    <ClInclude Include="Game\Samples\LODSample.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
