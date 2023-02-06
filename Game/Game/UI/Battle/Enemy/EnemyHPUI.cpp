@@ -7,6 +7,9 @@ namespace nsAWA
 {
     namespace nsUI
     {
+        const char* CEnemyHPUI::m_kLevel2DFilePath =
+            "Assets/Level2D/EnemyHPBar.tdl";
+
         const char* CEnemyHPUI::m_kSpriteHPBarFilePath = 
             "Assets/Images/FitnessBar/Common/Bar_HP.png";
         const char* CEnemyHPUI::m_kSpriteFrameFilePath =
@@ -15,87 +18,148 @@ namespace nsAWA
             "Assets/Images/FitnessBar/Common/BarGroundwork.png";
         const char* CEnemyHPUI::m_kSpriteDangerFilePath =
             "Assets/Images/FitnessBar/Common/Bar_HP_Danger.png";
+        const char* CEnemyHPUI::m_kSpriteDecreaaseFilePath =
+            "Assets/Images/FitnessBar/Common/Bar_HP_DecreaseAnimation.png";
+
+        const float CEnemyHPUI::m_kMaxBarWidthSize = 0.3f;
+
+        const float CEnemyHPUI::m_kDangerLine = 0.3f * m_kMaxBarWidthSize;
+
+        const float CEnemyHPUI::m_kStartDecreaseBarAnimationTime = 5.0f;
+        const float CEnemyHPUI::m_kStartDecreaseBarAnimationTimeAmount = 0.1f;
+        // 減少アニメーションの減少量
+        const float CEnemyHPUI::m_kDecreaseBarDecreaseAmount = 0.005f;
 
         bool CEnemyHPUI::Start()
         {
             return true;
         }
 
-        void CEnemyHPUI::LoadLevel(const char* tdlFilePath, const CVector2& basePosition)
+        void CEnemyHPUI::LoadLevel(const CVector2& basePosition)
         {
-            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
+            m_level.Load(m_kLevel2DFilePath, [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                 // 敵のHPバー
-                    if ("" == imgData.Name)
+                    if ("Bar_HP" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteHPBar = NewGO<CSpriteUI>();
-                        m_spriteHPBar->LoadSprite(m_kSpriteHPBarFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteHPBar->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteHPBar->SetPivot(imgData.Pivot);
+                        m_spriteHPBar->LoadSprite(
+                            m_kSpriteHPBarFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnRendererPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteHPBar->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
 
                         // UI位置の補正値を取得
-                        m_correctionAmountHPBar = basePosition - imgData.Position;
+                        m_initialPositionHPBar = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
                     }
                     // 敵のHPバーの枠
-                    if ("" == imgData.Name)
+                    else if ("BarFrame" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteFrame = NewGO<CSpriteUI>();
-                        m_spriteFrame->LoadSprite(m_kSpriteFrameFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteFrame->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteFrame->SetPivot(imgData.Pivot);
+                        m_spriteFrame->LoadSprite(
+                            m_kSpriteFrameFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnRendererPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteFrame->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
 
                         // UI位置の補正値を取得
-                        m_correctionAmountFrame = basePosition - imgData.Position;
+                        m_initialPositionFrame = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
                     }
                     // 敵のHPバーの下地
-                    if ("" == imgData.Name)
+                    else if ("BarGroundwork" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
-                        m_spriteBase->LoadSprite(m_kSpriteBaseFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteBase->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteBase->SetPivot(imgData.Pivot);
+                        m_spriteBase->LoadSprite(
+                            m_kSpriteBaseFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnRendererPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteBase->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBase = basePosition - imgData.Position;
+                        m_initialPositionBase = imgData.Position;
                         
                         // フックしたので、trueを返す
                         return true;
                     }
                     // 敵のHPバーのピンチ時のやつ
-                    if ("" == imgData.Name)
+                    else if ("Bar_HP_Danger" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteDanger = NewGO<CSpriteUI>();
-                        m_spriteDanger->LoadSprite(m_kSpriteDangerFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteDanger->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteDanger->SetPivot(imgData.Pivot);
+                        m_spriteDanger->LoadSprite(
+                            m_kSpriteDangerFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnRendererPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteDanger->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
                         // 非表示にする
                         m_spriteDanger->Deactivate();
 
                         // UI位置の補正値を取得
-                        m_correctionAmountDanger = basePosition - imgData.Position;
+                        m_initialPositionDanger = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
                     }
+                    // HPバーのディレイアニメーション用のUI
+                    else if ("Bar_HP_DecreaseAnimation" == imgData.Name)
+                    {
+                        // UIクラスを作成
+                        m_spriteDecrease = NewGO<CSpriteUI>();
+                        m_spriteDecrease->LoadSprite(
+                            m_kSpriteDecreaaseFilePath,
+                            imgData.SpriteSize,
+                            static_cast<EnRendererPriority>(imgData.Priority),
+                            EnAlphaBlendMode::enTrans
+                        );
+                        m_spriteDecrease->LoadInitData(
+                            imgData.Position,
+                            imgData.Scale,
+                            imgData.Pivot
+                        );
+                        //m_spriteDecrease->Deactivate();
+
+                        // UI位置の補正値を取得
+                        m_initialPositionDecrease = imgData.Position;
+
+                        // フックしたので、trueを返す
+                        return true;
+                    }
+
+                    return false;
                 });
         }
 
@@ -118,16 +182,83 @@ namespace nsAWA
 
         void CEnemyHPUI::Animation()
         {
+            // 遅れて減少するゲージのアニメーション
+            DecreaseBarAnimation();
+
+            // HPが３割を切っているかを確認
+            if (m_kDangerLine > m_barWidthSize) {
+                ChangeDangerUI(true);
+            }
+            else {
+                ChangeDangerUI(false);
+            }
+
             // ゲージの長さ（横幅）を適用
-            m_spriteHPBar->SetScale({ m_barWidthSize,1.0f,1.0f });
+            m_spriteHPBar->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
+            m_spriteDanger->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
+            m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,m_kMaxBarWidthSize,1.0f });
+
+            m_oldDecreaseBarWidthSize = m_barWidthSize;
+        }
+
+        void CEnemyHPUI::ChangeDangerUI(const bool flagDanger)
+        {
+            // ピンチ状態のとき
+            if (true == flagDanger) {
+                // ピンチ状態のUIが非表示なら
+                if (false == m_spriteDanger->IsDrawingFlag()) {
+                    m_spriteDanger->SetDrawingFlag(true);
+                    m_spriteHPBar->SetDrawingFlag(false);
+                }
+            }
+            // ピンチ状態ではないとき
+            else {
+                // ピンチ状態のUIが表示状態なら
+                if (true == m_spriteDanger->IsDrawingFlag()) {
+                    m_spriteDanger->SetDrawingFlag(false);
+                    m_spriteHPBar->SetDrawingFlag(true);
+                }
+            }
+        }
+
+        const bool CEnemyHPUI::StartDecreaseBarAnimationTimer()
+        {
+            // タイマーが設定時間を超えたか
+            if (m_kStartDecreaseBarAnimationTime <= m_startDecreaseBarAnimationTimer) {
+                return true;
+            }
+
+            // タイマーを進める
+            m_startDecreaseBarAnimationTimer += m_kStartDecreaseBarAnimationTimeAmount;
+
+            return false;
+        }
+
+        void CEnemyHPUI::DecreaseBarAnimation()
+        {
+            // 古い情報がリアルタイムのより少ない場合
+            if (m_decreaseBarWidthSize <= m_barWidthSize) {
+                m_decreaseBarWidthSize = m_barWidthSize;
+                return;
+            }
+
+            // アニメーションを始めるまでのタイマー
+            if (false == StartDecreaseBarAnimationTimer()) {
+                return;
+            }
+
+            // 古いバーがリアルタイムのバーに徐々に近づくアニメーション
+            // ※アニメーション速度は速めで！
+            m_decreaseBarWidthSize -= m_kDecreaseBarDecreaseAmount;
         }
 
         void CEnemyHPUI::SetUIPosition(const CVector2& position)
         {
-            m_spriteHPBar->SetPosition(position + m_correctionAmountHPBar);
-            m_spriteFrame->SetPosition(position + m_correctionAmountFrame);
-            m_spriteBase->SetPosition(position + m_correctionAmountBase);
-            m_spriteDanger->SetPosition(position + m_correctionAmountDanger);
+            m_spriteHPBar->SetPosition(position + m_initialPositionHPBar);
+            m_spriteFrame->SetPosition(position + m_initialPositionFrame);
+            m_spriteBase->SetPosition(position + m_initialPositionBase);
+            m_spriteDanger->SetPosition(position + m_initialPositionDanger);
+            m_spriteDecrease->SetPosition(position + m_initialPositionDecrease);
         }
     }
 }

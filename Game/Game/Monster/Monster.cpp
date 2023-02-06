@@ -3,6 +3,8 @@
 #include "Monster.h"
 #include "MonsterList.h"
 
+#include "../UI/Battle/Enemy/EnemyBattleStatusUI.h"
+
 namespace nsAWA {
 
 	namespace nsMonster {
@@ -35,6 +37,15 @@ namespace nsAWA {
 		}
 
 		void CMonster::UpdateActor(float deltaTime) {
+
+			// UI‚Ìˆ—
+			m_enemyBattleStatusUI->SetUIEnemyStatus(
+				m_status.GetHP(), m_status.GetMaxHP(), 0.0f
+			);
+			// nsGraphics::CCamera::CalcScreenPositionFromWorldPosition()
+			m_enemyBattleStatusUI->SetUIEnemyPosition(MainCamera()->CalcScreenPositionFromWorldPosition(m_position));
+			
+
 
 			//€‚ñ‚Å‚¢‚é‚È‚çB
 			if (IsDeath()) {
@@ -100,6 +111,10 @@ namespace nsAWA {
 
 			//‘Ò‹@ó‘Ô‚Éİ’èB
 			SetState(EnMonsterState::enIdle);
+
+			// UI‚Ìˆ—
+			m_enemyBattleStatusUI = NewGO<nsUI::CEnemyBattleStatusUI>();
+			m_enemyBattleStatusUI->LoadLevel();
 		}
 
 		void CMonster::ApplyDamage(float damage, float power, bool canGuard) {

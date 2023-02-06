@@ -30,7 +30,7 @@ namespace nsAWA
                         return true;
                     }
                     // スキルアイコンのイラスト
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteSkill = NewGO<CSpriteUI>();
@@ -42,6 +42,8 @@ namespace nsAWA
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
         }
 

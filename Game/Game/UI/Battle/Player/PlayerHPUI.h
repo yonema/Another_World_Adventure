@@ -46,7 +46,7 @@ namespace nsAWA
             void SetUIPlayerHPStatus(const float hp, const float maxHP)
             {
                 // 横幅の倍率を計算
-                m_barWidthSize = hp / maxHP;
+                m_barWidthSize = hp / maxHP * m_kMaxBarWidthSize;
 
                 if (m_oldDecreaseBarWidthSize != m_barWidthSize) {
                     m_startDecreaseBarAnimationTimer = 0;
@@ -70,6 +70,8 @@ namespace nsAWA
 
             static const char* m_kLevel2DFilePath;
 
+            static const float m_kMaxBarWidthSize;
+
 
         private: // data member
             // 実装されたら、下のやつを追加
@@ -81,12 +83,11 @@ namespace nsAWA
             CSpriteUI* m_spriteDanger = nullptr; // ピンチ時のHPバー
             CSpriteUI* m_spriteDecrease = nullptr; // HPバーのディレイアニメーションバー
 
-            float m_barWidthSize = 1.0f; // プレイヤーの体力バーの横幅の倍率
-            float m_decreaseBarWidthSize = 1.0f; // あとから追って減るゲージの横幅の倍率
+            float m_barWidthSize = m_kMaxBarWidthSize; // プレイヤーの体力バーの横幅の倍率
+            float m_decreaseBarWidthSize = m_kMaxBarWidthSize; // あとから追って減るゲージの横幅の倍率
             float m_startDecreaseBarAnimationTimer = 0.0f; // あとから追ってゲージが減るアニメーションのタイマー
-            bool m_flagDecreaseBarAnimation = false; // あとから追ってゲージが減るアニメーションをするか
 
-            float m_oldDecreaseBarWidthSize = 1.0f; // ゲージが減少する前の横幅の倍率
+            float m_oldDecreaseBarWidthSize = m_kMaxBarWidthSize; // ゲージが減少する前の横幅の倍率
         };
     }
 }

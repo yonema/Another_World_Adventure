@@ -7,6 +7,9 @@ namespace nsAWA
 {
     namespace nsUI
     {
+        const char* CEnemyBreakUI::m_kLevel2DFilePath =
+            "Assets/Level2D/BreakGauge.tdl";
+        
         const char* CEnemyBreakUI::m_kSpriteBreakBarFilePath =
             "Assets/Images/FitnessBar/Enemy/Gauge_Break.png";
         const char* CEnemyBreakUI::m_kSpriteBreakFilePath =
@@ -21,9 +24,9 @@ namespace nsAWA
             return true;
         }
 
-        void CEnemyBreakUI::LoadLevel(const char* tdlFilePath, const CVector2& basePosition)
+        void CEnemyBreakUI::LoadLevel(const CVector2& basePosition)
         {
-            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
+            m_level.Load(m_kLevel2DFilePath, [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                 // ブレイクゲージ
@@ -44,7 +47,7 @@ namespace nsAWA
                         return true;
                     }
                     // 敵のHPバーの枠
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBreak = NewGO<CSpriteUI>();
@@ -63,7 +66,7 @@ namespace nsAWA
                         return true;
                     }
                     // 敵のHPバーの下地
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBreakReduction = NewGO<CSpriteUI>();
@@ -82,7 +85,7 @@ namespace nsAWA
                         return true;
                     }
                     // 敵のHPバーのピンチ時のやつ
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
@@ -98,6 +101,8 @@ namespace nsAWA
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
         }
 

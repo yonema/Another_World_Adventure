@@ -11,11 +11,13 @@ namespace nsAWA
             "Assets/Level2D/SP_Bar.tdl";
 
         const char* CPlayerSPUI::m_kSpriteSPBarFilePath =
-            "Assets/Level2D/Sprites/Bar_SP.png";
+            "Assets/Images/FitnessBar/Player/Bar_SP.png";
         const char* CPlayerSPUI::m_kSpriteFrameFilePath =
             "Assets/Images/FitnessBar/Common/BarFrame.png";
         const char* CPlayerSPUI::m_kSpriteBaseFilePath =
             "Assets/Images/FitnessBar/Common/BarGroundwork.png";
+
+        const float CPlayerSPUI::m_kMaxBarWidthSize = 0.5f;
 
         bool CPlayerSPUI::Start()
         {
@@ -35,7 +37,7 @@ namespace nsAWA
                         m_spriteSPBar->LoadSprite(
                             m_kSpriteSPBarFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteSPBar->LoadInitData(
@@ -48,14 +50,14 @@ namespace nsAWA
                         return true;
                     }
                     // プレイヤーのSPバーの枠
-                    if ("SP_BarFrame" == imgData.Name)
+                    else if ("SP_BarFrame" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteFrame = NewGO<CSpriteUI>();
                         m_spriteFrame->LoadSprite(
                             m_kSpriteFrameFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteFrame->LoadInitData(
@@ -68,14 +70,14 @@ namespace nsAWA
                         return true;
                     }
                     // プレイヤーのSPバーの下地
-                    if ("SP_BarGroundwork" == imgData.Name)
+                    else if ("SP_BarGroundwork" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
                         m_spriteBase->LoadSprite(
                             m_kSpriteBaseFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteBase->LoadInitData(
@@ -87,6 +89,8 @@ namespace nsAWA
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
         }
 
@@ -109,7 +113,7 @@ namespace nsAWA
         void CPlayerSPUI::Animation()
         {
             // ゲージの長さ（横幅）を適用
-            //m_spriteSPBar->SetScale({ m_barWidthSize,1.0f,1.0f });
+            m_spriteSPBar->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
         }
     }
 }

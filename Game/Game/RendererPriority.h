@@ -17,18 +17,18 @@ namespace nsYMEngine
 			{
 				// 優先度の最低値。
 				// これより低い値の優先度は作ってはいけません。
-				enMin,
+				enMin = 0,
 
 
 
 				// 優先度の中間値
-				enMid,
+				enMid = 50,
 
 
 
 				// 優先度の最大値
 				// これより高い値の優先度を作ってはいけません。
-				enMax,
+				enMax = 99,
 				enNum
 			};
 
