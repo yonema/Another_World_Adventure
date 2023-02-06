@@ -41,6 +41,8 @@ namespace nsAWA {
 
 			CPlayerManager::GetInstance()->SetActiveSkill(0, "Fire_Forward");
 			CPlayerManager::GetInstance()->SetActiveSkill(1, "Fire_Side");
+			CPlayerManager::GetInstance()->SetActiveSkill(2, "Heal");
+			CPlayerManager::GetInstance()->SetActiveSkill(3, "Poison");
 #endif // _DEBUG
 
 		}
@@ -224,44 +226,52 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
 
+				//クールタイム中に設定。
+				CoolTimeOn();
+
 				//スキル３使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_3);
 
 #ifdef _DEBUG
 				//アイテム（毒）を生成。
-				{
-					//アイテムを仮生成。
-					nsItem::CThrowItem* item = NewGO<nsItem::CThrowItem>();
+				//{
+				//	//アイテムを仮生成。
+				//	nsItem::CThrowItem* item = NewGO<nsItem::CThrowItem>();
 
-					//毒機能を生成。
-					nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
-					poison->Init(
-						nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
-						player,
-						1
-					);
+				//	//毒機能を生成。
+				//	nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
+				//	poison->Init(
+				//		nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
+				//		player,
+				//		1
+				//	);
 
-					//投げ開始座標を設定。
-					item->SetStartPosition(player->GetPosition());
-					item->SetThrowDirection(player->GetForwardDirection());
+				//	//投げ開始座標を設定。
+				//	item->SetStartPosition(player->GetPosition());
+				//	item->SetThrowDirection(player->GetForwardDirection());
 
-					//アイテムに機能を追加。
-					//item->AddFeature(poison);
+				//	//アイテムに機能を追加。
+				//	//item->AddFeature(poison);
 
-					//アイテムを追加。
-					//player->GetItemManager()->AddItem(item);
-				}
+				//	//アイテムを追加。
+				//	//player->GetItemManager()->AddItem(item);
+				//}
 #endif
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_4)) {
 
+				//クールタイム中に設定。
+				CoolTimeOn();
+
 				//スキル４使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_4);
 
 #ifdef _DEBUG
-				//アイテム管理クラスを取得。
-				auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
-				//プレイヤーにアイテムを与える。
-				itemManager->AddItem("刀削麺", 2);
+				////アイテム管理クラスを取得。
+				//auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
+				////プレイヤーにアイテムを与える。
+				//itemManager->AddItem("刀削麺", 2);
 #endif
 			}
 

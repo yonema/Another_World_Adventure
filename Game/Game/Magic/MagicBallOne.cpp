@@ -117,7 +117,7 @@ namespace nsAWA {
 			//座標を設定。
 			endEffect->SetPosition(m_mainEffect->GetPosition());
 
-			//座標を反映。
+			//変更を反映。
 			endEffect->Update(0.0f);
 
 			//終了時エフェクトを破棄。

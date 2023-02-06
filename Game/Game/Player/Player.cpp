@@ -164,10 +164,9 @@ namespace nsAWA {
 
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
-			auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
 
 			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"Item = %s %d", nsUtils::GetWideStringFromString(itemManager->GetItemName()).c_str(), itemManager->GetItemNum());
+			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.0f",m_status.GetHP());
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}
