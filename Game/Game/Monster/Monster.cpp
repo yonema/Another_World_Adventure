@@ -42,8 +42,7 @@ namespace nsAWA {
 			m_enemyBattleStatusUI->SetUIEnemyStatus(
 				m_status.GetHP(), m_status.GetMaxHP(), 0.0f
 			);
-			// nsGraphics::CCamera::CalcScreenPositionFromWorldPosition()
-			m_enemyBattleStatusUI->SetUIEnemyPosition(MainCamera()->CalcScreenPositionFromWorldPosition(m_position));
+			m_enemyBattleStatusUI->SetUIEnemyPosition(m_position);
 			
 
 
