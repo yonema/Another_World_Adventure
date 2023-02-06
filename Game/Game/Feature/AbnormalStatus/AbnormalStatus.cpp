@@ -18,12 +18,10 @@ namespace nsAWA {
 
 			void CAbnormalStatus::Init(
 				EnAbnormalStatusType abnormalStatusType,
-				IGameActor* target,
 				int abnormalStatusLevel
 			) {
 				//î•ñ‚ğİ’èB
 				m_type = abnormalStatusType;
-				m_target = target;
 				m_abnormalStatusLevel = abnormalStatusLevel;
 			}
 

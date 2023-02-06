@@ -3,6 +3,8 @@
 #include "Feature.h"
 #include "HealFeature.h"
 #include "ApplyDamageFeature.h"
+#include "AbnormalStatus/Poison.h"
+#include "AbnormalStatus/Paralysis.h"
 
 namespace nsAWA {
 
@@ -17,9 +19,11 @@ namespace nsAWA {
 				nsFeature::CFeature* feature = nullptr;
 
 				//[0]...FeatureType
+				//効果の種類を取得。
+				std::string featureType = featureStr[0];
 
 				//回復。
-				if (featureStr[0] == "Heal") {
+				if (featureType == "Heal") {
 					//[1]Type
 					//[2]How
 					//[3]Value
@@ -56,7 +60,8 @@ namespace nsAWA {
 						healValue
 					);
 				}
-				else if (featureStr[0] == "Damage") {
+				//ダメージ。
+				else if (featureType == "Damage") {
 					//[1]Normal or Const
 					
 
@@ -96,6 +101,50 @@ namespace nsAWA {
 
 						nsGameWindow::MessageBoxError(L"ダメージタイプの設定が不適切です。");
 					}
+				}
+				//毒。
+				else if (featureType == "Poison") {
+					//[1]PoisonLevel
+
+					//効果を初期化。
+					feature = new nsFeature::nsStatusChanger::CAbnormalStatus;
+
+					//毒レベルを取得。
+					int poisonLevel = std::stoi(featureStr[1]);
+
+					//毒機能を生成。
+					feature = new nsFeature::nsStatusChanger::CAbnormalStatus;
+					dynamic_cast<nsFeature::nsStatusChanger::CAbnormalStatus*>(feature)->Init(
+						nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
+						poisonLevel
+					);
+				}
+				//麻痺。
+				else if (featureType == "Paralysis") {
+					//[1]ParalysisLevel
+
+					//効果を初期化。
+					feature = new nsFeature::nsStatusChanger::CAbnormalStatus;
+
+					//麻痺レベルを取得。
+					int paralysisLevel = std::stoi(featureStr[1]);
+
+					//麻痺機能を生成。
+					feature = new nsFeature::nsStatusChanger::CAbnormalStatus;
+					dynamic_cast<nsFeature::nsStatusChanger::CAbnormalStatus*>(feature)->Init(
+						nsFeature::nsStatusChanger::EnAbnormalStatusType::enParalysis,
+						paralysisLevel
+					);
+				}
+				else {
+
+					//効果の種類が不適切なので警告を出力。
+					std::string errorMsg = "CFeatureBuilder : 効果の種類が不適切です。 : ";
+					errorMsg += featureType;
+
+					//警告ウィンドウを出力。
+					nsGameWindow::MessageBoxWarning(nsUtils::GetWideStringFromString(errorMsg).c_str());
+					std::abort();
 				}
 
 				//ターゲットを設定。
