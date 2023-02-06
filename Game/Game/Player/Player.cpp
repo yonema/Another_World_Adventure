@@ -215,7 +215,7 @@ namespace nsAWA {
 				}
 			}
 
-			// UIの処理
+			// UIの処琁E
 			m_playerBattleStatusUI->SetUIPlayerStatus(
 				m_status.GetHP(), m_status.GetMaxHP(),
 				m_status.GetMP(), m_status.GetMaxMP(),

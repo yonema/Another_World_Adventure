@@ -33,7 +33,7 @@ namespace nsAWA
 
 
         private: // enum
-            static enum EnWindowNumber
+            enum EnWindowNumber
             {
                 enWindow_1,
                 enWindow_2,

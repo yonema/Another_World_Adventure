@@ -34,7 +34,7 @@ namespace nsAWA
                         return true;
                     }
                     // ウィンドウ２
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_2, imgData);
@@ -42,7 +42,7 @@ namespace nsAWA
                         return true;
                     }
                     // ウィンドウ３
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_3, imgData);
@@ -50,13 +50,15 @@ namespace nsAWA
                         return true;
                     }
                     // ウィンドウ４
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_4, imgData);
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
         }
 

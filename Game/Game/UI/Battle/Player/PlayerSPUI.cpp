@@ -37,7 +37,7 @@ namespace nsAWA
                         m_spriteSPBar->LoadSprite(
                             m_kSpriteSPBarFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteSPBar->LoadInitData(
@@ -50,14 +50,14 @@ namespace nsAWA
                         return true;
                     }
                     // プレイヤーのSPバーの枠
-                    if ("SP_BarFrame" == imgData.Name)
+                    else if ("SP_BarFrame" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteFrame = NewGO<CSpriteUI>();
                         m_spriteFrame->LoadSprite(
                             m_kSpriteFrameFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteFrame->LoadInitData(
@@ -70,14 +70,14 @@ namespace nsAWA
                         return true;
                     }
                     // プレイヤーのSPバーの下地
-                    if ("SP_BarGroundwork" == imgData.Name)
+                    else if ("SP_BarGroundwork" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
                         m_spriteBase->LoadSprite(
                             m_kSpriteBaseFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteBase->LoadInitData(
@@ -89,6 +89,8 @@ namespace nsAWA
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
         }
 

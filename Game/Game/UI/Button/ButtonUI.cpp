@@ -38,7 +38,7 @@ namespace nsAWA
                         return true;
                     }
                     // Bボタン
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enB, imgData);
@@ -46,7 +46,7 @@ namespace nsAWA
                         return true;
                     }
                     // Xボタン
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enX, imgData);
@@ -54,7 +54,7 @@ namespace nsAWA
                         return true;
                     }
                     // Yボタン
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enY, imgData);
@@ -62,7 +62,7 @@ namespace nsAWA
                         return true;
                     }
                     // Lボタン
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enBL, imgData);
@@ -70,7 +70,7 @@ namespace nsAWA
                         return true;
                     }
                     // Rボタン
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enBR, imgData);
@@ -78,7 +78,7 @@ namespace nsAWA
                         return true;
                     }
                     // Lトリガー
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enTL, imgData);
@@ -86,13 +86,15 @@ namespace nsAWA
                         return true;
                     }
                     // Rトリガー
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したボタンのUIを読み込む
                         LoadButtonSprite(EnButtonUI::enTR, imgData);
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
         }
 

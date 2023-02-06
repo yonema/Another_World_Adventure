@@ -24,7 +24,7 @@ namespace nsAWA
             void LoadSprite(
                 const char* tdlFilePath,
                 const CVector2& spriteSize = { 100.0f,100.0f },
-                const EnGOPriority priority = EnGOPriority::enMid,
+                const EnRendererPriority priority = EnRendererPriority::enMin,
                 const EnAlphaBlendMode alphaBlendMode = EnAlphaBlendMode::enNone
                 );
 

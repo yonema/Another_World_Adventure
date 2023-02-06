@@ -32,7 +32,7 @@ namespace nsAWA
                         return true;
                     }
                     // プレイヤーのHPバーの枠
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteFrame = NewGO<CSpriteUI>();
@@ -45,7 +45,7 @@ namespace nsAWA
                         return true;
                     }
                     // プレイヤーのHPバーの下地
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
@@ -58,7 +58,7 @@ namespace nsAWA
                         return true;
                     }
                     // プレイヤーのHPバーのピンチ時のやつ
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteDanger = NewGO<CSpriteUI>();
@@ -73,7 +73,7 @@ namespace nsAWA
                         return true;
                     }
 
-
+                    return false;
                 });
                 */
         }

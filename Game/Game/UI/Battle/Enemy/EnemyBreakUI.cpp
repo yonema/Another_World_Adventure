@@ -47,7 +47,7 @@ namespace nsAWA
                         return true;
                     }
                     // 敵のHPバーの枠
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBreak = NewGO<CSpriteUI>();
@@ -66,7 +66,7 @@ namespace nsAWA
                         return true;
                     }
                     // 敵のHPバーの下地
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBreakReduction = NewGO<CSpriteUI>();
@@ -85,7 +85,7 @@ namespace nsAWA
                         return true;
                     }
                     // 敵のHPバーのピンチ時のやつ
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
@@ -101,6 +101,8 @@ namespace nsAWA
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
         }
 

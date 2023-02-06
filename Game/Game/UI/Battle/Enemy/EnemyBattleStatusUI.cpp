@@ -34,7 +34,7 @@ namespace nsAWA
                         m_spriteEnemyStatusBase->LoadSprite(
                             m_kSpriteEnemyStatusBaseFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteEnemyStatusBase->LoadInitData(
@@ -49,6 +49,8 @@ namespace nsAWA
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
 
             // 敵のHPゲージ
