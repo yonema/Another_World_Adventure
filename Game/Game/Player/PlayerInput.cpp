@@ -39,7 +39,8 @@ namespace nsAWA {
 
 #ifdef _DEBUG
 
-			CPlayerManager::GetInstance()->SetActiveSkill(0, "Fire");
+			CPlayerManager::GetInstance()->SetActiveSkill(0, "Fire_Forward");
+			CPlayerManager::GetInstance()->SetActiveSkill(1, "Fire_Side");
 #endif // _DEBUG
 
 		}
@@ -195,7 +196,11 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
 
+				//クールタイム中に設定。
+				CoolTimeOn();
+
 				//スキル２使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
 #ifdef _DEBUG
 
 				////パッシブスキル（麻痺）を生成。

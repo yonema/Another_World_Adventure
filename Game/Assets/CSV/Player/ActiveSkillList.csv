@@ -6,5 +6,6 @@ Axe,DashAttack_Axe,50
 Axe,RushAttack_Axe,70
 Wand,SwordAttack_Wand,50
 Wand,RushAttack_Wand,70
-Magic,Fire,0
+Magic,Fire_Side,0
+Magic,Fire_Forward,0
 Magic,Bomb,70
