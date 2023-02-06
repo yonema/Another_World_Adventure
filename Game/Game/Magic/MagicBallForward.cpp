@@ -9,7 +9,7 @@ namespace nsAWA {
 		namespace {
 
 			constexpr short kMagicBallNum = 3;	//魔法の数
-			constexpr float kInterval = 0.5f;	//魔法弾の間隔（s）
+			constexpr float kInterval = 0.3f;	//魔法弾の間隔（s）
 		}
 
 		bool CMagicBallForward::Start() {
