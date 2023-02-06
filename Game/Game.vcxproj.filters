@@ -229,6 +229,7 @@
     <ClCompile Include="Game\Magic\MagicList.cpp" />
     <ClCompile Include="Game\Magic\MagicBase.cpp" />
     <ClCompile Include="Game\Magic\MagicBallSide.cpp" />
+    <ClCompile Include="Game\Magic\MagicBallForward.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -470,6 +471,7 @@
     <ClInclude Include="Game\Magic\MagicList.h" />
     <ClInclude Include="Game\Magic\MagicBase.h" />
     <ClInclude Include="Game\Magic\MagicBallSide.h" />
+    <ClInclude Include="Game\Magic\MagicBallForward.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
