@@ -153,10 +153,12 @@
   <ItemGroup>
     <ClCompile Include="Game\Magic\MagicList.cpp" />
     <ClCompile Include="Game\Magic\MagicBase.cpp" />
+    <ClCompile Include="Game\Samples\LODSample.cpp" />
     <ClCompile Include="Game\UI\FontArrayUI.cpp" />
     <ClCompile Include="Game\Magic\MagicBallSide.cpp" />
     <ClCompile Include="Game\Magic\MagicBallForward.cpp" />
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.cpp" />
@@ -391,10 +393,12 @@
     <ClInclude Include="Game\Magic\MagicList.h" />
     <ClInclude Include="Game\Magic\MagicBase.h" />
     <ClInclude Include="Game\RendererPriority.h" />
+    <ClInclude Include="Game\Samples\LODSample.h" />
     <ClInclude Include="Game\UI\FontArrayUI.h" />
     <ClInclude Include="Game\Magic\MagicBallSide.h" />
     <ClInclude Include="Game\Magic\MagicBallForward.h" />
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.h" />
