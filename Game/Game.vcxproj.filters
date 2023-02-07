@@ -238,6 +238,7 @@
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.cpp" />
+    <ClCompile Include="Game\UI\Menu\MenuBaseUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -489,6 +490,7 @@
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.h" />
     <ClInclude Include="Game\RendererPriority.h" />
+    <ClInclude Include="Game\UI\Menu\MenuBaseUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

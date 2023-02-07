@@ -20,7 +20,7 @@ namespace nsAWA
             ~CMenuSkillWindowUI() = default;
 
         public:
-            void LoadLevel(const char* tdlFilePath);
+            void LoadLevel();
             /**
              * @brief 受け取ったデータを元に対応した画像を読み込む
              * @param buttonUINum ウィンドウの識別用番号
@@ -44,6 +44,7 @@ namespace nsAWA
 
 
         private: // constant data member
+            static const char* m_kLevel2DFilePath;
             static const char* m_kSpriteWindowFilePath[EnWindowNumber::enMaxWindowNumber];
 
 

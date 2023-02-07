@@ -93,8 +93,8 @@ namespace nsAWA
             //std::vector<int> m_selectionSetSkill;
             std::vector<std::string> m_selectionSetSkill;
 
-            std::list<nsSkill::SActiveSkillData> m_selectionSetSkillData;
-            CFontArrayUI* m_fontSelectionSetSkillName;
+            //std::list<nsSkill::SActiveSkillData> m_selectionSetSkillData;
+            CFontArrayUI* m_fontSelectionSetSkillName = nullptr;;
 
             //std::list<std::vector<std::string>> m_selectionSetSkill;
 

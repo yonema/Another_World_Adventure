@@ -81,13 +81,13 @@ namespace nsAWA
             m_fontSelectionSetSkillName = NewGO<CFontArrayUI>();
             // アクティブ
             if (EnActiveOrPassive::enActive == m_activeOrPassive) {
-                m_selectionSetSkillData = playerManager.GetCanUseActiveSkillList();
+                //m_selectionSetSkillData = playerManager.GetCanUseActiveSkillList();
 
-                for (auto forSkillData : m_selectionSetSkillData) {
-                    m_fontSelectionSetSkillName->NewLoadFont(
-                        nsUtils::GetWideStringFromString(forSkillData.name).c_str()
-                    );
-                }
+                //for (auto forSkillData : m_selectionSetSkillData) {
+                //    m_fontSelectionSetSkillName->NewLoadFont(
+                //        nsUtils::GetWideStringFromString(forSkillData.name).c_str()
+                //    );
+                //}
             }
             // パッシブ
             else if (EnActiveOrPassive::enPassive == m_activeOrPassive) {
@@ -190,7 +190,7 @@ namespace nsAWA
             // 下
             if (0.0f > Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 if (m_selectionSetSkill.size() <= m_cursorPositionSelectionSetSkill) {
-                    m_cursorPositionSelectionSetSkill = static_cast<int>(m_selectionSetSkillData.size());
+                    //m_cursorPositionSelectionSetSkill = static_cast<int>(m_selectionSetSkillData.size());
                 }
                 else {
                     ++m_cursorPositionSelectionSetSkill;
@@ -209,13 +209,13 @@ namespace nsAWA
                 nsGameWindow::MessageBoxWarning(L"COperationMenuSkillUI : player が見つかりませんでした。");
             }
             // listのイテレーターを選択してるところまで移動する
-            std::list<nsSkill::SActiveSkillData>::iterator setSkillData = m_selectionSetSkillData.begin();
-            for (int forNum = 0; forNum < m_cursorPositionSelectionSetSkill; ++forNum) {
-                ++setSkillData;
-            }
-            
-            // スキルをセット
-            playerManager.SetActiveSkill(static_cast<int>(m_nowSetSkillFrame), setSkillData->name);
+            //std::list<nsSkill::SActiveSkillData>::iterator setSkillData = m_selectionSetSkillData.begin();
+            //for (int forNum = 0; forNum < m_cursorPositionSelectionSetSkill; ++forNum) {
+            //    ++setSkillData;
+            //}
+            //
+            //// スキルをセット
+            //playerManager.SetActiveSkill(static_cast<int>(m_nowSetSkillFrame), setSkillData->name);
         }
     }
 }

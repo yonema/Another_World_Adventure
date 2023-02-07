@@ -7,6 +7,9 @@ namespace nsAWA
 {
     namespace nsUI
     {
+        const char* CMenuSkillWindowUI::m_kLevel2DFilePath =
+            "Assets/Level2D/Menu_Skill.tdl";
+
         const char* CMenuSkillWindowUI::m_kSpriteWindowFilePath[EnWindowNumber::enMaxWindowNumber] =
         {
             "Assets/Images/Menu/Skill/Window_1.png",
@@ -20,13 +23,13 @@ namespace nsAWA
             return true;
         }
 
-        void CMenuSkillWindowUI::LoadLevel(const char* tdlFilePath)
+        void CMenuSkillWindowUI::LoadLevel()
         {
-            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
+            m_level.Load(m_kLevel2DFilePath, [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                     // ウィンドウ１
-                    if ("" == imgData.Name)
+                    if ("Window_1" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_1, imgData);
@@ -34,7 +37,7 @@ namespace nsAWA
                         return true;
                     }
                     // ウィンドウ２
-                    else if ("" == imgData.Name)
+                    else if ("Window_2" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_2, imgData);
@@ -42,7 +45,7 @@ namespace nsAWA
                         return true;
                     }
                     // ウィンドウ３
-                    else if ("" == imgData.Name)
+                    else if ("Window_3" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_3, imgData);
@@ -50,7 +53,7 @@ namespace nsAWA
                         return true;
                     }
                     // ウィンドウ４
-                    else if ("" == imgData.Name)
+                    else if ("Window_4" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_4, imgData);
@@ -66,11 +69,17 @@ namespace nsAWA
         {
             // UIクラスを作成
             m_spriteWindow[windowNum] = NewGO<CSpriteUI>();
-            m_spriteWindow[windowNum]->LoadSprite(m_kSpriteWindowFilePath[windowNum]);
-            // ポジションをロードした画像と同じにする
-            m_spriteWindow[windowNum]->SetPosition(imgData.Position);
-            // ピボットをロードした画像と同じにする
-            m_spriteWindow[windowNum]->SetPivot(imgData.Pivot);
+            m_spriteWindow[windowNum]->LoadSprite(
+                m_kSpriteWindowFilePath[windowNum],
+                imgData.SpriteSize,
+                static_cast<EnRendererPriority>(imgData.Priority),
+                EnAlphaBlendMode::enTrans
+            );
+            m_spriteWindow[windowNum]->LoadInitData(
+                imgData.Position,
+                imgData.Scale,
+                imgData.Pivot
+            );
         }
 
         void CMenuSkillWindowUI::OnDestroy()
