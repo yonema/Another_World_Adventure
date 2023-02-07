@@ -24,7 +24,7 @@ namespace nsAWA
             return true;
         }
 
-        void CEnemyBreakUI::LoadLevel(const CVector2& basePosition)
+        void CEnemyBreakUI::LoadLevel()
         {
             m_level.Load(m_kLevel2DFilePath, [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
@@ -41,7 +41,7 @@ namespace nsAWA
                         m_spriteBreakBar->SetPivot(imgData.Pivot);
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBreakBar = basePosition - imgData.Position;
+                        m_correctionAmountBreakBar = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
@@ -60,7 +60,7 @@ namespace nsAWA
                         m_spriteBreak->Deactivate();
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBreak = basePosition - imgData.Position;
+                        m_correctionAmountBreak = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
@@ -79,7 +79,7 @@ namespace nsAWA
                         m_spriteBreakReduction->Deactivate();
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBreakReduction = basePosition - imgData.Position;
+                        m_correctionAmountBreakReduction = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
@@ -96,7 +96,7 @@ namespace nsAWA
                         m_spriteBase->SetPivot(imgData.Pivot);
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBase = basePosition - imgData.Position;
+                        m_correctionAmountBase = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;

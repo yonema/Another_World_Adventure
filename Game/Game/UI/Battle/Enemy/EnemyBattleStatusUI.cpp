@@ -15,6 +15,11 @@ namespace nsAWA
         const char* CEnemyBattleStatusUI::m_kSpriteEnemyStatusBaseFilePath = 
             "Assets/Images/FitnessBar/Enemy/EnemyStatusBase.png";
 
+        const float CEnemyBattleStatusUI::m_kUIPositionCorrectionAmountY = -100.0f;
+
+        const float CEnemyBattleStatusUI::m_kDrawingAngle = 90.0f;
+
+
         bool CEnemyBattleStatusUI::Start()
         {
             return true;
@@ -55,11 +60,11 @@ namespace nsAWA
 
             // 敵のHPゲージ
             m_enemyHPUI = NewGO<CEnemyHPUI>();
-            m_enemyHPUI->LoadLevel(m_basePosition);
+            m_enemyHPUI->LoadLevel();
 
             // 敵のブレイクゲージ
             //m_enemyBreakUI = NewGO<CEnemyBreakUI>();
-            //m_enemyBreakUI->LoadLevel(m_basePosition);
+            //m_enemyBreakUI->LoadLevel();
         }
 
         void CEnemyBattleStatusUI::OnDestroy()
@@ -127,7 +132,7 @@ namespace nsAWA
                 nsMath::RadToDeg(std::acos(nsMath::Dot(normalizeCameraForwardDirection, normalizeTargetPosition)));
 
             // 視野に入っているか計算
-            if (resultFieldOfView <= 90.0f) {
+            if (resultFieldOfView <= m_kDrawingAngle) {
                 // 見つけたので成功
                 return true;
             }

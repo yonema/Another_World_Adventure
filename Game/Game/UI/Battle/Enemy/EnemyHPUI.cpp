@@ -35,7 +35,7 @@ namespace nsAWA
             return true;
         }
 
-        void CEnemyHPUI::LoadLevel(const CVector2& basePosition)
+        void CEnemyHPUI::LoadLevel()
         {
             m_level.Load(m_kLevel2DFilePath, [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
@@ -57,7 +57,7 @@ namespace nsAWA
                             imgData.Pivot
                         );
 
-                        // UI位置の補正値を取得
+                        // UIの初期位置を取得
                         m_initialPositionHPBar = imgData.Position;
 
                         // フックしたので、trueを返す
@@ -80,7 +80,7 @@ namespace nsAWA
                             imgData.Pivot
                         );
 
-                        // UI位置の補正値を取得
+                        // UIの初期位置を取得
                         m_initialPositionFrame = imgData.Position;
 
                         // フックしたので、trueを返す
@@ -103,7 +103,7 @@ namespace nsAWA
                             imgData.Pivot
                         );
 
-                        // UI位置の補正値を取得
+                        // UIの初期位置を取得
                         m_initialPositionBase = imgData.Position;
                         
                         // フックしたので、trueを返す
@@ -126,9 +126,9 @@ namespace nsAWA
                             imgData.Pivot
                         );
                         // 非表示にする
-                        m_spriteDanger->Deactivate();
+                        m_spriteDanger->SetDrawingFlag(false);
 
-                        // UI位置の補正値を取得
+                        // UIの初期位置を取得
                         m_initialPositionDanger = imgData.Position;
 
                         // フックしたので、trueを返す
@@ -150,9 +150,8 @@ namespace nsAWA
                             imgData.Scale,
                             imgData.Pivot
                         );
-                        //m_spriteDecrease->Deactivate();
 
-                        // UI位置の補正値を取得
+                        // UIの初期位置を取得
                         m_initialPositionDecrease = imgData.Position;
 
                         // フックしたので、trueを返す
@@ -169,6 +168,7 @@ namespace nsAWA
             DeleteGO(m_spriteFrame);
             DeleteGO(m_spriteBase);
             DeleteGO(m_spriteDanger);
+            DeleteGO(m_spriteDecrease);
         }
 
         void CEnemyHPUI::Update(float deltaTime)
@@ -186,25 +186,22 @@ namespace nsAWA
             DecreaseBarAnimation();
 
             // HPが３割を切っているかを確認
-            if (m_kDangerLine > m_barWidthSize) {
-                ChangeDangerUI(true);
-            }
-            else {
-                ChangeDangerUI(false);
-            }
+            ChangeDangerUI();
+
 
             // ゲージの長さ（横幅）を適用
             m_spriteHPBar->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
             m_spriteDanger->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
             m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,m_kMaxBarWidthSize,1.0f });
 
-            m_oldDecreaseBarWidthSize = m_barWidthSize;
+            // 現在のバーの横幅を保存
+            m_oldBarWidthSize = m_barWidthSize;
         }
 
-        void CEnemyHPUI::ChangeDangerUI(const bool flagDanger)
+        void CEnemyHPUI::ChangeDangerUI()
         {
             // ピンチ状態のとき
-            if (true == flagDanger) {
+            if (m_kDangerLine > m_barWidthSize) {
                 // ピンチ状態のUIが非表示なら
                 if (false == m_spriteDanger->IsDrawingFlag()) {
                     m_spriteDanger->SetDrawingFlag(true);
@@ -236,19 +233,18 @@ namespace nsAWA
 
         void CEnemyHPUI::DecreaseBarAnimation()
         {
-            // 古い情報がリアルタイムのより少ない場合
+            // アニメーションバーがHPバーより短い場合
             if (m_decreaseBarWidthSize <= m_barWidthSize) {
                 m_decreaseBarWidthSize = m_barWidthSize;
                 return;
             }
 
-            // アニメーションを始めるまでのタイマー
+            // アニメーションを始めるまでのタイマー処理
             if (false == StartDecreaseBarAnimationTimer()) {
                 return;
             }
 
-            // 古いバーがリアルタイムのバーに徐々に近づくアニメーション
-            // ※アニメーション速度は速めで！
+            // アニメーションバーがHPバーに徐々に近づくアニメーション
             m_decreaseBarWidthSize -= m_kDecreaseBarDecreaseAmount;
         }
 
