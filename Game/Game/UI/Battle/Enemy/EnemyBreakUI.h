@@ -23,7 +23,7 @@ namespace nsAWA
             ~CEnemyBreakUI() = default;
 
         public:
-            void LoadLevel(const CVector2& basePosition);
+            void LoadLevel();
 
         private:
             void Animation(); // UIのアニメーション

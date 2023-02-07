@@ -42,16 +42,27 @@ namespace nsAWA
                 const float sp, const float maxSP
             );
 
-        private:
-            static const char* m_kSpritePlayerStatusBaseFilePath;
+        private: // constant member
+            ////////////////////////////////////////////////////////////
+            // ファイルパス
+            ////////////////////////////////////////////////////////////
+
             static const char* m_kLevel2DFilePath;
+            static const char* m_kSpritePlayerStatusBaseFilePath;
 
 
         private: // data member
-            // 実装されたら、下のやつを追加
+            ////////////////////////////////////////////////////////////
+            // レベル、画像
+            ////////////////////////////////////////////////////////////
+
             nsLevel2D::CLevel2D m_level;
 
             CSpriteUI* m_spritePlayerStatusBase = nullptr;
+
+            ////////////////////////////////////////////////////////////
+            // UIクラス
+            ////////////////////////////////////////////////////////////
 
             CPlayerHPUI* m_playerHPUI = nullptr;
             CPlayerMPUI* m_playerMPUI = nullptr;

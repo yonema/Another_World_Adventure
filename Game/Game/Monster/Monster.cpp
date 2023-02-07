@@ -34,6 +34,9 @@ namespace nsAWA {
 
 			//AIコントローラーを破棄。
 			m_AIContoller.Release();
+
+			// UIを破棄
+			DeleteGO(m_enemyBattleStatusUI);
 		}
 
 		void CMonster::UpdateActor(float deltaTime) {

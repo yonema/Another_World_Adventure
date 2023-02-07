@@ -21,14 +21,14 @@ namespace nsAWA
         const char* CPlayerHPUI::m_kSpriteDecreaaseFilePath =
             "Assets/Images/FitnessBar/Common/Bar_HP_DecreaseAnimation.png";
 
-        // ピンチ判定ライン
+        const float CPlayerHPUI::m_kMaxBarWidthSize = 0.5f;
         const float CPlayerHPUI::m_kDangerLine = 0.3f * m_kMaxBarWidthSize;
+
         const float CPlayerHPUI::m_kStartDecreaseBarAnimationTime = 5.0f;
         const float CPlayerHPUI::m_kStartDecreaseBarAnimationTimeAmount = 0.1f;
-        // 減少アニメーションの減少量
         const float CPlayerHPUI::m_kDecreaseBarDecreaseAmount = 0.005f;
 
-        const float CPlayerHPUI::m_kMaxBarWidthSize = 0.5f;
+
 
         bool CPlayerHPUI::Start()
         {
@@ -171,25 +171,22 @@ namespace nsAWA
             DecreaseBarAnimation();
 
             // HPが３割を切っているかを確認
-            if (m_kDangerLine > m_barWidthSize) {
-                ChangeDangerUI(true);
-            }
-            else {
-                ChangeDangerUI(false);
-            }
+            ChangeDangerUI();
+
 
             // ゲージの長さ（横幅）を適用
             m_spriteHPBar->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
             m_spriteDanger->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
             m_spriteDecrease->SetScale({ m_decreaseBarWidthSize,m_kMaxBarWidthSize,1.0f });
 
-            m_oldDecreaseBarWidthSize = m_barWidthSize;
+            // 現在のバーの情報を保存
+            m_oldBarWidthSize = m_barWidthSize;
         }
 
-        void CPlayerHPUI::ChangeDangerUI(const bool flagDanger)
+        void CPlayerHPUI::ChangeDangerUI()
         {
             // ピンチ状態のとき
-            if (true == flagDanger) {
+            if (m_kDangerLine > m_barWidthSize) {
                 // ピンチ状態のUIが非表示なら
                 if (false == m_spriteDanger->IsDrawingFlag()) {
                     m_spriteDanger->SetDrawingFlag(true);
@@ -221,7 +218,7 @@ namespace nsAWA
 
         void CPlayerHPUI::DecreaseBarAnimation()
         {
-            // 古い情報がリアルタイムのより少ない場合
+            // アニメーションバーがHPバーより短い場合
             if (m_decreaseBarWidthSize <= m_barWidthSize) {
                 m_decreaseBarWidthSize = m_barWidthSize;
                 return;
@@ -233,7 +230,6 @@ namespace nsAWA
             }
 
             // 古いバーがリアルタイムのバーに徐々に近づくアニメーション
-            // ※アニメーション速度は速めで！
             m_decreaseBarWidthSize -= m_kDecreaseBarDecreaseAmount;
         }
     }
