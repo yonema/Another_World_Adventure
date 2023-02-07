@@ -84,21 +84,56 @@ namespace nsAWA
             //m_enemyBreakUI->SetUIEnemyBreakStatus(breakBar);
         }
 
-        void CEnemyBattleStatusUI::SetUIEnemyPosition(const CVector2& position)
+        void CEnemyBattleStatusUI::SetUIEnemyPosition(const CVector3& position)
         {
+            if (true == CheckDrawUI(position)) {
+                m_spriteEnemyStatusBase->SetDrawingFlag(true);
+            }
+            else {
+                m_spriteEnemyStatusBase->SetDrawingFlag(false);
+
+                return;
+            }
+
+            CVector3 targetPosition = position;
+            CVector2 uiPosition = MainCamera()->CalcScreenPositionFromWorldPosition(targetPosition);
+
+
+
             // これだと、全部一か所にまとまるので、
             // 補正値を追加で入れること
             m_spriteEnemyStatusBase->SetPosition(
                 {
-                    position.x + m_initialPosition.x,
-                    position.y + m_kUIPositionCorrectionAmountY + m_initialPosition.y
+                    uiPosition.x + m_initialPosition.x,
+                    uiPosition.y + m_kUIPositionCorrectionAmountY + m_initialPosition.y
                 }
             );
 
-            m_setUIEnemyPosition = { position.x,position.y + m_kUIPositionCorrectionAmountY };
+            m_setUIEnemyPosition = { uiPosition.x,uiPosition.y + m_kUIPositionCorrectionAmountY };
 
             m_enemyHPUI->SetUIPosition(m_setUIEnemyPosition);
             //m_enemyBreakUI->SetUIPosition(m_setUIEnemyPosition);
+        }
+
+        const bool CEnemyBattleStatusUI::CheckDrawUI(const CVector3& targetPosition)
+        {
+            CVector3 normalizeCameraForwardDirection = MainCamera()->GetForeardDirection();
+            CVector3 normalizeTargetPosition = targetPosition - MainCamera()->GetPosition();
+
+            normalizeCameraForwardDirection.Normalize();
+            normalizeTargetPosition.Normalize();
+
+            float resultFieldOfView = 
+                nsMath::RadToDeg(std::acos(nsMath::Dot(normalizeCameraForwardDirection, normalizeTargetPosition)));
+
+            // 視野に入っているか計算
+            if (resultFieldOfView <= 90.0f) {
+                // 見つけたので成功
+                return true;
+            }
+
+            // 失敗
+            return false;
         }
     }
 }

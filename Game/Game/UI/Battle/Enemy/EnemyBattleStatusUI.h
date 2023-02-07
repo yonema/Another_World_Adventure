@@ -37,7 +37,9 @@ namespace nsAWA
              * @brief UI‚ÌˆÊ’u‚ğæ“¾
              * @param position “G‚ÌˆÊ’u
             */
-            void SetUIEnemyPosition(const CVector2& position);
+            void SetUIEnemyPosition(const CVector3& position);
+
+            const bool CheckDrawUI(const CVector3& targetPosition);
 
 
         private: // constant data member
@@ -61,6 +63,7 @@ namespace nsAWA
             CVector2 m_initialPosition = CVector2::Zero(); // UI‚Ì‰ŠúˆÊ’u
 
             CVector2 m_setUIEnemyPosition = CVector2::Zero();
+
         };
     }
 }
