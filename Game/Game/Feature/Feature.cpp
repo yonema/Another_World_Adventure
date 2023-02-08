@@ -29,12 +29,12 @@ namespace nsAWA {
 			//持続時間が0秒になったら。
 			if (fabsf(m_durationTime) <= FLT_EPSILON) {
 
-				//終了したとして知らせる。
-				return true;
+				//死ぬ。
+				End();
 			}
-
-			//終了しないことを知らせる（まだ効果が残っている）。
-			return false;
+			
+			//まだ生きているかをリターン。
+			return IsDead();
 		}
 	}
 }

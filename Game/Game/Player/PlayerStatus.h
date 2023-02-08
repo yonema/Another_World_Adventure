@@ -1,15 +1,44 @@
 #pragma once
 #include "../Status.h"
+#include "../Feature/Feature.h"
 
 namespace nsAWA {
 
+	//前方宣言
 	namespace nsPlayer {
+
+		class CPlayerWeaponManager;
+	}
+
+	namespace nsSkill {
+
+		class CPassiveSkillManager;
+	}
+
+	namespace nsFeature {
+
+		class CFeatureManager;
+	}
+
+	namespace nsWeapon {
+
+		class CWeapon;
+	}
+
+	namespace nsPlayer {
+
+		
 
 		//プレイヤーステータスクラス
 		class CPlayerStatus : public CStatus
 		{
 		public:
-			void Init();
+			void Init(const nsWeapon::CWeapon* const & playerWeapon,
+				nsSkill::CPassiveSkillManager* passiveSkillManager,
+				nsFeature::CFeatureManager* featureManager
+				);
+
+			void Update();
 
 			void HealHP(float value);
 			void DamageHP(float value);
@@ -99,6 +128,10 @@ namespace nsAWA {
 					return FLT_MAX;
 				}
 			}
+
+		private:
+			void ResetStatusList();
+
 		private:
 			int m_level = 0;					//レベル
 			float m_HP = 0.0f;					//HP
@@ -109,6 +142,12 @@ namespace nsAWA {
 			float m_maxSP = 0.0f;				//最大SP
 			float m_guardGaugeValue = 0.0f;	//ガードゲージの値
 			float m_maxGuardGaugeValue = 0.0f;	//ガードゲージの最大値
+
+			const nsWeapon::CWeapon* const * m_weapon = nullptr;	//武器情報
+			nsSkill::CPassiveSkillManager* m_passiveSkillManager = nullptr;	//パッシブスキル管理クラス
+			nsFeature::CFeatureManager* m_featureManager = nullptr;	//効果リスト
+
+			float m_statusBaseList[static_cast<int>(nsFeature::EnStatusRef::enNum)] = { 0.0f }; 	//ステータス反映のための基底データ
 
 			float m_attack = 0.0f;				//物理攻撃力
 			float m_intelligence = 0.0f;		//魔法攻撃力

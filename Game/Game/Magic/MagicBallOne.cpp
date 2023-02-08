@@ -10,7 +10,7 @@ namespace nsAWA {
 
 			constexpr float kTriggerRadius = 5.0f;	//トリガーの半径
 			constexpr float kDurationTime = 1.0f;	//持続時間
-			constexpr float kMoveAmount = 50.0f;	//移動量
+			constexpr float kMoveAmount = 130.0f;	//移動量
 			constexpr float kAddPositionY = 10.0f;	//調整用加算座標
 			constexpr float kAddPositionMoveDirection = 10.0f;	//調整用加算座標
 		}
@@ -36,12 +36,12 @@ namespace nsAWA {
 			m_mainEffect = NewGO<CEffectPlayer>();
 			std::string mainEffectFilePath = "Assets/Effects/Magics/";
 			mainEffectFilePath += GetMagicName();
-			mainEffectFilePath += "_Main.efk";
+			mainEffectFilePath += "_Main.efkefc";
 
 			//初期化。
 			m_mainEffect->Init(nsUtils::GetWideStringFromString(mainEffectFilePath).c_str());
 
-			//エフェクトの座標を設定。
+			//メインエフェクトの座標を設定。
 			m_mainEffect->SetPosition(position);
 
 			//エフェクトを再生。
@@ -56,12 +56,14 @@ namespace nsAWA {
 
 		void CMagicBallOne::OnDestroy() {
 
+			if (m_mainEffect != nullptr) {
+
+				m_mainEffect->Stop();
+			}
+
 			//エフェクトを破棄。
 			DeleteGO(m_mainEffect);
 			m_mainEffect = nullptr;
-
-			DeleteGO(m_endEffect);
-			m_endEffect = nullptr;
 
 			//当たり判定を破棄。
 			m_trigger.Release();
@@ -91,9 +93,6 @@ namespace nsAWA {
 
 		void CMagicBallOne::OnTriggerEnter(CExtendedDataForRigidActor* otherData) {
 
-			//メインエフェクトを無効化。
-			m_mainEffect->Stop();
-
 			//トリガーに入ったオブジェクトがIGameActorのコライダーかどうか調べる。
 			auto rGameActorCollider = otherData->GetOwner<CGameActorCollider>();
 
@@ -104,16 +103,31 @@ namespace nsAWA {
 			}
 
 			//エンドエフェクトを生成。
-			m_endEffect = NewGO<CEffectPlayer>();
+			CEffectPlayer* endEffect = NewGO<CEffectPlayer>();
 			std::string endEffectFilePath = "Assets/Effects/Magics/";
 			endEffectFilePath += GetMagicName();
-			endEffectFilePath += "_End.efk";
+			endEffectFilePath += "_End.efkefc";
 
 			//初期化。
-			m_endEffect->Init(nsUtils::GetWideStringFromString(endEffectFilePath).c_str());
+			endEffect->Init(nsUtils::GetWideStringFromString(endEffectFilePath).c_str());
+
+			//再生。
+			endEffect->Play();
+
+			//座標を設定。
+			endEffect->SetPosition(m_mainEffect->GetPosition());
+
+			//変更を反映。
+			endEffect->Update(0.0f);
+
+			//終了時エフェクトを破棄。
+			DeleteGO(endEffect);
 
 			//当たり判定を無効化。
 			m_trigger.Deactivate();
+
+			//自身を破棄。
+			DeleteGO(this);
 		}
 	}
 }

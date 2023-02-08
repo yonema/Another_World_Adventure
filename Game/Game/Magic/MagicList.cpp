@@ -3,6 +3,8 @@
 #include "../CSV/CSVManager.h"
 #include "MagicBallOne.h"
 #include "MagicBallSide.h"
+#include "MagicBallForward.h"
+#include "MagicToPlayer.h"
 
 namespace nsAWA {
 
@@ -105,6 +107,23 @@ namespace nsAWA {
 			else if (magicType == "Side") {
 
 				magic = NewGO<CMagicBallSide>();
+			}
+			else if (magicType == "Forward") {
+
+				magic = NewGO<CMagicBallForward>();
+			}
+			else if (magicType == "ToPlayer") {
+
+				magic = NewGO<CMagicToPlayer>();
+			}
+			else {
+
+				//エラー出力。
+				std::string errorMsg = "CMagicBuilder : タイプが見つかりませんでした。 : ";
+				errorMsg += magicType;
+				nsGameWindow::MessageBoxError(nsUtils::GetWideStringFromString(errorMsg).c_str());
+
+				std::abort();
 			}
 
 			//名前を設定。

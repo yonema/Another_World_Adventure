@@ -1,0 +1,9 @@
+NAME,Poisoner,,,,
+FEATURE,Poison,1,,,
+*,,,,,
+NAME,Paralysiser,,,,
+FEATURE,Paralysis,1,,,
+*,,,,,
+NAME,ATKUp,,,,
+FEATURE,BuffDebuff,Buff,ATK,3,10
+*,,,,,

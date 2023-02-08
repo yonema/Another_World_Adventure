@@ -43,6 +43,10 @@ namespace nsAWA {
 				//次の座標を調整。
 				startMagicPosition += sideDirection * kInterval;
 			}
+
+			//生成が終わったので自身を破棄。
+			DeleteGO(this);
+
 			//成功。
 			return true;
 		}

@@ -20,7 +20,6 @@ namespace nsAWA {
 
 		private:
 			CEffectPlayer* m_mainEffect = nullptr;	//メインのエフェクト
-			CEffectPlayer* m_endEffect = nullptr;	//終了時のエフェクト
 			CPhysicsTriggerObject m_trigger;	//当たり判定
 			
 			

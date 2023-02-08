@@ -16,3 +16,9 @@ ATK,1
 INT,10
 CRI,10
 *,
+NAME,NormalSword
+TYPE,Sword
+ATK,5
+INT,2
+CRI,10
+*,
