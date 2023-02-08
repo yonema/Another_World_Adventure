@@ -159,6 +159,8 @@
     <ClCompile Include="Game\Magic\MagicBallForward.cpp" />
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.cpp" />
@@ -399,6 +401,8 @@
     <ClInclude Include="Game\Magic\MagicBallForward.h" />
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.h" />
