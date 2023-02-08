@@ -17,7 +17,7 @@ namespace nsAWA {
 			for (const auto& feature : m_featureList) {
 
 				//Œø‰Ê‚ÌŽ‘±ŽžŠÔ‚ðXVB
-				(*feature)->SetDurationTime(kPassiveSkillDurationTime);
+				feature->SetDurationTime(kPassiveSkillDurationTime);
 			}
 		}
 	}

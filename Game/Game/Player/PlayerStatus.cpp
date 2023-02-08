@@ -56,7 +56,7 @@ namespace nsAWA {
 
 				for (const auto& feature : passiveSkill->GetFeatureList()) {
 
-					featureList.emplace_back(*feature);
+					featureList.emplace_back(feature);
 				}
 			}
 

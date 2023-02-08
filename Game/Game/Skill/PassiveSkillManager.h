@@ -18,6 +18,20 @@ namespace nsAWA {
 
 			void SetPassiveSkill(int skillNum, nsSkill::CPassiveSkill* passiveSkill);
 
+			nsSkill::CPassiveSkill* GetPassiveSkill(int skillNum)const{
+			
+				//番号が範囲外なら。
+				if (skillNum >= m_passiveSkillMaxNum) {
+
+					//エラー出力。
+					nsGameWindow::MessageBoxError(L"CPassiveSKill : 設定範囲外の番号です。");
+					std::abort();
+				}
+
+				//パッシブスキルをリターン。
+				return m_passiveSkill[skillNum];
+			}
+
 			void AddPassiveSkillSize() {
 
 				//装着可能な数を加算。

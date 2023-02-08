@@ -9,6 +9,8 @@
 #ifdef _DEBUG
 #include "../Monster/Monster.h"
 #include "PlayerManager.h"
+#include "../Skill/PassiveSkillManager.h"
+#include "../Skill/PassiveSkill.h"
 #endif
 #include "../UI/Battle/Player/PlayerBattleStatusUI.h"
 
@@ -62,6 +64,9 @@ namespace nsAWA {
 			m_collider.Init(this);
 
 #ifdef _DEBUG
+			//仮に最初は毒パッシブスキルに設定。
+			CPlayerManager::GetInstance()->SetPassiveSkill(0, "Poisoner");
+
 			m_fontRenderer = NewGO<nsGraphics::nsFonts::CFontRenderer>();
 
 			//フォントの情報を設定。
@@ -165,7 +170,7 @@ namespace nsAWA {
 			//プレイヤーのHPを表示。
 
 			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"HP = %4.1f",m_status.GetHP());
+			StringCbPrintf(m_dispText, dispTextSize, L"SkillName = %s",nsUtils::GetWideStringFromString(GetPassiveSkillManager()->GetPassiveSkill(0)->GetName()).c_str());
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}

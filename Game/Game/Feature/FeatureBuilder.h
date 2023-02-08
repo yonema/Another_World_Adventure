@@ -21,7 +21,7 @@ namespace nsAWA {
 				IGameActor* creator,
 				IGameActor* target,
 				std::list<std::vector<std::string>> featureListStr,
-				std::list<nsFeature::CFeature**>& featureList
+				std::list<nsFeature::CFeature*>& featureList
 				);
 
 		private:
@@ -29,7 +29,7 @@ namespace nsAWA {
 				IGameActor* creator, 
 				IGameActor* target,
 				std::list<std::vector<std::string>> featureListStr,
-				std::list<nsFeature::CFeature**>& featureList
+				std::list<nsFeature::CFeature*>& featureList
 				);
 
 		};

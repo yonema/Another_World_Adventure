@@ -21,13 +21,13 @@ namespace nsAWA {
 				return m_featureListStr;
 			}
 
-			void SetFeatureList(const std::list<nsFeature::CFeature**>& featureList) {
+			void SetFeatureList(const std::list<nsFeature::CFeature*>& featureList) {
 
 				//効果のリストを設定。
 				m_featureList = featureList;
 			}
 
-			std::list<nsFeature::CFeature**>& GetFeatureList() {
+			std::list<nsFeature::CFeature*>& GetFeatureList() {
 
 				//効果のリストを取得。
 				return m_featureList;
@@ -37,7 +37,7 @@ namespace nsAWA {
 
 		private:
 			std::list<std::vector<std::string>> m_featureListStr;//効果のリストの文字列
-			std::list<nsFeature::CFeature**> m_featureList;		//効果のリスト
+			std::list<nsFeature::CFeature*> m_featureList;		//効果のリスト
 		};
 	}
 }
