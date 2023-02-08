@@ -20,11 +20,5 @@ namespace nsAWA {
 				feature->SetDurationTime(kPassiveSkillDurationTime);
 			}
 		}
-
-		void CPassiveSkill::AddFeature(nsFeature::CFeature* feature) {
-
-			//Œø‰Ê‚ð’Ç‰ÁB
-			m_featureList.emplace_back(feature->CreateAndReturn());
-		}
 	}
 }

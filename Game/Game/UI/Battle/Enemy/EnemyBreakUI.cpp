@@ -7,6 +7,9 @@ namespace nsAWA
 {
     namespace nsUI
     {
+        const char* CEnemyBreakUI::m_kLevel2DFilePath =
+            "Assets/Level2D/BreakGauge.tdl";
+        
         const char* CEnemyBreakUI::m_kSpriteBreakBarFilePath =
             "Assets/Images/FitnessBar/Enemy/Gauge_Break.png";
         const char* CEnemyBreakUI::m_kSpriteBreakFilePath =
@@ -21,9 +24,9 @@ namespace nsAWA
             return true;
         }
 
-        void CEnemyBreakUI::LoadLevel(const char* tdlFilePath, const CVector2& basePosition)
+        void CEnemyBreakUI::LoadLevel()
         {
-            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
+            m_level.Load(m_kLevel2DFilePath, [&](const nsLevel2D::SLevel2DSpriteData& imgData)
                 { // ロードするレベル一つ一つにクエリを行う
 
                 // ブレイクゲージ
@@ -38,13 +41,13 @@ namespace nsAWA
                         m_spriteBreakBar->SetPivot(imgData.Pivot);
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBreakBar = basePosition - imgData.Position;
+                        m_correctionAmountBreakBar = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
                     }
                     // 敵のHPバーの枠
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBreak = NewGO<CSpriteUI>();
@@ -57,13 +60,13 @@ namespace nsAWA
                         m_spriteBreak->Deactivate();
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBreak = basePosition - imgData.Position;
+                        m_correctionAmountBreak = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
                     }
                     // 敵のHPバーの下地
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBreakReduction = NewGO<CSpriteUI>();
@@ -76,13 +79,13 @@ namespace nsAWA
                         m_spriteBreakReduction->Deactivate();
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBreakReduction = basePosition - imgData.Position;
+                        m_correctionAmountBreakReduction = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
                     }
                     // 敵のHPバーのピンチ時のやつ
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
@@ -93,11 +96,13 @@ namespace nsAWA
                         m_spriteBase->SetPivot(imgData.Pivot);
 
                         // UI位置の補正値を取得
-                        m_correctionAmountBase = basePosition - imgData.Position;
+                        m_correctionAmountBase = imgData.Position;
 
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
         }
 

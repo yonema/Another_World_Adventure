@@ -28,7 +28,7 @@ namespace nsAWA
         private:
             void Animation(); // UIのアニメーション
 
-            void ChangeDangerUI(const bool flagDanger);
+            void ChangeDangerUI();
 
             const bool StartDecreaseBarAnimationTimer();
 
@@ -46,33 +46,42 @@ namespace nsAWA
             void SetUIPlayerHPStatus(const float hp, const float maxHP)
             {
                 // 横幅の倍率を計算
-                m_barWidthSize = hp / maxHP;
+                m_barWidthSize = hp / maxHP * m_kMaxBarWidthSize;
 
-                if (m_oldDecreaseBarWidthSize != m_barWidthSize) {
+                if (m_oldBarWidthSize != m_barWidthSize) {
                     m_startDecreaseBarAnimationTimer = 0;
                 }
             }
 
-        private:
+        private: // constant member
+            ////////////////////////////////////////////////////////////
             // ファイルパス
+            ////////////////////////////////////////////////////////////
+
+            static const char* m_kLevel2DFilePath;
+  
             static const char* m_kSpriteHPBarFilePath;
             static const char* m_kSpriteFrameFilePath;
             static const char* m_kSpriteBaseFilePath;
             static const char* m_kSpriteDangerFilePath;
             static const char* m_kSpriteDecreaaseFilePath;
 
-            // ピンチ判定ライン
-            static const float m_kDangerLine;
-            static const float m_kStartDecreaseBarAnimationTime;
-            static const float m_kStartDecreaseBarAnimationTimeAmount;
-            // 減少アニメーションの減少量
-            static const float m_kDecreaseBarDecreaseAmount;
+            ////////////////////////////////////////////////////////////
+            // ステータス系
+            ////////////////////////////////////////////////////////////
 
-            static const char* m_kLevel2DFilePath;
+            static const float m_kMaxBarWidthSize; // バーの横幅の最大値
+            static const float m_kDangerLine; // ピンチ判定ライン
+
+            static const float m_kStartDecreaseBarAnimationTime; // アニメーションが始まるまでの時間
+            static const float m_kStartDecreaseBarAnimationTimeAmount; // アニメーションが始まるまでのタイマーの進む量
+            static const float m_kDecreaseBarDecreaseAmount; // アニメーションバーの減少量
 
 
         private: // data member
-            // 実装されたら、下のやつを追加
+            ////////////////////////////////////////////////////////////
+            // レベル、画像
+            ////////////////////////////////////////////////////////////
             nsLevel2D::CLevel2D m_level;
 
             CSpriteUI* m_spriteHPBar = nullptr; // HPバー
@@ -81,12 +90,15 @@ namespace nsAWA
             CSpriteUI* m_spriteDanger = nullptr; // ピンチ時のHPバー
             CSpriteUI* m_spriteDecrease = nullptr; // HPバーのディレイアニメーションバー
 
-            float m_barWidthSize = 1.0f; // プレイヤーの体力バーの横幅の倍率
-            float m_decreaseBarWidthSize = 1.0f; // あとから追って減るゲージの横幅の倍率
-            float m_startDecreaseBarAnimationTimer = 0.0f; // あとから追ってゲージが減るアニメーションのタイマー
-            bool m_flagDecreaseBarAnimation = false; // あとから追ってゲージが減るアニメーションをするか
+            ////////////////////////////////////////////////////////////
+            // ステータス
+            ////////////////////////////////////////////////////////////
 
-            float m_oldDecreaseBarWidthSize = 1.0f; // ゲージが減少する前の横幅の倍率
+            float m_barWidthSize = m_kMaxBarWidthSize; // プレイヤーの体力バーの横幅の倍率
+            float m_decreaseBarWidthSize = m_kMaxBarWidthSize; // あとから追って減るゲージの横幅の倍率
+            float m_startDecreaseBarAnimationTimer = 0.0f; // あとから追ってゲージが減るアニメーションのタイマー
+
+            float m_oldBarWidthSize = m_kMaxBarWidthSize; // ゲージが減少する前の横幅の倍率
         };
     }
 }

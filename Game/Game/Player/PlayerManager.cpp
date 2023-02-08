@@ -3,6 +3,10 @@
 #include "Player.h"
 #include "../Skill/ActiveSkillList.h"
 #include "../Skill/ActiveSkill.h"
+#include "../Skill/PassiveSkillList.h"
+#include "../Skill/PassiveSkill.h"
+#include "../Skill/PassiveSkillManager.h"
+#include "../Feature/FeatureBuilder.h"
 #include "../Weapon/Weapon.h"
 #include "../Armor/Armor.h"
 
@@ -60,6 +64,26 @@ namespace nsAWA {
 
 			//プレイヤーにアクティブスキルを設定。
 			m_player->SetActiveSkill(setNum, activeSkill);
+		}
+
+		void CPlayerManager::SetPassiveSkill(int setNum, const std::string& passiveSkillName) {
+
+			//設定番号をチェック。
+			if (setNum >= m_player->GetPassiveSkillManager()->GetPassiveSkillMaxNum()) {
+
+				nsGameWindow::MessageBoxError(L"パッシブスキルの設定番号が規定数を超えています。");
+			}
+
+			//名前からパッシブスキルを生成。
+			nsSkill::CPassiveSkillBuilder passiveSkillBuilder;
+			nsSkill::CPassiveSkill* passiveSkill = passiveSkillBuilder.CreatePassiveSkill(passiveSkillName);
+
+			//リストから効果を生成。
+			nsFeature::CFeatureBuilder featureBuilder;
+			featureBuilder.CreateFeature(m_player, m_player, passiveSkill->GetFeatureListStr(), passiveSkill->GetFeatureList());
+
+			//プレイヤーにパッシブスキルを設定。
+			m_player->GetPassiveSkillManager()->SetPassiveSkill(setNum, passiveSkill);
 		}
 
 		std::list<nsSkill::SActiveSkillData> CPlayerManager::GetCanUseActiveSkillList() {
@@ -174,7 +198,6 @@ namespace nsAWA {
 		{
 			if (false == FindPlayer()) {
 				nsGameWindow::MessageBoxWarning(L"CPlayerManager : player が見つかりませんでした。");
-				return "";
 			}
 
 			return m_player->GetActiveSkill(skillNam)->GetName();

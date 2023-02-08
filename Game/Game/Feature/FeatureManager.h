@@ -19,6 +19,12 @@ namespace nsAWA {
 				m_feature.emplace_back(statusChanger);
 			}
 
+			const std::list<nsFeature::CFeature*>& GetStatusChanger() {
+
+				//ステータス変化を取得。
+				return m_feature;
+			}
+
 			void UpdateFeature(float deltaTime);
 
 			bool IsParalysis()const {
@@ -37,6 +43,7 @@ namespace nsAWA {
 
 		private:
 			void UpdateFeatureState();
+
 		private:
 			std::list<nsFeature::CFeature*> m_feature;	//ステータスを変化させるもののリスト
 			bool m_isPoison = false;		//毒状態？

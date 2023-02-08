@@ -24,17 +24,8 @@ namespace nsAWA {
 
 			void Release();
 
-			virtual CFeature* CreateAndReturn() {
-
-				//一部の派生クラスで使用される関数のため、基底クラスのこの関数が呼ばれた場合はエラーを出力する。
-				nsGameWindow::MessageBoxError(L"生成されるものがありません。");
-
-				return nullptr;
-			}
-
 			bool Update(float deltaTime);
 
-			virtual float Apply(EnStatusRef statusRef) { return 1.0f; }
 		public:
 			void SetDurationTime(float durationTime) {
 

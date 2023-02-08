@@ -13,7 +13,7 @@ namespace nsAWA
         void CSpriteUI::LoadSprite(
             const char* tdlFilePath,
             const CVector2& spriteSize,
-            const EnGOPriority priority,
+            const EnRendererPriority priority,
             const EnAlphaBlendMode alphaBlendMode
         )
         {
@@ -21,9 +21,10 @@ namespace nsAWA
             spriteInitData.filePath = tdlFilePath;
             spriteInitData.spriteSize = spriteSize;
             spriteInitData.alphaBlendMode = alphaBlendMode;
+            spriteInitData.priority = priority;
 
             // âÊëúÇÃì«Ç›çûÇ›
-            m_spriteRenderer = NewGO<CSpriteRenderer>(priority);
+            m_spriteRenderer = NewGO<CSpriteRenderer>();
             m_spriteRenderer->Init(spriteInitData);
         }
 

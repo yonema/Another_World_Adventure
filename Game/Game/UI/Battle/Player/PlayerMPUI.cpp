@@ -17,6 +17,8 @@ namespace nsAWA
         const char* CPlayerMPUI::m_kSpriteBaseFilePath =
             "Assets/Images/FitnessBar/Common/BarGroundwork.png";
 
+        const float CPlayerMPUI::m_kMaxBarWidthSize = 0.5f;
+
         bool CPlayerMPUI::Start()
         {
             return true;
@@ -35,7 +37,7 @@ namespace nsAWA
                         m_spriteMPBar->LoadSprite(
                             m_kSpriteMPBarFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteMPBar->LoadInitData(
@@ -48,14 +50,14 @@ namespace nsAWA
                         return true;
                     }
                     // プレイヤーのMPバーの枠
-                    if ("MP_BarFrame" == imgData.Name)
+                    else if ("MP_BarFrame" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteFrame = NewGO<CSpriteUI>();
                         m_spriteFrame->LoadSprite(
                             m_kSpriteFrameFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteFrame->LoadInitData(
@@ -68,14 +70,14 @@ namespace nsAWA
                         return true;
                     }
                     // プレイヤーのMPバーの下地
-                    if ("MP_BarGroundwork" == imgData.Name)
+                    else if ("MP_BarGroundwork" == imgData.Name)
                     {
                         // UIクラスを作成
                         m_spriteBase = NewGO<CSpriteUI>();
                         m_spriteBase->LoadSprite(
                             m_kSpriteBaseFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spriteBase->LoadInitData(
@@ -87,6 +89,8 @@ namespace nsAWA
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
         }
 
@@ -109,7 +113,7 @@ namespace nsAWA
         void CPlayerMPUI::Animation()
         {
             // ゲージの長さ（横幅）を適用
-            //m_spriteMPBar->SetScale({ m_barWidthSize,1.0f,1.0f });
+            m_spriteMPBar->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
         }
     }
 }

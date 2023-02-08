@@ -16,6 +16,10 @@ namespace nsAWA {
 
 		class CArmor;
 	}
+	namespace nsUI {
+
+		class CEnemyBattleStatusUI;
+	}
 	namespace nsMonster {
 
 		enum class EnMonsterList;
@@ -124,6 +128,8 @@ namespace nsAWA {
 			nsMonsterAI::CMonsterAIController m_AIContoller;	//AIコントローラー
 			EnMonsterState m_state = static_cast<EnMonsterState>(-1);	//ステート
 			bool m_isChangeState = false;	//ステートがこのフレームで変更された？
+
+			nsUI::CEnemyBattleStatusUI* m_enemyBattleStatusUI = nullptr;
 		};
 	}
 }

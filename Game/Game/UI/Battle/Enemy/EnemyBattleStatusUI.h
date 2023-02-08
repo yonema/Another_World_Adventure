@@ -22,7 +22,7 @@ namespace nsAWA
             ~CEnemyBattleStatusUI() = default;
 
         public:
-            void LoadLevel(const char* tdlFilePath);
+            void LoadLevel();
 
 
         public: // Set function
@@ -37,24 +37,47 @@ namespace nsAWA
              * @brief UIの位置を取得
              * @param position 敵の位置
             */
-            void SetUIEnemyPosition(const CVector2& position);
+            void SetUIEnemyPosition(const CVector3& position);
+            /**
+             * @brief UIを描画するか確認
+             * @param targetPosition 描画するUIを保持する敵
+             * @return 描画するか
+            */
+            const bool CheckDrawUI(const CVector3& targetPosition);
 
 
         private: // constant data member
+            static const char* m_kLevel2DFilePath; // レベルファイルのパス
+            static const char* m_kSpriteEnemyStatusBaseFilePath; // 画像のパス
+
             // UIの取得した敵の位置に対しての補正値（Y座標）
-            static constexpr float m_kUIPositionCorrectionAmountY = 100.0f;
-            static const char* m_kSpriteEnemyStatusBaseFilePath;
+            static const float m_kUIPositionCorrectionAmountY;
+            static const float m_kDrawingAngle; // UI表示の判定角度
 
         private: // data member
-            // 実装されたら、下のやつを追加
-            nsLevel2D::CLevel2D m_level;
+            ////////////////////////////////////////////////////////////
+            // レベル、画像
+            ////////////////////////////////////////////////////////////
+
+            nsLevel2D::CLevel2D m_level; // レベルファイルクラス
 
             CSpriteUI* m_spriteEnemyStatusBase = nullptr; // 敵のステータス
 
-            CEnemyHPUI* m_enemyHPUI = nullptr; // 敵の体力ゲージ
-            CEnemyBreakUI* m_enemyBreakUI = nullptr; // 敵のブレイクゲージ
+            ////////////////////////////////////////////////////////////
+            // UIクラス
+            ////////////////////////////////////////////////////////////
 
-            CVector2 m_basePosition = CVector2::Zero(); // UIの基準となる位置
+            CEnemyHPUI* m_enemyHPUI = nullptr; // 敵の体力ゲージUIクラス
+            CEnemyBreakUI* m_enemyBreakUI = nullptr; // 敵のブレイクゲージUIクラス
+
+            ////////////////////////////////////////////////////////////
+            // ステータス
+            ////////////////////////////////////////////////////////////
+
+            CVector2 m_initialPosition = CVector2::Zero(); // UIの初期位置
+
+            CVector2 m_setUIEnemyPosition = CVector2::Zero();
+
         };
     }
 }

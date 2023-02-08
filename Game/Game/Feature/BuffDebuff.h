@@ -21,7 +21,6 @@ namespace nsAWA {
 			{
 			public:
 				void Init(EnBuffOrDebuff buffOrDebuff,
-					IGameActor* target,
 					EnStatusRef statusRef,
 					float value,
 					float durationTime
@@ -29,7 +28,7 @@ namespace nsAWA {
 
 				void Create()override final;
 
-				CFeature* CreateAndReturn()override final;
+				//CFeature* CreateAndReturn()override final;
 
 				float Apply(EnStatusRef statusRef) {
 
@@ -46,7 +45,6 @@ namespace nsAWA {
 					}
 				}
 			private:
-				IGameActor* m_target = nullptr;								//ターゲット
 				EnBuffOrDebuff m_buffOrDebuff = EnBuffOrDebuff::enNone;		//バフかデバフか
 				EnStatusRef m_statusRef = EnStatusRef::enNone;				//参照ステータス
 				float m_value = 0.0f;		//増減値

@@ -37,7 +37,7 @@ namespace nsAWA
             void SetUIPlayerMPStatus(const float mp, const float maxMP)
             {
                 // 横幅の倍率を計算
-                m_barWidthSize = mp / maxMP;
+                m_barWidthSize = mp / maxMP * m_kMaxBarWidthSize;
             }
 
         private:
@@ -46,6 +46,8 @@ namespace nsAWA
             static const char* m_kSpriteBaseFilePath;
 
             static const char* m_kLevel2DFilePath;
+
+            static const float m_kMaxBarWidthSize;
 
 
         private: // data member
@@ -56,7 +58,7 @@ namespace nsAWA
             CSpriteUI* m_spriteFrame = nullptr; // バーの枠
             CSpriteUI* m_spriteBase = nullptr; // HPバーの下地
 
-            float m_barWidthSize = 1.0f; // プレイヤーの体力バーの横幅の倍率
+            float m_barWidthSize = m_kMaxBarWidthSize; // プレイヤーの体力バーの横幅の倍率
 
         };
     }
