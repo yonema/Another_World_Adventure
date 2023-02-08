@@ -1,4 +1,5 @@
 #pragma once
+#include <regex>
 
 namespace nsAWA
 {
@@ -21,6 +22,7 @@ namespace nsAWA
 
             /**
              * @brief 次へ(文が表示しきっていない場合すべて表示、表示しきっている場合次の文へ)
+             * @return 文章の最後か?
             */
             void Next();
 
@@ -32,7 +34,17 @@ namespace nsAWA
             {
                 return m_isInited;
             }
+            
+            /**
+             * @brief 会話文すべてを出力したか?
+             * @return 会話文すべてを出力したか
+            */
+            bool IsShowAllSentence()
+            {
+                return m_allTextEnd;
+            }
 
+            void Release();
         private:
             /**
              * @brief 会話のCSVデータを読み込む
@@ -63,11 +75,13 @@ namespace nsAWA
             void HandleNextSentence();
 
             /**
-             * @brief 空白文字扱いとしているアスタリスクを空白に変換する
-             * @param showLine 表示予定の文
-             * @return 変換された文
+             * @brief 文字列中に一致する単語を置き換える
+             * @param sourceLine 置き換えを行う文章
+             * @param before 置き換えるために検索する単語
+             * @param after 置き換える後の単語
+             * @return 単語が置き換えられた文章
             */
-            std::string ReplaceEmpty(std::string showLine);
+            std::wstring ReplaceEmpty(std::wstring sourceLine,std::wstring before,std::wstring after);
 
             /**
              * @brief 一文の終わりまで一気に表示する
@@ -81,9 +95,11 @@ namespace nsAWA
             const CVector2 m_kFirstLinePosition = CVector2(-490.0f, 220.0f);    //一行目の文の座標
             const CVector2 m_kSecondLinePosition = CVector2(-490.0f, 275.0f);   //二行目の文の座標
             const float m_kSentenceScale = 0.75f;                               //文の拡大率
+            const std::wstring m_playerName = L"ヨゾラ";                        //プレイヤーネーム(TODO:後から変更できるようにする)
 
 
             bool m_isInited = false;                                //初期化済み?
+            bool m_allTextEnd = false;                              //すべての文章を表示し終わったか?
 
             CFontRenderer* m_nameRenderer = nullptr;                //名前のレンダラー
             CFontRenderer* m_firstLineRenderer = nullptr;           //一行目のレンダラー
