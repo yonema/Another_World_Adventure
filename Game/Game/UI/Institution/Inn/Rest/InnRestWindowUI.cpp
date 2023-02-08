@@ -32,13 +32,15 @@ namespace nsAWA
                         return true;
                     }
                     // ウィンドウ２
-                    if ("" == imgData.Name)
+                    else if ("" == imgData.Name)
                     {
                         // 対応したウィンドウのUIを読み込む
                         LoadWindowSprite(EnWindowNumber::enWindow_2, imgData);
                         // フックしたので、trueを返す
                         return true;
                     }
+                    
+                    return false;
                 });
         }
 

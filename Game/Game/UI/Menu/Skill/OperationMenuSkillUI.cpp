@@ -190,7 +190,7 @@ namespace nsAWA
             // ‰º
             if (0.0f > Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 if (m_selectionSetSkill.size() <= m_cursorPositionSelectionSetSkill) {
-                    m_cursorPositionSelectionSetSkill = m_selectionSetSkillData.size();
+                    m_cursorPositionSelectionSetSkill = static_cast<int>(m_selectionSetSkillData.size());
                 }
                 else {
                     ++m_cursorPositionSelectionSetSkill;

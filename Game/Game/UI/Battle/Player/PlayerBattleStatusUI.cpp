@@ -35,7 +35,7 @@ namespace nsAWA
                         m_spritePlayerStatusBase->LoadSprite(
                             m_kSpritePlayerStatusBaseFilePath,
                             imgData.SpriteSize,
-                            static_cast<EnGOPriority>(imgData.Priority),
+                            static_cast<EnRendererPriority>(imgData.Priority),
                             EnAlphaBlendMode::enTrans
                         );
                         m_spritePlayerStatusBase->LoadInitData(
@@ -47,6 +47,8 @@ namespace nsAWA
                         // フックしたので、trueを返す
                         return true;
                     }
+
+                    return false;
                 });
 
             // プレイヤーのHPゲージ

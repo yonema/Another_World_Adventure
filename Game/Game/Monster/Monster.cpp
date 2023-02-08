@@ -3,6 +3,8 @@
 #include "Monster.h"
 #include "MonsterList.h"
 
+#include "../UI/Battle/Enemy/EnemyBattleStatusUI.h"
+
 namespace nsAWA {
 
 	namespace nsMonster {
@@ -32,9 +34,20 @@ namespace nsAWA {
 
 			//AIコントローラーを破棄。
 			m_AIContoller.Release();
+
+			// UIを破棄
+			DeleteGO(m_enemyBattleStatusUI);
 		}
 
 		void CMonster::UpdateActor(float deltaTime) {
+
+			// UIの処理
+			m_enemyBattleStatusUI->SetUIEnemyStatus(
+				m_status.GetHP(), m_status.GetMaxHP(), 0.0f
+			);
+			m_enemyBattleStatusUI->SetUIEnemyPosition(m_position);
+			
+
 
 			//死んでいるなら。
 			if (IsDeath()) {
@@ -100,6 +113,10 @@ namespace nsAWA {
 
 			//待機状態に設定。
 			SetState(EnMonsterState::enIdle);
+
+			// UIの処理
+			m_enemyBattleStatusUI = NewGO<nsUI::CEnemyBattleStatusUI>();
+			m_enemyBattleStatusUI->LoadLevel();
 		}
 
 		void CMonster::ApplyDamage(float damage, float power, bool canGuard) {

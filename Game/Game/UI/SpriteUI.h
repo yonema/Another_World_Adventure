@@ -24,7 +24,7 @@ namespace nsAWA
             void LoadSprite(
                 const char* tdlFilePath,
                 const CVector2& spriteSize = { 100.0f,100.0f },
-                const EnGOPriority priority = EnGOPriority::enMid,
+                const EnRendererPriority priority = EnRendererPriority::enMin,
                 const EnAlphaBlendMode alphaBlendMode = EnAlphaBlendMode::enNone
                 );
 
@@ -70,6 +70,25 @@ namespace nsAWA
             const CVector3& GetScale() const
             {
                 return m_spriteRenderer->GetScale();
+            }
+
+
+            /**
+             * @brief 現在の描画フラグを取得
+             * @return 
+            */
+            const bool IsDrawingFlag() const
+            {
+                return m_spriteRenderer->IsDrawingFlag();
+            }
+
+            /**
+             * @brief 描画するかどうかのフラグを変更
+             * @param isDrawingFlag 
+            */
+            void SetDrawingFlag(const bool isDrawingFlag)
+            {
+                m_spriteRenderer->SetDrawingFlag(isDrawingFlag);
             }
 
 

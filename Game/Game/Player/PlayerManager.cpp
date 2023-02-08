@@ -198,7 +198,6 @@ namespace nsAWA {
 		{
 			if (false == FindPlayer()) {
 				nsGameWindow::MessageBoxWarning(L"CPlayerManager : player ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
-				return "";
 			}
 
 			return m_player->GetActiveSkill(skillNam)->GetName();

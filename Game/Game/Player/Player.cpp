@@ -217,6 +217,13 @@ namespace nsAWA {
 					}
 				}
 			}
+
+			// UIの処琁E
+			m_playerBattleStatusUI->SetUIPlayerStatus(
+				m_status.GetHP(), m_status.GetMaxHP(),
+				m_status.GetMP(), m_status.GetMaxMP(),
+				m_status.GetSP(), m_status.GetMaxSP()
+			);
 		}
 
 		void CPlayer::SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill) {

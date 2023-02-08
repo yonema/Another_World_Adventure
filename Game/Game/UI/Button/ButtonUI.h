@@ -34,7 +34,7 @@ namespace nsAWA
 
         public: // enum
             // ƒ{ƒ^ƒ“‚Ì‰æ‘œŽ¯•Ê—p‚Ì—ñ‹“Œ^
-            static enum EnButtonUI
+            enum EnButtonUI
             {
                 enA,
                 enB,
