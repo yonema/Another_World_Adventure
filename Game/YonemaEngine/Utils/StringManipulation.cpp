@@ -146,5 +146,25 @@ namespace nsYMEngine
 			return result;
 		}
 
+		std::wstring ReplaceWordFromWideString(const std::wstring& sentence, const std::wstring& target, const std::wstring& replacement)
+		{
+			std::wstring result = sentence;
+
+			//’u‚«Š·‚¦‚½‚¢•¶š‚ª‘¶İ‚·‚é?
+			size_t pos = result.find(target);
+
+			//Š®‘S‚ÉŒ©‚Â‚©‚ç‚È‚­‚È‚é‚Ü‚ÅŒJ‚è•Ô‚·
+			while (pos != std::string::npos)
+			{
+				auto len = target.length();
+
+				result.replace(pos, len, replacement);
+
+				pos = result.find(target);
+			}
+
+			return result;
+		}
+
 	}
 }

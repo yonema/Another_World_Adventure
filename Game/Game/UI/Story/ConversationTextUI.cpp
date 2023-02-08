@@ -63,7 +63,7 @@ namespace nsAWA
 				std::string name = (*m_strItr)[0];
 				std::wstring wName = nsYMEngine::nsUtils::GetWideStringFromString(name);
 
-				wName = ReplaceEmpty(wName, L"*name*", m_playerName);
+				wName = nsUtils::ReplaceWordFromWideString(wName, L"*name*", m_playerName);
 				m_nameRenderer->SetText(wName.c_str());
 
 				m_strItr++;
@@ -75,33 +75,13 @@ namespace nsAWA
 			std::wstring wFirst = nsYMEngine::nsUtils::GetWideStringFromString(first);
 			std::wstring wSecond = nsYMEngine::nsUtils::GetWideStringFromString(second);
 
-			wFirst = ReplaceEmpty(wFirst, L"*name*", m_playerName);
-			wSecond = ReplaceEmpty(wSecond, L"*name*", m_playerName);
+			wFirst = nsUtils::ReplaceWordFromWideString(wFirst, L"*name*", m_playerName);
+			wSecond = nsUtils::ReplaceWordFromWideString(wSecond, L"*name*", m_playerName);
 
-			wFirst = ReplaceEmpty(wFirst, L"*", L"");
-			wSecond = ReplaceEmpty(wSecond, L"*", L"");
+			wFirst = nsUtils::ReplaceWordFromWideString(wFirst, L"*", L"");
+			wSecond = nsUtils::ReplaceWordFromWideString(wSecond, L"*", L"");
 
 			NewString(wFirst, wSecond);
-		}
-
-		std::wstring CConversationTextUI::ReplaceEmpty(const std::wstring sourceLine, std::wstring before, std::wstring after)
-		{
-			std::wstring result = sourceLine;
-
-			//íuÇ´ä∑Ç¶ÇΩÇ¢ï∂éöÇ™ë∂ç›Ç∑ÇÈ?
-			auto pos = result.find(before);
-
-			//äÆëSÇ…å©Ç¬Ç©ÇÁÇ»Ç≠Ç»ÇÈÇ‹Ç≈åJÇËï‘Ç∑
-			while (pos != std::string::npos)
-			{
-				auto len = before.length();
-
-				result.replace(pos, len, after);
-
-				pos = result.find(before);
-			}
-
-			return result;
 		}
 
 		void CConversationTextUI::NewString(std::wstring firstLineString, std::wstring secondLineString)
