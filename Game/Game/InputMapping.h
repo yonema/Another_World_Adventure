@@ -43,6 +43,8 @@ namespace nsYMEngine
 			enDecision, // Œˆ’è
 			enCancel, // ƒLƒƒƒ“ƒZƒ‹
 
+			enMenu,
+
 			enNumActions
 		};
 
@@ -165,12 +167,17 @@ namespace nsYMEngine
 			//enDecision
 			{
 				{CGamepad::EnPadButton::enA},
-				{CKeyboard::EnKeyButton::enJ}
+				{CKeyboard::EnKeyButton::enZ}
 			},
 			//enCancel
 			{
 				{CGamepad::EnPadButton::enB},
-				{CKeyboard::EnKeyButton::enK}
+				{CKeyboard::EnKeyButton::enX}
+			},
+			// enMenu
+			{
+				{CGamepad::EnPadButton::enStart},
+				{CKeyboard::EnKeyButton::enEnter}
 			},
 		};
 

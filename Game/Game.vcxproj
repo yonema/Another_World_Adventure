@@ -157,6 +157,7 @@
     <ClCompile Include="Game\Samples\LODSample.cpp" />
     <ClCompile Include="Game\UI\FontArrayUI.cpp" />
     <ClCompile Include="Game\Magic\MagicBallSide.cpp" />
+    <ClCompile Include="Game\UI\Menu\MenuBaseUI.cpp" />
     <ClCompile Include="Game\Magic\MagicBallForward.cpp" />
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
     <ClCompile Include="Game\Skill\PassiveSkillList.cpp" />
@@ -401,6 +402,7 @@
     <ClInclude Include="Game\Samples\LODSample.h" />
     <ClInclude Include="Game\UI\FontArrayUI.h" />
     <ClInclude Include="Game\Magic\MagicBallSide.h" />
+    <ClInclude Include="Game\UI\Menu\MenuBaseUI.h" />
     <ClInclude Include="Game\Magic\MagicBallForward.h" />
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
     <ClInclude Include="Game\Skill\PassiveSkillList.h" />

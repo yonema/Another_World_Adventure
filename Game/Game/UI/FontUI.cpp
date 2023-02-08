@@ -20,6 +20,7 @@ namespace nsAWA
             fontParam.text = text;
             fontParam.position.x = 0.0f;
             fontParam.position.y = 0.0f;
+            fontParam.scale = 1.0f;
             fontParam.pivot.x = 0.0f;
             fontParam.pivot.y = 0.0f;
             fontParam.anchor = EnAnchors::enMiddleCenter;
