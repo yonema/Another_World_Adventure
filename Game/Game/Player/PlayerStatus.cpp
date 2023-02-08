@@ -1,6 +1,12 @@
 #include "YonemaEnginePreCompile.h"
 #include "PlayerStatus.h"
 #include "../CSV/CSVManager.h"
+#include "PlayerWeaponManager.h"
+#include "../Weapon/Weapon.h"
+#include "../Skill/PassiveSkillManager.h"
+#include "../Skill/PassiveSkill.h"
+#include "../Feature/FeatureManager.h"
+#include "../Feature/Feature.h"
 
 namespace nsAWA {
 
@@ -14,11 +20,18 @@ namespace nsAWA {
 			constexpr float kGGValue = 100.0f;			//ガードゲージ量
 		}
 
-		void CPlayerStatus::Init() {
+		void CPlayerStatus::Init(const nsWeapon::CWeapon* const & playerWeapon,
+			nsSkill::CPassiveSkillManager* passiveSkillManager,
+			nsFeature::CFeatureManager* featureManager
+		) {
 
+			//情報を取得。
+			m_weapon = &playerWeapon;
+			m_passiveSkillManager = passiveSkillManager;
+			m_featureManager = featureManager;
 #ifdef _DEBUG
 
-			m_attack = 2.0f;
+			m_attack = 0.0f;
 
 			m_intelligence = 2.0f;
 
@@ -26,6 +39,31 @@ namespace nsAWA {
 			m_mind = 2.0f;
 #endif
 			
+		}
+
+		void CPlayerStatus::Update() {
+
+			std::list<nsFeature::CFeature*> featureList;
+
+			for (const auto& passiveSkill : m_passiveSkillManager->GetPassiveSkillList()) {
+
+				//パッシブスキルが登録されていなかったら。
+				if (passiveSkill == nullptr) {
+
+					//次へ。
+					continue;
+				}
+
+				for (const auto& feature : passiveSkill->GetFeatureList()) {
+
+					featureList.emplace_back(*feature);
+				}
+			}
+
+			int a = 0;
+
+			//攻撃力を取得。
+			m_attack = (*m_weapon)->GetAttack();
 		}
 
 		void CPlayerStatus::LoadStatus(const std::vector<std::string>& statusDataStr) {

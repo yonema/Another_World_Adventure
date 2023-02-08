@@ -17,14 +17,8 @@ namespace nsAWA {
 			for (const auto& feature : m_featureList) {
 
 				//効果の持続時間を更新。
-				feature->SetDurationTime(kPassiveSkillDurationTime);
+				(*feature)->SetDurationTime(kPassiveSkillDurationTime);
 			}
-		}
-
-		void CPassiveSkill::AddFeature(nsFeature::CFeature* feature) {
-
-			//効果を追加。
-			m_featureList.emplace_back(feature->CreateAndReturn());
 		}
 	}
 }

@@ -43,18 +43,14 @@ namespace nsAWA {
 			m_weaponManager.Init(m_modelRenderer);
 
 #ifdef _DEBUG
-			//武器を設定。
-			CPlayerManager playerManager;
-			if (playerManager.FindPlayer()) {
 
-				playerManager.SetWeapon("NewSword");
-				playerManager.SetArmor("NewArmor");
-			}
+			CPlayerManager::GetInstance()->SetWeapon("NewSword");
 
 #endif // DEBUG
 
 			//ステータスを初期化。
-			m_status.Init();
+			//m_status.Init(&m_weaponManager);
+			m_status.Init(m_weaponManager.GetWeaponPointer(),GetPassiveSkillManager(),GetFeatureManager());
 
 			//入力クラスを初期化。
 			m_input.Init(&m_action, &m_animation);
@@ -150,6 +146,9 @@ namespace nsAWA {
 			//プレイヤーアクションクラスを更新。
 			m_action.Update(deltaTime);
 
+			//ステータスを更新。
+			m_status.Update();
+
 			//アニメーションを更新。
 			m_animation.Update(m_action.IsChangeState(), m_action.GetState());
 
@@ -166,7 +165,7 @@ namespace nsAWA {
 			//プレイヤーのHPを表示。
 
 			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"HP = %3.0f",m_status.GetHP());
+			StringCbPrintf(m_dispText, dispTextSize, L"HP = %4.1f",m_status.GetHP());
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}

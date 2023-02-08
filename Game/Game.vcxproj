@@ -157,6 +157,7 @@
     <ClCompile Include="Game\Magic\MagicBallSide.cpp" />
     <ClCompile Include="Game\Magic\MagicBallForward.cpp" />
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
+    <ClCompile Include="Game\Skill\PassiveSkillList.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.cpp" />
@@ -395,6 +396,7 @@
     <ClInclude Include="Game\Magic\MagicBallSide.h" />
     <ClInclude Include="Game\Magic\MagicBallForward.h" />
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
+    <ClInclude Include="Game\Skill\PassiveSkillList.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.h" />
