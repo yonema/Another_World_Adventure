@@ -65,7 +65,7 @@ namespace nsAWA {
 
 #ifdef _DEBUG
 			//仮に最初は毒パッシブスキルに設定。
-			CPlayerManager::GetInstance()->SetPassiveSkill(0, "Poisoner");
+			CPlayerManager::GetInstance()->SetPassiveSkill(0, "Paralysiser");
 
 			m_fontRenderer = NewGO<nsGraphics::nsFonts::CFontRenderer>();
 
@@ -170,7 +170,7 @@ namespace nsAWA {
 			//プレイヤーのHPを表示。
 
 			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"SkillName = %s",nsUtils::GetWideStringFromString(GetPassiveSkillManager()->GetPassiveSkill(0)->GetName()).c_str());
+			StringCbPrintf(m_dispText, dispTextSize, L"ATK = %4.1f", m_status.GetAttack("Physical"));
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}
