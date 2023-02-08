@@ -2,57 +2,43 @@
 #include "ConversationWindowUI.h"
 
 #include "../SpriteUI.h"
+#include <sstream>
+
 
 namespace nsAWA
 {
-    namespace nsUI
-    {
-        const char* CConversationWindowUI::m_kSpriteWindowFilePath =
-            "ファイルパス";
+	namespace nsUI
+	{
 
-        bool CConversationWindowUI::Start()
-        {
-            return true;
-        }
+		bool CConversationWindowUI::Start()
+		{
+			m_level.Load(m_kSpriteWindowFilePath);
 
-        void CConversationWindowUI::LoadLevel(const char* tdlFilePath)
-        {
-            m_level.Load("", [&](const nsLevel2D::SLevel2DSpriteData& imgData)
-                { // ロードするレベル一つ一つにクエリを行う
+			m_level.PlayAnimation("WindowAppear");
+			m_level.PlayAnimation("ButtonAppear");
 
-                    // ウィンドウ１
-                    if ("" == imgData.Name)
-                    {
-                        // UIクラスを作成
-                        m_spriteWindow = NewGO<CSpriteUI>();
-                        m_spriteWindow->LoadSprite(m_kSpriteWindowFilePath);
-                        // ポジションをロードした画像と同じにする
-                        m_spriteWindow->SetPosition(imgData.Position);
-                        // ピボットをロードした画像と同じにする
-                        m_spriteWindow->SetPivot(imgData.Pivot);
-                        // フックしたので、trueを返す
-                        return true;
-                    }
+			return true;
+		}
 
-                    return false;
-                });
-        }
+		void CConversationWindowUI::OnDestroy()
+		{
+		}
 
-        void CConversationWindowUI::OnDestroy()
-        {
-            DeleteGO(m_spriteWindow);
-        }
+		void CConversationWindowUI::Update(float deltaTime)
+		{
+			if (m_text.IsInited() == true)
+			{
+				m_text.Update(deltaTime);
 
-        void CConversationWindowUI::Update(float deltaTime)
-        {
-            // 毎フレームの処理をここに
+				if (Keyboard()->IsTrigger(EnKeyButton::enJ))
+				{
+					m_text.Next();
+					m_level.PlayAnimation("Pressed");
+				}
+			}
 
-
-        }
-
-        void CConversationWindowUI::Animation()
-        {
-
-        }
-    }
+		}
+    
+    
+	}
 }
