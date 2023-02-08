@@ -242,6 +242,8 @@
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
     <ClCompile Include="Game\Samples\LODSample.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -497,6 +499,8 @@
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
     <ClInclude Include="Game\Samples\LODSample.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

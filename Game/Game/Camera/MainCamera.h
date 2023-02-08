@@ -33,7 +33,7 @@ namespace nsAWA {
 			const CVector3& GetForwardDirection()const {
 
 				//‘O•ûŒü‚ðŽæ“¾B
-				return MainCamera()->GetForeardDirection();
+				return MainCamera()->GetForwardDirection();
 			}
 
 			const CVector3& GetRightDirection()const {
