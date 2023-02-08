@@ -1,0 +1,6 @@
+NAME,Poisoner,
+FEATURE,Poison,1
+*,,
+NAME,Paralysiser,
+FEATURE,Paralysis,1
+*,,

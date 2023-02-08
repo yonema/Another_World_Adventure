@@ -11,6 +11,9 @@ namespace nsAWA {
 		//パッシブスキル管理クラスを生成。
 		m_passiveSkillManager = new nsSkill::CPassiveSkillManager;
 
+		//パッシブ管理クラスを初期化。
+		m_passiveSkillManager->Init();
+
 		//効果管理クラスを生成。
 		m_featureManager = new nsFeature::CFeatureManager;
 

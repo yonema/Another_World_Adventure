@@ -41,6 +41,8 @@ namespace nsAWA {
 
 			void SetActiveSkill(int setNum, const std::string& activeSkillName);
 
+			void SetPassiveSkill(int setNum, const std::string& passiveSkillName);
+
 			std::list<nsSkill::SActiveSkillData> GetCanUseActiveSkillList();
 
 			std::list<nsSkill::SActiveSkillData> GetCanUseActiveSkillListAll() {
@@ -57,8 +59,6 @@ namespace nsAWA {
 
 		public:
 			const std::string& GetActiveSkillName(const int skillNam);
-
-
 
 			void AddCanUseActiveSkill(const std::string& skillName) {
 

@@ -14,7 +14,6 @@ namespace nsAWA {
 		class CSkill : nsUtils::SNoncopyable
 		{
 		public:
-			virtual void AddFeature(nsFeature::CFeature* feature) {};
 
 			void SetName(const std::string& name) {
 
@@ -33,7 +32,6 @@ namespace nsAWA {
 
 		protected:
 			std::string m_name = "NoName";					//–¼‘O
-			std::list<nsFeature::CFeature*> m_featureList;	//Œø‰Ê‚ÌƒŠƒXƒg
 		};
 	}
 }

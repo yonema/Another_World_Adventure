@@ -240,6 +240,7 @@
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.cpp" />
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
+    <ClCompile Include="Game\Skill\PassiveSkillList.cpp" />
     <ClCompile Include="Game\Samples\LODSample.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
@@ -497,6 +498,7 @@
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.h" />
     <ClInclude Include="Game\RendererPriority.h" />
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
+    <ClInclude Include="Game\Skill\PassiveSkillList.h" />
     <ClInclude Include="Game\Samples\LODSample.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />

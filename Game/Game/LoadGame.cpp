@@ -7,6 +7,7 @@
 #include "Item/AllItemList.h"
 #include "Monster/MonsterList.h"
 #include "Skill/ActiveSkillList.h"
+#include "Skill/PassiveSkillList.h"
 #include "Weapon/WeaponList.h"
 #include "Armor/ArmorList.h"
 #include "Magic/MagicList.h"
@@ -51,6 +52,9 @@ namespace nsAWA {
 
 		//アクティブスキルのリストを生成。
 		nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
+
+		//パッシブスキルのリストを生成。
+		nsSkill::CPassiveSkillList::GetInstance()->LoadPassiveSkillList();
 
 		//武器のリストを生成。
 		nsWeapon::CWeaponList::GetInstance()->LoadWeaponList();

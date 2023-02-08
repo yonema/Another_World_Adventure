@@ -10,10 +10,33 @@ namespace nsAWA {
 
 	namespace nsFeature {
 
-		void CFeatureBuilder::CreateFeature(IGameActor* creator, IGameActor* target, std::list<std::vector<std::string>> featureList) {
+		void CFeatureBuilder::CreateFeature(IGameActor* creator, IGameActor* target, std::list<std::vector<std::string>> featureListStr) {
+
+			std::list<nsFeature::CFeature*> featureListEmpty;
+			//効果を生成。
+			Create(creator, target, featureListStr, featureListEmpty);
+		}
+
+		void CFeatureBuilder::CreateFeature(
+			IGameActor* creator,
+			IGameActor* target,
+			std::list<std::vector<std::string>> featureListStr,
+			std::list<nsFeature::CFeature*>& featureList
+		) {
+
+			//効果を生成。
+			Create(creator, target, featureListStr, featureList);
+		}
+
+		void CFeatureBuilder::Create(
+			IGameActor* creator,
+			IGameActor* target,
+			std::list<std::vector<std::string>> featureListStr,
+			std::list<nsFeature::CFeature*>& featureList
+			) {
 
 			//効果のリストを順に参照。
-			for (const auto& featureStr : featureList) {
+			for (const auto& featureStr : featureListStr) {
 
 				//効果の雛形を生成。
 				nsFeature::CFeature* feature = nullptr;
@@ -63,7 +86,7 @@ namespace nsAWA {
 				//ダメージ。
 				else if (featureType == "Damage") {
 					//[1]Normal or Const
-					
+
 
 					//効果を初期化。
 					feature = new nsFeature::CApplyDamageFeature;
@@ -107,13 +130,12 @@ namespace nsAWA {
 					//[1]PoisonLevel
 
 					//効果を初期化。
-					feature = new nsFeature::nsStatusChanger::CAbnormalStatus;
+					feature = new nsFeature::nsStatusChanger::CPoison;
 
 					//毒レベルを取得。
 					int poisonLevel = std::stoi(featureStr[1]);
 
 					//毒機能を生成。
-					feature = new nsFeature::nsStatusChanger::CAbnormalStatus;
 					dynamic_cast<nsFeature::nsStatusChanger::CAbnormalStatus*>(feature)->Init(
 						nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
 						poisonLevel
@@ -124,13 +146,12 @@ namespace nsAWA {
 					//[1]ParalysisLevel
 
 					//効果を初期化。
-					feature = new nsFeature::nsStatusChanger::CAbnormalStatus;
+					feature = new nsFeature::nsStatusChanger::CParalysis;
 
 					//麻痺レベルを取得。
 					int paralysisLevel = std::stoi(featureStr[1]);
 
 					//麻痺機能を生成。
-					feature = new nsFeature::nsStatusChanger::CAbnormalStatus;
 					dynamic_cast<nsFeature::nsStatusChanger::CAbnormalStatus*>(feature)->Init(
 						nsFeature::nsStatusChanger::EnAbnormalStatusType::enParalysis,
 						paralysisLevel
@@ -155,6 +176,9 @@ namespace nsAWA {
 
 				//効果を生成。
 				feature->Create();
+
+				//リストに追加。
+				featureList.emplace_back(feature);
 			}
 		}
 	}
