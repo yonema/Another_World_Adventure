@@ -179,7 +179,7 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 #ifdef _DEBUG
 
-				CPlayerManager::GetInstance()->SetPassiveSkill(0,"Poisoner");
+				CPlayerManager::GetInstance()->SetPassiveSkill(0,"ATKUp");
 
 				////クールタイム中に設定。
 				//CoolTimeOn();
@@ -191,7 +191,7 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
 
-				CPlayerManager::GetInstance()->SetPassiveSkill(1, "Paralysiser");
+				CPlayerManager::GetInstance()->SetPassiveSkill(1, "ATKUp");
 				////クールタイム中に設定。
 				//CoolTimeOn();
 				//

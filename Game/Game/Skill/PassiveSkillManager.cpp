@@ -25,6 +25,7 @@ namespace nsAWA {
 				if (m_passiveSkill[skillNum] != nullptr) {
 
 					//破棄。
+					m_passiveSkill[skillNum]->ReleaseFeature();
 					delete m_passiveSkill[skillNum];
 				}
 
@@ -39,20 +40,6 @@ namespace nsAWA {
 		}
 
 		void CPassiveSkillManager::UpdatePassiveSkill() {
-
-			//パッシブスキルを順に参照。
-			//for (int skillNum = 0; skillNum < m_passiveSkill.size(); skillNum++) {
-			//
-			//	//パッシブスキルが設定されていなかったら。
-			//	if (m_passiveSkill[skillNum] == nullptr) {
-			//
-			//		//終了。
-			//		return;
-			//	}
-			//
-			//	//更新。
-			//	m_passiveSkill[skillNum]->Update();
-			//}
 
 			for (const auto& passiveSkill : m_passiveSkill) {
 

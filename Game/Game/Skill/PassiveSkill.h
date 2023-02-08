@@ -33,6 +33,8 @@ namespace nsAWA {
 				return m_featureList;
 			}
 
+			void ReleaseFeature();
+
 			void Update();
 
 		private:

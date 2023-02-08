@@ -22,6 +22,12 @@ namespace nsAWA {
 
 		void CHealFeature::Create() {
 
+			//Š„‡‰ñ•œ‚È‚ç‰ñ•œ—Ê‚ğŒvZB
+			if (m_howHeal == EnHowHeal::enRatio) {
+
+				CalcHealValue(m_target, m_healTarget, m_healValue);
+			}
+
 			switch (m_healTarget) {
 
 				//HP‰ñ•œB

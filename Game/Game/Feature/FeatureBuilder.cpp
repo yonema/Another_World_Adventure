@@ -5,6 +5,7 @@
 #include "ApplyDamageFeature.h"
 #include "AbnormalStatus/Poison.h"
 #include "AbnormalStatus/Paralysis.h"
+#include "BuffDebuff.h"
 
 namespace nsAWA {
 
@@ -155,6 +156,36 @@ namespace nsAWA {
 					dynamic_cast<nsFeature::nsStatusChanger::CAbnormalStatus*>(feature)->Init(
 						nsFeature::nsStatusChanger::EnAbnormalStatusType::enParalysis,
 						paralysisLevel
+					);
+				}
+				//バフデバフ。
+				else if (featureType == "BuffDebuff") {
+					//[1]BuffOrDebuff
+					//[2]StatusRef
+					//[3]Value
+					//[4]DurationTime
+
+					//効果を初期化。
+					feature = new nsFeature::nsStatusChanger::CBuffDebuff;
+
+					//バフかデバフか取得。
+					std::string buffOrDebuff = featureStr[1];
+
+					//参照ステータスを取得。
+					std::string StatusRef = featureStr[2];
+
+					//値を取得。
+					float value = std::stof(featureStr[3]);
+
+					//持続時間を取得。
+					float DurationTime = std::stof(featureStr[4]);
+
+					//バフデバフ機能を生成。
+					dynamic_cast<nsFeature::nsStatusChanger::CBuffDebuff*>(feature)->Init(
+						buffOrDebuff,
+						StatusRef,
+						value,
+						DurationTime
 					);
 				}
 				else {

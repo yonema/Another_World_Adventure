@@ -1,5 +1,6 @@
 #pragma once
 #include "../Status.h"
+#include "../Feature/Feature.h"
 
 namespace nsAWA {
 
@@ -127,6 +128,10 @@ namespace nsAWA {
 					return FLT_MAX;
 				}
 			}
+
+		private:
+			void ResetStatusList();
+
 		private:
 			int m_level = 0;					//レベル
 			float m_HP = 0.0f;					//HP
@@ -141,6 +146,8 @@ namespace nsAWA {
 			const nsWeapon::CWeapon* const * m_weapon = nullptr;	//武器情報
 			nsSkill::CPassiveSkillManager* m_passiveSkillManager = nullptr;	//パッシブスキル管理クラス
 			nsFeature::CFeatureManager* m_featureManager = nullptr;	//効果リスト
+
+			float m_statusBaseList[static_cast<int>(nsFeature::EnStatusRef::enNum)] = { 0.0f }; 	//ステータス反映のための基底データ
 
 			float m_attack = 0.0f;				//物理攻撃力
 			float m_intelligence = 0.0f;		//魔法攻撃力
