@@ -75,15 +75,6 @@ namespace nsAWA
             void HandleNextSentence();
 
             /**
-             * @brief 文字列中に一致する単語を置き換える
-             * @param sourceLine 置き換えを行う文章
-             * @param before 置き換えるために検索する単語
-             * @param after 置き換える後の単語
-             * @return 単語が置き換えられた文章
-            */
-            std::wstring ReplaceEmpty(std::wstring sourceLine,std::wstring before,std::wstring after);
-
-            /**
              * @brief 一文の終わりまで一気に表示する
             */
             void SkipToEnd();
