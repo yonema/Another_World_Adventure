@@ -5,8 +5,6 @@ namespace nsAWA
 {
     namespace nsUI
     {
-        class CSpriteUI;
-
         class CConversationWindowUI : public IGameObject
         {
         public:
@@ -16,28 +14,22 @@ namespace nsAWA
 
             void Update(float deltaTime) override final;
 
+            /**
+             * @brief 会話のCSVファイルをセット　必ず呼ぶこと。
+             * @param csvFilePath 会話のCSVファイルパス
+            */
+            void InitConvesationCSV(const wchar_t* csvFilePath)
+            {
+                m_text.Init(csvFilePath);
+            }
         public:
             CConversationWindowUI() = default;
             ~CConversationWindowUI() = default;
-
-        public:
-            void LoadLevel(const char* tdlFilePath);
-            /**
-             * @brief 受け取ったデータを元に対応した画像を読み込む
-             * @param buttonUINum ウィンドウの識別用番号
-             * @param imgData レベルデータ
-            */
-            void LoadWindowSprite(const int windowNum, const nsLevel2D::SLevel2DSpriteData& imgData);
-
-
-
         private: // constant data member
-            const char* m_kSpriteWindowFilePath = "Assets/Level2D/LevelFiles/TestTalkWindow.tdl";
-
-
+            const char* m_kSpriteWindowFilePath = "Assets/Level2D/LevelFiles/ConversationWindow.tdl";
         private: // data member
-            nsLevel2D::CLevel2D m_level;
-            CConversationTextUI m_text; //会話テキスト
+            nsLevel2D::CLevel2D m_level;    //会話ウィンドウのレベル
+            CConversationTextUI m_text;     //会話テキストの表示クラス
         };
     }
 }

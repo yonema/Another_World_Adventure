@@ -16,14 +16,8 @@ namespace nsAWA
 
 			m_level.PlayAnimation("WindowAppear");
 			m_level.PlayAnimation("ButtonAppear");
-			m_text.Init(L"Assets/CSV/Conversation/ConversationSample.csv");
 
 			return true;
-		}
-
-		void CConversationWindowUI::LoadLevel(const char* tdlFilePath)
-		{
-			m_level.Load(m_kSpriteWindowFilePath);
 		}
 
 		void CConversationWindowUI::OnDestroy()

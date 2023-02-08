@@ -8,41 +8,34 @@ namespace nsAWA
 	{
 		void CConversationTextUI::Init(const wchar_t* conversationCSVPath)
 		{
+			m_nameRenderer = NewGO<CFontRenderer>("nameRenderer");
+			SFontParameter nameParam;
+			nameParam.position = m_kNamePosition;
+			nameParam.pivot = m_kTextPivot;
+			m_nameRenderer->Init(nameParam);
+
 			m_firstLineRenderer = NewGO<CFontRenderer>("firstLineRenderer");
-			m_writingFontPtr = m_firstLineRenderer;
+			SFontParameter firstLineParam2;
+			firstLineParam2.position = m_kFirstLinePosition;
+			firstLineParam2.scale = m_kSentenceScale;
+			firstLineParam2.pivot = m_kTextPivot;
+			m_firstLineRenderer->Init(firstLineParam2, EnFontType::enConversation);
+
 			m_secondLineRenderer = NewGO<CFontRenderer>("secondRenderer");
-			SFontParameter talkFontParam(
-				L"",
-				{ -490.0f,220.0f },
-				nsMath::CVector4::White(),
-				0.0f,
-				0.75f,
-				{ 0.0f, 0.5f },
-				EnAnchors::enMiddleCenter
-			);
+			SFontParameter secondLineParam2;
+			secondLineParam2.position = m_kSecondLinePosition;
+			secondLineParam2.scale = m_kSentenceScale;
+			secondLineParam2.pivot = m_kTextPivot;
+			m_secondLineRenderer->Init(secondLineParam2, EnFontType::enConversation);
 
-			m_firstLineRenderer->Init(talkFontParam, EnFontType::enConversation);
-			talkFontParam.position = CVector2(-490.0f, 275.0f);
-			m_secondLineRenderer->Init(talkFontParam, EnFontType::enConversation);
-
-			m_nameRenderer = NewGO<CFontRenderer>("fontRenderer", EnGOPriority::enMax);
-			SFontParameter nameFontParam(
-				L"名前",
-				{ -510.0f,130.0f },
-				nsMath::CVector4::White(),
-				0.0f,
-				1.0f,
-				{ 0.0f, 0.0f },
-				EnAnchors::enMiddleCenter
-			);
-			m_nameRenderer->Init(nameFontParam, EnFontType::enConversation);
-
-			SetCSVData(conversationCSVPath);
+			//最初に書き込む先は一行目のレンダラー
+			m_writingFontPtr = m_firstLineRenderer;
+			LoadCSVData(conversationCSVPath);
 
 			m_isInited = true;
 		}
 
-		void CConversationTextUI::SetCSVData(const wchar_t* conversationCSVPath)
+		void CConversationTextUI::LoadCSVData(const wchar_t* conversationCSVPath)
 		{
 			nsCSV::CCsvManager csvManager;
 			csvManager.LoadCSV(conversationCSVPath);
@@ -50,13 +43,39 @@ namespace nsAWA
 
 			m_strItr = m_conversationData.begin();
 
-			std::string first = (*m_strItr)[0];
-			std::string second = (*m_strItr)[1];
+			HandleNextSentence();
+		}
+
+		void CConversationTextUI::HandleNextSentence()
+		{
+			if ((*m_strItr).size() == 1)
+			{
+				std::string name = (*m_strItr)[0];
+
+				m_nameRenderer->SetText(nsYMEngine::nsUtils::GetWideStringFromString(name).c_str());
+
+				m_strItr++;
+			}
+
+			std::string first = ReplaceEmpty((*m_strItr)[0]);
+			std::string second = ReplaceEmpty((*m_strItr)[1]);
 
 			std::wstring wFirst = nsYMEngine::nsUtils::GetWideStringFromString(first);
 			std::wstring wSecond = nsYMEngine::nsUtils::GetWideStringFromString(second);
 
 			NewString(wFirst, wSecond);
+		}
+
+		std::string CConversationTextUI::ReplaceEmpty(std::string checkLine)
+		{
+			if (checkLine == "*")
+			{
+				return "";
+			}
+			else
+			{
+				return checkLine;
+			}
 		}
 
 		void CConversationTextUI::NewString(std::wstring firstLineString, std::wstring secondLineString)
@@ -73,9 +92,14 @@ namespace nsAWA
 
 		void CConversationTextUI::Update(float deltaTime)
 		{
-			count += deltaTime;
+			if (m_isInited == false)
+			{
+				return;
+			}
 
-			if (count >= 0.05 && m_isShowAllLine == false)
+			m_time += deltaTime;
+
+			if (m_time >= 0.05f && m_isShowAllLine == false)
 			{
 				ShowNextChar();
 			}
@@ -85,7 +109,7 @@ namespace nsAWA
 		{
 			if (m_isShowAllLine)
 			{
-				ShowNextString();
+				ShowNextSentence();
 			}
 			else
 			{
@@ -113,12 +137,12 @@ namespace nsAWA
 				m_isShowAllLine = true;
 			}
 
-			count = 0.0f;
+			m_time = 0.0f;
 
 			m_writingFontPtr->SetText(m_currentStr.c_str());
 		}
 
-		void CConversationTextUI::ShowNextString()
+		void CConversationTextUI::ShowNextSentence()
 		{
 			auto end = m_conversationData.end();
 			end--;
@@ -132,14 +156,7 @@ namespace nsAWA
 				m_strItr++;
 			}
 
-			std::string first = (*m_strItr)[0];
-			std::string second = (*m_strItr)[1];
-
-
-			std::wstring wFirst = nsYMEngine::nsUtils::GetWideStringFromString(first);
-			std::wstring wSecond = nsYMEngine::nsUtils::GetWideStringFromString(second);
-
-			NewString(wFirst, wSecond);
+			HandleNextSentence();
 		}
 
 		void CConversationTextUI::SkipToEnd()
