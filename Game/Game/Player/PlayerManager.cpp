@@ -10,6 +10,8 @@ namespace nsAWA {
 
 	namespace nsPlayer {
 
+		const std::string CPlayerManager::m_kTestFontNotFound = "Not Found";
+
 		bool CPlayerManager::FindPlayer() {
 
 			//既にプレイヤーが見つかっているなら。
@@ -170,13 +172,20 @@ namespace nsAWA {
 			m_player->SetArmor(armor);
 		}
 
-		const std::string& CPlayerManager::GetActiveSkillName(const int skillNam)
+		const std::string& CPlayerManager::GetActiveSkillName(const int skillNum)
 		{
 			if (false == FindPlayer()) {
 				nsGameWindow::MessageBoxWarning(L"CPlayerManager : player が見つかりませんでした。");
+
+				return m_kTestFontNotFound;
 			}
 
-			return m_player->GetActiveSkill(skillNam)->GetName();
+			if (nullptr == m_player->GetActiveSkill(skillNum)) {
+				return m_kTestFontNotFound;
+			}
+
+
+			return m_player->GetActiveSkill(skillNum)->GetName();
 		}
 	}
 }

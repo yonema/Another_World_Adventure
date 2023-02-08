@@ -15,7 +15,7 @@ namespace nsAWA
         const char* CEnemyBattleStatusUI::m_kSpriteEnemyStatusBaseFilePath = 
             "Assets/Images/FitnessBar/Enemy/EnemyStatusBase.png";
 
-        const float CEnemyBattleStatusUI::m_kUIPositionCorrectionAmountY = -100.0f;
+        const float CEnemyBattleStatusUI::m_kUIPositionCorrectionAmountY = 13.0f;
 
         const float CEnemyBattleStatusUI::m_kDrawingAngle = 90.0f;
 
@@ -100,7 +100,7 @@ namespace nsAWA
                 return;
             }
 
-            CVector3 targetPosition = position;
+            CVector3 targetPosition = { position.x,position.y + m_kUIPositionCorrectionAmountY,position.z };
             CVector2 uiPosition = MainCamera()->CalcScreenPositionFromWorldPosition(targetPosition);
 
 
@@ -110,11 +110,11 @@ namespace nsAWA
             m_spriteEnemyStatusBase->SetPosition(
                 {
                     uiPosition.x + m_initialPosition.x,
-                    uiPosition.y + m_kUIPositionCorrectionAmountY + m_initialPosition.y
+                    uiPosition.y + m_initialPosition.y
                 }
             );
 
-            m_setUIEnemyPosition = { uiPosition.x,uiPosition.y + m_kUIPositionCorrectionAmountY };
+            m_setUIEnemyPosition = { uiPosition.x,uiPosition.y };
 
             m_enemyHPUI->SetUIPosition(m_setUIEnemyPosition);
             //m_enemyBreakUI->SetUIPosition(m_setUIEnemyPosition);

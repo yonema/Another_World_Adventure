@@ -56,7 +56,7 @@ namespace nsAWA {
 
 
 		public:
-			const std::string& GetActiveSkillName(const int skillNam);
+			const std::string& GetActiveSkillName(const int skillNum);
 
 
 
@@ -88,6 +88,9 @@ namespace nsAWA {
 
 		private:
 			void ResetActiveSkill();
+
+		private:
+			static const std::string m_kTestFontNotFound;
 
 		private:
 			nsPlayer::CPlayer* m_player = nullptr;	//プレイヤーのポインタ

@@ -10,6 +10,7 @@ namespace nsAWA
     namespace nsUI
     {
         class CFontArrayUI;
+        class CFontUI;
         
         class COperationMenuSkillUI : public IGameObject
         {
@@ -39,6 +40,10 @@ namespace nsAWA
 
         private:
             void ChangeSetSkill();
+
+
+        private:
+            void TestFont();
 
 
         public:
@@ -100,6 +105,11 @@ namespace nsAWA
 
             // スキル選択時のカーソルの位置
             int m_cursorPositionSelectionSetSkill = 0;
+
+
+            CFontUI* m_testFontActiveOrPassive = nullptr;
+            CFontArrayUI* m_testFontNowSetSkillName = nullptr;
+            
         };
     }
 }

@@ -5,6 +5,7 @@
 #include "../../../CSV/CSVManager.h"
 #include "../../../Player/Player.h"
 #include "../../FontArrayUI.h"
+#include "../../FontUI.h"
 
 namespace nsAWA
 {
@@ -12,14 +13,18 @@ namespace nsAWA
     {
         bool COperationMenuSkillUI::Start()
         {
-            // スキルの情報を取得
+            m_testFontActiveOrPassive = NewGO<CFontUI>();
+            m_testFontActiveOrPassive->LoadFont(L"アクティブ");
+
+            m_testFontNowSetSkillName = NewGO<CFontArrayUI>();
 
             return true;
         }
 
         void COperationMenuSkillUI::OnDestroy()
         {
-
+            DeleteGO(m_testFontActiveOrPassive);
+            DeleteGO(m_testFontNowSetSkillName);
         }
 
         void COperationMenuSkillUI::Update(float deltaTime)
@@ -39,6 +44,19 @@ namespace nsAWA
 
                 break;
             }
+
+            TestFont();
+        }
+
+        void COperationMenuSkillUI::TestFont()
+        {
+            if (EnActiveOrPassive::enActive == m_activeOrPassive) {
+                m_testFontActiveOrPassive->SetText(L"アクティブ");
+            }
+            else if (EnActiveOrPassive::enPassive == m_activeOrPassive) {
+                m_testFontActiveOrPassive->SetText(L"パッシブ");
+            }
+
         }
 
         void COperationMenuSkillUI::Animation()
@@ -54,8 +72,7 @@ namespace nsAWA
         {
             // ここで、現在セットしてるスキルを取得
             // プレイヤーを検索
-            nsPlayer::CPlayerManager playerManager;
-            if (false == playerManager.FindPlayer()) {
+            if (false == nsPlayer::CPlayerManager::GetInstance()->FindPlayer()) {
                 nsGameWindow::MessageBoxWarning(L"COperationMenuSkillUI : player が見つかりませんでした。");
             }
             // アクティブ
@@ -64,7 +81,7 @@ namespace nsAWA
                 m_nowSetSkillName.resize(m_kActiveSkillMaxNum);
                 // 名前を代入
                 for (int skillNum = 0; m_kActiveSkillMaxNum > skillNum; ++skillNum) {
-                    m_nowSetSkillName[skillNum] = playerManager.GetActiveSkillName(skillNum);
+                    m_nowSetSkillName[skillNum] = nsPlayer::CPlayerManager::GetInstance()->GetActiveSkillName(skillNum);
                 }
             }
             // パッシブ
@@ -73,7 +90,7 @@ namespace nsAWA
                 m_nowSetSkillName.resize(m_kPassiveSkillMaxNum);
                 // 名前を代入
                 for (int skillNum = 0; m_kPassiveSkillMaxNum > skillNum; ++skillNum) {
-                    m_nowSetSkillName[skillNum] = playerManager.GetActiveSkillName(skillNum);
+                    m_nowSetSkillName[skillNum] = nsPlayer::CPlayerManager::GetInstance()->GetActiveSkillName(skillNum);
                 }
             }
 
@@ -99,6 +116,13 @@ namespace nsAWA
                 for (auto& forData : csvData) {
                     m_selectionSetSkill.push_back(forData[0]);
                 }
+            }
+
+            for (int forNum = 0; m_nowSetSkillName.size() > forNum; ++forNum) {
+
+            }
+            for (auto forName : m_nowSetSkillName) {
+                m_testFontNowSetSkillName->NewLoadFont(nsUtils::GetWideStringFromString(forName).c_str());
             }
         }
 
@@ -204,8 +228,7 @@ namespace nsAWA
             // 選択したスキルを入れ替える
 
             // 選択したスキル欄のところのスキルを入れ替える
-            nsPlayer::CPlayerManager playerManager;
-            if (false == playerManager.FindPlayer()) {
+            if (false == nsPlayer::CPlayerManager::GetInstance()->FindPlayer()) {
                 nsGameWindow::MessageBoxWarning(L"COperationMenuSkillUI : player が見つかりませんでした。");
             }
             // listのイテレーターを選択してるところまで移動する
@@ -215,7 +238,9 @@ namespace nsAWA
             //}
             //
             //// スキルをセット
-            //playerManager.SetActiveSkill(static_cast<int>(m_nowSetSkillFrame), setSkillData->name);
+            //nsPlayer::CPlayerManager::GetInstance()->SetActiveSkill(
+            //    static_cast<int>(m_nowSetSkillFrame), setSkillData->name
+            //);
         }
     }
 }
