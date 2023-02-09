@@ -2,6 +2,10 @@
 
 namespace nsAWA
 {
+	namespace nsUI
+	{
+		class CMenuBaseUI;
+	}
 
 	//ÉQÅ[ÉÄÉNÉâÉX
 	class CGame : public IGameObject
@@ -20,6 +24,15 @@ namespace nsAWA
 		constexpr CGame() = default;
 		~CGame() = default;
 
+
 	private:
+		void TestMenu();
+
+		void TestDeleteMenu();
+
+	private:
+
+		nsUI::CMenuBaseUI* m_menuBaseUI = nullptr;
+		bool m_flagCreateMenuBaseUI = false;
 	};
 }

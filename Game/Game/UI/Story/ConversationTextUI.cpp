@@ -8,6 +8,11 @@ namespace nsAWA
 	{
 		void CConversationTextUI::Init(const wchar_t* conversationCSVPath)
 		{
+			if (m_isInited == true)
+			{
+				return;
+			}
+
 			m_nameRenderer = NewGO<CFontRenderer>("nameRenderer");
 			SFontParameter nameParam;
 			nameParam.position = m_kNamePosition;
@@ -30,9 +35,9 @@ namespace nsAWA
 
 			//Å‰‚É‘‚«ž‚Þæ‚Íˆês–Ú‚ÌƒŒƒ“ƒ_ƒ‰[
 			m_writingFontPtr = m_firstLineRenderer;
-			LoadCSVData(conversationCSVPath);
-
 			m_isInited = true;
+
+			LoadCSVData(conversationCSVPath);
 		}
 
 		void CConversationTextUI::LoadCSVData(const wchar_t* conversationCSVPath)
@@ -48,38 +53,44 @@ namespace nsAWA
 
 		void CConversationTextUI::HandleNextSentence()
 		{
+			if (m_isInited == false)
+			{
+				return;
+			}
+
 			if ((*m_strItr).size() == 1)
 			{
 				std::string name = (*m_strItr)[0];
+				std::wstring wName = nsYMEngine::nsUtils::GetWideStringFromString(name);
 
-				m_nameRenderer->SetText(nsYMEngine::nsUtils::GetWideStringFromString(name).c_str());
+				wName = nsUtils::ReplaceWordFromWideString(wName, L"*name*", m_playerName);
+				m_nameRenderer->SetText(wName.c_str());
 
 				m_strItr++;
 			}
 
-			std::string first = ReplaceEmpty((*m_strItr)[0]);
-			std::string second = ReplaceEmpty((*m_strItr)[1]);
+			std::string first = (*m_strItr)[0];
+			std::string second = (*m_strItr)[1];
 
 			std::wstring wFirst = nsYMEngine::nsUtils::GetWideStringFromString(first);
 			std::wstring wSecond = nsYMEngine::nsUtils::GetWideStringFromString(second);
 
-			NewString(wFirst, wSecond);
-		}
+			wFirst = nsUtils::ReplaceWordFromWideString(wFirst, L"*name*", m_playerName);
+			wSecond = nsUtils::ReplaceWordFromWideString(wSecond, L"*name*", m_playerName);
 
-		std::string CConversationTextUI::ReplaceEmpty(std::string checkLine)
-		{
-			if (checkLine == "*")
-			{
-				return "";
-			}
-			else
-			{
-				return checkLine;
-			}
+			wFirst = nsUtils::ReplaceWordFromWideString(wFirst, L"*", L"");
+			wSecond = nsUtils::ReplaceWordFromWideString(wSecond, L"*", L"");
+
+			NewString(wFirst, wSecond);
 		}
 
 		void CConversationTextUI::NewString(std::wstring firstLineString, std::wstring secondLineString)
 		{
+			if (m_isInited == false)
+			{
+				return;
+			}
+
 			m_firstLineString = firstLineString;
 			m_secondLineString = secondLineString;
 			m_currentStr = L"";
@@ -107,6 +118,11 @@ namespace nsAWA
 
 		void CConversationTextUI::Next()
 		{
+			if (m_isInited == false)
+			{
+				return;
+			}
+
 			if (m_isShowAllLine)
 			{
 				ShowNextSentence();
@@ -119,6 +135,11 @@ namespace nsAWA
 
 		void CConversationTextUI::ShowNextChar()
 		{
+			if (m_isInited == false)
+			{
+				return;
+			}
+
 			itr = m_writingStrPtr->begin() + m_currentStr.length();
 
 			if (itr != m_writingStrPtr->end())
@@ -144,11 +165,17 @@ namespace nsAWA
 
 		void CConversationTextUI::ShowNextSentence()
 		{
+			if (m_isInited == false)
+			{
+				return;
+			}
+
 			auto end = m_conversationData.end();
 			end--;
 
 			if (m_strItr == end)
 			{
+				m_allTextEnd = true;
 				return;
 			}
 			else
@@ -161,9 +188,27 @@ namespace nsAWA
 
 		void CConversationTextUI::SkipToEnd()
 		{
+			if (m_isInited == false)
+			{
+				return;
+			}
+
 			m_firstLineRenderer->SetText(m_firstLineString.c_str());
 			m_secondLineRenderer->SetText(m_secondLineString.c_str());
 			m_isShowAllLine = true;
+		}
+
+		void CConversationTextUI::Release()
+		{
+			DeleteGO(m_nameRenderer);
+			DeleteGO(m_firstLineRenderer);
+			DeleteGO(m_secondLineRenderer);
+
+			m_nameRenderer = nullptr;
+			m_firstLineRenderer = nullptr;
+			m_secondLineRenderer = nullptr;
+
+			m_isInited = false;
 		}
 	}
 }

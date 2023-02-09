@@ -198,9 +198,9 @@
     <ClCompile Include="Game\UI\Battle\Player\PlayerHPUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Player\PlayerMPUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Player\PlayerSPUI.cpp" />
-    <ClCompile Include="Game\UI\Battle\BattleSkillUI.cpp" />
-    <ClCompile Include="Game\UI\Battle\ItemUI.cpp" />
-    <ClCompile Include="Game\UI\Battle\SkillIconUI.cpp" />
+    <ClCompile Include="Game\UI\Battle\Skill\BattleSkillUI.cpp" />
+    <ClCompile Include="Game\UI\Battle\Item\ItemUI.cpp" />
+    <ClCompile Include="Game\UI\Battle\Skill\SkillIconUI.cpp" />
     <ClCompile Include="Game\UI\Button\ButtonUI.cpp" />
     <ClCompile Include="Game\UI\Institution\Blacksmith\BlacksmithWindowUI.cpp" />
     <ClCompile Include="Game\UI\Institution\Guild\GuildWindowUI.cpp" />
@@ -239,6 +239,7 @@
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurBaseGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.cpp" />
+    <ClCompile Include="Game\UI\Menu\MenuBaseUI.cpp" />
     <ClCompile Include="Game\UI\Story\ConversationTextUI.cpp" />
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
     <ClCompile Include="Game\Skill\PassiveSkillList.cpp" />
@@ -458,9 +459,9 @@
     <ClInclude Include="Game\UI\Battle\Player\PlayerHPUI.h" />
     <ClInclude Include="Game\UI\Battle\Player\PlayerMPUI.h" />
     <ClInclude Include="Game\UI\Battle\Player\PlayerSPUI.h" />
-    <ClInclude Include="Game\UI\Battle\BattleSkillUI.h" />
-    <ClInclude Include="Game\UI\Battle\ItemUI.h" />
-    <ClInclude Include="Game\UI\Battle\SkillIconUI.h" />
+    <ClInclude Include="Game\UI\Battle\Skill\BattleSkillUI.h" />
+    <ClInclude Include="Game\UI\Battle\Item\ItemUI.h" />
+    <ClInclude Include="Game\UI\Battle\Skill\SkillIconUI.h" />
     <ClInclude Include="Game\UI\Button\ButtonUI.h" />
     <ClInclude Include="Game\UI\Institution\Blacksmith\BlacksmithWindowUI.h" />
     <ClInclude Include="Game\UI\Institution\Guild\GuildWindowUI.h" />
@@ -501,6 +502,7 @@
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurXGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlurYGenericRenderer.h" />
     <ClInclude Include="Game\RendererPriority.h" />
+    <ClInclude Include="Game\UI\Menu\MenuBaseUI.h" />
     <ClInclude Include="Game\UI\Story\ConversationTextUI.h" />
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
     <ClInclude Include="Game\Skill\PassiveSkillList.h" />

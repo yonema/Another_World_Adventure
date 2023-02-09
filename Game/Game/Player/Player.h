@@ -21,6 +21,8 @@ namespace nsAWA {
 	namespace nsUI {
 		
 		class CPlayerBattleStatusUI;
+		class CSkillIconUI;
+		class CItemUI;
 	}
 
 	namespace nsPlayer {
@@ -96,6 +98,11 @@ namespace nsAWA {
 		private:
 			void CreatePlayerModel();
 
+		public: // UI
+			void ChangeFromSkillToItemUI();
+
+			void ChangeFromItemToSkillUI();
+
 		private:
 			CPlayerInput m_input;									//“ü—Í
 			CPlayerAction m_action;									//ƒAƒNƒVƒ‡ƒ“
@@ -110,6 +117,8 @@ namespace nsAWA {
 			wchar_t m_dispText[32] = {};
 #endif		
 			nsUI::CPlayerBattleStatusUI* m_playerBattleStatusUI = nullptr;
+			nsUI::CSkillIconUI* m_skillIconUI = nullptr;
+			nsUI::CItemUI* m_itemUI = nullptr;
 
 		};
 	}

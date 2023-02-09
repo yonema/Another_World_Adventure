@@ -13,6 +13,8 @@
 #include "../Skill/PassiveSkill.h"
 #endif
 #include "../UI/Battle/Player/PlayerBattleStatusUI.h"
+#include "../UI/Battle/Skill/SkillIconUI.h"
+#include "../UI/Battle/Item/ItemUI.h"
 
 namespace nsAWA {
 
@@ -90,6 +92,11 @@ namespace nsAWA {
 			m_playerBattleStatusUI = NewGO<nsUI::CPlayerBattleStatusUI>();
 			m_playerBattleStatusUI->LoadLevel();
 
+			m_skillIconUI = NewGO<nsUI::CSkillIconUI>();
+			m_skillIconUI->LoadLevel();
+
+			m_itemUI = NewGO<nsUI::CItemUI>();
+			m_itemUI->LoadLevel();
 
 			//データをロード。
 			CUserData userData;
@@ -123,6 +130,7 @@ namespace nsAWA {
 
 			// UIを破棄。
 			DeleteGO(m_playerBattleStatusUI);
+			DeleteGO(m_skillIconUI);
 		}
 
 		void CPlayer::UpdateActor(float deltaTime) {
@@ -315,6 +323,22 @@ namespace nsAWA {
 
 			//防具を受け取る。
 			return m_armor;
+		}
+
+		////////////////////////////////////////////////////////////
+		// UI
+		////////////////////////////////////////////////////////////
+
+		void CPlayer::ChangeFromSkillToItemUI()
+		{
+			m_skillIconUI->DeactiveDrawing();
+			m_itemUI->ActiveDrawing();
+		}
+
+		void CPlayer::ChangeFromItemToSkillUI()
+		{
+			m_itemUI->DeactiveDrawing();
+			m_skillIconUI->ActiveDrawing();
 		}
 	}
 }

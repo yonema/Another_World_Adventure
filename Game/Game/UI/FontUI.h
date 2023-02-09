@@ -49,10 +49,10 @@ namespace nsAWA
                 m_fontRenderer->SetColor(color);
             }
 
-            //void SetScale(const CVector3& scale)
-            //{
-            //    m_fontRenderer->SetScale(scale);
-            //}
+            void SetScale(const float scale)
+            {
+                m_fontRenderer->SetScale(scale);
+            }
 
         public: // Get function
             const CVector2& GetPosition() const
@@ -75,10 +75,10 @@ namespace nsAWA
                 return m_fontRenderer->GetColor();
             }
 
-            //const CVector3& GetScale() const
-            //{
-            //    return m_fontRenderer->GetScale();
-            //}
+            const float GetScale() const
+            {
+                return m_fontRenderer->GetScale();
+            }
 
 
 
