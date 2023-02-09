@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Event\ProgressManagement\EventProgress.cpp" />
+    <ClCompile Include="Game\Event\ProgressManagement\EventProgressManager.cpp" />
     <ClCompile Include="Game\UI\Story\ConversationTextUI.cpp" />
     <ClCompile Include="Game\Magic\MagicList.cpp" />
     <ClCompile Include="Game\Magic\MagicBase.cpp" />
@@ -398,6 +400,8 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Event\ProgressManagement\EventProgress.h" />
+    <ClInclude Include="Game\Event\ProgressManagement\EventProgressManager.h" />
     <ClInclude Include="Game\UI\Story\ConversationTextUI.h" />
     <ClInclude Include="Game\Magic\MagicList.h" />
     <ClInclude Include="Game\Magic\MagicBase.h" />
