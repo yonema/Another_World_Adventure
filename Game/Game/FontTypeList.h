@@ -19,6 +19,7 @@ namespace nsYMEngine
 			{
 				enSimple,
 				enDegitalTextbook,
+				enConversation,
 
 
 
@@ -32,7 +33,9 @@ namespace nsYMEngine
 			static const wchar_t* g_kSpriteFontFilePaths[static_cast<unsigned int>(EnFontType::enNum)] =
 			{
 				L"Assets/Fonts/simple.spritefont",
-				L"Assets/Fonts/degitalTextbook.spritefont"
+				L"Assets/Fonts/degitalTextbook.spritefont",
+				L"Assets/Fonts/ConversationFont.spritefont",
+
 			};
 
 		}

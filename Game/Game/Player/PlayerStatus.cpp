@@ -1,6 +1,13 @@
 #include "YonemaEnginePreCompile.h"
 #include "PlayerStatus.h"
 #include "../CSV/CSVManager.h"
+#include "PlayerWeaponManager.h"
+#include "../Weapon/Weapon.h"
+#include "../Skill/PassiveSkillManager.h"
+#include "../Skill/PassiveSkill.h"
+#include "../Feature/FeatureManager.h"
+#include "../Feature/Feature.h"
+#include "../Feature/BuffDebuff.h"
 
 namespace nsAWA {
 
@@ -12,13 +19,25 @@ namespace nsAWA {
 			constexpr float kPerMax = 100.0f;			//最大％
 			constexpr float kSPValue = 100.0f;			//SP量
 			constexpr float kGGValue = 100.0f;			//ガードゲージ量
+			constexpr float kStatusBaseInitValue = 0.0f;	//ステータス反映のための初期値
+			constexpr float kStatusBaseMul = 1.0f;	//ステータス反映の初期倍率
 		}
 
-		void CPlayerStatus::Init() {
+		void CPlayerStatus::Init(const nsWeapon::CWeapon* const & playerWeapon,
+			nsSkill::CPassiveSkillManager* passiveSkillManager,
+			nsFeature::CFeatureManager* featureManager
+		) {
 
+			//情報を取得。
+			m_weapon = &playerWeapon;
+			m_passiveSkillManager = passiveSkillManager;
+			m_featureManager = featureManager;
+
+			//ステータス反映のためのリストを初期化。
+			ResetStatusList();
 #ifdef _DEBUG
 
-			m_attack = 2.0f;
+			m_attack = 0.0f;
 
 			m_intelligence = 2.0f;
 
@@ -26,6 +45,72 @@ namespace nsAWA {
 			m_mind = 2.0f;
 #endif
 			
+		}
+
+		void CPlayerStatus::Update() {
+
+			std::list<nsFeature::CFeature*> featureList;
+
+			//パッシブスキルの効果のリストを順に参照。
+			//for (const auto& passiveSkill : m_passiveSkillManager->GetPassiveSkillList()) {
+			//
+			//	//パッシブスキルが登録されていなかったら。
+			//	if (passiveSkill == nullptr) {
+			//
+			//		//次へ。
+			//		continue;
+			//	}
+			//
+			//	for (const auto& feature : passiveSkill->GetFeatureList()) {
+			//
+			//		//効果のクラス名を取得。
+			//		const type_info& id = typeid(*feature);
+			//
+			//		//バフデバフなら。
+			//		if (typeid(nsFeature::nsStatusChanger::CBuffDebuff) == id) {
+			//
+			//			//効果のリストを順に取得。
+			//			featureList.emplace_back(feature);
+			//		}
+			//	}
+			//}
+
+			//ステータス変化のリストを順に参照。
+			for (const auto& feature : m_featureManager->GetStatusChanger()) {
+
+				//効果のクラス名を取得。
+				const type_info& id = typeid(*feature);
+
+				//バフデバフなら。
+				if (typeid(nsFeature::nsStatusChanger::CBuffDebuff) == id) {
+
+					//効果のリストを順に取得。
+					featureList.emplace_back(feature);
+				}
+			}
+
+			//ステータス反映のためのデータを初期化。
+			ResetStatusList();
+
+			//バフデバフ量を計算して仮反映。
+			//ステータスデータを順に参照。
+			for (int statusRef = 0; statusRef < static_cast<int>(nsFeature::EnStatusRef::enNum); statusRef++) {
+
+				//バフデバフリストから値を受け取る。
+				for (const auto& feature : featureList) {
+
+					auto featureRef = dynamic_cast<nsFeature::nsStatusChanger::CBuffDebuff*>(feature);
+
+					//まず加算。
+					m_statusBaseList[statusRef] += featureRef->Apply(static_cast<nsFeature::EnStatusRef>(statusRef));
+				}
+			}
+
+			//各ステータスを本反映。
+			m_attack = (*m_weapon)->GetAttack() * (kStatusBaseMul + m_statusBaseList[static_cast<int>(nsFeature::EnStatusRef::enAttack)]);
+
+
+			m_intelligence = (*m_weapon)->GetIntelligence() * m_statusBaseList[static_cast<int>(nsFeature::EnStatusRef::enInteligence)];
 		}
 
 		void CPlayerStatus::LoadStatus(const std::vector<std::string>& statusDataStr) {
@@ -44,6 +129,15 @@ namespace nsAWA {
 
 			//プレイヤーのひるみ値の区切りを設定。
 			m_winceDelimiter = m_maxHP * kPlayerWinceDelimiter / kPerMax;
+		}
+
+		void CPlayerStatus::ResetStatusList() {
+
+			//ステータス反映のためのデータを初期化。
+			for (auto& statusBase : m_statusBaseList) {
+
+				statusBase = kStatusBaseInitValue;
+			}
 		}
 
 		void CPlayerStatus::HealHP(float value) {

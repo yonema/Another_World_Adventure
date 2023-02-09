@@ -122,7 +122,7 @@ namespace nsAWA
 
         const bool CEnemyBattleStatusUI::CheckDrawUI(const CVector3& targetPosition)
         {
-            CVector3 normalizeCameraForwardDirection = MainCamera()->GetForeardDirection();
+            CVector3 normalizeCameraForwardDirection = MainCamera()->GetForwardDirection();
             CVector3 normalizeTargetPosition = targetPosition - MainCamera()->GetPosition();
 
             normalizeCameraForwardDirection.Normalize();

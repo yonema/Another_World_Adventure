@@ -33,6 +33,12 @@ namespace nsAWA {
 				return m_weapon;
 			}
 
+			const nsWeapon::CWeapon* const & GetWeaponPointer() const{
+
+				//武器の参照を取得。（変更不可）
+				return m_weapon;
+			}
+
 		private:
 			const CModelRenderer* m_playerModel = nullptr;	//プレイヤーモデル
 			unsigned int m_weaponBaseBoneID = 0;			//武器を持たせるボーンのID

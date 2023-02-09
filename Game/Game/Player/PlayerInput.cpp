@@ -36,12 +36,6 @@ namespace nsAWA {
 
 			//ステートを変化させるとともにアニメーションを再生するため、プレイヤーアニメーションクラスのポインタを受け取る。
 			m_playerAnimation = playerAnimation;
-
-#ifdef _DEBUG
-
-			CPlayerManager::GetInstance()->SetActiveSkill(0, "Fire");
-#endif // _DEBUG
-
 		}
 
 		void CPlayerInput::Update(bool isAnimationPlaying) {
@@ -185,79 +179,44 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 #ifdef _DEBUG
 
-				//クールタイム中に設定。
-				CoolTimeOn();
+				CPlayerManager::GetInstance()->SetPassiveSkill(0,"ATKUp");
 
-				//スキル１使用。
-				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
+				////クールタイム中に設定。
+				//CoolTimeOn();
+				//
+				////スキル１使用。
+				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
 #endif 
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
 
-				//スキル２使用。
-#ifdef _DEBUG
-
-				////パッシブスキル（麻痺）を生成。
-				//{
-				//	//麻痺機能を生成。
-				//	nsFeature::nsStatusChanger::CAbnormalStatus* paralysis = new nsFeature::nsStatusChanger::CAbnormalStatus;
-				//	paralysis->Init(
-				//		nsFeature::nsStatusChanger::EnAbnormalStatusType::enParalysis,
-				//		player,
-				//		1
-				//	);
-				//	//パッシブスキルに機能を追加。
-				//	nsSkill::CPassiveSkill* passiveSkill = new nsSkill::CPassiveSkill;
-				//	passiveSkill->AddFeature(paralysis);
-
-				//	//プレイヤーにパッシブスキルを設定。
-				//	player->GetPassiveSkillManager()->AddPassiveSkill(passiveSkill);
-				//}
-#endif
+				CPlayerManager::GetInstance()->SetPassiveSkill(1, "ATKUp");
+				////クールタイム中に設定。
+				//CoolTimeOn();
+				//
+				////スキル２使用。
+				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
 
-				//スキル３使用。
+				CPlayerManager::GetInstance()->SetPassiveSkill(0, "Paralysiser");
 
-#ifdef _DEBUG
-				//アイテム（毒）を生成。
-				{
-					//アイテムを仮生成。
-					nsItem::CThrowItem* item = NewGO<nsItem::CThrowItem>();
-
-					//毒機能を生成。
-					nsFeature::nsStatusChanger::CAbnormalStatus* poison = new nsFeature::nsStatusChanger::CAbnormalStatus;
-					poison->Init(
-						nsFeature::nsStatusChanger::EnAbnormalStatusType::enPoison,
-						player,
-						1
-					);
-
-					//投げ開始座標を設定。
-					item->SetStartPosition(player->GetPosition());
-					item->SetThrowDirection(player->GetForwardDirection());
-
-					//アイテムに機能を追加。
-					//item->AddFeature(poison);
-
-					//アイテムを追加。
-					//player->GetItemManager()->AddItem(item);
-				}
-#endif
+				////クールタイム中に設定。
+				//CoolTimeOn();
+				//
+				////スキル３使用。
+				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_3);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_4)) {
 
-				//スキル４使用。
+				//クールタイム中に設定。
+				CoolTimeOn();
 
-#ifdef _DEBUG
-				//アイテム管理クラスを取得。
-				auto itemManager = CPlayerManager::GetInstance()->GetItemManager();
-				//プレイヤーにアイテムを与える。
-				itemManager->AddItem("刀削麺", 2);
-#endif
+				//スキル４使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_4);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_5)) {

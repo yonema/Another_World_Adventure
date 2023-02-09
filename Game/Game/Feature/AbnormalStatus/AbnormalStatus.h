@@ -23,11 +23,10 @@ namespace nsAWA {
 			public:
 				void Create()override final;
 
-				CFeature* CreateAndReturn()override final;
+				//CFeature* CreateAndReturn()override final;
 
 				void Init(
 					EnAbnormalStatusType abnormalStatusType,
-					IGameActor* target,
 					int abnormalStatusLevel
 				);
 			protected:
@@ -44,8 +43,6 @@ namespace nsAWA {
 			private:
 				EnAbnormalStatusType m_type = EnAbnormalStatusType::enNone;	//状態異常の種類
 				int m_abnormalStatusLevel = 0;			//状態異常レベル
-			protected:
-				IGameActor* m_target = nullptr;			//ターゲット
 			};
 		}
 	}
