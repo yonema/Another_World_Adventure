@@ -21,6 +21,7 @@ namespace nsAWA {
 	namespace nsUI {
 		
 		class CPlayerBattleStatusUI;
+		class CSkillIconUI;
 	}
 
 	namespace nsPlayer {
@@ -105,6 +106,7 @@ namespace nsAWA {
 			wchar_t m_dispText[32] = {};
 #endif		
 			nsUI::CPlayerBattleStatusUI* m_playerBattleStatusUI = nullptr;
+			nsUI::CSkillIconUI* m_skillIconUI = nullptr;
 
 		};
 	}
