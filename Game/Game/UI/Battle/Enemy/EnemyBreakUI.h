@@ -36,7 +36,7 @@ namespace nsAWA
             void SetUIEnemyBreakStatus(const float breakBar)
             {
                 // 横幅の倍率を計算
-                m_barPercentage = breakBar / 100;
+                m_barPercentage = breakBar / 100 * m_kMaxBarHeightSize;
             }
             /**
              * @brief UIの位置を取得
@@ -52,6 +52,8 @@ namespace nsAWA
 
             static const char* m_kLevel2DFilePath;
 
+            static const float m_kMaxBarHeightSize; // UIの最大の横幅
+
         private: // data member
             // 実装されたら、下のやつを追加
             nsLevel2D::CLevel2D m_level;
@@ -62,10 +64,10 @@ namespace nsAWA
             CSpriteUI* m_spriteBase = nullptr; // ブレイクゲージの下地
 
             // UIの位置の補正値
-            CVector2 m_correctionAmountBreakBar = CVector2::Zero();
-            CVector2 m_correctionAmountBreak = CVector2::Zero();
-            CVector2 m_correctionAmountBreakReduction = CVector2::Zero();
-            CVector2 m_correctionAmountBase = CVector2::Zero();
+            CVector2 m_initialPositionBreakBar = CVector2::Zero();
+            CVector2 m_initialPositionBreak = CVector2::Zero();
+            CVector2 m_initialPositionBreakReduction = CVector2::Zero();
+            CVector2 m_initialPositionBase = CVector2::Zero();
 
             float m_barPercentage = 0.0f; // ブレイクゲージの割合
 

@@ -1,7 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "BattleSkillUI.h"
 
-#include "../SpriteUI.h"
+#include "../../SpriteUI.h"
 #include "SkillIconUI.h"
 namespace nsAWA
 {
@@ -17,7 +17,7 @@ namespace nsAWA
             // スキルアイコン６つ分のUIクラスを作成
             for (auto& forUI : m_skillIconUI) {
                 forUI = NewGO<CSkillIconUI>();
-                forUI->LoadLevel(tdlFilePath);
+                //forUI->LoadLevel(tdlFilePath);
             }
         }
 
