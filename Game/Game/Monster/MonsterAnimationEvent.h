@@ -51,6 +51,8 @@ namespace nsAWA {
 
 			void Release();
 
+			void Death();
+
 		private:
 			CMonster* m_monster = nullptr;		//自身のポインタ
 			nsMonsterAI::CMonsterAIController* m_aiController = nullptr;		//AIコントローラー

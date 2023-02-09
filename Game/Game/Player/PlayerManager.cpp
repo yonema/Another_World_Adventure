@@ -10,9 +10,26 @@
 #include "../Weapon/Weapon.h"
 #include "../Armor/Armor.h"
 
+#include "Observer/ObserverList/PlayerLevelObserver.h"
+
 namespace nsAWA {
 
 	namespace nsPlayer {
+
+		void CPlayerManager::Init(CPlayer* player) {
+
+			//プレイヤーを取得。
+			m_player = player;
+
+			//アイテム管理クラスを初期化。
+			m_itemManager.Init(dynamic_cast<IGameActor*>(m_player));
+
+			//オブザーバー監視クラスを初期化。
+			m_observable.Init(m_player);
+
+			//オブザーバーを生成。
+			CreateObserver();
+		}
 
 		bool CPlayerManager::FindPlayer() {
 
@@ -201,6 +218,12 @@ namespace nsAWA {
 			}
 
 			return m_player->GetActiveSkill(skillNam)->GetName();
+		}
+
+		void CPlayerManager::CreateObserver() {
+
+			//オブザーバーを追加。
+			m_observable.AddObserver(new nsObserver::CPlayerLevelObserver);
 		}
 	}
 }

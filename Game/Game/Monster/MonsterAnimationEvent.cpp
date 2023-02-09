@@ -5,6 +5,8 @@
 #include "../CreateTrigger.h"
 #include "../GameActor.h"
 #include "AI/MonsterAIController.h"
+#include "../Player/Player.h"
+#include "../Player/PlayerManager.h"
 
 namespace nsAWA {
 
@@ -31,6 +33,10 @@ namespace nsAWA {
 			else if (animationEventName == "Release") {
 
 				Release();
+			}
+			else if (animationEventName == "Death") {
+
+				Death();
 			}
 			else {
 
@@ -69,6 +75,29 @@ namespace nsAWA {
 
 			//自身を破棄。
 			DeleteGO(m_monster);
+		}
+
+		void CMonsterAnimationEvent::Death() {
+
+			//プレイヤーを検索。
+			auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+
+			//プレイヤーに経験値を付与。
+			if (player != nullptr) {
+
+				//経験値を取得。
+				player->AddExp(m_monster->GetDropExp());
+
+				//オブザーバーに通知。
+				nsPlayer::CPlayerManager::GetInstance()->NotifyObserver();
+			}
+			else {
+
+				nsGameWindow::MessageBoxWarning(L"CMonsterAnimationEvent : playerの検索に失敗したため、戦闘後獲得処理が行えませんでした。");
+			}
+
+			//破棄処理。
+			Release();
 		}
 	}
 }

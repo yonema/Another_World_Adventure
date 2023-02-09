@@ -55,9 +55,28 @@ namespace nsAWA {
 
 			void LoadStatus(const std::vector<std::string>& statusDataStr);
 
+			void SetLevel(int level) {
+
+				//レベルを設定。
+				m_level = level;
+			}
+
 			int GetLevel()const {
 
+				//レベルを取得。
 				return m_level;
+			}
+
+			void AddExp(float exp) {
+
+				//経験値を獲得。
+				m_exp += exp;
+			}
+
+			int GetExp()const {
+
+				//経験値を取得。
+				return m_exp;
 			}
 
 			float GetHP()const {
@@ -134,6 +153,7 @@ namespace nsAWA {
 
 		private:
 			int m_level = 0;					//レベル
+			int m_exp = 0;						//経験値
 			float m_HP = 0.0f;					//HP
 			float m_maxHP = 0.0f;				//最大HP
 			float m_MP = 0.0f;					//MP

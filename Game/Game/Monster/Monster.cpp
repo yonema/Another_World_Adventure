@@ -46,8 +46,6 @@ namespace nsAWA {
 				m_status.GetHP(), m_status.GetMaxHP(), 0.0f
 			);
 			m_enemyBattleStatusUI->SetUIEnemyPosition(m_position);
-			
-
 
 			//死んでいるなら。
 			if (IsDeath()) {
@@ -91,6 +89,9 @@ namespace nsAWA {
 
 			//名前を設定。
 			m_name = monsterInfo.name;
+
+			//獲得経験値量を設定。
+			m_dropExp = monsterInfo.dropExp;
 
 			//ステータスを初期化。
 			m_status.Init(m_name);

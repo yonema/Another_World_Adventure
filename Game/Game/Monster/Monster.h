@@ -110,10 +110,16 @@ namespace nsAWA {
 				return col;
 			}
 
-			const std::string& GetName()const {
+			const std::string& GetMonsterName()const {
 
 				//名前を取得。
 				return m_name;
+			}
+
+			int GetDropExp()const {
+
+				//獲得経験値量を取得。
+				return m_dropExp;
 			}
 
 		private:
@@ -121,6 +127,7 @@ namespace nsAWA {
 
 		private:
 			std::string m_name = "NoName";				//名前
+			int m_dropExp = 0;							//獲得経験値量
 
 			CMonsterCollider m_collider;				//コライダー
 			CMonsterStatus m_status;					//ステータス
