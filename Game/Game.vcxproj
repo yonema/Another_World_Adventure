@@ -163,6 +163,9 @@
     <ClCompile Include="Game\Magic\MagicBallForward.cpp" />
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
     <ClCompile Include="Game\Skill\PassiveSkillList.cpp" />
+    <ClCompile Include="Game\Player\Observer\PlayerObserver.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObservablePlayer.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
@@ -237,7 +240,7 @@
     <ClCompile Include="Game\UI\Battle\Enemy\EnemyBattleStatusUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Enemy\EnemyBreakUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Enemy\EnemyHPUI.cpp" />
-    <ClCompile Include="Game\UI\Battle\ItemUI.cpp" />
+    <ClCompile Include="Game\UI\Battle\Item\ItemUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Player\PlayerBattleStatusUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Player\PlayerHPUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Player\PlayerMPUI.cpp" />
@@ -410,6 +413,9 @@
     <ClInclude Include="Game\Magic\MagicBallForward.h" />
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
     <ClInclude Include="Game\Skill\PassiveSkillList.h" />
+    <ClInclude Include="Game\Player\Observer\PlayerObserver.h" />
+    <ClInclude Include="Game\Player\Observer\ObservablePlayer.h" />
+    <ClInclude Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
@@ -489,7 +495,7 @@
     <ClInclude Include="Game\UI\Battle\Enemy\EnemyBattleStatusUI.h" />
     <ClInclude Include="Game\UI\Battle\Enemy\EnemyBreakUI.h" />
     <ClInclude Include="Game\UI\Battle\Enemy\EnemyHPUI.h" />
-    <ClInclude Include="Game\UI\Battle\ItemUI.h" />
+    <ClInclude Include="Game\UI\Battle\Item\ItemUI.h" />
     <ClInclude Include="Game\UI\Battle\Player\PlayerBattleStatusUI.h" />
     <ClInclude Include="Game\UI\Battle\Player\PlayerHPUI.h" />
     <ClInclude Include="Game\UI\Battle\Player\PlayerMPUI.h" />

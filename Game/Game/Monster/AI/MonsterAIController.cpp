@@ -21,7 +21,7 @@ namespace nsAWA {
 				m_owner = owner;
 
 				//名前を取得。
-				std::string monsterName = owner->GetName();
+				std::string monsterName = owner->GetMonsterName();
 
 				//AI情報が入ったCSVのファイルパスを設定。
 				std::string monsterStatusCSVFilePath = "Assets/CSV/Monsters/";

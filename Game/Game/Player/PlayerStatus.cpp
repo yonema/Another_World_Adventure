@@ -33,47 +33,16 @@ namespace nsAWA {
 			m_passiveSkillManager = passiveSkillManager;
 			m_featureManager = featureManager;
 
-			//ステータス反映のためのリストを初期化。
-			ResetStatusList();
-#ifdef _DEBUG
-
-			m_attack = 0.0f;
-
-			m_intelligence = 2.0f;
-
 			m_defence = 2.0f;
 			m_mind = 2.0f;
-#endif
-			
+
+			//ステータス反映のためのリストを初期化。
+			ResetStatusList();	
 		}
 
 		void CPlayerStatus::Update() {
 
 			std::list<nsFeature::CFeature*> featureList;
-
-			//パッシブスキルの効果のリストを順に参照。
-			//for (const auto& passiveSkill : m_passiveSkillManager->GetPassiveSkillList()) {
-			//
-			//	//パッシブスキルが登録されていなかったら。
-			//	if (passiveSkill == nullptr) {
-			//
-			//		//次へ。
-			//		continue;
-			//	}
-			//
-			//	for (const auto& feature : passiveSkill->GetFeatureList()) {
-			//
-			//		//効果のクラス名を取得。
-			//		const type_info& id = typeid(*feature);
-			//
-			//		//バフデバフなら。
-			//		if (typeid(nsFeature::nsStatusChanger::CBuffDebuff) == id) {
-			//
-			//			//効果のリストを順に取得。
-			//			featureList.emplace_back(feature);
-			//		}
-			//	}
-			//}
 
 			//ステータス変化のリストを順に参照。
 			for (const auto& feature : m_featureManager->GetStatusChanger()) {
@@ -117,10 +86,11 @@ namespace nsAWA {
 
 			//ステータスをロード。
 			m_level = std::stoi(statusDataStr[0]);
-			m_HP = std::stof(statusDataStr[1]);
-			m_maxHP = std::stof(statusDataStr[2]);
-			m_MP = std::stof(statusDataStr[3]);
-			m_maxMP = std::stof(statusDataStr[4]);
+			m_exp = std::stoi(statusDataStr[1]);
+			m_HP = std::stof(statusDataStr[2]);
+			m_maxHP = std::stof(statusDataStr[3]);
+			m_MP = std::stof(statusDataStr[4]);
+			m_maxMP = std::stof(statusDataStr[5]);
 			m_SP = kSPValue;
 			m_maxSP = kSPValue;
 			m_guardGaugeValue = kGGValue;

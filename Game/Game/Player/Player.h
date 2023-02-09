@@ -22,6 +22,7 @@ namespace nsAWA {
 		
 		class CPlayerBattleStatusUI;
 		class CSkillIconUI;
+		class CItemUI;
 	}
 
 	namespace nsPlayer {
@@ -61,6 +62,11 @@ namespace nsAWA {
 				//SPを回復。
 				m_status.HealSP(healValue);
 			}
+			void AddExp(float exp) {
+
+				//経験値を獲得。
+				m_status.AddExp(exp);
+			}
 
 		public:
 			CPlayerAction& GetPlayerAction() {
@@ -92,6 +98,11 @@ namespace nsAWA {
 		private:
 			void CreatePlayerModel();
 
+		public: // UI
+			void ChangeFromSkillToItemUI();
+
+			void ChangeFromItemToSkillUI();
+
 		private:
 			CPlayerInput m_input;									//入力
 			CPlayerAction m_action;									//アクション
@@ -107,6 +118,7 @@ namespace nsAWA {
 #endif		
 			nsUI::CPlayerBattleStatusUI* m_playerBattleStatusUI = nullptr;
 			nsUI::CSkillIconUI* m_skillIconUI = nullptr;
+			nsUI::CItemUI* m_itemUI = nullptr;
 
 		};
 	}

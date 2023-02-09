@@ -87,6 +87,9 @@ namespace nsAWA {
 
 				//各スキル使用への入力を受付。
 				InputSkillAction();
+
+				// UIの表示切替
+				CPlayerManager::GetInstance()->ChangeFromItemToSkillUI();
 			}
 
 			//アイテム選択準備。
@@ -108,6 +111,9 @@ namespace nsAWA {
 
 					itemManager->BackItem();
 				}
+
+				// UIの表示切替
+				CPlayerManager::GetInstance()->ChangeFromSkillToItemUI();
 			}
 
 			//R1,L1がともに押されていないなら。
@@ -155,6 +161,9 @@ namespace nsAWA {
 					//アイテムを使用。
 					m_playerAction->UseItem();
 				}
+
+				// UIの表示切替
+				CPlayerManager::GetInstance()->ChangeFromItemToSkillUI();
 			}
 
 			//ガード準備入力。
