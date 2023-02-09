@@ -39,5 +39,5 @@ EVENT,CoolTimeOff,FALSE
 NAME,Giyara_Death,
 SPEED,0.45,
 LOOP,FALSE,
-EVENT,Release,FALSE
+EVENT,Death,FALSE
 *,,

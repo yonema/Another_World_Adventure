@@ -14,6 +14,7 @@
 #endif
 #include "../UI/Battle/Player/PlayerBattleStatusUI.h"
 #include "../UI/Battle/Skill/SkillIconUI.h"
+#include "../UI/Battle/Item/ItemUI.h"
 
 namespace nsAWA {
 
@@ -64,6 +65,8 @@ namespace nsAWA {
 			//当たり判定を初期化。
 			m_collider.Init(this);
 
+			
+
 #ifdef _DEBUG
 			//仮に最初は毒パッシブスキルに設定。
 			CPlayerManager::GetInstance()->SetPassiveSkill(0, "Paralysiser");
@@ -92,11 +95,15 @@ namespace nsAWA {
 			m_skillIconUI = NewGO<nsUI::CSkillIconUI>();
 			m_skillIconUI->LoadLevel();
 
+			m_itemUI = NewGO<nsUI::CItemUI>();
+			m_itemUI->LoadLevel();
 
 			//データをロード。
 			CUserData userData;
 			userData.Load();
 
+			//プレイヤー管理クラスを初期化。
+			CPlayerManager::GetInstance()->Init(this);
 
 			return true;
 		}
@@ -175,7 +182,7 @@ namespace nsAWA {
 			//プレイヤーのHPを表示。
 
 			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"ATK = %4.1f", m_status.GetAttack("Physical"));
+			StringCbPrintf(m_dispText, dispTextSize, L"Level = %d , Exp = %d", m_status.GetLevel(), m_status.GetExp());
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}
@@ -316,6 +323,22 @@ namespace nsAWA {
 
 			//防具を受け取る。
 			return m_armor;
+		}
+
+		////////////////////////////////////////////////////////////
+		// UI
+		////////////////////////////////////////////////////////////
+
+		void CPlayer::ChangeFromSkillToItemUI()
+		{
+			m_skillIconUI->DeactiveDrawing();
+			m_itemUI->ActiveDrawing();
+		}
+
+		void CPlayer::ChangeFromItemToSkillUI()
+		{
+			m_itemUI->DeactiveDrawing();
+			m_skillIconUI->ActiveDrawing();
 		}
 	}
 }

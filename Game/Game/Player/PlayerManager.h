@@ -1,6 +1,7 @@
 #pragma once
 #include "../Skill/ActiveSkillList.h"
 #include "../Item/ItemManager.h"
+#include "Observer/ObservablePlayer.h"
 
 namespace nsAWA {
 
@@ -8,12 +9,12 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		class CPlayer;
+		
 
 		//プレイヤー管理クラス
 		class CPlayerManager : nsUtils::SNoncopyable
 		{
 		public:
-
 			static CPlayerManager* GetInstance() {
 
 				//インスタンスを生成。
@@ -25,15 +26,14 @@ namespace nsAWA {
 
 			void DeleteInstance() {
 
+				//オブザーバーを破棄。
+				m_observable.ReleaseObserver();
+
 				//インスタンスを破棄。
 				delete GetInstance();
 			}
 
-			void Init(IGameActor* player) {
-
-				//アイテム管理クラスを初期化。
-				m_itemManager.Init(player);
-			}
+			void Init(CPlayer* player);
 
 			bool FindPlayer();
 
@@ -55,7 +55,11 @@ namespace nsAWA {
 
 			void SetArmor(const std::string& armorName);
 
+			void NotifyObserver() {
 
+				//オブザーバーに通知。
+				m_observable.NotifyObserver();
+			}
 
 		public:
 			const std::string& GetActiveSkillName(const int skillNum);
@@ -86,8 +90,17 @@ namespace nsAWA {
 				return &m_itemManager;
 			}
 
+
+
+		public: // UI
+			void ChangeFromSkillToItemUI();
+
+			void ChangeFromItemToSkillUI();
+
 		private:
 			void ResetActiveSkill();
+
+			void CreateObserver();
 
 		private:
 			static const std::string m_kTestFontNotFound;
@@ -96,6 +109,7 @@ namespace nsAWA {
 			nsPlayer::CPlayer* m_player = nullptr;	//プレイヤーのポインタ
 			std::list<nsSkill::SActiveSkillData> m_canUseActiveSkillDataList;	//使用可能なアクティブスキルの名前のリスト
 			nsItem::CItemManager m_itemManager;		//アイテム管理クラス
+			nsObserver::CObservablePlayer m_observable;				//オブザーバー監視クラス
 		};
 	}
 }
