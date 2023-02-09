@@ -23,31 +23,32 @@ namespace nsAWA
             ~CItemUI() = default;
 
         public:
-            void LoadLevel(const char* tdlFilePath);
+            void LoadLevel();
 
         private:
             void Animation(); // UIのアニメーション
 
+
         public:
-            /**
-             * @brief プレイヤーのHPを
-             * @param hp 体力
-             * @param maxHP 体力の最大値
-            */
-            void SetUIPlayerMPStatus(const float& mp, const float& maxMP)
-            {
-                // 横幅の倍率を計算
-                m_barWidthSize = mp / maxMP;
-            }
+            void ActiveDrawing();
+
+            void DeactiveDrawing();
+
+
+
+        private: // constant member
+            static const char* m_kLevel2DFilePath;
+
+            static const char* m_kItemBaseSpriteFilePath;
+
+
 
         private: // data member
             // 実装されたら、下のやつを追加
             nsLevel2D::CLevel2D m_level;
 
-            CSpriteUI* m_spriteBase = nullptr; // HPバー
-
-
-            float m_barWidthSize = 1.0f; // プレイヤーの体力バーの横幅の倍率
+            CSpriteUI* m_spriteBase = nullptr;
+            //CSpriteUI* m_spriteItemIcon = nullptr;
 
         };
     }

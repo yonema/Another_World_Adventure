@@ -130,5 +130,27 @@ namespace nsAWA
         {
 
         }
+
+        void CSkillIconUI::ActiveDrawing()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            for (auto forNum : m_spriteSkillIcon) {
+                forNum->SetDrawingFlag(true);
+            }
+        }
+
+        void CSkillIconUI::DeactiveDrawing()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            for (auto forNum : m_spriteSkillIcon) {
+                forNum->SetDrawingFlag(false);
+            }
+        }
     }
 }

@@ -199,7 +199,7 @@
     <ClCompile Include="Game\UI\Battle\Player\PlayerMPUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Player\PlayerSPUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Skill\BattleSkillUI.cpp" />
-    <ClCompile Include="Game\UI\Battle\ItemUI.cpp" />
+    <ClCompile Include="Game\UI\Battle\Item\ItemUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Skill\SkillIconUI.cpp" />
     <ClCompile Include="Game\UI\Button\ButtonUI.cpp" />
     <ClCompile Include="Game\UI\Institution\Blacksmith\BlacksmithWindowUI.cpp" />
@@ -457,7 +457,7 @@
     <ClInclude Include="Game\UI\Battle\Player\PlayerMPUI.h" />
     <ClInclude Include="Game\UI\Battle\Player\PlayerSPUI.h" />
     <ClInclude Include="Game\UI\Battle\Skill\BattleSkillUI.h" />
-    <ClInclude Include="Game\UI\Battle\ItemUI.h" />
+    <ClInclude Include="Game\UI\Battle\Item\ItemUI.h" />
     <ClInclude Include="Game\UI\Battle\Skill\SkillIconUI.h" />
     <ClInclude Include="Game\UI\Button\ButtonUI.h" />
     <ClInclude Include="Game\UI\Institution\Blacksmith\BlacksmithWindowUI.h" />

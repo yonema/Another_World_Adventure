@@ -86,6 +86,13 @@ namespace nsAWA {
 				return &m_itemManager;
 			}
 
+
+
+		public: // UI
+			void ChangeFromSkillToItemUI();
+
+			void ChangeFromItemToSkillUI();
+
 		private:
 			void ResetActiveSkill();
 
