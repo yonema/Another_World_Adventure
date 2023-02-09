@@ -166,5 +166,20 @@ namespace nsYMEngine
 			return result;
 		}
 
+
+
+		bool ForwardMatchName(const char* str, const char* forwardStr)
+		{
+			auto len = strlen(forwardStr);
+			auto namelen = strlen(str);
+			if (len > namelen) 
+			{
+				//名前が長い。不一致。
+				return false;
+			}
+			return strncmp(str, forwardStr, len) == 0;
+		}
+
+
 	}
 }

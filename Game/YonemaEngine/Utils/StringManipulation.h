@@ -83,5 +83,16 @@ namespace nsYMEngine
 		 * @return ’u‚«Š·‚¦‚ªs‚í‚ê‚½•¶Í
 		*/
 		std::wstring ReplaceWordFromWideString(const std::wstring& sentence, const std::wstring& target, const std::wstring& replacement);
+
+
+		/**
+		 * @brief •¶š—ñ‚ª‘O•ûˆê’v‚·‚é‚©’²‚×‚é
+		 * @param str ’²‚×‚ç‚ê‚é•¶š—ñ
+		 * @param forwardStr ’²‚×‚é•¶š—ñ
+		 * @return ˆê’v‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+		 * @retval true : ˆê’v‚µ‚Ä‚¢‚é
+		 * @retval false : ˆê’v‚µ‚Ä‚È‚¢
+		*/
+		bool ForwardMatchName(const char* str, const char* forwardStr);
 	}
 }
