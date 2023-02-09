@@ -211,5 +211,15 @@ namespace nsAWA {
 
 			return m_player->GetActiveSkill(skillNum)->GetName();
 		}
+
+		void CPlayerManager::ChangeFromSkillToItemUI()
+		{
+			m_player->ChangeFromSkillToItemUI();
+		}
+
+		void CPlayerManager::ChangeFromItemToSkillUI()
+		{
+			m_player->ChangeFromItemToSkillUI();
+		}
 	}
 }

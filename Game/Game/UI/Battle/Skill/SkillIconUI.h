@@ -46,8 +46,16 @@ namespace nsAWA
             void Animation(); // UIのアニメーション
 
 
+
+        public:
+            void ActiveDrawing();
+
+            void DeactiveDrawing();
+
+
         private: // constant member
             static const char* m_kLevel2DFilePath;
+
             static const char* m_kSkillIconFilePath;
             static const char* m_kFireFilePath;
 
@@ -58,8 +66,8 @@ namespace nsAWA
 
             CSpriteUI* m_spriteSkillIcon[static_cast<int>(EnSkillButton::enMaxSkillButton)] = { nullptr };
 
-            CSpriteUI* m_spriteBase = nullptr;
-            CSpriteUI* m_spriteSkill = nullptr;
+            //CSpriteUI* m_spriteBase = nullptr;
+            //CSpriteUI* m_spriteSkill = nullptr;
         };
 
     }

@@ -235,7 +235,7 @@
     <ClCompile Include="Game\UI\Battle\Enemy\EnemyBattleStatusUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Enemy\EnemyBreakUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Enemy\EnemyHPUI.cpp" />
-    <ClCompile Include="Game\UI\Battle\ItemUI.cpp" />
+    <ClCompile Include="Game\UI\Battle\Item\ItemUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Player\PlayerBattleStatusUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Player\PlayerHPUI.cpp" />
     <ClCompile Include="Game\UI\Battle\Player\PlayerMPUI.cpp" />
@@ -485,7 +485,7 @@
     <ClInclude Include="Game\UI\Battle\Enemy\EnemyBattleStatusUI.h" />
     <ClInclude Include="Game\UI\Battle\Enemy\EnemyBreakUI.h" />
     <ClInclude Include="Game\UI\Battle\Enemy\EnemyHPUI.h" />
-    <ClInclude Include="Game\UI\Battle\ItemUI.h" />
+    <ClInclude Include="Game\UI\Battle\Item\ItemUI.h" />
     <ClInclude Include="Game\UI\Battle\Player\PlayerBattleStatusUI.h" />
     <ClInclude Include="Game\UI\Battle\Player\PlayerHPUI.h" />
     <ClInclude Include="Game\UI\Battle\Player\PlayerMPUI.h" />
