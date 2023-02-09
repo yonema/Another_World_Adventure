@@ -1,11 +1,10 @@
 #pragma once
+#include "EventProgress.h"
 
 namespace nsAWA
 {
 	namespace nsEvent
 	{
-		class CEventProgress;
-
 		class CEventProgressManager : nsUtils::SNoncopyable
 		{
 		private:
@@ -73,6 +72,13 @@ namespace nsAWA
 			 * @return イベントの進行度(進行できない状態なら-1)
 			*/
 			int GetProgression(std::string eventName);
+
+			/**
+			 * @brief 名前で指定したイベントの進行状態を取得する
+			 * @param eventName 取得するイベント名
+			 * @return イベントの進行状態
+			*/
+			EnEventState GetProgressState(std::string eventName);
 		private:
 			static CEventProgressManager* m_instance;		//インスタンス
 			

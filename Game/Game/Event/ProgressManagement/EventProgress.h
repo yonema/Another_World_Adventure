@@ -4,6 +4,14 @@ namespace nsAWA
 {
 	namespace nsEvent
 	{
+		enum class EnEventState
+		{
+			enNotReady,	//進行不可
+			enProgress,	//進行中
+			enCompleted,//完了
+			enExpired,	//終了済み
+		};
+
 		class CEventProgress
 		{
 		public:
@@ -38,7 +46,17 @@ namespace nsAWA
 			*/
 			void Progress()
 			{
+				if (m_progression >= m_maxProgress)
+				{
+					return;
+				}
+
 				m_progression++;
+
+				if (m_progression == m_maxProgress)
+				{
+					m_eventState = EnEventState::enCompleted;
+				}
 			}
 
 			/**
@@ -101,6 +119,23 @@ namespace nsAWA
 			{
 				return m_progression;
 			}
+
+			/**
+			 * @brief イベントの進行状態を取得
+			 * @return イベントの進行状態
+			*/
+			EnEventState GetProgressState()
+			{
+				return m_eventState;
+			}
+
+			/**
+			 * @brief イベントを終了済みとしてマーク
+			*/
+			void MarkAsExpired()
+			{
+				m_eventState = EnEventState::enExpired;
+			}
 		private:
 			std::list<CEventProgress*> m_followingEvents;	//このイベントを前提条件とするイベント
 
@@ -111,6 +146,9 @@ namespace nsAWA
 			int m_maxProgress = 0;							//最大進行度
 
 			std::string m_eventName = "";					//イベント名
+
+			EnEventState m_eventState = EnEventState::enProgress;	//イベントの進行状態
+
 		};
 	}
 }
