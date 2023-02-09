@@ -247,6 +247,8 @@
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
+    <ClCompile Include="Game\Event\ProgressManagement\EventProgressManager.cpp" />
+    <ClCompile Include="Game\Event\ProgressManagement\EventProgress.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -507,6 +509,8 @@
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
+    <ClInclude Include="Game\Event\ProgressManagement\EventProgressManager.h" />
+    <ClInclude Include="Game\Event\ProgressManagement\EventProgress.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
