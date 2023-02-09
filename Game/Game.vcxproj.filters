@@ -247,6 +247,9 @@
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
+    <ClCompile Include="Game\Player\Observer\PlayerObserver.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObservablePlayer.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -507,6 +510,9 @@
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
+    <ClInclude Include="Game\Player\Observer\PlayerObserver.h" />
+    <ClInclude Include="Game\Player\Observer\ObservablePlayer.h" />
+    <ClInclude Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

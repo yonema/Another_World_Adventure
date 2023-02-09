@@ -62,6 +62,11 @@ namespace nsAWA {
 				//SPを回復。
 				m_status.HealSP(healValue);
 			}
+			void AddExp(float exp) {
+
+				//経験値を獲得。
+				m_status.AddExp(exp);
+			}
 
 		public:
 			CPlayerAction& GetPlayerAction() {

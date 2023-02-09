@@ -74,13 +74,13 @@ namespace nsAWA {
 
 	void CLoadGame::Update(float deltaTime)
 	{
-		//#ifdef _DEBUG
-		//		//ƒMƒ„ƒ‰‚ðoŒ»‚³‚¹‚éB
-		//		if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
-		//
-		//			nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
-		//		}
-		//#endif
+#ifdef _DEBUG
+		//ƒMƒ„ƒ‰‚ðoŒ»‚³‚¹‚éB
+		if (Input()->IsTrigger(EnActionMapping::enUseItem)) {
+
+			nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+		}
+#endif
 	}
 
 	void CLoadGame::OnDestroy()

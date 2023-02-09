@@ -10,90 +10,106 @@
 #include "../Weapon/Weapon.h"
 #include "../Armor/Armor.h"
 
+#include "Observer/ObserverList/PlayerLevelObserver.h"
+
 namespace nsAWA {
 
 	namespace nsPlayer {
 
+		void CPlayerManager::Init(CPlayer* player) {
+
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å–å¾—ã€‚
+			m_player = player;
+
+			//ã‚¢ã‚¤ãƒ†ãƒ ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’åˆæœŸåŒ–ã€‚
+			m_itemManager.Init(dynamic_cast<IGameActor*>(m_player));
+
+			//ã‚ªãƒ–ã‚¶ãƒ¼ãƒãƒ¼ç›£è¦–ã‚¯ãƒ©ã‚¹ã‚’åˆæœŸåŒ–ã€‚
+			m_observable.Init(m_player);
+
+			//ã‚ªãƒ–ã‚¶ãƒ¼ãƒãƒ¼ã‚’ç”Ÿæˆã€‚
+			CreateObserver();
+		}
 		const std::string CPlayerManager::m_kTestFontNotFound = "Not Found";
 
 		bool CPlayerManager::FindPlayer() {
 
-			//Šù‚ÉƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚Á‚Ä‚¢‚é‚È‚çB
+			//æ—¢ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã£ã¦ã„ã‚‹ãªã‚‰ã€‚
 			if (m_player != nullptr) {
 
-				//¬Œ÷B
+				//æˆåŠŸã€‚
 				return true;
 			}
 
-			//ƒvƒŒƒCƒ„[‚ğŒŸõB
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ¤œç´¢ã€‚
 			auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
 
 			if (player != nullptr) {
 
-				//ƒvƒŒƒCƒ„[‚ğ”­Œ©B
+				//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç™ºè¦‹ã€‚
 				m_player = player;
 
-				//¬Œ÷B
+				//æˆåŠŸã€‚
 				return true;
 			}
 			else {
 
-				//ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½B
+				//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸã€‚
 				return false;
 			}
 		}
 
 		void CPlayerManager::SetPlayer(CPlayer* player) {
 
-			//ƒvƒŒƒCƒ„[‚ğİ’èB
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¨­å®šã€‚
 			m_player = player;
 
-			//ƒAƒCƒeƒ€ŠÇ—ƒNƒ‰ƒX‚Ìƒ^[ƒQƒbƒg‚ğİ’èB
+			//ã‚¢ã‚¤ãƒ†ãƒ ç®¡ç†ã‚¯ãƒ©ã‚¹ã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’è¨­å®šã€‚
 			m_itemManager.SetTatget(player);
 		}
 
 		void CPlayerManager::SetActiveSkill(int setNum, const std::string& activeSkillName) {
 
-			//İ’è”Ô†‚ğƒ`ƒFƒbƒNB
+			//è¨­å®šç•ªå·ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
 			if (setNum >= nsSkill::CActiveSkill::m_kActiveSkillNumMax) {
 
-				nsGameWindow::MessageBoxError(L"ƒAƒNƒeƒBƒuƒXƒLƒ‹‚Ìİ’è”Ô†‚ª‹K’è”‚ğ’´‚¦‚Ä‚¢‚Ü‚·B");
+				nsGameWindow::MessageBoxError(L"ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®è¨­å®šç•ªå·ãŒè¦å®šæ•°ã‚’è¶…ãˆã¦ã„ã¾ã™ã€‚");
 			}
 
-			//–¼‘O‚©‚çƒAƒNƒeƒBƒuƒXƒLƒ‹‚ğ¶¬B
+			//åå‰ã‹ã‚‰ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã‚’ç”Ÿæˆã€‚
 			nsSkill::CActiveSkillBuilder activeSkillBuilder;
 			nsSkill::CActiveSkill* activeSkill =  activeSkillBuilder.CreateActiveSkill(activeSkillName);
 
-			//ƒvƒŒƒCƒ„[‚ÉƒAƒNƒeƒBƒuƒXƒLƒ‹‚ğİ’èB
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã‚’è¨­å®šã€‚
 			m_player->SetActiveSkill(setNum, activeSkill);
 		}
 
 		void CPlayerManager::SetPassiveSkill(int setNum, const std::string& passiveSkillName) {
 
-			//İ’è”Ô†‚ğƒ`ƒFƒbƒNB
+			//è¨­å®šç•ªå·ã‚’ãƒã‚§ãƒƒã‚¯ã€‚
 			if (setNum >= m_player->GetPassiveSkillManager()->GetPassiveSkillMaxNum()) {
 
-				nsGameWindow::MessageBoxError(L"ƒpƒbƒVƒuƒXƒLƒ‹‚Ìİ’è”Ô†‚ª‹K’è”‚ğ’´‚¦‚Ä‚¢‚Ü‚·B");
+				nsGameWindow::MessageBoxError(L"ãƒ‘ãƒƒã‚·ãƒ–ã‚¹ã‚­ãƒ«ã®è¨­å®šç•ªå·ãŒè¦å®šæ•°ã‚’è¶…ãˆã¦ã„ã¾ã™ã€‚");
 			}
 
-			//–¼‘O‚©‚çƒpƒbƒVƒuƒXƒLƒ‹‚ğ¶¬B
+			//åå‰ã‹ã‚‰ãƒ‘ãƒƒã‚·ãƒ–ã‚¹ã‚­ãƒ«ã‚’ç”Ÿæˆã€‚
 			nsSkill::CPassiveSkillBuilder passiveSkillBuilder;
 			nsSkill::CPassiveSkill* passiveSkill = passiveSkillBuilder.CreatePassiveSkill(passiveSkillName);
 
-			//ƒŠƒXƒg‚©‚çŒø‰Ê‚ğ¶¬B
+			//ãƒªã‚¹ãƒˆã‹ã‚‰åŠ¹æœã‚’ç”Ÿæˆã€‚
 			nsFeature::CFeatureBuilder featureBuilder;
 			featureBuilder.CreateFeature(m_player, m_player, passiveSkill->GetFeatureListStr(), passiveSkill->GetFeatureList());
 
-			//ƒvƒŒƒCƒ„[‚ÉƒpƒbƒVƒuƒXƒLƒ‹‚ğİ’èB
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ‘ãƒƒã‚·ãƒ–ã‚¹ã‚­ãƒ«ã‚’è¨­å®šã€‚
 			m_player->GetPassiveSkillManager()->SetPassiveSkill(setNum, passiveSkill);
 		}
 
 		std::list<nsSkill::SActiveSkillData> CPlayerManager::GetCanUseActiveSkillList() {
 
-			//g—p‰Â”\‚ÈƒAƒNƒeƒBƒuƒXƒLƒ‹‚ÌƒŠƒXƒg‚ğ’è‹`B
+			//ä½¿ç”¨å¯èƒ½ãªã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®ãƒªã‚¹ãƒˆã‚’å®šç¾©ã€‚
 			std::list<nsSkill::SActiveSkillData> canUseActiveSkillList;
 
-			//•Šíí‚ğæ“¾B
+			//æ­¦å™¨ç¨®ã‚’å–å¾—ã€‚
 			nsWeapon::EnWeaponType type = m_player->GetWeapon()->GetWeaponType();
 			std::string typeName = "NoTypeName";
 
@@ -112,24 +128,24 @@ namespace nsAWA {
 
 			for (const auto& activeSkill : m_canUseActiveSkillDataList) {
 
-				//•Šíí‚Æƒ^ƒCƒv‚ª‚ ‚Á‚Ä‚¢‚é‚©A–‚–@ƒXƒLƒ‹‚È‚çB
+				//æ­¦å™¨ç¨®ã¨ã‚¿ã‚¤ãƒ—ãŒã‚ã£ã¦ã„ã‚‹ã‹ã€é­”æ³•ã‚¹ã‚­ãƒ«ãªã‚‰ã€‚
 				if (activeSkill.type == typeName || activeSkill.type == "Magic") {
 
-					//g‚¦‚éƒAƒNƒeƒBƒuƒXƒLƒ‹‚Æ‚µ‚Äİ’èB
+					//ä½¿ãˆã‚‹ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã¨ã—ã¦è¨­å®šã€‚
 					canUseActiveSkillList.emplace_back(activeSkill);
 				}
 			}
 
-			//g‚¦‚éƒAƒNƒeƒBƒuƒXƒLƒ‹‚Ìƒf[ƒ^‚ğƒŠƒ^[ƒ“B
+			//ä½¿ãˆã‚‹ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®ãƒ‡ãƒ¼ã‚¿ã‚’ãƒªã‚¿ãƒ¼ãƒ³ã€‚
 			return canUseActiveSkillList;
 		}
 
 		void CPlayerManager::ResetActiveSkill() {
 
-			//•Šíí‚ğæ“¾B
+			//æ­¦å™¨ç¨®ã‚’å–å¾—ã€‚
 			nsWeapon::EnWeaponType weaponType = m_player->GetWeapon()->GetWeaponType();
 
-			//•Šíí‚©‚çƒ^ƒCƒv‚ğ’è‹`B
+			//æ­¦å™¨ç¨®ã‹ã‚‰ã‚¿ã‚¤ãƒ—ã‚’å®šç¾©ã€‚
 			nsSkill::CActiveSkill::EnActiveSkillType activeSkillType = nsSkill::CActiveSkill::EnActiveSkillType::enNone;
 
 			switch (weaponType) {
@@ -145,25 +161,25 @@ namespace nsAWA {
 				break;
 			}
 
-			//ƒAƒNƒeƒBƒuƒXƒLƒ‹‚ğ‡‚ÉQÆB
+			//ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã‚’é †ã«å‚ç…§ã€‚
 			for (int activeSkillNum = 0; activeSkillNum < nsSkill::CActiveSkill::m_kActiveSkillNumMax; activeSkillNum++) {
 
-				//ƒAƒNƒeƒBƒuƒXƒLƒ‹‚ğæ“¾B
+				//ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã‚’å–å¾—ã€‚
 				nsSkill::CActiveSkill* activeSkill = m_player->GetActiveSkill(activeSkillNum);
 
-				//ƒAƒNƒeƒBƒuƒXƒLƒ‹‚ªİ’è‚³‚ê‚Ä‚¢‚È‚©‚Á‚½‚çB
+				//ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ãŒè¨­å®šã•ã‚Œã¦ã„ãªã‹ã£ãŸã‚‰ã€‚
 				if (activeSkill == nullptr) {
 
-					//Ÿ‚ÖB
+					//æ¬¡ã¸ã€‚
 					continue;
 				}
 
-				//İ’è’†‚ÌƒAƒNƒeƒBƒuƒXƒLƒ‹‚ª–‚–@ƒXƒLƒ‹‚¶‚á‚È‚­A
-				//•Šíí‚Æˆê’v‚µ‚Ä‚¢‚È‚©‚Á‚½‚çB
+				//è¨­å®šä¸­ã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ãŒé­”æ³•ã‚¹ã‚­ãƒ«ã˜ã‚ƒãªãã€
+				//æ­¦å™¨ç¨®ã¨ä¸€è‡´ã—ã¦ã„ãªã‹ã£ãŸã‚‰ã€‚
 				if (activeSkill->GetType() != nsSkill::CActiveSkill::EnActiveSkillType::enMagic
 					&& activeSkillType != activeSkill->GetType()) {
 
-					//‚»‚ÌƒAƒNƒeƒBƒuƒXƒLƒ‹‚ğŠO‚·B
+					//ãã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã‚’å¤–ã™ã€‚
 					m_player->SetActiveSkill(activeSkillNum, nullptr);
 				}
 			}
@@ -171,35 +187,35 @@ namespace nsAWA {
 
 		void CPlayerManager::SetWeapon(const std::string& weaponName) {
 
-			//•Ší\’zƒNƒ‰ƒX‚ğ¶¬B
+			//æ­¦å™¨æ§‹ç¯‰ã‚¯ãƒ©ã‚¹ã‚’ç”Ÿæˆã€‚
 			nsWeapon::CWeaponBuilder weaponBuilder;
 
-			//•Ší‚ğ¶¬B
+			//æ­¦å™¨ã‚’ç”Ÿæˆã€‚
 			nsWeapon::CWeapon* weapon = weaponBuilder.CreateWeapon(weaponName);
 
-			//•Ší‚ğİ’èB
+			//æ­¦å™¨ã‚’è¨­å®šã€‚
 			m_player->SetWeapon(weapon);
 
-			//ƒAƒNƒeƒBƒuƒXƒLƒ‹‚Ìİ’è‚ğXVB
+			//ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®è¨­å®šã‚’æ›´æ–°ã€‚
 			ResetActiveSkill();
 		}
 
 		void CPlayerManager::SetArmor(const std::string& armorName) {
 
-			//–h‹ï\’zƒNƒ‰ƒX‚ğ¶¬B
+			//é˜²å…·æ§‹ç¯‰ã‚¯ãƒ©ã‚¹ã‚’ç”Ÿæˆã€‚
 			nsArmor::CArmorBuilder armorBuilder;
 
-			//–h‹ï‚ğ¶¬B
+			//é˜²å…·ã‚’ç”Ÿæˆã€‚
 			nsArmor::CArmor* armor = armorBuilder.CreateArmor(armorName);
 
-			//–h‹ï‚ğİ’èB
+			//é˜²å…·ã‚’è¨­å®šã€‚
 			m_player->SetArmor(armor);
 		}
 
 		const std::string& CPlayerManager::GetActiveSkillName(const int skillNum)
 		{
 			if (false == FindPlayer()) {
-				nsGameWindow::MessageBoxWarning(L"CPlayerManager : player ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+				nsGameWindow::MessageBoxWarning(L"CPlayerManager : player ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
 
 				return m_kTestFontNotFound;
 			}
@@ -220,6 +236,12 @@ namespace nsAWA {
 		void CPlayerManager::ChangeFromItemToSkillUI()
 		{
 			m_player->ChangeFromItemToSkillUI();
+		}
+
+		void CPlayerManager::CreateObserver() {
+
+			//ã‚ªãƒ–ã‚¶ãƒ¼ãƒãƒ¼ã‚’è¿½åŠ ã€‚
+			m_observable.AddObserver(new nsObserver::CPlayerLevelObserver);
 		}
 	}
 }

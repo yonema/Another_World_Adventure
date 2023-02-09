@@ -161,6 +161,9 @@
     <ClCompile Include="Game\Magic\MagicBallForward.cpp" />
     <ClCompile Include="Game\Magic\MagicToPlayer.cpp" />
     <ClCompile Include="Game\Skill\PassiveSkillList.cpp" />
+    <ClCompile Include="Game\Player\Observer\PlayerObserver.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObservablePlayer.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
@@ -406,6 +409,9 @@
     <ClInclude Include="Game\Magic\MagicBallForward.h" />
     <ClInclude Include="Game\Magic\MagicToPlayer.h" />
     <ClInclude Include="Game\Skill\PassiveSkillList.h" />
+    <ClInclude Include="Game\Player\Observer\PlayerObserver.h" />
+    <ClInclude Include="Game\Player\Observer\ObservablePlayer.h" />
+    <ClInclude Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
