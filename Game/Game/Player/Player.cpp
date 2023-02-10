@@ -103,8 +103,14 @@ namespace nsAWA {
 
 		void CPlayer::OnDestroySub() {
 
-			//プレイヤーモデルを破棄。
-			DeleteGO(m_modelRenderer);
+			//プレイヤー管理クラスを破棄。
+			CPlayerManager::GetInstance()->DeleteInstance();
+
+			//アクションクラスを破棄。
+			m_action.Release();
+
+			//入力クラスを破棄。
+			m_input.Release();
 
 			//アニメーションを破棄。
 			m_animation.Release();

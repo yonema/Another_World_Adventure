@@ -13,6 +13,8 @@ namespace nsAWA {
 		class CFeatureManager : nsUtils::SNoncopyable
 		{
 		public:
+			void Release();
+
 			void AddStatusChanger(nsFeature::CFeature* statusChanger) {
 
 				//ステータス変化を付与。

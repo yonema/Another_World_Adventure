@@ -23,10 +23,23 @@ namespace nsAWA {
 
 	void IGameActor::OnDestroy() {
 
+		//モデルを破棄。
+		DeleteGO(m_modelRenderer);
+
+		//パッシブスキル管理クラスを破棄。
 		if (m_passiveSkillManager != nullptr) {
 
-			//パッシブスキル管理クラスを破棄。
+			m_passiveSkillManager->Release();
+			
 			delete m_passiveSkillManager;
+		}
+
+		//ステータス変化管理クラスを破棄。
+		if (m_featureManager != nullptr) {
+
+			m_featureManager->Release();
+
+			delete m_featureManager;
 		}
 
 		//派生クラスの破棄処理。

@@ -18,6 +18,8 @@ namespace nsAWA {
 		}
 		virtual void CreateCollider() = 0;
 
+		void Release();
+
 	public:
 
 		IGameActor* GetGameActor()const {

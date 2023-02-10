@@ -75,6 +75,8 @@ namespace nsAWA {
 				nsPlayerAnimation::CPlayerAnimation* playerAnimation
 			);
 
+			void Release();
+
 			void Update(float deltaTime);
 
 			void Move(float inputX,float inputZ, float speed = 0.0f);

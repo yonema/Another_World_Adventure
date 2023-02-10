@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerObserver.h"
 
 namespace nsAWA {
 
@@ -23,11 +24,11 @@ namespace nsAWA {
 					m_player = player;
 				}
 
-				void AddObserver(CPlayerObserver* observer);
+				void AddObserver(CPlayerObserver* observer, EnObserverEvent observerEvent);
 
 				void ReleaseObserver();
 
-				void NotifyObserver();
+				void NotifyObserver(EnObserverEvent observerEvent);
 
 			private:
 				CPlayer* m_player = nullptr;				//ÉvÉåÉCÉÑÅ[

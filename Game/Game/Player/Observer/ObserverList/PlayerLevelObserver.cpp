@@ -14,7 +14,7 @@ namespace nsAWA {
 				constexpr const wchar_t* kExpTableCSVFilePath = L"Assets/CSV/Player/ExpTable.csv";	//経験値テーブルのCSVのファイルパス
 			}
 
-			void CPlayerLevelObserver::Init(CObservablePlayer* observablePlayer) {
+			void CPlayerLevelObserver::InitSub(CObservablePlayer* observablePlayer) {
 
 				//経験値テーブルのCSVをロード。
 				nsCSV::CCsvManager csvManager;

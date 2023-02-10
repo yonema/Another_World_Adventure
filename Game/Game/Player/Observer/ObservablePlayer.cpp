@@ -9,13 +9,13 @@ namespace nsAWA {
 
 		namespace nsObserver {
 
-			void CObservablePlayer::AddObserver(CPlayerObserver* observer) {
+			void CObservablePlayer::AddObserver(CPlayerObserver* observer, EnObserverEvent observerEvent) {
 
 				//オブザーバーを追加。
 				m_observerList.emplace_back(observer);
 
 				//初期化。
-				observer->Init(this);
+				observer->Init(this, observerEvent);
 			}
 
 			void CObservablePlayer::ReleaseObserver() {
@@ -32,13 +32,24 @@ namespace nsAWA {
 				}
 			}
 
-			void CObservablePlayer::NotifyObserver() {
+			void CObservablePlayer::NotifyObserver(EnObserverEvent observerEvent) {
 
 				//各オブザーバーに通知。
 				for (const auto& observer : m_observerList) {
 
-					//更新。
-					observer->Update(this);
+					//イベントリストを順に参照。
+					for (auto observerEventData : observer->GetEventList()) {
+
+						//イベントが一致したら。
+						if (observerEventData == observerEvent) {
+
+							//更新。
+							observer->Update(this);
+
+							//このオブザーバーは更新したので終了。
+							break;
+						}
+					}
 				}
 			}
 
