@@ -25,6 +25,11 @@ namespace nsAWA {
 		class CWeapon;
 	}
 
+	namespace nsArmor {
+
+		class CArmor;
+	}
+
 	namespace nsPlayer {
 
 		
@@ -34,6 +39,7 @@ namespace nsAWA {
 		{
 		public:
 			void Init(const nsWeapon::CWeapon* const & playerWeapon,
+				const nsArmor::CArmor* const & playerArmor,
 				nsSkill::CPassiveSkillManager* passiveSkillManager,
 				nsFeature::CFeatureManager* featureManager
 				);
@@ -164,6 +170,7 @@ namespace nsAWA {
 			float m_maxGuardGaugeValue = 0.0f;	//ガードゲージの最大値
 
 			const nsWeapon::CWeapon* const * m_weapon = nullptr;	//武器情報
+			const nsArmor::CArmor* const * m_armor = nullptr;	//防具情報
 			nsSkill::CPassiveSkillManager* m_passiveSkillManager = nullptr;	//パッシブスキル管理クラス
 			nsFeature::CFeatureManager* m_featureManager = nullptr;	//効果リスト
 

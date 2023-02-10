@@ -84,8 +84,6 @@ namespace nsAWA {
 
 					position.y = m_nextPosition.y;
 				}
-
-				m_fontRenderer->SetPosition(position);
 			}
 
 			if (fabsf(m_nextPosition.x - position.x) > FLT_EPSILON) {
@@ -96,9 +94,9 @@ namespace nsAWA {
 
 					position.x = m_nextPosition.x;
 				}
-
-				m_fontRenderer->SetPosition(position);
 			}
+
+			m_fontRenderer->SetPosition(position);
 		}
 
 		void CLogParts::AddPosition() {
