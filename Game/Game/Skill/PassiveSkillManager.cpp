@@ -17,12 +17,13 @@ namespace nsAWA {
 			//パッシブスキルを破棄。
 			for (auto itr = m_passiveSkill.begin(); itr != m_passiveSkill.end(); ) {
 
-				//破棄。
-				delete (*itr);
+				if ((*itr) != nullptr) {
+					//破棄。
+					delete (*itr);
+				}
 				itr = m_passiveSkill.erase(itr);
 
-				//次のイテレータに移る。
-				itr++;
+				continue;
 			}
 		}
 

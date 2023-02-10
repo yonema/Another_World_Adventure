@@ -225,7 +225,7 @@ namespace nsAWA {
 					m_action.SetState(EnPlayerState::enDamage);
 
 					//クールタイムをONに設定。
-					m_input.CoolTimeOn();
+					m_input.InputDisable();
 
 					//一回ひるんだので、二回以上のひるみは無効とする。
 					while (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {

@@ -34,14 +34,14 @@ namespace nsAWA {
 
 			void CPlayerAnimationEvent::CoolTimeOn() {
 
-				//クールタイムをONにする。
-				m_playerInput->CoolTimeOn();
+				//入力不可に設定。
+				m_playerInput->InputDisable();
 			}
 
 			void CPlayerAnimationEvent::CoolTimeOff() {
 
-				//クールタイムをOFFにする。
-				m_playerInput->CoolTimeOff();
+				//入力可能に設定。
+				m_playerInput->InputEnable();
 
 				//ステートを初期化する。
 				m_playerInput->ChangeState();
