@@ -11,6 +11,7 @@
 #include "../Armor/Armor.h"
 
 #include "Observer/ObserverList/PlayerLevelObserver.h"
+#include "Observer/PlayerObserver.h"
 
 namespace nsAWA {
 
@@ -241,7 +242,7 @@ namespace nsAWA {
 		void CPlayerManager::CreateObserver() {
 
 			//オブザーバーを追加。
-			m_observable.AddObserver(new nsObserver::CPlayerLevelObserver);
+			m_observable.AddObserver(new nsObserver::CPlayerLevelObserver, nsObserver::EnObserverEvent::enWin);
 		}
 	}
 }

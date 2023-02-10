@@ -35,6 +35,9 @@ namespace nsAWA {
 		EnableAutoFitCullingBoxToMainCamera();
 #endif
 
+		//ゲームリストを生成。
+		CreateGameList();
+
 		//プレイヤーを生成。
 		m_player = NewGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
 
@@ -43,27 +46,6 @@ namespace nsAWA {
 
 		//バックグラウンドを生成。
 		m_backGround = NewGO<nsBackGround::CBackGround>(nsBackGround::CBackGround::m_kObjName_BackGround);
-
-		//アイテムリストを生成。
-		nsItem::CAllItemList::GetInstance()->LoadAllItemList();
-
-		//モンスターリストを生成。
-		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
-
-		//アクティブスキルのリストを生成。
-		nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
-
-		//パッシブスキルのリストを生成。
-		nsSkill::CPassiveSkillList::GetInstance()->LoadPassiveSkillList();
-
-		//武器のリストを生成。
-		nsWeapon::CWeaponList::GetInstance()->LoadWeaponList();
-
-		//防具のリストを生成。
-		nsArmor::CArmorList::GetInstance()->LoadArmorList();
-
-		//魔法のリストを生成。
-		nsMagic::CMagicList::GetInstance()->LoadMagicList();
 
 #ifdef _DEBUG
 		nsMonster::CMonster* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
@@ -85,10 +67,64 @@ namespace nsAWA {
 
 	void CLoadGame::OnDestroy()
 	{
+		//ゲームリストを破棄。
+		DeleteGameList();
+
 		//プレイヤーを破棄。
 		DeleteGO(m_player);
 
 		//メインカメラを破棄。
 		DeleteGO(m_mainCamera);
+
+		//地形を破棄。
+		DeleteGO(m_backGround);
+	}
+
+	void CLoadGame::CreateGameList() {
+
+		//アイテムリストを生成。
+		nsItem::CAllItemList::GetInstance()->LoadAllItemList();
+
+		//モンスターリストを生成。
+		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
+
+		//アクティブスキルのリストを生成。
+		nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
+
+		//パッシブスキルのリストを生成。
+		nsSkill::CPassiveSkillList::GetInstance()->LoadPassiveSkillList();
+
+		//武器のリストを生成。
+		nsWeapon::CWeaponList::GetInstance()->LoadWeaponList();
+
+		//防具のリストを生成。
+		nsArmor::CArmorList::GetInstance()->LoadArmorList();
+
+		//魔法のリストを生成。
+		nsMagic::CMagicList::GetInstance()->LoadMagicList();
+	}
+
+	void CLoadGame::DeleteGameList() {
+
+		//アイテムリストを破棄。
+		nsItem::CAllItemList::GetInstance()->DeleteInstance();
+
+		//モンスターリストを破棄。
+		nsMonster::CMonsterList::GetInstance()->DeleteInstance();
+
+		//アクティブスキルのリストを破棄。
+		nsSkill::CActiveSkillList::GetInstance()->DeleteInstance();
+
+		//パッシブスキルのリストを破棄。
+		nsSkill::CPassiveSkillList::GetInstance()->DeleteInstance();
+
+		//武器のリストを破棄。
+		nsWeapon::CWeaponList::GetInstance()->DeleteInstance();
+
+		//防具のリストを破棄。
+		nsArmor::CArmorList::GetInstance()->DeleteInstance();
+
+		//魔法のリストを破棄。
+		nsMagic::CMagicList::GetInstance()->DeleteInstance();
 	}
 }

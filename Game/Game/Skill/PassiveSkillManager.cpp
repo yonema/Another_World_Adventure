@@ -12,6 +12,20 @@ namespace nsAWA {
 			m_passiveSkill.resize(m_passiveSkillMaxNum);
 		}
 
+		void CPassiveSkillManager::Release() {
+
+			//パッシブスキルを破棄。
+			for (auto itr = m_passiveSkill.begin(); itr != m_passiveSkill.end(); ) {
+
+				//破棄。
+				delete (*itr);
+				itr = m_passiveSkill.erase(itr);
+
+				//次のイテレータに移る。
+				itr++;
+			}
+		}
+
 		void CPassiveSkillManager::SetPassiveSkill(int skillNum, nsSkill::CPassiveSkill* passiveSkill) {
 
 			//最大可能装着数を超えているなら。

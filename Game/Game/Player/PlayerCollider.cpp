@@ -52,14 +52,5 @@ namespace nsAWA {
 			//座標を設定。
 			m_triggerBox.SetPosition(finalPosition);
 		}
-
-		void CPlayerCollider::Release() {
-
-			//当たり判定を破棄。
-			m_triggerBox.Release();
-
-			//破棄された。
-			m_released = true;
-		}
 	}
 }

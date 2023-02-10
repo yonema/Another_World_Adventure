@@ -8,6 +8,20 @@ namespace nsAWA {
 
 	namespace nsFeature {
 
+		void CFeatureManager::Release() {
+
+			//効果を破棄。
+			for (auto itr = m_feature.begin(); itr != m_feature.end(); ) {
+
+				//破棄。
+				delete (*itr);
+				itr = m_feature.erase(itr);
+
+				//次のイテレータに移る。
+				itr++;
+			}
+		}
+
 		void CFeatureManager::UpdateFeature(float deltaTime) {
 
 			//ステータス変化のリストのイテレータを順に参照。

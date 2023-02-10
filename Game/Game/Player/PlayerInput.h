@@ -21,6 +21,8 @@ namespace nsAWA {
 		public:
 			void Init(CPlayerAction* playerAction, nsPlayerAnimation::CPlayerAnimation* playerAnimation);
 
+			void Release() {};
+
 			void Update(bool isAnimationPlaying);
 
 			void CoolTimeOn() {
