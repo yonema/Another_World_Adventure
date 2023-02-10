@@ -263,6 +263,8 @@
     <ClCompile Include="Game\Scenes\YonejiTestScene.cpp" />
     <ClCompile Include="Game\Humans\TalkToPlayer.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerInputObserver.cpp" />
+    <ClCompile Include="Game\GameLog\GameLog.cpp" />
+    <ClCompile Include="Game\GameLog\LogParts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -541,6 +543,8 @@
     <ClInclude Include="Game\Humans\TalkToPlayer.h" />
     <ClInclude Include="Game\Humans\HumanTable.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerInputObserver.h" />
+    <ClInclude Include="Game\GameLog\GameLog.h" />
+    <ClInclude Include="Game\GameLog\LogParts.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

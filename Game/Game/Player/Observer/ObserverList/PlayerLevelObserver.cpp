@@ -2,6 +2,7 @@
 #include "PlayerLevelObserver.h"
 #include "../ObservablePlayer.h"
 #include "../../../CSV/CSVManager.h"
+#include "../../../GameLog/GameLog.h"
 
 namespace nsAWA {
 
@@ -64,6 +65,13 @@ namespace nsAWA {
 
 						//レベルアップ。
 						observablePlayer->SetLevel(level);
+
+						std::string levelUpText = "レベルが";
+						levelUpText += std::to_string(level);
+						levelUpText += "に上がった!";
+
+						//レベルアップテキストを表示。
+						nsGameLog::CGameLog::GetInstance()->AddGameLog(levelUpText);
 					}
 
 					//終了。
