@@ -91,6 +91,8 @@ namespace nsAWA {
 
 			void AddItem(std::string itemName, int getNum = 1, bool back = true);
 
+			void AddMaterialItem(std::string itemName, int getNum = 1);
+
 			bool HasItem()const {
 
 				//サイズが0より大きいかどうかをリターン。
@@ -99,6 +101,7 @@ namespace nsAWA {
 
 		private:
 			std::list<SHasItem> m_sItemList;	//アイテムリスト
+			std::list<SHasItem> m_materialItemList;	//素材アイテムリスト
 			IGameActor* m_target = nullptr;		//ターゲット
 		};
 	}

@@ -2,6 +2,7 @@
 #include "../Status.h"
 #include "Monster.h"
 #include "MonsterList.h"
+#include "../Item/MaterialItemList.h"
 
 #include "../UI/Battle/Enemy/EnemyBattleStatusUI.h"
 
@@ -12,6 +13,10 @@ namespace nsAWA {
 		namespace {
 
 			constexpr const char* const kMonsterModelTextureRootPath = "monster";	//モンスターモデルのテクスチャのパス
+			constexpr int kDropMin = 1;	//ドロップ最低確率
+			constexpr int kDropMax = 100;//ドロップ最大確率
+			constexpr int kNormalItemDropPer = 80;//ノーマルアイテムのドロップ率(％)
+			constexpr int kRareItemDropPer = 30;//レアアイテムのドロップ率(％)
 		}
 
 		const char* const CMonster::m_kObjName_Monster = "Monster";
@@ -89,6 +94,9 @@ namespace nsAWA {
 
 			//獲得経験値量を設定。
 			m_dropExp = monsterInfo.dropExp;
+
+			//ドロップアイテムのリストを設定。
+			m_dropItemList = monsterInfo.dropMaterialItemList;
 
 			//ステータスを初期化。
 			m_status.Init(m_name);
@@ -185,6 +193,31 @@ namespace nsAWA {
 
 			//ステータスを取得。
 			return &m_status;
+		}
+
+		bool CMonster::CheckDrop(const std::string& dropItemName) {
+
+			//素材アイテムリストクラスのインスタンスを取得。
+			auto materialItemListInstance = nsItem::CMaterialItemList::GetInstance();
+
+			//素材アイテム情報を取得。
+			nsItem::SMaterialItemInfo materialItem = materialItemListInstance->GetMaterialItemInfo(dropItemName);
+
+			//抽選。
+			int result = Random()->GetRangeInt(kDropMin, kDropMax);
+
+			//結果をリターン。
+			if (materialItem.rank == "Normal" && result <= kNormalItemDropPer
+				|| materialItem.rank == "Rare" && result <= kRareItemDropPer
+				){
+
+				//成功。
+				return true;
+			}
+			else {
+				//失敗。
+				return false;
+			}
 		}
 	}
 }

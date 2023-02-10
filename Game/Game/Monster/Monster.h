@@ -122,12 +122,21 @@ namespace nsAWA {
 				return m_dropExp;
 			}
 
+			const std::list<std::string>& GetDropItemList()const {
+
+				//ドロップアイテムリストを取得。
+				return m_dropItemList;
+			}
+
+			bool CheckDrop(const std::string& dropItemName);
+
 		private:
 			void CreateMonsterModel(const SMonsterInitData& monsterInfo);
 
 		private:
 			std::string m_name = "NoName";				//名前
 			int m_dropExp = 0;							//獲得経験値量
+			std::list<std::string> m_dropItemList;		//ドロップアイテムリスト
 
 			CMonsterCollider m_collider;				//コライダー
 			CMonsterStatus m_status;					//ステータス
