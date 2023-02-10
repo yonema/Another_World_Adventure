@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Humans\Human.cpp" />
     <ClCompile Include="Game\Event\ProgressManagement\EventProgress.cpp" />
     <ClCompile Include="Game\Event\ProgressManagement\EventProgressManager.cpp" />
     <ClCompile Include="Game\UI\Story\ConversationTextUI.cpp" />
@@ -166,6 +167,15 @@
     <ClCompile Include="Game\Player\Observer\PlayerObserver.cpp" />
     <ClCompile Include="Game\Player\Observer\ObservablePlayer.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.cpp" />
+    <ClCompile Include="Game\HumanTest.cpp" />
+    <ClCompile Include="Game\Humans\HumanManager.cpp" />
+    <ClCompile Include="Game\Humans\HumanModelRenderer.cpp" />
+    <ClCompile Include="Game\Scenes\MainGameScene.cpp" />
+    <ClCompile Include="Game\Scenes\OpeningScene.cpp" />
+    <ClCompile Include="Game\Scenes\TitleScene.cpp" />
+    <ClCompile Include="Game\Scenes\SceneBase.cpp" />
+    <ClCompile Include="Game\Scenes\YonejiTestScene.cpp" />
+    <ClCompile Include="Game\Humans\TalkToPlayer.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerInputObserver.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
@@ -401,8 +411,11 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Humans\Human.h" />
     <ClInclude Include="Game\Event\ProgressManagement\EventProgress.h" />
     <ClInclude Include="Game\Event\ProgressManagement\EventProgressManager.h" />
+    <ClInclude Include="Game\Humans\HumanAnimationType.h" />
+    <ClInclude Include="Game\Humans\HumanTable.h" />
     <ClInclude Include="Game\UI\Story\ConversationTextUI.h" />
     <ClInclude Include="Game\Magic\MagicList.h" />
     <ClInclude Include="Game\Magic\MagicBase.h" />
@@ -417,6 +430,15 @@
     <ClInclude Include="Game\Player\Observer\PlayerObserver.h" />
     <ClInclude Include="Game\Player\Observer\ObservablePlayer.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.h" />
+    <ClInclude Include="Game\HumanTest.h" />
+    <ClInclude Include="Game\Humans\HumanManager.h" />
+    <ClInclude Include="Game\Humans\HumanModelRenderer.h" />
+    <ClInclude Include="Game\Scenes\MainGameScene.h" />
+    <ClInclude Include="Game\Scenes\OpeningScene.h" />
+    <ClInclude Include="Game\Scenes\TitleScene.h" />
+    <ClInclude Include="Game\Scenes\SceneBase.h" />
+    <ClInclude Include="Game\Scenes\YonejiTestScene.h" />
+    <ClInclude Include="Game\Humans\TalkToPlayer.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerInputObserver.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
