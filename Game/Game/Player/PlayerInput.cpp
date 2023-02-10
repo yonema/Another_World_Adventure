@@ -40,8 +40,8 @@ namespace nsAWA {
 
 		void CPlayerInput::Update(bool isAnimationPlaying) {
 
-			//クールタイム中なら早期リターン。
-			if (m_isCoolTime) { return; }
+			//入力できない状態なら早期リターン。
+			if (!m_canInput) { return; }
 
 			//移動・回転入力。
 			{
@@ -124,8 +124,8 @@ namespace nsAWA {
 				//弱攻撃入力。
 				if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
 
-					//クールタイムをONにする。
-					CoolTimeOn();
+					//入力不可に設定。
+					InputDisable();
 
 					//弱攻撃状態にする。
 					m_playerAction->SetState(EnPlayerState::enWeakAttack);
@@ -134,8 +134,8 @@ namespace nsAWA {
 				//強攻撃入力。
 				if (Input()->IsTrigger(EnActionMapping::enStrongAttack)) {
 
-					//クールタイムをONにする。
-					CoolTimeOn();
+					//入力不可に設定。
+					InputDisable();
 
 					//強攻撃状態にする。
 					m_playerAction->SetState(EnPlayerState::enStrongAttack);
@@ -145,8 +145,8 @@ namespace nsAWA {
 				if (Input()->IsTrigger(EnActionMapping::enStep)
 					) {
 
-					//クールタイムをONにする。
-					CoolTimeOn();
+					//入力不可に設定。
+					InputDisable();
 
 					//ステップ状態にする。
 					m_playerAction->SetState(EnPlayerState::enStep);
@@ -221,8 +221,8 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_4)) {
 
-				//クールタイム中に設定。
-				CoolTimeOn();
+				//入力不可に設定。
+				InputDisable();
 
 				//スキル４使用。
 				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_4);

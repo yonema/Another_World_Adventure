@@ -14,11 +14,13 @@ namespace nsAWA {
 			for (auto itr = m_feature.begin(); itr != m_feature.end(); ) {
 
 				//破棄。
-				delete (*itr);
+				if ((*itr) != nullptr) {
+					delete (*itr);
+				}
+
 				itr = m_feature.erase(itr);
 
-				//次のイテレータに移る。
-				itr++;
+				continue;
 			}
 		}
 

@@ -75,6 +75,18 @@ namespace nsAWA {
 				return m_action;
 			}
 
+			void InputEnable() {
+
+				//“ü—Í‚Å‚«‚éó‘Ô‚É‚·‚éB
+				m_input.InputEnable();
+			}
+
+			void InputDisable() {
+
+				//“ü—Í‚Å‚«‚È‚¢ó‘Ô‚É‚·‚éB
+				m_input.InputDisable();
+			}
+
 			CPlayerStatus* GetStatus()override final;
 
 			nsWeapon::CWeapon* GetWeapon();
