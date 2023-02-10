@@ -1,5 +1,6 @@
 #include "YonemaEnginePreCompile.h"
 #include "NetworkManager.h"
+#include <cpprest/http_client.h>
 
 namespace nsAWA
 {
