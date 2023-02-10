@@ -41,7 +41,7 @@ namespace nsAWA
 		static const std::unordered_map<std::string, const char* const> g_kNameToCsvFilePathParts =
 		{
 			{ "Alice", "Assets/CSV/Conversation/Talk/Alice_talk" },
-			{ "Alan", "Assets/CSV/Conversation/Talk/Aran_talk" },
+			{ "Alan", "Assets/CSV/Conversation/Talk/Alan_talk" },
 			{ "Barbara", "Assets/CSV/Conversation/Talk/Barbara_talk" },
 			{ "Bobby", "Assets/CSV/Conversation/Talk/Bobby_talk" },
 			{ "Eric", "Assets/CSV/Conversation/Talk/Eric_talk" },
