@@ -7,6 +7,7 @@
 #include "AI/MonsterAIController.h"
 #include "../Player/Player.h"
 #include "../Player/PlayerManager.h"
+#include "../Player/Observer/PlayerObserver.h"
 
 namespace nsAWA {
 
@@ -89,7 +90,7 @@ namespace nsAWA {
 				player->AddExp(m_monster->GetDropExp());
 
 				//オブザーバーに通知。
-				nsPlayer::CPlayerManager::GetInstance()->NotifyObserver();
+				nsPlayer::CPlayerManager::GetInstance()->NotifyObserver(nsPlayer::nsObserver::EnObserverEvent::enWin);
 			}
 			else {
 

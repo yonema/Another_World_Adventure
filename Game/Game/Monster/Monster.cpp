@@ -23,9 +23,6 @@ namespace nsAWA {
 
 		void CMonster::OnDestroySub() {
 
-			//モンスターモデルを破棄。
-			DeleteGO(m_modelRenderer);
-
 			//アニメーションを破棄。
 			m_animation.Release();
 

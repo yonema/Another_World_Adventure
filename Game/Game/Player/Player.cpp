@@ -110,8 +110,14 @@ namespace nsAWA {
 
 		void CPlayer::OnDestroySub() {
 
-			//プレイヤーモデルを破棄。
-			DeleteGO(m_modelRenderer);
+			//プレイヤー管理クラスを破棄。
+			CPlayerManager::GetInstance()->DeleteInstance();
+
+			//アクションクラスを破棄。
+			m_action.Release();
+
+			//入力クラスを破棄。
+			m_input.Release();
 
 			//アニメーションを破棄。
 			m_animation.Release();
@@ -219,7 +225,7 @@ namespace nsAWA {
 					m_action.SetState(EnPlayerState::enDamage);
 
 					//クールタイムをONに設定。
-					m_input.CoolTimeOn();
+					m_input.InputDisable();
 
 					//一回ひるんだので、二回以上のひるみは無効とする。
 					while (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {

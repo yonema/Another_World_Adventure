@@ -1,4 +1,5 @@
 #pragma once
+#include "PlayerObserver.h"
 
 namespace nsAWA {
 
@@ -23,14 +24,21 @@ namespace nsAWA {
 					m_player = player;
 				}
 
-				void AddObserver(CPlayerObserver* observer);
+				void AddObserver(CPlayerObserver* observer, EnObserverEvent observerEvent = EnObserverEvent::enNone);
 
 				void ReleaseObserver();
 
-				void NotifyObserver();
+				void NotifyObserver(EnObserverEvent observerEvent);
+
+				EnObserverEvent GetCarentEvent()const {
+
+					//現在のイベントを取得。
+					return m_carentEvent;
+				}
 
 			private:
 				CPlayer* m_player = nullptr;				//プレイヤー
+				EnObserverEvent m_carentEvent = EnObserverEvent::enNone;	//現在のイベント
 				std::list<CPlayerObserver*> m_observerList;	//オブザーバーのリスト
 
 
@@ -42,6 +50,10 @@ namespace nsAWA {
 				void SetLevel(int level);
 
 				int GetLevel()const;
+
+				void InputEnable();
+
+				void InputDisable();
 			};
 		}
 	}

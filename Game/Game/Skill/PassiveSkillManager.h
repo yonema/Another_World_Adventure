@@ -16,6 +16,8 @@ namespace nsAWA {
 		public:
 			void Init();
 
+			void Release();
+
 			void SetPassiveSkill(int skillNum, nsSkill::CPassiveSkill* passiveSkill);
 
 			nsSkill::CPassiveSkill* GetPassiveSkill(int skillNum)const{
