@@ -49,12 +49,12 @@ namespace nsAWA {
 #ifdef _DEBUG
 
 			CPlayerManager::GetInstance()->SetWeapon("NewSword");
+			CPlayerManager::GetInstance()->SetArmor("NewArmor");
 
 #endif // DEBUG
 
 			//ステータスを初期化。
-			//m_status.Init(&m_weaponManager);
-			m_status.Init(m_weaponManager.GetWeaponPointer(),GetPassiveSkillManager(),GetFeatureManager());
+			m_status.Init(m_weaponManager.GetWeaponPointer(),m_armor,GetPassiveSkillManager(),GetFeatureManager());
 
 			//入力クラスを初期化。
 			m_input.Init(&m_action, &m_animation);
