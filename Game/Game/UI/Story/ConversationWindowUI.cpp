@@ -21,7 +21,7 @@ namespace nsAWA
 			//ウィンドウが消えるアニメーションが終了した時のイベントを記述
 			m_level.RegisterAnimationEvent("WindowDisappear", "Disappeared", [this](const nsYMEngine::nsGraphics::nsAnimations2D::SAnimation2DFrameData& frameData)
 				{
-					DeleteGO(this);
+					m_endFlag = true;
 				}
 			);
 
@@ -35,14 +35,15 @@ namespace nsAWA
 
 		void CConversationWindowUI::Update(float deltaTime)
 		{
-			if (m_text.IsInited() == false)
+			if (m_text.IsInited() == false || m_endFlag)
 			{
 				return;
 			}
 
 			m_text.Update(deltaTime);
 
-			if (Gamepad()->IsTrigger(EnPadButton::enA) || Keyboard()->IsTrigger(EnKeyButton::enJ))
+			
+			if (Input()->IsTrigger(EnActionMapping::enDecision))
 			{
 				m_text.Next();
 				m_level.PlayAnimation("Pressed");

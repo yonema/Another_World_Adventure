@@ -1,12 +1,10 @@
 #pragma once
+// そのうち消す予定
+
 namespace nsAWA
 {
-	//ゲームクラス
-	class CGame : public IGameObject
+	class CHumanTest : public IGameObject
 	{
-	private:
-		static const char* const m_kGameObjectName;		//ゲームクラスの名前
-
 	public:
 		bool Start() override final;
 
@@ -15,10 +13,11 @@ namespace nsAWA
 		void OnDestroy() override final;
 
 	public:
-		constexpr CGame() = default;
-		~CGame() = default;
+		constexpr CHumanTest() = default;
+		~CHumanTest() = default;
 
 	private:
 
 	};
+
 }

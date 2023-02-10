@@ -1,9 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "Game.h"
-#include "LoadGame.h"
-#include "Samples/EffectSample.h"
+#include "Scenes/TitleScene.h"
 
-#include "UI/Menu/MenuBaseUI.h"
 
 
 namespace nsAWA
@@ -12,44 +10,23 @@ namespace nsAWA
 
 	bool CGame::Start()
 	{
-		//ゲームをロード。
-		NewGO<CLoadGame>();
+		nsScene::CreateScene<nsScene::CTitleScene>();
 
 		return true;
 	}
 
 	void CGame::Update(float deltaTime)
 	{
-		TestMenu();
+
+		return;
 	}
 
 	void CGame::OnDestroy()
 	{
-		DeleteGO(m_menuBaseUI);
+		nsScene::DeleteCurrentScene();
+
+		return;
 	}
 
-	void CGame::TestMenu()
-	{
-		if (false == Input()->IsTrigger(EnActionMapping::enMenu)) {
-			return;
-		}
 
-		if (true == m_flagCreateMenuBaseUI) {
-			TestDeleteMenu();
-			
-			return;
-		}
-
-		m_menuBaseUI = NewGO<nsUI::CMenuBaseUI>();
-		m_menuBaseUI->LoadLevel();
-
-		m_flagCreateMenuBaseUI = true;
-	}
-
-	void CGame::TestDeleteMenu()
-	{
-		DeleteGO(m_menuBaseUI);
-
-		m_flagCreateMenuBaseUI = false;
-	}
 }
