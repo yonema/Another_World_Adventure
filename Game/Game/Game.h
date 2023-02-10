@@ -14,6 +14,11 @@ namespace nsAWA
 
 		void OnDestroy() override final;
 
+	private:
+		/**
+		 * @brief アプリケーションに渡された引数を処理する
+		*/
+		void HandleApplicationArgument();
 	public:
 		constexpr CGame() = default;
 		~CGame() = default;

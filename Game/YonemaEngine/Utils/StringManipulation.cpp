@@ -78,23 +78,7 @@ namespace nsYMEngine
 			return GetWideStringFromString(str.c_str());
 		}
 
-		std::pair<std::string, std::string> SplitFilename(
-			const std::string& fileName,
-			const char spliter
-		) noexcept
-		{
-			int idx = static_cast<int>(fileName.find(spliter));
-
-			std::pair<std::string, std::string> ret;
-			ret.first = fileName.substr(0, idx);
-			// spliter‚ğŠÜ‚ß‚È‚¢‚½‚ß‚ÉˆêŒÂi‚ß‚éB
-			idx++;
-			ret.second = fileName.substr(idx, fileName.length() - idx);
-
-			return ret;
-		}
-
-		std::pair<std::string, std::string> SplitFilename(
+		std::pair<std::string, std::string> SplitString(
 			const char* fileName,
 			const char spliter
 		) noexcept
@@ -109,6 +93,22 @@ namespace nsYMEngine
 			ret.second = str.substr(idx, str.length() - idx);
 
 			return ret;
+		}
+
+		std::pair<std::string, std::string> SplitFilename(
+			const std::string& fileName,
+			const char spliter
+		) noexcept
+		{
+			return SplitString(fileName.c_str(),spliter);
+		}
+
+		std::pair<std::string, std::string> SplitFilename(
+			const char* fileName,
+			const char spliter
+		) noexcept
+		{
+			return SplitString(fileName,spliter);
 		}
 
 		std::string GetTexturePathFromModelAndTexPath(
