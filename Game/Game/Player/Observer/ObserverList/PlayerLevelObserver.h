@@ -16,7 +16,7 @@ namespace nsAWA {
 					enNeedExp		//必要経験値
 				};
 
-				void Init(CObservablePlayer* observablePlayer)override final;
+				void InitSub(CObservablePlayer* observablePlayer)override final;
 
 				void Update(CObservablePlayer* observablePlayer)override final;
 

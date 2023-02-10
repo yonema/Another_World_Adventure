@@ -2,6 +2,7 @@
 #include "../Skill/ActiveSkillList.h"
 #include "../Item/ItemManager.h"
 #include "Observer/ObservablePlayer.h"
+#include "Observer/PlayerObserver.h"
 
 namespace nsAWA {
 
@@ -55,10 +56,10 @@ namespace nsAWA {
 
 			void SetArmor(const std::string& armorName);
 
-			void NotifyObserver() {
+			void NotifyObserver(nsObserver::EnObserverEvent observerEvent) {
 
 				//オブザーバーに通知。
-				m_observable.NotifyObserver();
+				m_observable.NotifyObserver(observerEvent);
 			}
 
 		public:
