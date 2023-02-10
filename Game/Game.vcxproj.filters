@@ -265,6 +265,7 @@
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerInputObserver.cpp" />
     <ClCompile Include="Game\GameLog\GameLog.cpp" />
     <ClCompile Include="Game\GameLog\LogParts.cpp" />
+    <ClCompile Include="Game\Network\NetworkManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -545,6 +546,7 @@
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerInputObserver.h" />
     <ClInclude Include="Game\GameLog\GameLog.h" />
     <ClInclude Include="Game\GameLog\LogParts.h" />
+    <ClInclude Include="Game\Network\NetworkManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

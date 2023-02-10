@@ -179,6 +179,7 @@
     <ClCompile Include="Game\Scenes\YonejiTestScene.cpp" />
     <ClCompile Include="Game\Humans\TalkToPlayer.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerInputObserver.cpp" />
+    <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
@@ -444,6 +445,7 @@
     <ClInclude Include="Game\Scenes\YonejiTestScene.h" />
     <ClInclude Include="Game\Humans\TalkToPlayer.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerInputObserver.h" />
+    <ClInclude Include="Game\Network\NetworkManager.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
