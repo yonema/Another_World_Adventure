@@ -253,6 +253,8 @@
     <ClCompile Include="Game\Player\Observer\ObservablePlayer.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerInputObserver.cpp" />
+    <ClCompile Include="Game\GameLog\GameLog.cpp" />
+    <ClCompile Include="Game\GameLog\LogParts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -519,6 +521,8 @@
     <ClInclude Include="Game\Player\Observer\ObservablePlayer.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerInputObserver.h" />
+    <ClInclude Include="Game\GameLog\GameLog.h" />
+    <ClInclude Include="Game\GameLog\LogParts.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

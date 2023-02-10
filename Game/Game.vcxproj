@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\GameLog\LogParts.cpp" />
+    <ClCompile Include="Game\GameLog\GameLog.cpp" />
     <ClCompile Include="Game\Event\ProgressManagement\EventProgress.cpp" />
     <ClCompile Include="Game\Event\ProgressManagement\EventProgressManager.cpp" />
     <ClCompile Include="Game\UI\Story\ConversationTextUI.cpp" />
@@ -401,6 +403,8 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\GameLog\LogParts.h" />
+    <ClInclude Include="Game\GameLog\GameLog.h" />
     <ClInclude Include="Game\Event\ProgressManagement\EventProgress.h" />
     <ClInclude Include="Game\Event\ProgressManagement\EventProgressManager.h" />
     <ClInclude Include="Game\UI\Story\ConversationTextUI.h" />
