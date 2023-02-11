@@ -11,6 +11,7 @@
 #include "Weapon/WeaponList.h"
 #include "Armor/ArmorList.h"
 #include "Magic/MagicList.h"
+#include "Item/MaterialItemList.h"
 #include "GameLog/GameLog.h"
 
 #ifdef _DEBUG
@@ -89,6 +90,9 @@ namespace nsAWA {
 		//アイテムリストを生成。
 		nsItem::CAllItemList::GetInstance()->LoadAllItemList();
 
+		//素材アイテムリストを生成。
+		nsItem::CMaterialItemList::GetInstance()->LoadMaterialItemList();
+
 		//モンスターリストを生成。
 		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
 
@@ -112,6 +116,9 @@ namespace nsAWA {
 
 		//アイテムリストを破棄。
 		nsItem::CAllItemList::GetInstance()->DeleteInstance();
+
+		//素材アイテムリストを破棄。
+		nsItem::CMaterialItemList::GetInstance()->DeleteInstance();
 
 		//モンスターリストを破棄。
 		nsMonster::CMonsterList::GetInstance()->DeleteInstance();

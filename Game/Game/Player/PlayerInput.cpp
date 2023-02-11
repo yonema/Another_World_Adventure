@@ -41,16 +41,6 @@ namespace nsAWA {
 
 		void CPlayerInput::Update(bool isAnimationPlaying) {
 
-#ifdef _DEBUG
-			//仮に弱攻撃入力でログ表示。
-			if (Input()->IsTrigger(EnActionMapping::enWeakAttack)) {
-
-				std::string getExpText = "弱攻撃入力!";
-
-				//経験値獲得テキストを表示。
-				nsGameLog::CGameLog::GetInstance()->AddGameLog(getExpText);
-			}
-#endif // _DEBUG
 			//入力できない状態なら早期リターン。
 			if (!m_canInput) { return; }
 

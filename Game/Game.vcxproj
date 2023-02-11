@@ -181,6 +181,7 @@
     <ClCompile Include="Game\Scenes\YonejiTestScene.cpp" />
     <ClCompile Include="Game\Humans\TalkToPlayer.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerInputObserver.cpp" />
+    <ClCompile Include="Game\Item\MaterialItemList.cpp" />
     <ClCompile Include="Game\World\World.cpp" />
     <ClCompile Include="Game\World\WorldParts.cpp" />
     <ClCompile Include="Game\Facility\Town.cpp" />
@@ -456,6 +457,7 @@
     <ClInclude Include="Game\Scenes\YonejiTestScene.h" />
     <ClInclude Include="Game\Humans\TalkToPlayer.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerInputObserver.h" />
+    <ClInclude Include="Game\Item\MaterialItemList.h" />
     <ClInclude Include="Game\World\World.h" />
     <ClInclude Include="Game\World\WorldParts.h" />
     <ClInclude Include="Game\Facility\Town.h" />

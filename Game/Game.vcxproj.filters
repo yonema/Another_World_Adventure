@@ -273,6 +273,7 @@
     <ClCompile Include="Game\Facility\Guild.cpp" />
     <ClCompile Include="Game\GameLog\GameLog.cpp" />
     <ClCompile Include="Game\GameLog\LogParts.cpp" />
+    <ClCompile Include="Game\Item\MaterialItemList.cpp" />
     <ClCompile Include="Game\Network\NetworkManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -563,6 +564,7 @@
     <ClInclude Include="Game\Facility\FacilityType.h" />
     <ClInclude Include="Game\GameLog\GameLog.h" />
     <ClInclude Include="Game\GameLog\LogParts.h" />
+    <ClInclude Include="Game\Item\MaterialItemList.h" />
     <ClInclude Include="Game\Network\NetworkManager.h" />
   </ItemGroup>
   <ItemGroup>

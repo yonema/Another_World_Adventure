@@ -19,42 +19,65 @@ namespace nsAWA {
 			nsCSV::CCsvManager monsterNameCsvManager;
 			monsterNameCsvManager.LoadCSV(kMonsterNameCSVFilePath);
 
+			//モンスターデータの雛形を生成。
+			SMonsterInitData monsterInitData;
+
 			//モンスターの名前からモンスター情報を読み込み、保持する。
 			for (const auto& monsterList : monsterNameCsvManager.GetCsvData()) {
 
-				//名前を取得。
-				std::string monsterName = monsterList[0];
+				//見出しを取得。
+				std::string title = monsterList[0];
 
-				//獲得経験値量を取得。
-				int dropExp = std::stoi(monsterList[1]);
+				if (title == "*") {
 
-				//モンスターデータの雛形を生成。
-				SMonsterInitData monsterInitData;
+					//モンスターデータを追加。
+					AddMonsterInitData(monsterInitData);
 
-				//名前を設定。
-				monsterInitData.name = monsterName;
+					//モンスターデータを初期化。
+					SMonsterInitData monsterInitDataBase;
+					monsterInitData = monsterInitDataBase;
 
-				//獲得経験値量を設定。
-				monsterInitData.dropExp = dropExp;
+					//次へ。
+					continue;
+				}
 
+				if (title == "NAME") {
+
+					//名前を設定。
+					monsterInitData.name = monsterList[1];
+				}
+				
+				if (title == "DROPEXP") {
+
+					//獲得経験値量を設定。
+					monsterInitData.dropExp = std::stoi(monsterList[1]);
+				}
+
+				if (title == "DROPITEM") {
+
+					//ドロップアイテムを設定。
+					monsterInitData.dropMaterialItemList.emplace_back(monsterList[1]);
+				}
+
+				//モデルのファイルパスを設定。
 				monsterInitData.modelFilePath = "Assets/Models/Monsters/";
-				monsterInitData.modelFilePath += monsterName;
+				monsterInitData.modelFilePath += monsterInitData.name;
 				monsterInitData.modelFilePath += ".fbx";
 
 				//アニメーション情報が入ったCSVファイルのパスを設定。
 				std::string animCSVFilePath = "Assets/CSV/Monsters/";
-				animCSVFilePath += monsterName + "/";
-				animCSVFilePath += monsterName + "_Animation.csv";
+				animCSVFilePath += monsterInitData.name + "/";
+				animCSVFilePath += monsterInitData.name + "_Animation.csv";
 
 				//アニメーションイベント情報が入ったCSVファイルのパスを設定。
 				std::string animEventCSVFilePath = "Assets/CSV/Monsters/";
-				animEventCSVFilePath += monsterName + "/";
-				animEventCSVFilePath += monsterName + "_AnimationEvent.csv";
+				animEventCSVFilePath += monsterInitData.name + "/";
+				animEventCSVFilePath += monsterInitData.name + "_AnimationEvent.csv";
 
 				//アニメーションをロード。
 				CMonsterAnimation monsterAnimation;
 				monsterAnimation.LoadAnimation(
-					monsterName,
+					monsterInitData.name,
 					nsUtils::GetWideStringFromString(animCSVFilePath).c_str(),
 					nsUtils::GetWideStringFromString(animEventCSVFilePath).c_str()
 				);
@@ -64,9 +87,6 @@ namespace nsAWA {
 
 				//アニメーションのファイルパスのリストを取得、設定。
 				monsterInitData.animationFilePath = monsterAnimation.GetAnimFilePathArray();
-
-				//モンスターデータを追加。
-				AddMonsterInitData(monsterInitData);
 			}
 		}
 
@@ -78,14 +98,6 @@ namespace nsAWA {
 
 				//同じ名前のモンスターを検索。
 				if (monsterData.name == monsterName) {
-
-					//モンスターデータを初期化。
-					//SMonsterInitData monsterInitData;
-					//monsterInitData.name = monsterData.name;
-					//monsterInitData.dropExp = monsterData.dropExp;
-					//monsterInitData.animDataList = monsterData.animDataList;
-					//monsterInitData.animationFilePath = monsterData.animationFilePath;
-					//monsterInitData.modelFilePath = monsterData.modelFilePath;
 
 					//モンスターを生成。
 					monster = NewGO<CMonster>(nsMonster::CMonster::m_kObjName_Monster);

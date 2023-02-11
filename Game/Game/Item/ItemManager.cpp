@@ -2,6 +2,7 @@
 #include "../GameActor.h"
 #include "ItemManager.h"
 #include "AllItemList.h"
+#include "MaterialItemList.h"
 #include "SelfItem.h"
 #include "ThrowItem.h"
 
@@ -101,6 +102,41 @@ namespace nsAWA {
 				//新たにアイテム情報を追加。
 				m_sItemList.emplace_front(item);
 			}
+		}
+
+		void CItemManager::AddMaterialItem(std::string itemName, int getNum) {
+
+			//リストに名前があるか検索。
+			bool isFound = CMaterialItemList::GetInstance()->IsFoundName(itemName);
+
+			//リストになかった。
+			if (!isFound) {
+
+				//終了。
+				return;
+			}
+
+			//手持ちのアイテムを順に参照。
+			for (auto& itemNameStr : m_materialItemList) {
+
+				//名前が一致したら。
+				if (itemNameStr.name == itemName) {
+
+					//既に同じアイテムを持っているので所持数を加算。
+					itemNameStr.hasNum += getNum;
+
+					//終了。
+					return;
+				}
+			}
+
+			//持っていなかったので素材アイテム情報を生成。
+			SHasItem item;
+			item.name = itemName;	//名前
+			item.hasNum = getNum;	//所持数
+
+			//新たに素材アイテム情報を追加。
+			m_sItemList.emplace_back(item);
 		}
 	}
 }
