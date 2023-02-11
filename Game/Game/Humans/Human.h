@@ -62,6 +62,22 @@ namespace nsAWA
 				return m_enableTalking;
 			}
 
+			constexpr void HumanActivate() noexcept
+			{
+				if (m_humanMR)
+				{
+					m_humanMR->ModelActivate();
+				}
+			}
+
+			constexpr void HumanDeactivate() noexcept
+			{
+				if (m_humanMR)
+				{
+					m_humanMR->ModelDeactivate();
+				}
+			}
+
 		private:
 
 			void CheckEnableTalking();

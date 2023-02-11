@@ -173,6 +173,11 @@ namespace nsAWA
 			if (Input()->IsTrigger(EnActionMapping::enDecision))
 			{
 				m_isTalking = true;
+
+				// 会話中、カーソルは非表示
+				m_talkingCursorSR->SetDrawingFlag(false);
+
+				// 会話ウィンドウと会話内容を生成
 				m_conversationWindowUI = NewGO<nsUI::CConversationWindowUI>("TalkToPlayer");
 				std::string filePath = {};
 				BuildCsvFilePath(&filePath, 0);

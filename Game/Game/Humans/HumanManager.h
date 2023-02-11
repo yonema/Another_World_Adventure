@@ -67,6 +67,10 @@ namespace nsAWA
 				return m_humanMap;
 			}
 
+			void ActivateAllHumans();
+
+			void DeactivateAllHumans();
+
 		private:
 			void CheckBaseHumanLoading() noexcept;
 

@@ -18,7 +18,7 @@ namespace nsAWA
 			{ "Barbara", "Assets/Models/Humans/Barbara.fbx" },
 			{ "Michelle", "Assets/Models/Humans/Michelle.fbx" },
 			{ "John", "Assets/Models/Humans/John.fbx" },
-			{ "Alain", "Assets/Models/Humans/Alain.fbx" },
+			{ "Alan", "Assets/Models/Humans/Alain.fbx" },
 			{ "Sara", "Assets/Models/Humans/Sara.fbx" },
 			{ "Tom", "Assets/Models/Humans/Tom.fbx" },
 			{ "James", "Assets/Models/Humans/James.fbx" },
