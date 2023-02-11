@@ -81,6 +81,12 @@ namespace nsAWA
 				m_baseHumanMR = nullptr;
 			}
 
+			if (m_talkToPlayer)
+			{
+				DeleteGO(m_talkToPlayer);
+				m_talkToPlayer = nullptr;
+			}
+
 			return;
 		}
 
@@ -212,6 +218,23 @@ namespace nsAWA
 		}
 
 
+		void CHumanManager::ActivateAllHumans()
+		{
+			for (auto& human : m_humanMap)
+			{
+				human.second->HumanActivate();
+			}
+			return;
+		}
+
+		void CHumanManager::DeactivateAllHumans()
+		{
+			for (auto& human : m_humanMap)
+			{
+				human.second->HumanDeactivate();
+			}
+			return;
+		}
 
 	}
 }

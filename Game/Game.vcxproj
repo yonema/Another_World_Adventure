@@ -125,7 +125,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../ExLibrary/DirectXTex-main\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug;../ExLibrary\DirectXTex-main\DirectXTex\Bin\Desktop_2019\x64\Debug;..\ExLibrary\DirectXTK12-sept2021\DirectXTK12-sept2021\Bin\Desktop_2019_Win10\x64\Debug;..\ExLibrary\PhysX-4.1\PhysX-4.1\physx\bin\win.x86_64.vc142.md\debug;..\ExLibrary\EffekseerForCpp170a\src\Effekseer\Debug;..\ExLibrary\EffekseerForCpp170a\src\EffekseerRendererDX12\Debug;..\ExLibrary\EffekseerForCpp170a\src\3rdParty\LLGI\src\Debug;..\ExLibrary\EffekseerForCpp170a\src\EffekseerSoundXAudio2\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sensapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,10 +147,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../ExLibrary/DirectXTex-main\DirectXTex\Bin\Desktop_2019_Win10\x64\Release;../ExLibrary\DirectXTex-main\DirectXTex\Bin\Desktop_2019\x64\Release;..\ExLibrary\DirectXTK12-sept2021\DirectXTK12-sept2021\Bin\Desktop_2019_Win10\x64\Release;..\ExLibrary\PhysX-4.1\PhysX-4.1\physx\bin\win.x86_64.vc142.md\release;..\ExLibrary\EffekseerForCpp170a\src\Effekseer\Release;..\ExLibrary\EffekseerForCpp170a\src\EffekseerRendererDX12\Release;..\ExLibrary\EffekseerForCpp170a\src\3rdParty\LLGI\src\Release;..\ExLibrary\EffekseerForCpp170a\src\EffekseerSoundXAudio2\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sensapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Facility\Forge.cpp" />
+    <ClCompile Include="Game\Facility\FacilityBase.cpp" />
     <ClCompile Include="Game\GameLog\LogParts.cpp" />
     <ClCompile Include="Game\GameLog\GameLog.cpp" />
     <ClCompile Include="Game\Humans\Human.cpp" />
@@ -180,6 +182,13 @@
     <ClCompile Include="Game\Humans\TalkToPlayer.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerInputObserver.cpp" />
     <ClCompile Include="Game\Item\MaterialItemList.cpp" />
+    <ClCompile Include="Game\World\World.cpp" />
+    <ClCompile Include="Game\World\WorldParts.cpp" />
+    <ClCompile Include="Game\Facility\Town.cpp" />
+    <ClCompile Include="Game\Facility\Guild.cpp" />
+    <ClCompile Include="Game\Facility\Inn.cpp" />
+    <ClCompile Include="Game\Facility\Shop.cpp" />
+    <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
@@ -414,6 +423,9 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Facility\FacilityType.h" />
+    <ClInclude Include="Game\Facility\Forge.h" />
+    <ClInclude Include="Game\Facility\FacilityBase.h" />
     <ClInclude Include="Game\GameLog\LogParts.h" />
     <ClInclude Include="Game\GameLog\GameLog.h" />
     <ClInclude Include="Game\Humans\Human.h" />
@@ -446,6 +458,13 @@
     <ClInclude Include="Game\Humans\TalkToPlayer.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerInputObserver.h" />
     <ClInclude Include="Game\Item\MaterialItemList.h" />
+    <ClInclude Include="Game\World\World.h" />
+    <ClInclude Include="Game\World\WorldParts.h" />
+    <ClInclude Include="Game\Facility\Town.h" />
+    <ClInclude Include="Game\Facility\Guild.h" />
+    <ClInclude Include="Game\Facility\Inn.h" />
+    <ClInclude Include="Game\Facility\Shop.h" />
+    <ClInclude Include="Game\Network\NetworkManager.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
@@ -759,11 +778,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets" Condition="Exists('packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets')" />
+    <Import Project="packages\cpprestsdk.v142.2.10.15\build\native\cpprestsdk.v142.targets" Condition="Exists('packages\cpprestsdk.v142.2.10.15\build\native\cpprestsdk.v142.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets'))" />
+    <Error Condition="!Exists('packages\cpprestsdk.v142.2.10.15\build\native\cpprestsdk.v142.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cpprestsdk.v142.2.10.15\build\native\cpprestsdk.v142.targets'))" />
   </Target>
 </Project>

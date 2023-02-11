@@ -6,9 +6,9 @@
 namespace nsAWA
 {
 	class CLoadGame;
-	namespace nsHumans
+	namespace nsWorld
 	{
-		class CHumanManager;
+		class CWorld;
 	}
 }
 
@@ -39,12 +39,8 @@ namespace nsAWA
 			void InitAfterBaseLoaded(float deltaTime);
 
 		private:
-			CLevel3D m_level3D = {};
-			nsHumans::CHumanManager* m_humanManager = nullptr;
-			bool m_isLevelLoaded = false;
 			CLoadGame* m_loadGame = nullptr;
-
-			CFontRenderer* m_nowLoadingFR = nullptr;
+			nsWorld::CWorld* m_world = nullptr;
 		};
 
 	}
