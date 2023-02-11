@@ -8,6 +8,7 @@
 #include "../Player/Player.h"
 #include "../Player/PlayerManager.h"
 #include "../Player/Observer/PlayerObserver.h"
+#include "../GameLog/GameLog.h"
 
 namespace nsAWA {
 
@@ -88,6 +89,12 @@ namespace nsAWA {
 
 				//経験値を取得。
 				player->AddExp(m_monster->GetDropExp());
+
+				std::string getExpText = std::to_string(m_monster->GetDropExp());
+				getExpText += "の経験値を獲得!";
+
+				//経験値獲得テキストを表示。
+				nsGameLog::CGameLog::GetInstance()->AddGameLog(getExpText);
 
 				//オブザーバーに通知。
 				nsPlayer::CPlayerManager::GetInstance()->NotifyObserver(nsPlayer::nsObserver::EnObserverEvent::enWin);

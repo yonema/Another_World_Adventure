@@ -39,6 +39,16 @@ namespace nsYMEngine
 		*/
 		std::wstring GetWideStringFromString(const std::string& str) noexcept;
 
+		/**
+		 * @brief 文字列をセパレータ文字で分離する
+		 * @param[in] string 対象の文字列
+		 * @param[in] spliter 区切り文字 
+		 * @return 分離前後の文字列ペア
+		*/
+		std::pair<std::string, std::string> SplitString(
+			const char* string,
+			const char spliter
+		) noexcept;
 
 		/**
 		 * @brief ファイル名をセパレータ文字で分離する

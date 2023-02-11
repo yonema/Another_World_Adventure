@@ -11,6 +11,7 @@
 #include "Weapon/WeaponList.h"
 #include "Armor/ArmorList.h"
 #include "Magic/MagicList.h"
+#include "GameLog/GameLog.h"
 
 #ifdef _DEBUG
 #include "Monster/Monster.h"
@@ -56,6 +57,9 @@ namespace nsAWA {
 
 	void CLoadGame::Update(float deltaTime)
 	{
+		//ゲームログを更新。
+		nsGameLog::CGameLog::GetInstance()->Update(deltaTime);
+
 #ifdef _DEBUG
 		//ギヤラを出現させる。
 		if (Input()->IsTrigger(EnActionMapping::enUseItem)) {

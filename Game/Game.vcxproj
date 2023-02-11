@@ -153,6 +153,8 @@
   <ItemGroup>
     <ClCompile Include="Game\Facility\Forge.cpp" />
     <ClCompile Include="Game\Facility\FacilityBase.cpp" />
+    <ClCompile Include="Game\GameLog\LogParts.cpp" />
+    <ClCompile Include="Game\GameLog\GameLog.cpp" />
     <ClCompile Include="Game\Humans\Human.cpp" />
     <ClCompile Include="Game\Event\ProgressManagement\EventProgress.cpp" />
     <ClCompile Include="Game\Event\ProgressManagement\EventProgressManager.cpp" />
@@ -185,6 +187,7 @@
     <ClCompile Include="Game\Facility\Guild.cpp" />
     <ClCompile Include="Game\Facility\Inn.cpp" />
     <ClCompile Include="Game\Facility\Shop.cpp" />
+    <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
@@ -422,6 +425,8 @@
     <ClInclude Include="Game\Facility\FacilityType.h" />
     <ClInclude Include="Game\Facility\Forge.h" />
     <ClInclude Include="Game\Facility\FacilityBase.h" />
+    <ClInclude Include="Game\GameLog\LogParts.h" />
+    <ClInclude Include="Game\GameLog\GameLog.h" />
     <ClInclude Include="Game\Humans\Human.h" />
     <ClInclude Include="Game\Event\ProgressManagement\EventProgress.h" />
     <ClInclude Include="Game\Event\ProgressManagement\EventProgressManager.h" />
@@ -457,6 +462,7 @@
     <ClInclude Include="Game\Facility\Guild.h" />
     <ClInclude Include="Game\Facility\Inn.h" />
     <ClInclude Include="Game\Facility\Shop.h" />
+    <ClInclude Include="Game\Network\NetworkManager.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
@@ -770,11 +776,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets" Condition="Exists('packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets')" />
+    <Import Project="packages\cpprestsdk.v142.2.10.15\build\native\cpprestsdk.v142.targets" Condition="Exists('packages\cpprestsdk.v142.2.10.15\build\native\cpprestsdk.v142.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Assimp_native_4.1_v142.4.1.0\build\native\Assimp_native_4.1_v142.targets'))" />
+    <Error Condition="!Exists('packages\cpprestsdk.v142.2.10.15\build\native\cpprestsdk.v142.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cpprestsdk.v142.2.10.15\build\native\cpprestsdk.v142.targets'))" />
   </Target>
 </Project>
