@@ -1,6 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "NetworkManager.h"
 #include <cpprest/http_client.h>
+#include <Sensapi.h>
 
 namespace nsAWA
 {
@@ -10,10 +11,20 @@ namespace nsAWA
 
 		void CNetworkManager::UploadSaveData()
 		{
+			//ネットワークモードを調べる
 			if (m_networkMode == "NETWORK_OFFLINE")
 			{
 				return;
 			}
+
+			//現在のネットワーク状況を調べる
+			if (IsNetworkAlive() == false)
+			{
+				m_networkMode = "NETWORK_OFFLINE";
+
+				return;
+			}
+
 
 			//アップロード処理
 
@@ -47,11 +58,30 @@ namespace nsAWA
 
 				url += letter ^ m_kURLKey[i];
 			}
-
 			m_serverURL = url;
 
 			fclose(fp);
 
+		}
+
+		bool CNetworkManager::IsNetworkAccessible()
+		{
+			BOOL isAlive;
+			DWORD networkFlag;
+			DWORD error;
+
+
+			isAlive = IsNetworkAlive(&networkFlag);
+			error = GetLastError();
+
+			if (error == 0 && isAlive == TRUE)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
 }
