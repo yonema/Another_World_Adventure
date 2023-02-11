@@ -20,6 +20,9 @@ namespace nsAWA
 				if (m_instance == nullptr)
 				{
 					m_instance = new CNetworkManager();
+
+					//接続先URLを読み込み
+					m_instance->GetURL();
 				}
 				return m_instance;
 			}
@@ -60,8 +63,15 @@ namespace nsAWA
 			 * @brief セーブデータをサーバーにアップロードする
 			*/
 			void UploadSaveData();
+
+			void GetURL();
+		private:
+			const std::string m_kNetworkSettingPath = "Assets/NetworkSetting/network.cfg";
+			const std::string m_kURLKey = "AnotherWorldAdventureAnotherWorldAdventureAnothe";
 		private:
 			static CNetworkManager* m_instance;					//インスタンス
+
+			std::string m_serverURL = "";						//接続先URL
 
 			std::string m_networkMode = "NETWORK_OFFLINE";		//インターネットに接続されている?
 
