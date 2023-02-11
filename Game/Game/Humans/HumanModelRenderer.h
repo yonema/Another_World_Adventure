@@ -77,6 +77,27 @@ namespace nsAWA
 				PlayAnimation(animType, isLoop, speed);
 			}
 
+			constexpr void ModelActivate() noexcept
+			{
+				if (m_modelRenderer)
+				{
+					m_modelRenderer->ModelActivate();
+				}
+			}
+
+			constexpr void ModelDeactivate() noexcept
+			{
+				if (m_modelRenderer)
+				{
+					m_modelRenderer->ModelDeactivate();
+				}
+			}
+
+			constexpr bool IsModelActivate() const noexcept
+			{
+				return m_modelRenderer ? m_modelRenderer->IsModelActivate() : false;
+			}
+
 		private:
 
 			void CheckLoading();

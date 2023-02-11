@@ -279,6 +279,27 @@ namespace nsYMEngine
 						m_modelInitData.distanceToLOD > 0.0f;
 				}
 
+				constexpr bool IsModelActivate() const noexcept
+				{
+					return m_renderer ? m_renderer->IsDrawingFlag() : false;
+				}
+
+				constexpr void ModelActivate() noexcept
+				{
+					if (m_renderer)
+					{
+						m_renderer->SetDrawingFlag(true);
+					}
+				}
+
+				constexpr void ModelDeactivate() noexcept
+				{
+					if (m_renderer)
+					{
+						m_renderer->SetDrawingFlag(false);
+					}
+				}
+
 
 			private:
 				void Terminate() noexcept;
