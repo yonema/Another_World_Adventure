@@ -3,13 +3,17 @@
 #include <cpprest/http_client.h>
 #include <Sensapi.h>
 
+using namespace web;                        // URIのような共通の機能
+using namespace web::http;                  // 共通のHTTP機能
+using namespace web::http::client;          // HTTP クライアントの機能
+
 namespace nsAWA
 {
 	namespace nsNetwork
 	{
 		CNetworkManager* CNetworkManager::m_instance = nullptr;
 
-		void CNetworkManager::UploadSaveData()
+		void CNetworkManager::UploadSaveData(const std::string& saveData)
 		{
 			//ネットワークモードを調べる
 			if (m_networkMode == "NETWORK_OFFLINE")
@@ -18,7 +22,7 @@ namespace nsAWA
 			}
 
 			//現在のネットワーク状況を調べる
-			if (IsNetworkAlive() == false)
+			if (IsNetworkAccessible() == false)
 			{
 				m_networkMode = "NETWORK_OFFLINE";
 
@@ -27,6 +31,7 @@ namespace nsAWA
 
 
 			//アップロード処理
+			HttpUpload(saveData);
 
 		}
 
@@ -58,7 +63,8 @@ namespace nsAWA
 
 				url += letter ^ m_kURLKey[i];
 			}
-			m_serverURL = url;
+
+			m_serverURL = nsUtils::GetWideStringFromString(url.c_str());
 
 			fclose(fp);
 
@@ -82,6 +88,33 @@ namespace nsAWA
 			{
 				return false;
 			}
+		}
+
+		void CNetworkManager::HttpUpload(const std::string& saveData)
+		{
+			pplx::create_task([=]
+				{
+					// クライアントの設定
+					http_client client(m_serverURL);
+
+					// 送信データの作成
+					json::value postData;
+
+					std::wstring wSaveData = nsUtils::GetWideStringFromString(saveData.c_str());
+					postData[L"saveDataCSV"] = json::value::string(wSaveData.c_str());
+
+					// リクエスト送信
+					return client.request(methods::PATCH, L"playerData/" + m_hashCode, postData.serialize(), L"application/json");
+				})
+			.then([](http_response  response)
+				{
+					// ステータスコード判定
+					if (response.status_code() != status_codes::OK)
+					{
+						//アップロードエラー。ただゲーム側には特に影響しない。
+						nsGameWindow::MessageBoxError(L"セーブデータのアップロードに失敗しました。");
+					}
+				});
 		}
 	}
 }

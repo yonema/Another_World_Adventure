@@ -21,6 +21,9 @@ namespace nsAWA
 				{
 					m_instance = new CNetworkManager();
 
+					//ネットワークモードを設定
+					m_instance->m_networkMode = networkMode;
+
 					//接続先URLを読み込み
 					m_instance->GetURL();
 				}
@@ -56,14 +59,15 @@ namespace nsAWA
 			*/
 			void SetHashCode(std::string hashCode)
 			{
-				m_hashCode = hashCode;
+				m_hashCode = nsUtils::GetWideStringFromString(hashCode.c_str());
 			}
 
 			/**
 			 * @brief セーブデータをサーバーにアップロードする
 			*/
-			void UploadSaveData();
+			void UploadSaveData(const std::string& saveData);
 
+		private:
 			/**
 			 * @brief アセットから暗号化されているサーバーURLを復号して取得する
 			*/
@@ -74,17 +78,23 @@ namespace nsAWA
 			 * @return インターネットに接続されているか
 			*/
 			bool IsNetworkAccessible();
+
+			/**
+			 * @brief セーブデータをhttp通信でアップロードし更新する
+			 * @param saveData セーブデータ
+			*/
+			void HttpUpload(const std::string& saveData);
 		private:
 			const std::string m_kNetworkSettingPath = "Assets/NetworkSetting/network.cfg";
 			const std::string m_kURLKey = "AnotherWorldAdventureAnotherWorldAdventureAnothe";
 		private:
 			static CNetworkManager* m_instance;					//インスタンス
 
-			std::string m_serverURL = "";						//接続先URL
+			std::wstring m_serverURL = L"";						//接続先URL
 
 			std::string m_networkMode = "NETWORK_OFFLINE";		//インターネットに接続されている?
 
-			std::string m_hashCode = "";						//http通信に使用するハッシュコード
+			std::wstring m_hashCode = L"";						//http通信に使用するハッシュコード
 		};
 	}
 }
