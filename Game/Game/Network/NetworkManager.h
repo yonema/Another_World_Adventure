@@ -64,7 +64,16 @@ namespace nsAWA
 			*/
 			void UploadSaveData();
 
+			/**
+			 * @brief アセットから暗号化されているサーバーURLを復号して取得する
+			*/
 			void GetURL();
+
+			/**
+			 * @brief インターネットに接続されている?
+			 * @return インターネットに接続されているか
+			*/
+			bool IsNetworkAccessible();
 		private:
 			const std::string m_kNetworkSettingPath = "Assets/NetworkSetting/network.cfg";
 			const std::string m_kURLKey = "AnotherWorldAdventureAnotherWorldAdventureAnothe";
