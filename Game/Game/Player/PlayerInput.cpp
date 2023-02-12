@@ -74,9 +74,12 @@ namespace nsAWA {
 
 					//回転。
 					m_playerAction->Rotate();
+
+					//クールタイムOFF。
+					CoolTimeOff();
 				}
 				//アニメーションが再生されていないなら。
-				else{
+				else if(!m_isCoolTime){
 
 					//待機状態に設定し、このフレームは待機アニメーションが流れるようにする。
 					m_playerAction->SetState(EnPlayerState::enIdle);
@@ -128,9 +131,21 @@ namespace nsAWA {
 					//入力不可に設定。
 					InputDisable();
 
-					//弱攻撃状態にする。
-					m_playerAction->SetState(EnPlayerState::enWeakAttack);
+					if (m_playerAction->GetState() == EnPlayerState::enWeakAttack_A) {
 
+						//弱攻撃B状態にする。
+						m_playerAction->SetState(EnPlayerState::enWeakAttack_B);
+					}
+					else if (m_playerAction->GetState() == EnPlayerState::enWeakAttack_B) {
+
+						//弱攻撃C状態にする。
+						m_playerAction->SetState(EnPlayerState::enWeakAttack_C);
+					}
+					else {
+
+						//弱攻撃A状態にする。
+						m_playerAction->SetState(EnPlayerState::enWeakAttack_A);
+					}
 				}
 
 				//強攻撃入力。

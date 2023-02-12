@@ -138,8 +138,14 @@ namespace nsAWA {
 				case EnPlayerState::enStep:
 					stateStr += "ForwardStep";
 					break;
-				case EnPlayerState::enWeakAttack:
-					stateStr += "WeakAttack";
+				case EnPlayerState::enWeakAttack_A:
+					stateStr += "WeakAttack_A";
+					break;
+				case EnPlayerState::enWeakAttack_B:
+					stateStr += "WeakAttack_B";
+					break;
+				case EnPlayerState::enWeakAttack_C:
+					stateStr += "WeakAttack_C";
 					break;
 				case EnPlayerState::enStrongAttack:
 					stateStr += "StrongAttack";

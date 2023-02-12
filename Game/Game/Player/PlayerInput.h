@@ -37,6 +37,18 @@ namespace nsAWA {
 				m_canInput = false;
 			}
 
+			void CoolTimeOn() {
+
+				//クールタイムON。
+				m_isCoolTime = true;
+			}
+
+			void CoolTimeOff() {
+
+				//クールタイムOFF。
+				m_isCoolTime = false;
+			}
+
 			void ChangeState();
 
 		private:
@@ -46,6 +58,7 @@ namespace nsAWA {
 			CPlayerAction* m_playerAction = nullptr;	//プレイヤーアクションのポインタ
 			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;	//プレイヤーアニメーションのポインタ
 			bool m_canInput = true;		//入力できる？
+			bool m_isCoolTime = false;	//クールタイム中？
 			float m_magicTime = 0.0f;		//魔法スキルの詠唱時間
 		};
 	}

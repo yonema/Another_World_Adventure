@@ -36,6 +36,9 @@ namespace nsAWA {
 
 				//入力不可に設定。
 				m_playerInput->InputDisable();
+
+				//クールタイムON。
+				m_playerInput->CoolTimeOn();
 			}
 
 			void CPlayerAnimationEvent::CoolTimeOff() {
@@ -43,8 +46,17 @@ namespace nsAWA {
 				//入力可能に設定。
 				m_playerInput->InputEnable();
 
+				//クールタイムOFF。
+				m_playerInput->CoolTimeOff();
+
 				//ステートを初期化する。
 				m_playerInput->ChangeState();
+			}
+
+			void CPlayerAnimationEvent::InputEnable() {
+
+				//入力可能に設定。
+				m_playerInput->InputEnable();
 			}
 
 			void CPlayerAnimationEvent::CreateTrigger(IGameActor* creator, const AnimationEventDataStr& animEventDataStr) {
@@ -150,6 +162,10 @@ namespace nsAWA {
 				else if (animationEventName == "CreateMagic") {
 
 					CreateMagic();
+				}
+				else if (animationEventName == "InputEnable") {
+
+					InputEnable();
 				}
 				else {
 
