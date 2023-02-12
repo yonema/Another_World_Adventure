@@ -36,7 +36,9 @@ namespace nsAWA {
 			enIdle,			//待機
 			enWalk,			//歩き
 			enRun,			//ダッシュ
-			enWeakAttack,	//弱攻撃
+			enWeakAttack_A,	//弱攻撃A
+			enWeakAttack_B,	//弱攻撃B
+			enWeakAttack_C,	//弱攻撃C
 			enStrongAttack,	//強攻撃
 			enStep,			//ステップ
 			enUseActiveSkill,//アクティブスキル
@@ -131,6 +133,12 @@ namespace nsAWA {
 				}
 			}
 
+			const EnPlayerState& GetState()const {
+
+				//ステートを取得。
+				return m_state;
+			}
+
 			void ResetChangeState() {
 
 				//ステートの変更状況を初期化。
@@ -142,11 +150,6 @@ namespace nsAWA {
 				//ステートを初期化する。
 				m_state = EnPlayerState::enNone;
 				m_isChangeState = true;
-			}
-
-			const EnPlayerState& GetState()const {
-
-				return m_state;
 			}
 
 			bool IsChangeState()const {

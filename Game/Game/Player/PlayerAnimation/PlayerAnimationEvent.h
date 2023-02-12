@@ -48,6 +48,8 @@ namespace nsAWA {
 
 				void CoolTimeOff();
 
+				void InputEnable();
+
 				void CreateTrigger(IGameActor* creator, const AnimationEventDataStr& animEventDataStr);
 
 				void MoveStart();
