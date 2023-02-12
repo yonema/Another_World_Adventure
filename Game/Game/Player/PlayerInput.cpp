@@ -104,12 +104,16 @@ namespace nsAWA {
 				if (Input()->IsTrigger(EnActionMapping::enItemSelectRight)) {
 
 					itemManager->NextItem();
+					// UIの表示切替
+					CPlayerManager::GetInstance()->MoveNextItemUI();
 				}
 
 				//前のアイテムを選ぶ。
 				if (Input()->IsTrigger(EnActionMapping::enItemSelectLeft)) {
 
 					itemManager->BackItem();
+					// UIの表示切替
+					CPlayerManager::GetInstance()->MoveBackItemUI();
 				}
 
 				// UIの表示切替

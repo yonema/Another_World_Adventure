@@ -201,7 +201,7 @@ namespace nsAWA {
 			if (false == FindPlayer()) {
 				nsGameWindow::MessageBoxWarning(L"CPlayerManager : player ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
 
-				return m_kTestFontNotFound;
+				std::abort();
 			}
 
 			if (nullptr == m_player->GetActiveSkill(skillNum)) {
@@ -220,6 +220,16 @@ namespace nsAWA {
 		void CPlayerManager::ChangeFromItemToSkillUI()
 		{
 			m_player->ChangeFromItemToSkillUI();
+		}
+
+		void CPlayerManager::MoveNextItemUI()
+		{
+			m_player->MoveNextItemUI();
+		}
+
+		void CPlayerManager::MoveBackItemUI()
+		{
+			m_player->MoveBackItemUI();
 		}
 	}
 }

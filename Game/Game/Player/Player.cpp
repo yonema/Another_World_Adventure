@@ -336,6 +336,16 @@ namespace nsAWA {
 			m_itemUI->DeactiveDrawing();
 			m_skillIconUI->ActiveDrawing();
 		}
+
+		void CPlayer::MoveNextItemUI()
+		{
+			m_itemUI->MoveNextItemUI();
+		}
+
+		void CPlayer::MoveBackItemUI()
+		{
+			m_itemUI->MoveBackItemUI();
+		}
 	}
 }
 

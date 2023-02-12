@@ -86,6 +86,14 @@ namespace nsAWA {
 				return ((*m_sItemList.begin()).hasNum);
 			}
 
+			void GetAllItemName(std::list<std::string> nameVec)
+			{
+				// 先頭から最後までのアイテムの名前を取得
+				for (auto forNum : m_sItemList) {
+					nameVec.push_back(forNum.name);
+				}
+			}
+
 #endif // _DEBUG
 
 
