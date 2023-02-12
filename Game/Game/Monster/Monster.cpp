@@ -163,6 +163,10 @@ namespace nsAWA {
 			SModelInitData modelInitData;
 			modelInitData.modelFilePath = monsterInfo.modelFilePath.c_str();
 			modelInitData.textureRootPath = kMonsterModelTextureRootPath;
+			modelInitData.SetFlags(EnModelInitDataFlags::enRegisterAnimationBank);
+			modelInitData.SetFlags(EnModelInitDataFlags::enRegisterTextureBank);
+			modelInitData.SetFlags(EnModelInitDataFlags::enShadowCaster);
+
 			
 			//アニメーションの数を取得。
 			const int animNum = static_cast<int>(monsterInfo.animationFilePath.size());

@@ -21,6 +21,7 @@ namespace nsAWA
 			~CInn() = default;
 
 		private:
+
 		};
 
 	}

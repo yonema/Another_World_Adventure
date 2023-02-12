@@ -8,6 +8,13 @@ namespace nsAWA
 	{
 		class CHumanManager;
 	}
+	namespace nsMonster
+	{
+		namespace nsMonsterPop
+		{
+			class CMonsterPopManager;
+		}
+	}
 }
 
 namespace nsAWA
@@ -48,8 +55,11 @@ namespace nsAWA
 		private:
 			CSkyCubeRenderer* m_skyCubeRenderer = nullptr;
 			nsHumans::CHumanManager* m_humanManager = nullptr;
+			nsMonster::nsMonsterPop::CMonsterPopManager* m_monsterPopManager = nullptr;
+
 			bool m_isLevelLoaded = false;
 			CWorldParts m_worldParts = {};
+			TRSListMap m_levelTRS = {};
 		};
 
 	}
