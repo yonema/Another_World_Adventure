@@ -169,6 +169,8 @@ namespace nsYMEngine
 
 
 			// DebugSystem
+#ifdef _DEBUG
+
 
 			constexpr void EnableDebugDrawLine() noexcept
 			{
@@ -209,6 +211,7 @@ namespace nsYMEngine
 				}
 				return;
 			}
+#endif // _DEBUG
 
 			// End DebugSystem
 

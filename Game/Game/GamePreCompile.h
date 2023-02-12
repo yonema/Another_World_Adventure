@@ -90,6 +90,7 @@ using CVector3 = nsMath::CVector3;
 using CVector4 = nsMath::CVector4;
 using CQuaternion = nsMath::CQuaternion;
 using CMatrix = nsMath::CMatrix;
+using STRS = nsMath::STRS;
 
 
 // ƒwƒ‹ƒp[ŠÖ”

@@ -41,6 +41,9 @@ namespace nsYMEngine
 		{
 			class CAnimationClip : nsUtils::SNoncopyable
 			{
+			public:
+				using AnimEventFunc = std::function<void(void)> ;
+				using AnimEventFuncArray = std::vector<AnimEventFunc>;
 			private:
 				static const std::string m_kAnimEventKeyNodeName;
 
@@ -52,35 +55,22 @@ namespace nsYMEngine
 
 				void Release();
 
-				void CalcAndGetAnimatedBoneTransforms(
+				bool CalcAndGetAnimatedBoneTransforms(
 					float timeInSeconds,
 					std::vector<nsMath::CMatrix>* pMTransforms,
 					CSkelton* pSkelton,
+					const AnimEventFuncArray& animEventFuncArray,
+					unsigned int* prevAnimEventIdxInOut,
+					bool onlyAnimEvent,
 					unsigned int animIdx = 0,
 					bool isLoop = true
 				) noexcept;
 
-				constexpr bool IsPlayedAnimationToEnd() const noexcept
-				{
-					return m_isPlayedAnimationToEnd;
-				}
-
 				constexpr void ResetAnimationParam() noexcept
 				{
-					m_prevAnimEventIdx = 0;
-					m_isPlayedAnimationToEnd = false;
+					//m_prevAnimEventIdx = 0;
+					//m_isPlayedAnimationToEnd = false;
 					m_animLoopCounter = 0;
-				}
-
-				_CONSTEXPR20_CONTAINER void ReserveAnimationEventFuncArray(unsigned int size)
-				{
-					m_animationEventFuncArray.reserve(static_cast<size_t>(size));
-				}
-
-				_CONSTEXPR20_CONTAINER void AddAnimationEventFunc(
-					const std::function<void(void)>& animationEventFunc)
-				{
-					m_animationEventFuncArray.emplace_back(animationEventFunc);
 				}
 
 				constexpr bool IsLoaded() const noexcept
@@ -105,7 +95,12 @@ namespace nsYMEngine
 				bool ImportScene(const char* animFilePath);
 
 				float CalcAnimationTimeTicks(
-					float timeInSeconds, unsigned int animIdx, bool isLoop) noexcept;
+					float timeInSeconds, 
+					unsigned int animIdx, 
+					bool isLoop,
+					bool* isPlayedAnimationToEndOut,
+					unsigned int* prevAnimEventIdxOut
+				) noexcept;
 
 				void ReadNodeHierarchy(
 					float animTimeTicks,
@@ -148,16 +143,15 @@ namespace nsYMEngine
 					float animTimeTicks,
 					const aiNode& node,
 					const aiAnimation& animation,
-					unsigned int animIdx
+					unsigned int animIdx,
+					const AnimEventFuncArray& animEventFuncArray,
+					unsigned int* prevAnimEventIdxInOut
 				) noexcept;
 
 			private:
 				Assimp::Importer* m_importer = nullptr;
 				const aiScene* m_scene = nullptr;
-				bool m_isPlayedAnimationToEnd = false;
-				unsigned int m_prevAnimEventIdx = 0;
 				int m_animLoopCounter = 0;
-				std::vector<std::function<void(void)>> m_animationEventFuncArray = {};
 				bool m_isLoaded = false;
 				bool m_isShared = false;
 				std::vector<std::unordered_map<std::string, const aiNodeAnim*>>
