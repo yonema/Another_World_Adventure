@@ -54,7 +54,7 @@ namespace nsAWA {
 				return m_useMP;
 			}
 		public:
-			static const int m_kActiveSkillNumMax;
+			static int m_kActiveSkillNumMax;
 		private:
 			float m_useMP = 0.0f;	//消費MP
 			EnActiveSkillType m_activeSkillType = EnActiveSkillType::enNone;	//アクティブスキルのタイプ

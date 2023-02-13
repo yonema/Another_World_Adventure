@@ -195,6 +195,13 @@ namespace nsAWA {
 
 		void CPlayer::ApplyDamage(float damage, float power, bool canGuard) {
 
+			//被弾中は被弾しない。
+			if (m_action.GetState() == EnPlayerState::enDamage) {
+
+				//終了。
+				return;
+			}
+
 			//ガード中かつガードできる攻撃なら。
 			if (m_action.GetState() == EnPlayerState::enGuard
 				&& canGuard == true
