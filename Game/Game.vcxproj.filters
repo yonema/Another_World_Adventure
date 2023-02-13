@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="Assets\Shaders\BasicPixelShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\BasicVertexShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\FbxTestPixelShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\FbxTestVertexShader.hlsl" />
     <FxCompile Include="Assets\Shaders\PeraPolygonPixelShader.hlsl" />
     <FxCompile Include="Assets\Shaders\PeraPolygonVertexShader.hlsl" />
     <FxCompile Include="Assets\Shaders\SpritePixelShader.hlsl" />
@@ -250,7 +246,6 @@
     <ClCompile Include="Game\Player\Observer\PlayerObserver.cpp" />
     <ClCompile Include="Game\Player\Observer\ObservablePlayer.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.cpp" />
-    <ClCompile Include="Game\HumanTest.cpp" />
     <ClCompile Include="Game\Humans\HumanManager.cpp" />
     <ClCompile Include="Game\Humans\Human.cpp" />
     <ClCompile Include="Game\Humans\HumanModelRenderer.cpp" />
@@ -273,6 +268,8 @@
     <ClCompile Include="Game\GameLog\LogParts.cpp" />
     <ClCompile Include="Game\Item\MaterialItemList.cpp" />
     <ClCompile Include="Game\Network\NetworkManager.cpp" />
+    <ClCompile Include="Game\Monster\MonsterPop\MonsterPopManager.cpp" />
+    <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -536,7 +533,6 @@
     <ClInclude Include="Game\Player\Observer\PlayerObserver.h" />
     <ClInclude Include="Game\Player\Observer\ObservablePlayer.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.h" />
-    <ClInclude Include="Game\HumanTest.h" />
     <ClInclude Include="Game\Humans\HumanManager.h" />
     <ClInclude Include="Game\Humans\Human.h" />
     <ClInclude Include="Game\Humans\HumanModelRenderer.h" />
@@ -562,13 +558,18 @@
     <ClInclude Include="Game\GameLog\LogParts.h" />
     <ClInclude Include="Game\Item\MaterialItemList.h" />
     <ClInclude Include="Game\Network\NetworkManager.h" />
+    <ClInclude Include="Game\Monster\MonsterPop\MonsterPopManager.h" />
+    <ClInclude Include="Game\Monster\MonsterPop\MonsterPopPoint.h" />
+    <ClInclude Include="Game\Monster\MonsterPop\MonsterPopInfo.h" />
+    <ClInclude Include="YonemaEngine\Math\STRS.h" />
+    <ClInclude Include="Game\World\TRSListMap.h" />
+    <ClInclude Include="YonemaEngine\EngineConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\BasicHeader.hlsli" />
-    <None Include="Assets\Shaders\FbxTestHeader.hlsli" />
     <None Include="Assets\Shaders\PeraPolygonHeader.hlsli" />
     <None Include="Assets\Shaders\SimplePostEffectHeader.hlsli" />
     <None Include="Assets\Shaders\SpriteHeader.hlsli" />

@@ -46,7 +46,7 @@ namespace nsAWA
 			modelInitData.modelFilePath = filePath;
 			modelInitData.animInitData.Init(
 				static_cast<int>(EnHumanAnimType::enNum),
-				CHumanManager::m_kAnimFilePaths
+				g_kAnimFilePaths
 			);
 			modelInitData.vertexBias.SetRotationXDeg(m_kVertexBiasXDegAngle);
 			modelInitData.retargetSkeltonName = CHumanManager::m_kRetargetSkeltonName;

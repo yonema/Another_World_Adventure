@@ -94,7 +94,10 @@ namespace nsAWA {
 			for (const auto& gameActor : gameActorArray) {
 
 				//ヒットストップ。
-				NewGO<CHitStop>()->Init(gameActor, kHitStopTime);
+				if (!gameActor->IsHitStop()) {
+
+					NewGO<CHitStop>()->Init(gameActor, kHitStopTime);
+				}
 
 				//揺らす。
 				NewGO<CShakeActor>()->Init(gameActor, kCameraShakeAmount);

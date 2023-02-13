@@ -37,8 +37,6 @@ namespace nsAWA
 
 		bool CShareAnimationSample::Start()
 		{
-			EnableDebugDrawPhysicsLine();
-
 			// CameraSetting
 			MainCamera()->SetNearClip(0.01f);
 			MainCamera()->SetFarClip(1000.0f);

@@ -31,6 +31,10 @@ namespace nsAWA
 			{
 				CreateScene<CYonejiTestScene>();
 			}
+			else if (Keyboard()->IsTrigger(EnKeyButton::enEscape))
+			{
+				ExitGame();
+			}
 
 			return;
 		}

@@ -14,7 +14,6 @@ namespace nsAWA
 			MainCamera()->UpdateCameraParam();
 
 			{
-				EnableDebugDrawPhysicsLine();
 
 				SLevel3DInitData initData;
 				initData.mBias.MakeScaling(0.01f, 0.01f, 0.01f);

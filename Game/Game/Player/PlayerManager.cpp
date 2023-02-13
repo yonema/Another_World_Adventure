@@ -218,7 +218,7 @@ namespace nsAWA {
 			if (false == FindPlayer()) {
 				nsGameWindow::MessageBoxWarning(L"CPlayerManager : player が見つかりませんでした。");
 
-				return m_kTestFontNotFound;
+				std::abort();
 			}
 
 			if (nullptr == m_player->GetActiveSkill(skillNum)) {
@@ -239,6 +239,16 @@ namespace nsAWA {
 			m_player->ChangeFromItemToSkillUI();
 		}
 
+		void CPlayerManager::MoveNextItemUI()
+		{
+			m_player->MoveNextItemUI();
+		}
+
+		void CPlayerManager::MoveBackItemUI()
+		{
+			m_player->MoveBackItemUI();
+    }
+    
 		void CPlayerManager::CreateObserver() {
 
 			//レベル管理のオブザーバーを追加。
@@ -249,6 +259,13 @@ namespace nsAWA {
 			inputObserver->AddEvent(nsObserver::EnObserverEvent::enInputEnable);
 			inputObserver->AddEvent(nsObserver::EnObserverEvent::enInputDisable);
 			m_observable.AddObserver(inputObserver);
+
 		}
+    
+    
+    
+    
+    
+    
 	}
 }

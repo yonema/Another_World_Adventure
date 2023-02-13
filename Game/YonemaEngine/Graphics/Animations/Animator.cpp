@@ -89,6 +89,8 @@ namespace nsYMEngine
 				bool res = InitAnimationClips(
 					animInitData, loadingAsynchronous, regiseterAnimBank);
 
+				m_animEventFuncArrays.resize(animInitData.numAnimations);
+
 				return res;
 			}
 
@@ -180,6 +182,8 @@ namespace nsYMEngine
 					return;
 				}
 				m_animationClips[m_animationIndex]->ResetAnimationParam();
+				m_isPlayedAnimationToEnd = false;
+				m_prevAnimEventIdx = 0;
 				m_animationIndex = animIdx;
 				m_animationTimer = 0.0f;
 				m_isPlaying = true;
@@ -195,6 +199,8 @@ namespace nsYMEngine
 					return;
 				}
 				m_animationClips[m_animationIndex]->ResetAnimationParam();
+				m_isPlayedAnimationToEnd = false;
+				m_prevAnimEventIdx = 0;
 				m_animationIndex = animIdx;
 				m_animationTimer = timer;
 				m_isPlaying = true;
@@ -206,13 +212,23 @@ namespace nsYMEngine
 
 			void CAnimator::CalcAndGetAnimatedBoneTransforms(
 				std::vector<nsMath::CMatrix>* pMTransforms,
-				CSkelton* pSkelton
+				CSkelton* pSkelton,
+				bool onlyAnimEvent
 				) noexcept
 			{
-				m_animationClips[m_animationIndex]->CalcAndGetAnimatedBoneTransforms(
-					m_animationTimer, pMTransforms, pSkelton, 0, m_isLoop);
+				m_isPlayedAnimationToEnd = 
+					m_animationClips[m_animationIndex]->CalcAndGetAnimatedBoneTransforms(
+					m_animationTimer, 
+					pMTransforms,
+					pSkelton,
+					m_animEventFuncArrays[m_animationIndex],
+					&m_prevAnimEventIdx,
+					onlyAnimEvent,
+					0,
+					m_isLoop
+				);
 
-				m_isPlaying = !m_animationClips[m_animationIndex]->IsPlayedAnimationToEnd();
+				m_isPlaying = !m_isPlayedAnimationToEnd;
 
 				return;
 			}

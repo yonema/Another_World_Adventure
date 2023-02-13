@@ -93,9 +93,9 @@ namespace nsYMEngine
 				}
 			}
 
-			static void ProcessThread(CLoadModelThread* instance, unsigned int threadID) noexcept
+			static void ProcessThread(CLoadModelThread* instance, unsigned int threadID, const bool& isProcessingThread) noexcept
 			{
-				while (m_isProcessingThread)
+				while (isProcessingThread)
 				{
 					instance->Update(threadID);
 				}
@@ -134,11 +134,11 @@ namespace nsYMEngine
 
 		private:
 			static CLoadModelThread* m_instance;
-			static bool m_isProcessingThread;
 			std::array<std::thread*, m_kNumThread> m_thread = {};
 			std::array <std::list<SLoadModelProcess>, m_kNumThread>
 				m_loadModelProcess = {};
 			unsigned int m_threadIdx = 0;
+			bool m_isProcessingThread = false;
 		};
 
 	}

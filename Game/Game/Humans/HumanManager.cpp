@@ -8,19 +8,6 @@ namespace nsAWA
 {
 	namespace nsHumans
 	{
-		const char* const CHumanManager::
-			m_kAnimFilePaths[static_cast<int>(EnHumanAnimType::enNum)] =
-		{
-			"Assets/Animations/Player/Sword_Idle.fbx",
-			"Assets/Animations/Player/Sword_Walk.fbx",
-			"Assets/Animations/Player/Sword_Run.fbx",
-			"Assets/Animations/Player/Sword_WeakAttack.fbx",
-			"Assets/Animations/Player/Sword_Damage.fbx",
-			"Assets/Animations/Player/Sword_Death.fbx",
-			"Assets/Animations/Player/Sword_UseItem.fbx",
-			"Assets/Animations/Player/Magic.fbx"
-		};
-
 		const char* const CHumanManager::m_kRetargetSkeltonName = "PlayerSkelton";
 
 		const char* const CHumanManager::m_kHumanPrefix = "Humans_";
@@ -101,7 +88,7 @@ namespace nsAWA
 			SModelInitData modelInitData;
 			modelInitData.modelFilePath = g_kNameToModelFilePath.at(g_kBaseHumanName);
 			modelInitData.animInitData.Init(
-				static_cast<int>(EnHumanAnimType::enNum), m_kAnimFilePaths);
+				static_cast<int>(EnHumanAnimType::enNum), g_kAnimFilePaths);
 			modelInitData.retargetSkeltonName = m_kRetargetSkeltonName;
 
 			modelInitData.SetFlags(EnModelInitDataFlags::enRegisterAnimationBank);
@@ -220,19 +207,36 @@ namespace nsAWA
 
 		void CHumanManager::ActivateAllHumans()
 		{
+			if (m_isPlayerInTown)
+			{
+				return;
+			}
+
+
 			for (auto& human : m_humanMap)
 			{
 				human.second->HumanActivate();
 			}
+
+			m_isPlayerInTown = true;
+
 			return;
 		}
 
 		void CHumanManager::DeactivateAllHumans()
 		{
+			if (m_isPlayerInTown != true)
+			{
+				return;
+			}
+
 			for (auto& human : m_humanMap)
 			{
 				human.second->HumanDeactivate();
 			}
+
+			m_isPlayerInTown = false;
+
 			return;
 		}
 

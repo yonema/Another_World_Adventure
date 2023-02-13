@@ -94,17 +94,20 @@ namespace nsYMEngine
 			}
 
 
-			void CAnimationClip::CalcAndGetAnimatedBoneTransforms(
+			bool CAnimationClip::CalcAndGetAnimatedBoneTransforms(
 				float timeInSeconds,
 				std::vector<nsMath::CMatrix>* pMTransforms,
 				CSkelton* pSkelton,
+				const AnimEventFuncArray& animEventFuncArray,
+				unsigned int* prevAnimEventIdxInOut,
+				bool onlyAnimEvent,
 				unsigned int animIdx,
 				bool isLoop
 			) noexcept
 			{
 				if (pSkelton == nullptr)
 				{
-					return;
+					return true;
 				}
 				if (animIdx >= m_scene->mNumAnimations)
 				{
@@ -114,27 +117,33 @@ namespace nsYMEngine
 					sprintf_s(buffer, "Invalid animation index %d, max is %d\n", animIdx, m_scene->mNumAnimations);
 					::OutputDebugStringA(buffer);
 #endif
-					return;
+					return true;
 				}
 
-				float animTimeTicks = CalcAnimationTimeTicks(timeInSeconds, animIdx, isLoop);
+				bool isPlayedAnimationToEnd = false;
+				float animTimeTicks = CalcAnimationTimeTicks(
+					timeInSeconds, animIdx, isLoop, &isPlayedAnimationToEnd, prevAnimEventIdxInOut);
 				const aiAnimation& animation = *m_scene->mAnimations[animIdx];
 
 				/*ReadNodeHierarchy(
 					animTimeTicks, *m_scene->mRootNode, nsMath::CMatrix::Identity(), animation, pSkelton);*/
-				ReadNodeHierarchy(
-					animTimeTicks,
-					*(pSkelton->GetRootNode()->pNode),
-					nsMath::CMatrix::Identity(), 
-					animation,
-					pSkelton,
-					animIdx
-				);
+				
+				if (onlyAnimEvent != true)
+				{
+					ReadNodeHierarchy(
+						animTimeTicks,
+						*(pSkelton->GetRootNode()->pNode),
+						nsMath::CMatrix::Identity(),
+						animation,
+						pSkelton,
+						animIdx
+					);
+				}
 
-				if (m_animEventNode)
+				if (m_animEventNode && isPlayedAnimationToEnd != true)
 				{
 					ReadAnimKeyEventNode(
-						animTimeTicks, *m_animEventNode, animation, animIdx);
+						animTimeTicks, *m_animEventNode, animation, animIdx, animEventFuncArray, prevAnimEventIdxInOut);
 				}
 
 
@@ -152,11 +161,16 @@ namespace nsYMEngine
 					(*pMTransforms)[boneIdx] = boneInfoArray[boneIdx].mFinalTransform;
 				}
 
-				return;
+				return isPlayedAnimationToEnd;
 			}
 
 			float CAnimationClip::CalcAnimationTimeTicks(
-				float timeInSeconds, unsigned int animIdx, bool isLoop) noexcept
+				float timeInSeconds, 
+				unsigned int animIdx,
+				bool isLoop,
+				bool* isPlayedAnimationToEndOut,
+				unsigned int* prevAnimEventIdxOut
+			) noexcept
 			{
 				float ticksPerSecond =
 					m_scene->mAnimations[animIdx]->mTicksPerSecond != 0 ?
@@ -181,10 +195,10 @@ namespace nsYMEngine
 					{
 						// 終端まで再生した。
 						m_animLoopCounter = animLoopCount;
-						m_prevAnimEventIdx = 0;
+						*prevAnimEventIdxOut = 0;
 					}
 
-					m_isPlayedAnimationToEnd = false;
+					*isPlayedAnimationToEndOut = false;
 				}
 				else
 				{
@@ -193,12 +207,12 @@ namespace nsYMEngine
 
 					if (timeInTicks > duration)
 					{
-						m_prevAnimEventIdx = 0;
-						m_isPlayedAnimationToEnd = true;
+						*prevAnimEventIdxOut = 0;
+						*isPlayedAnimationToEndOut = true;
 					}
 					else
 					{
-						m_isPlayedAnimationToEnd = false;
+						*isPlayedAnimationToEndOut = false;
 					}
 				}
 
@@ -550,14 +564,16 @@ namespace nsYMEngine
 				float animTimeTicks,
 				const aiNode& node,
 				const aiAnimation& animation,
-				unsigned int animIdx
+				unsigned int animIdx,
+				const AnimEventFuncArray& animEventFuncArray,
+				unsigned int* prevAnimEventIdxInOut
 			) noexcept
 			{
-				if (IsPlayedAnimationToEnd())
-				{
-					// 最後まで再生し終わったら、イベントは実行されない。
-					return;
-				}
+				//if (IsPlayedAnimationToEnd())
+				//{
+				//	// 最後まで再生し終わったら、イベントは実行されない。
+				//	return;
+				//}
 
 				std::string nodeName(node.mName.data);
 				const aiNodeAnim* pNodeAnim = FindNodeAnim(animation, nodeName, animIdx);
@@ -578,21 +594,21 @@ namespace nsYMEngine
 				// まだ過ぎていないキーインデックスを探す。
 				unsigned int animEventKeyIdx = FindPosition(animTimeTicks, *pNodeAnim);
 
-				if (animEventKeyIdx <= m_prevAnimEventIdx * 2)
+				if (animEventKeyIdx <= *prevAnimEventIdxInOut * 2)
 				{
 					// すでに実行したことがあるアニメーションイベント。
 					return;
 				}
 
 				// アニメーションイベント実行。
-				if (m_prevAnimEventIdx < m_animationEventFuncArray.size())
+				if (*prevAnimEventIdxInOut < animEventFuncArray.size())
 				{
-					m_animationEventFuncArray[m_prevAnimEventIdx]();
+					animEventFuncArray[*prevAnimEventIdxInOut]();
 				}
 
 				// アニメーションイベントを呼ぶタイミングは、キーとキーの間に挟まれているため、
 				// イベントを1つ実行したら、2つ進める。
-				m_prevAnimEventIdx++;
+				(*prevAnimEventIdxInOut)++;
 
 				return;
 			}

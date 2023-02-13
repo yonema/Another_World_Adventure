@@ -9,8 +9,6 @@ namespace nsAWA
 		{
 			MainCamera()->SetFarClip(1000.0f);
 
-			// デバック用のPhysicsのライン描画機能の有効化。
-			EnableDebugDrawPhysicsLine();
 			// ラインのカリングボックスの有効化。
 			SetCullingBoxForDebugDrawLine(50.0f, nsMath::CVector3::Zero());
 			// ラインのカリングボックスの自動カメラフィット機能の有効化。

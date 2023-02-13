@@ -90,6 +90,7 @@ using CVector3 = nsMath::CVector3;
 using CVector4 = nsMath::CVector4;
 using CQuaternion = nsMath::CQuaternion;
 using CMatrix = nsMath::CMatrix;
+using STRS = nsMath::STRS;
 
 
 // ƒwƒ‹ƒp[ŠÖ”
@@ -135,19 +136,6 @@ static constexpr const nsInput::CInputManager* const Input()
 
 
 //////// •¨— ////////
-
-static void EnableDebugDrawPhysicsLine() noexcept
-{
-	nsPhysics::CPhysicsEngine::GetInstance()->EnableDebugDrawLine();
-}
-static void DisableDebugDrawPhysicsLine() noexcept
-{
-	nsPhysics::CPhysicsEngine::GetInstance()->DisableDebugDrawLine();
-}
-static bool IsEnableDebugDrawPhysicsLine() noexcept
-{
-	return nsPhysics::CPhysicsEngine::GetInstance()->IsEnableDebugDrawLine();
-}
 
 static void SetCullingBoxForDebugDrawLine(float halfExtent, const nsMath::CVector3& center) noexcept
 {

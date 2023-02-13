@@ -115,6 +115,10 @@ namespace nsAWA {
 
 			void ChangeFromItemToSkillUI();
 
+			void MoveNextItemUI();
+
+			void MoveBackItemUI();
+
 		private:
 			CPlayerInput m_input;									//“ü—Í
 			CPlayerAction m_action;									//ƒAƒNƒVƒ‡ƒ“
