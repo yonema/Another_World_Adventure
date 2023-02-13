@@ -92,6 +92,8 @@ namespace nsYMEngine
 					//現在再生中のアニメーションがあった場合、そこまでの移動データを保存する
 					AnimFrameDataToSprite(currentData);
 					m_animations2D.at(m_playingAnimationName).ResetFrame();
+					//次のアニメーションの再生中データに今のデータを渡す
+					m_animations2D.at(playAnimName).m_playingFrameData = currentData;
 				}
 
 				m_animations2D.at(playAnimName).SetDefaultPosition(GetPosition());
