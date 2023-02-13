@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Scenes/TitleScene.h"
 #include "Network/NetworkManager.h"
+#include "UI/Institution/Inn/InnWindowUI.h"
 
 
 
@@ -13,13 +14,20 @@ namespace nsAWA
 	{
 		HandleApplicationArgument();
 
-		nsScene::CreateScene<nsScene::CTitleScene>();
+		//nsScene::CreateScene<nsScene::CTitleScene>();
+
 
 		return true;
 	}
 
 	void CGame::Update(float deltaTime)
 	{
+
+		if (Keyboard()->IsTrigger(EnKeyButton::en7))
+		{
+			NewGO<nsUI::CInnWindowUI>();
+
+		}
 
 		return;
 	}
