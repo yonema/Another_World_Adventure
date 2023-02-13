@@ -14,7 +14,7 @@ namespace nsAWA
 	{
 		HandleApplicationArgument();
 
-		//nsScene::CreateScene<nsScene::CTitleScene>();
+		nsScene::CreateScene<nsScene::CTitleScene>();
 
 
 		return true;
@@ -22,13 +22,6 @@ namespace nsAWA
 
 	void CGame::Update(float deltaTime)
 	{
-
-		if (Keyboard()->IsTrigger(EnKeyButton::en7))
-		{
-			NewGO<nsUI::CInnWindowUI>();
-
-		}
-
 		return;
 	}
 
