@@ -1,10 +1,13 @@
 #include "Human.h"
 #include "HumanTable.h"
+#include "HumanManager.h"
 
 namespace nsAWA
 {
 	namespace nsHumans
 	{
+		CHumanManager* CHuman::m_humanManager = nullptr;
+
 		bool CHuman::Start()
 		{
 
@@ -13,7 +16,19 @@ namespace nsAWA
 
 		void CHuman::Update(float deltaTime)
 		{
-
+			switch (m_loadingState)
+			{
+			case EnLoadingState::enBeforeLoading:
+				break;
+			case EnLoadingState::enNowLoading:
+				if (m_humanMR->GetModelRenderer()->IsLoadingAsynchronous() != true)
+				{
+					ChangeLoadingState(EnLoadingState::enAfterLoading);
+				}
+				break;
+			case EnLoadingState::enAfterLoading:
+				break;
+			}
 			return;
 		}
 
@@ -37,6 +52,8 @@ namespace nsAWA
 
 			m_humanMR = NewGO<CHumanModelRenderer>(name);
 			m_humanMR->Init(name, position, rotation, filePath);
+
+			ChangeLoadingState(EnLoadingState::enNowLoading);
 			
 			CheckEnableTalking();
 
@@ -71,6 +88,38 @@ namespace nsAWA
 
 			return;
 		}
+
+
+		void CHuman::ChangeLoadingState(EnLoadingState newState)
+		{
+			if (m_loadingState == newState)
+			{
+				return;
+			}
+
+			m_loadingState = newState;
+
+			switch (m_loadingState)
+			{
+			case EnLoadingState::enBeforeLoading:
+				break;
+			case EnLoadingState::enNowLoading:
+				break;
+			case EnLoadingState::enAfterLoading:
+				if (m_humanManager == nullptr)
+				{
+					if (m_humanManager->IsPlayerInTown() != true)
+					{
+						HumanDeactivate();
+					}
+				}
+				break;
+			}
+
+
+			return;
+		}
+
 
 
 

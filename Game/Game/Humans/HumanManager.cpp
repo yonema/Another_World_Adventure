@@ -207,6 +207,12 @@ namespace nsAWA
 
 		void CHumanManager::ActivateAllHumans()
 		{
+			if (m_isPlayerInTown)
+			{
+				return;
+			}
+
+
 			for (auto& human : m_humanMap)
 			{
 				human.second->HumanActivate();
@@ -219,6 +225,11 @@ namespace nsAWA
 
 		void CHumanManager::DeactivateAllHumans()
 		{
+			if (m_isPlayerInTown != true)
+			{
+				return;
+			}
+
 			for (auto& human : m_humanMap)
 			{
 				human.second->HumanDeactivate();

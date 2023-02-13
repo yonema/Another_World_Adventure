@@ -1,5 +1,12 @@
 #pragma once
 #include "HumanModelRenderer.h"
+namespace nsAWA
+{
+	namespace nsHumans
+	{
+		class CHumanManager;
+	}
+}
 
 namespace nsAWA
 {
@@ -78,14 +85,24 @@ namespace nsAWA
 				}
 			}
 
+
+			static void SetHumanaManager(CHumanManager* manager) noexcept
+			{
+				m_humanManager = manager;
+			}
+
 		private:
 
 			void CheckEnableTalking();
 
+			void ChangeLoadingState(EnLoadingState newState);
+
 		private:
+			static CHumanManager* m_humanManager;
 			CHumanModelRenderer* m_humanMR = nullptr;
 			std::string m_name = {};
 			bool m_enableTalking = false;
+			EnLoadingState m_loadingState = EnLoadingState::enBeforeLoading;
 		};
 
 	}
