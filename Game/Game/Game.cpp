@@ -16,6 +16,7 @@ namespace nsAWA
 
 		nsScene::CreateScene<nsScene::CTitleScene>();
 
+
 		return true;
 	}
 
