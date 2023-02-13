@@ -137,19 +137,6 @@ static constexpr const nsInput::CInputManager* const Input()
 
 //////// •¨— ////////
 
-static void EnableDebugDrawPhysicsLine() noexcept
-{
-	nsPhysics::CPhysicsEngine::GetInstance()->EnableDebugDrawLine();
-}
-static void DisableDebugDrawPhysicsLine() noexcept
-{
-	nsPhysics::CPhysicsEngine::GetInstance()->DisableDebugDrawLine();
-}
-static bool IsEnableDebugDrawPhysicsLine() noexcept
-{
-	return nsPhysics::CPhysicsEngine::GetInstance()->IsEnableDebugDrawLine();
-}
-
 static void SetCullingBoxForDebugDrawLine(float halfExtent, const nsMath::CVector3& center) noexcept
 {
 	nsPhysics::CPhysicsEngine::GetInstance()->SetCullingBoxForDebugDrawLine(halfExtent, center);

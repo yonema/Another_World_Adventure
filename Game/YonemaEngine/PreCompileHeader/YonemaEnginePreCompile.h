@@ -44,6 +44,10 @@
 // “ü—Í
 #pragma comment(lib, "xinput.lib")
 
+// ƒTƒEƒ“ƒh
+#pragma comment (lib, "xaudio2.lib")
+#pragma comment (lib, "winmm.lib")
+
 
 // •¨—(PhysX)
 #pragma comment (lib, "PhysXCommon_64.lib")

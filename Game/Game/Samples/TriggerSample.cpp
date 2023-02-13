@@ -255,7 +255,6 @@ namespace nsAWA
 #pragma region CTriggerSample
 		bool CTriggerSample::Start()
 		{
-			EnableDebugDrawPhysicsLine();
 			SetCullingBoxForDebugDrawLine(100.0f, nsMath::CVector3::Zero());
 
 			// 物理テスト用のオブジェクトを生成

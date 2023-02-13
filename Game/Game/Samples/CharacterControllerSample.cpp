@@ -7,7 +7,6 @@ namespace nsAWA
 	{
 		bool CCharacterControllerSample::Start()
 		{
-			EnableDebugDrawPhysicsLine();
 			SetCullingBoxForDebugDrawLine(1000.0f, nsMath::CVector3::Zero());
 			MainCamera()->SetFarClip(1000.0f);
 
