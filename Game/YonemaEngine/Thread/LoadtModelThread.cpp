@@ -7,8 +7,9 @@ namespace nsYMEngine
 {
 	namespace nsThread
 	{
+		std::mutex g_mutex = {};
+
 		CLoadModelThread* CLoadModelThread::m_instance = nullptr;
-		bool CLoadModelThread::m_isProcessingThread = false;
 
 		CLoadModelThread::CLoadModelThread()
 		{
@@ -30,7 +31,8 @@ namespace nsYMEngine
 
 			for (unsigned int threadIdx = 0; threadIdx < m_kNumThread; threadIdx++)
 			{
-				m_thread[threadIdx] = new std::thread(ProcessThread, this, threadIdx);
+				m_thread[threadIdx] = new std::thread(
+					ProcessThread, this, threadIdx, std::ref(m_isProcessingThread));
 			}
 
 			return;
@@ -38,7 +40,11 @@ namespace nsYMEngine
 
 		void CLoadModelThread::Terminate()
 		{
+			g_mutex.lock();
+
 			m_isProcessingThread = false;
+
+			g_mutex.unlock();
 
 			for (unsigned int threadIdx = 0; threadIdx < m_kNumThread; threadIdx++)
 			{

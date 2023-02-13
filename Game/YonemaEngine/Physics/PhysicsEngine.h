@@ -54,9 +54,7 @@ namespace nsYMEngine
 			static const float m_kDefaultStaticFriction;
 			static const float m_kDefaultDynamicFriction;
 			static const float m_kDefaultRestitution;
-#ifdef _DEBUG
 			static const unsigned int m_kMaxMyDebugLine;
-#endif // _DEBUG
 
 		private:
 			CPhysicsEngine();
@@ -169,21 +167,6 @@ namespace nsYMEngine
 
 
 			// DebugSystem
-#ifdef _DEBUG
-
-
-			constexpr void EnableDebugDrawLine() noexcept
-			{
-				m_enableDebugDrawLine = true;
-			}
-			constexpr void DisableDebugDrawLine() noexcept
-			{
-				m_enableDebugDrawLine = false;
-			}
-			constexpr bool IsEnableDebugDrawLine() noexcept
-			{
-				return m_enableDebugDrawLine;
-			}
 
 			void SetCullingBoxForDebugDrawLine(
 				float halfExtent, const nsMath::CVector3& center) noexcept;
@@ -201,17 +184,8 @@ namespace nsYMEngine
 				return m_enableAutoFitCullingBoxToMainCamera;
 			}
 
-			inline void PushDebugLine(const SMyDebugLine& debugLine)
-			{
-				m_myDebugLineArray.emplace_back(debugLine);
-				if (m_myDebugLineArray.size() > m_kMaxMyDebugLine)
-				{
-					nsGameWindow::MessageBoxError(L"ÉåÉCÇÃêîÇ™ëΩÇ∑Ç¨Ç‹Ç∑ÅB");
-					std::abort();
-				}
-				return;
-			}
-#endif // _DEBUG
+			void PushDebugLine(const SMyDebugLine& debugLine);
+
 
 			// End DebugSystem
 
@@ -265,13 +239,11 @@ namespace nsYMEngine
 
 			std::list<CPhysicsTriggerObject*> m_physicsTriggerObjectList = {};
 
-#ifdef _DEBUG
-			bool m_enableDebugDrawLine = false;
-			bool m_enableAutoFitCullingBoxToMainCamera = false;
+
+			bool m_enableAutoFitCullingBoxToMainCamera = true;
 			float m_cullingBoxHalfExtent = 0.0f;
 			nsGraphics::nsDebugRenderers::CPhysicsDebugLineRenderer* m_physicsDebugLineRenderer = nullptr;
 			std::vector<SMyDebugLine> m_myDebugLineArray = {};
-#endif // _DEBUG
 		};
 	}
 }

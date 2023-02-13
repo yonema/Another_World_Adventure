@@ -1,6 +1,7 @@
 #include "World.h"
 #include "../Humans/HumanManager.h"
 #include "../Monster/MonsterPop/MonsterPopManager.h"
+#include "../EngineConfig.h"
 
 namespace nsAWA
 {
@@ -11,6 +12,13 @@ namespace nsAWA
 
 		bool CWorld::Start()
 		{
+#ifdef DRAW_COLLISION
+			SetCullingBoxForDebugDrawLine(500.0f, nsMath::CVector3::Zero());
+
+			// ラインのカリングボックスの自動カメラフィット機能の有効化。
+			EnableAutoFitCullingBoxToMainCamera();
+#endif // DRAW_COLLISION
+
 			m_humanManager = NewGO<nsHumans::CHumanManager>("HumanManager");
 			m_humanManager->GenerateBase(true);
 
