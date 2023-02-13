@@ -55,6 +55,12 @@ namespace nsAWA {
 			m_isHitStop = flag;
 		}
 
+		bool IsHitStop()const {
+
+			//ヒットストップのフラグを取得。
+			return m_isHitStop;
+		}
+
 	protected:
 		void Update(float deltaTime)override final;
 
