@@ -2,6 +2,7 @@
 #include "NetworkManager.h"
 #include <cpprest/http_client.h>
 #include <Sensapi.h>
+#include <fstream>
 
 using namespace web;                        // URIのような共通の機能
 using namespace web::http;                  // 共通のHTTP機能
@@ -13,7 +14,7 @@ namespace nsAWA
 	{
 		CNetworkManager* CNetworkManager::m_instance = nullptr;
 
-		void CNetworkManager::UploadSaveData(const std::string& saveData)
+		void CNetworkManager::UploadSaveData()
 		{
 			//ネットワークモードを調べる
 			if (m_networkMode != "NETWORK_ONLINE")
@@ -29,6 +30,12 @@ namespace nsAWA
 				return;
 			}
 
+			std::string saveData = LoadLocalSaveData();
+
+			if (saveData == "")
+			{
+				return;
+			}
 
 			//アップロード処理
 			HttpUpload(saveData);
@@ -88,6 +95,21 @@ namespace nsAWA
 			{
 				return false;
 			}
+		}
+
+		std::string CNetworkManager::LoadLocalSaveData()
+		{
+			std::ifstream ifs(m_kSaveDataPath);
+
+			//オープンに失敗したら無を返す
+			if (!ifs)
+			{
+				return "";
+			}
+
+			std::string saveDataStr((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+			return saveDataStr;
 		}
 
 		void CNetworkManager::HttpUpload(const std::string& saveData)
