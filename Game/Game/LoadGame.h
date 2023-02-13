@@ -25,6 +25,11 @@ namespace nsAWA {
 		void OnDestroy() override final;
 
 	private:
+		void CreateGameList();
+
+		void DeleteGameList();
+
+	private:
 		nsPlayer::CPlayer* m_player = nullptr;			//プレイヤー
 		nsCamera::CMainCamera* m_mainCamera = nullptr;	//メインカメラ
 		nsBackGround::CBackGround* m_backGround = nullptr;	//バックグラウンド

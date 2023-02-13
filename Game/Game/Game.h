@@ -1,12 +1,6 @@
 #pragma once
-
 namespace nsAWA
 {
-	namespace nsUI
-	{
-		class CMenuBaseUI;
-	}
-
 	//ゲームクラス
 	class CGame : public IGameObject
 	{
@@ -20,19 +14,16 @@ namespace nsAWA
 
 		void OnDestroy() override final;
 
+	private:
+		/**
+		 * @brief アプリケーションに渡された引数を処理する
+		*/
+		void HandleApplicationArgument();
 	public:
 		constexpr CGame() = default;
 		~CGame() = default;
 
-
-	private:
-		void TestMenu();
-
-		void TestDeleteMenu();
-
 	private:
 
-		nsUI::CMenuBaseUI* m_menuBaseUI = nullptr;
-		bool m_flagCreateMenuBaseUI = false;
 	};
 }

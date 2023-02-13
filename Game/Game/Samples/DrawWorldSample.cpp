@@ -136,7 +136,7 @@ namespace nsAWA
 
 			// CreateSimpleMover
 			m_simpleMover = NewGO<nsDebugSystem::CSimpleMover>();
-			m_simpleMover->SetPosition({ 0.0f,0.0f,0.0f });
+			m_simpleMover->SetPosition(m_spawnPoint);
 
 			return true;
 		}
@@ -184,8 +184,16 @@ namespace nsAWA
 
 		bool CDrawWorldSample::Start()
 		{
+			constexpr float kFarClip = 5000.0f;
+
 			// CameraSetting
-			MainCamera()->SetFarClip(1000.0f);
+			MainCamera()->SetFarClip(kFarClip);
+
+			m_skyCubeRenderer = NewGO<CSkyCubeRenderer>();
+			m_skyCubeRenderer->Init(EnSkyType::enNormal);
+			m_skyCubeRenderer->SetScale(kFarClip);
+			m_skyCubeRenderer->SetAutoFollowCameraFlag(true);
+			m_skyCubeRenderer->SetAutoRotateFlag(true);
 
 			// まず最初にベースとなるモデルをロードしておく。
 			// アニメーションやAnimationScaledのため。
@@ -193,36 +201,30 @@ namespace nsAWA
 
 			// CreateWorldFromLevel3D
 			SLevel3DInitData initData;
-			initData.mBias.MakeScaling(0.01f, 0.01f, 0.01f);
 			initData.isCreateStaticPhysicsObjectForAll = false;
 
 			CQuaternion rot;
 			rot.SetRotationXDeg(-90.0f);
 
+			struct STRS
+			{
+				STRS(const CVector3& pos, const CQuaternion& rot, const CVector3& scale)
+					:pos(pos), rot(rot), scale(scale)
+				{};
+				CVector3 pos;
+				CQuaternion rot;
+				CVector3 scale;
+			};
+			std::unordered_map<std::string, std::list<STRS>> modelTRSArray = {};
+
 			m_level3D.Init(
-				"Assets/Level3D/Samples/TownLevelTest.fbx",
+				"Assets/Level3D/WorldLevel.fbx",
 				initData,
 				[&](const SLevelChipData& chipData)->bool
 				{
-					if (chipData.EqualObjectName("Town"))
+					if (chipData.ForwardMatchName("Humans_"))
 					{
-						static const char* const townFilePath = "Assets/Models/Town/Town.fbx";
-
-						SModelInitData modelInitData;
-						modelInitData.modelFilePath = townFilePath;
-						modelInitData.SetFlags(EnModelInitDataFlags::enNodeTransform);
-						modelInitData.SetFlags(EnModelInitDataFlags::enShadowCaster);
-
-						auto* townMR = NewGO<CModelRenderer>();
-						townMR->Init(modelInitData);
-						townMR->SetScale(chipData.scale);
-						townMR->SetPosition(chipData.position);
-						townMR->SetRotation(chipData.rotation * rot);
-						return true;
-					}
-					else if (chipData.ForwardMatchName("Humans_"))
-					{
-						auto* name = chipData.name;
+						auto* name = chipData.name.c_str();
 						name += strlen("Humans_");
 						std::string nameStr = name;
 						const char* findChar = strchr(name, static_cast<int>('.'));
@@ -247,17 +249,148 @@ namespace nsAWA
 
 						return true;
 					}
-					return false;
+					else if (chipData.ForwardMatchName("Building_") || chipData.ForwardMatchName("Town_"))
+					{
+						constexpr const char* const rootPath = "Assets/Models/Town/";
+
+						std::string nameStr = chipData.name;
+
+						nameStr += ".fbx";
+
+						std::string filePath = rootPath + nameStr;
+
+						modelTRSArray[filePath].emplace_back(
+							chipData.position, chipData.rotation, chipData.scale);
+
+						return true;
+					}
+					else if (chipData.ForwardMatchName("Meadow_"))
+					{
+						constexpr const char* const rootPath = "Assets/Models/Meadow/";
+
+						std::string nameStr = chipData.name;
+
+						nameStr += ".fbx";
+
+						std::string filePath = rootPath + nameStr;
+						modelTRSArray[filePath].emplace_back(
+							chipData.position, chipData.rotation, chipData.scale);
+
+						return true;
+					}
+					else if (chipData.ForwardMatchName("Mountain_"))
+					{
+						constexpr const char* const rootPath = "Assets/Models/Mountain/";
+
+						std::string nameStr = chipData.name;
+
+						nameStr += ".fbx";
+
+						std::string filePath = rootPath + nameStr;
+						modelTRSArray[filePath].emplace_back(
+							chipData.position, chipData.rotation, chipData.scale);
+
+						return true;
+					}
+					else if (chipData.ForwardMatchName("Monster_"))
+					{
+						const char* charName = chipData.name.c_str();
+						charName += strlen("Monster_");
+
+						if (nsUtils::ForwardMatchName(charName, "Meadow_"))
+						{
+							charName += strlen("Meadow_");
+						}
+
+						int num = atoi(charName);
+
+
+						constexpr const char* const filePath =
+							"Assets/Models/Monsters/Giyara.fbx";
+						constexpr unsigned int numAnims = 1;
+						constexpr const char* const animFilePaths[numAnims] =
+						{
+							"Assets/Animations/Monsters/Giyara/Giyara_Idle.fbx"
+						};
+
+						SModelInitData modelInitData;
+						modelInitData.modelFilePath = filePath;
+						modelInitData.SetFlags(EnModelInitDataFlags::enShadowCaster);
+						modelInitData.SetFlags(EnModelInitDataFlags::enLoadingAsynchronous);
+						modelInitData.SetFlags(EnModelInitDataFlags::enRegisterAnimationBank);
+						modelInitData.SetFlags(EnModelInitDataFlags::enRegisterTextureBank);
+						modelInitData.animInitData.Init(numAnims, animFilePaths);
+						modelInitData.textureRootPath = "monster";
+
+
+						auto* mr = NewGO<CModelRenderer>();
+						mr->SetScale(0.1f);
+						mr->SetPosition(chipData.position);
+						mr->SetRotation(chipData.rotation * rot);
+						mr->Init(modelInitData);
+
+						return true;
+					}
+					else if (chipData.EqualObjectName("PlayerSpawn"))
+					{
+						m_debugPlayer = NewGO<CDebugPlayer>();
+						m_debugPlayer->SetSpawnPoint(chipData.position);
+
+						return true;
+					}
+
+					std::wstring wstr = L"予想外のオブジェクト ";
+					wstr += nsUtils::GetWideStringFromString(chipData.name);
+					wstr.erase(wstr.end() - 1);
+					wstr += L" がレベルで読み込まれています。";
+					nsGameWindow::MessageBoxWarning(wstr.c_str());
+
+					return true;
 				}
 			);
 
 
-			m_skyCubeRenderer = NewGO<CSkyCubeRenderer>();
-			m_skyCubeRenderer->Init(EnSkyType::enNormal);
-			m_skyCubeRenderer->SetAutoFollowCameraFlag(true);
-			m_skyCubeRenderer->SetAutoRotateFlag(true);
+			for (const auto& modelTRS : modelTRSArray)
+			{
+				const auto& filePath = modelTRS.first;
 
-			m_debugPlayer = NewGO<CDebugPlayer>();
+				SModelInitData modelInitData;
+				modelInitData.modelFilePath = filePath;
+				//modelInitData.SetFlags(EnModelInitDataFlags::enNodeTransform);
+				modelInitData.SetFlags(EnModelInitDataFlags::enShadowCaster);
+				modelInitData.SetFlags(EnModelInitDataFlags::enRegisterTextureBank);
+				modelInitData.maxInstance = static_cast<unsigned int>(modelTRS.second.size());
+
+				auto* mr = NewGO<CModelRenderer>();
+				mr->Init(modelInitData);
+
+				if (modelInitData.maxInstance > 1)
+				{
+					auto* worldMatArray = mr->GetWorldMatrixArrayRef();
+
+					int idx = 0;
+					for (const auto& trs : modelTRS.second)
+					{
+						CMatrix mModel, mTrans, mRot, mScale;
+						mTrans.MakeTranslation(trs.pos);
+						mScale.MakeScaling(trs.scale);
+						mRot.MakeRotationFromQuaternion(trs.rot);
+
+						mModel = mScale * mRot * mTrans;
+
+						(*worldMatArray)[idx++] = mModel;
+					}
+				}
+				else
+				{
+					const auto& trs = modelTRS.second.begin();
+					mr->SetPosition(trs->pos);
+					mr->SetScale(trs->scale);
+					mr->SetRotation(trs->rot);
+				}
+
+			}
+
 
 			SFontParameter fontParam;
 			fontParam.position = { 10.0f, 30.0f };
@@ -290,6 +423,8 @@ namespace nsAWA
 		void CDrawWorldSample::Update(float deltaTime)
 		{
 			constexpr size_t kSize = 128;
+
+			//nsGeometries::CGeometryData::DebugUpdate(deltaTime);
 
 			std::wstring text = {};
 			text.reserve(kSize * (m_humansMap.size() + 1));

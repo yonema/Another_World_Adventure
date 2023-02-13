@@ -13,6 +13,8 @@ namespace nsAWA {
 		struct SMonsterInitData {
 
 			std::string name = "NoName";				//名前
+			int dropExp = 0;							//獲得経験値量
+			std::list<std::string> dropMaterialItemList;//ドロップ素材アイテムのリスト
 			std::string modelFilePath = "NoFilePath";	//モデルのファイルパス
 			std::vector<std::string> animationFilePath;	//アニメーションのファイルパスのリスト
 			std::vector<SAnimData> animDataList;		//アニメーションデータ

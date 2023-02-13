@@ -18,11 +18,12 @@ EVENT,MoveStart,FALSE
 EVENT,MoveEnd,FALSE
 EVENT,CoolTimeOff,FALSE
 *,,
-NAME,Sword_WeakAttack,
+NAME,Sword_WeakAttack_A,
 SPEED,1,
 LOOP,FALSE,
 EVENT,CoolTimeOn,FALSE
 EVENT,CreateTrigger,TRUE
+EVENT,InputEnable,FALSE
 EVENT,CoolTimeOff,FALSE
 *,,
 NAME,Sword_StrongAttack,

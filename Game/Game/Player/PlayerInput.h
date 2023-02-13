@@ -21,23 +21,32 @@ namespace nsAWA {
 		public:
 			void Init(CPlayerAction* playerAction, nsPlayerAnimation::CPlayerAnimation* playerAnimation);
 
+			void Release() {};
+
 			void Update(bool isAnimationPlaying);
+
+			void InputEnable() {
+
+				//入力できる状態にする。
+				m_canInput = true;
+			}
+
+			void InputDisable() {
+
+				//入力できない状態にする。
+				m_canInput = false;
+			}
 
 			void CoolTimeOn() {
 
-				//クールタイム中にする。
+				//クールタイムON。
 				m_isCoolTime = true;
 			}
 
 			void CoolTimeOff() {
 
-				//クールタイムを外す。
+				//クールタイムOFF。
 				m_isCoolTime = false;
-			}
-
-			bool GetCoolTime()const {
-
-				return m_isCoolTime;
 			}
 
 			void ChangeState();
@@ -48,7 +57,8 @@ namespace nsAWA {
 		private:
 			CPlayerAction* m_playerAction = nullptr;	//プレイヤーアクションのポインタ
 			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;	//プレイヤーアニメーションのポインタ
-			bool m_isCoolTime = false;		//クールタイム中？
+			bool m_canInput = true;		//入力できる？
+			bool m_isCoolTime = false;	//クールタイム中？
 			float m_magicTime = 0.0f;		//魔法スキルの詠唱時間
 		};
 	}
