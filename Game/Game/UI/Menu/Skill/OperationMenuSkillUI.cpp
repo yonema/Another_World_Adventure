@@ -15,6 +15,7 @@ namespace nsAWA
         {
             m_testFontActiveOrPassive = NewGO<CFontUI>();
             m_testFontActiveOrPassive->LoadFont(L"アクティブ");
+            m_testFontActiveOrPassive->SetPosition({ -200.0f,-300.0f });
 
             m_testFontNowSetSkillName = NewGO<CFontArrayUI>();
 
@@ -25,6 +26,7 @@ namespace nsAWA
         {
             DeleteGO(m_testFontActiveOrPassive);
             DeleteGO(m_testFontNowSetSkillName);
+            DeleteGO(m_fontSelectionSetSkillName);
         }
 
         void COperationMenuSkillUI::Update(float deltaTime)
@@ -81,7 +83,8 @@ namespace nsAWA
                 m_nowSetSkillName.resize(m_kActiveSkillMaxNum);
                 // 名前を代入
                 for (int skillNum = 0; m_kActiveSkillMaxNum > skillNum; ++skillNum) {
-                    m_nowSetSkillName[skillNum] = nsPlayer::CPlayerManager::GetInstance()->GetActiveSkillName(skillNum);
+                    m_nowSetSkillName[skillNum] =
+                        nsPlayer::CPlayerManager::GetInstance()->GetActiveSkillName(skillNum);
                 }
             }
             // パッシブ
@@ -90,21 +93,16 @@ namespace nsAWA
                 m_nowSetSkillName.resize(m_kPassiveSkillMaxNum);
                 // 名前を代入
                 for (int skillNum = 0; m_kPassiveSkillMaxNum > skillNum; ++skillNum) {
-                    m_nowSetSkillName[skillNum] = nsPlayer::CPlayerManager::GetInstance()->GetActiveSkillName(skillNum);
+                    m_nowSetSkillName[skillNum] =
+                        nsPlayer::CPlayerManager::GetInstance()->GetActiveSkillName(skillNum);
                 }
             }
-
+            
             // ここで、所持してるスキル全部を取得
             m_fontSelectionSetSkillName = NewGO<CFontArrayUI>();
             // アクティブ
             if (EnActiveOrPassive::enActive == m_activeOrPassive) {
-                //m_selectionSetSkillData = playerManager.GetCanUseActiveSkillList();
-
-                //for (auto forSkillData : m_selectionSetSkillData) {
-                //    m_fontSelectionSetSkillName->NewLoadFont(
-                //        nsUtils::GetWideStringFromString(forSkillData.name).c_str()
-                //    );
-                //}
+                m_selectionSetSkillData = nsPlayer::CPlayerManager::GetInstance()->GetCanUseActiveSkillList();
             }
             // パッシブ
             else if (EnActiveOrPassive::enPassive == m_activeOrPassive) {
@@ -114,15 +112,34 @@ namespace nsAWA
                 csvData = csvManager.GetCsvData();
 
                 for (auto& forData : csvData) {
-                    m_selectionSetSkill.push_back(forData[0]);
+                    //m_selectionSetSkill.push_back(forData[0]);
                 }
             }
 
             for (int forNum = 0; m_nowSetSkillName.size() > forNum; ++forNum) {
 
             }
-            for (auto forName : m_nowSetSkillName) {
+
+            float addPosY = 0;
+            int num = 0;
+            for (auto& forName : m_nowSetSkillName) {
                 m_testFontNowSetSkillName->NewLoadFont(nsUtils::GetWideStringFromString(forName).c_str());
+                m_testFontNowSetSkillName->SetPosition(num, { -200.0f,0.0f + addPosY });
+
+                addPosY += 40.0f;
+                ++num;
+            }
+
+            addPosY = 0;
+            num = 0;
+            for (auto forSkillData : m_selectionSetSkillData) {
+                m_fontSelectionSetSkillName->NewLoadFont(
+                    nsUtils::GetWideStringFromString(forSkillData.name).c_str()
+                );
+                m_fontSelectionSetSkillName->SetPosition(num, { 200.0f,-100.0f + addPosY });
+
+                addPosY += 40.0f;
+                ++num;
             }
         }
 
@@ -167,6 +184,14 @@ namespace nsAWA
                 m_windowStatus = EnWindowStatus::enActiveOrPassive;
             }
 
+            // スティックのトリガー処理
+            if (0.0f == Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
+                m_flagPreviousFrameInput = false;
+            }
+            if (true == m_flagPreviousFrameInput) {
+                return;
+            }
+
             // 上
             if (0.0f < Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 if (EnNowSetSkillFrame::en1_A >= m_nowSetSkillFrame) {
@@ -176,6 +201,8 @@ namespace nsAWA
                     m_nowSetSkillFrame =
                         static_cast<EnNowSetSkillFrame>(static_cast<int>(m_nowSetSkillFrame) - 1);
                 }
+
+                m_flagPreviousFrameInput = true;
             }
             // 下
             if (0.0f > Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
@@ -186,6 +213,8 @@ namespace nsAWA
                     m_nowSetSkillFrame =
                         static_cast<EnNowSetSkillFrame>(static_cast<int>(m_nowSetSkillFrame) + 1);
                 }
+
+                m_flagPreviousFrameInput = true;
             }
         }
 
@@ -202,6 +231,14 @@ namespace nsAWA
                 m_windowStatus = EnWindowStatus::enNowSetSkill;
             }
 
+            // スティックのトリガー処理
+            if (0.0f == Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
+                m_flagPreviousFrameInput = false;
+            }
+            if (true == m_flagPreviousFrameInput) {
+                return;
+            }
+
             // 上
             if (0.0f < Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 if (0 >= m_cursorPositionSelectionSetSkill) {
@@ -210,15 +247,19 @@ namespace nsAWA
                 else {
                     --m_cursorPositionSelectionSetSkill;
                 }
+
+                m_flagPreviousFrameInput = true;
             }
             // 下
             if (0.0f > Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
-                if (m_selectionSetSkill.size() <= m_cursorPositionSelectionSetSkill) {
-                    //m_cursorPositionSelectionSetSkill = static_cast<int>(m_selectionSetSkillData.size());
+                if (m_selectionSetSkillData.size() <= m_cursorPositionSelectionSetSkill) {
+                    m_cursorPositionSelectionSetSkill = static_cast<int>(m_selectionSetSkillData.size() - 1);
                 }
                 else {
                     ++m_cursorPositionSelectionSetSkill;
                 }
+
+                m_flagPreviousFrameInput = true;
             }
         }
 
@@ -231,16 +272,17 @@ namespace nsAWA
             if (false == nsPlayer::CPlayerManager::GetInstance()->FindPlayer()) {
                 nsGameWindow::MessageBoxWarning(L"COperationMenuSkillUI : player が見つかりませんでした。");
             }
+
             // listのイテレーターを選択してるところまで移動する
-            //std::list<nsSkill::SActiveSkillData>::iterator setSkillData = m_selectionSetSkillData.begin();
-            //for (int forNum = 0; forNum < m_cursorPositionSelectionSetSkill; ++forNum) {
-            //    ++setSkillData;
-            //}
-            //
-            //// スキルをセット
-            //nsPlayer::CPlayerManager::GetInstance()->SetActiveSkill(
-            //    static_cast<int>(m_nowSetSkillFrame), setSkillData->name
-            //);
+            std::list<nsSkill::SActiveSkillData>::iterator setSkillData = m_selectionSetSkillData.begin();
+            for (int forNum = 0; forNum < m_cursorPositionSelectionSetSkill; ++forNum) {
+                ++setSkillData;
+            }
+            
+            // スキルをセット
+            nsPlayer::CPlayerManager::GetInstance()->SetActiveSkill(
+                static_cast<int>(m_nowSetSkillFrame), setSkillData->name
+            );
         }
     }
 }

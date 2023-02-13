@@ -1,11 +1,12 @@
 #pragma once
+#include "../../../Skill/ActiveSkillList.h"
 
 namespace nsAWA
 {
-    namespace nsSkill
-    {
-        struct SActiveSkillData;
-    }
+    //namespace nsSkill
+    //{
+    //    struct SActiveSkillData;
+    //}
 
     namespace nsUI
     {
@@ -96,11 +97,10 @@ namespace nsAWA
 
             std::vector<std::string> m_nowSetSkillName;
             //std::vector<int> m_selectionSetSkill;
-            std::vector<std::string> m_selectionSetSkill;
+            
+            CFontArrayUI* m_fontSelectionSetSkillName = nullptr;
 
-            //std::list<nsSkill::SActiveSkillData> m_selectionSetSkillData;
-            CFontArrayUI* m_fontSelectionSetSkillName = nullptr;;
-
+            std::list<nsSkill::SActiveSkillData> m_selectionSetSkillData;
             //std::list<std::vector<std::string>> m_selectionSetSkill;
 
             // スキル選択時のカーソルの位置
@@ -109,6 +109,8 @@ namespace nsAWA
 
             CFontUI* m_testFontActiveOrPassive = nullptr;
             CFontArrayUI* m_testFontNowSetSkillName = nullptr;
+
+            bool m_flagPreviousFrameInput = false;
             
         };
     }

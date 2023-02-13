@@ -77,20 +77,6 @@ namespace nsAWA
                     // 真ん中のアイテムアイコン
                     else if ("Center" == imgData.Name)
                     {
-                        //// UIクラスを作成
-                        //m_spriteItemIcon = NewGO<CSpriteUI>();
-                        //m_spriteItemIcon->LoadSprite(
-                        //    m_kPotionSpriteFilePath,
-                        //    imgData.SpriteSize,
-                        //    static_cast<EnRendererPriority>(imgData.Priority),
-                        //    EnAlphaBlendMode::enTrans
-                        //);
-                        //m_spriteItemIcon->LoadInitData(
-                        //    imgData.Position,
-                        //    imgData.Scale,
-                        //    imgData.Pivot
-                        //);
-
                         // 画像のデータを取得
                         LoadImgData(static_cast<int>(EnItemIcon::enCenter), imgData);
 
