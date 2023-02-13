@@ -261,14 +261,16 @@ namespace nsAWA
                 m_itemIconSpriteData[m_itemIconSpriteData.size() - 1].itemIconPos = EnItemIcon::enBack;
             }
             else {
-                m_itemIconSpriteData[m_spriteItemIconNum - 1].itemIconPos = EnItemIcon::enBack;
+                m_itemIconSpriteData[m_spriteItemIconNum - static_cast<unsigned __int64>(1)].
+                    itemIconPos = EnItemIcon::enBack;
             }
 
-            if (m_itemIconSpriteData.size() <= m_spriteItemIconNum + 1) {
+            if (m_itemIconSpriteData.size() <= m_spriteItemIconNum + static_cast<unsigned __int64>(1)) {
                 m_itemIconSpriteData[0].itemIconPos = EnItemIcon::enNext;
             }
             else {
-                m_itemIconSpriteData[static_cast<int>(m_spriteItemIconNum + 1)].itemIconPos = EnItemIcon::enNext;
+                m_itemIconSpriteData[m_spriteItemIconNum + static_cast<unsigned __int64>(1)].
+                    itemIconPos = EnItemIcon::enNext;
             }
         }
 
@@ -282,7 +284,7 @@ namespace nsAWA
             --m_spriteItemIconNum;
             // —v‘f”‚ð’´‚¦‚½‚ç‚O‚É‚·‚é
             if (0 > m_spriteItemIconNum) {
-                m_spriteItemIconNum = m_itemIconSpriteData.size() - 1;
+                m_spriteItemIconNum = static_cast<int>(m_itemIconSpriteData.size() - 1);
             }
 
             m_itemIconSpriteData[m_spriteItemIconNum].itemIconPos = EnItemIcon::enCenter;
@@ -291,14 +293,16 @@ namespace nsAWA
                 m_itemIconSpriteData[m_itemIconSpriteData.size() - 1].itemIconPos = EnItemIcon::enBack;
             }
             else {
-                m_itemIconSpriteData[m_spriteItemIconNum - 1].itemIconPos = EnItemIcon::enBack;
+                m_itemIconSpriteData[m_spriteItemIconNum - static_cast<unsigned __int64>(1)].
+                    itemIconPos = EnItemIcon::enBack;
             }
 
-            if (m_itemIconSpriteData.size() <= m_spriteItemIconNum + 1) {
+            if (m_itemIconSpriteData.size() <= m_spriteItemIconNum + static_cast<unsigned __int64>(1)) {
                 m_itemIconSpriteData[0].itemIconPos = EnItemIcon::enNext;
             }
             else {
-                m_itemIconSpriteData[m_spriteItemIconNum + 1].itemIconPos = EnItemIcon::enNext;
+                m_itemIconSpriteData[m_spriteItemIconNum + static_cast<unsigned __int64>(1)].
+                    itemIconPos = EnItemIcon::enNext;
             }
         }
 
