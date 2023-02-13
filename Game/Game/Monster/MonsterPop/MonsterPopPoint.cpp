@@ -4,6 +4,7 @@
 #include "../../Player/Player.h"
 #include "../Monster.h"
 #include "../MonsterList.h"
+#include "../../../YonemaEngine/EngineConfig.h"
 
 namespace nsAWA
 {
@@ -36,9 +37,9 @@ namespace nsAWA
 				}
 				m_monsterArray.clear();
 
-#ifdef _DEBUG
+#ifdef DRAW_COLLISION
 				m_trigger.Release();
-#endif // _DEBUG
+#endif // DRAW_COLLISION
 
 				return;
 			}
