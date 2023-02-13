@@ -1,5 +1,6 @@
 #include "World.h"
 #include "../Humans/HumanManager.h"
+#include "../Humans/Human.h"
 #include "../Monster/MonsterPop/MonsterPopManager.h"
 #include "../EngineConfig.h"
 
@@ -21,6 +22,7 @@ namespace nsAWA
 
 			m_humanManager = NewGO<nsHumans::CHumanManager>("HumanManager");
 			m_humanManager->GenerateBase(true);
+			nsHumans::CHuman::SetHumanaManager(m_humanManager);
 
 			m_monsterPopManager = 
 				NewGO<nsMonster::nsMonsterPop::CMonsterPopManager>("MonsterPopManager");
