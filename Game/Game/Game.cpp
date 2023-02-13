@@ -1,9 +1,8 @@
 #include "YonemaEnginePreCompile.h"
 #include "Game.h"
-#include "LoadGame.h"
-#include "Samples/EffectSample.h"
+#include "Scenes/TitleScene.h"
+#include "Network/NetworkManager.h"
 
-#include "UI/Menu/MenuBaseUI.h"
 
 
 namespace nsAWA
@@ -12,44 +11,68 @@ namespace nsAWA
 
 	bool CGame::Start()
 	{
-		//ゲームをロード。
-		NewGO<CLoadGame>();
+		HandleApplicationArgument();
+
+		nsScene::CreateScene<nsScene::CTitleScene>();
 
 		return true;
 	}
 
 	void CGame::Update(float deltaTime)
 	{
-		TestMenu();
+
+		return;
 	}
 
 	void CGame::OnDestroy()
 	{
-		DeleteGO(m_menuBaseUI);
+		nsScene::DeleteCurrentScene();
+
+		return;
 	}
 
-	void CGame::TestMenu()
+	void CGame::HandleApplicationArgument()
 	{
-		if (false == Input()->IsTrigger(EnActionMapping::enMenu)) {
-			return;
+		//コマンドライン引数を取得
+		std::string argumentLine = GetCommandLineA();
+		
+		//プレイヤー名と合言葉から作成したハッシュコード
+		std::string hashCode = "";
+
+		//ネットワークの接続状態
+		std::string networkMode = "";
+
+		//コマンドライン引数は' 'で区切られているのでまず2分割
+		auto firstSplit = nsUtils::SplitString(argumentLine.c_str(),' ');
+
+		//コマンドライン引数が一つしかなければエラー。
+		if (firstSplit.second.length() <= 0)
+		{
+#ifdef _DEBUG
+	
+			hashCode = "ERROR_ARGUMENT_NOT_FOUND";
+
+			networkMode = "NETWORK_OFFLINE";
+
+#else
+
+			nsGameWindow::MessageBoxWarning(L"エラー。ランチャーからゲームを起動して下さい。");
+
+			std::exit(EXIT_FAILURE);
+
+#endif
+		}
+		else
+		{
+			//コマンドライン引数が2個以上あれば、値を取得する
+			auto gameArguments = nsUtils::SplitString(firstSplit.second.c_str(), ' ');
+
+			hashCode = gameArguments.first;
+
+			networkMode = gameArguments.second;
 		}
 
-		if (true == m_flagCreateMenuBaseUI) {
-			TestDeleteMenu();
-			
-			return;
-		}
-
-		m_menuBaseUI = NewGO<nsUI::CMenuBaseUI>();
-		m_menuBaseUI->LoadLevel();
-
-		m_flagCreateMenuBaseUI = true;
-	}
-
-	void CGame::TestDeleteMenu()
-	{
-		DeleteGO(m_menuBaseUI);
-
-		m_flagCreateMenuBaseUI = false;
+		//ネットワークインスタンスを作成し、ハッシュコードを登録
+		nsNetwork::CNetworkManager::CreateInstance(networkMode)->SetHashCode(hashCode);
 	}
 }

@@ -49,12 +49,12 @@ namespace nsAWA {
 #ifdef _DEBUG
 
 			CPlayerManager::GetInstance()->SetWeapon("NewSword");
+			CPlayerManager::GetInstance()->SetArmor("NewArmor");
 
 #endif // DEBUG
 
 			//ステータスを初期化。
-			//m_status.Init(&m_weaponManager);
-			m_status.Init(m_weaponManager.GetWeaponPointer(),GetPassiveSkillManager(),GetFeatureManager());
+			m_status.Init(m_weaponManager.GetWeaponPointer(),m_armor,GetPassiveSkillManager(),GetFeatureManager());
 
 			//入力クラスを初期化。
 			m_input.Init(&m_action, &m_animation);
@@ -64,6 +64,8 @@ namespace nsAWA {
 
 			//当たり判定を初期化。
 			m_collider.Init(this);
+
+			
 
 #ifdef _DEBUG
 			//仮に最初は毒パッシブスキルに設定。
@@ -100,14 +102,22 @@ namespace nsAWA {
 			CUserData userData;
 			userData.Load();
 
+			//プレイヤー管理クラスを初期化。
+			CPlayerManager::GetInstance()->Init(this);
 
 			return true;
 		}
 
 		void CPlayer::OnDestroySub() {
 
-			//プレイヤーモデルを破棄。
-			DeleteGO(m_modelRenderer);
+			//プレイヤー管理クラスを破棄。
+			CPlayerManager::GetInstance()->DeleteInstance();
+
+			//アクションクラスを破棄。
+			m_action.Release();
+
+			//入力クラスを破棄。
+			m_input.Release();
 
 			//アニメーションを破棄。
 			m_animation.Release();
@@ -178,12 +188,19 @@ namespace nsAWA {
 			//プレイヤーのHPを表示。
 
 			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"ATK = %4.1f", m_status.GetAttack("Physical"));
+			StringCbPrintf(m_dispText, dispTextSize, L"Level = %d , Exp = %d", m_status.GetLevel(), m_status.GetExp());
 			m_fontRenderer->SetText(m_dispText);
 #endif
 		}
 
 		void CPlayer::ApplyDamage(float damage, float power, bool canGuard) {
+
+			//被弾中は被弾しない。
+			if (m_action.GetState() == EnPlayerState::enDamage) {
+
+				//終了。
+				return;
+			}
 
 			//ガード中かつガードできる攻撃なら。
 			if (m_action.GetState() == EnPlayerState::enGuard
@@ -215,7 +232,7 @@ namespace nsAWA {
 					m_action.SetState(EnPlayerState::enDamage);
 
 					//クールタイムをONに設定。
-					m_input.CoolTimeOn();
+					m_input.InputDisable();
 
 					//一回ひるんだので、二回以上のひるみは無効とする。
 					while (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {

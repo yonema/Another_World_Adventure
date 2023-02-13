@@ -19,8 +19,6 @@ namespace nsAWA {
 
 			void Update();
 
-			void Release();
-
 		public:
 			CPlayer* GetPlayer() {
 

@@ -78,23 +78,7 @@ namespace nsYMEngine
 			return GetWideStringFromString(str.c_str());
 		}
 
-		std::pair<std::string, std::string> SplitFilename(
-			const std::string& fileName,
-			const char spliter
-		) noexcept
-		{
-			int idx = static_cast<int>(fileName.find(spliter));
-
-			std::pair<std::string, std::string> ret;
-			ret.first = fileName.substr(0, idx);
-			// spliterを含めないために一個進める。
-			idx++;
-			ret.second = fileName.substr(idx, fileName.length() - idx);
-
-			return ret;
-		}
-
-		std::pair<std::string, std::string> SplitFilename(
+		std::pair<std::string, std::string> SplitString(
 			const char* fileName,
 			const char spliter
 		) noexcept
@@ -109,6 +93,22 @@ namespace nsYMEngine
 			ret.second = str.substr(idx, str.length() - idx);
 
 			return ret;
+		}
+
+		std::pair<std::string, std::string> SplitFilename(
+			const std::string& fileName,
+			const char spliter
+		) noexcept
+		{
+			return SplitString(fileName.c_str(),spliter);
+		}
+
+		std::pair<std::string, std::string> SplitFilename(
+			const char* fileName,
+			const char spliter
+		) noexcept
+		{
+			return SplitString(fileName,spliter);
 		}
 
 		std::string GetTexturePathFromModelAndTexPath(
@@ -145,6 +145,41 @@ namespace nsYMEngine
 
 			return result;
 		}
+
+		std::wstring ReplaceWordFromWideString(const std::wstring& sentence, const std::wstring& target, const std::wstring& replacement)
+		{
+			std::wstring result = sentence;
+
+			//置き換えたい文字が存在する?
+			size_t pos = result.find(target);
+
+			//完全に見つからなくなるまで繰り返す
+			while (pos != std::string::npos)
+			{
+				auto len = target.length();
+
+				result.replace(pos, len, replacement);
+
+				pos = result.find(target);
+			}
+
+			return result;
+		}
+
+
+
+		bool ForwardMatchName(const char* str, const char* forwardStr)
+		{
+			auto len = strlen(forwardStr);
+			auto namelen = strlen(str);
+			if (len > namelen) 
+			{
+				//名前が長い。不一致。
+				return false;
+			}
+			return strncmp(str, forwardStr, len) == 0;
+		}
+
 
 	}
 }

@@ -69,6 +69,12 @@ namespace nsAWA {
 					return m_activeSkill;
 				}
 
+				bool IsPlaying()const {
+
+					//アニメーションが再生中かどうか調べる。
+					return m_playerModel->IsPlaying();
+				}
+
 			private:
 				void PlayAnimation(EnPlayerState playerState);
 

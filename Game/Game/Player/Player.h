@@ -62,12 +62,29 @@ namespace nsAWA {
 				//SPを回復。
 				m_status.HealSP(healValue);
 			}
+			void AddExp(float exp) {
+
+				//経験値を獲得。
+				m_status.AddExp(exp);
+			}
 
 		public:
 			CPlayerAction& GetPlayerAction() {
 
 				//プレイヤーアクションクラスを取得。
 				return m_action;
+			}
+
+			void InputEnable() {
+
+				//入力できる状態にする。
+				m_input.InputEnable();
+			}
+
+			void InputDisable() {
+
+				//入力できない状態にする。
+				m_input.InputDisable();
 			}
 
 			CPlayerStatus* GetStatus()override final;

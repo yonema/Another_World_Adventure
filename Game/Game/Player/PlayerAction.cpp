@@ -49,6 +49,19 @@ namespace nsAWA {
 			m_playerAnimation = playerAnimation;
 		}
 
+		void CPlayerAction::Release() {
+
+			//アクティブスキルを破棄。
+			for (auto& activeSkill : m_activeSkill) {
+
+				if (activeSkill != nullptr) {
+
+					delete activeSkill;
+					activeSkill = nullptr;
+				}
+			}
+		}
+
 		void CPlayerAction::Update(float deltaTime) {
 
 			//deltaTimeを更新(各関数で必要になるため)。

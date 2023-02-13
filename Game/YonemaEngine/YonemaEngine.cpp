@@ -11,6 +11,7 @@
 #include "DebugSystem/DisplayFPS.h"
 #include "../Game/Game.h"
 #include "../Game/Samples/SampleMain.h"
+#include "EngineConfig.h"
 
 namespace nsYMEngine
 {
@@ -49,9 +50,9 @@ namespace nsYMEngine
 
 		m_random = new nsUtils::CRandom();
 
-#ifdef _DEBUG
+#ifdef DISPLAY_FPS
 		m_displayFPS = NewGO<nsDebugSystem::CDisplayFPS>("DisplayFPS");
-#endif // _DEBUG
+#endif // DISPLAY_FPS
 
 
 		return true;
@@ -59,9 +60,9 @@ namespace nsYMEngine
 
 	void CYonemaEngine::Terminate()
 	{
-#ifdef _DEBUG
+#ifdef DISPLAY_FPS
 		DeleteGO(m_displayFPS);
-#endif // _DEBUG
+#endif // DISPLAY_FPS
 
 		delete m_random;
 		m_random = nullptr;

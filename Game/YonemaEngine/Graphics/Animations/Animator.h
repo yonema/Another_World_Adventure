@@ -62,7 +62,8 @@ namespace nsYMEngine
 
 				void CalcAndGetAnimatedBoneTransforms(
 					std::vector<nsMath::CMatrix>* pMTransforms,
-					CSkelton* pSkelton
+					CSkelton* pSkelton,
+					bool onlyAnimEvent
 					) noexcept;
 
 				void UpdateAnimation(float deltaTime) noexcept;
@@ -90,7 +91,7 @@ namespace nsYMEngine
 
 				constexpr bool IsPlayedAnimationToEnd() const noexcept
 				{
-					return m_animationClips[m_animationIndex]->IsPlayedAnimationToEnd();
+					return m_isPlayedAnimationToEnd;
 				}
 
 				inline void ReserveAnimationEventFuncArray(unsigned int animIdx, unsigned int size)
@@ -99,7 +100,7 @@ namespace nsYMEngine
 					{
 						return;
 					}
-					m_animationClips[animIdx]->ReserveAnimationEventFuncArray(size);
+					m_animEventFuncArrays[animIdx].reserve(size);
 				}
 
 				inline void AddAnimationEventFunc(
@@ -110,7 +111,7 @@ namespace nsYMEngine
 					{
 						return;
 					}
-					m_animationClips[animIdx]->AddAnimationEventFunc(animationEventFunc);
+					m_animEventFuncArrays[animIdx].emplace_back(animationEventFunc);
 				}
 
 				inline bool IsLoaded() const noexcept
@@ -144,11 +145,14 @@ namespace nsYMEngine
 
 			private:
 				std::vector<CAnimationClip*> m_animationClips = {};
+				std::vector<CAnimationClip::AnimEventFuncArray> m_animEventFuncArrays = {};
 				unsigned int m_animationIndex = 0;
 				float m_animationTimer = 0.0f;
 				bool m_isPlaying = true;	// çÏê¨ÇµÇΩèuä‘Ç©ÇÁçƒê∂äJén
 				float m_animationSpeed = 1.0f;
 				bool m_isLoop = true;
+				bool m_isPlayedAnimationToEnd = false;
+				unsigned int m_prevAnimEventIdx = 0;
 			};
 
 		}

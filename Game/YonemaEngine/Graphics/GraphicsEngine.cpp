@@ -6,7 +6,7 @@
 #include "Fonts/FontEngine.h"
 #include "../Effect/EffectEngine.h"
 #include "../Memory/ResourceBankTable.h"
-
+#include "../EngineConfig.h"
 
 namespace nsYMEngine
 {
@@ -329,7 +329,7 @@ namespace nsYMEngine
 
 		void CGraphicsEngine::DrawCollision()
 		{
-#ifdef _DEBUG
+#ifdef DRAW_COLLISION
 			// 深度バッファはフレームバッファと同じものを使用。
 			auto dsvH = m_frameBuffer.GetDsvCpuDescriptorHandle();
 			const nsDx12Wrappers::CRenderTarget* rtArray[] = { &m_simplePostEffectRenderTarget };
@@ -365,7 +365,7 @@ namespace nsYMEngine
 
 			// 描画終了
 			m_commandList.TransitionFromRenderTargetToShaderResource(m_simplePostEffectRenderTarget);
-#endif // _DEBUG
+#endif // DRAW_COLLISION
 			return;
 		}
 

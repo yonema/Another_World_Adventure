@@ -22,6 +22,12 @@ namespace nsAWA
             {
                 m_text.Init(csvFilePath);
             }
+
+            constexpr bool IsEnd() const noexcept
+            {
+                return m_endFlag;
+            }
+
         public:
             CConversationWindowUI() = default;
             ~CConversationWindowUI() = default;
@@ -30,6 +36,7 @@ namespace nsAWA
         private: // data member
             nsLevel2D::CLevel2D m_level;    //会話ウィンドウのレベル
             CConversationTextUI m_text;     //会話テキストの表示クラス
+            bool m_endFlag = false;
         };
     }
 }

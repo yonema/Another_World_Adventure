@@ -44,6 +44,10 @@
 // ì¸óÕ
 #pragma comment(lib, "xinput.lib")
 
+// ÉTÉEÉìÉh
+#pragma comment (lib, "xaudio2.lib")
+#pragma comment (lib, "winmm.lib")
+
 
 // ï®óù(PhysX)
 #pragma comment (lib, "PhysXCommon_64.lib")
@@ -69,6 +73,7 @@
 #include "../Math/Vector4.h"
 #include "../Math/Quaternion.h"
 #include "../Math/Matrix.h"
+#include "../Math/STRS.h"
 #include "../GameWindow/MessageBox.h"
 #include "../Graphics/Dx12Wrappers/Dx12Wrappers_Include.h"
 #include "../CommonLibrary/CommonLibrary.h"

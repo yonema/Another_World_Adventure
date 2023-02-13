@@ -28,8 +28,6 @@ namespace nsAWA
 
 		bool CGetBoneMatrixSample::Start()
 		{
-			EnableDebugDrawPhysicsLine();
-
 			// InitHumanModel
 			{
 				SModelInitData modelInitData;

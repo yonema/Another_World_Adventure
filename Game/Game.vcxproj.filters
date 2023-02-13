@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="Assets\Shaders\BasicPixelShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\BasicVertexShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\FbxTestPixelShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\FbxTestVertexShader.hlsl" />
     <FxCompile Include="Assets\Shaders\PeraPolygonPixelShader.hlsl" />
     <FxCompile Include="Assets\Shaders\PeraPolygonVertexShader.hlsl" />
     <FxCompile Include="Assets\Shaders\SpritePixelShader.hlsl" />
@@ -247,6 +243,35 @@
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
+    <ClCompile Include="Game\Event\ProgressManagement\EventProgressManager.cpp" />
+    <ClCompile Include="Game\Event\ProgressManagement\EventProgress.cpp" />
+    <ClCompile Include="Game\Player\Observer\PlayerObserver.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObservablePlayer.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.cpp" />
+    <ClCompile Include="Game\Humans\HumanManager.cpp" />
+    <ClCompile Include="Game\Humans\Human.cpp" />
+    <ClCompile Include="Game\Humans\HumanModelRenderer.cpp" />
+    <ClCompile Include="Game\Scenes\TitleScene.cpp" />
+    <ClCompile Include="Game\Scenes\OpeningScene.cpp" />
+    <ClCompile Include="Game\Scenes\MainGameScene.cpp" />
+    <ClCompile Include="Game\Scenes\SceneBase.cpp" />
+    <ClCompile Include="Game\Scenes\YonejiTestScene.cpp" />
+    <ClCompile Include="Game\Humans\TalkToPlayer.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObserverList\PlayerInputObserver.cpp" />
+    <ClCompile Include="Game\World\World.cpp" />
+    <ClCompile Include="Game\World\WorldParts.cpp" />
+    <ClCompile Include="Game\Facility\FacilityBase.cpp" />
+    <ClCompile Include="Game\Facility\Town.cpp" />
+    <ClCompile Include="Game\Facility\Inn.cpp" />
+    <ClCompile Include="Game\Facility\Shop.cpp" />
+    <ClCompile Include="Game\Facility\Forge.cpp" />
+    <ClCompile Include="Game\Facility\Guild.cpp" />
+    <ClCompile Include="Game\GameLog\GameLog.cpp" />
+    <ClCompile Include="Game\GameLog\LogParts.cpp" />
+    <ClCompile Include="Game\Item\MaterialItemList.cpp" />
+    <ClCompile Include="Game\Network\NetworkManager.cpp" />
+    <ClCompile Include="Game\Monster\MonsterPop\MonsterPopManager.cpp" />
+    <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -507,13 +532,48 @@
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.h" />
+    <ClInclude Include="Game\Event\ProgressManagement\EventProgressManager.h" />
+    <ClInclude Include="Game\Event\ProgressManagement\EventProgress.h" />
+    <ClInclude Include="Game\Player\Observer\PlayerObserver.h" />
+    <ClInclude Include="Game\Player\Observer\ObservablePlayer.h" />
+    <ClInclude Include="Game\Player\Observer\ObserverList\PlayerLevelObserver.h" />
+    <ClInclude Include="Game\Humans\HumanManager.h" />
+    <ClInclude Include="Game\Humans\Human.h" />
+    <ClInclude Include="Game\Humans\HumanModelRenderer.h" />
+    <ClInclude Include="Game\Humans\HumanAnimationType.h" />
+    <ClInclude Include="Game\Scenes\TitleScene.h" />
+    <ClInclude Include="Game\Scenes\OpeningScene.h" />
+    <ClInclude Include="Game\Scenes\MainGameScene.h" />
+    <ClInclude Include="Game\Scenes\SceneBase.h" />
+    <ClInclude Include="Game\Scenes\YonejiTestScene.h" />
+    <ClInclude Include="Game\Humans\TalkToPlayer.h" />
+    <ClInclude Include="Game\Humans\HumanTable.h" />
+    <ClInclude Include="Game\Player\Observer\ObserverList\PlayerInputObserver.h" />
+    <ClInclude Include="Game\World\World.h" />
+    <ClInclude Include="Game\World\WorldParts.h" />
+    <ClInclude Include="Game\Facility\FacilityBase.h" />
+    <ClInclude Include="Game\Facility\Town.h" />
+    <ClInclude Include="Game\Facility\Inn.h" />
+    <ClInclude Include="Game\Facility\Shop.h" />
+    <ClInclude Include="Game\Facility\Forge.h" />
+    <ClInclude Include="Game\Facility\Guild.h" />
+    <ClInclude Include="Game\Facility\FacilityType.h" />
+    <ClInclude Include="Game\GameLog\GameLog.h" />
+    <ClInclude Include="Game\GameLog\LogParts.h" />
+    <ClInclude Include="Game\Item\MaterialItemList.h" />
+    <ClInclude Include="Game\Network\NetworkManager.h" />
+    <ClInclude Include="Game\Monster\MonsterPop\MonsterPopManager.h" />
+    <ClInclude Include="Game\Monster\MonsterPop\MonsterPopPoint.h" />
+    <ClInclude Include="Game\Monster\MonsterPop\MonsterPopInfo.h" />
+    <ClInclude Include="YonemaEngine\Math\STRS.h" />
+    <ClInclude Include="Game\World\TRSListMap.h" />
+    <ClInclude Include="YonemaEngine\EngineConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\BasicHeader.hlsli" />
-    <None Include="Assets\Shaders\FbxTestHeader.hlsli" />
     <None Include="Assets\Shaders\PeraPolygonHeader.hlsli" />
     <None Include="Assets\Shaders\SimplePostEffectHeader.hlsli" />
     <None Include="Assets\Shaders\SpriteHeader.hlsli" />

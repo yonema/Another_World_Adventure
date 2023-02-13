@@ -167,9 +167,7 @@ namespace nsAWA {
 
 			//警告ウィンドウを出力。
 			nsGameWindow::MessageBoxError(nsUtils::GetWideStringFromString(errorMsg).c_str());
-
-			//そもそもここを通ってはいけないが、空の情報をリターン。
-			return m_itemList;
+			std::abort();
 		}
 
 		CItem* CItemBuilder::CreateItemBase(std::string itemName) {
