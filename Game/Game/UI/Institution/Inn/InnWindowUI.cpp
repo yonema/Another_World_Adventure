@@ -1,5 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "InnWindowUI.h"
+#include "../../../UserData.h"
+#include "../../../Network/NetworkManager.h"
 
 namespace nsAWA
 {
@@ -168,8 +170,14 @@ namespace nsAWA
 			}
 			else
 			{
+				//セーブ
+				CUserData userDataSave;
+				userDataSave.Save();
+
+				//セーブしたデータをネットワークにアップロード
+				nsNetwork::CNetworkManager::GetInstance()->UploadSaveData();
+
 				nsGameWindow::MessageBoxWarning(L"セーブしました。");
-				//Execute Save
 			}
 
 			m_level.PlayAnimation("FadeEnd");
