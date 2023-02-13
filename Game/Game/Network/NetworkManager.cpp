@@ -16,7 +16,7 @@ namespace nsAWA
 		void CNetworkManager::UploadSaveData(const std::string& saveData)
 		{
 			//ネットワークモードを調べる
-			if (m_networkMode == "NETWORK_OFFLINE")
+			if (m_networkMode != "NETWORK_ONLINE")
 			{
 				return;
 			}
