@@ -65,8 +65,7 @@ namespace nsAWA
 			/**
 			 * @brief セーブデータをサーバーにアップロードする
 			*/
-			void UploadSaveData(const std::string& saveData);
-
+			void UploadSaveData();
 		private:
 			/**
 			 * @brief アセットから暗号化されているサーバーURLを復号して取得する
@@ -80,13 +79,20 @@ namespace nsAWA
 			bool IsNetworkAccessible();
 
 			/**
+			 * @brief ローカルにあるセーブデータを取得する
+			 * @return セーブデータ
+			*/
+			std::string LoadLocalSaveData();
+
+			/**
 			 * @brief セーブデータをhttp通信でアップロードし更新する
 			 * @param saveData セーブデータ
 			*/
 			void HttpUpload(const std::string& saveData);
 		private:
-			const std::string m_kNetworkSettingPath = "Assets/NetworkSetting/network.cfg";
-			const std::string m_kURLKey = "AnotherWorldAdventureAnotherWorldAdventureAnothe";
+			const std::string m_kNetworkSettingPath = "Assets/NetworkSetting/network.cfg";		//ネットワークの設定ファイル
+			const std::string m_kURLKey = "AnotherWorldAdventureAnotherWorldAdventureAnothe";	//ネットワーク送信先の復号キー
+			const std::string m_kSaveDataPath = "Assets/CSV/UserData.csv";						//ローカルのセーブデータの保存場所
 		private:
 			static CNetworkManager* m_instance;					//インスタンス
 
