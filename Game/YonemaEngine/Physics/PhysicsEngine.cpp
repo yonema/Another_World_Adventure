@@ -5,6 +5,7 @@
 #include "../Graphics/GraphicsEngine.h"
 #include "../Graphics/DebugRenderers/PhysicsDebugLineRenderer.h"
 #include "../snippets/snippetutils/SnippetUtils.h"
+#include "../EngineConfig.h"
 
 namespace nsYMEngine
 {
@@ -20,9 +21,9 @@ namespace nsYMEngine
 		const float CPhysicsEngine::m_kDefaultStaticFriction = 0.5f;
 		const float CPhysicsEngine::m_kDefaultDynamicFriction = 0.5f;
 		const float CPhysicsEngine::m_kDefaultRestitution = 0.6f;
-#ifdef _DEBUG
+#ifdef DRAW_COLLISION
 		const unsigned int CPhysicsEngine::m_kMaxMyDebugLine = 1000;
-#endif // _DEBUG
+#endif // DRAW_COLLISION
 
 
 
@@ -136,9 +137,9 @@ namespace nsYMEngine
 			m_defaultMaterial = m_physics->createMaterial(
 				m_kDefaultStaticFriction, m_kDefaultDynamicFriction, m_kDefaultRestitution);
 
-#ifdef _DEBUG
+#ifdef DRAW_COLLISION
 			InitDebugging();
-#endif // _DEBUG
+#endif // DRAW_COLLISION
 
 			return true;
 		}
@@ -249,9 +250,9 @@ namespace nsYMEngine
 				physicsTriggerObject->UpdateContactEvent();
 			}
 
-#ifdef _DEBUG
+#ifdef DRAW_COLLISION
 			UpdateDebugData();
-#endif // _DEBUG
+#endif // DRAW_COLLISION
 
 			// ExtendedDataは、simulateとfetchResultsが呼ばれた後破棄する。
 			// コールバック時にExtendedDataがnullになるのを防ぐため。
@@ -415,7 +416,7 @@ namespace nsYMEngine
 #pragma region DebugSystem
 		void CPhysicsEngine::InitDebugging()
 		{
-#ifdef _DEBUG
+#ifdef DRAW_COLLISION
 			m_scene->setVisualizationParameter(physx::PxVisualizationParameter::eSCALE, 1.0f);
 
 			m_scene->setVisualizationParameter(physx::PxVisualizationParameter::eACTOR_AXES, 2.0f);
@@ -426,17 +427,13 @@ namespace nsYMEngine
 			m_physicsDebugLineRenderer = new nsGraphics::nsDebugRenderers::CPhysicsDebugLineRenderer();
 
 			m_myDebugLineArray.reserve(m_kMaxMyDebugLine);
-#endif // _DEBUG
+#endif // DRAW_COLLISION
 			return;
 		}
 
 		void CPhysicsEngine::UpdateDebugData()
 		{
-#ifdef _DEBUG
-			if (m_enableDebugDrawLine != true)
-			{
-				return;
-			}
+#ifdef DRAW_COLLISION
 
 			AutoFitCullingBoxToMainCamere();
 
@@ -461,14 +458,14 @@ namespace nsYMEngine
 					line.pos0, line.pos1, line.color0, line.color1);
 			}
 			m_myDebugLineArray.clear();
-#endif // _DEBUG
+#endif // DRAW_COLLISION
 			return;
 		}
 
 		void CPhysicsEngine::SetCullingBoxForDebugDrawLine(
 			float halfExtent, const nsMath::CVector3& center) noexcept
 		{
-#ifdef _DEBUG
+#ifdef DRAW_COLLISION
 			m_cullingBoxHalfExtent = halfExtent;
 			m_scene->setVisualizationCullingBox(
 				physx::PxBounds3::centerExtents(
@@ -476,7 +473,7 @@ namespace nsYMEngine
 					{ m_cullingBoxHalfExtent , m_cullingBoxHalfExtent, m_cullingBoxHalfExtent }
 				)
 			);
-#endif // _DEBUG
+#endif // DRAW_COLLISION
 			return;
 		}
 
@@ -498,6 +495,19 @@ namespace nsYMEngine
 			SetCullingBoxForDebugDrawLine(m_cullingBoxHalfExtent, centerPos);
 
 			return;
+		}
+
+		void CPhysicsEngine::PushDebugLine(const SMyDebugLine& debugLine)
+		{
+#ifdef DRAW_COLLISION
+			m_myDebugLineArray.emplace_back(debugLine);
+			if (m_myDebugLineArray.size() > m_kMaxMyDebugLine)
+			{
+				nsGameWindow::MessageBoxError(L"レイの数が多すぎます。");
+				std::abort();
+			}
+			return;
+#endif // DRAW_COLLISION
 		}
 
 #pragma endregion DebugSystem

@@ -25,6 +25,11 @@ namespace nsAWA
 
 		void CTown::OnTriggerEnter(CExtendedDataForRigidActor* otherData)
 		{
+			if (otherData->GetPhysicsAttribute() != EnPhysicsAttributes::enPlayer)
+			{
+				return;
+			}
+
 			if (m_humanManagerRef == nullptr)
 			{
 				return;
@@ -37,6 +42,11 @@ namespace nsAWA
 
 		void CTown::OnTriggerExit(CExtendedDataForRigidActor* otherData)
 		{
+			if (otherData->GetPhysicsAttribute() != EnPhysicsAttributes::enPlayer)
+			{
+				return;
+			}
+
 			if (m_humanManagerRef == nullptr)
 			{
 				return;

@@ -98,6 +98,10 @@ namespace nsAWA {
 
 			void ChangeFromItemToSkillUI();
 
+			void MoveNextItemUI();
+
+			void MoveBackItemUI();
+
 		private:
 			void ResetActiveSkill();
 

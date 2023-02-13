@@ -5,7 +5,7 @@ namespace nsAWA
 {
 	namespace nsFacility
 	{
-		//Œš•¨‚ÌƒXƒe[ƒg ‘¼‚ÌŒš•¨‚Å‚àg—p‚Å‚«‚»‚¤‚È‚çIFacilityBase‚ÉˆÚ‚µ‚½‚Ù‚¤‚ª‚¢‚¢?
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ÌƒXï¿½eï¿½[ï¿½g ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ï¿½Å‚ï¿½gï¿½pï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½IFacilityBaseï¿½ÉˆÚ‚ï¿½ï¿½ï¿½ï¿½Ù‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
 		enum class EnFacilityState
 		{
 			enClose,
@@ -45,6 +45,7 @@ namespace nsAWA
 			CLevel2D m_backGroundLevel;
 
 			EnFacilityState m_state = EnFacilityState::enClose;
+
 		};
 
 	}

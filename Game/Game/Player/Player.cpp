@@ -195,6 +195,13 @@ namespace nsAWA {
 
 		void CPlayer::ApplyDamage(float damage, float power, bool canGuard) {
 
+			//”í’e’†‚Í”í’e‚µ‚È‚¢B
+			if (m_action.GetState() == EnPlayerState::enDamage) {
+
+				//I—¹B
+				return;
+			}
+
 			//ƒK[ƒh’†‚©‚ÂƒK[ƒh‚Å‚«‚éUŒ‚‚È‚çB
 			if (m_action.GetState() == EnPlayerState::enGuard
 				&& canGuard == true
@@ -345,6 +352,16 @@ namespace nsAWA {
 		{
 			m_itemUI->DeactiveDrawing();
 			m_skillIconUI->ActiveDrawing();
+		}
+
+		void CPlayer::MoveNextItemUI()
+		{
+			m_itemUI->MoveNextItemUI();
+		}
+
+		void CPlayer::MoveBackItemUI()
+		{
+			m_itemUI->MoveBackItemUI();
 		}
 	}
 }

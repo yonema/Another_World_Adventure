@@ -37,7 +37,7 @@ namespace nsYMEngine
 					D3DCOMPILE_SKIP_OPTIMIZATION | 
 					D3DCOMPILE_WARNINGS_ARE_ERRORS;
 #else
-				compileFlags |= D3DCOMPILE_OPTIMIZATION_LEVEL3
+				compileFlags |= D3DCOMPILE_OPTIMIZATION_LEVEL3;
 #endif
 				auto result = D3DCompileFromFile(
 					filePath,

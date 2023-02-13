@@ -21,7 +21,6 @@ namespace nsAWA
 		{
 		public:
 			static const char* const m_kRetargetSkeltonName;
-			static const char* const m_kAnimFilePaths[static_cast<int>(EnHumanAnimType::enNum)];
 			static const char* const m_kHumanPrefix;
 
 		public:
@@ -52,12 +51,12 @@ namespace nsAWA
 				return GetBaseLoadingState() == EnLoadingState::enAfterLoading;
 			}
 
-			constexpr void SetPlayerRef(nsPlayer::CPlayer* playerRef) noexcept
+			constexpr void SetPlayerRef(const nsPlayer::CPlayer* playerRef) noexcept
 			{
 				m_playerRef = playerRef;
 			}
 
-			constexpr auto* GetPlayerRef() noexcept
+			constexpr const auto* GetPlayerRef() const noexcept
 			{
 				return m_playerRef;
 			}
@@ -71,6 +70,11 @@ namespace nsAWA
 
 			void DeactivateAllHumans();
 
+			constexpr bool IsPlayerInTown() const noexcept
+			{
+				return m_isPlayerInTown;
+			}
+
 		private:
 			void CheckBaseHumanLoading() noexcept;
 
@@ -78,8 +82,9 @@ namespace nsAWA
 			std::unordered_map<std::string, CHuman*> m_humanMap = {};
 			EnLoadingState m_baseLoadingState = EnLoadingState::enBeforeLoading;
 			CModelRenderer* m_baseHumanMR = nullptr;
-			nsPlayer::CPlayer* m_playerRef = nullptr;
+			const nsPlayer::CPlayer* m_playerRef = nullptr;
 			CTalkToPlayer* m_talkToPlayer = nullptr;
+			bool m_isPlayerInTown = false;
 		};
 
 	}

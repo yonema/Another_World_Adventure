@@ -1181,16 +1181,22 @@ namespace nsYMEngine
 
 				m_animator->UpdateAnimation(deltaTime);
 
+				bool onlyAnimEvent = true;
 				if (m_geometryDataArray[0]->IsInViewFrustum() && 
 					updateAnimMatrix &&
 					IsDrawingFlag())
 				{
-					m_animator->CalcAndGetAnimatedBoneTransforms(&m_boneMatrices, m_skelton);
+					onlyAnimEvent = false;
+				}
+				m_animator->CalcAndGetAnimatedBoneTransforms(
+					&m_boneMatrices, m_skelton, onlyAnimEvent);
+
+				if (onlyAnimEvent != true)
+				{
 					m_boneMatrixArraySB.CopyToMappedStructuredBuffer(m_boneMatrices.data());
 
 					m_shadowModelRenderer.UpdateBoneMatrixArray(&m_boneMatrices);
 				}
-
 
 				return;
 			}
