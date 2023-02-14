@@ -121,6 +121,19 @@ namespace nsAWA {
 				//プレイヤーネームを設定。
 				m_status.SetPlayerName(playerName);
 			}
+
+			void SetIsInTown(bool flag) {
+
+				//街中かどうかを設定。
+				m_isInTown = flag;
+			}
+
+			bool IsInTown()const {
+
+				//街中？
+				return m_isInTown;
+			}
+
 		public:	//依頼関連
 			void SetSlayQuest(const std::string& questName, const std::string& targetEnemyName, int slayToCompleteNum)
 			{
@@ -164,6 +177,7 @@ namespace nsAWA {
 			void MoveBackItemUI();
 
 		private:
+			bool m_isInTown = false;								//街中？
 			CPlayerInput m_input;									//入力
 			CPlayerAction m_action;									//アクション
 			nsPlayerAnimation::CPlayerAnimation m_animation;		//アニメーション

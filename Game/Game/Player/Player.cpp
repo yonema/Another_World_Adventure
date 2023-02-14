@@ -45,13 +45,13 @@ namespace nsAWA {
 			m_animation.SetPlayerModelAndAnimEvent(m_modelRenderer);
 
 			//武器管理クラスを初期化。
-			m_weaponManager.Init(m_modelRenderer, &m_action);
+			m_weaponManager.Init(this, m_modelRenderer, &m_action);
 
 			//ステータスを初期化。
 			m_status.Init(m_weaponManager.GetWeaponPointer(),m_armor,GetPassiveSkillManager(),GetFeatureManager());
 
 			//入力クラスを初期化。
-			m_input.Init(&m_action, &m_animation);
+			m_input.Init(this, &m_action, &m_animation);
 
 			//アクションクラスを初期化。
 			m_action.Init(m_position, m_rotation, &m_status, GetFeatureManager(),&m_animation);
@@ -115,6 +115,17 @@ namespace nsAWA {
 		}
 
 		void CPlayer::UpdateActor(float deltaTime) {
+
+			if (Input()->IsTrigger(EnActionMapping::enDecision)) {
+
+				if (m_isInTown) {
+					m_isInTown = false;
+				}
+				else {
+
+					m_isInTown = true;
+				}
+			}
 
 			//死んでいるなら。
 			if (IsDeath()) {

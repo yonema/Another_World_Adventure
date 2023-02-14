@@ -5,13 +5,18 @@ namespace nsAWA {
 
 	namespace nsPlayer {
 
+		class CPlayer;
+	}
+
+	namespace nsPlayer {
+
 		class CPlayerAction;
 
 		//プレイヤーの武器管理クラス
 		class CPlayerWeaponManager : public nsUtils::SNoncopyable
 		{
 		public:
-			void Init(const CModelRenderer* playerModel, const CPlayerAction* action);
+			void Init(const CPlayer* player, const CModelRenderer* playerModel, const CPlayerAction* action);
 
 			void Release() {
 
@@ -51,6 +56,7 @@ namespace nsAWA {
 			const CModelRenderer* m_playerModel = nullptr;	//プレイヤーモデル
 			const CPlayerAction* m_playerAction = nullptr;	//プレイヤーアクション
 			unsigned int m_weaponBaseBoneID = 0;			//武器を持たせるボーンのID
+			const CPlayer* m_player = nullptr;				//プレイヤー
 
 			nsWeapon::CWeapon* m_weapon = nullptr;	//武器
 			CEffectPlayer* m_mainEffect = nullptr;	//エフェクト
