@@ -2,7 +2,8 @@
 #include "Game.h"
 #include "Scenes/TitleScene.h"
 #include "Network/NetworkManager.h"
-
+#include "GamePreLoading.h"
+#include "GameNowLoading.h"
 
 
 namespace nsAWA
@@ -13,7 +14,23 @@ namespace nsAWA
 	{
 		HandleApplicationArgument();
 
-		nsScene::CreateScene<nsScene::CTitleScene>();
+		m_gamePreLoading = NewGO<CGamePreLoading>("GamePreLoading");
+
+		auto* gameLoading = NewGO<CGameNowLoading>("NowLoading:Game");
+		gameLoading->SetExitFunc(
+			[&]()->bool
+			{
+				if (m_gamePreLoading->IsLoaded())
+				{
+					nsScene::CreateScene<nsScene::CTitleScene>();
+					return true;
+				}
+
+				return false;
+			}
+		);
+
+		
 
 
 		return true;
