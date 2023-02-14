@@ -5,7 +5,6 @@ namespace nsAWA
 {
 	namespace nsFacility
 	{
-		//�����̃X�e�[�g ���̌����ł�g�p�ł������Ȃ�IFacilityBase�Ɉڂ����ق�������?
 		enum class EnFacilityState
 		{
 			enClose,
@@ -42,7 +41,7 @@ namespace nsAWA
 		private:
 			CSpriteRenderer* m_enterSprite = nullptr;
 
-			CLevel2D m_backGroundLevel;
+			CLevel2D m_backGroundLevel = {};
 
 			EnFacilityState m_state = EnFacilityState::enClose;
 
