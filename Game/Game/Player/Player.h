@@ -109,19 +109,19 @@ namespace nsAWA {
 			void SetArmor(nsArmor::CArmor* armor);
 
 		public:	//ˆË—ŠŠÖ˜A
-			void SetSlayQuest(int slayToCompleteNum)
+			void SetSlayQuest(const std::string& questName, const std::string& targetEnemyName, int slayToCompleteNum)
 			{
-				m_questManager.SetSlayQuest(slayToCompleteNum);
+				m_questManager.SetSlayQuest(questName, targetEnemyName, slayToCompleteNum);
 			}
 
-			bool IsQuestReceived()
+			bool IsQuestReceived(const std::string& questName)
 			{
-				return m_questManager.IsQuestReceived();
+				return m_questManager.IsQuestReceived(questName);
 			}
 
-			bool IsQuestCompleted()
+			bool IsQuestCompleted(const std::string& questName)
 			{
-				return m_questManager.IsQuestCompleted();
+				return m_questManager.IsQuestCompleted(questName);
 			}
 
 			void ProgressSlayQuest(const std::string& slayMonsterName)

@@ -272,6 +272,7 @@
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
     <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
+    <ClCompile Include="Game\Quest\QuestData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -568,6 +569,7 @@
     <ClInclude Include="YonemaEngine\EngineConfig.h" />
     <ClInclude Include="Game\Player\PlayerQuestManager.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
+    <ClInclude Include="Game\Quest\QuestData.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
