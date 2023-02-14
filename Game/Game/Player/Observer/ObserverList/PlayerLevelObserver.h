@@ -18,7 +18,7 @@ namespace nsAWA {
 
 				void InitSub(CObservablePlayer* observablePlayer)override final;
 
-				void Update(CObservablePlayer* observablePlayer)override final;
+				void Update(CObservablePlayer* observablePlayer, const std::string& message = "")override final;
 
 			private:
 				std::vector<std::vector<int>> m_expTable;		//経験値テーブル

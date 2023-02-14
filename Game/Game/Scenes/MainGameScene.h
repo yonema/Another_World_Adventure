@@ -1,12 +1,5 @@
 #pragma once
 #include "SceneBase.h"
-namespace nsAWA
-{
-	namespace nsUI
-	{
-		class CMenuBaseUI;
-	}
-}
 
 namespace nsAWA
 {
@@ -31,13 +24,7 @@ namespace nsAWA
 			~CMainGameScene() = default;
 
 		private:
-			void TestMenu();
 
-			void TestDeleteMenu();
-
-		private:
-			nsUI::CMenuBaseUI* m_menuBaseUI = nullptr;
-			bool m_flagCreateMenuBaseUI = false;
 		};
 
 	}

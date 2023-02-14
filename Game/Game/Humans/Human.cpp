@@ -106,7 +106,7 @@ namespace nsAWA
 			case EnLoadingState::enNowLoading:
 				break;
 			case EnLoadingState::enAfterLoading:
-				if (m_humanManager == nullptr)
+				if (m_humanManager != nullptr)
 				{
 					if (m_humanManager->IsPlayerInTown() != true)
 					{

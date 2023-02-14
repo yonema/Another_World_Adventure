@@ -1,5 +1,6 @@
 #pragma once
 #include "Time/GameTime.h"
+#include "Utils/InvokeFunc.h"
 
 namespace nsYMEngine
 {
@@ -107,6 +108,11 @@ namespace nsYMEngine
 			return m_random;
 		}
 
+		constexpr nsUtils::CInvokeFunc* GetInvokeFunc() noexcept
+		{
+			return &m_invokeFunc;
+		}
+
 	private:
 
 		void Terminate();
@@ -123,6 +129,7 @@ namespace nsYMEngine
 		nsGraphics::nsAnimations::CUpdateAnimationManager* m_updateAnimationManager = nullptr;
 		nsTime::CGameTime m_gameTime;
 		nsUtils::CRandom* m_random = nullptr;
+		nsUtils::CInvokeFunc m_invokeFunc = {};
 		nsThread::CLoadModelThread* m_loadModelThread = nullptr;
 		bool m_isExitGame = false;
 

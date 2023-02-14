@@ -136,6 +136,11 @@ namespace nsAWA
 			{
 				m_eventState = EnEventState::enExpired;
 			}
+
+			constexpr int GetMaxProgress() const noexcept
+			{
+				return m_maxProgress;
+			}
 		private:
 			std::list<CEventProgress*> m_followingEvents;	//このイベントを前提条件とするイベント
 

@@ -113,9 +113,9 @@ namespace nsAWA {
 						nsGameLog::CGameLog::GetInstance()->AddGameLog(itemDropText);
 					}
 				}
-
-				//オブザーバーに通知。
-				nsPlayer::CPlayerManager::GetInstance()->NotifyObserver(nsPlayer::nsObserver::EnObserverEvent::enWin);
+				
+				//オブザーバー倒したモンスター名とともに通知。
+				nsPlayer::CPlayerManager::GetInstance()->NotifyObserver(nsPlayer::nsObserver::EnObserverEvent::enWin, m_monster->GetMonsterName());
 			}
 			else {
 

@@ -107,6 +107,8 @@ namespace nsYMEngine
 
 		m_gameObjectManager->Update(deltaTime);
 
+		m_invokeFunc.Update(deltaTime);
+
 		m_updateAnimationManager->Update();
 
 		m_physicsWorld->Update(deltaTime);

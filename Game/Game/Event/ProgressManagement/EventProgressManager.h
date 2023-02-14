@@ -79,6 +79,14 @@ namespace nsAWA
 			 * @return イベントの進行状態
 			*/
 			EnEventState GetProgressState(std::string eventName);
+
+
+			constexpr const auto& GetLatestEvents() const noexcept
+			{
+				return m_latestEvents;
+			}
+
+
 		private:
 			static CEventProgressManager* m_instance;		//インスタンス
 			
