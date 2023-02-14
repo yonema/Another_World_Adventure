@@ -73,7 +73,7 @@ namespace nsAWA {
 				return m_level;
 			}
 
-			void AddExp(float exp) {
+			void AddExp(int exp) {
 
 				//ŒoŒ±’l‚ğŠl“¾B
 				m_exp += exp;

@@ -7,6 +7,7 @@
 #include "../Utils/StringManipulation.h"
 #include "../../CreateTrigger.h"
 #include "../../Skill/ActiveSkill.h"
+#include "../../Skill/ActiveSkillList.h"
 #include "../../Magic/MagicList.h"
 #include "../../Magic/MagicBase.h"
 
@@ -59,12 +60,60 @@ namespace nsAWA {
 				m_playerInput->InputEnable();
 			}
 
-			void CPlayerAnimationEvent::CreateTrigger(IGameActor* creator, const AnimationEventDataStr& animEventDataStr) {
+			void CPlayerAnimationEvent::CreateTrigger(const std::string& triggerIndexStr) {
 
+				std::list<std::vector<std::string>> triggerMaterialStr;
+
+				//スキル使用中なら、そのスキルのアニメーションイベントデータを取得。
+				if (m_playerAction->GetState() == EnPlayerState::enUseActiveSkill) {
+
+					nsSkill::CActiveSkill* activeSkill = m_playerAnimation->GetReserveActiveSkillInfo();
+
+					nsSkill::CActiveSkill::SActiveSkillAnimData activeSkillAnimData = activeSkill->GetActiveSkillAnimData(triggerIndexStr);
+					triggerMaterialStr = activeSkillAnimData.sAnimEventData;
+				}
+				else {
+
+					//通常攻撃。
+					std::string attackName = "NoName";
+
+					//現在のステートから文字列を取得。
+					switch (m_playerAction->GetState()) {
+
+					case EnPlayerState::enWeakAttack_A:
+						attackName = "WeakAttack_A";
+						break;
+					case EnPlayerState::enWeakAttack_B:
+						attackName = "WeakAttack_B";
+						break;
+					case EnPlayerState::enWeakAttack_C:
+						attackName = "WeakAttack_C";
+						break;
+					case EnPlayerState::enStrongAttack:
+						attackName = "StrongAttack";
+						break;
+					default:
+						break;
+					}
+
+					//通常攻撃のアニメーションイベントデータを取得。
+					nsSkill::SActiveSkillData attack = nsSkill::CActiveSkillList::GetInstance()->GetActiveSkillData(attackName);
+
+					for (const auto& data : attack.animDataList) {
+
+						if (data.index == triggerIndexStr) {
+
+							//設定。
+							triggerMaterialStr = data.sAnimEventData;
+						}
+					}
+				}
+
+				//トリガーを生成。
 				auto trigger = NewGO<CCreateTrigger>();
 				trigger->Create(
-					creator,
-					animEventDataStr,
+					m_player,
+					triggerMaterialStr,
 					m_player->GetPosition(),
 					m_player->GetForwardDirection()
 				);
@@ -133,9 +182,7 @@ namespace nsAWA {
 				magic->SetMoveDirection(m_player->GetForwardDirection());
 			}
 
-			void CPlayerAnimationEvent::GetAnimationEvent(const std::string& animationEventName,
-			const AnimationEventDataStr& animationEventData
-			) {
+			void CPlayerAnimationEvent::GetAnimationEvent(const std::string& animationEventName, const std::string& detailStr) {
 
 				//イベントの名前から対応するメンバ関数を呼び出す。
 
@@ -149,7 +196,7 @@ namespace nsAWA {
 				}
 				else if (animationEventName == "CreateTrigger") {
 
-					CreateTrigger(m_player,animationEventData);
+					CreateTrigger(detailStr);
 				}
 				else if (animationEventName == "MoveStart") {
 

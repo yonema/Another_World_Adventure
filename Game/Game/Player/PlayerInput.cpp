@@ -209,24 +209,25 @@ namespace nsAWA {
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 #ifdef _DEBUG
 
-				CPlayerManager::GetInstance()->SetPassiveSkill(0,"ATKUp");
+				CPlayerManager::GetInstance()->SetActiveSkill(0,"JumpAttack_Sword");
 
-				////クールタイム中に設定。
-				//CoolTimeOn();
-				//
-				////スキル１使用。
-				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
+				//クールタイム中に設定。
+				CoolTimeOn();
+				
+				//スキル１使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
 #endif 
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
 
-				CPlayerManager::GetInstance()->SetPassiveSkill(1, "ATKUp");
-				////クールタイム中に設定。
-				//CoolTimeOn();
-				//
-				////スキル２使用。
-				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
+				CPlayerManager::GetInstance()->SetActiveSkill(1, "JumpAttackL_Sword");
+
+				//クールタイム中に設定。
+				CoolTimeOn();
+				
+				//スキル２使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
