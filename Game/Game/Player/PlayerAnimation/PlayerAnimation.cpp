@@ -52,7 +52,7 @@ namespace nsAWA {
 							animData.animNum,
 							[&]() {m_animationEvent.GetAnimationEvent(
 								animEventData.eventName,
-								animEventData.eventData);
+								animEventData.detailStr);
 							}
 						);
 					}
@@ -204,7 +204,8 @@ namespace nsAWA {
 						return;
 					}
 
-					name += m_activeSkill->GetName();
+					//アニメーションを指定するため、ファイルパスを取得。
+					name = m_activeSkill->GetAnimationFilePath();
 
 					//終了。
 					return;
@@ -295,7 +296,7 @@ namespace nsAWA {
 
 						//イベントを取得。
 						animEventData.eventName = animData[1];
-						animEventData.hasEventMaterial = animData[2] == "TRUE" ? true : false;
+						animEventData.detailStr = animData[2];
 
 						animDataBase.animationEvent.emplace_back(animEventData);
 					}
@@ -329,33 +330,6 @@ namespace nsAWA {
 
 					//イベントの情報を追加。
 					animEventData.emplace_back(animEventStr);
-				}
-
-				//アニメーションデータを順に参照。
-				for (auto& animData : m_animDataList) {
-
-					//アニメーションイベントを順に参照。
-					for (auto& animEvent : animData.animationEvent) {
-
-						//イベント情報が必要ないなら。
-						if (!animEvent.hasEventMaterial) {
-
-							//次のイベントへ。
-							continue;
-						}
-						//イベントに情報が必要なら。
-						else {
-							
-							//アニメーションイベントデータの先頭情報を取り出す。
-							auto animEventDataItr = animEventDataList.begin();
-
-							//データを格納。
-							animEvent.eventData = *animEventDataItr;
-
-							//先頭情報を破棄。
-							animEventDataList.erase(animEventDataItr);
-						}
-					}
 				}
 			}
 		}

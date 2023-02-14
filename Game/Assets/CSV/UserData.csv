@@ -1,3 +1,3 @@
-1,0,200,200,100,100,,,
-JumpAttack_Sword,DashAttack_Sword,RushAttack_Sword,RushAttack_Wand,Fire_Forward,Fire_Side,Heal,Poison,Paralysis
-エーテル,3,聖水,2,刀削麺,2,,,
+1,0,200,200,100,100
+JumpAttack_Sword,JumpAttackL_Sword,,,,
+エーテル,3,聖水,2,刀削麺,2

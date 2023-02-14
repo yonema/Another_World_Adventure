@@ -26,8 +26,7 @@ namespace nsAWA {
 			struct SAnimationEventData {
 				
 				std::string eventName = "NoName";					//イベント名
-				bool hasEventMaterial = false;						//イベントに必要な材料がある？
-				AnimationEventDataStr eventData;					//イベント材料
+				std::string detailStr = "None";						//イベント詳細データ
 			};
 			//プレイヤーアニメーションイベントクラス
 			class CPlayerAnimationEvent : nsUtils::SNoncopyable
@@ -50,7 +49,7 @@ namespace nsAWA {
 
 				void InputEnable();
 
-				void CreateTrigger(IGameActor* creator, const AnimationEventDataStr& animEventDataStr);
+				void CreateTrigger(const std::string& triggerIndexStr);
 
 				void MoveStart();
 
@@ -60,9 +59,7 @@ namespace nsAWA {
 
 				void CreateMagic();
 
-				void GetAnimationEvent(const std::string& animationEventName,
-					const AnimationEventDataStr& animationEventData
-					);
+				void GetAnimationEvent(const std::string& animationEventName, const std::string& detailStr);
 
 			private:
 				IGameActor* m_player = nullptr;			//プレイヤーのポインタ
@@ -71,6 +68,8 @@ namespace nsAWA {
 				CPlayerAnimation* m_playerAnimation = nullptr;//プレイヤーアニメーションクラス
 				bool m_isMoving = false;				//イベントによって移動している？
 				CVector3 m_playerMoveInput = CVector3::Zero();	//プレイヤーの入力方向
+
+				std::unordered_map<std::string, AnimationEventDataStr> m_animEventDataList;	//アニメーションイベントデータ
 			};
 		}
 	}

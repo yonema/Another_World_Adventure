@@ -1,18 +1,18 @@
 #pragma once
+#include "ActiveSkill.h"
 
 namespace nsAWA {
 
 	namespace nsSkill {
-
-		//前方宣言
-		class CActiveSkill;
 
 		//アクティブスキルのデータ
 		struct SActiveSkillData {
 
 			std::string type = "NoType";	//スキルタイプ
 			std::string name = "NoName";	//名前
+			std::string animFilePath = "NoPath";	//アニメーションのファイルパス
 			float useMP = 0.0f;				//消費MP
+			std::list<CActiveSkill::SActiveSkillAnimData> animDataList;	//アニメーションデータリスト
 		};
 
 		//アクティブスキルのリスト

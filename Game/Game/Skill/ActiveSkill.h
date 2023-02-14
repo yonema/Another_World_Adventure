@@ -20,6 +20,15 @@ namespace nsAWA {
 
 				enNone = -1//設定なし
 			};
+
+			using ActiveSkillAnimEventData = std::list<std::vector<std::string>>;
+
+			struct SActiveSkillAnimData {
+
+				std::string skillName = "NoName";
+				std::string index = "NoIndex";
+				ActiveSkillAnimEventData sAnimEventData;
+			};
 		public:
 			void SetUseMP(float useMP) {
 
@@ -53,11 +62,33 @@ namespace nsAWA {
 				//消費MPをリターン。
 				return m_useMP;
 			}
+
+			void SetAnimaitonFilePath(const std::string& animFilePath) {
+
+				//アニメーションのファイルパスを設定。
+				m_animFilePath = animFilePath;
+			}
+
+			const std::string& GetAnimationFilePath()const {
+
+				//アニメーションのファイルパスをリターン。
+				return m_animFilePath;
+			}
+
+			void SetAnimDataList(const std::list<SActiveSkillAnimData>& animDataList) {
+
+				//アニメーションデータのリストを設定。
+				m_activeSkillAnimDataList = animDataList;
+			}
+
+			const SActiveSkillAnimData& GetActiveSkillAnimData(const std::string& index)const;
 		public:
 			static int m_kActiveSkillNumMax;
 		private:
 			float m_useMP = 0.0f;	//消費MP
+			std::string m_animFilePath = "NoFilePath";							//アニメーションのファイルパス
 			EnActiveSkillType m_activeSkillType = EnActiveSkillType::enNone;	//アクティブスキルのタイプ
+			std::list<SActiveSkillAnimData> m_activeSkillAnimDataList;	//アクティブスキルのアニメーションデータのリスト
 		};
 	}
 }
