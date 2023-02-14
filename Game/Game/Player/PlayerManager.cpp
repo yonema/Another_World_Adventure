@@ -85,6 +85,12 @@ namespace nsAWA {
 			m_player->SetActiveSkill(setNum, activeSkill);
 		}
 
+		void CPlayerManager::SetActiveSkillMaxNum(int maxNum) {
+
+			//パッシブスキルの装着可能数を設定。
+			m_player->GetPassiveSkillManager()->SetPassiveSkillMaxNum(maxNum);
+		}
+
 		void CPlayerManager::SetPassiveSkill(int setNum, const std::string& passiveSkillName) {
 
 			//設定番号をチェック。

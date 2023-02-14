@@ -23,6 +23,12 @@ namespace nsAWA {
 
 		void SaveItem();
 
+		void SaveWeaponAndArmor(nsPlayer::CPlayer* player);
+
+		void SaveSetActiveSkill(nsPlayer::CPlayer* player);
+
+		void SaveSetPassiveSkill(nsPlayer::CPlayer* player);
+
 	private:
 		std::list<std::vector<std::string>> m_userData;		//ユーザーデータ
 	};

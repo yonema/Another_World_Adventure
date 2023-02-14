@@ -25,11 +25,13 @@ namespace nsAWA {
 
 			struct SActiveSkillAnimData {
 
-				std::string skillName = "NoName";
-				std::string index = "NoIndex";
-				ActiveSkillAnimEventData sAnimEventData;
+				std::string skillName = "NoName";			//スキルの名前
+				std::string index = "NoIndex";				//アニメーションイベントにインデックス
+				ActiveSkillAnimEventData sAnimEventData;	//アニメーションイベントデータ
 			};
 		public:
+			void Execute();
+
 			void SetUseMP(float useMP) {
 
 				//消費MPを設定。
@@ -81,6 +83,12 @@ namespace nsAWA {
 				m_activeSkillAnimDataList = animDataList;
 			}
 
+			void SetEffectName(const std::string& effectName) {
+				
+				//エフェクトの名前を設定。
+				m_effectName = effectName;
+			}
+
 			const SActiveSkillAnimData& GetActiveSkillAnimData(const std::string& index)const;
 		public:
 			static int m_kActiveSkillNumMax;
@@ -88,6 +96,7 @@ namespace nsAWA {
 			float m_useMP = 0.0f;	//消費MP
 			std::string m_animFilePath = "NoFilePath";							//アニメーションのファイルパス
 			EnActiveSkillType m_activeSkillType = EnActiveSkillType::enNone;	//アクティブスキルのタイプ
+			std::string m_effectName = "NoName";						//エフェクトの名前
 			std::list<SActiveSkillAnimData> m_activeSkillAnimDataList;	//アクティブスキルのアニメーションデータのリスト
 		};
 	}

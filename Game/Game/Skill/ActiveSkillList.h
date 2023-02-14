@@ -12,6 +12,7 @@ namespace nsAWA {
 			std::string name = "NoName";	//名前
 			std::string animFilePath = "NoPath";	//アニメーションのファイルパス
 			float useMP = 0.0f;				//消費MP
+			std::string effectName = "NoPath";	//エフェクトの名前
 			std::list<CActiveSkill::SActiveSkillAnimData> animDataList;	//アニメーションデータリスト
 		};
 

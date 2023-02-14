@@ -44,12 +44,7 @@ namespace nsAWA {
 			m_animation.SetPlayerModelAndAnimEvent(m_modelRenderer);
 
 			//武器管理クラスを初期化。
-			m_weaponManager.Init(m_modelRenderer);
-
-
-			//仮に装備。
-			CPlayerManager::GetInstance()->SetWeapon("NewSword");
-			CPlayerManager::GetInstance()->SetArmor("NewArmor");
+			m_weaponManager.Init(m_modelRenderer, &m_action);
 
 			//ステータスを初期化。
 			m_status.Init(m_weaponManager.GetWeaponPointer(),m_armor,GetPassiveSkillManager(),GetFeatureManager());
@@ -63,29 +58,6 @@ namespace nsAWA {
 			//当たり判定を初期化。
 			m_collider.Init(this);
 
-			
-
-#ifdef _DEBUG
-			//仮に最初は毒パッシブスキルに設定。
-			CPlayerManager::GetInstance()->SetPassiveSkill(0, "Paralysiser");
-
-			m_fontRenderer = NewGO<nsGraphics::nsFonts::CFontRenderer>();
-
-			//フォントの情報を設定。
-			nsGraphics::nsFonts::CFontRenderer::SFontParameter fontParam(
-				L"",
-				{0.0f,20.0f},
-				nsMath::CVector4::White(),
-				0.0f,
-				0.5f,
-				nsMath::CVector2::Zero(),
-				EnAnchors::enTopLeft
-			);
-
-			//初期化。
-			m_fontRenderer->Init(fontParam);
-#endif
-
 			// UIの処理
 			m_playerBattleStatusUI = NewGO<nsUI::CPlayerBattleStatusUI>();
 			m_playerBattleStatusUI->LoadLevel();
@@ -96,12 +68,12 @@ namespace nsAWA {
 			m_itemUI = NewGO<nsUI::CItemUI>();
 			m_itemUI->LoadLevel();
 
+			//プレイヤー管理クラスを初期化。
+			CPlayerManager::GetInstance()->Init(this);
+
 			//データをロード。
 			CUserData userData;
 			userData.Load();
-
-			//プレイヤー管理クラスを初期化。
-			CPlayerManager::GetInstance()->Init(this);
 
 			return true;
 		}

@@ -91,6 +91,12 @@ namespace nsAWA {
 
 			nsWeapon::CWeapon* GetWeapon();
 
+			CPlayerWeaponManager* GetWeaponManager() {
+
+				//武器管理クラスを取得。
+				return &m_weaponManager;
+			}
+
 			nsArmor::CArmor* GetArmor();
 
 			CGameActorCollider* GetGameActorCollider() {
@@ -107,6 +113,11 @@ namespace nsAWA {
 
 			void SetArmor(nsArmor::CArmor* armor);
 
+			void SetPlayerName(const std::string& playerName) {
+
+				//プレイヤーネームを設定。
+				m_status.SetPlayerName(playerName);
+			}
 		private:
 			void CreatePlayerModel();
 

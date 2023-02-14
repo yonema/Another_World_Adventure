@@ -1,5 +1,6 @@
 #include "YonemaEnginePreCompile.h"
 #include "PlayerWeaponManager.h"
+#include "PlayerAction.h"
 
 namespace nsAWA {
 
@@ -8,12 +9,17 @@ namespace nsAWA {
 		namespace {
 
 			constexpr const char* const kPlayerWeaponBaseBoneID = "J_Bip_R_Hand";	//プレイヤーの武器持ち場所
+			constexpr float kEffectAddPosition = 10.0f;		//エフェクト発生場所
+			constexpr float kEffectScale = 2.0f;		//エフェクトサイズ
 		}
 
-		void CPlayerWeaponManager::Init(const CModelRenderer* playerModel) {
+		void CPlayerWeaponManager::Init(const CModelRenderer* playerModel, const CPlayerAction* action) {
 
 			//プレイヤーモデルを取得。
 			m_playerModel = playerModel;
+
+			//プレイヤーアクションを取得。
+			m_playerAction = action;
 
 			//モデルが入っていないなら。
 			if (m_playerModel == nullptr) {
@@ -37,6 +43,17 @@ namespace nsAWA {
 
 		void CPlayerWeaponManager::Update() {
 
+			//スキル使用中じゃなく、エフェクトが入っていたら。
+			if (m_playerAction->GetState() != EnPlayerState::enUseActiveSkill
+				&& m_mainEffect != nullptr
+				) {
+
+				//エフェクトを破棄。
+				m_mainEffect->Stop();
+				DeleteGO(m_mainEffect);
+				m_mainEffect = nullptr;
+			}
+
 			//武器情報が入っていないなら。
 			if (m_weapon == nullptr) {
 
@@ -57,6 +74,13 @@ namespace nsAWA {
 			m_weapon->SetPosition(bonePos);
 			m_weapon->SetRotation(boneRot);
 			m_weapon->SetScale(boneScale);
+
+			//エフェクトが入っているなら。
+			if (m_mainEffect != nullptr) {
+
+				//エフェクトを更新。
+				UpdateEffect();
+			}
 		}
 
 		void CPlayerWeaponManager::ChangeWeapon(nsWeapon::CWeapon* weapon) {
@@ -71,6 +95,41 @@ namespace nsAWA {
 
 			//武器を設定。
 			m_weapon = weapon;
+		}
+
+		void CPlayerWeaponManager::CreateEffect(const std::string& effectFilePath) {
+
+			//メインエフェクトを生成。
+			m_mainEffect = NewGO<CEffectPlayer>();
+			std::string mainEffectFilePath = "Assets/Effects/Weapon/";
+			mainEffectFilePath += effectFilePath;
+			mainEffectFilePath += ".efkefc";
+
+			//初期化。
+			m_mainEffect->Init(nsUtils::GetWideStringFromString(mainEffectFilePath).c_str());
+
+			//更新。
+			UpdateEffect();
+
+			//エフェクトを再生。
+			m_mainEffect->Play();
+		}
+
+		void CPlayerWeaponManager::UpdateEffect() {
+
+			//エフェクト発生場所を取得。
+			CVector3 weaponBasePosition = CVector3::Down();
+
+			const CQuaternion& rot = m_weapon->GetModelRenderer()->GetRotation();
+
+			rot.Apply(weaponBasePosition);
+
+			weaponBasePosition *= kEffectAddPosition;
+
+			//エフェクトの座標と回転を設定。
+			m_mainEffect->SetPosition(m_weapon->GetPosition() + weaponBasePosition);
+			m_mainEffect->SetRotation(m_weapon->GetRotation());
+			m_mainEffect->SetScale(kEffectScale);
 		}
 	}
 }

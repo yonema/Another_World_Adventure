@@ -85,12 +85,13 @@ namespace nsAWA {
 		void CPlayerStatus::LoadStatus(const std::vector<std::string>& statusDataStr) {
 
 			//ステータスをロード。
-			m_level = std::stoi(statusDataStr[0]);
-			m_exp = std::stoi(statusDataStr[1]);
-			m_HP = std::stof(statusDataStr[2]);
-			m_maxHP = std::stof(statusDataStr[3]);
-			m_MP = std::stof(statusDataStr[4]);
-			m_maxMP = std::stof(statusDataStr[5]);
+			m_playerName = statusDataStr[0];
+			m_level = std::stoi(statusDataStr[1]);
+			m_exp = std::stoi(statusDataStr[2]);
+			m_HP = std::stof(statusDataStr[3]);
+			m_maxHP = std::stof(statusDataStr[4]);
+			m_MP = std::stof(statusDataStr[5]);
+			m_maxMP = std::stof(statusDataStr[6]);
 			m_SP = kSPValue;
 			m_maxSP = kSPValue;
 			m_guardGaugeValue = kGGValue;

@@ -57,9 +57,21 @@ namespace nsAWA {
 
 			void HealGuardGaugeValue(float value);
 			void DamageGuardGaugeValue(float value);
-		public:
 
+		public:
 			void LoadStatus(const std::vector<std::string>& statusDataStr);
+
+			void SetPlayerName(const std::string& playerName) {
+
+				//プレイヤーネームを設定。
+				m_playerName = playerName;
+			}
+
+			const std::string& GetPlayerName()const {
+
+				//プレイヤーネームを取得。
+				return m_playerName;
+			}
 
 			void SetLevel(int level) {
 
@@ -180,6 +192,8 @@ namespace nsAWA {
 			float m_intelligence = 0.0f;		//魔法攻撃力
 			float m_defence = 0.0f;				//物理防御力
 			float m_mind = 0.0f;				//魔法防御力
+
+			std::string m_playerName = "NoName";//プレイヤーネーム
 		};
 	}
 }
