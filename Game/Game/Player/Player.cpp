@@ -182,6 +182,13 @@ namespace nsAWA {
 			//トリガーを更新。
 			m_collider.Update();
 
+			// UIにプレイヤーのステータスを渡す
+			m_playerBattleStatusUI->SetUIPlayerStatus(
+				m_status.GetHP(), m_status.GetMaxHP(),
+				m_status.GetMP(), m_status.GetMaxMP(),
+				m_status.GetSP(), m_status.GetMaxSP()
+			);
+
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
 
@@ -241,12 +248,6 @@ namespace nsAWA {
 				}
 			}
 
-			// UI縺ｮ蜃ｦ逅・
-			m_playerBattleStatusUI->SetUIPlayerStatus(
-				m_status.GetHP(), m_status.GetMaxHP(),
-				m_status.GetMP(), m_status.GetMaxMP(),
-				m_status.GetSP(), m_status.GetMaxSP()
-			);
 		}
 
 		void CPlayer::SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill) {
