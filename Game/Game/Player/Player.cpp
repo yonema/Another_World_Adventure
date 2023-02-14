@@ -116,17 +116,6 @@ namespace nsAWA {
 
 		void CPlayer::UpdateActor(float deltaTime) {
 
-			if (Input()->IsTrigger(EnActionMapping::enDecision)) {
-
-				if (m_isInTown) {
-					m_isInTown = false;
-				}
-				else {
-
-					m_isInTown = true;
-				}
-			}
-
 			//éÄÇÒÇ≈Ç¢ÇÈÇ»ÇÁÅB
 			if (IsDeath()) {
 

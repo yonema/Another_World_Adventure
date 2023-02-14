@@ -126,6 +126,9 @@ namespace nsAWA {
 
 				//街中かどうかを設定。
 				m_isInTown = flag;
+
+				//ステート変更扱い。
+				m_action.ChangeState();
 			}
 
 			bool IsInTown()const {
