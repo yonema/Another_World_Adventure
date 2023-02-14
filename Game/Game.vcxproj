@@ -190,6 +190,8 @@
     <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
+    <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
@@ -467,6 +469,8 @@
     <ClInclude Include="Game\Network\NetworkManager.h" />
     <ClInclude Include="Game\Monster\MonsterPop\MonsterPopManager.h" />
     <ClInclude Include="Game\Monster\MonsterPop\MonsterPopPoint.h" />
+    <ClInclude Include="Game\Player\PlayerQuestManager.h" />
+    <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
     <ClInclude Include="YonemaEngine\EngineConfig.h" />
     <ClInclude Include="YonemaEngine\Math\STRS.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />

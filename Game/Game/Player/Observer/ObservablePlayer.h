@@ -54,6 +54,8 @@ namespace nsAWA {
 				void InputEnable();
 
 				void InputDisable();
+
+				void ProgressSlayQuest();
 			};
 		}
 	}

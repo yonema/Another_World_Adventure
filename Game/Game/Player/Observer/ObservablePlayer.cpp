@@ -87,6 +87,12 @@ namespace nsAWA {
 				//入力できない状態にする。
 				m_player->InputDisable();
 			}
+
+			void CObservablePlayer::ProgressSlayQuest()
+			{
+				//討伐クエストを進める
+				m_player->ProgressSlayQuest();
+			}
 		}
 	}
 }

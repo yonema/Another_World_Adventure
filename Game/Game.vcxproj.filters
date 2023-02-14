@@ -270,6 +270,8 @@
     <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
+    <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -564,6 +566,8 @@
     <ClInclude Include="YonemaEngine\Math\STRS.h" />
     <ClInclude Include="Game\World\TRSListMap.h" />
     <ClInclude Include="YonemaEngine\EngineConfig.h" />
+    <ClInclude Include="Game\Player\PlayerQuestManager.h" />
+    <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
