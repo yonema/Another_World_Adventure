@@ -4,6 +4,11 @@
 
 namespace nsAWA {
 
+	namespace nsPlayer {
+
+		class CPlayer;
+	}
+
 	namespace nsCamera {
 
 		//メインカメラクラス

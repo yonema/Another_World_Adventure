@@ -2,13 +2,19 @@
 
 namespace nsAWA {
 
+	//前方宣言
+	namespace nsPlayer {
+
+		class CPlayer;
+	}
+
 	namespace nsCamera {
 
 		//カメラアクションクラス
 		class CCameraAction : nsUtils::SNoncopyable
 		{
 		public:
-			void Init();
+			void Init(nsPlayer::CPlayer* player);
 
 			void Update();
 
@@ -25,6 +31,7 @@ namespace nsAWA {
 				return m_targetPosition;
 			}
 		private:
+			nsPlayer::CPlayer* m_player = nullptr;			//プレイヤー
 			CVector3 m_position = CVector3::Zero();			//視点
 			CVector3 m_targetPosition = CVector3::Zero();	//注視点
 			CVector3 m_addCameraVec = CVector3::Zero();		//注視点から視点までの加算ベクトル
