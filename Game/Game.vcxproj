@@ -201,7 +201,8 @@
     <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
     <ClCompile Include="Game\Quest\QuestData.cpp" />
-    <ClCompile Include="Game\UI\Menu\MenuManager.cpp" />    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
+    <ClCompile Include="Game\UI\Menu\MenuManager.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\ImageProcessing\GaussianBlur.cpp" />
@@ -433,6 +434,7 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Attribute.h" />
     <ClInclude Include="Game\Event\EventNameTable.h" />
     <ClInclude Include="Game\Event\EventSetFuncPool.h" />
     <ClInclude Include="Game\Event\EventController.h" />
@@ -491,7 +493,8 @@
     <ClInclude Include="Game\Player\PlayerQuestManager.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
     <ClInclude Include="Game\Quest\QuestData.h" />
-    <ClInclude Include="Game\UI\Menu\MenuManager.h" />    <ClInclude Include="YonemaEngine\EngineConfig.h" />
+    <ClInclude Include="Game\UI\Menu\MenuManager.h" />
+    <ClInclude Include="YonemaEngine\EngineConfig.h" />
     <ClInclude Include="YonemaEngine\Math\STRS.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
     <ClInclude Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.h" />

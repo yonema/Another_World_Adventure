@@ -75,7 +75,6 @@ namespace nsAWA {
 
 			m_menuManager = NewGO<nsUI::CMenuManager>();
 
-
 			//データをロード。
 			CUserData userData;
 			userData.Load();
@@ -170,9 +169,9 @@ namespace nsAWA {
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
 
-			size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
-			StringCbPrintf(m_dispText, dispTextSize, L"Level = %d , Exp = %d", m_status.GetLevel(), m_status.GetExp());
-			m_fontRenderer->SetText(m_dispText);
+			//size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
+			//StringCbPrintf(m_dispText, dispTextSize, L"Level = %d , Exp = %d", m_status.GetLevel(), m_status.GetExp());
+			//m_fontRenderer->SetText(m_dispText);
 #endif
 		}
 

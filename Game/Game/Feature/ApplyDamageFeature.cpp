@@ -4,6 +4,7 @@
 #include "../Status.h"
 #include "../ShakeActor.h"
 #include "../HitStop.h"
+#include "../Attribute.h"
 
 namespace nsAWA {
 
@@ -27,7 +28,16 @@ namespace nsAWA {
 			}
 		}
 
-		void CApplyDamageFeature::Init(IGameActor* creator, IGameActor* target, float power, const std::string& attackType, bool canGuard) {
+		void CApplyDamageFeature::Init(
+			IGameActor* creator,
+			IGameActor* target,
+			EnAttribute attribute,
+			float power, 
+			const std::string& attackType,
+			bool canGuard)
+		{
+			//ターゲットを設定。
+			m_target = target;
 
 			//生成者の情報がないなら
 			if (creator == nullptr) {
@@ -39,10 +49,7 @@ namespace nsAWA {
 			//ダメージを与えるのに必要な情報を取得。
 			int level = creator->GetStatus()->GetLevel();
 			float attack = creator->GetStatus()->GetAttack(attackType);
-			float defence = target->GetStatus()->GetDeffence(attackType);
-
-			//ターゲットを設定。
-			m_target = target;
+			float defence = m_target->GetStatus()->GetDeffence(attackType);
 
 			//ダメージ計算。
 			m_damage = CalcDamage(level, power, attack, defence);
@@ -52,6 +59,10 @@ namespace nsAWA {
 
 			//乱数値をダメージに乗算。
 			m_damage *= randomDamage;
+
+			//属性相性からダメージ計算。
+			CAttribute attributeInstance;
+			m_damage *= attributeInstance.CalcAttributeCompatibility(attribute, m_target->GetStatus()->GetAttribute());
 
 			//ガードできるかどうかを設定。
 			m_canGuard = canGuard;

@@ -101,6 +101,9 @@ namespace nsAWA {
 			//ステータスを初期化。
 			m_status.Init(m_name);
 
+			//属性を設定。
+			m_status.SetAttribute(monsterInfo.attribute);
+
 			//アニメーションイベントを初期化。
 			m_animation.InitAnimationEvent(this, &m_AIContoller);
 

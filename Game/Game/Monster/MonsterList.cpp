@@ -47,6 +47,37 @@ namespace nsAWA {
 					monsterInitData.name = monsterList[1];
 				}
 				
+				if (title == "ATTRIBUTE") {
+
+					//属性を設定。
+					EnAttribute attribute = EnAttribute::enNone;
+					std::string attributeStr = monsterList[1];
+
+					if (attributeStr == "Fire") {
+
+						attribute = EnAttribute::enFire;
+					}
+					else if (attributeStr == "Water") {
+
+						attribute = EnAttribute::enWater;
+					}
+					else if (attributeStr == "Lightning") {
+
+						attribute = EnAttribute::enLightning;
+					}
+					else if (attributeStr == "None") {
+
+						attribute = EnAttribute::enNone;
+					}
+					else {
+
+						//エラー出力。
+						nsGameWindow::MessageBoxWarning(L"CMonsterList : 属性が指定されていません。");
+					}
+
+					monsterInitData.attribute = attribute;
+				}
+
 				if (title == "DROPEXP") {
 
 					//獲得経験値量を設定。

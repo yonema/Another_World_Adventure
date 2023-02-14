@@ -1,5 +1,6 @@
 #pragma once
 #include "Feature.h"
+#include "../Attribute.h"
 
 namespace nsAWA {
 
@@ -13,7 +14,12 @@ namespace nsAWA {
 			/**
 			 * @brief 通常ダメージ
 			*/
-			void Init(IGameActor* creator, IGameActor* target, float power, const std::string& attackType, bool canGuard);
+			void Init(IGameActor* creator, 
+				IGameActor* target,
+				EnAttribute attribute,
+				float power,
+				const std::string& attackType,
+				bool canGuard);
 
 			/**
 			 * @brief 固定ダメージ
