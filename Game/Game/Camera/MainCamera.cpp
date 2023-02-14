@@ -1,5 +1,6 @@
 #include "YonemaEnginePreCompile.h"
 #include "MainCamera.h"
+#include "../Player/Player.h"
 
 namespace nsAWA {
 
@@ -22,8 +23,11 @@ namespace nsAWA {
 			//カメラ入力クラスを初期化。
 			m_input.Init(&m_action);
 
+			//プレイヤーを検索。
+			auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+
 			//カメラアクションクラスを初期化。
-			m_action.Init();
+			m_action.Init(player);
 
 			return true;
 		}
