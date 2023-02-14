@@ -186,6 +186,24 @@ namespace nsAWA
 		}
 
 
+		void CHumanManager::DeleteHuman(const std::string& name)
+		{
+			auto itr = m_humanMap.find(name);
+
+			if (itr == m_humanMap.end()) 
+			{
+				return;
+			}
+
+			DeleteGO(itr->second);
+
+			m_humanMap.erase(itr);
+
+			return;
+		}
+
+
+
 
 		void CHumanManager::CheckBaseHumanLoading() noexcept
 		{

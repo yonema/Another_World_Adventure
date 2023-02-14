@@ -39,6 +39,8 @@ namespace nsAWA
 			void GenerateHuman(
 				const std::string& objName, const CVector3& position, const CQuaternion& rotation);
 
+			void DeleteHuman(const std::string& name);
+
 			void Release();
 
 			constexpr auto GetBaseLoadingState() const noexcept

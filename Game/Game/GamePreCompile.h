@@ -161,3 +161,8 @@ static nsUtils::CRandom* Random() noexcept
 {
 	return CYonemaEngine::GetInstance()->GetRandom();
 }
+
+static void InvokeFunc(const std::function<void(void)>& func, float delayTime)
+{
+	CYonemaEngine::GetInstance()->GetInvokeFunc()->PushInvokeFunc(func, delayTime);
+}
