@@ -34,6 +34,7 @@ namespace nsAWA {
 		public:
 
 			void Release();
+
 		private:
 
 			void Create(const SWeaponInfo& weaponInfo);
@@ -116,13 +117,12 @@ namespace nsAWA {
 				return m_sInfo.weaponType;
 			}
 
-			const CModelRenderer* GetModelRenderer()const {
+			CModelRenderer* GetModelRenderer() {
 
 				//ƒ‚ƒfƒ‹‚ğæ“¾B
 				return m_modelRenderer;
 			}
 		private:
-			
 			CModelRenderer* m_modelRenderer = nullptr;		//ƒ‚ƒfƒ‹
 			SWeaponInfo m_sInfo;							//î•ñ
 		};

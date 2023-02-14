@@ -6,6 +6,7 @@ namespace nsAWA {
 	namespace nsPlayer {
 
 		class CPlayerAction;
+		class CPlayer;
 
 		namespace nsPlayerAnimation {
 
@@ -19,7 +20,7 @@ namespace nsAWA {
 		class CPlayerInput : nsUtils::SNoncopyable
 		{
 		public:
-			void Init(CPlayerAction* playerAction, nsPlayerAnimation::CPlayerAnimation* playerAnimation);
+			void Init(const CPlayer* player,CPlayerAction* playerAction, nsPlayerAnimation::CPlayerAnimation* playerAnimation);
 
 			void Release() {};
 
@@ -55,6 +56,7 @@ namespace nsAWA {
 			void InputSkillAction();
 
 		private:
+			const CPlayer* m_player = nullptr;			//プレイヤー
 			CPlayerAction* m_playerAction = nullptr;	//プレイヤーアクションのポインタ
 			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;	//プレイヤーアニメーションのポインタ
 			bool m_canInput = true;		//入力できる？

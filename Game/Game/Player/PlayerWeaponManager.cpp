@@ -1,6 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "PlayerWeaponManager.h"
 #include "PlayerAction.h"
+#include "Player.h"
 
 namespace nsAWA {
 
@@ -13,7 +14,10 @@ namespace nsAWA {
 			constexpr float kEffectScale = 2.0f;		//エフェクトサイズ
 		}
 
-		void CPlayerWeaponManager::Init(const CModelRenderer* playerModel, const CPlayerAction* action) {
+		void CPlayerWeaponManager::Init(const CPlayer* player, const CModelRenderer* playerModel, const CPlayerAction* action) {
+
+			//プレイヤーを格納。
+			m_player = player;
 
 			//プレイヤーモデルを取得。
 			m_playerModel = playerModel;
@@ -42,6 +46,21 @@ namespace nsAWA {
 		}
 
 		void CPlayerWeaponManager::Update() {
+
+			//街中にいるなら。
+			if (m_player->IsInTown()) {
+
+				//武器を無効化。
+				m_weapon->GetModelRenderer()->ModelDeactivate();
+
+				//終了。
+				return;
+			}
+			else {
+
+				//武器を有効化。
+				m_weapon->GetModelRenderer()->ModelActivate();
+			}
 
 			//スキル使用中じゃなく、エフェクトが入っていたら。
 			if (m_playerAction->GetState() != EnPlayerState::enUseActiveSkill

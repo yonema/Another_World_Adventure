@@ -11,6 +11,11 @@ namespace nsAWA {
 	namespace nsPlayer {
 		
 		enum class EnPlayerState;
+		class CPlayer;
+	}
+	namespace nsWeapon {
+
+		class CWeapon;
 	}
 
 	namespace nsPlayer {
@@ -23,6 +28,7 @@ namespace nsAWA {
 				enSword,	//剣
 				enAxe,		//斧
 				enWand,		//杖
+				enNoWeapon,	//武器なし
 
 				enNum,		//タイプの数
 				enNone		//設定なし
@@ -43,7 +49,7 @@ namespace nsAWA {
 			class CPlayerAnimation : nsUtils::SNoncopyable
 			{
 			public:
-				void Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction);
+				void Init(CPlayer* player, CPlayerInput* playerInput, CPlayerAction* playerAction);
 
 				void Release();
 
@@ -85,7 +91,9 @@ namespace nsAWA {
 				void SetActiveSkillName(std::string& name);
 
 			private:
+				const CPlayer* m_player = nullptr;			//プレイヤー
 				CModelRenderer* m_playerModel = nullptr;	//プレイヤーモデル
+				const nsWeapon::CWeapon* const* m_weapon = nullptr;	//武器情報
 				EnAnimType m_type = EnAnimType::enNone;		//アニメーションのタイプ
 				CPlayerAnimationEvent m_animationEvent;		//プレイヤーのアニメーションイベント
 				nsSkill::CActiveSkill* m_activeSkill = nullptr;	//アクティブスキルのポインタ

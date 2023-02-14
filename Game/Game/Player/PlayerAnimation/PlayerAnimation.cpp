@@ -3,6 +3,9 @@
 #include "PlayerAnimationEvent.h"
 #include "PlayerAnimation.h"
 #include "../PlayerAction.h"
+#include "../Player.h"
+#include "../../Weapon/Weapon.h"
+#include "../PlayerWeaponManager.h"
 #include "../../Skill/ActiveSkill.h"
 
 #include "../../CSV/CSVManager.h"
@@ -20,17 +23,19 @@ namespace nsAWA {
 				constexpr const float kCanPlayerInput = 0.001f;	//入力が判定される最低値
 			}
 
-			void CPlayerAnimation::Init(IGameActor* player, CPlayerInput* playerInput, CPlayerAction* playerAction) {
+			void CPlayerAnimation::Init(CPlayer* player, CPlayerInput* playerInput, CPlayerAction* playerAction) {
+
+				//プレイヤーを取得。
+				m_player = player;
+
+				//武器の参照を取得。
+				m_weapon = &player->GetWeaponManager()->GetWeaponPointer();
 
 				//アニメーションデータを読み込む。
 				LoadAnimation();
 
 				//アニメーションイベントクラスを初期化。
 				m_animationEvent.Init(player, playerInput, playerAction, this);
-
-				//剣タイプに設定。
-				m_type = EnAnimType::enSword;
-
 			}
 
 			void CPlayerAnimation::SetPlayerModelAndAnimEvent(CModelRenderer* playerModel) {
@@ -67,6 +72,28 @@ namespace nsAWA {
 			}
 
 			void CPlayerAnimation::Update(bool changeState, EnPlayerState playerState) {
+
+				if (m_weapon == nullptr) {
+
+					m_type = EnAnimType::enNoWeapon;
+				}
+				else {
+
+					nsWeapon::EnWeaponType weaponType = (*m_weapon)->GetWeaponType();
+
+					switch (weaponType) {
+
+					case nsWeapon::EnWeaponType::enSword:
+						m_type = EnAnimType::enSword;
+						break;
+					case nsWeapon::EnWeaponType::enAxe:
+						m_type = EnAnimType::enAxe;
+						break;
+					case nsWeapon::EnWeaponType::enWand:
+						m_type = EnAnimType::enWand;
+						break;
+					}
+				}
 
 				//ステートに変更があったか。
 				if (changeState) {
@@ -120,6 +147,17 @@ namespace nsAWA {
 
 					stateStr = "Wand_";
 					break;
+				case EnAnimType::enNoWeapon:
+
+					stateStr = "NoWeapon_";
+					break;
+				}
+
+				//街中にいるなら。
+				if (m_player->IsInTown()) {
+
+					//武器なしアニメーションを使用する。
+					stateStr = "NoWeapon_";
 				}
 
 				//ステートを文字列に変換して合成。
