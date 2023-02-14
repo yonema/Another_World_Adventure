@@ -14,14 +14,8 @@
 #include "Item/MaterialItemList.h"
 #include "GameLog/GameLog.h"
 
-#ifdef _DEBUG
+//仮に。
 #include "Monster/Monster.h"
-#include "Monster/MonsterList.h"
-#include "Item/SelfItem.h"
-#include "Feature/AbnormalStatus/Poison.h"
-#include "Item/ItemManager.h"
-#include "Monster/AI/MonsterAIController.h"
-#endif
 
 namespace nsAWA {
 
@@ -48,10 +42,10 @@ namespace nsAWA {
 		//バックグラウンドを生成。
 		m_backGround = NewGO<nsBackGround::CBackGround>(nsBackGround::CBackGround::m_kObjName_BackGround);
 
-#ifdef _DEBUG
+		//仮に。
 		nsMonster::CMonster* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
 		monster->SetPosition({ 0.0f,0.0f,50.0f });
-#endif
+
 		return true;
 	}
 
