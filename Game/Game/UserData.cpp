@@ -119,7 +119,7 @@ namespace nsAWA {
 		itr++;
 		
 		//パッシブスキルの装着可能数を設定。
-		playerManager->SetActiveSkillMaxNum((*itr).size());
+		playerManager->SetActiveSkillMaxNum(static_cast<int>((*itr).size()));
 
 		//パッシブスキルをロード。
 		for (int dataNum = 0; dataNum < (*itr).size(); dataNum++) {
