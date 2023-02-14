@@ -5,10 +5,10 @@
 #include "../Armor/Armor.h"
 #include "../Skill/ActiveSkillList.h"
 #include "../UserData.h"
+#include "PlayerManager.h"
 
 #ifdef _DEBUG
 #include "../Monster/Monster.h"
-#include "PlayerManager.h"
 #include "../Skill/PassiveSkillManager.h"
 #include "../Skill/PassiveSkill.h"
 #endif
@@ -46,12 +46,10 @@ namespace nsAWA {
 			//武器管理クラスを初期化。
 			m_weaponManager.Init(m_modelRenderer);
 
-#ifdef _DEBUG
 
+			//仮に装備。
 			CPlayerManager::GetInstance()->SetWeapon("NewSword");
 			CPlayerManager::GetInstance()->SetArmor("NewArmor");
-
-#endif // DEBUG
 
 			//ステータスを初期化。
 			m_status.Init(m_weaponManager.GetWeaponPointer(),m_armor,GetPassiveSkillManager(),GetFeatureManager());

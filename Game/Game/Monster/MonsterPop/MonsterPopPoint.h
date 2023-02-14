@@ -81,9 +81,8 @@ namespace nsAWA
 				bool m_preIsPlayerInTown = false;
 				bool m_isPlayerInTown = false;
 
-#ifdef _DEBUG
 				CPhysicsTriggerObject m_trigger = {};
-#endif // _DEBUG
+
 
 			};
 

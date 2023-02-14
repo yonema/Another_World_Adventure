@@ -27,10 +27,9 @@ namespace nsAWA {
 
 				//アニメーションイベントクラスを初期化。
 				m_animationEvent.Init(player, playerInput, playerAction, this);
-#ifdef _DEBUG
+
 				//剣タイプに設定。
 				m_type = EnAnimType::enSword;
-#endif // _DEBUG
 
 			}
 
