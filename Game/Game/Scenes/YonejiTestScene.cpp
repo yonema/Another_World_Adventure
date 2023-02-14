@@ -62,6 +62,7 @@ namespace nsAWA
 			m_isLoaded = true;
 			m_loadGame = NewGO<CLoadGame>();
 			m_loadGame->SetPlayerSpawnPosition(m_world->GetPlayerSpawnPosition());
+			m_loadGame->SetPlayerSpawnRotation(m_world->GetPlayerSpawnRotation());
 
 
 			return;

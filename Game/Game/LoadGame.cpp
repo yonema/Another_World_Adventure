@@ -36,6 +36,7 @@ namespace nsAWA {
 		//プレイヤーを生成。
 		m_player = NewGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
 		m_player->SetPosition(m_playerSpawnPosition);
+		m_player->SetRotation(m_playerSpawnQuaternion);
 
 		//メインカメラを生成。
 		m_mainCamera = NewGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);

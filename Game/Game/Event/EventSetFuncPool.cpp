@@ -29,7 +29,15 @@ namespace nsAWA
 			);
 
 			eventName = GetEventNameFromTable(EnEventNameType::enTrainingWithHRA);
-			m_setFuncListMap[eventName].reserve(1);
+			m_setFuncListMap[eventName].reserve(2);
+			m_setFuncListMap[eventName].emplace_back(
+				[]()->bool
+				{
+					static bool clear = false;
+					InvokeFunc([&]() {clear = true; }, 3.0f);
+					return clear;
+				}
+			);
 			m_setFuncListMap[eventName].emplace_back(
 				[]()->bool
 				{
