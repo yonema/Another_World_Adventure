@@ -61,6 +61,8 @@ NAME,Sword_ForwardStep,
 SPEED,1,
 LOOP,FALSE,
 EVENT,CoolTimeOn,NONE
+EVENT,MoveStart,NONE
+EVENT,MoveEnd,NONE
 EVENT,CoolTimeOff,NONE
 *,,
 NAME,NoWeapon_Idle,
