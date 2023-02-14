@@ -273,6 +273,7 @@
     <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
     <ClCompile Include="Game\Quest\QuestData.cpp" />
+    <ClCompile Include="Game\UI\Menu\MenuManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -570,6 +571,7 @@
     <ClInclude Include="Game\Player\PlayerQuestManager.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
     <ClInclude Include="Game\Quest\QuestData.h" />
+    <ClInclude Include="Game\UI\Menu\MenuManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

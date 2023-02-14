@@ -102,6 +102,11 @@ namespace nsAWA {
 
 			void MoveBackItemUI();
 
+			void InputEnable();
+
+			void InputDisable();
+
+
 		private:
 			void ResetActiveSkill();
 
@@ -115,6 +120,8 @@ namespace nsAWA {
 			std::list<nsSkill::SActiveSkillData> m_canUseActiveSkillDataList;	//使用可能なアクティブスキルの名前のリスト
 			nsItem::CItemManager m_itemManager;		//アイテム管理クラス
 			nsObserver::CObservablePlayer m_observable;				//オブザーバー監視クラス
+
+
 		};
 	}
 }

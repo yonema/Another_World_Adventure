@@ -15,6 +15,7 @@
 #include "../UI/Battle/Player/PlayerBattleStatusUI.h"
 #include "../UI/Battle/Skill/SkillIconUI.h"
 #include "../UI/Battle/Item/ItemUI.h"
+#include "../UI/Menu/MenuManager.h"
 
 namespace nsAWA {
 
@@ -96,6 +97,8 @@ namespace nsAWA {
 			m_itemUI = NewGO<nsUI::CItemUI>();
 			m_itemUI->LoadLevel();
 
+			m_menuManager = NewGO<nsUI::CMenuManager>();
+
 			//データをロード。
 			CUserData userData;
 			userData.Load();
@@ -135,6 +138,7 @@ namespace nsAWA {
 			// UIを破棄。
 			DeleteGO(m_playerBattleStatusUI);
 			DeleteGO(m_skillIconUI);
+			DeleteGO(m_menuManager);
 		}
 
 		void CPlayer::UpdateActor(float deltaTime) {

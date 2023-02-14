@@ -24,6 +24,7 @@ namespace nsAWA {
 		class CPlayerBattleStatusUI;
 		class CSkillIconUI;
 		class CItemUI;
+		class CMenuManager;
 	}
 
 	namespace nsPlayer {
@@ -131,7 +132,7 @@ namespace nsAWA {
 
 			void ResetQuest()
 			{
-				m_questManager.Reset();
+				//m_questManager.Reset();
 			}
 		private:
 			void CreatePlayerModel();
@@ -161,6 +162,7 @@ namespace nsAWA {
 			nsUI::CPlayerBattleStatusUI* m_playerBattleStatusUI = nullptr;
 			nsUI::CSkillIconUI* m_skillIconUI = nullptr;
 			nsUI::CItemUI* m_itemUI = nullptr;
+			nsUI::CMenuManager* m_menuManager;
 
 		};
 	}
