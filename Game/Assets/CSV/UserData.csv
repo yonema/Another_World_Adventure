@@ -1,3 +1,6 @@
-1,0,200,200,100,100
-JumpAttack_Sword,JumpAttackL_Sword,,,,
-エーテル,3,聖水,2,刀削麺,2
+Yoneji,1,0,193.304398,200,100,100
+JumpAttack_Sword,JumpAttackL_Sword,,,,,
+エーテル,3,聖水,2,刀削麺,2,
+NewSword,NewArmor,,,,,
+JumpAttack_Sword,JumpAttackL_Sword,None,None,None,None,
+Poisoner,Paralysiser,None,None,None,,

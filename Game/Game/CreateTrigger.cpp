@@ -118,6 +118,17 @@ namespace nsAWA {
 		//IGameActorのコライダーだったら。
 		if (rGameActorCollider != nullptr) {
 
+			auto hitEffect = NewGO<CEffectPlayer>();
+			hitEffect->Init(L"Assets/Effects/Normal/attack.efkefc");
+
+			auto hitPosition = rGameActorCollider->GetGameActor()->GetPosition();
+			hitPosition.y += 5.0f;
+
+			hitEffect->SetScale(50.0f);
+			hitEffect->SetPosition(hitPosition);
+			hitEffect->Update(0.0f);
+			hitEffect->Play();
+
 			//効果を生成。
 			nsFeature::CFeatureBuilder featureBuilder;
 			featureBuilder.CreateFeature(m_creator, rGameActorCollider->GetGameActor(), m_triggerInfo.m_featureList);

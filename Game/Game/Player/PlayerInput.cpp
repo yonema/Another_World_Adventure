@@ -3,6 +3,7 @@
 #include "PlayerAction.h"
 #include "PlayerManager.h"
 
+#include "../UserData.h"
 
 namespace nsAWA {
 
@@ -187,35 +188,37 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 
-				CPlayerManager::GetInstance()->SetActiveSkill(0,"JumpAttack_Sword");
+				CPlayerManager::GetInstance()->SetPassiveSkill(0, "Poisoner");
 
-				//クールタイム中に設定。
-				CoolTimeOn();
-				
-				//スキル１使用。
-				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
+				////クールタイム中に設定。
+				//CoolTimeOn();
+				//
+				////スキル１使用。
+				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
 
-				CPlayerManager::GetInstance()->SetActiveSkill(1, "JumpAttackL_Sword");
+				CPlayerManager::GetInstance()->SetPassiveSkill(1, "Paralysiser");
 
-				//クールタイム中に設定。
-				CoolTimeOn();
-				
-				//スキル２使用。
-				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
+				////クールタイム中に設定。
+				//CoolTimeOn();
+				//
+				////スキル２使用。
+				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
 
-				CPlayerManager::GetInstance()->SetPassiveSkill(0, "Paralysiser");
+				//データをセーブ。
+				CUserData userData;
+				userData.Save();
 
 				////クールタイム中に設定。
-				CoolTimeOn();
-				
-				//スキル３使用。
-				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_3);
+				//CoolTimeOn();
+				//
+				////スキル３使用。
+				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_3);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_4)) {

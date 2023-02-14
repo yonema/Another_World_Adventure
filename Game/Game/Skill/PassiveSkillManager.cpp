@@ -8,8 +8,7 @@ namespace nsAWA {
 
 		void CPassiveSkillManager::Init() {
 
-			//枠のサイズを初期化。
-			m_passiveSkill.resize(m_passiveSkillMaxNum);
+
 		}
 
 		void CPassiveSkillManager::Release() {
@@ -44,12 +43,7 @@ namespace nsAWA {
 					delete m_passiveSkill[skillNum];
 				}
 
-				//新しいパッシブスキルを装着する。
-				//m_passiveSkill[skillNum] = new nsSkill::CPassiveSkill;
-				//m_passiveSkill[skillNum]->SetFeatureList(passiveSkill->GetFeatureList());
-				//m_passiveSkill[skillNum]->SetName(passiveSkill->GetName());
-
-				//delete passiveSkill;
+				//新たなパッシブスキルを設定。
 				m_passiveSkill[skillNum] = passiveSkill;
 			}
 		}

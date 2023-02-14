@@ -24,6 +24,12 @@ namespace nsAWA {
 
 			void Create(const SArmorInfo& armorInfo);
 		public:
+			const std::string& GetArmorName()const {
+
+				//–h‹ï‚Ì–¼‘O‚ğæ“¾B
+				return m_sInfo.name;
+			}
+
 			float GetDeffence()const {
 
 				return m_sInfo.defence;

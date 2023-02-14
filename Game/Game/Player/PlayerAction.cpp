@@ -199,6 +199,9 @@ namespace nsAWA {
 			//MPを消費。
 			m_playerStatus->DamageMP(useMP);
 
+			//スキルを実行。
+			m_activeSkill[static_cast<int>(activeSkillNum)]->Execute();
+
 			//アクティブスキルが使用できない状態だったら。
 			if (!m_playerFeatureManager->CanUseActiveSkill()) {
 
