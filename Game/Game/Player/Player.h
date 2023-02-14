@@ -124,9 +124,9 @@ namespace nsAWA {
 				return m_questManager.IsQuestCompleted();
 			}
 
-			void ProgressSlayQuest()
+			void ProgressSlayQuest(const std::string& slayMonsterName)
 			{
-				m_questManager.Progress();
+				m_questManager.Progress(slayMonsterName);
 			}
 
 			void ResetQuest()

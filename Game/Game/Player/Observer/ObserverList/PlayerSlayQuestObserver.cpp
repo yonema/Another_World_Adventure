@@ -8,10 +8,10 @@ namespace nsAWA
 	{
 		namespace nsObserver
 		{
-			void CPlayerSlayQuestObserver::Update(CObservablePlayer* observablePlayer) {
+			void CPlayerSlayQuestObserver::Update(CObservablePlayer* observablePlayer, const std::string& message) {
 
 				//討伐クエストを進める
-				observablePlayer->ProgressSlayQuest();
+				observablePlayer->ProgressSlayQuest(message);
 			}
 		}
 	}

@@ -51,7 +51,7 @@ namespace nsAWA {
 
 				virtual void ReleaseSub() {};
 
-				virtual void Update(CObservablePlayer* observablePlayer) = 0;
+				virtual void Update(CObservablePlayer* observablePlayer,const std::string& message = "") = 0;
 
 				void AddEvent(EnObserverEvent observerEvent) {
 
