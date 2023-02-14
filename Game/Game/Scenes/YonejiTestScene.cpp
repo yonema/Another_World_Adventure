@@ -31,7 +31,7 @@ namespace nsAWA
 		{
 			if (Keyboard()->IsTrigger(EnKeyButton::enEscape))
 			{
-				CreateScene<CTitleScene>();
+				CreateSceneWithFade<CTitleScene>();
 			}
 
 			InitAfterBaseLoaded(deltaTime);
