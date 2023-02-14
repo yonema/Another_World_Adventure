@@ -266,7 +266,15 @@ namespace nsAWA {
 
 		}
     
-    
+		void CPlayerManager::InputEnable()
+		{
+			m_player->InputEnable();
+		}
+
+		void CPlayerManager::InputDisable()
+		{
+			m_player->InputDisable();
+		}
     
     
     
