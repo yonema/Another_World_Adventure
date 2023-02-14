@@ -28,7 +28,7 @@ namespace nsAWA {
 
 				void ReleaseObserver();
 
-				void NotifyObserver(EnObserverEvent observerEvent);
+				void NotifyObserver(EnObserverEvent observerEvent,const std::string& message = "");
 
 				EnObserverEvent GetCarentEvent()const {
 
@@ -54,6 +54,8 @@ namespace nsAWA {
 				void InputEnable();
 
 				void InputDisable();
+
+				void ProgressSlayQuest(const std::string& slayMonsterName);
 			};
 		}
 	}

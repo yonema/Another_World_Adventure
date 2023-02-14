@@ -2,6 +2,8 @@
 #include "InnWindowUI.h"
 #include "../../../UserData.h"
 #include "../../../Network/NetworkManager.h"
+#include "../../../Feature/FeatureBuilder.h"
+#include "../../../Player/Player.h"
 
 namespace nsAWA
 {
@@ -165,12 +167,32 @@ namespace nsAWA
 		{
 			if (m_selecting == EnSelectingItem::enRest)
 			{
-				nsGameWindow::MessageBoxWarning(L"‹x‚İ‚Ü‚µ‚½B");
-				//Execute Rest
+				//‹x‚Ş
+
+				//‹x‚Ş‚Ì‰¹‚ª—~‚µ‚¢?
+
+				nsPlayer::CPlayer* player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+
+				nsFeature::CFeatureBuilder healFeature;
+
+				std::vector<std::string> featureVec;
+				featureVec.push_back("Heal");
+				featureVec.push_back("HP");
+				featureVec.push_back("Ratio");
+				featureVec.push_back("100");
+
+				std::list<std::vector<std::string>> feature;
+				feature.push_back(featureVec);
+
+				healFeature.CreateFeature(player,player,feature);
+
 			}
 			else
 			{
 				//ƒZ[ƒu
+
+				//ƒZ[ƒu‚·‚é‚Ì‰¹‚ª—~‚µ‚¢?
+
 				CUserData userDataSave;
 				userDataSave.Save();
 

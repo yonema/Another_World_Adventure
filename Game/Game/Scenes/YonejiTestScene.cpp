@@ -2,6 +2,11 @@
 #include "TitleScene.h"
 #include "../World/World.h"
 #include "../LoadGame.h"
+#include "../GamePreLoading.h"
+#include "../Event/EventController.h"
+#include "../Event/EventManager.h"
+#include "../Event/EventFlow.h"
+#include "../Player/Player.h"
 
 // ‚»‚Ì‚¤‚¿Á‚·—\’è
 
@@ -11,10 +16,13 @@ namespace nsAWA
 	{
 		bool CYonejiTestScene::Start()
 		{
-			constexpr float kFarClip = 5000.0f;
-			MainCamera()->SetFarClip(kFarClip);
 
 			m_world = NewGO<nsWorld::CWorld>();
+
+			if (m_isTutorial)
+			{
+				m_world->SetMode(nsWorld::CWorld::EnMode::enTutorial);
+			}
 
 			return true;
 		}
@@ -27,6 +35,9 @@ namespace nsAWA
 			}
 
 			InitAfterBaseLoaded(deltaTime);
+
+
+
 
 			return;
 		}
@@ -48,8 +59,10 @@ namespace nsAWA
 			{
 				return;
 			}
-
+			m_isLoaded = true;
 			m_loadGame = NewGO<CLoadGame>();
+			m_loadGame->SetPlayerSpawnPosition(m_world->GetPlayerSpawnPosition());
+
 
 			return;
 		}

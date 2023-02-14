@@ -1,8 +1,9 @@
 #include "World.h"
+#include "../GamePreLoading.h"
+#include "../Event/EventManager.h"
 #include "../Humans/HumanManager.h"
 #include "../Humans/Human.h"
 #include "../Monster/MonsterPop/MonsterPopManager.h"
-#include "../EngineConfig.h"
 
 namespace nsAWA
 {
@@ -13,21 +14,6 @@ namespace nsAWA
 
 		bool CWorld::Start()
 		{
-#ifdef DRAW_COLLISION
-			SetCullingBoxForDebugDrawLine(500.0f, nsMath::CVector3::Zero());
-
-			// ラインのカリングボックスの自動カメラフィット機能の有効化。
-			EnableAutoFitCullingBoxToMainCamera();
-#endif // DRAW_COLLISION
-
-			m_humanManager = NewGO<nsHumans::CHumanManager>("HumanManager");
-			m_humanManager->GenerateBase(true);
-			nsHumans::CHuman::SetHumanaManager(m_humanManager);
-
-			m_monsterPopManager = 
-				NewGO<nsMonster::nsMonsterPop::CMonsterPopManager>("MonsterPopManager");
-			m_monsterPopManager->SetHumanManagerRef(*m_humanManager);
-
 			InitSkyCube();
 
 			return true;
@@ -42,10 +28,6 @@ namespace nsAWA
 
 		void CWorld::OnDestroy()
 		{
-			m_humanManager->Release();
-			DeleteGO(m_humanManager);
-			m_humanManager = nullptr;
-
 			DeleteGO(m_skyCubeRenderer);
 			m_skyCubeRenderer = nullptr;
 
@@ -55,11 +37,6 @@ namespace nsAWA
 		void CWorld::TryLoadLevel()
 		{
 			if (m_isLevelLoaded)
-			{
-				return;
-			}
-
-			if (m_humanManager->IsBaseLoaded() != true)
 			{
 				return;
 			}
@@ -81,18 +58,35 @@ namespace nsAWA
 				{
 					if (chipData.ForwardMatchName(nsHumans::CHumanManager::m_kHumanPrefix))
 					{
-						m_humanManager->GenerateHuman(
+						CGamePreLoading::GetInstance()->GetHumanManager()->
+							GenerateHuman(
 							chipData.name, chipData.position, chipData.rotation);
 						return true;
 					}
-					else if (chipData.EqualObjectName("PlayerSpawn"))
+					else if (chipData.ForwardMatchName("PlayerSpawn_"))
 					{
+						const char* sarchName = chipData.name.c_str();
+
+						sarchName += strlen("PlayerSpawn_");
+
+						const char* nameByMode = "Town";
+						if (m_mode == EnMode::enTutorial)
+						{
+							nameByMode = "Tutorial";
+						}
+
+						if (nsUtils::ForwardMatchName(sarchName, nameByMode))
+						{
+							m_playerSpawnPosition = chipData.position;
+						}
+
 						return true;
 					}
 					else if (chipData.ForwardMatchName(
 						nsMonster::nsMonsterPop::CMonsterPopManager::m_kMonsterPopPrefix))
 					{
-						m_monsterPopManager->GenerateMonsterPopPoint(
+						CGamePreLoading::GetInstance()->GetMonsterPopManager()->
+							GenerateMonsterPopPoint(
 							chipData.name, chipData.position);
 						return true;
 					}
@@ -115,7 +109,7 @@ namespace nsAWA
 				}
 			);
 
-			m_worldParts.Build(m_humanManager);
+			m_worldParts.Build(CGamePreLoading::GetInstance()->GetHumanManager());
 
 			m_isLevelLoaded = true;
 

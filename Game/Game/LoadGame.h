@@ -24,6 +24,11 @@ namespace nsAWA {
 
 		void OnDestroy() override final;
 
+		void SetPlayerSpawnPosition(const CVector3& position)
+		{
+			m_playerSpawnPosition = position;
+		}
+
 	private:
 		void CreateGameList();
 
@@ -33,5 +38,6 @@ namespace nsAWA {
 		nsPlayer::CPlayer* m_player = nullptr;			//プレイヤー
 		nsCamera::CMainCamera* m_mainCamera = nullptr;	//メインカメラ
 		nsBackGround::CBackGround* m_backGround = nullptr;	//バックグラウンド
+		CVector3 m_playerSpawnPosition = nsMath::CVector3::Zero();
 	};
 }

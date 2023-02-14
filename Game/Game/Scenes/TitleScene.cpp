@@ -3,6 +3,7 @@
 #include "OpeningScene.h"
 #include "YonejiTestScene.h"
 
+
 namespace nsAWA
 {
 	namespace nsScene
