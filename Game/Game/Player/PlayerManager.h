@@ -56,10 +56,10 @@ namespace nsAWA {
 
 			void SetArmor(const std::string& armorName);
 
-			void NotifyObserver(nsObserver::EnObserverEvent observerEvent) {
+			void NotifyObserver(nsObserver::EnObserverEvent observerEvent,const std::string& message = "") {
 
 				//オブザーバーに通知。
-				m_observable.NotifyObserver(observerEvent);
+				m_observable.NotifyObserver(observerEvent,message);
 			}
 
 		public:

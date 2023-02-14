@@ -8,7 +8,7 @@ namespace nsAWA {
 
 		namespace nsObserver {
 
-			void CPlayerInputObserver::Update(CObservablePlayer* observablePlayer) {
+			void CPlayerInputObserver::Update(CObservablePlayer* observablePlayer, const std::string& message) {
 
 				//現在のイベントを取得。
 				EnObserverEvent carentEvent = observablePlayer->GetCarentEvent();

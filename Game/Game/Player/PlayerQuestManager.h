@@ -40,13 +40,9 @@ namespace nsAWA
 			/**
 			 * @brief 討伐数を進める
 			*/
-			void Progress()
+			void Progress(const std::string& slayMonsterName)
 			{
-				if (m_isQuestReceived == false)
-				{
-					return;
-				}
-
+				//TODO:名前からクエスト検索
 				m_slayProgressNum++;
 			}
 

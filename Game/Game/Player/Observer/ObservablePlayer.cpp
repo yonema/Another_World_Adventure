@@ -32,7 +32,7 @@ namespace nsAWA {
 				}
 			}
 
-			void CObservablePlayer::NotifyObserver(EnObserverEvent observerEvent) {
+			void CObservablePlayer::NotifyObserver(EnObserverEvent observerEvent,const std::string& message) {
 
 				//イベントを取得。
 				m_carentEvent = observerEvent;
@@ -47,7 +47,7 @@ namespace nsAWA {
 						if (observerEventData == observerEvent) {
 
 							//更新。
-							observer->Update(this);
+							observer->Update(this,message);
 
 							//このオブザーバーは更新したので終了。
 							break;
@@ -88,10 +88,10 @@ namespace nsAWA {
 				m_player->InputDisable();
 			}
 
-			void CObservablePlayer::ProgressSlayQuest()
+			void CObservablePlayer::ProgressSlayQuest(const std::string& slayMonsterName)
 			{
 				//討伐クエストを進める
-				m_player->ProgressSlayQuest();
+				m_player->ProgressSlayQuest(slayMonsterName);
 			}
 		}
 	}
