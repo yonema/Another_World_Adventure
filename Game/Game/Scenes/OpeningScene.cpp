@@ -5,6 +5,7 @@
 #include "../Humans/HumanModelRenderer.h"
 #include "../Humans/HumanTable.h"
 #include "../Event/EventController.h"
+#include "../Event/EventNameTable.h"
 #include "../GamePreLoading.h"
 #include "../GameNowLoading.h"
 
@@ -41,20 +42,28 @@ namespace nsAWA
 		void COpeningScene::Update(float deltaTime)
 		{
 			auto* eventFlow = CGamePreLoading::GetInstance()->
-				GetEventController()->GetEventFlow("—_‚ÆˆÙ¢ŠE“]ˆÚ");
+				GetEventController()->GetEventFlow(nsEvent::GetEventNameFromTable(
+						nsEvent::EnEventNameType::enGoddesAndAWTransfer));
 
-			if (eventFlow == nullptr || eventFlow->IsClear())
+			if (m_gameNowLoading == nullptr && (eventFlow == nullptr || eventFlow->IsClear()))
 			{
-				auto* loading = NewGO<CGameNowLoading>();
+				m_gameNowLoading = NewGO<CGameNowLoading>();
 
-				auto* newScene = CreateScene<CYonejiTestScene>();
-				newScene->Tutorial();
+				InvokeFunc(
+					[]()
+					{
+						auto* newScene = CreateScene<CYonejiTestScene>();
+						newScene->Tutorial();
+					},
+					3.0f
+				);
 
-				loading->SetExitFunc([]()->bool
+
+				m_gameNowLoading->SetExitFunc([]()->bool
 					{
 						auto* scene = ISceneBase::GetCurrentScene();
 						auto* gameScene = dynamic_cast<CYonejiTestScene*>(scene);
-						if (gameScene->IsLoaded())
+						if (gameScene && gameScene->IsLoaded())
 						{
 							return true;
 						}
@@ -70,7 +79,7 @@ namespace nsAWA
 		{
 			DeleteGO(m_skyCubeRenderer);
 			DeleteGO(m_humanMR);
-
+			m_gameNowLoading = nullptr;
 
 			return;
 		}

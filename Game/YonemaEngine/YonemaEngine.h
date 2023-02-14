@@ -11,6 +11,7 @@ namespace nsYMEngine
 		{
 			class CUpdateAnimationManager;
 		}
+		class CFade;
 	}
 	namespace nsInput
 	{
@@ -113,6 +114,11 @@ namespace nsYMEngine
 			return &m_invokeFunc;
 		}
 
+		constexpr auto* GetFade() noexcept
+		{
+			return m_fade;
+		}
+
 	private:
 
 		void Terminate();
@@ -131,6 +137,7 @@ namespace nsYMEngine
 		nsUtils::CRandom* m_random = nullptr;
 		nsUtils::CInvokeFunc m_invokeFunc = {};
 		nsThread::CLoadModelThread* m_loadModelThread = nullptr;
+		nsGraphics::CFade* m_fade = nullptr;
 		bool m_isExitGame = false;
 
 		nsDebugSystem::CDisplayFPS* m_displayFPS = nullptr;

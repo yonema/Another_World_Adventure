@@ -2,6 +2,7 @@
 #include "SceneBase.h"
 namespace nsAWA
 {
+	class CGameNowLoading;
 	namespace nsHumans
 	{
 		class CHumanModelRenderer;
@@ -39,6 +40,7 @@ namespace nsAWA
 			static bool m_initialOpening;
 			CSkyCubeRenderer* m_skyCubeRenderer = nullptr;
 			nsHumans::CHumanModelRenderer* m_humanMR = nullptr;
+			CGameNowLoading* m_gameNowLoading = nullptr;
 		};
 
 	}

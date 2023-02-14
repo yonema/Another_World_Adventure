@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="YonemaEngine\Graphics\Fade.cpp" />
     <ClCompile Include="Game\Event\EventSetFuncPool.cpp" />
     <ClCompile Include="Game\Event\EventController.cpp" />
     <ClCompile Include="Game\GameNowLoading.cpp" />
@@ -435,6 +436,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Attribute.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Fade.h" />
     <ClInclude Include="Game\Event\EventNameTable.h" />
     <ClInclude Include="Game\Event\EventSetFuncPool.h" />
     <ClInclude Include="Game\Event\EventController.h" />
