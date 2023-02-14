@@ -31,6 +31,15 @@ namespace nsYMEngine
 				m_kEnableUpdateFlags;
 
 		protected:
+			enum class EnMenuUpdateFlagTable
+			{
+				enGame,
+				enMenu,
+				enGameAndMenu,
+				enNumFlags
+			};
+
+		protected:
 			/**
 			 * @brief スタート処理。この処理は自身を生成した次のフレームの開始時に一度だけ呼ばれます。
 			 * @return Update()処理を行うか？
@@ -156,6 +165,18 @@ namespace nsYMEngine
 			{
 				if (m_flagTable == m_kEnableUpdateFlags)
 				{
+					// メニューの処理のときかつ、ゲームのみで動作するゲームオブジェクトのとき
+					if (true == m_flagNowMenuUpdate && EnMenuUpdateFlagTable::enGame == m_flagUpdateTable) {
+						// 処理をしない
+						return;
+					}
+
+					// ゲームの処理のときかつ、メニューのみで動作するゲームオブジェクトのとき
+					if (false == m_flagNowMenuUpdate && EnMenuUpdateFlagTable::enMenu == m_flagUpdateTable) {
+						// 処理をしない
+						return;
+					}
+
 					Update(deltaTime);
 				}
 			};
@@ -180,10 +201,26 @@ namespace nsYMEngine
 				return m_flagTable[static_cast<int>(flag)];
 			}
 
+		protected:
+			inline void SetFlagUpdateTable(EnMenuUpdateFlagTable flag) noexcept
+			{
+				m_flagUpdateTable = flag;
+			}
+
+		public:
+			inline void SetFlagNowMenuUpdate(const bool flag) noexcept
+			{
+				m_flagNowMenuUpdate = flag;
+			}
+
 		private:
 			std::string m_name = "";
 			std::bitset<static_cast<int>(EnGameObjectFlagTable::enNumFlags)> m_flagTable = 
 				m_kEnableStartFlags;
+
+			EnMenuUpdateFlagTable m_flagUpdateTable = EnMenuUpdateFlagTable::enGame;
+
+			static bool m_flagNowMenuUpdate;
 		};
 
 	}

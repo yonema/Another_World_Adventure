@@ -80,6 +80,14 @@ namespace nsAWA
                 return m_fontRenderer->GetScale();
             }
 
+        public:
+            void SetMenuUpdate()
+            {
+                SetFlagUpdateTable(EnMenuUpdateFlagTable::enMenu);
+
+                m_fontRenderer->SetMenuUpdate();
+            }
+
 
 
         private: // data member

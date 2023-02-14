@@ -82,6 +82,16 @@ namespace nsAWA
             //}
 
 
+        public:
+            void SetMenuUpdate()
+            {
+                SetFlagUpdateTable(EnMenuUpdateFlagTable::enMenu);
+
+                for (auto& forNum : m_fontRenderers) {
+                    forNum->SetMenuUpdate();
+                }
+            }
+
 
         private: // data member
             std::vector<CFontRenderer*> m_fontRenderers;

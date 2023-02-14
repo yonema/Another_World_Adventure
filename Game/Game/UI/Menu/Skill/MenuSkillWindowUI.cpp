@@ -20,6 +20,8 @@ namespace nsAWA
 
         bool CMenuSkillWindowUI::Start()
         {
+            SetFlagUpdateTable(EnMenuUpdateFlagTable::enMenu);
+
             return true;
         }
 
@@ -80,6 +82,7 @@ namespace nsAWA
                 imgData.Scale,
                 imgData.Pivot
             );
+            m_spriteWindow[windowNum]->SetMenuUpdate();
         }
 
         void CMenuSkillWindowUI::OnDestroy()

@@ -17,6 +17,8 @@ namespace nsAWA
 
         bool CMenuBaseUI::Start()
         {
+            SetFlagUpdateTable(EnMenuUpdateFlagTable::enMenu);
+
             return true;
         }
 
@@ -41,6 +43,7 @@ namespace nsAWA
                             imgData.Scale,
                             imgData.Pivot
                         );
+                        m_spriteMenuBase->SetMenuUpdate();
 
                         // フックしたので、trueを返す
                         return true;
@@ -49,7 +52,7 @@ namespace nsAWA
                     return false;
                 });
 
-            m_menuSkillWindowUI = NewGO<CMenuSkillWindowUI>();
+            m_menuSkillWindowUI = NewGO<CMenuSkillWindowUI>("Test");
             m_menuSkillWindowUI->LoadLevel();
 
             m_operationMenuSkillUI = NewGO<COperationMenuSkillUI>();

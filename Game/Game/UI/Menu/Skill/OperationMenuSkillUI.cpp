@@ -13,6 +13,8 @@ namespace nsAWA
     {
         bool COperationMenuSkillUI::Start()
         {
+            SetFlagUpdateTable(EnMenuUpdateFlagTable::enMenu);
+
             m_testFontActiveOrPassive = NewGO<CFontUI>();
             m_testFontActiveOrPassive->LoadFont(L"アクティブ");
             m_testFontActiveOrPassive->SetPosition({ -200.0f,-300.0f });
@@ -125,6 +127,7 @@ namespace nsAWA
             for (auto& forName : m_nowSetSkillName) {
                 m_testFontNowSetSkillName->NewLoadFont(nsUtils::GetWideStringFromString(forName).c_str());
                 m_testFontNowSetSkillName->SetPosition(num, { -200.0f,0.0f + addPosY });
+                m_testFontNowSetSkillName->SetMenuUpdate();
 
                 addPosY += 40.0f;
                 ++num;
@@ -137,6 +140,7 @@ namespace nsAWA
                     nsUtils::GetWideStringFromString(forSkillData.name).c_str()
                 );
                 m_fontSelectionSetSkillName->SetPosition(num, { 200.0f,-100.0f + addPosY });
+                m_fontSelectionSetSkillName->SetMenuUpdate();
 
                 addPosY += 40.0f;
                 ++num;

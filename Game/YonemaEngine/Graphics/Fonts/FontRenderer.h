@@ -138,6 +138,12 @@ namespace nsYMEngine
 
 				void Terminate();
 
+			public:
+				void SetMenuUpdate()
+				{
+					SetFlagUpdateTable(EnMenuUpdateFlagTable::enMenu);
+				}
+
 
 			private:
 				SFontParameter m_fontParameter = {};

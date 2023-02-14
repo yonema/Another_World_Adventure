@@ -108,6 +108,14 @@ namespace nsYMEngine
 			private:
 				void Terminate();
 
+
+			public:
+				void SetMenuUpdate()
+				{
+					SetFlagUpdateTable(EnMenuUpdateFlagTable::enMenu);
+				}
+
+
 			private:
 				nsSprites::CSprite* m_sprite = nullptr;
 

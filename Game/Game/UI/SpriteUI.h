@@ -92,6 +92,14 @@ namespace nsAWA
             }
 
 
+        public:
+            void SetMenuUpdate()
+            {
+                SetFlagUpdateTable(EnMenuUpdateFlagTable::enMenu);
+
+                m_spriteRenderer->SetMenuUpdate();
+            }
+
 
         private: // data member
             CSpriteRenderer* m_spriteRenderer = nullptr; // UI‚Ì‰æ‘œƒf[ƒ^

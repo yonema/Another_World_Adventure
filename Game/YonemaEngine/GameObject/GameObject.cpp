@@ -8,6 +8,8 @@ namespace nsYMEngine
 		const std::bitset<static_cast<int>(IGameObject::EnGameObjectFlagTable::enNumFlags)> 
 			IGameObject::m_kEnableUpdateFlags(std::string("101"));
 
+		bool IGameObject::m_flagNowMenuUpdate = false;
+
 		bool IGameObject::IsMatchName(const char* objectName) const noexcept
 		{
 			if (strcmp(m_name.c_str(), objectName) == 0) 

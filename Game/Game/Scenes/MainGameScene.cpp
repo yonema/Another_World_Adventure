@@ -11,6 +11,8 @@ namespace nsAWA
 			//ゲームをロード。
 			NewGO<CLoadGame>();
 
+			SetFlagUpdateTable(EnMenuUpdateFlagTable::enGameAndMenu);
+
 			return true;
 		}
 
@@ -43,12 +45,16 @@ namespace nsAWA
 			m_menuBaseUI = NewGO<nsUI::CMenuBaseUI>();
 			m_menuBaseUI->LoadLevel();
 
+			SetFlagNowMenuUpdate(true);
+
 			m_flagCreateMenuBaseUI = true;
 		}
 
 		void CMainGameScene::TestDeleteMenu()
 		{
 			DeleteGO(m_menuBaseUI);
+
+			SetFlagNowMenuUpdate(false);
 
 			m_flagCreateMenuBaseUI = false;
 		}
