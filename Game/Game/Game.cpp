@@ -65,7 +65,8 @@ namespace nsAWA
 		//コマンドライン引数が一つしかなければエラー。
 		if (firstSplit.second.length() <= 0)
 		{
-#ifdef _DEBUG
+#define kasumi
+#ifdef kasumi
 	
 			hashCode = "ERROR_ARGUMENT_NOT_FOUND";
 

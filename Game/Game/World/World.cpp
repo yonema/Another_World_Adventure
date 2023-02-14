@@ -78,6 +78,9 @@ namespace nsAWA
 						if (nsUtils::ForwardMatchName(sarchName, nameByMode))
 						{
 							m_playerSpawnPosition = chipData.position;
+							CQuaternion rot;
+							rot.SetRotationXDeg(-90.0f);
+							m_playerSpawnRotation = chipData.rotation * rot;
 						}
 
 						return true;
