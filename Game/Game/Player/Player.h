@@ -10,7 +10,7 @@
 
 namespace nsAWA {
 
-	//å‰æ–¹å®£è¨€
+	//‘O•ûéŒ¾
 	namespace nsWeapon {
 
 		class CWeapon;
@@ -29,11 +29,11 @@ namespace nsAWA {
 
 	namespace nsPlayer {
 
-		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¯ãƒ©ã‚¹
+		//ƒvƒŒƒCƒ„[ƒNƒ‰ƒX
 		class CPlayer : public IGameActor
 		{
 		public:
-			static const char* const m_kObjName_Player;		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¯ãƒ©ã‚¹ã®åå‰
+			static const char* const m_kObjName_Player;		//ƒvƒŒƒCƒ„[ƒNƒ‰ƒX‚Ì–¼‘O
 		public:
 			bool StartSub()override final;
 
@@ -45,47 +45,47 @@ namespace nsAWA {
 
 			bool IsDeath()const override final {
 
-				//HPãŒ0ä»¥ä¸‹ã‹ã©ã†ã‹ã‚’ãƒªã‚¿ãƒ¼ãƒ³ã€‚
+				//HP‚ª0ˆÈ‰º‚©‚Ç‚¤‚©‚ğƒŠƒ^[ƒ“B
 				return m_status.GetHP() <= FLT_EPSILON;
 			}
 
 			void HealHP(float healValue)override final {
 
-				//HPã‚’å›å¾©ã€‚
+				//HP‚ğ‰ñ•œB
 				m_status.HealHP(healValue);
 			}
 			void HealMP(float healValue)override final {
 
-				//MPã‚’å›å¾©ã€‚
+				//MP‚ğ‰ñ•œB
 				m_status.HealMP(healValue);
 			}
 			void HealSP(float healValue)override final {
 
-				//SPã‚’å›å¾©ã€‚
+				//SP‚ğ‰ñ•œB
 				m_status.HealSP(healValue);
 			}
 			void AddExp(float exp) {
 
-				//çµŒé¨“å€¤ã‚’ç²å¾—ã€‚
+				//ŒoŒ±’l‚ğŠl“¾B
 				m_status.AddExp(exp);
 			}
 
 		public:
 			CPlayerAction& GetPlayerAction() {
 
-				//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹ã‚’å–å¾—ã€‚
+				//ƒvƒŒƒCƒ„[ƒAƒNƒVƒ‡ƒ“ƒNƒ‰ƒX‚ğæ“¾B
 				return m_action;
 			}
 
 			void InputEnable() {
 
-				//å…¥åŠ›ã§ãã‚‹çŠ¶æ…‹ã«ã™ã‚‹ã€‚
+				//“ü—Í‚Å‚«‚éó‘Ô‚É‚·‚éB
 				m_input.InputEnable();
 			}
 
 			void InputDisable() {
 
-				//å…¥åŠ›ã§ããªã„çŠ¶æ…‹ã«ã™ã‚‹ã€‚
+				//“ü—Í‚Å‚«‚È‚¢ó‘Ô‚É‚·‚éB
 				m_input.InputDisable();
 			}
 
@@ -97,7 +97,7 @@ namespace nsAWA {
 
 			CGameActorCollider* GetGameActorCollider() {
 
-				//ã‚¢ã‚¯ã‚¿ãƒ¼ã®å½“ãŸã‚Šåˆ¤å®šã‚’å–å¾—ã€‚
+				//ƒAƒNƒ^[‚Ì“–‚½‚è”»’è‚ğæ“¾B
 				return &m_collider;
 			}
 
@@ -109,7 +109,7 @@ namespace nsAWA {
 
 			void SetArmor(nsArmor::CArmor* armor);
 
-		public:	//ä¾é ¼é–¢é€£
+		public:	//ˆË—ŠŠÖ˜A
 			void SetSlayQuest(const std::string& questName, const std::string& targetEnemyName, int slayToCompleteNum)
 			{
 				m_questManager.SetSlayQuest(questName, targetEnemyName, slayToCompleteNum);
@@ -151,14 +151,14 @@ namespace nsAWA {
 			void MoveBackItemUI();
 
 		private:
-			CPlayerInput m_input;									//å…¥åŠ›
-			CPlayerAction m_action;									//ã‚¢ã‚¯ã‚·ãƒ§ãƒ³
-			nsPlayerAnimation::CPlayerAnimation m_animation;		//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
-			CPlayerStatus m_status;									//ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
-			nsArmor::CArmor* m_armor = nullptr;						//é˜²å…·
-			CPlayerCollider m_collider;								//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
-			CPlayerWeaponManager m_weaponManager;					//æ­¦å™¨ç®¡ç†ã‚¯ãƒ©ã‚¹
-			CPlayerQuestManager m_questManager;						//ã‚¯ã‚¨ã‚¹ãƒˆç®¡ç†ã‚¯ãƒ©ã‚¹
+			CPlayerInput m_input;									//“ü—Í
+			CPlayerAction m_action;									//ƒAƒNƒVƒ‡ƒ“
+			nsPlayerAnimation::CPlayerAnimation m_animation;		//ƒAƒjƒ[ƒVƒ‡ƒ“
+			CPlayerStatus m_status;									//ƒXƒe[ƒ^ƒX
+			nsArmor::CArmor* m_armor = nullptr;						//–h‹ï
+			CPlayerCollider m_collider;								//ƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
+			CPlayerWeaponManager m_weaponManager;					//•ŠíŠÇ—ƒNƒ‰ƒX
+			CPlayerQuestManager m_questManager;						//ƒNƒGƒXƒgŠÇ—ƒNƒ‰ƒX
 #ifdef _DEBUG
 			CFontRenderer* m_fontRenderer = nullptr;
 			wchar_t m_dispText[32] = {};

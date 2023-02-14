@@ -207,12 +207,18 @@ namespace nsAWA
 
 		void CTalkToPlayer::UpdateTalking()
 		{
+			if (m_conversationWindowUI == nullptr)
+			{
+				return;
+			}
+
 
 			if (m_conversationWindowUI->IsEnd())
 			{
 				m_talkingHuman = nullptr;
 				m_isTalking = false;
 				DeleteGO(m_conversationWindowUI);
+				m_conversationWindowUI = nullptr;
 			}
 
 

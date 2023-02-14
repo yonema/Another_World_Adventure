@@ -270,11 +270,14 @@
     <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
+    <ClCompile Include="Game\Event\EventManager.cpp" />
+    <ClCompile Include="Game\Event\EventPiece.cpp" />
+    <ClCompile Include="Game\Event\EventFlow.cpp" />
+    <ClCompile Include="YonemaEngine\Utils\InvokeFunc.cpp" />
     <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
     <ClCompile Include="Game\Quest\QuestData.cpp" />
-    <ClCompile Include="Game\UI\Menu\MenuManager.cpp" />
-  </ItemGroup>
+    <ClCompile Include="Game\UI\Menu\MenuManager.cpp" />  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
     <ClInclude Include="Game\Feature\FeatureBuilder.h" />
@@ -568,11 +571,20 @@
     <ClInclude Include="YonemaEngine\Math\STRS.h" />
     <ClInclude Include="Game\World\TRSListMap.h" />
     <ClInclude Include="YonemaEngine\EngineConfig.h" />
+    <ClInclude Include="Game\Event\EventManager.h" />
+    <ClInclude Include="Game\Event\EventPiece.h" />
+    <ClInclude Include="Game\Event\EventFlow.h" />
+    <ClInclude Include="Game\Event\EventPieceType.h" />
+    <ClInclude Include="YonemaEngine\Utils\InvokeFunc.h" />
+    <ClInclude Include="Game\GamePreLoading.h" />
+    <ClInclude Include="Game\GameNowLoading.h" />
+    <ClInclude Include="Game\Event\EventController.h" />
+    <ClInclude Include="Game\Event\EventSetFuncPool.h" />
+    <ClInclude Include="Game\Event\EventNameTable.h" />
     <ClInclude Include="Game\Player\PlayerQuestManager.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
     <ClInclude Include="Game\Quest\QuestData.h" />
-    <ClInclude Include="Game\UI\Menu\MenuManager.h" />
-  </ItemGroup>
+    <ClInclude Include="Game\UI\Menu\MenuManager.h" />  </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>

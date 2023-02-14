@@ -4,17 +4,6 @@
 namespace nsAWA
 {
 	class CLoadGame;
-	namespace nsHumans
-	{
-		class CHumanManager;
-	}
-	namespace nsMonster
-	{
-		namespace nsMonsterPop
-		{
-			class CMonsterPopManager;
-		}
-	}
 }
 
 namespace nsAWA
@@ -23,6 +12,14 @@ namespace nsAWA
 	{
 		class CWorld : public IGameObject
 		{
+		public:
+			enum EnMode
+			{
+				enTutorial,
+				enNormal,
+				enNum
+			};
+
 		private:
 			static const char* const m_kLevelFilePath;
 			static const float m_kSkyCubeScale;
@@ -43,6 +40,21 @@ namespace nsAWA
 				return m_isLevelLoaded;
 			}
 
+			constexpr const auto& GetPlayerSpawnPosition() const noexcept
+			{
+				return m_playerSpawnPosition;
+			}
+
+			constexpr void SetMode(EnMode mode) noexcept
+			{
+				m_mode = mode;
+			}
+
+			constexpr auto GetMode() const noexcept
+			{
+				return m_mode;
+			}
+
 		private:
 			void TryLoadLevel();
 
@@ -54,12 +66,11 @@ namespace nsAWA
 
 		private:
 			CSkyCubeRenderer* m_skyCubeRenderer = nullptr;
-			nsHumans::CHumanManager* m_humanManager = nullptr;
-			nsMonster::nsMonsterPop::CMonsterPopManager* m_monsterPopManager = nullptr;
-
 			bool m_isLevelLoaded = false;
 			CWorldParts m_worldParts = {};
 			TRSListMap m_levelTRS = {};
+			CVector3 m_playerSpawnPosition = CVector3::Zero();
+			EnMode m_mode = EnMode::enNormal;
 		};
 
 	}
