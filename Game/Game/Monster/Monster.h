@@ -4,6 +4,7 @@
 #include "MonsterAnimation.h"
 #include "MonsterCollider.h"
 #include "AI/MonsterAIController.h"
+#include "../Attribute.h"
 
 namespace nsAWA {
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "Attribute.h"
 
 namespace nsAWA {
 
@@ -40,9 +41,23 @@ namespace nsAWA {
 			//ひるみ値の区切りを取得。
 			return m_winceDelimiter;
 		}
+
+		const EnAttribute& GetAttribute()const {
+
+			//属性を取得。
+			return m_attribute;
+		}
+
+		void SetAttribute(const EnAttribute& attribute) {
+
+			//属性を設定。
+			m_attribute = attribute;
+		}
+
 	protected:
 		float m_winceValue = 0.0f;		//ひるみ値
 		float m_winceDelimiter = 0.0f;	//ひるみ値の区切り
+		EnAttribute m_attribute = EnAttribute::enNone;//属性
 	};
 }
 

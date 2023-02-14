@@ -6,6 +6,7 @@
 #include "AbnormalStatus/Poison.h"
 #include "AbnormalStatus/Paralysis.h"
 #include "BuffDebuff.h"
+#include "../Attribute.h"
 
 namespace nsAWA {
 
@@ -96,15 +97,41 @@ namespace nsAWA {
 					if (featureStr[1] == "Normal") {
 
 						//[2]Physical or Magic
-						//[3]power
-						//[4]canGuard
+						//[3]Attribute
+						//[4]power
+						//[5]canGuard
+
+						//属性を設定。
+						EnAttribute attribute = EnAttribute::enNone;
+						if (featureStr[3] == "Fire") {
+
+							attribute = EnAttribute::enFire;
+						}
+						else if (featureStr[3] == "Water") {
+
+							attribute = EnAttribute::enWater;
+						}
+						else if (featureStr[3] == "Lightning") {
+
+							attribute = EnAttribute::enLightning;
+						}
+						else if (featureStr[3] == "None") {
+
+							attribute = EnAttribute::enNone;
+						}
+						else {
+
+							//エラー出力。
+							nsGameWindow::MessageBoxWarning(L"CFeatureBuilder : 属性が指定されていません。");
+						}
 
 						dynamic_cast<nsFeature::CApplyDamageFeature*>(feature)->Init(
 							creator,
 							target,
-							std::stof(featureStr[3]),
+							attribute,
+							std::stof(featureStr[4]),
 							featureStr[2],
-							featureStr[4] == "TRUE" ? true : false
+							featureStr[5] == "TRUE" ? true : false
 						);
 					}
 					//固定ダメージ
