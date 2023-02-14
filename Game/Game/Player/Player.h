@@ -129,9 +129,9 @@ namespace nsAWA {
 				m_questManager.Progress(slayMonsterName);
 			}
 
-			void ResetQuest()
+			void EraseQuest(const std::string& eraseQuestName)
 			{
-				m_questManager.Reset();
+				m_questManager.EraseQuest(eraseQuestName);
 			}
 		private:
 			void CreatePlayerModel();

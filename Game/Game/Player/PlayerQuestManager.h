@@ -36,9 +36,13 @@ namespace nsAWA
 			*/
 			void Progress(const std::string& slayMonsterName);
 
+			/**
+			 * @brief クエストを削除する
+			 * @param eraseQuestName 削除するクエスト名
+			*/
 			void EraseQuest(const std::string& eraseQuestName);
 		private:
-			std::unordered_map < std::string, nsQuest::CQuestData> m_receivingQuests;
+			std::unordered_map < std::string, nsQuest::CQuestData> m_receivingQuests;	//受注中のクエスト
 		};
 	}
 }
