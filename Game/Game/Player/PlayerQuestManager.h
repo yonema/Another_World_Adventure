@@ -1,4 +1,5 @@
 #pragma once
+#include "../Quest/QuestData.h"
 
 namespace nsAWA
 {
@@ -8,59 +9,36 @@ namespace nsAWA
 		{
 		public:
 			/**
-			 * @brief クエストをセットする
-			 * @param slayToCompleteNum クリアするための討伐数
+			 * @brief 新規クエストを作成
+			 * @param questName クエスト名
+			 * @param targetEnemyName 討伐目標のモンスター名
+			 * @param slayToCompleteNum 完了に必要な討伐数
 			*/
-			void SetSlayQuest(int slayToCompleteNum)
-			{
-				m_slayProgressNum = 0;
-				m_slayToCompleteNum = slayToCompleteNum;
-
-				m_isQuestReceived = true;
-			}
+			void SetSlayQuest(const std::string& questName, const std::string& targetEnemyName, int slayToCompleteNum);
 
 			/**
-			 * @brief クエストを受けている?
-			 * @return 
+			 * @brief クエストを受注中?
+			 * @param questName クエスト名
+			 * @return 受注中か
 			*/
-			bool IsQuestReceived()
-			{
-				return m_isQuestReceived;
-			}
+			bool IsQuestReceived(const std::string& questName);
 
 			/**
-			 * @brief クエストの完了条件を満たしている?
-			 * @return 討伐数が完了に必要な数以上か?
+			 * @brief クエストが完了している?
+			 * @param questName クエスト名
+			 * @return 完了しているか
 			*/
-			bool IsQuestCompleted()
-			{
-				return m_slayProgressNum >= m_slayToCompleteNum;
-			}
+			bool IsQuestCompleted(const std::string& questName);
 
 			/**
-			 * @brief 討伐数を進める
+			 * @brief クエストを進める
+			 * @param slayMonsterName 倒したモンスターの名前
 			*/
-			void Progress(const std::string& slayMonsterName)
-			{
-				//TODO:名前からクエスト検索
-				m_slayProgressNum++;
-			}
+			void Progress(const std::string& slayMonsterName);
 
-			/**
-			 * @brief クエストをリセットする
-			*/
-			void Reset()
-			{
-				m_isQuestReceived = false;
-				m_slayProgressNum = 0;
-				m_slayToCompleteNum = 0;
-			}
+			void EraseQuest(const std::string& eraseQuestName);
 		private:
-			bool m_isQuestReceived = false;
-
-			int m_slayProgressNum = 0;
-
-			int m_slayToCompleteNum = 0;
+			std::unordered_map < std::string, nsQuest::CQuestData> m_receivingQuests;
 		};
 	}
 }
