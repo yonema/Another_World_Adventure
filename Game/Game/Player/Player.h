@@ -6,6 +6,7 @@
 #include "PlayerAnimation/PlayerAnimation.h"
 #include "PlayerCollider.h"
 #include "PlayerWeaponManager.h"
+#include "PlayerQuestManager.h"
 
 namespace nsAWA {
 
@@ -107,6 +108,31 @@ namespace nsAWA {
 
 			void SetArmor(nsArmor::CArmor* armor);
 
+		public:	//依頼関連
+			void SetSlayQuest(int slayToCompleteNum)
+			{
+				m_questManager.SetSlayQuest(slayToCompleteNum);
+			}
+
+			bool IsQuestReceived()
+			{
+				return m_questManager.IsQuestReceived();
+			}
+
+			bool IsQuestCompleted()
+			{
+				return m_questManager.IsQuestCompleted();
+			}
+
+			void ProgressSlayQuest(const std::string& slayMonsterName)
+			{
+				m_questManager.Progress(slayMonsterName);
+			}
+
+			void ResetQuest()
+			{
+				m_questManager.Reset();
+			}
 		private:
 			void CreatePlayerModel();
 
@@ -127,7 +153,7 @@ namespace nsAWA {
 			nsArmor::CArmor* m_armor = nullptr;						//防具
 			CPlayerCollider m_collider;								//プレイヤーの当たり判定
 			CPlayerWeaponManager m_weaponManager;					//武器管理クラス
-
+			CPlayerQuestManager m_questManager;						//クエスト管理クラス
 #ifdef _DEBUG
 			CFontRenderer* m_fontRenderer = nullptr;
 			wchar_t m_dispText[32] = {};

@@ -12,6 +12,7 @@
 
 #include "Observer/ObserverList/PlayerLevelObserver.h"
 #include "Observer/ObserverList/PlayerInputObserver.h"
+#include "Observer/ObserverList/PlayerSlayQuestObserver.h"
 
 namespace nsAWA {
 
@@ -259,6 +260,9 @@ namespace nsAWA {
 			inputObserver->AddEvent(nsObserver::EnObserverEvent::enInputEnable);
 			inputObserver->AddEvent(nsObserver::EnObserverEvent::enInputDisable);
 			m_observable.AddObserver(inputObserver);
+
+			//討伐クエスト管理のオブザーバーを追加
+			m_observable.AddObserver(new nsObserver::CPlayerSlayQuestObserver, nsObserver::EnObserverEvent::enWin);
 
 		}
     

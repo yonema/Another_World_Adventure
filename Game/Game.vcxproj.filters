@@ -200,9 +200,7 @@
     <ClCompile Include="Game\UI\Button\ButtonUI.cpp" />
     <ClCompile Include="Game\UI\Institution\Blacksmith\BlacksmithWindowUI.cpp" />
     <ClCompile Include="Game\UI\Institution\Guild\GuildWindowUI.cpp" />
-    <ClCompile Include="Game\UI\Institution\Inn\Meal\InnMealWindowUI.cpp" />
-    <ClCompile Include="Game\UI\Institution\Inn\Rest\InnRestWindowUI.cpp" />
-    <ClCompile Include="Game\UI\Institution\Inn\Storehouse\InnStorehouseWindowUI.cpp" />
+    <ClCompile Include="Game\UI\Institution\Inn\InnWindowUI.cpp" />
     <ClCompile Include="Game\UI\Institution\Shop\ShopWindowUI.cpp" />
     <ClCompile Include="Game\UI\Menu\Equipment\MenuEquipmentWindowUI.cpp" />
     <ClCompile Include="Game\UI\Menu\Item\MenuItemWindowUI.cpp" />
@@ -272,6 +270,8 @@
     <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
+    <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -487,9 +487,7 @@
     <ClInclude Include="Game\UI\Button\ButtonUI.h" />
     <ClInclude Include="Game\UI\Institution\Blacksmith\BlacksmithWindowUI.h" />
     <ClInclude Include="Game\UI\Institution\Guild\GuildWindowUI.h" />
-    <ClInclude Include="Game\UI\Institution\Inn\Meal\InnMealWindowUI.h" />
-    <ClInclude Include="Game\UI\Institution\Inn\Rest\InnRestWindowUI.h" />
-    <ClInclude Include="Game\UI\Institution\Inn\Storehouse\InnStorehouseWindowUI.h" />
+    <ClInclude Include="Game\UI\Institution\Inn\InnWindowUI.h" />
     <ClInclude Include="Game\UI\Institution\Shop\ShopWindowUI.h" />
     <ClInclude Include="Game\UI\Menu\Equipment\MenuEquipmentWindowUI.h" />
     <ClInclude Include="Game\UI\Menu\Item\MenuItemWindowUI.h" />
@@ -568,6 +566,8 @@
     <ClInclude Include="YonemaEngine\Math\STRS.h" />
     <ClInclude Include="Game\World\TRSListMap.h" />
     <ClInclude Include="YonemaEngine\EngineConfig.h" />
+    <ClInclude Include="Game\Player\PlayerQuestManager.h" />
+    <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

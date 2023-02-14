@@ -16,7 +16,7 @@ namespace nsAWA
             SetFlagUpdateTable(EnMenuUpdateFlagTable::enMenu);
 
             m_testFontActiveOrPassive = NewGO<CFontUI>();
-            m_testFontActiveOrPassive->LoadFont(L"ƒAƒNƒeƒBƒu");
+            m_testFontActiveOrPassive->LoadFont(L"ã‚¢ã‚¯ãƒ†ã‚£ãƒ–");
             m_testFontActiveOrPassive->SetPosition({ -200.0f,-300.0f });
 
             m_testFontNowSetSkillName = NewGO<CFontArrayUI>();
@@ -33,7 +33,7 @@ namespace nsAWA
 
         void COperationMenuSkillUI::Update(float deltaTime)
         {
-            // –ˆƒtƒŒ[ƒ€‚Ìˆ—‚ğ‚±‚±‚É
+            // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ã®å‡¦ç†ã‚’ã“ã“ã«
             switch (m_windowStatus) {
             case EnWindowStatus::enActiveOrPassive:
                 OperationActiveOrPassive();
@@ -55,10 +55,10 @@ namespace nsAWA
         void COperationMenuSkillUI::TestFont()
         {
             if (EnActiveOrPassive::enActive == m_activeOrPassive) {
-                m_testFontActiveOrPassive->SetText(L"ƒAƒNƒeƒBƒu");
+                m_testFontActiveOrPassive->SetText(L"ã‚¢ã‚¯ãƒ†ã‚£ãƒ–");
             }
             else if (EnActiveOrPassive::enPassive == m_activeOrPassive) {
-                m_testFontActiveOrPassive->SetText(L"ƒpƒbƒVƒu");
+                m_testFontActiveOrPassive->SetText(L"ãƒ‘ãƒƒã‚·ãƒ–");
             }
 
         }
@@ -74,39 +74,39 @@ namespace nsAWA
 
         void COperationMenuSkillUI::LoadSkillData()
         {
-            // ‚±‚±‚ÅAŒ»İƒZƒbƒg‚µ‚Ä‚éƒXƒLƒ‹‚ğæ“¾
-            // ƒvƒŒƒCƒ„[‚ğŒŸõ
+            // ã“ã“ã§ã€ç¾åœ¨ã‚»ãƒƒãƒˆã—ã¦ã‚‹ã‚¹ã‚­ãƒ«ã‚’å–å¾—
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æ¤œç´¢
             if (false == nsPlayer::CPlayerManager::GetInstance()->FindPlayer()) {
-                nsGameWindow::MessageBoxWarning(L"COperationMenuSkillUI : player ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+                nsGameWindow::MessageBoxWarning(L"COperationMenuSkillUI : player ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
             }
-            // ƒAƒNƒeƒBƒu
+            // ã‚¢ã‚¯ãƒ†ã‚£ãƒ–
             if (EnActiveOrPassive::enActive == m_activeOrPassive) {
-                // —v‘f”‚ğŒˆ’è
+                // è¦ç´ æ•°ã‚’æ±ºå®š
                 m_nowSetSkillName.resize(m_kActiveSkillMaxNum);
-                // –¼‘O‚ğ‘ã“ü
+                // åå‰ã‚’ä»£å…¥
                 for (int skillNum = 0; m_kActiveSkillMaxNum > skillNum; ++skillNum) {
                     m_nowSetSkillName[skillNum] =
                         nsPlayer::CPlayerManager::GetInstance()->GetActiveSkillName(skillNum);
                 }
             }
-            // ƒpƒbƒVƒu
+            // ãƒ‘ãƒƒã‚·ãƒ–
             else if (EnActiveOrPassive::enPassive == m_activeOrPassive) {
-                // —v‘f”‚ğŒˆ’è
+                // è¦ç´ æ•°ã‚’æ±ºå®š
                 m_nowSetSkillName.resize(m_kPassiveSkillMaxNum);
-                // –¼‘O‚ğ‘ã“ü
+                // åå‰ã‚’ä»£å…¥
                 for (int skillNum = 0; m_kPassiveSkillMaxNum > skillNum; ++skillNum) {
                     m_nowSetSkillName[skillNum] =
                         nsPlayer::CPlayerManager::GetInstance()->GetActiveSkillName(skillNum);
                 }
             }
             
-            // ‚±‚±‚ÅAŠ‚µ‚Ä‚éƒXƒLƒ‹‘S•”‚ğæ“¾
+            // ã“ã“ã§ã€æ‰€æŒã—ã¦ã‚‹ã‚¹ã‚­ãƒ«å…¨éƒ¨ã‚’å–å¾—
             m_fontSelectionSetSkillName = NewGO<CFontArrayUI>();
-            // ƒAƒNƒeƒBƒu
+            // ã‚¢ã‚¯ãƒ†ã‚£ãƒ–
             if (EnActiveOrPassive::enActive == m_activeOrPassive) {
                 m_selectionSetSkillData = nsPlayer::CPlayerManager::GetInstance()->GetCanUseActiveSkillList();
             }
-            // ƒpƒbƒVƒu
+            // ãƒ‘ãƒƒã‚·ãƒ–
             else if (EnActiveOrPassive::enPassive == m_activeOrPassive) {
                 nsCSV::CCsvManager csvManager;
                 csvManager.LoadCSV(L"Assets/CSV/Player/PassiveSkillList.csv");
@@ -127,6 +127,7 @@ namespace nsAWA
             for (auto& forName : m_nowSetSkillName) {
                 m_testFontNowSetSkillName->NewLoadFont(nsUtils::GetWideStringFromString(forName).c_str());
                 m_testFontNowSetSkillName->SetPosition(num, { -200.0f,0.0f + addPosY });
+
                 m_testFontNowSetSkillName->SetMenuUpdate();
 
                 addPosY += 40.0f;
@@ -140,6 +141,7 @@ namespace nsAWA
                     nsUtils::GetWideStringFromString(forSkillData.name).c_str()
                 );
                 m_fontSelectionSetSkillName->SetPosition(num, { 200.0f,-100.0f + addPosY });
+
                 m_fontSelectionSetSkillName->SetMenuUpdate();
 
                 addPosY += 40.0f;
@@ -155,23 +157,23 @@ namespace nsAWA
 
         void COperationMenuSkillUI::OperationActiveOrPassive()
         {
-            // Œˆ’è
+            // æ±ºå®š
             if (true == Input()->IsTrigger(EnActionMapping::enDecision)) {
-                // ‚±‚±‚ÅAƒXƒLƒ‹‚Ìî•ñ‚Ì“Ç‚İ‚İ‚ğ‚¨‚±‚È‚¤
+                // ã“ã“ã§ã€ã‚¹ã‚­ãƒ«ã®æƒ…å ±ã®èª­ã¿è¾¼ã¿ã‚’ãŠã“ãªã†
                 LoadSkillData();
 
                 m_windowStatus = EnWindowStatus::enNowSetSkill;
             }
-            // ƒLƒƒƒ“ƒZƒ‹
+            // ã‚­ãƒ£ãƒ³ã‚»ãƒ«
             if (true == Input()->IsTrigger(EnActionMapping::enCancel)) {
                 m_flagEndProcessing = true;
             }
             
-            // ¶
+            // å·¦
             if (0.0f > Input()->GetVirtualAxis(EnAxisMapping::enRight)) {
                 m_activeOrPassive = EnActiveOrPassive::enActive;
             }
-            // ‰E
+            // å³
             if (0.0f < Input()->GetVirtualAxis(EnAxisMapping::enRight)) {
                 m_activeOrPassive = EnActiveOrPassive::enPassive;
             }
@@ -179,16 +181,16 @@ namespace nsAWA
 
         void COperationMenuSkillUI::OperationNowSetSkill()
         {
-            // Œˆ’è
+            // æ±ºå®š
             if (true == Input()->IsTrigger(EnActionMapping::enDecision)) {
                 m_windowStatus = EnWindowStatus::enSelectionSetSkill;
             }
-            // ƒLƒƒƒ“ƒZƒ‹
+            // ã‚­ãƒ£ãƒ³ã‚»ãƒ«
             if (true == Input()->IsTrigger(EnActionMapping::enCancel)) {
                 m_windowStatus = EnWindowStatus::enActiveOrPassive;
             }
 
-            // ƒXƒeƒBƒbƒN‚ÌƒgƒŠƒK[ˆ—
+            // ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ãƒˆãƒªã‚¬ãƒ¼å‡¦ç†
             if (0.0f == Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 m_flagPreviousFrameInput = false;
             }
@@ -196,7 +198,7 @@ namespace nsAWA
                 return;
             }
 
-            // ã
+            // ä¸Š
             if (0.0f < Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 if (EnNowSetSkillFrame::en1_A >= m_nowSetSkillFrame) {
                     m_nowSetSkillFrame = EnNowSetSkillFrame::en1_A;
@@ -208,7 +210,7 @@ namespace nsAWA
 
                 m_flagPreviousFrameInput = true;
             }
-            // ‰º
+            // ä¸‹
             if (0.0f > Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 if (EnNowSetSkillFrame::en6_RT <= m_nowSetSkillFrame) {
                     m_nowSetSkillFrame = EnNowSetSkillFrame::en6_RT;
@@ -224,18 +226,18 @@ namespace nsAWA
 
         void COperationMenuSkillUI::OperationSelectionSetSkill()
         {
-            // Œˆ’è
+            // æ±ºå®š
             if (true == Input()->IsTrigger(EnActionMapping::enDecision)) {
-                // ƒXƒLƒ‹‚ğ•t‚¯‘Ö‚¦‚é
+                // ã‚¹ã‚­ãƒ«ã‚’ä»˜ã‘æ›¿ãˆã‚‹
                 ChangeSetSkill();
                 m_windowStatus = EnWindowStatus::enNowSetSkill;
             }
-            // ƒLƒƒƒ“ƒZƒ‹
+            // ã‚­ãƒ£ãƒ³ã‚»ãƒ«
             if (true == Input()->IsTrigger(EnActionMapping::enCancel)) {
                 m_windowStatus = EnWindowStatus::enNowSetSkill;
             }
 
-            // ƒXƒeƒBƒbƒN‚ÌƒgƒŠƒK[ˆ—
+            // ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ãƒˆãƒªã‚¬ãƒ¼å‡¦ç†
             if (0.0f == Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 m_flagPreviousFrameInput = false;
             }
@@ -243,7 +245,7 @@ namespace nsAWA
                 return;
             }
 
-            // ã
+            // ä¸Š
             if (0.0f < Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 if (0 >= m_cursorPositionSelectionSetSkill) {
                     m_cursorPositionSelectionSetSkill = 0;
@@ -254,7 +256,7 @@ namespace nsAWA
 
                 m_flagPreviousFrameInput = true;
             }
-            // ‰º
+            // ä¸‹
             if (0.0f > Input()->GetVirtualAxis(EnAxisMapping::enForward)) {
                 if (m_selectionSetSkillData.size() <= m_cursorPositionSelectionSetSkill) {
                     m_cursorPositionSelectionSetSkill = static_cast<int>(m_selectionSetSkillData.size() - 1);
@@ -269,21 +271,21 @@ namespace nsAWA
 
         void COperationMenuSkillUI::ChangeSetSkill()
         {
-            // m_nowSetSkillFrame‚Ì‚Æ‚±‚ë‚ÉA
-            // ‘I‘ğ‚µ‚½ƒXƒLƒ‹‚ğ“ü‚ê‘Ö‚¦‚é
+            // m_nowSetSkillFrameã®ã¨ã“ã‚ã«ã€
+            // é¸æŠã—ãŸã‚¹ã‚­ãƒ«ã‚’å…¥ã‚Œæ›¿ãˆã‚‹
 
-            // ‘I‘ğ‚µ‚½ƒXƒLƒ‹—“‚Ì‚Æ‚±‚ë‚ÌƒXƒLƒ‹‚ğ“ü‚ê‘Ö‚¦‚é
+            // é¸æŠã—ãŸã‚¹ã‚­ãƒ«æ¬„ã®ã¨ã“ã‚ã®ã‚¹ã‚­ãƒ«ã‚’å…¥ã‚Œæ›¿ãˆã‚‹
             if (false == nsPlayer::CPlayerManager::GetInstance()->FindPlayer()) {
-                nsGameWindow::MessageBoxWarning(L"COperationMenuSkillUI : player ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+                nsGameWindow::MessageBoxWarning(L"COperationMenuSkillUI : player ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
             }
 
-            // list‚ÌƒCƒeƒŒ[ƒ^[‚ğ‘I‘ğ‚µ‚Ä‚é‚Æ‚±‚ë‚Ü‚ÅˆÚ“®‚·‚é
+            // listã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ãƒ¼ã‚’é¸æŠã—ã¦ã‚‹ã¨ã“ã‚ã¾ã§ç§»å‹•ã™ã‚‹
             std::list<nsSkill::SActiveSkillData>::iterator setSkillData = m_selectionSetSkillData.begin();
             for (int forNum = 0; forNum < m_cursorPositionSelectionSetSkill; ++forNum) {
                 ++setSkillData;
             }
             
-            // ƒXƒLƒ‹‚ğƒZƒbƒg
+            // ã‚¹ã‚­ãƒ«ã‚’ã‚»ãƒƒãƒˆ
             nsPlayer::CPlayerManager::GetInstance()->SetActiveSkill(
                 static_cast<int>(m_nowSetSkillFrame), setSkillData->name
             );

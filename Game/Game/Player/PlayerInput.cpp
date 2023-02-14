@@ -3,23 +3,6 @@
 #include "PlayerAction.h"
 #include "PlayerManager.h"
 
-#ifdef _DEBUG
-#include "../Player/Player.h"
-#include "../Feature/AbnormalStatus/Poison.h"
-#include "../Feature/ApplyDamageFeature.h"
-#include "../Feature/HealFeature.h"
-#include "../Skill/PassiveSkill.h"
-#include "../Skill/PassiveSkillManager.h"
-#include "../Skill/ActiveSkill.h"
-#include "../Item/SelfItem.h"
-#include "../Item/ThrowItem.h"
-#include "../Feature/AbnormalStatus/Poison.h"
-#include "../Item/ItemManager.h"
-#include "../CSV/CSVManager.h"
-#include "../UserData.h"
-#include "../Magic/MagicBallOne.h"
-#include "../GameLog/GameLog.h"
-#endif
 
 namespace nsAWA {
 
@@ -201,32 +184,27 @@ namespace nsAWA {
 
 		void CPlayerInput::InputSkillAction() {
 
-#ifdef _DEBUG
-			//プレイヤーを探す。
-			auto player = FindGO<CPlayer>(CPlayer::m_kObjName_Player);
-#endif
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
-#ifdef _DEBUG
 
-				CPlayerManager::GetInstance()->SetPassiveSkill(0,"ATKUp");
+				CPlayerManager::GetInstance()->SetActiveSkill(0,"JumpAttack_Sword");
 
-				////クールタイム中に設定。
-				//CoolTimeOn();
-				//
-				////スキル１使用。
-				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
-#endif 
+				//クールタイム中に設定。
+				CoolTimeOn();
+				
+				//スキル１使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
 
-				CPlayerManager::GetInstance()->SetPassiveSkill(1, "ATKUp");
-				////クールタイム中に設定。
-				//CoolTimeOn();
-				//
-				////スキル２使用。
-				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
+				CPlayerManager::GetInstance()->SetActiveSkill(1, "JumpAttackL_Sword");
+
+				//クールタイム中に設定。
+				CoolTimeOn();
+				
+				//スキル２使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
@@ -234,10 +212,10 @@ namespace nsAWA {
 				CPlayerManager::GetInstance()->SetPassiveSkill(0, "Paralysiser");
 
 				////クールタイム中に設定。
-				//CoolTimeOn();
-				//
-				////スキル３使用。
-				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_3);
+				CoolTimeOn();
+				
+				//スキル３使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_3);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_4)) {

@@ -190,6 +190,8 @@
     <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
+    <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
+    <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeGenericRenderer.cpp" />
     <ClCompile Include="YonemaEngine\Graphics\Environment\SkyCubeRenderer.cpp" />
@@ -274,9 +276,7 @@
     <ClCompile Include="Game\UI\FontUI.cpp" />
     <ClCompile Include="Game\UI\Institution\Blacksmith\BlacksmithWindowUI.cpp" />
     <ClCompile Include="Game\UI\Institution\Guild\GuildWindowUI.cpp" />
-    <ClCompile Include="Game\UI\Institution\Inn\Meal\InnMealWindowUI.cpp" />
-    <ClCompile Include="Game\UI\Institution\Inn\Rest\InnRestWindowUI.cpp" />
-    <ClCompile Include="Game\UI\Institution\Inn\Storehouse\InnStorehouseWindowUI.cpp" />
+    <ClCompile Include="Game\UI\Institution\Inn\InnWindowUI.cpp" />
     <ClCompile Include="Game\UI\Institution\Shop\ShopWindowUI.cpp" />
     <ClCompile Include="Game\UI\Menu\Equipment\MenuEquipmentWindowUI.cpp" />
     <ClCompile Include="Game\UI\Menu\Item\MenuItemWindowUI.cpp" />
@@ -469,6 +469,8 @@
     <ClInclude Include="Game\Network\NetworkManager.h" />
     <ClInclude Include="Game\Monster\MonsterPop\MonsterPopManager.h" />
     <ClInclude Include="Game\Monster\MonsterPop\MonsterPopPoint.h" />
+    <ClInclude Include="Game\Player\PlayerQuestManager.h" />
+    <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
     <ClInclude Include="YonemaEngine\EngineConfig.h" />
     <ClInclude Include="YonemaEngine\Math\STRS.h" />
     <ClInclude Include="YonemaEngine\Graphics\Dx12Wrappers\DescriptorHandle.h" />
@@ -560,9 +562,7 @@
     <ClInclude Include="Game\UI\FontUI.h" />
     <ClInclude Include="Game\UI\Institution\Blacksmith\BlacksmithWindowUI.h" />
     <ClInclude Include="Game\UI\Institution\Guild\GuildWindowUI.h" />
-    <ClInclude Include="Game\UI\Institution\Inn\Meal\InnMealWindowUI.h" />
-    <ClInclude Include="Game\UI\Institution\Inn\Rest\InnRestWindowUI.h" />
-    <ClInclude Include="Game\UI\Institution\Inn\Storehouse\InnStorehouseWindowUI.h" />
+    <ClInclude Include="Game\UI\Institution\Inn\InnWindowUI.h" />
     <ClInclude Include="Game\UI\Institution\Shop\ShopWindowUI.h" />
     <ClInclude Include="Game\UI\Menu\Equipment\MenuEquipmentWindowUI.h" />
     <ClInclude Include="Game\UI\Menu\Item\MenuItemWindowUI.h" />

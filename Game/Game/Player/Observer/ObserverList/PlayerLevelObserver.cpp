@@ -39,7 +39,7 @@ namespace nsAWA {
 				m_oldPlayerLevel = observablePlayer->GetLevel();
 			}
 
-			void CPlayerLevelObserver::Update(CObservablePlayer* observablePlayer) {
+			void CPlayerLevelObserver::Update(CObservablePlayer* observablePlayer, const std::string& message) {
 
 				//ŒoŒ±’l‚ðŽæ“¾B
 				int exp = observablePlayer->GetExp();

@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Scenes/TitleScene.h"
 #include "Network/NetworkManager.h"
+#include "UI/Institution/Inn/InnWindowUI.h"
 
 
 
@@ -15,12 +16,12 @@ namespace nsAWA
 
 		nsScene::CreateScene<nsScene::CTitleScene>();
 
+
 		return true;
 	}
 
 	void CGame::Update(float deltaTime)
 	{
-
 		return;
 	}
 

@@ -9,7 +9,7 @@ namespace nsAWA {
 
 			class CPlayerInputObserver : public CPlayerObserver
 			{
-				void Update(CObservablePlayer* observablePlayer)override final;
+				void Update(CObservablePlayer* observablePlayer, const std::string& message)override final;
 			};
 		}
 	}
