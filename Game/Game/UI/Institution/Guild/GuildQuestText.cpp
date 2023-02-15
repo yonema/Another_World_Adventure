@@ -1,5 +1,6 @@
 #include "YonemaEnginePreCompile.h"
 #include "GuildQuestText.h"
+#include "../../../Player/Player.h"
 
 namespace nsAWA
 {
@@ -7,11 +8,38 @@ namespace nsAWA
     {
         bool CGuildQuestText::Start()
         {
+            //クエスト名から達成度を取得 あんまりFindしたくなかったけど...
+            nsPlayer::CPlayer* player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+
+            if (player != nullptr)
+            {
+
+                bool isReceived = player->IsQuestReceived(m_questName);
+                if (isReceived == true)
+                {
+                    bool isCompleted = player->IsQuestCompleted(m_questName);
+
+                    if (isCompleted == true)
+                    {
+                        m_questProgress = EnQuestProgress::enComplete;
+                    }
+                    else
+                    {
+                        m_questProgress = EnQuestProgress::enReceive;
+                    }
+                }
+                else
+                {
+                    m_questProgress = EnQuestProgress::enNotReceive;
+                }
+            }
+
             m_fontRenderer = NewGO<CFontRenderer>();
             SFontParameter initParam;
             m_fontRenderer->Init(initParam);
 
-            m_fontRenderer->SetText(m_questName.c_str());
+            std::wstring wQuestName = nsUtils::GetWideStringFromString(m_questName);
+            m_fontRenderer->SetText(wQuestName.c_str());
             m_fontRenderer->SetPivot(m_kTextPivot);
 
             return true;

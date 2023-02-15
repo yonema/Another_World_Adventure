@@ -8,7 +8,7 @@ namespace nsAWA
 		{
 			enNotReceive,
 			enReceive,
-			enClear
+			enComplete
 		};
 
 		class CGuildQuestText : public IGameObject
@@ -20,7 +20,7 @@ namespace nsAWA
 
 			void Update(float deltaTime) override final;
 
-			void SetQuestName(std::wstring questName)
+			void SetQuestName(std::string questName)
 			{
 				m_questName = questName;
 			}
@@ -43,7 +43,7 @@ namespace nsAWA
 			const CVector2 m_kTextPivot = CVector2(0.0f, 0.5f);
 		private:
 			CFontRenderer* m_fontRenderer = nullptr;
-			std::wstring  m_questName = L"";
+			std::string  m_questName = "";
 			std::function<void(void)> m_onReceiveEvent = nullptr;
 			std::function<void(void)> m_onClearEvent = nullptr;
 			CVector2 m_fontPosition = CVector2::Zero();
