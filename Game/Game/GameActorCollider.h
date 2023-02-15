@@ -33,7 +33,7 @@ namespace nsAWA {
 			//トリガーを取得。
 			return &m_trigger;
 		}
-	private:
+	protected:
 		CPhysicsDynamicObject m_rigidBody;				//剛体
 		CPhysicsTriggerObject m_trigger;				//トリガー
 	protected:

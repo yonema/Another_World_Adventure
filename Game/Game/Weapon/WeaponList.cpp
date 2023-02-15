@@ -46,9 +46,13 @@ namespace nsAWA {
 					//名前を設定。
 					weaponInfo.name = name;
 
+					
+				}
+				else if (title == "WEAPONFILEPATH") {
+
 					//モデルのファイルパスを設定。
 					weaponInfo.modelFilePath = "Assets/Models/Weapons/";
-					weaponInfo.modelFilePath += name;
+					weaponInfo.modelFilePath += lineData[1];
 					weaponInfo.modelFilePath += ".fbx";
 				}
 				else if (title == "TYPE") {

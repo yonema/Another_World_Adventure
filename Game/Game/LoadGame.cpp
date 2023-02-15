@@ -14,7 +14,7 @@
 #include "Item/MaterialItemList.h"
 #include "GameLog/GameLog.h"
 
-//‰¼‚ÉB
+//ä»®ã«ã€‚
 #include "Monster/Monster.h"
 
 namespace nsAWA {
@@ -23,45 +23,46 @@ namespace nsAWA {
 	{
 
 #ifdef _DEBUG
-		//ƒƒCƒ„[ƒtƒŒ[ƒ€‚ğ‰Â‹‰»B
+		//ãƒ¯ã‚¤ãƒ¤ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’å¯è¦–åŒ–ã€‚
 		SetCullingBoxForDebugDrawLine(100.0f, nsMath::CVector3::Zero());
 
-		// ƒ‰ƒCƒ“‚ÌƒJƒŠƒ“ƒOƒ{ƒbƒNƒX‚Ì©“®ƒJƒƒ‰ƒtƒBƒbƒg‹@”\‚Ì—LŒø‰»B
+		// ãƒ©ã‚¤ãƒ³ã®ã‚«ãƒªãƒ³ã‚°ãƒœãƒƒã‚¯ã‚¹ã®è‡ªå‹•ã‚«ãƒ¡ãƒ©ãƒ•ã‚£ãƒƒãƒˆæ©Ÿèƒ½ã®æœ‰åŠ¹åŒ–ã€‚
 		EnableAutoFitCullingBoxToMainCamera();
 #endif
 
-		//ƒQ[ƒ€ƒŠƒXƒg‚ğ¶¬B
+		//ã‚²ãƒ¼ãƒ ãƒªã‚¹ãƒˆã‚’ç”Ÿæˆã€‚
 		CreateGameList();
 
-		//ƒvƒŒƒCƒ„[‚ğ¶¬B
+		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç”Ÿæˆã€‚
 		m_player = NewGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
 		m_player->SetPosition(m_playerSpawnPosition);
 		m_player->SetRotation(m_playerSpawnQuaternion);
 
-		//ƒƒCƒ“ƒJƒƒ‰‚ğ¶¬B
+		//ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã‚’ç”Ÿæˆã€‚
 		m_mainCamera = NewGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
 
-		//ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh‚ğ¶¬B
+		//ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã‚’ç”Ÿæˆã€‚
 		m_backGround = NewGO<nsBackGround::CBackGround>(nsBackGround::CBackGround::m_kObjName_BackGround);
 
-		//‰¼‚ÉB
-		nsMonster::CMonster* mnsGiyara = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
-		mnsGiyara->SetPosition({ 0.0f,0.0f,50.0f });
+		//ä»®ã«ã€‚
+		nsMonster::CMonster* giyara = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+		giyara->SetPosition({ 0.0f,0.0f,50.0f });
 
-		//‰¼‚ÉB
-		nsMonster::CMonster* mnsSkeleton = nsMonster::CMonsterList::GetInstance()->CreateMonster("Skeleton");
-		mnsSkeleton->SetPosition({ 0.0f,0.0f,100.0f });
+		//ä»®ã«ã€‚
+		nsMonster::CMonster* skeleton = nsMonster::CMonsterList::GetInstance()->CreateMonster("Skeleton");
+		skeleton->SetPosition({ 0.0f,0.0f,100.0f });
+
 
 		return true;
 	}
 
 	void CLoadGame::Update(float deltaTime)
 	{
-		//ƒQ[ƒ€ƒƒO‚ğXVB
+		//ã‚²ãƒ¼ãƒ ãƒ­ã‚°ã‚’æ›´æ–°ã€‚
 		nsGameLog::CGameLog::GetInstance()->Update(deltaTime);
 
 #ifdef _DEBUG
-		//ƒMƒ„ƒ‰‚ğoŒ»‚³‚¹‚éB
+		//ã‚®ãƒ¤ãƒ©ã‚’å‡ºç¾ã•ã›ã‚‹ã€‚
 		if (Input()->IsTrigger(EnActionMapping::enUseItem)) {
 
 			nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
@@ -71,70 +72,70 @@ namespace nsAWA {
 
 	void CLoadGame::OnDestroy()
 	{
-		//ƒQ[ƒ€ƒŠƒXƒg‚ğ”jŠüB
+		//ã‚²ãƒ¼ãƒ ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã€‚
 		DeleteGameList();
 
-		//ƒvƒŒƒCƒ„[‚ğ”jŠüB
+		//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç ´æ£„ã€‚
 		DeleteGO(m_player);
 
-		//ƒƒCƒ“ƒJƒƒ‰‚ğ”jŠüB
+		//ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã‚’ç ´æ£„ã€‚
 		DeleteGO(m_mainCamera);
 
-		//’nŒ`‚ğ”jŠüB
+		//åœ°å½¢ã‚’ç ´æ£„ã€‚
 		DeleteGO(m_backGround);
 	}
 
 	void CLoadGame::CreateGameList() {
 
-		//ƒAƒCƒeƒ€ƒŠƒXƒg‚ğ¶¬B
+		//ã‚¢ã‚¤ãƒ†ãƒ ãƒªã‚¹ãƒˆã‚’ç”Ÿæˆã€‚
 		nsItem::CAllItemList::GetInstance()->LoadAllItemList();
 
-		//‘fŞƒAƒCƒeƒ€ƒŠƒXƒg‚ğ¶¬B
+		//ç´ æã‚¢ã‚¤ãƒ†ãƒ ãƒªã‚¹ãƒˆã‚’ç”Ÿæˆã€‚
 		nsItem::CMaterialItemList::GetInstance()->LoadMaterialItemList();
 
-		//ƒ‚ƒ“ƒXƒ^[ƒŠƒXƒg‚ğ¶¬B
+		//ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼ãƒªã‚¹ãƒˆã‚’ç”Ÿæˆã€‚
 		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
 
-		//ƒAƒNƒeƒBƒuƒXƒLƒ‹‚ÌƒŠƒXƒg‚ğ¶¬B
+		//ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®ãƒªã‚¹ãƒˆã‚’ç”Ÿæˆã€‚
 		//nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
 
-		//ƒpƒbƒVƒuƒXƒLƒ‹‚ÌƒŠƒXƒg‚ğ¶¬B
+		//ãƒ‘ãƒƒã‚·ãƒ–ã‚¹ã‚­ãƒ«ã®ãƒªã‚¹ãƒˆã‚’ç”Ÿæˆã€‚
 		//nsSkill::CPassiveSkillList::GetInstance()->LoadPassiveSkillList();
 
-		//•Ší‚ÌƒŠƒXƒg‚ğ¶¬B
+		//æ­¦å™¨ã®ãƒªã‚¹ãƒˆã‚’ç”Ÿæˆã€‚
 		nsWeapon::CWeaponList::GetInstance()->LoadWeaponList();
 
-		//–h‹ï‚ÌƒŠƒXƒg‚ğ¶¬B
+		//é˜²å…·ã®ãƒªã‚¹ãƒˆã‚’ç”Ÿæˆã€‚
 		nsArmor::CArmorList::GetInstance()->LoadArmorList();
 
-		//–‚–@‚ÌƒŠƒXƒg‚ğ¶¬B
+		//é­”æ³•ã®ãƒªã‚¹ãƒˆã‚’ç”Ÿæˆã€‚
 		//nsMagic::CMagicList::GetInstance()->LoadMagicList();
 	}
 
 	void CLoadGame::DeleteGameList() {
 
-		//ƒAƒCƒeƒ€ƒŠƒXƒg‚ğ”jŠüB
+		//ã‚¢ã‚¤ãƒ†ãƒ ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã€‚
 		nsItem::CAllItemList::GetInstance()->DeleteInstance();
 
-		//‘fŞƒAƒCƒeƒ€ƒŠƒXƒg‚ğ”jŠüB
+		//ç´ æã‚¢ã‚¤ãƒ†ãƒ ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã€‚
 		nsItem::CMaterialItemList::GetInstance()->DeleteInstance();
 
-		//ƒ‚ƒ“ƒXƒ^[ƒŠƒXƒg‚ğ”jŠüB
+		//ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã€‚
 		nsMonster::CMonsterList::GetInstance()->DeleteInstance();
 
-		//ƒAƒNƒeƒBƒuƒXƒLƒ‹‚ÌƒŠƒXƒg‚ğ”jŠüB
+		//ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã®ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã€‚
 		nsSkill::CActiveSkillList::GetInstance()->DeleteInstance();
 
-		//ƒpƒbƒVƒuƒXƒLƒ‹‚ÌƒŠƒXƒg‚ğ”jŠüB
+		//ãƒ‘ãƒƒã‚·ãƒ–ã‚¹ã‚­ãƒ«ã®ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã€‚
 		nsSkill::CPassiveSkillList::GetInstance()->DeleteInstance();
 
-		//•Ší‚ÌƒŠƒXƒg‚ğ”jŠüB
+		//æ­¦å™¨ã®ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã€‚
 		nsWeapon::CWeaponList::GetInstance()->DeleteInstance();
 
-		//–h‹ï‚ÌƒŠƒXƒg‚ğ”jŠüB
+		//é˜²å…·ã®ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã€‚
 		nsArmor::CArmorList::GetInstance()->DeleteInstance();
 
-		//–‚–@‚ÌƒŠƒXƒg‚ğ”jŠüB
+		//é­”æ³•ã®ãƒªã‚¹ãƒˆã‚’ç ´æ£„ã€‚
 		nsMagic::CMagicList::GetInstance()->DeleteInstance();
 	}
 }

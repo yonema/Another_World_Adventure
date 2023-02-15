@@ -154,11 +154,18 @@ namespace nsAWA {
 				}
 				else {
 
-					//前方向を取得。
-					m_playerMoveInput = m_player->GetForwardDirection();
+					//プレイヤーの前方向を取得。
+					const auto& playerDir = m_player->GetForwardDirection();
 
-					//移動。
-					m_playerAction->Move(m_playerMoveInput.x, m_playerMoveInput.z, kMoveSpeed);
+					//カメラの前方向を取得。
+					const auto& camDir = MainCamera()->GetForwardDirection();
+
+					//回転を適用。
+					CQuaternion rot;
+					rot.SetRotation(camDir, playerDir);
+					m_playerMoveInput = CVector3::Front();
+					rot.Apply(m_playerMoveInput);
+					m_playerMoveInput.Normalize();
 				}
 			}
 

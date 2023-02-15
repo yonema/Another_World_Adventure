@@ -128,11 +128,21 @@ namespace nsAWA {
 				//ステートの変更状況を初期化。
 				m_action.ResetChangeState();
 
+				//武器管理クラスを更新。
+				m_weaponManager.Update();
+
 				//コライダーを破棄。
 				if (!m_collider.IsReleased()) {
 
 					m_collider.Release();
 				}
+
+				// UIにプレイヤーのステータスを渡す
+				m_playerBattleStatusUI->SetUIPlayerStatus(
+					m_status.GetHP(), m_status.GetMaxHP(),
+					m_status.GetMP(), m_status.GetMaxMP(),
+					m_status.GetSP(), m_status.GetMaxSP()
+				);
 
 				//これ以上は何もせず終了。
 				return;

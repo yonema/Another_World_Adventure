@@ -34,10 +34,10 @@ namespace nsAWA {
 		//ëÆê´ëäê´ï\
 		float m_attributeCompatibility[static_cast<int>(EnAttribute::enNum)][static_cast<int>(EnAttribute::enNum)] =
 		{
-			{kNormal,kRegist,kWeak},
-			{kWeak,kNormal,kRegist},
-			{kRegist,kWeak,kNormal},
-			{kNormal,kNormal,kNormal},
+			{kNormal,kRegist,kWeak, kNormal},
+			{kWeak,kNormal,kRegist, kNormal},
+			{kRegist,kWeak,kNormal, kNormal},
+			{kNormal,kNormal,kNormal, kNormal},
 		};
 	};
 }
