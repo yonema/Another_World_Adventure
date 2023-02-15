@@ -285,7 +285,10 @@
     <ClCompile Include="YonemaEngine\PreCompileHeader\YonemaEnginePreCompile.cpp" />
     <ClCompile Include="Game\UI\Institution\Guild\GuildQuestText.cpp" />
     <ClCompile Include="Game\Event\EventCut\TutorialEventCut.cpp" />
-    <ClCompile Include="Game\Event\EventCut\ReceiveSkillEventCut.cpp" />  </ItemGroup>
+    <ClCompile Include="Game\Event\EventCut\ReceiveSkillEventCut.cpp" />
+    <ClCompile Include="Game\Event\EventCut\EventCutBase.cpp" />
+    <ClCompile Include="Game\Event\ProgressManagement\EventSaveData.cpp" />
+  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Attribute.h" />
     <ClInclude Include="YonemaEngine\Graphics\Fade.h" />
@@ -380,7 +383,8 @@
     <ClInclude Include="Game\Monster\AI\AISequence.h" />
     <ClInclude Include="Game\Monster\AI\AIPart.h" />
     <ClInclude Include="Game\Monster\AI\AITask\AITaskFindGameActor.h" />
-    <ClInclude Include="Game\CreateTrigger.h" />    <ClInclude Include="Game\BackGround\BackGround.h" />
+    <ClInclude Include="Game\CreateTrigger.h" />
+    <ClInclude Include="Game\BackGround\BackGround.h" />
     <ClInclude Include="Game\Feature\FeatureBuilder.h" />
     <ClInclude Include="Game\GameActorCollider.h" />
     <ClInclude Include="Game\Item\AllItemList.h" />
@@ -598,7 +602,9 @@
     <ClInclude Include="Game\Event\EventCut\TutorialEventCut.h" />
     <ClInclude Include="Game\Event\EventCut\EventCutInclude.h" />
     <ClInclude Include="Game\Event\EventCut\ReceiveSkillEventCut.h" />
-  </ItemGroup>  <ItemGroup>
+    <ClInclude Include="Game\Event\ProgressManagement\EventSaveData.h" />
+  </ItemGroup>
+  <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
