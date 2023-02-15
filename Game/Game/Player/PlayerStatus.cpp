@@ -22,6 +22,7 @@ namespace nsAWA {
 			constexpr float kGGValue = 100.0f;			//ガードゲージ量
 			constexpr float kStatusBaseInitValue = 0.0f;	//ステータス反映のための初期値
 			constexpr float kStatusBaseMul = 1.0f;	//ステータス反映の初期倍率
+			constexpr float kStatusBaseMin = -0.9f;	//ステータス反映の最低倍率
 		}
 
 		void CPlayerStatus::Init(const nsWeapon::CWeapon* const & playerWeapon,
@@ -72,6 +73,15 @@ namespace nsAWA {
 
 					//まず加算。
 					m_statusBaseList[statusRef] += featureRef->Apply(static_cast<nsFeature::EnStatusRef>(statusRef));
+				}
+			}
+
+			//もしステータスの型が-1.0f未満なら、負の値になるのを防ぐため0.1になるように調整。
+			for (auto& statusBase : m_statusBaseList) {
+
+				if (statusBase < -1.0f) {
+
+					statusBase = kStatusBaseMin;
 				}
 			}
 
