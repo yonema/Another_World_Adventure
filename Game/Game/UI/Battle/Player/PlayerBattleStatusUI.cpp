@@ -48,6 +48,7 @@ namespace nsAWA
                         return true;
                     }
 
+                    return true;
                     return false;
                 });
 
