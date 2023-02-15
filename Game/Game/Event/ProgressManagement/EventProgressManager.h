@@ -86,11 +86,38 @@ namespace nsAWA
 				return m_latestEvents;
 			}
 
+			/**
+			 * @brief クリアしたイベント名のリストを取得(クリアした順に並んでいる)
+			 * @return クリアしたイベント名の配列
+			*/
+			std::vector<std::string> GetClearedEvents()
+			{
+				return m_cleardEventNameList;
+			}
 
+			/**
+			 * @brief クリアしたイベントをクリアした順番に終了済みとしてマークしていく
+			 * @param clearedEventNameList クリアしたイベント名のリスト
+			*/
+			void SetClearedEvents(std::vector<std::string> clearedEventNameList);
+
+			/**
+			 * @brief 進行中のイベントのみの進行度を取得
+			 * @return 進行中のイベントの進行度を格納した配列
+			*/
+			std::vector<std::string> GetProgressionList();
+
+			/**
+			 * @brief 進行中のイベントの進行度を設定
+			 * @param  進行中のイベントの進行度を格納した配列
+			*/
+			void SetProgressionList(std::vector<std::string>);
 		private:
 			static CEventProgressManager* m_instance;		//インスタンス
 			
 			std::list<CEventProgress*> m_latestEvents;		//進行度をチェックするイベント(前提条件によって実行できない物も含む)
+		
+			std::vector<std::string> m_cleardEventNameList;	//クリアしたイベントのリスト(クリアした順に格納)
 		};
 	}
 }

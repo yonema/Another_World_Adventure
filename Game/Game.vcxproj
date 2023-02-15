@@ -151,6 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Event\ProgressManagement\EventSaveData.cpp" />
+    <ClCompile Include="Game\UI\Institution\Guild\GuildQuestText.cpp" />
+    <ClCompile Include="Game\Event\EventCut\EventCutBase.cpp" />
+    <ClCompile Include="Game\Event\EventCut\TutorialEventCut.cpp" />
+    <ClCompile Include="Game\Event\EventCut\ReceiveSkillEventCut.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Fade.cpp" />
     <ClCompile Include="Game\Event\EventSetFuncPool.cpp" />
     <ClCompile Include="Game\Event\EventController.cpp" />
     <ClCompile Include="Game\GameNowLoading.cpp" />
@@ -434,7 +440,14 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Event\ProgressManagement\EventSaveData.h" />
+    <ClInclude Include="Game\Event\EventCut\EventCutBase.h" />
     <ClInclude Include="Game\Attribute.h" />
+    <ClInclude Include="Game\UI\Institution\Guild\GuildQuestText.h" />
+    <ClInclude Include="Game\Event\EventCut\EventCutInclude.h" />
+    <ClInclude Include="Game\Event\EventCut\TutorialEventCut.h" />
+    <ClInclude Include="Game\Event\EventCut\ReceiveSkillEventCut.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Fade.h" />
     <ClInclude Include="Game\Event\EventNameTable.h" />
     <ClInclude Include="Game\Event\EventSetFuncPool.h" />
     <ClInclude Include="Game\Event\EventController.h" />

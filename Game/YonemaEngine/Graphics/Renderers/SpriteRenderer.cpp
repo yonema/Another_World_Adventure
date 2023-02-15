@@ -32,7 +32,11 @@ namespace nsYMEngine
 
 				m_sprite->Init(spriteInitData);
 
-				if (spriteInitData.alphaBlendMode == nsSprites::EnAlphaBlendMode::enTrans)
+				if (spriteInitData.topSprite)
+				{
+					m_sprite->SetRenderType(CRendererTable::EnRendererType::enTopSprite);
+				}
+				else if (spriteInitData.alphaBlendMode == nsSprites::EnAlphaBlendMode::enTrans)
 				{
 					m_sprite->SetRenderType(CRendererTable::EnRendererType::enTransSprite);
 				}

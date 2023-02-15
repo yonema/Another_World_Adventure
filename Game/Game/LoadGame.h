@@ -29,6 +29,11 @@ namespace nsAWA {
 			m_playerSpawnPosition = position;
 		}
 
+		void SetPlayerSpawnRotation(const CQuaternion& rotation)
+		{
+			m_playerSpawnQuaternion = rotation;
+		}
+
 	private:
 		void CreateGameList();
 
@@ -39,5 +44,6 @@ namespace nsAWA {
 		nsCamera::CMainCamera* m_mainCamera = nullptr;	//メインカメラ
 		nsBackGround::CBackGround* m_backGround = nullptr;	//バックグラウンド
 		CVector3 m_playerSpawnPosition = nsMath::CVector3::Zero();
+		CQuaternion m_playerSpawnQuaternion = CQuaternion::Identity();
 	};
 }
