@@ -1,6 +1,6 @@
-Yoneji,1,0,193.304398,200,100,100,
-スナップ斬り,火焔斬り,氷結斬り,雷神斬り,ボーンスラッシュ,ファイヤースラッシュ,アイススラッシュ,ライトニングスラッシュ
-エーテル,3,聖水,2,刀削麺,2,,
-柔らかい剣,NewArmor,,,,,,
-ファイヤースラッシュ,アイススラッシュ,ライトニングスラッシュ,None,None,None,,
-魔術師の本気,None,None,None,None,,,
+Yoneji,1,0,193.304398,200,100,100,,,,
+スナップ斬り,火焔斬り,氷結斬り,雷神斬り,ボーンスラッシュ,ファイヤースラッシュ,アイススラッシュ,ライトニングスラッシュ,Fire_Forward,Fire_Side,ResurrectLight
+エーテル,3,聖水,2,刀削麺,2,,,,,
+柔らかい剣,NewArmor,,,,,,,,,
+Fire_Forward,Fire_Side,ResurrectLight,None,None,None,,,,,
+None,None,None,None,None,,,,,,
