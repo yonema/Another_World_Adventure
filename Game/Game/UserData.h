@@ -29,6 +29,8 @@ namespace nsAWA {
 
 		void SaveSetPassiveSkill(nsPlayer::CPlayer* player);
 
+		void SaveClearedEventData();
+
 	private:
 		std::list<std::vector<std::string>> m_userData;		//ユーザーデータ
 	};

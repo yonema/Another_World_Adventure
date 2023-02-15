@@ -86,11 +86,15 @@ namespace nsAWA
 				return m_latestEvents;
 			}
 
-
+			std::vector<std::string> GetProgressionList();
 		private:
 			static CEventProgressManager* m_instance;		//インスタンス
 			
 			std::list<CEventProgress*> m_latestEvents;		//進行度をチェックするイベント(前提条件によって実行できない物も含む)
+		
+			std::vector<std::string> m_cleardEventNameList;	//クリアしたイベントのリスト(クリアした順に格納)
+
+			std::vector<std::string> m_progressionList;		//クリアしていないイベントのうち進行中のものの進行度のリスト
 		};
 	}
 }

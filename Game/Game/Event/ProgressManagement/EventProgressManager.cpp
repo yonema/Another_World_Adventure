@@ -33,6 +33,9 @@ namespace nsAWA
 				//イベントを終了済みとしてマーク
 				event->MarkAsExpired();
 
+				//クリアしたイベントリストにイベント名を追加
+				m_cleardEventNameList.emplace_back(event->GetName());
+
 				//コンプリートしたイベントを前提条件とするイベントを追加
 				std::list<CEventProgress*> childEvents = event->GetChildren();
 
@@ -96,6 +99,11 @@ namespace nsAWA
 			}
 
 			return EnEventState::enNotReady;
+		}
+
+		std::vector<std::string> CEventProgressManager::GetProgressionList()
+		{
+			//進行度
 		}
 	}
 }

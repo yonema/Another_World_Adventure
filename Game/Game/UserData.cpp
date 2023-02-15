@@ -6,6 +6,7 @@
 #include "Armor/Armor.h"
 #include "Skill/PassiveSkillManager.h"
 #include "Skill/PassiveSkill.h"
+#include "Event/ProgressManagement/EventProgressManager.h"
 
 
 namespace nsAWA {
@@ -267,5 +268,20 @@ namespace nsAWA {
 
 		//ユーザーデータに追加。
 		m_userData.emplace_back(setPassiveSkillName);
+	}
+
+	void CUserData::SaveClearedEventData()
+	{
+		//セーブ
+		nsEvent::CEventProgressManager* eventManager =  nsEvent::CEventProgressManager::GetInstance();
+
+		if (eventManager != nullptr)
+		{
+			//eventManager.GetClearedEventData();
+		}
+		else
+		{
+			//空データ
+		}
 	}
 }
