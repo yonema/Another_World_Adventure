@@ -4,6 +4,9 @@
 #include "Monster/MonsterPop/MonsterPopManager.h"
 #include "Event/EventManager.h"
 #include "Event/EventController.h"
+#include "Skill/ActiveSkillList.h"
+#include "Skill/PassiveSkillList.h"
+#include "Magic/MagicList.h"
 #include "../EngineConfig.h"
 
 
@@ -30,6 +33,10 @@ namespace nsAWA
 		// ラインのカリングボックスの自動カメラフィット機能の有効化。
 		EnableAutoFitCullingBoxToMainCamera();
 #endif // DRAW_COLLISION
+
+		nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
+		nsSkill::CPassiveSkillList::GetInstance()->LoadPassiveSkillList();
+		nsMagic::CMagicList::GetInstance()->LoadMagicList();
 
 		m_humanManager = NewGO<nsHumans::CHumanManager>("HumanManager");
 		m_humanManager->GenerateBase(true);

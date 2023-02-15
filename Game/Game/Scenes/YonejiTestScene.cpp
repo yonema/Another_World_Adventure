@@ -7,6 +7,7 @@
 #include "../Event/EventManager.h"
 #include "../Event/EventFlow.h"
 #include "../Player/Player.h"
+#include "../Camera/CameraAction.h"
 
 // ÇªÇÃÇ§Çøè¡Ç∑ó\íË
 
@@ -63,6 +64,11 @@ namespace nsAWA
 			m_loadGame = NewGO<CLoadGame>();
 			m_loadGame->SetPlayerSpawnPosition(m_world->GetPlayerSpawnPosition());
 			m_loadGame->SetPlayerSpawnRotation(m_world->GetPlayerSpawnRotation());
+
+			CVector3 addCameraVec = nsCamera::CCameraAction::GetStartAddCameraVec();
+			m_world->GetPlayerSpawnRotation().Apply(addCameraVec);
+			nsCamera::CCameraAction::SetStartAddCameraVec(addCameraVec);
+			
 
 
 			return;

@@ -55,7 +55,7 @@ namespace nsAWA
 						auto* newScene = CreateScene<CYonejiTestScene>();
 						newScene->Tutorial();
 					},
-					3.0f
+					1.0f
 				);
 
 

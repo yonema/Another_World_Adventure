@@ -45,12 +45,12 @@ namespace nsAWA {
 		m_backGround = NewGO<nsBackGround::CBackGround>(nsBackGround::CBackGround::m_kObjName_BackGround);
 
 		//仮に。
-		nsMonster::CMonster* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
-		monster->SetPosition({ 0.0f,0.0f,50.0f });
+		nsMonster::CMonster* mnsGiyara = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+		mnsGiyara->SetPosition({ 0.0f,0.0f,50.0f });
 
 		//仮に。
-		nsMonster::CMonster* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Skeleton");
-		monster->SetPosition({ 0.0f,0.0f,100.0f });
+		nsMonster::CMonster* mnsSkeleton = nsMonster::CMonsterList::GetInstance()->CreateMonster("Skeleton");
+		mnsSkeleton->SetPosition({ 0.0f,0.0f,100.0f });
 
 		return true;
 	}
@@ -96,10 +96,10 @@ namespace nsAWA {
 		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
 
 		//アクティブスキルのリストを生成。
-		nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
+		//nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
 
 		//パッシブスキルのリストを生成。
-		nsSkill::CPassiveSkillList::GetInstance()->LoadPassiveSkillList();
+		//nsSkill::CPassiveSkillList::GetInstance()->LoadPassiveSkillList();
 
 		//武器のリストを生成。
 		nsWeapon::CWeaponList::GetInstance()->LoadWeaponList();
@@ -108,7 +108,7 @@ namespace nsAWA {
 		nsArmor::CArmorList::GetInstance()->LoadArmorList();
 
 		//魔法のリストを生成。
-		nsMagic::CMagicList::GetInstance()->LoadMagicList();
+		//nsMagic::CMagicList::GetInstance()->LoadMagicList();
 	}
 
 	void CLoadGame::DeleteGameList() {

@@ -34,6 +34,11 @@ namespace nsAWA {
 
 			const SPassiveSkillData& GetPassiveSkillData(const std::string& passiveSkillName);
 
+			constexpr const auto& GetPassiveSkillList() const noexcept
+			{
+				return m_passiveSkillList;
+			}
+
 		private:
 			std::list<SPassiveSkillData> m_passiveSkillList;	//パッシブスキルのリスト
 		};

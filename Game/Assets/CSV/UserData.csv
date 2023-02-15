@@ -1,6 +1,6 @@
-Yoneji,1,0,193.304398,200,100,100
-JumpAttack_Sword,JumpAttackL_Sword,,,,,
+Yoneji,1,0,193.304398,200,100,100,
+JumpAttack_Sword,JumpAttackL_Sword,
 ÉGÅ[ÉeÉã,3,êπêÖ,2,ìÅçÌñÀ,2,
-NewSword,NewArmor,,,,,
-JumpAttack_Sword,JumpAttackL_Sword,None,None,None,None,
-None,None,None,None,None,,
+NewSword,NewArmor,
+JumpAttack_Sword,RushAttack_Sword,Heal,None,None,None,
+Paralysiser,None,None,None,None,
