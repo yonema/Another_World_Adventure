@@ -1,6 +1,7 @@
 #include "YonemaEnginePreCompile.h"
 #include "ConversationTextUI.h"
 #include "../../CSV/CSVManager.h"
+#include "../../Player/Player.h"
 
 namespace nsAWA
 {
@@ -12,6 +13,15 @@ namespace nsAWA
 			{
 				return;
 			}
+
+			nsPlayer::CPlayer* player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+
+			if (player != nullptr)
+			{
+				std::string playerName = player->GetStatus()->GetPlayerName();
+				m_playerName = nsUtils::GetWideStringFromString(playerName);
+			}
+
 
 			m_nameRenderer = NewGO<CFontRenderer>("nameRenderer");
 			SFontParameter nameParam;

@@ -87,21 +87,28 @@ namespace nsAWA
 			}
 
 			//ChengeSelect
-			if (Keyboard()->IsTrigger(EnKeyButton::en8))
+			if (abs(Input()->GetVirtualAxis(EnAxisMapping::enForward)) >= 0.8f && m_canChangeItem == true)
 			{
 				ChengeSelectingItem();
+
+				m_canChangeItem = false;
 			}
 			
 			//Exit
-			if (Keyboard()->IsTrigger(EnKeyButton::en9))
+			if (Input()->IsTrigger(EnActionMapping::enCancel))
 			{
 				ExitUI();
 			}
 
 			//OK
-			if (Keyboard()->IsTrigger(EnKeyButton::en0))
+			if (Input()->IsTrigger(EnActionMapping::enDecision))
 			{
 				StartExecute();
+			}
+
+			if (abs(Input()->GetVirtualAxis(EnAxisMapping::enForward)) < 0.8f)
+			{
+				m_canChangeItem = true;
 			}
 		}
 

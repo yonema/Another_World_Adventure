@@ -50,12 +50,11 @@ namespace nsAWA
         private: // data member
             nsLevel2D::CLevel2D m_level;
             bool m_playingAnimation = false;
-            bool m_isInputDisable = false;
-            float m_disableTime = 0.0f;
             std::vector<CGuildQuestText*> m_showQuests;
             bool m_endFlag = false;
             CSpriteRenderer* m_cursorRenderer = nullptr;
             int m_selectingIndex = 0;
+            bool m_canChangeItem = true;
         };
     }
 }
