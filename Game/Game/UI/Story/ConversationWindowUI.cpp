@@ -14,12 +14,12 @@ namespace nsAWA
 		{
 			m_level.Load(m_kSpriteWindowFilePath);
 
-			m_level.PlayAnimation("WindowAppear");
-			m_level.PlayAnimation("ButtonAppear");
+			m_level.PlayAnimation("ConversationWindowAppear");
+			m_level.PlayAnimation("ConversationAButtonAppear");
 
 
 			//ウィンドウが消えるアニメーションが終了した時のイベントを記述
-			m_level.RegisterAnimationEvent("WindowDisappear", "Disappeared", [this](const nsYMEngine::nsGraphics::nsAnimations2D::SAnimation2DFrameData& frameData)
+			m_level.RegisterAnimationEvent("ConversationWindowDisappear", "Disappeared", [this](const nsYMEngine::nsGraphics::nsAnimations2D::SAnimation2DFrameData& frameData)
 				{
 					m_endFlag = true;
 				}
@@ -46,13 +46,13 @@ namespace nsAWA
 			if (Input()->IsTrigger(EnActionMapping::enDecision))
 			{
 				m_text.Next();
-				m_level.PlayAnimation("Pressed");
+				m_level.PlayAnimation("ConversationAButtonPressed");
 
 				if (m_text.IsShowAllSentence())
 				{
 					m_text.Release();
-					m_level.PlayAnimation("WindowDisappear");
-					m_level.PlayAnimation("ButtonDisappear");
+					m_level.PlayAnimation("ConversationWindowDisappear");
+					m_level.PlayAnimation("ConversationAButtonDisappear");
 				}
 			}
 		}
