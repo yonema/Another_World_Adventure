@@ -11,7 +11,7 @@ namespace nsAWA
     namespace nsUI
     {
         const char* CPlayerBattleStatusUI::m_kLevel2DFilePath =
-            "Assets/Level2D/PlayerStatusBase.tdl";
+            "Assets/Level2D/PlayerStatus.tdl";
 
         const char* CPlayerBattleStatusUI::m_kSpritePlayerStatusBaseFilePath =
             "Assets/Images/FitnessBar/Player/PlayerStatusBase.png";

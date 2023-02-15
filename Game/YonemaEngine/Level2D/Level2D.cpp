@@ -113,7 +113,7 @@ namespace nsYMEngine
 				}
 
 				//スプライトのリストに追加
-				m_spritesList.emplace_back(CreateNewSpriteFromData(spriteData));
+				//m_spritesList.emplace_back(CreateNewSpriteFromData(spriteData));
 			}
 
 			fclose(fp);
