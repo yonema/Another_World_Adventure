@@ -1,5 +1,7 @@
 #include "Town.h"
 #include "../Humans/HumanManager.h"
+#include "../Player/PlayerCollider.h"
+#include "../Player/Player.h"
 
 namespace nsAWA
 {
@@ -30,6 +32,18 @@ namespace nsAWA
 				return;
 			}
 
+			auto* actorCollider = otherData->GetOwner<CGameActorCollider>();
+			auto* playerCollider = dynamic_cast<nsPlayer::CPlayerCollider*>(actorCollider);
+
+			if (playerCollider)
+			{
+				auto* player = playerCollider->GetPlayer();
+				if (player)
+				{
+					player->SetIsInTown(true);
+				}
+			}
+
 			if (m_humanManagerRef == nullptr)
 			{
 				return;
@@ -45,6 +59,18 @@ namespace nsAWA
 			if (otherData->GetPhysicsAttribute() != EnPhysicsAttributes::enPlayer)
 			{
 				return;
+			}
+
+			auto* actorCollider = otherData->GetOwner<CGameActorCollider>();
+			auto* playerCollider = dynamic_cast<nsPlayer::CPlayerCollider*>(actorCollider);
+
+			if (playerCollider)
+			{
+				auto* player = playerCollider->GetPlayer();
+				if (player)
+				{
+					player->SetIsInTown(false);
+				}
 			}
 
 			if (m_humanManagerRef == nullptr)

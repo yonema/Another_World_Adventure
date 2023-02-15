@@ -121,6 +121,15 @@ namespace nsAWA
 			}
 
 			/**
+			 * @brief イベントの進行度をセットする　セーブデータの復元時以外は使わないことを想定している。
+			 * @param progression イベントの進行度
+			*/
+			void SetProgression(int progression)
+			{
+				m_progression = progression;
+			}
+
+			/**
 			 * @brief イベントの進行状態を取得
 			 * @return イベントの進行状態
 			*/

@@ -85,6 +85,12 @@ namespace nsAWA
 			std::string LoadLocalSaveData();
 
 			/**
+			 * @brief ローカルにあるイベントセーブデータを取得する
+			 * @return 
+			*/
+			std::string LoadLocalEventSaveData();
+
+			/**
 			 * @brief セーブデータをhttp通信でアップロードし更新する
 			 * @param saveData セーブデータ
 			*/
@@ -93,6 +99,7 @@ namespace nsAWA
 			const std::string m_kNetworkSettingPath = "Assets/NetworkSetting/network.cfg";		//ネットワークの設定ファイル
 			const std::string m_kURLKey = "AnotherWorldAdventureAnotherWorldAdventureAnothe";	//ネットワーク送信先の復号キー
 			const std::string m_kSaveDataPath = "Assets/CSV/UserData.csv";						//ローカルのセーブデータの保存場所
+			const std::string m_kEventSaveDataPath = "Assets/CSV/EventData.csv";				//ローカルのセーブデータの保存場所
 		private:
 			static CNetworkManager* m_instance;					//インスタンス
 

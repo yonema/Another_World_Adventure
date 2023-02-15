@@ -431,6 +431,27 @@ namespace nsYMEngine
 			m_fontEngine->ExecuteDraw(&m_commandList);
 
 
+			// フォント描画でTRIANGLELISTに戻っているため再度TRIANGLESTRIPを設定
+			m_commandList.SetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+			// トップスプライトの描画
+			// 半透明スプライトと同じ描画設定
+			m_commandList.SetGraphicsRootSignatureAndPipelineState(
+				m_rendererTable.GetRootSignature(
+					RendererType::enTransSprite),
+				m_rendererTable.GetPipelineState(
+					RendererType::enTransSprite)
+			);
+			// トップスプライト描画
+			for (auto& rendererList : m_rendererTable.GetRendererListArray(RendererType::enTopSprite))
+			{
+				for (auto& renderer : rendererList)
+				{
+					renderer->DrawWrapper(&m_commandList);
+				}
+			}
+
+
 			// 描画終了
 			m_commandList.TransitionFromRenderTargetToPresent(m_frameBuffer);
 

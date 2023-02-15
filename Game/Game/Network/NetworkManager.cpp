@@ -37,8 +37,23 @@ namespace nsAWA
 				return;
 			}
 
+			std::string eventSaveData = LoadLocalEventSaveData();
+
+			if (eventSaveData == "")
+			{
+				return;
+			}
+
+			//int a = std::string::max_size();
+
+			std::string uploadData;
+			uploadData.reserve(static_cast<size_t>(1000));
+			uploadData = saveData;
+			uploadData += "*eventData*";
+			uploadData += eventSaveData;
+
 			//アップロード処理
-			HttpUpload(saveData);
+			HttpUpload(uploadData);
 
 		}
 
@@ -100,6 +115,21 @@ namespace nsAWA
 		std::string CNetworkManager::LoadLocalSaveData()
 		{
 			std::ifstream ifs(m_kSaveDataPath);
+
+			//オープンに失敗したら無を返す
+			if (!ifs)
+			{
+				return "";
+			}
+
+			std::string saveDataStr((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+			return saveDataStr;
+		}
+		
+		std::string CNetworkManager::LoadLocalEventSaveData()
+		{
+			std::ifstream ifs(m_kEventSaveDataPath);
 
 			//オープンに失敗したら無を返す
 			if (!ifs)
