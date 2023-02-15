@@ -166,7 +166,10 @@ namespace nsAWA
 				{
 					char str[256];
 
-					int progression = progressionEvent->GetProgression();
+					int progression = 0;
+					
+					//TODO:現在はイベントの進行度が復元できていないようなので一旦すべて進行度0とする
+					//int progression = progressionEvent->GetProgression();
 
 					sprintf_s(str, sizeof(str), "%d", progression);
 

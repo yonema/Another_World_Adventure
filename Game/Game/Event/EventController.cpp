@@ -1,6 +1,7 @@
 #include "EventController.h"
 #include "EventManager.h"
 #include "EventFlow.h"
+#include "ProgressManagement/EventSaveData.h"
 
 namespace nsAWA
 {
@@ -9,6 +10,10 @@ namespace nsAWA
 		bool CEventController::Start()
 		{
 			InitCurrentEventFlowMap();
+
+			//イベントのセーブデータからロード
+			CEventSaveData loader;
+			loader.Load();
 
 			return true;
 		}
