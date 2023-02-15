@@ -63,8 +63,8 @@ namespace nsAWA
             m_enemyHPUI->LoadLevel();
 
             // 敵のブレイクゲージ
-            m_enemyBreakUI = NewGO<CEnemyBreakUI>();
-            m_enemyBreakUI->LoadLevel();
+            //m_enemyBreakUI = NewGO<CEnemyBreakUI>();
+            //m_enemyBreakUI->LoadLevel();
         }
 
         void CEnemyBattleStatusUI::OnDestroy()
@@ -72,7 +72,7 @@ namespace nsAWA
             DeleteGO(m_spriteEnemyStatusBase);
 
             DeleteGO(m_enemyHPUI);
-            DeleteGO(m_enemyBreakUI);
+            //DeleteGO(m_enemyBreakUI);
         }
 
         void CEnemyBattleStatusUI::Update(float deltaTime)
@@ -86,7 +86,7 @@ namespace nsAWA
         void CEnemyBattleStatusUI::SetUIEnemyStatus(const float hp, const float maxHP, const float breakBar)
         {
             m_enemyHPUI->SetUIEnemyHPStatus(hp, maxHP);
-            m_enemyBreakUI->SetUIEnemyBreakStatus(breakBar);
+            //m_enemyBreakUI->SetUIEnemyBreakStatus(breakBar);
         }
 
         void CEnemyBattleStatusUI::SetUIEnemyPosition(const CVector3& position)
@@ -117,7 +117,7 @@ namespace nsAWA
             m_setUIEnemyPosition = { uiPosition.x,uiPosition.y };
 
             m_enemyHPUI->SetUIPosition(m_setUIEnemyPosition);
-            m_enemyBreakUI->SetUIPosition(m_setUIEnemyPosition);
+            //m_enemyBreakUI->SetUIPosition(m_setUIEnemyPosition);
         }
 
         const bool CEnemyBattleStatusUI::CheckDrawUI(const CVector3& targetPosition)
