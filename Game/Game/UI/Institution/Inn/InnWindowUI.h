@@ -44,6 +44,7 @@ namespace nsAWA
             EnSelectingItem m_selecting = EnSelectingItem::enRest;  //選択中の項目
             bool m_playingAnimation = false;                        //アニメーション演出中?
             bool m_endFlag = false;
+            bool m_canChangeItem = true;
         };
     }
 }

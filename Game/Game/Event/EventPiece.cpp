@@ -24,6 +24,11 @@ namespace nsAWA
 				return;
 			}
 
+			if (m_isStartEvent != true)
+			{
+				return;
+			}
+
 
 			switch (m_eventPieceType)
 			{
@@ -78,6 +83,8 @@ namespace nsAWA
 			{
 				return;
 			}
+
+			m_isStartEvent = true;
 
 			if (m_eventPieceType == EnEventPieceType::enTrigger)
 			{

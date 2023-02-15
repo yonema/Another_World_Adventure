@@ -22,15 +22,15 @@ namespace nsAWA
 		{
 			if (Input()->IsTrigger(EnActionMapping::enDecision))
 			{
-				CreateScene<CMainGameScene>();
+				CreateSceneWithFade<CMainGameScene>();
 			}
 			else if (Keyboard()->IsTrigger(EnKeyButton::en0))
 			{
-				CreateScene<COpeningScene>();
+				CreateSceneWithFade<COpeningScene>();
 			}
 			else if (Keyboard()->IsTrigger(EnKeyButton::en1))
 			{
-				CreateScene<CYonejiTestScene>();
+				CreateSceneWithFade<CYonejiTestScene>();
 			}
 			else if (Keyboard()->IsTrigger(EnKeyButton::enEscape))
 			{

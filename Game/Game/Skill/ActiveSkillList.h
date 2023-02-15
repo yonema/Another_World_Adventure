@@ -44,6 +44,11 @@ namespace nsAWA {
 				return m_activeSkillList;
 			}
 
+			constexpr const auto& GetActiveSkillList() const noexcept
+			{
+				return m_activeSkillList;
+			}
+
 		private:
 			void AddActiveSkill(const SActiveSkillData& activeSkillData) {
 

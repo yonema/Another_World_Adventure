@@ -167,12 +167,12 @@ namespace nsYMEngine
 			//enDecision
 			{
 				{CGamepad::EnPadButton::enA},
-				{CKeyboard::EnKeyButton::enZ}
+				{CKeyboard::EnKeyButton::enJ}
 			},
 			//enCancel
 			{
 				{CGamepad::EnPadButton::enB},
-				{CKeyboard::EnKeyButton::enX}
+				{CKeyboard::EnKeyButton::enK}
 			},
 			// enMenu
 			{
