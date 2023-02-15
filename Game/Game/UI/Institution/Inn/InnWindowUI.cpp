@@ -4,6 +4,7 @@
 #include "../../../Network/NetworkManager.h"
 #include "../../../Feature/FeatureBuilder.h"
 #include "../../../Player/Player.h"
+#include "../../../Event/ProgressManagement/EventSaveData.h"
 
 namespace nsAWA
 {
@@ -200,8 +201,13 @@ namespace nsAWA
 
 				//セーブする時の音が欲しい?
 
+				//ユーザーデータのセーブ
 				CUserData userDataSave;
 				userDataSave.Save();
+
+				//イベントデータのセーブ
+				nsEvent::CEventSaveData eventDataSave;
+				eventDataSave.Save();
 
 				//セーブしたデータをネットワークにアップロード
 				nsNetwork::CNetworkManager::GetInstance()->UploadSaveData();
