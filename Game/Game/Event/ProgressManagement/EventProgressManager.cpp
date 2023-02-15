@@ -103,7 +103,26 @@ namespace nsAWA
 
 		std::vector<std::string> CEventProgressManager::GetProgressionList()
 		{
+			std::vector<std::string> progressionList;
+
 			//is“x
+			for (auto progressionEvent : m_latestEvents)
+			{
+				if (progressionEvent->GetProgressState() == EnEventState::enProgress)
+				{
+					char str[256];
+
+					int progression = progressionEvent->GetProgression();
+
+					sprintf_s(str, sizeof(str), "%d", progression);
+
+					std::string progressionString = str;
+
+					progressionList.emplace_back(progressionString);
+				}
+			}
+
+			return progressionList;
 		}
 	}
 }
