@@ -10,3 +10,6 @@ Sword,ボーンスラッシュ,5,SwordSlash,NONE
 Sword,ファイヤースラッシュ,12,Sword_WeakAttack_C,Fire
 Sword,アイススラッシュ,12,Sword_WeakAttack_C,Cold
 Sword,ライトニングスラッシュ,12,Sword_WeakAttack_C,Lightning
+Magic,Fire_Forward,12,Magic,None
+Magic,Fire_Side,12,Magic,None
+Magic,ResurrectLight,30,Magic,None

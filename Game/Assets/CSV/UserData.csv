@@ -1,6 +1,6 @@
-Yoneji,1,0,193.304398,200,100,100,
-�X�i�b�v�a��,�Ή��a��,�X���a��,���_�a��,�{�[���X���b�V��,�t�@�C���[�X���b�V��,�A�C�X�X���b�V��,���C�g�j���O�X���b�V��
-�G�[�e��,3,����,2,�����,2,,
-�_�炩����,NewArmor,,,,,,
-�t�@�C���[�X���b�V��,�A�C�X�X���b�V��,���C�g�j���O�X���b�V��,None,None,None,,
-���p�t�̖{�C,None,None,None,None,,,
+Yoneji,1,0,193.304398,200,100,100,,,,
+�X�i�b�v�a��,�Ή��a��,�X���a��,���_�a��,�{�[���X���b�V��,�t�@�C���[�X���b�V��,�A�C�X�X���b�V��,���C�g�j���O�X���b�V��,Fire_Forward,Fire_Side,ResurrectLight
+�G�[�e��,3,����,2,�����,2,,,,,
+�_�炩����,NewArmor,,,,,,,,,
+Fire_Forward,Fire_Side,ResurrectLight,None,None,None,,,,,
+None,None,None,None,None,,,,,,
