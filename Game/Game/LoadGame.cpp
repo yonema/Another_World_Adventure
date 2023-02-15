@@ -44,14 +44,6 @@ namespace nsAWA {
 		//バックグラウンドを生成。
 		m_backGround = NewGO<nsBackGround::CBackGround>(nsBackGround::CBackGround::m_kObjName_BackGround);
 
-		//仮に。
-		nsMonster::CMonster* giyara = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
-		giyara->SetPosition({ 0.0f,0.0f,50.0f });
-
-		//仮に。
-		nsMonster::CMonster* skeleton = nsMonster::CMonsterList::GetInstance()->CreateMonster("Skeleton");
-		skeleton->SetPosition({ 0.0f,0.0f,100.0f });
-
 
 		return true;
 	}
