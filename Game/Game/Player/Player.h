@@ -77,16 +77,16 @@ namespace nsAWA {
 				return m_action;
 			}
 
-			void InputEnable() {
+			void InputEnableBySystem() {
 
 				//“ü—Í‚Å‚«‚éó‘Ô‚É‚·‚éB
-				m_input.InputEnable();
+				m_input.InputEnableBySystem();
 			}
 
-			void InputDisable() {
+			void InputDisableBySystem() {
 
 				//“ü—Í‚Å‚«‚È‚¢ó‘Ô‚É‚·‚éB
-				m_input.InputDisable();
+				m_input.InputDisableBySystem();
 			}
 
 			CPlayerStatus* GetStatus()override final;

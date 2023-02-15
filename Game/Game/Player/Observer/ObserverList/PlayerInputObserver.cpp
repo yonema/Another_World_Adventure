@@ -18,12 +18,12 @@ namespace nsAWA {
 				case EnObserverEvent::enInputEnable:
 
 					//“ü—Í‚Å‚«‚éó‘Ô‚É‚·‚éB
-					observablePlayer->InputEnable();
+					observablePlayer->InputEnableBySystem();
 					break;
 				case EnObserverEvent::enInputDisable:
 
 					//“ü—Í‚Å‚«‚È‚¢ó‘Ô‚É‚·‚éB
-					observablePlayer->InputDisable();
+					observablePlayer->InputDisableBySystem();
 					break;
 				}
 			}

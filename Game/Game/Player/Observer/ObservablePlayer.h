@@ -51,9 +51,9 @@ namespace nsAWA {
 
 				int GetLevel()const;
 
-				void InputEnable();
+				void InputEnableBySystem();
 
-				void InputDisable();
+				void InputDisableBySystem();
 
 				void ProgressSlayQuest(const std::string& slayMonsterName);
 			};
