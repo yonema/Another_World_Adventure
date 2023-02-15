@@ -48,6 +48,7 @@ NAME,Sword_UseItem,
 SPEED,1,
 LOOP,FALSE,
 EVENT,CoolTimeOn,NONE
+EVENT,InputEnable,NONE
 EVENT,CoolTimeOff,NONE
 *,,
 NAME,Magic,

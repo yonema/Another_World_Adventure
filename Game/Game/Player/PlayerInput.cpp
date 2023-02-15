@@ -175,6 +175,9 @@ namespace nsAWA {
 					&& !Input()->IsPress(EnActionMapping::enSkillPreparation)
 					) {
 
+					//入力不可に設定。
+					InputDisable();
+
 					//アイテムを使用。
 					m_playerAction->UseItem();
 				}
