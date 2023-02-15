@@ -76,16 +76,16 @@ namespace nsAWA {
 				return m_player->GetStatus()->GetLevel();
 			}
 
-			void CObservablePlayer::InputEnable() {
+			void CObservablePlayer::InputEnableBySystem() {
 
 				//“ü—Í‚Å‚«‚éó‘Ô‚É‚·‚éB
-				m_player->InputEnable();
+				m_player->InputEnableBySystem();
 			}
 
-			void CObservablePlayer::InputDisable() {
+			void CObservablePlayer::InputDisableBySystem() {
 
 				//“ü—Í‚Å‚«‚È‚¢ó‘Ô‚É‚·‚éB
-				m_player->InputDisable();
+				m_player->InputDisableBySystem();
 			}
 
 			void CObservablePlayer::ProgressSlayQuest(const std::string& slayMonsterName)

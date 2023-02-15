@@ -30,7 +30,7 @@ namespace nsAWA {
 		void CPlayerInput::Update(bool isAnimationPlaying) {
 
 			//入力できない状態なら早期リターン。
-			if (!m_canInput) { return; }
+			if (!m_canInput || !m_canInputBySystem) { return; }
 
 			//移動・回転入力。
 			{
