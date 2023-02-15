@@ -31,6 +31,7 @@ namespace nsAWA
 			static const char* const m_kCursorSpriteFilePath;
 			static const float m_kCursorXPos;
 			static const float m_kStartYPos;
+			static const float m_kStartYTitleOffset;
 			static const wchar_t* const m_kTitleText[];
 			static const CVector4 m_kFontColor;
 			

@@ -6,6 +6,7 @@
 #include "../Skill/ActiveSkillList.h"
 #include "../UserData.h"
 #include "PlayerManager.h"
+#include "../Humans/HumanTable.h"
 
 #ifdef _DEBUG
 #include "../Monster/Monster.h"
@@ -21,7 +22,7 @@ namespace nsAWA {
 
 	namespace {
 
-		constexpr const char* const kPlayerModelFilePath = "Assets/Models/player.fbx";	//プレイヤーモデルのファイルパス
+		//constexpr const char* const kPlayerModelFilePath = "Assets/Models/player.fbx";	//プレイヤーモデルのファイルパス
 		constexpr float kPlayerModelScale = 0.1f;	//プレイヤーモデルの拡大率
 		constexpr const char* const kPlayerModelTextureRootPath = "player";	//プレイヤーモデルのテクスチャのパス
 	}
@@ -41,43 +42,7 @@ namespace nsAWA {
 			//プレイヤーモデルを生成。
 			CreatePlayerModel();
 
-			//アニメーションに使用するモデルを伝える。
-			m_animation.SetPlayerModelAndAnimEvent(m_modelRenderer);
 
-			//武器管理クラスを初期化。
-			m_weaponManager.Init(this, m_modelRenderer, &m_action);
-
-			//ステータスを初期化。
-			m_status.Init(m_weaponManager.GetWeaponPointer(),m_armor,GetPassiveSkillManager(),GetFeatureManager());
-
-			//入力クラスを初期化。
-			m_input.Init(this, &m_action, &m_animation);
-
-			//アクションクラスを初期化。
-			m_action.Init(m_position, m_rotation, &m_status, GetFeatureManager(),&m_animation);
-
-			//当たり判定を初期化。
-			m_collider.Init(this);
-
-			// UIの処理
-			m_playerBattleStatusUI = NewGO<nsUI::CPlayerBattleStatusUI>();
-			m_playerBattleStatusUI->LoadLevel();
-
-			m_skillIconUI = NewGO<nsUI::CSkillIconUI>();
-			m_skillIconUI->LoadLevel();
-
-			m_itemUI = NewGO<nsUI::CItemUI>();
-			m_itemUI->LoadLevel();
-
-
-			//プレイヤー管理クラスを初期化。
-			CPlayerManager::GetInstance()->Init(this);
-
-			m_menuManager = NewGO<nsUI::CMenuManager>();
-
-			//データをロード。
-			CUserData userData;
-			userData.Load();
 
 			return true;
 		}
@@ -115,6 +80,13 @@ namespace nsAWA {
 		}
 
 		void CPlayer::UpdateActor(float deltaTime) {
+
+			if (m_isInited != true)
+			{
+				InitAfterLoadModel();
+
+				return;
+			}
 
 			//死んでいるなら。
 			if (IsDeath()) {
@@ -276,10 +248,16 @@ namespace nsAWA {
 
 			//プレイヤーモデルの初期化データを定義。
 			SModelInitData modelInitData;
-			modelInitData.modelFilePath = kPlayerModelFilePath;
-			modelInitData.textureRootPath = kPlayerModelTextureRootPath;
+			//modelInitData.modelFilePath = kPlayerModelFilePath;
+			modelInitData.modelFilePath = nsHumans::g_kNameToModelFilePath.at("Player1");
+			//modelInitData.textureRootPath = kPlayerModelTextureRootPath;
 			modelInitData.vertexBias.AddRotationX(nsMath::YM_PIDIV2);
 			modelInitData.vertexBias.AddRotationZ(nsMath::YM_PI);
+			modelInitData.SetFlags(EnModelInitDataFlags::enCullingOff);
+			modelInitData.SetFlags(EnModelInitDataFlags::enLoadingAsynchronous);
+			modelInitData.SetFlags(EnModelInitDataFlags::enRegisterAnimationBank);
+			modelInitData.SetFlags(EnModelInitDataFlags::enRegisterTextureBank);
+			modelInitData.SetFlags(EnModelInitDataFlags::enShadowCaster);
 
 
 			//アニメーションの数を取得。
@@ -305,6 +283,59 @@ namespace nsAWA {
 			m_modelRenderer->Init(modelInitData);
 			m_modelRenderer->SetScale(kPlayerModelScale);
 		}
+
+
+		void CPlayer::InitAfterLoadModel()
+		{
+			if (m_modelRenderer->IsLoadingAsynchronous())
+			{
+				return;
+			}
+
+			//アニメーションに使用するモデルを伝える。
+			m_animation.SetPlayerModelAndAnimEvent(m_modelRenderer);
+
+			//武器管理クラスを初期化。
+			m_weaponManager.Init(this, m_modelRenderer, &m_action);
+
+			//ステータスを初期化。
+			m_status.Init(m_weaponManager.GetWeaponPointer(), m_armor, GetPassiveSkillManager(), GetFeatureManager());
+
+			//入力クラスを初期化。
+			m_input.Init(this, &m_action, &m_animation);
+
+			//アクションクラスを初期化。
+			m_action.Init(m_position, m_rotation, &m_status, GetFeatureManager(), &m_animation);
+
+			//当たり判定を初期化。
+			m_collider.Init(this);
+
+			// UIの処理
+			m_playerBattleStatusUI = NewGO<nsUI::CPlayerBattleStatusUI>();
+			m_playerBattleStatusUI->LoadLevel();
+
+			m_skillIconUI = NewGO<nsUI::CSkillIconUI>();
+			m_skillIconUI->LoadLevel();
+
+			m_itemUI = NewGO<nsUI::CItemUI>();
+			m_itemUI->LoadLevel();
+
+
+			//プレイヤー管理クラスを初期化。
+			CPlayerManager::GetInstance()->Init(this);
+
+			m_menuManager = NewGO<nsUI::CMenuManager>();
+
+			//データをロード。
+			CUserData userData;
+			userData.Load();
+
+			m_isInited = true;
+
+			return;
+		}
+
+
 
 		CPlayerStatus* CPlayer::GetStatus() {
 

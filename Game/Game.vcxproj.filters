@@ -288,8 +288,8 @@
     <ClCompile Include="Game\Event\EventCut\ReceiveSkillEventCut.cpp" />
     <ClCompile Include="Game\Event\EventCut\EventCutBase.cpp" />
     <ClCompile Include="Game\Event\ProgressManagement\EventSaveData.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="Game\UI\Story\ConversationPlayerInputDisable.cpp" />
+  </ItemGroup>  <ItemGroup>
     <ClInclude Include="Game\Attribute.h" />
     <ClInclude Include="YonemaEngine\Graphics\Fade.h" />
     <ClInclude Include="Game\Event\EventNameTable.h" />
@@ -603,9 +603,9 @@
     <ClInclude Include="Game\Event\EventCut\EventCutInclude.h" />
     <ClInclude Include="Game\Event\EventCut\ReceiveSkillEventCut.h" />
     <ClInclude Include="Game\Event\ProgressManagement\EventSaveData.h" />
+    <ClInclude Include="Game\UI\Story\ConversationPlayerInputDisable.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Images\StarMan.png" />
+  <ItemGroup>    <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\BasicHeader.hlsli" />

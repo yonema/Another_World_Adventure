@@ -110,6 +110,11 @@ namespace nsAWA
 				return m_eventTriggerMap;
 			}
 
+			constexpr auto& GetEventUtilPointMap() const noexcept
+			{
+				return m_eventUtilPointMap;
+			}
+
 			constexpr auto& GetEventSetFuncPool() const noexcept
 			{
 				return m_eventSetFuncPool;
@@ -122,7 +127,7 @@ namespace nsAWA
 
 			EnEventCsvType CheckEventCsvType(const std::string& data);
 
-			void InitEventTriggerTRS();
+			void LoadLevelForEvent();
 
 			void PushEventTrigger(const std::string& name, const STRS& trs);
 
@@ -137,6 +142,7 @@ namespace nsAWA
 			std::unordered_map<std::string, CEventProgress> m_eventProgressMap = {};
 			std::unordered_map<std::string, SEventMaterial> m_eventMaterialMap = {};
 			nsWorld::TRSMap m_eventTriggerMap = {};
+			std::unordered_map<std::string, STRS> m_eventUtilPointMap = {};
 			CEventSetFuncPool* m_eventSetFuncPool = nullptr;
 		};
 

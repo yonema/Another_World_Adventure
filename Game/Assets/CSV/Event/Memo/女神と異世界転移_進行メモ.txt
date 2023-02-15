@@ -1,0 +1,9 @@
+女神と異世界転移
+Set
+	OpeningSceneの初期化が終わる
+Conversation
+	会話1
+Set
+	スキル選びイベントカット
+Conversation
+	会話2

@@ -18,9 +18,11 @@ namespace nsAWA
 			"StrongAttack"
 		};
 		const char* const CReceiveSkillEventCut::m_kCursorSpriteFilePath =
-			"Assets/Images/Menu/Cursor/LeftUp.png";
-		const float CReceiveSkillEventCut::m_kCursorXPos = -300.0f;
-		const float CReceiveSkillEventCut::m_kStartYPos = 150.0f;
+			"Assets/Images/Institution/Guild/Arrow.png";
+		const float CReceiveSkillEventCut::m_kCursorXPos = -200.0f;
+		const float CReceiveSkillEventCut::m_kStartYPos = 170.0f;
+		const float CReceiveSkillEventCut::m_kStartYTitleOffset = 60.0f;
+
 
 		const wchar_t* const CReceiveSkillEventCut::m_kTitleText[] =
 		{
@@ -44,7 +46,7 @@ namespace nsAWA
 
 			SFontParameter fontParam;
 			fontParam.anchor = EnAnchors::enTopCenter;
-			fontParam.pivot = { 0.5f,0.0f };
+			fontParam.pivot = { 0.5f,0.5f };
 			fontParam.color = m_kFontColor;
 
 			m_activeSkillListFR.reserve(activeSkillList.size());
@@ -109,7 +111,7 @@ namespace nsAWA
 				param.anchor = EnAnchors::enTopCenter;
 				param.pivot = { 0.5f,1.0f };
 				param.color = m_kFontColor;
-				param.position = { 0.0f, m_kStartYPos - 30.0f };
+				param.position = { 0.0f, m_kStartYPos - m_kStartYTitleOffset };
 				m_titleFR = NewGO<CFontRenderer>();
 				m_titleFR->Init(param);
 			}
@@ -132,7 +134,8 @@ namespace nsAWA
 				m_titleBackWindow = NewGO<CSpriteRenderer>();
 				m_titleBackWindow->Init(initData);
 				m_titleBackWindow->SetAnchor(EnAnchors::enTopCenter);
-				m_titleBackWindow->SetPosition({ 0.0f,  m_kStartYPos - 60.0f });
+				m_titleBackWindow->SetPosition(
+					{ 0.0f,  m_kStartYPos - m_kStartYTitleOffset - 20.0f });
 			}
 
 			{
@@ -150,12 +153,13 @@ namespace nsAWA
 			m_cursorSR = NewGO<CSpriteRenderer>();
 			SSpriteInitData spriteInitData = {};
 			spriteInitData.filePath = m_kCursorSpriteFilePath;
-			spriteInitData.spriteSize = { 61.0f, 35.0f };
+			spriteInitData.spriteSize = { 48.0f, 48.0f };
 			spriteInitData.alphaBlendMode = EnAlphaBlendMode::enTrans;
 			m_cursorSR->Init(spriteInitData);
 			m_cursorSR->SetAnchor(EnAnchors::enTopCenter);
-			m_cursorSR->SetPivot({ 0.0f,0.0f });
+			m_cursorSR->SetPivot({ 1.0f,0.5f });
 			m_cursorSR->SetPosition({ m_kCursorXPos, m_kStartYPos });
+			m_cursorSR->SetScale(1.5f);
 
 
 			HiddenAllFont();
@@ -172,12 +176,12 @@ namespace nsAWA
 			m_checkSkillFR->Init(selectedFontParam);
 
 			selectedFontParam.text = L"‚Í‚¢";
-			selectedFontParam.position = { -200.0, 50.0f };
+			selectedFontParam.position = { -150.0f, 50.0f };
 			m_yesFR = NewGO<CFontRenderer>();
 			m_yesFR->Init(selectedFontParam);
 
 			selectedFontParam.text = L"‚¢‚¢‚¦";
-			selectedFontParam.position = { 200.0, 50.0f };
+			selectedFontParam.position = { 150.0f, 50.0f };
 			m_noFR = NewGO<CFontRenderer>();
 			m_noFR->Init(selectedFontParam);
 
@@ -421,7 +425,7 @@ namespace nsAWA
 
 			m_isYes = true;
 			auto pos = m_yesFR->GetPosition();
-			pos.x -= 100.0f;
+			pos.x -= 50.0f;
 			m_cursorSR->SetPosition(pos);
 			m_cursorSR->SetAnchor(m_yesFR->GetAnchor());
 
@@ -479,7 +483,7 @@ namespace nsAWA
 				pos = m_yesFR->GetPosition();
 			}
 
-			pos.x -= 100.0f;
+			pos.x -= 50.0f;
 			m_cursorSR->SetPosition(pos);
 
 

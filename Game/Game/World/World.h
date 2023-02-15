@@ -60,6 +60,8 @@ namespace nsAWA
 				return m_mode;
 			}
 
+			bool IsAllModelLoaded() const noexcept;
+
 		private:
 			void TryLoadLevel();
 

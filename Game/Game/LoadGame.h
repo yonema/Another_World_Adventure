@@ -34,6 +34,8 @@ namespace nsAWA {
 			m_playerSpawnQuaternion = rotation;
 		}
 
+		bool IsPlayerInited() const noexcept;
+
 	private:
 		void CreateGameList();
 
