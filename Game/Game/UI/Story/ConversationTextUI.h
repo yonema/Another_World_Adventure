@@ -86,12 +86,12 @@ namespace nsAWA
             const CVector2 m_kFirstLinePosition = CVector2(-490.0f, 220.0f);    //一行目の文の座標
             const CVector2 m_kSecondLinePosition = CVector2(-490.0f, 275.0f);   //二行目の文の座標
             const float m_kSentenceScale = 0.75f;                               //文の拡大率
-            const std::wstring m_playerName = L"ヨゾラ";                        //プレイヤーネーム(TODO:後から変更できるようにする)
 
 
             bool m_isInited = false;                                //初期化済み?
             bool m_allTextEnd = false;                              //すべての文章を表示し終わったか?
 
+            std::wstring m_playerName = L"冒険者";                  //プレイヤーネーム
             CFontRenderer* m_nameRenderer = nullptr;                //名前のレンダラー
             CFontRenderer* m_firstLineRenderer = nullptr;           //一行目のレンダラー
             CFontRenderer* m_secondLineRenderer = nullptr;          //二行目のレンダラー

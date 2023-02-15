@@ -51,26 +51,17 @@ namespace nsAWA
 
         void CGuildWindowUI::Update(float deltaTime)
         {
-            if (m_playingAnimation == true || m_isInputDisable == true)
+            if (m_playingAnimation == true)
             {
-                m_disableTime += deltaTime;
-
-                if (m_disableTime >= m_kWaitTime)
-                {
-                    m_disableTime = 0.0f;
-                    m_isInputDisable = false;
-                }
-
                 return;
             }
 
-            if (Input()->GetVirtualAxis(EnAxisMapping::enForward) >= 0.8f)
+            if (Input()->GetVirtualAxis(EnAxisMapping::enForward) >= 0.8f && m_canChangeItem)
             {
                 SelectUp();
-
                 return;
             }
-            else if(Input()->GetVirtualAxis(EnAxisMapping::enForward) <= -0.8f)
+            else if(Input()->GetVirtualAxis(EnAxisMapping::enForward) <= -0.8f && m_canChangeItem)
             {
                 SelectDown();
                 return;
@@ -95,6 +86,11 @@ namespace nsAWA
 
                 m_level.PlayAnimation("InnDisappear");
                 return;
+            }
+
+            if (abs(Input()->GetVirtualAxis(EnAxisMapping::enForward)) < 0.8f)
+            {
+                m_canChangeItem = true;
             }
         }
 
@@ -165,7 +161,7 @@ namespace nsAWA
 
             m_cursorRenderer->SetPosition(position);
 
-            m_isInputDisable = true;
+            m_canChangeItem = false;
         }
 
         void CGuildWindowUI::SelectDown()
@@ -181,7 +177,7 @@ namespace nsAWA
 
             m_cursorRenderer->SetPosition(position);
 
-            m_isInputDisable = true;
+            m_canChangeItem = false;
         }
         
         void CGuildWindowUI::SelectOK()
