@@ -17,6 +17,7 @@ namespace nsYMEngine
 			// ‚±‚±‚©‚ç‰º‚ÉŠg’£‚µ‚Ä‚¢‚Á‚Ä‚­‚¾‚³‚¢B
 			enPlayer,
 			enPlayerAttack,
+			enPlayerCharacon,
 			enMonster,
 			enItemRigidBody
 		};

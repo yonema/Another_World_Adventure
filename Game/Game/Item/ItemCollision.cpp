@@ -105,6 +105,7 @@ namespace nsAWA {
 
 			//投げたアイテムがプレイヤー以外の何か（自身の剛体を除く）と接触した。
 			if (otherData->GetPhysicsAttribute() != EnPhysicsAttributes::enPlayer
+				&& otherData->GetPhysicsAttribute() != EnPhysicsAttributes::enPlayerCharacon
 				&& otherData->GetPhysicsAttribute() != EnPhysicsAttributes::enPlayerAttack
 				)
 			{
