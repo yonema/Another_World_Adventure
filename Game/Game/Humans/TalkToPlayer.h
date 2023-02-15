@@ -12,7 +12,7 @@ namespace nsAWA
 	}
 	namespace nsUI
 	{
-		class CConversationWindowUI;
+		class CConversationPlayerInputDisable;
 	}
 }
 
@@ -62,7 +62,7 @@ namespace nsAWA
 
 		private:
 			CHumanManager* m_manager = nullptr;
-			nsUI::CConversationWindowUI* m_conversationWindowUI = nullptr;
+			nsUI::CConversationPlayerInputDisable* m_conversation = nullptr;
 			CSpriteRenderer* m_talkingCursorSR = nullptr;
 			CHuman* m_talkingHuman = nullptr;
 			bool m_isTalking = false;

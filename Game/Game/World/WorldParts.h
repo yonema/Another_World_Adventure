@@ -47,6 +47,8 @@ namespace nsAWA
 
 			void Build(nsHumans::CHumanManager* humanManager);
 
+			bool IsAllModelLoaded() const noexcept;
+
 		private:
 
 			void Terminate();

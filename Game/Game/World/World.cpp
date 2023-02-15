@@ -145,6 +145,12 @@ namespace nsAWA
 			return;
 		}
 
+		bool CWorld::IsAllModelLoaded() const noexcept
+		{
+			return m_worldParts.IsAllModelLoaded();
+		}
+
+
 
 	}
 }

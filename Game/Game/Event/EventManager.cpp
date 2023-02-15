@@ -145,7 +145,7 @@ namespace nsAWA
 
 
 
-			InitEventTriggerTRS();
+			LoadLevelForEvent();
 
 			m_eventSetFuncPool = NewGO<CEventSetFuncPool>();
 
@@ -195,9 +195,12 @@ namespace nsAWA
 		}
 
 
-		void CEventManager::InitEventTriggerTRS()
+		void CEventManager::LoadLevelForEvent()
 		{
 			CLevel3D level3D;
+
+			CQuaternion rot;
+			rot.SetRotationXDeg(-90.0f);
 
 			level3D.Init(
 				m_kLevelFilePath,
@@ -210,7 +213,21 @@ namespace nsAWA
 						PushEventTrigger(
 							name, STRS(chipData.position, chipData.rotation, chipData.scale));
 					}
+					else if (chipData.ForwardMatchName("EventUtilPoint_"))
+					{
+						const char* name = chipData.name.c_str();
+						name += strlen("EventUtilPoint_");
 
+						auto itr = m_eventUtilPointMap.find(name);
+						if (itr != m_eventUtilPointMap.end())
+						{
+							nsGameWindow::MessageBoxWarning(L"ìØÇ∂ñºëOÇÃEventUtilPointÇ™ÉåÉxÉãÇ…ê›íËÇ≥ÇÍÇƒÇ¢Ç‹Ç∑ÅB");
+							return true;
+						}
+
+						m_eventUtilPointMap.emplace(
+							name, STRS(chipData.position, chipData.rotation * rot, chipData.scale));
+					}
 					return true;
 				});
 

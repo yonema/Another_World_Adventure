@@ -56,11 +56,10 @@ namespace nsAWA
 
 		void CYonejiTestScene::InitAfterBaseLoaded(float deltaTime)
 		{
-			if (m_loadGame != nullptr || m_world->IsLevelLoaded() != true)
+			if (m_loadGame != nullptr || m_world->IsAllModelLoaded() != true)
 			{
 				return;
 			}
-			m_isLoaded = true;
 			m_loadGame = NewGO<CLoadGame>();
 			m_loadGame->SetPlayerSpawnPosition(m_world->GetPlayerSpawnPosition());
 			m_loadGame->SetPlayerSpawnRotation(m_world->GetPlayerSpawnRotation());
@@ -74,6 +73,15 @@ namespace nsAWA
 			return;
 		}
 
+		bool CYonejiTestScene::IsLoaded() const noexcept
+		{
+			if (m_loadGame == nullptr)
+			{
+				return false;
+			}
+
+			return m_loadGame->IsPlayerInited();
+		}
 
 
 

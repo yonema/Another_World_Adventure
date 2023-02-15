@@ -128,6 +128,7 @@ namespace nsAWA
 				modelInitData.modelFilePath = TRSList.first;
 				modelInitData.SetFlags(EnModelInitDataFlags::enShadowCaster);
 				modelInitData.SetFlags(EnModelInitDataFlags::enRegisterTextureBank);
+				modelInitData.SetFlags(EnModelInitDataFlags::enLoadingAsynchronous);
 				modelInitData.maxInstance = static_cast<unsigned int>(TRSList.second.size());
 
 				auto* mr = NewGO<CModelRenderer>();
@@ -243,6 +244,28 @@ namespace nsAWA
 
 			return;
 		}
+
+		bool CWorldParts::IsAllModelLoaded() const noexcept
+		{
+			if (m_modelRendererArray.empty())
+			{
+				return false;
+			}
+
+			bool allLoaded = true;
+
+			for (const auto& model : m_modelRendererArray)
+			{
+				if (model->IsLoadingAsynchronous())
+				{
+					allLoaded = false;
+					break;
+				}
+			}
+
+			return allLoaded;
+		}
+
 
 
 
