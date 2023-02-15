@@ -203,33 +203,29 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 
-				////クールタイム中に設定。
-				//CoolTimeOn();
-				//
-				////スキル１使用。
-				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
+				//クールタイム中に設定。
+				CoolTimeOn();
+				
+				//スキル１使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_1);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
 
-				////クールタイム中に設定。
-				//CoolTimeOn();
-				//
-				////スキル２使用。
-				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
+				//クールタイム中に設定。
+				CoolTimeOn();
+				
+				//スキル２使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_2);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
 
-				//データをセーブ。
-				CUserData userData;
-				userData.Save();
-
-				////クールタイム中に設定。
-				//CoolTimeOn();
-				//
-				////スキル３使用。
-				//m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_3);
+				//クールタイム中に設定。
+				CoolTimeOn();
+				
+				//スキル３使用。
+				m_playerAction->UseActiveSkill(EnActiveSkillListNumber::enActiveSkill_3);
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_4)) {

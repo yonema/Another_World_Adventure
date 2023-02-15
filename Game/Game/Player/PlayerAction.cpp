@@ -186,6 +186,13 @@ namespace nsAWA {
 
 		void CPlayerAction::UseActiveSkill(EnActiveSkillListNumber activeSkillNum) {
 
+			//アクティブスキル使用中なら。
+			if (m_state == EnPlayerState::enUseActiveSkill) {
+
+				//早期リターン。
+				return;
+			}
+
 			//消費MPを取得。
 			float useMP = m_activeSkill[static_cast<int>(activeSkillNum)]->GetUseMP();
 

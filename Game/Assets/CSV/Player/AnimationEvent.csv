@@ -1,12 +1,12 @@
 SIZE,Medium,,,,,
 POSITION,0,8,10,,,
-FEATURE,Damage,Normal,Magical,Water,20,TRUE
+FEATURE,Damage,Normal,Magical,Fire,20,TRUE
 *,,,,,,
 SIZE,Medium,,,,,
 POSITION,0,8,10,,,
-FEATURE,Damage,Normal,Magical,Water,20,TRUE
+FEATURE,Damage,Normal,Magical,Water,30,TRUE
 *,,,,,,
 SIZE,Medium,,,,,
 POSITION,0,8,10,,,
-FEATURE,Damage,Normal,Magical,Water,20,TRUE
+FEATURE,Damage,Normal,Magical,Lightning,40,TRUE
 *,,,,,,

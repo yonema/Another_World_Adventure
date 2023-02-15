@@ -34,7 +34,6 @@ namespace nsAWA {
 
 		private:
 			bool m_released = false;				//破棄された？
-			CPhysicsTriggerObject m_triggerBox;		//当たり判定
 			const CVector3* m_position = nullptr;	//座標
 
 			CPlayer* m_player = nullptr;	//プレイヤーのポインタ
