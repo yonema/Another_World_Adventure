@@ -85,6 +85,10 @@ namespace nsAWA
 
 						return true;
 					}
+					else if (chipData.ForwardMatchName("EventTrigger_"))
+					{
+						return true;
+					}
 					else if (chipData.ForwardMatchName(
 						nsMonster::nsMonsterPop::CMonsterPopManager::m_kMonsterPopPrefix))
 					{
