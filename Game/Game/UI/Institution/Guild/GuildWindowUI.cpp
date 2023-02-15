@@ -3,6 +3,7 @@
 
 #include "../../SpriteUI.h"
 #include "GuildQuestText.h"
+#include "../../../Player/Player.h"
 
 namespace nsAWA
 {
@@ -103,17 +104,42 @@ namespace nsAWA
 
 
             auto* questText1 = NewGO<CGuildQuestText>(EnGOPriority::enMax);
-            questText1->SetQuestName(L"ギヤラ討伐!");
+            questText1->SetQuestName("ギヤラ討伐! 1体");
+            questText1->SetEventOnReceive([]()
+                {
+                    nsPlayer::CPlayer* player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+
+                    if (player != nullptr)
+                    {
+                        player->SetSlayQuest("ギヤラ討伐! 1体","Giyara",1);
+                    }
+                }
+            );
+
+            questText1->SetEventOnClear([]() 
+                {
+                    //依頼クリア時の処理
+                });
+
             m_showQuests.emplace_back(questText1);
             auto* questText2 = NewGO<CGuildQuestText>(EnGOPriority::enMax);
-            questText2->SetQuestName(L"ドラゴン討伐!");
+            questText2->SetQuestName("スケルトン討伐! 3体");
             m_showQuests.emplace_back(questText2);
-            auto* questText3 = NewGO<CGuildQuestText>(EnGOPriority::enMax);
-            questText3->SetQuestName(L"グール討伐!");
-            m_showQuests.emplace_back(questText3);
-            auto* questText4 = NewGO<CGuildQuestText>(EnGOPriority::enMax);
-            questText4->SetQuestName(L"雷神討伐!");
-            m_showQuests.emplace_back(questText4);
+            questText2->SetEventOnReceive([]()
+                {
+                    nsPlayer::CPlayer* player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+
+                    if (player != nullptr)
+                    {
+                        player->SetSlayQuest("スケルトン討伐! 3体", "Skeleton", 3);
+                    }
+                }
+            );
+
+            questText2->SetEventOnClear([]()
+                {
+                    //依頼クリア時の処理
+                });
 
             int count = 0;
             for (CGuildQuestText* quest : m_showQuests)
