@@ -13,6 +13,9 @@ namespace nsAWA {
 		//カメラアクションクラス
 		class CCameraAction : nsUtils::SNoncopyable
 		{
+		private:
+			static CVector3 m_startAddCameraVec;		//開始時点での加算ベクトル
+
 		public:
 			void Init(nsPlayer::CPlayer* player);
 
@@ -30,6 +33,17 @@ namespace nsAWA {
 				
 				return m_targetPosition;
 			}
+
+			static inline void SetStartAddCameraVec(const CVector3& vec) noexcept
+			{
+				m_startAddCameraVec = vec;
+			}
+
+			static inline const CVector3& GetStartAddCameraVec() noexcept
+			{
+				return m_startAddCameraVec;
+			}
+
 		private:
 			nsPlayer::CPlayer* m_player = nullptr;			//プレイヤー
 			CVector3 m_position = CVector3::Zero();			//視点

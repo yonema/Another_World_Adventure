@@ -3,7 +3,8 @@ namespace nsAWA
 {
 	namespace nsScene
 	{
-		ISceneBase* ISceneBase::m_currentScene = nullptr;;
+		ISceneBase* ISceneBase::m_currentScene = nullptr;
+		bool ISceneBase::m_nowCreating = false;
 
 
 	}

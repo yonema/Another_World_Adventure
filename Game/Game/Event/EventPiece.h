@@ -95,6 +95,7 @@ namespace nsAWA
 			CVector3 m_position = CVector3::Zero();
 			bool m_isClear = false;
 			std::function<bool(void)> m_setFunc = [](){ return true; };
+			bool m_isStartEvent = false;
 		};
 
 	}

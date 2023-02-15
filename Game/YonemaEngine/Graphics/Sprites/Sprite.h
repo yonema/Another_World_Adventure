@@ -23,6 +23,7 @@ namespace nsYMEngine
 				DXGI_FORMAT colorFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
 				nsRenderers::EnRendererPriority priority = nsRenderers::EnRendererPriority::enMid;
 				nsDx12Wrappers::CConstantBuffer* pExpandConstantBuffer = nullptr;
+				bool topSprite = false;
 			};
 
 			class CSprite : public nsRenderers::IRenderer

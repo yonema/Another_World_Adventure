@@ -4,7 +4,7 @@ namespace nsAWA
 {
     namespace nsUI
     {
-        class CSpriteUI;
+        class CGuildQuestText;
 
         class CGuildWindowUI : public IGameObject
         {
@@ -15,23 +15,22 @@ namespace nsAWA
 
             void Update(float deltaTime) override final;
 
+            bool IsEnd()
+            {
+                return m_endFlag;
+            }
         public:
             CGuildWindowUI() = default;
             ~CGuildWindowUI() = default;
 
-        public:
-            void LoadLevel(const char* tdlFilePath);
-            /**
-             * @brief 受け取ったデータを元に対応した画像を読み込む
-             * @param buttonUINum ウィンドウの識別用番号
-             * @param imgData レベルデータ
-            */
-            void LoadWindowSprite(const int windowNum, const nsLevel2D::SLevel2DSpriteData& imgData);
-
         private:
-            void Animation(); // UIのアニメーション
+            void InitQuests();
 
+            void SelectUp();
 
+            void SelectDown();
+
+            void SelectOK();
         private: // enum
             enum EnWindowNumber
             {
@@ -42,14 +41,20 @@ namespace nsAWA
 
 
         private: // constant data member
-            static const char* m_kSpriteWindowFilePath[EnWindowNumber::enMaxWindowNumber];
-
+            const char* m_kGuildWindowFilePath = "Assets/Level2D/LevelFiles/InnUI.tdl"; //仮
+            const CVector2 m_kTextStandardPosition = CVector2(-480.0f, -200.0f);
+            const CVector2 m_kCursorStandardPosition = CVector2(-500.0f, -200.0f);
+            const float m_kOffset = 75;
+            const float m_kWaitTime = 0.16f;
 
         private: // data member
             nsLevel2D::CLevel2D m_level;
-
-            // ボタンの画像
-            CSpriteUI* m_spriteWindow[EnWindowNumber::enMaxWindowNumber] = { nullptr };
+            bool m_playingAnimation = false;
+            std::vector<CGuildQuestText*> m_showQuests;
+            bool m_endFlag = false;
+            CSpriteRenderer* m_cursorRenderer = nullptr;
+            int m_selectingIndex = 0;
+            bool m_canChangeItem = true;
         };
     }
 }
