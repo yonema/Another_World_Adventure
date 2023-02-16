@@ -116,5 +116,35 @@ namespace nsAWA
             // ゲージの長さ（横幅）を適用
             m_spriteMPBar->SetScale({ m_barWidthSize,m_kMaxBarWidthSize,1.0f });
         }
+
+        void CPlayerMPUI::ActivatePlayerBattleStatusDrawingFlag()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            m_spriteMPBar->SetDrawingFlag(true);
+            m_spriteBase->SetDrawingFlag(true);
+            m_spriteFrame->SetDrawingFlag(true);
+
+            m_spriteMPBar->Activate();
+            m_spriteBase->Activate();
+            m_spriteFrame->Activate();
+        }
+
+        void CPlayerMPUI::DeactivatePlayerBattleStatusDrawingFlag()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            m_spriteMPBar->SetDrawingFlag(false);
+            m_spriteBase->SetDrawingFlag(false);
+            m_spriteFrame->SetDrawingFlag(false);
+
+            m_spriteMPBar->Deactivate();
+            m_spriteBase->Deactivate();
+            m_spriteFrame->Deactivate();
+        }
     }
 }

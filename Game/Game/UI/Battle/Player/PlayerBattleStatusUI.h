@@ -42,6 +42,10 @@ namespace nsAWA
                 const float sp, const float maxSP
             );
 
+            void ActivatePlayerBattleStatusDrawingFlag();
+
+            void DeactivatePlayerBattleStatusDrawingFlag();
+
         private: // constant member
             ////////////////////////////////////////////////////////////
             // ファイルパス

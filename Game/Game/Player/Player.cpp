@@ -17,14 +17,15 @@
 #include "../UI/Battle/Skill/SkillIconUI.h"
 #include "../UI/Battle/Item/ItemUI.h"
 #include "../UI/Menu/MenuManager.h"
+#include "../UI/Battle/Player/PlayerUIManager.h"
 
 namespace nsAWA {
 
 	namespace {
 
-		//constexpr const char* const kPlayerModelFilePath = "Assets/Models/player.fbx";	//ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚Ìƒtƒ@ƒCƒ‹ƒpƒX
-		constexpr float kPlayerModelScale = 0.1f;	//ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ÌŠg‘å—¦
-		constexpr const char* const kPlayerModelTextureRootPath = "player";	//ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ÌƒeƒNƒXƒ`ƒƒ‚ÌƒpƒX
+		//constexpr const char* const kPlayerModelFilePath = "Assets/Models/player.fbx";	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹
+		constexpr float kPlayerModelScale = 0.1f;	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã®æ‹¡å¤§ç‡
+		constexpr const char* const kPlayerModelTextureRootPath = "player";	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒ‘ã‚¹
 	}
 
 	namespace nsPlayer {
@@ -33,54 +34,50 @@ namespace nsAWA {
 
 		bool CPlayer::StartSub() {
 
-			//ƒvƒŒƒCƒ„[ŠÇ—ƒNƒ‰ƒX‚É©g‚ğİ’èB
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç®¡ç†ã‚¯ãƒ©ã‚¹ã«è‡ªèº«ã‚’è¨­å®šã€‚
 			CPlayerManager::GetInstance()->SetPlayer(this);
 
-			//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ‰Šú‰»B
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’åˆæœŸåŒ–ã€‚
 			m_animation.Init(this, &m_input, &m_action);
 
-			//ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ğ¶¬B
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã‚’ç”Ÿæˆã€‚
 			CreatePlayerModel();
-
-
 
 			return true;
 		}
 
 		void CPlayer::OnDestroySub() {
 
-			//ƒvƒŒƒCƒ„[ŠÇ—ƒNƒ‰ƒX‚ğ”jŠüB
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’ç ´æ£„ã€‚
 			CPlayerManager::GetInstance()->DeleteInstance();
 
-			//ƒAƒNƒVƒ‡ƒ“ƒNƒ‰ƒX‚ğ”jŠüB
+			//ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹ã‚’ç ´æ£„ã€‚
 			m_action.Release();
 
-			//“ü—ÍƒNƒ‰ƒX‚ğ”jŠüB
+			//å…¥åŠ›ã‚¯ãƒ©ã‚¹ã‚’ç ´æ£„ã€‚
 			m_input.Release();
 
-			//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ”jŠüB
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç ´æ£„ã€‚
 			m_animation.Release();
 
-			//•Ší‚ğ”jŠüB
+			//æ­¦å™¨ã‚’ç ´æ£„ã€‚
 			m_weaponManager.Release();
 
-			//–h‹ï‚ğ”jŠüB
+			//é˜²å…·ã‚’ç ´æ£„ã€‚
 			if (m_armor != nullptr) {
 				m_armor->Release();
 				m_armor = nullptr;
 			}
 
-			//“–‚½‚è”»’è‚ğ”jŠüB
+			//å½“ãŸã‚Šåˆ¤å®šã‚’ç ´æ£„ã€‚
 			m_collider.Release();
 
-			// UI‚ğ”jŠüB
-			DeleteGO(m_playerBattleStatusUI);
-			DeleteGO(m_skillIconUI);
-			DeleteGO(m_menuManager);
+			// UIã‚’ç ´æ£„ã€‚
+			DeleteGO(m_playerUIManager);
 		}
 
 		void CPlayer::UpdateActor(float deltaTime) {
-
+    
 			if (m_isInited != true)
 			{
 				InitAfterLoadModel();
@@ -88,68 +85,69 @@ namespace nsAWA {
 				return;
 			}
 
-			//€‚ñ‚Å‚¢‚é‚È‚çB
+			// UIã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’æ¸¡ã™
+			m_playerUIManager->SetUIPlayerStatus(
+				m_status.GetHP(), m_status.GetMaxHP(),
+				m_status.GetMP(), m_status.GetMaxMP(),
+				m_status.GetSP(), m_status.GetMaxSP()
+			);
+
+
+			//æ­»ã‚“ã§ã„ã‚‹ãªã‚‰ã€‚
 			if (IsDeath()) {
 
-				//€–Só‘Ô‚ÉB
+				//æ­»äº¡çŠ¶æ…‹ã«ã€‚
 				m_action.SetState(EnPlayerState::enDeath);
 
-				//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğXVB
+				//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’æ›´æ–°ã€‚
 				m_animation.Update(m_action.IsChangeState(), m_action.GetState());
 
-				//ƒXƒe[ƒg‚Ì•ÏXó‹µ‚ğ‰Šú‰»B
+				//ã‚¹ãƒ†ãƒ¼ãƒˆã®å¤‰æ›´çŠ¶æ³ã‚’åˆæœŸåŒ–ã€‚
 				m_action.ResetChangeState();
 
-				//•ŠíŠÇ—ƒNƒ‰ƒX‚ğXVB
+				//æ­¦å™¨ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’æ›´æ–°ã€‚
 				m_weaponManager.Update();
 
-				//ƒRƒ‰ƒCƒ_[‚ğ”jŠüB
+				//ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ç ´æ£„ã€‚
 				if (!m_collider.IsReleased()) {
 
 					m_collider.Release();
 				}
 
-				// UI‚ÉƒvƒŒƒCƒ„[‚ÌƒXƒe[ƒ^ƒX‚ğ“n‚·
+				// UIã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’æ¸¡ã™
 				m_playerBattleStatusUI->SetUIPlayerStatus(
 					m_status.GetHP(), m_status.GetMaxHP(),
 					m_status.GetMP(), m_status.GetMaxMP(),
 					m_status.GetSP(), m_status.GetMaxSP()
 				);
 
-				//‚±‚êˆÈã‚Í‰½‚à‚¹‚¸I—¹B
+				//ã“ã‚Œä»¥ä¸Šã¯ä½•ã‚‚ã›ãšçµ‚äº†ã€‚
 				return;
 			}
 
-			//“ü—ÍƒNƒ‰ƒX‚ğXVB
+			//å…¥åŠ›ã‚¯ãƒ©ã‚¹ã‚’æ›´æ–°ã€‚
 			m_input.Update(m_modelRenderer->IsPlaying());
 
-			//ƒvƒŒƒCƒ„[ƒAƒNƒVƒ‡ƒ“ƒNƒ‰ƒX‚ğXVB
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹ã‚’æ›´æ–°ã€‚
 			m_action.Update(deltaTime);
 
-			//ƒXƒe[ƒ^ƒX‚ğXVB
+			//ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’æ›´æ–°ã€‚
 			m_status.Update();
 
-			//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğXVB
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’æ›´æ–°ã€‚
 			m_animation.Update(m_action.IsChangeState(), m_action.GetState());
 
-			//ƒXƒe[ƒg‚Ì•ÏXó‹µ‚ğ‰Šú‰»B
+			//ã‚¹ãƒ†ãƒ¼ãƒˆã®å¤‰æ›´çŠ¶æ³ã‚’åˆæœŸåŒ–ã€‚
 			m_action.ResetChangeState();
 
-			//•ŠíŠÇ—ƒNƒ‰ƒX‚ğXVB
+			//æ­¦å™¨ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’æ›´æ–°ã€‚
 			m_weaponManager.Update();
 
-			//ƒgƒŠƒK[‚ğXVB
+			//ãƒˆãƒªã‚¬ãƒ¼ã‚’æ›´æ–°ã€‚
 			m_collider.Update();
 
-			// UI‚ÉƒvƒŒƒCƒ„[‚ÌƒXƒe[ƒ^ƒX‚ğ“n‚·
-			m_playerBattleStatusUI->SetUIPlayerStatus(
-				m_status.GetHP(), m_status.GetMaxHP(),
-				m_status.GetMP(), m_status.GetMaxMP(),
-				m_status.GetSP(), m_status.GetMaxSP()
-			);
-
 #ifdef _DEBUG
-			//ƒvƒŒƒCƒ„[‚ÌHP‚ğ•\¦B
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®HPã‚’è¡¨ç¤ºã€‚
 
 			//size_t dispTextSize = sizeof(wchar_t) * static_cast<size_t>(32);
 			//StringCbPrintf(m_dispText, dispTextSize, L"Level = %d , Exp = %d", m_status.GetLevel(), m_status.GetExp());
@@ -159,49 +157,49 @@ namespace nsAWA {
 
 		void CPlayer::ApplyDamage(float damage, float power, bool canGuard) {
 
-			//”í’e’†‚Í”í’e‚µ‚È‚¢B
+			//è¢«å¼¾ä¸­ã¯è¢«å¼¾ã—ãªã„ã€‚
 			if (m_action.GetState() == EnPlayerState::enDamage) {
 
-				//I—¹B
+				//çµ‚äº†ã€‚
 				return;
 			}
 
-			//ƒK[ƒh’†‚©‚ÂƒK[ƒh‚Å‚«‚éUŒ‚‚È‚çB
+			//ã‚¬ãƒ¼ãƒ‰ä¸­ã‹ã¤ã‚¬ãƒ¼ãƒ‰ã§ãã‚‹æ”»æ’ƒãªã‚‰ã€‚
 			if (m_action.GetState() == EnPlayerState::enGuard
 				&& canGuard == true
 				)
 			{
-				//ƒK[ƒh¬Œ÷B
-				//ˆĞ—Í•ª‚¾‚¯ƒK[ƒhƒQ[ƒW‚Ì’l‚ªŒ¸­‚·‚éB
+				//ã‚¬ãƒ¼ãƒ‰æˆåŠŸã€‚
+				//å¨åŠ›åˆ†ã ã‘ã‚¬ãƒ¼ãƒ‰ã‚²ãƒ¼ã‚¸ã®å€¤ãŒæ¸›å°‘ã™ã‚‹ã€‚
 				m_status.DamageGuardGaugeValue(power);
 
-				//ƒK[ƒhƒQ[ƒW‚ª0‚É‚È‚Á‚½‚çB
+				//ã‚¬ãƒ¼ãƒ‰ã‚²ãƒ¼ã‚¸ãŒ0ã«ãªã£ãŸã‚‰ã€‚
 				if (fabsf(m_status.GetGuardGaugeValue()) < FLT_EPSILON) {
 					
-					//ƒXƒ^ƒ“ó‘Ô‚É‚·‚éB
+					//ã‚¹ã‚¿ãƒ³çŠ¶æ…‹ã«ã™ã‚‹ã€‚
 					m_action.SetState(EnPlayerState::enStun);
 				}
 			}
 			else {
-				//ƒ_ƒ[ƒW‚ğ‚­‚ç‚¤B
+				//ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ãã‚‰ã†ã€‚
 				m_status.DamageHP(damage);
 
-				//‚Ğ‚é‚İ’l‚ğ‰ÁZB
+				//ã²ã‚‹ã¿å€¤ã‚’åŠ ç®—ã€‚
 				m_status.AddWinceValue(damage);
 
-				//‚Ğ‚é‚İ’l‚ª‚Ğ‚é‚İ’l‚Ì‹æØ‚è‚ğ’´‚¦‚Ä‚¢‚½‚çB
+				//ã²ã‚‹ã¿å€¤ãŒã²ã‚‹ã¿å€¤ã®åŒºåˆ‡ã‚Šã‚’è¶…ãˆã¦ã„ãŸã‚‰ã€‚
 				if (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {
 
-					//ƒ_ƒ[ƒWó‘Ô‚Éİ’èB
+					//ãƒ€ãƒ¡ãƒ¼ã‚¸çŠ¶æ…‹ã«è¨­å®šã€‚
 					m_action.SetState(EnPlayerState::enDamage);
 
-					//ƒN[ƒ‹ƒ^ƒCƒ€‚ğON‚Éİ’èB
+					//ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ã‚’ONã«è¨­å®šã€‚
 					m_input.InputDisable();
 
-					//ˆê‰ñ‚Ğ‚é‚ñ‚¾‚Ì‚ÅA“ñ‰ñˆÈã‚Ì‚Ğ‚é‚İ‚Í–³Œø‚Æ‚·‚éB
+					//ä¸€å›ã²ã‚‹ã‚“ã ã®ã§ã€äºŒå›ä»¥ä¸Šã®ã²ã‚‹ã¿ã¯ç„¡åŠ¹ã¨ã™ã‚‹ã€‚
 					while (m_status.GetWinceValue() >= m_status.GetWinceDelimiter()) {
 
-						//‚Ğ‚é‚İ’l‚ğŒ¸ZB
+						//ã²ã‚‹ã¿å€¤ã‚’æ¸›ç®—ã€‚
 						m_status.SubWinceValue(m_status.GetWinceDelimiter());
 					}
 				}
@@ -211,42 +209,42 @@ namespace nsAWA {
 
 		void CPlayer::SetActiveSkill(int setNum, nsSkill::CActiveSkill* activeSkill) {
 
-			//ƒAƒNƒeƒBƒuƒXƒLƒ‹‚ğİ’èB
+			//ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã‚’è¨­å®šã€‚
 			m_action.SetActiveSkill(setNum, activeSkill);
 		}
 
 		nsSkill::CActiveSkill* CPlayer::GetActiveSkill(int skillNum)const {
 
-			//ƒAƒNƒeƒBƒuƒXƒLƒ‹‚ğæ“¾B
+			//ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‚¹ã‚­ãƒ«ã‚’å–å¾—ã€‚
 			return m_action.GetActiveSkill(skillNum);
 		}
 
 		void CPlayer::SetWeapon(nsWeapon::CWeapon* weapon) {
 
-			//•Ší‚ğİ’èB
+			//æ­¦å™¨ã‚’è¨­å®šã€‚
 			m_weaponManager.ChangeWeapon(weapon);
 		}
 
 		void CPlayer::SetArmor(nsArmor::CArmor* armor) {
 
-			//Šù‚É–h‹ïî•ñ‚ª“ü‚Á‚Ä‚¢‚½‚çB
+			//æ—¢ã«é˜²å…·æƒ…å ±ãŒå…¥ã£ã¦ã„ãŸã‚‰ã€‚
 			if (m_armor != nullptr) {
 
-				//–h‹ï‚ğ”jŠüB
+				//é˜²å…·ã‚’ç ´æ£„ã€‚
 				m_armor->Release();
 				m_armor = nullptr;
 			}
 
-			//–h‹ï‚ğİ’èB
+			//é˜²å…·ã‚’è¨­å®šã€‚
 			m_armor = armor;
 		}
 
 		void CPlayer::CreatePlayerModel() {
 
-			//ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ğ¶¬B
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã‚’ç”Ÿæˆã€‚
 			m_modelRenderer = NewGO<CModelRenderer>();
 
-			//ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚Ì‰Šú‰»ƒf[ƒ^‚ğ’è‹`B
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–ãƒ‡ãƒ¼ã‚¿ã‚’å®šç¾©ã€‚
 			SModelInitData modelInitData;
 			//modelInitData.modelFilePath = kPlayerModelFilePath;
 			modelInitData.modelFilePath = nsHumans::g_kNameToModelFilePath.at("Player1");
@@ -260,26 +258,26 @@ namespace nsAWA {
 			modelInitData.SetFlags(EnModelInitDataFlags::enShadowCaster);
 
 
-			//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì”‚ğæ“¾B
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®æ•°ã‚’å–å¾—ã€‚
 			const int animNum = static_cast<int>(m_animation.GetAnimFilePath().size());
 
-			//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ìƒtƒ@ƒCƒ‹ƒpƒX‚Ì”z—ñ‚ğ’è‹`B
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã®é…åˆ—ã‚’å®šç¾©ã€‚
 			std::vector<const char*> animNumVec;
 
-			//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì”‚¾‚¯‰ñ‚µ‚Äƒtƒ@ƒCƒ‹ƒpƒX‚ğŠi”[B
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®æ•°ã ã‘å›ã—ã¦ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’æ ¼ç´ã€‚
 			for (int animIndex = 0; animIndex < animNum; animIndex++) {
 
-				//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ìƒtƒ@ƒCƒ‹ƒpƒX‚ğæ“¾B
+				//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’å–å¾—ã€‚
 				animNumVec.emplace_back(m_animation.GetAnimFilePath()[animIndex].c_str());
 			}
 
-			//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ‰Šú‰»B
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’åˆæœŸåŒ–ã€‚
 			modelInitData.animInitData.Init(
 				static_cast<unsigned int>(animNum),
 				animNumVec.data()
 			);
 
-			//ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚ğ‰Šú‰»B
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã‚’åˆæœŸåŒ–ã€‚
 			m_modelRenderer->Init(modelInitData);
 			m_modelRenderer->SetScale(kPlayerModelScale);
 		}
@@ -292,41 +290,35 @@ namespace nsAWA {
 				return;
 			}
 
-			//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ég—p‚·‚éƒ‚ƒfƒ‹‚ğ“`‚¦‚éB
+			//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã«ä½¿ç”¨ã™ã‚‹ãƒ¢ãƒ‡ãƒ«ã‚’ä¼ãˆã‚‹ã€‚
 			m_animation.SetPlayerModelAndAnimEvent(m_modelRenderer);
 
-			//•ŠíŠÇ—ƒNƒ‰ƒX‚ğ‰Šú‰»B
+			//æ­¦å™¨ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’åˆæœŸåŒ–ã€‚
 			m_weaponManager.Init(this, m_modelRenderer, &m_action);
 
-			//ƒXƒe[ƒ^ƒX‚ğ‰Šú‰»B
+			//ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’åˆæœŸåŒ–ã€‚
 			m_status.Init(m_weaponManager.GetWeaponPointer(), m_armor, GetPassiveSkillManager(), GetFeatureManager());
 
-			//“ü—ÍƒNƒ‰ƒX‚ğ‰Šú‰»B
+			//å…¥åŠ›ã‚¯ãƒ©ã‚¹ã‚’åˆæœŸåŒ–ã€‚
 			m_input.Init(this, &m_action, &m_animation);
 
-			//ƒAƒNƒVƒ‡ƒ“ƒNƒ‰ƒX‚ğ‰Šú‰»B
+			//ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚¯ãƒ©ã‚¹ã‚’åˆæœŸåŒ–ã€‚
 			m_action.Init(m_position, m_rotation, &m_status, GetFeatureManager(), &m_animation);
 
-			//“–‚½‚è”»’è‚ğ‰Šú‰»B
+			//å½“ãŸã‚Šåˆ¤å®šã‚’åˆæœŸåŒ–ã€‚
 			m_collider.Init(this);
 
-			// UI‚Ìˆ—
-			m_playerBattleStatusUI = NewGO<nsUI::CPlayerBattleStatusUI>();
-			m_playerBattleStatusUI->LoadLevel();
-
-			m_skillIconUI = NewGO<nsUI::CSkillIconUI>();
-			m_skillIconUI->LoadLevel();
-
-			m_itemUI = NewGO<nsUI::CItemUI>();
-			m_itemUI->LoadLevel();
+			// UIã®å‡¦ç†      
+      //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’åˆæœŸåŒ–ã€‚
+			CPlayerManager::GetInstance()->Init(this);
 
 
-			//ƒvƒŒƒCƒ„[ŠÇ—ƒNƒ‰ƒX‚ğ‰Šú‰»B
+			//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç®¡ç†ã‚¯ãƒ©ã‚¹ã‚’åˆæœŸåŒ–ã€‚
 			CPlayerManager::GetInstance()->Init(this);
 
 			m_menuManager = NewGO<nsUI::CMenuManager>();
 
-			//ƒf[ƒ^‚ğƒ[ƒhB
+			//ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ­ãƒ¼ãƒ‰ã€‚
 			CUserData userData;
 			userData.Load();
 
@@ -339,19 +331,19 @@ namespace nsAWA {
 
 		CPlayerStatus* CPlayer::GetStatus() {
 
-			//ƒXƒe[ƒ^ƒX‚ğó‚¯æ‚éB
+			//ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’å—ã‘å–ã‚‹ã€‚
 			return &m_status;
 		}
 
 		nsWeapon::CWeapon* CPlayer::GetWeapon() {
 
-			//•Ší‚ğó‚¯æ‚éB
+			//æ­¦å™¨ã‚’å—ã‘å–ã‚‹ã€‚
 			return m_weaponManager.GetWeapon();
 		}
 
 		nsArmor::CArmor* CPlayer::GetArmor() {
 
-			//–h‹ï‚ğó‚¯æ‚éB
+			//é˜²å…·ã‚’å—ã‘å–ã‚‹ã€‚
 			return m_armor;
 		}
 
@@ -361,24 +353,22 @@ namespace nsAWA {
 
 		void CPlayer::ChangeFromSkillToItemUI()
 		{
-			m_skillIconUI->DeactiveDrawing();
-			m_itemUI->ActiveDrawing();
+			m_playerUIManager->ChangeFromSkillToItemUI();
 		}
 
 		void CPlayer::ChangeFromItemToSkillUI()
 		{
-			m_itemUI->DeactiveDrawing();
-			m_skillIconUI->ActiveDrawing();
+			m_playerUIManager->ChangeFromItemToSkillUI();
 		}
 
 		void CPlayer::MoveNextItemUI()
 		{
-			m_itemUI->MoveNextItemUI();
+			m_playerUIManager->MoveNextItemUI();
 		}
 
 		void CPlayer::MoveBackItemUI()
 		{
-			m_itemUI->MoveBackItemUI();
+			m_playerUIManager->MoveBackItemUI();
 		}
 	}
 }

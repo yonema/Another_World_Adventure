@@ -49,6 +49,10 @@ namespace nsAWA
 
             void DeactiveDrawing();
 
+            void ActivatePlayerBattleStatusDrawingFlag();
+
+            void DeactivatePlayerBattleStatusDrawingFlag();
+
 
         private: // enum
             enum class EnItemIcon
@@ -100,11 +104,11 @@ namespace nsAWA
             nsLevel2D::CLevel2D m_level;
 
             CSpriteUI* m_spriteBase = nullptr;
-            CSpriteUI* m_spriteItemIcon = nullptr;
+            //CSpriteUI* m_spriteItemIcon = nullptr;
 
-            std::vector<CSpriteUI*> m_vecSpriteItemIcon;
+            //std::vector<CSpriteUI*> m_vecSpriteItemIcon;
 
-            std::list<CSpriteUI*>  m_listSpriteItemIcon;
+            //std::list<CSpriteUI*>  m_listSpriteItemIcon;
 
             int m_spriteItemIconNum = 0;
 

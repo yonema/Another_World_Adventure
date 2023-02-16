@@ -92,5 +92,41 @@ namespace nsAWA
             m_playerMPUI->SetUIPlayerMPStatus(mp, maxMP);
             m_playerSPUI->SetUIPlayerSPStatus(sp, maxSP);
         }
+
+        void CPlayerBattleStatusUI::ActivatePlayerBattleStatusDrawingFlag()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            m_spritePlayerStatusBase->SetDrawingFlag(true);
+            m_spritePlayerStatusBase->Activate();
+
+            m_playerHPUI->ActivatePlayerBattleStatusDrawingFlag();
+            m_playerMPUI->ActivatePlayerBattleStatusDrawingFlag();
+            m_playerSPUI->ActivatePlayerBattleStatusDrawingFlag();
+
+            m_playerHPUI->Activate();
+            m_playerMPUI->Activate();
+            m_playerSPUI->Activate();
+        }
+
+        void CPlayerBattleStatusUI::DeactivatePlayerBattleStatusDrawingFlag()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            m_spritePlayerStatusBase->SetDrawingFlag(false);
+            m_spritePlayerStatusBase->Deactivate();
+
+            m_playerHPUI->DeactivatePlayerBattleStatusDrawingFlag();
+            m_playerMPUI->DeactivatePlayerBattleStatusDrawingFlag();
+            m_playerSPUI->DeactivatePlayerBattleStatusDrawingFlag();
+
+            m_playerHPUI->Deactivate();
+            m_playerMPUI->Deactivate();
+            m_playerSPUI->Deactivate();
+        }
     }
 }

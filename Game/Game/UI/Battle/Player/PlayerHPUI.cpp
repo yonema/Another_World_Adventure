@@ -188,19 +188,13 @@ namespace nsAWA
         {
             // ピンチ状態のとき
             if (m_kDangerLine > m_barWidthSize) {
-                // ピンチ状態のUIが非表示なら
-                if (false == m_spriteDanger->IsDrawingFlag()) {
-                    m_spriteDanger->SetDrawingFlag(true);
-                    m_spriteHPBar->SetDrawingFlag(false);
-                }
+                m_spriteDanger->SetDrawingFlag(true);
+                m_spriteHPBar->SetDrawingFlag(false);
             }
             // ピンチ状態ではないとき
             else {
-                // ピンチ状態のUIが表示状態なら
-                if (true == m_spriteDanger->IsDrawingFlag()) {
-                    m_spriteDanger->SetDrawingFlag(false);
-                    m_spriteHPBar->SetDrawingFlag(true);
-                }
+                m_spriteDanger->SetDrawingFlag(false);
+                m_spriteHPBar->SetDrawingFlag(true);
             }
         }
 
@@ -232,6 +226,44 @@ namespace nsAWA
 
             // 古いバーがリアルタイムのバーに徐々に近づくアニメーション
             m_decreaseBarWidthSize -= m_kDecreaseBarDecreaseAmount;
+        }
+
+        void CPlayerHPUI::ActivatePlayerBattleStatusDrawingFlag()
+        {
+            if (nullptr == this) {
+                return;
+            }
+            
+            m_spriteBase->SetDrawingFlag(true);
+            m_spriteDanger->SetDrawingFlag(true);
+            m_spriteDecrease->SetDrawingFlag(true);
+            m_spriteFrame->SetDrawingFlag(true);
+            m_spriteHPBar->SetDrawingFlag(true);
+
+            m_spriteBase->Activate();
+            m_spriteDanger->Activate();
+            m_spriteDecrease->Activate();
+            m_spriteFrame->Activate();
+            m_spriteHPBar->Activate();
+        }
+
+        void CPlayerHPUI::DeactivatePlayerBattleStatusDrawingFlag()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            m_spriteBase->SetDrawingFlag(false);
+            m_spriteDanger->SetDrawingFlag(false);
+            m_spriteDecrease->SetDrawingFlag(false);
+            m_spriteFrame->SetDrawingFlag(false);
+            m_spriteHPBar->SetDrawingFlag(false);
+
+            m_spriteBase->Deactivate();
+            m_spriteDanger->Deactivate();
+            m_spriteDecrease->Deactivate();
+            m_spriteFrame->Deactivate();
+            m_spriteHPBar->Deactivate();
         }
     }
 }

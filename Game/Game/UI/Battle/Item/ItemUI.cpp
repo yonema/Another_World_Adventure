@@ -294,7 +294,7 @@ namespace nsAWA
 
         void CItemUI::ActiveDrawing()
         {
-            if (nullptr == this) {
+            if (nullptr == this || false == IsActive()) {
                 return;
             }
 
@@ -309,7 +309,7 @@ namespace nsAWA
 
         void CItemUI::DeactiveDrawing()
         {
-            if (nullptr == this) {
+            if (nullptr == this || false == IsActive()) {
                 return;
             }
 
@@ -320,6 +320,34 @@ namespace nsAWA
             }
 
             m_flagDrawSprite = false;
+        }
+
+        void CItemUI::ActivatePlayerBattleStatusDrawingFlag()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            m_spriteBase->Activate();
+
+            for (auto& forNum : m_itemIconSpriteData) {
+                forNum.sprite->Activate();
+            }
+        }
+
+        void CItemUI::DeactivatePlayerBattleStatusDrawingFlag()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            m_spriteBase->SetDrawingFlag(false);
+            m_spriteBase->Deactivate();
+
+            for (auto& forNum : m_itemIconSpriteData) {
+                forNum.sprite->SetDrawingFlag(false);
+                forNum.sprite->Deactivate();
+            }
         }
     }
 }
