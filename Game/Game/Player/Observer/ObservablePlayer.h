@@ -51,6 +51,8 @@ namespace nsAWA {
 
 				int GetLevel()const;
 
+				const CVector3& GetPlayerPosition()const;
+
 				void InputEnableBySystem();
 
 				void InputDisableBySystem();

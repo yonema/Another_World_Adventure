@@ -3,6 +3,7 @@
 #include "../ObservablePlayer.h"
 #include "../../../CSV/CSVManager.h"
 #include "../../../GameLog/GameLog.h"
+#include "../../../Sound/SoundManager.h"
 
 namespace nsAWA {
 
@@ -69,6 +70,9 @@ namespace nsAWA {
 						std::string levelUpText = "レベルが";
 						levelUpText += std::to_string(level);
 						levelUpText += "に上がった!";
+
+						//レベルアップSEを再生。
+						nsSound::CSoundManager::GetInstance()->CreateSound("LevelUp");
 
 						//レベルアップテキストを表示。
 						nsGameLog::CGameLog::GetInstance()->AddGameLog(levelUpText);
