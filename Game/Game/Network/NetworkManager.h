@@ -65,7 +65,7 @@ namespace nsAWA
 			/**
 			 * @brief セーブデータをサーバーにアップロードする
 			*/
-			void UploadSaveData();
+			bool UploadSaveData();
 		private:
 			/**
 			 * @brief アセットから暗号化されているサーバーURLを復号して取得する
