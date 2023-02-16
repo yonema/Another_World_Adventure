@@ -49,6 +49,8 @@ namespace nsAWA {
 		//BGMÄ¶B
 		nsSound::CSoundManager::GetInstance()->ChangeBGM("MeadowBGM");
 
+		auto monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+		monster->SetPosition({ 0.0f,0.0f,50.0f });
 
 		return true;
 	}

@@ -6,7 +6,7 @@ namespace nsAWA {
 
 	namespace nsGameLog {
 
-		void CGameLog::AddGameLog(const std::string& text) {
+		void CGameLog::AddGameLog(const std::string& text, const CVector4& fontColor) {
 
 			//ログ部品の座標をずらす。
 			for (const auto& logPart : m_logParts) {
@@ -20,7 +20,7 @@ namespace nsAWA {
 
 			//ログ部品を生成。
 			CLogParts* logParts = NewGO<CLogParts>();
-			logParts->Create(wText);
+			logParts->Create(wText, fontColor);
 
 			//ログ部品を追加。
 			m_logParts.emplace_back(logParts);

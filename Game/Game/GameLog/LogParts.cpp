@@ -16,7 +16,7 @@ namespace nsAWA {
 			constexpr float kFontAlphaValueAddSpeed = 0.5f;		//フォントが現れる速度(s)
 		}
 
-		void CLogParts::Create(const std::wstring& text) {
+		void CLogParts::Create(const std::wstring& text, const CVector4& fontColor) {
 
 			//テキスト詳細を設定。
 			SFontParameter fontParam;
@@ -24,7 +24,7 @@ namespace nsAWA {
 			fontParam.position = kDispStartPosition;
 			fontParam.pivot.x = 0.0f;
 			fontParam.pivot.y = 0.0f;
-			fontParam.color = nsMath::CVector4::Red();
+			fontParam.color = fontColor;
 			fontParam.anchor = EnAnchors::enTopLeft;
 			m_fontRenderer = NewGO<CFontRenderer>();
 
