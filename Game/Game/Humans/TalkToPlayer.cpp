@@ -17,6 +17,7 @@ namespace nsAWA
 		const CVector2 CTalkToPlayer::m_kTalkingCursorSize = { 256.0f,256.0f };
 		const float CTalkToPlayer::m_kTalkingCursorOffset = 17.0f;
 
+		std::list<std::function<bool(const std::string&)>> CTalkToPlayer::m_hookFuncList = {};
 
 
 
@@ -175,6 +176,30 @@ namespace nsAWA
 
 			if (Input()->IsTrigger(EnActionMapping::enDecision))
 			{
+
+				bool isHook = false;
+
+				if (m_hookFuncList.empty() != true)
+				{
+					m_hookFuncList.remove_if(
+						[&](std::function<bool(const std::string&)>& hookFunc)
+						{
+							if (hookFunc(m_talkingHuman->GetName()))
+							{
+								isHook = true;
+								return true;
+							}
+
+							return false;
+						}
+					);
+				}
+
+				if (isHook)
+				{
+					return;
+				}
+
 				m_isTalking = true;
 
 				// 会話中、カーソルは非表示
@@ -186,6 +211,7 @@ namespace nsAWA
 				BuildCsvFilePath(&filePath, 0);
 				auto wstr = nsUtils::GetWideStringFromString(filePath);
 				m_conversation->Init(wstr.c_str());
+
 			}
 
 			return;

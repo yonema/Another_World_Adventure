@@ -43,6 +43,11 @@ namespace nsAWA
 
 			void Init(CHumanManager* manager);
 
+			static void PushHookFunc(const std::function<bool(const std::string&)> hookFunc)
+			{
+				m_hookFuncList.emplace_back(hookFunc);
+			}
+
 		private:
 
 			void UpdateNonTalking();
@@ -61,6 +66,7 @@ namespace nsAWA
 			void BuildCsvFilePath(std::string* filePathOut, unsigned int talkIdx);
 
 		private:
+			static std::list<std::function<bool(const std::string&)>> m_hookFuncList;
 			CHumanManager* m_manager = nullptr;
 			nsUI::CConversationPlayerInputDisable* m_conversation = nullptr;
 			CSpriteRenderer* m_talkingCursorSR = nullptr;

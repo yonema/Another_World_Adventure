@@ -7,6 +7,7 @@
 #include "../Humans/HumanTable.h"
 #include "../Player/Player.h"
 #include "EventCut/EventCutInclude.h"
+#include "../Humans/TalkToPlayer.h"
 
 namespace nsAWA
 {
@@ -251,16 +252,80 @@ namespace nsAWA
 
 
 			eventName = GetEventNameFromTable(EnEventNameType::enRegisterAdventurer);
-			m_setFuncListMap[eventName].reserve(3);
-			// 
+			m_setFuncListMap[eventName].reserve(8);
+			// メアリーに話しかける
 			m_setFuncListMap[eventName].emplace_back(
 				[]()->bool
 				{
 					return false;
+					//bool clear = false;
+					//static int step = 0;
+					//switch (step)
+					//{
+					//case 0:
+					//	nsHumans::CTalkToPlayer::PushHookFunc(
+					//		[&](const std::string& name)->bool
+					//		{
+					//			if (name == "Mary")
+					//			{
+					//				step++;
+					//				return true;
+					//			}
+
+					//			return false;
+					//		}
+					//	);
+					//	step++;
+					//	break;
+					//case 1:
+					//	break;
+					//case 2:
+					//	clear = true;
+					//	break;
+					//}
+
+					//return clear;
 				}
 			);
-
-
+			//// フェードして冒険者３人組を生成、メアリー非表示
+			//m_setFuncListMap[eventName].emplace_back(
+			//	[]()->bool
+			//	{
+			//		static int step = 0;
+			//		bool clear = false;
+			//		nsHumans::CHuman* pHuman = nullptr;
+			//		switch (step)
+			//		{
+			//		case 0:
+			//			Fade()->FadeOut(1.0f);
+			//			InvokeFunc([&]() {step++; }, 1.0f);
+			//			step++;
+			//			break;
+			//		case 1:
+			//			break;
+			//		case 2:
+			//			pHuman = FindGO<nsHumans::CHuman>("Mary");
+			//			if (pHuman)
+			//			{
+			//				pHuman->G
+			//			}
+			//			DeleteGO(FindGO<nsHumans::CHumanModelRenderer>(kEventGuardianMRName));
+			//			step++;
+			//			break;
+			//		case 3:
+			//			Fade()->FadeIn(1.0f);
+			//			InvokeFunc([&]() {step++; }, 1.0f);
+			//			step++;
+			//			break;
+			//		case 4:
+			//			break;
+			//		case 5:
+			//			clear = true;
+			//			break;
+			//		}
+			//		return clear;
+			//	}
+			//);
 
 
 

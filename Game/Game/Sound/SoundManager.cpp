@@ -6,7 +6,7 @@ namespace nsAWA {
 
 	namespace nsSound {
 
-		CSoundPlayer* CSoundManager::SoundRelease(const std::string soundName) {
+		void CSoundManager::SoundRelease(const std::string soundName) {
 
 			//サウンドを破棄。
 			auto* soundRef = m_playSoundList.at(soundName);

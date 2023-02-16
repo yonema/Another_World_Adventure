@@ -9,11 +9,13 @@ namespace nsAWA
 	{
 		bool CEventController::Start()
 		{
-			InitCurrentEventFlowMap();
 
 			//イベントのセーブデータからロード
 			CEventSaveData loader;
 			loader.Load();
+
+			InitCurrentEventFlowMap();
+
 
 			return true;
 		}

@@ -41,7 +41,7 @@ namespace nsAWA {
 
 			void CreateSound(const std::string& soundName);
 
-			CSoundPlayer* SoundRelease(const std::string soundName);
+			void SoundRelease(const std::string soundName);
 
 		private:
 			std::unordered_map<std::string, CSoundPlayer*> m_playSoundList;	//サウンドリスト

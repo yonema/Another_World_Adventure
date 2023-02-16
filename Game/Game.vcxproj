@@ -151,7 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-
+    <ClCompile Include="Game\Scenes\EnterGameScene.cpp" />
     <ClCompile Include="Game\Event\ProgressManagement\EventSaveData.cpp" />
     <ClCompile Include="Game\UI\Story\ConversationPlayerInputDisable.cpp" />
     <ClCompile Include="Game\UI\Institution\Guild\GuildQuestText.cpp" />
@@ -444,6 +444,7 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Scenes\EnterGameScene.h" />
     <ClInclude Include="Game\UI\Story\ConversationPlayerInputDisable.h" />
     <ClInclude Include="Game\Event\ProgressManagement\EventSaveData.h" />
     <ClInclude Include="Game\Event\EventCut\EventCutBase.h" />

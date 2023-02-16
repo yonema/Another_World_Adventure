@@ -1,11 +1,14 @@
 #pragma once
 #include "SceneBase.h"
-
+namespace nsAWA
+{
+	class CGameNowLoading;
+}
 namespace nsAWA
 {
 	namespace nsScene
 	{
-		class CTitleScene : public ISceneBase
+		class CEnterGameScene : public ISceneBase
 		{
 		public:
 			bool Start() override final;
@@ -16,17 +19,16 @@ namespace nsAWA
 
 			inline const char* const GetSceneName() const noexcept override final
 			{
-				return "TitleScene";
+				return "EnterScene";
 			}
 
 		public:
-			constexpr CTitleScene() = default;
-			~CTitleScene() = default;
+			constexpr CEnterGameScene() = default;
+			~CEnterGameScene() = default;
 
 		private:
-			CSpriteRenderer* m_titleBackSR = nullptr;
-			CSpriteRenderer* m_titleLogoSR = nullptr;
-			CFontRenderer* m_fontRenderer = nullptr;
+			CGameNowLoading* m_gameNowLoading = nullptr;
+
 		};
 
 	}
