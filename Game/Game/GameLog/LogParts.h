@@ -8,7 +8,7 @@ namespace nsAWA {
 		class CLogParts : public IGameObject
 		{
 		public:
-			void Create(const std::wstring& text);
+			void Create(const std::wstring& text, const CVector4& fontColor);
 
 			void OnDestroy()override final;
 

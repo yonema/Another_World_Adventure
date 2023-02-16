@@ -25,7 +25,7 @@ namespace nsAWA {
 				delete GetInstance();
 			}
 
-			void AddGameLog(const std::string& text);
+			void AddGameLog(const std::string& text, const CVector4& fontColor = CVector4::Red());
 
 			void Update(float deltaTime);
 
