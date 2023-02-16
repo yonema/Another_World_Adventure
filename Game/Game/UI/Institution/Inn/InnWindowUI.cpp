@@ -5,6 +5,7 @@
 #include "../../../Feature/FeatureBuilder.h"
 #include "../../../Player/Player.h"
 #include "../../../Event/ProgressManagement/EventSaveData.h"
+#include "../../../GameLog/GameLog.h"
 
 namespace nsAWA
 {
@@ -210,7 +211,20 @@ namespace nsAWA
 				eventDataSave.Save();
 
 				//セーブしたデータをネットワークにアップロード
-				nsNetwork::CNetworkManager::GetInstance()->UploadSaveData();
+				bool isSuccess = nsNetwork::CNetworkManager::GetInstance()->UploadSaveData();
+
+				nsGameLog::CGameLog* logSystem = nsGameLog::CGameLog::GetInstance();
+
+				if (isSuccess == true)
+				{
+					logSystem->AddGameLog("サーバーにセーブデータをアップロードしました。" , CVector4::Green());
+					logSystem->AddGameLog("サーバー接続:成功" , CVector4::Green());
+				}
+				else
+				{
+					logSystem->AddGameLog("オフラインのためセーブデータはアップロードされません。", CVector4(1.0f, 0.4f, 0.0f, 1.0f));
+					logSystem->AddGameLog("サーバー接続:失敗", CVector4(1.0f,0.4f,0.0f,1.0f));
+				}
 			}
 
 			m_level.PlayAnimation("FadeEnd");

@@ -14,12 +14,12 @@ namespace nsAWA
 	{
 		CNetworkManager* CNetworkManager::m_instance = nullptr;
 
-		void CNetworkManager::UploadSaveData()
+		bool CNetworkManager::UploadSaveData()
 		{
 			//ネットワークモードを調べる
 			if (m_networkMode != "NETWORK_ONLINE")
 			{
-				return;
+				return false;
 			}
 
 			//現在のネットワーク状況を調べる
@@ -27,21 +27,21 @@ namespace nsAWA
 			{
 				m_networkMode = "NETWORK_OFFLINE";
 
-				return;
+				return false;
 			}
 
 			std::string saveData = LoadLocalSaveData();
 
 			if (saveData == "")
 			{
-				return;
+				return false;
 			}
 
 			std::string eventSaveData = LoadLocalEventSaveData();
 
 			if (eventSaveData == "")
 			{
-				return;
+				return false;
 			}
 
 			//int a = std::string::max_size();
@@ -54,6 +54,8 @@ namespace nsAWA
 
 			//アップロード処理
 			HttpUpload(uploadData);
+
+			return true;
 
 		}
 
