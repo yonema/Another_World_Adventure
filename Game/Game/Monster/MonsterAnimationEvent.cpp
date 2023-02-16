@@ -14,6 +14,11 @@ namespace nsAWA {
 
 	namespace nsMonster {
 
+		namespace {
+
+			constexpr float kDeathEffectScale = 2.0f;	//死亡エフェクトのサイズ
+		}
+
 		void CMonsterAnimationEvent::GetAnimationEvent(const std::string& animationEventName,
 			const AnimationEventDataStr& animationEventData
 		) {
@@ -121,6 +126,24 @@ namespace nsAWA {
 
 				nsGameWindow::MessageBoxWarning(L"CMonsterAnimationEvent : playerの検索に失敗したため、戦闘後獲得処理が行えませんでした。");
 			}
+
+			//死亡エフェクトを生成。
+			CEffectPlayer* deathEffect = NewGO<CEffectPlayer>();
+			std::string effectFilePath = "Assets/Effects/Normal/enemydeath.efkefc";
+			
+			//初期化。
+			deathEffect->Init(nsUtils::GetWideStringFromString(effectFilePath).c_str());
+
+			//エフェクトのtransformを設定。
+			deathEffect->SetPosition(m_monster->GetPosition());
+			deathEffect->SetRotation(m_monster->GetRotation());
+			deathEffect->SetScale(kDeathEffectScale);
+
+			//エフェクトを再生。
+			deathEffect->Play();
+
+			//更新。
+			deathEffect->Update(0.0f);
 
 			//破棄処理。
 			Release();

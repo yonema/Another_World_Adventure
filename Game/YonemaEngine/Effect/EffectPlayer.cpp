@@ -80,18 +80,13 @@ namespace nsYMEngine
 			nsMath::CVector3 axis(nsMath::CVector3::Up());
 
 			// 0Š„‚è—\–h
-			if (fabsf(halfRadAngle) > FLT_EPSILON)
+			if (fabsf(halfRadAngle) > 0.01f)
 			{
 				axis.x = m_rotation.x / sinf(halfRadAngle);
 				axis.y = m_rotation.y / sinf(halfRadAngle);
 				axis.z = m_rotation.z / sinf(halfRadAngle);
 				axis.Normalize();
 			}
-
-			axis.x = m_rotation.x / sinf(halfRadAngle);
-			axis.y = m_rotation.y / sinf(halfRadAngle);
-			axis.z = m_rotation.z / sinf(halfRadAngle);
-			axis.Normalize();
 
 			CEffectEngine::GetInstance()->SetRotation(m_instanceHandle, axis, radAngle);
 			CEffectEngine::GetInstance()->SetScale(m_instanceHandle, m_scale);

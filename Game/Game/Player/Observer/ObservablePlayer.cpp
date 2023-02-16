@@ -93,6 +93,12 @@ namespace nsAWA {
 				//討伐クエストを進める
 				m_player->ProgressSlayQuest(slayMonsterName);
 			}
+
+			const CVector3& CObservablePlayer::GetPlayerPosition()const {
+
+				//プレイヤーの座標を取得。
+				return m_player->GetPosition();
+			}
 		}
 	}
 }

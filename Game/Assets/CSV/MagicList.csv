@@ -1,9 +1,11 @@
 NAME,Fire_Forward,,,,,
 TYPE,Forward,,,,,
+EFFECTNAME,FireBall,,,,,
 FEATURE,Damage,Normal,Magical,Fire,50,TRUE
 *,,,,,,
 NAME,Fire_Side,,,,,
 TYPE,Side,,,,,
+EFFECTNAME,FireBall,,,,,
 FEATURE,Damage,Normal,Magical,Fire,50,TRUE
 *,,,,,,
 NAME,ResurrectLight,,,,,
