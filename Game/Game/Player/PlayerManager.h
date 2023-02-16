@@ -91,6 +91,8 @@ namespace nsAWA {
 				return &m_itemManager;
 			}
 
+			const CVector3& GetPlayerPosition();
+
 
 
 		public: // UI

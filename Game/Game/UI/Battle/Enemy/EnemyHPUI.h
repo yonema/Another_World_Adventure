@@ -59,6 +59,16 @@ namespace nsAWA
             */
             void SetUIPosition(const CVector2& position);
 
+            void SetAllUIScale(const CVector3& scale)
+            {
+                m_distanceScale = scale;
+            }
+
+            void SetAllDrawingFlag(const bool flag)
+            {
+                m_flagAllDrawSprite = flag;
+            }
+
         private:
             ////////////////////////////////////////////////////////////
             // ファイルパス
@@ -110,6 +120,8 @@ namespace nsAWA
             CVector2 m_initialPositionDanger = CVector2::Zero();
             CVector2 m_initialPositionDecrease = CVector2::Zero();
 
+            CVector3 m_distanceScale = CVector3::One();
+
             float m_barWidthSize = m_kMaxBarWidthSize; // プレイヤーの体力バーの横幅の倍率
 
             float m_decreaseBarWidthSize = m_kMaxBarWidthSize; // あとから追って減るゲージの横幅の倍率
@@ -117,7 +129,7 @@ namespace nsAWA
 
             float m_oldBarWidthSize = m_kMaxBarWidthSize; // ゲージが減少する前の横幅の倍率
 
-
+            bool m_flagAllDrawSprite = true;
         };
     }
 }

@@ -276,7 +276,10 @@ namespace nsAWA {
 			m_player->InputDisable();
 		}
     
-    
+		const CVector3& CPlayerManager::GetPlayerPosition()
+		{
+			return m_player->GetPosition();
+		}
     
     
 	}
