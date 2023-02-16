@@ -84,6 +84,8 @@ namespace nsAWA
 						nsPlayer::nsObserver::EnObserverEvent::enInputEnable);
 				}
 
+				m_state = EnFacilityState::enClose;
+
 				m_enterFont->SetScale(1.0f);
 			}
 		}
