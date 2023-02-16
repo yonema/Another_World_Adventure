@@ -37,7 +37,14 @@ namespace nsAWA {
 
 			void LoadMagicList();
 
+
 			const CMagicList::SMagicData& GetMagicData(const std::string& name)const;
+
+			constexpr const auto& GetMagicList() const noexcept
+			{
+				//魔法スキルのリストを取得。
+				return m_magicList;
+			}
 
 		private:
 			std::list<SMagicData> m_magicList;	//魔法スキルのリスト

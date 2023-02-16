@@ -186,6 +186,13 @@ namespace nsAWA {
 
 		void CPlayerAction::UseActiveSkill(EnActiveSkillListNumber activeSkillNum) {
 
+			//アクティブスキル使用中なら。
+			if (m_state == EnPlayerState::enUseActiveSkill) {
+
+				//早期リターン。
+				return;
+			}
+
 			//消費MPを取得。
 			float useMP = m_activeSkill[static_cast<int>(activeSkillNum)]->GetUseMP();
 
@@ -198,6 +205,9 @@ namespace nsAWA {
 
 			//MPを消費。
 			m_playerStatus->DamageMP(useMP);
+
+			//スキルを実行。
+			m_activeSkill[static_cast<int>(activeSkillNum)]->Execute();
 
 			//アクティブスキルが使用できない状態だったら。
 			if (!m_playerFeatureManager->CanUseActiveSkill()) {
@@ -227,6 +237,10 @@ namespace nsAWA {
 			cameraRight.y = 0.0f;
 			cameraRight.Normalize();
 
+			//入力方向を取得。
+			CVector3 inputVec = { inputX , 0.0f, inputZ };
+			inputVec.Normalize();
+
 			//移動速度を初期化。
 			float moveAmountf = 0.0f;
 
@@ -247,8 +261,8 @@ namespace nsAWA {
 
 			//移動量を計算。
 			CVector3 moveAmount = CVector3::Zero();
-			moveAmount += cameraForward * inputZ * moveAmountf * m_deltaTimeRef;
-			moveAmount += cameraRight * inputX * moveAmountf * m_deltaTimeRef;
+			moveAmount += cameraForward * inputVec.z * moveAmountf * m_deltaTimeRef;
+			moveAmount += cameraRight * inputVec.x * moveAmountf * m_deltaTimeRef;
 
 			//リターン。
 			return moveAmount;

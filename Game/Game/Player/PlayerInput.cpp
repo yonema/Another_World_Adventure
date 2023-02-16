@@ -2,7 +2,9 @@
 #include "PlayerInput.h"
 #include "PlayerAction.h"
 #include "PlayerManager.h"
+#include "Player.h"
 
+#include "../UserData.h"
 
 namespace nsAWA {
 
@@ -13,7 +15,10 @@ namespace nsAWA {
 			constexpr const float kCanPlayerMoveInput = 0.001f;	//移動入力が判定される最低値
 		}
 
-		void CPlayerInput::Init(CPlayerAction* playerAction, nsPlayerAnimation::CPlayerAnimation* playerAnimation) {
+		void CPlayerInput::Init(const CPlayer* player, CPlayerAction* playerAction, nsPlayerAnimation::CPlayerAnimation* playerAnimation) {
+
+			//プレイヤーのポインタを格納。
+			m_player = player;
 
 			//入力によって行動させるため、プレイヤーアクションクラスのポインタを受け取る。
 			m_playerAction = playerAction;
@@ -25,7 +30,7 @@ namespace nsAWA {
 		void CPlayerInput::Update(bool isAnimationPlaying) {
 
 			//入力できない状態なら早期リターン。
-			if (!m_canInput) { return; }
+			if (!m_canInput || !m_canInputBySystem) { return; }
 
 			//移動・回転入力。
 			{
@@ -68,6 +73,14 @@ namespace nsAWA {
 					m_playerAction->SetState(EnPlayerState::enIdle);
 				}
 			}
+
+			//街中にいるなら。
+			if (m_player->IsInTown()) {
+
+				//これ以上の入力は受け付けない。
+				return;
+			}
+
 
 			//スキル準備入力。
 			if (Input()->IsPress(EnActionMapping::enSkillPreparation)) {
@@ -162,6 +175,9 @@ namespace nsAWA {
 					&& !Input()->IsPress(EnActionMapping::enSkillPreparation)
 					) {
 
+					//入力不可に設定。
+					InputDisable();
+
 					//アイテムを使用。
 					m_playerAction->UseItem();
 				}
@@ -187,8 +203,6 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_1)) {
 
-				CPlayerManager::GetInstance()->SetActiveSkill(0,"JumpAttack_Sword");
-
 				//クールタイム中に設定。
 				CoolTimeOn();
 				
@@ -197,8 +211,6 @@ namespace nsAWA {
 			}
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_2)) {
-
-				CPlayerManager::GetInstance()->SetActiveSkill(1, "JumpAttackL_Sword");
 
 				//クールタイム中に設定。
 				CoolTimeOn();
@@ -209,9 +221,7 @@ namespace nsAWA {
 
 			if (Input()->IsTrigger(EnActionMapping::enUseSkill_3)) {
 
-				CPlayerManager::GetInstance()->SetPassiveSkill(0, "Paralysiser");
-
-				////クールタイム中に設定。
+				//クールタイム中に設定。
 				CoolTimeOn();
 				
 				//スキル３使用。

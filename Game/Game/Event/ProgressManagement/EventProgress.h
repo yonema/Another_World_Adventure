@@ -121,6 +121,15 @@ namespace nsAWA
 			}
 
 			/**
+			 * @brief イベントの進行度をセットする　セーブデータの復元時以外は使わないことを想定している。
+			 * @param progression イベントの進行度
+			*/
+			void SetProgression(int progression)
+			{
+				m_progression = progression;
+			}
+
+			/**
 			 * @brief イベントの進行状態を取得
 			 * @return イベントの進行状態
 			*/
@@ -135,6 +144,11 @@ namespace nsAWA
 			void MarkAsExpired()
 			{
 				m_eventState = EnEventState::enExpired;
+			}
+
+			constexpr int GetMaxProgress() const noexcept
+			{
+				return m_maxProgress;
 			}
 		private:
 			std::list<CEventProgress*> m_followingEvents;	//このイベントを前提条件とするイベント

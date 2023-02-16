@@ -10,7 +10,7 @@ namespace nsYMEngine
 		namespace nsRenderers
 		{
 			class CRendererTable;
-			class CSpriteRender;
+			class CSpriteRenderer;
 		}
 	}
 }

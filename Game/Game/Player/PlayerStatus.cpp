@@ -22,6 +22,7 @@ namespace nsAWA {
 			constexpr float kGGValue = 100.0f;			//ガードゲージ量
 			constexpr float kStatusBaseInitValue = 0.0f;	//ステータス反映のための初期値
 			constexpr float kStatusBaseMul = 1.0f;	//ステータス反映の初期倍率
+			constexpr float kStatusBaseMin = -0.9f;	//ステータス反映の最低倍率
 		}
 
 		void CPlayerStatus::Init(const nsWeapon::CWeapon* const & playerWeapon,
@@ -75,6 +76,15 @@ namespace nsAWA {
 				}
 			}
 
+			//もしステータスの型が-1.0f未満なら、負の値になるのを防ぐため0.1になるように調整。
+			for (auto& statusBase : m_statusBaseList) {
+
+				if (statusBase < -1.0f) {
+
+					statusBase = kStatusBaseMin;
+				}
+			}
+
 			//各ステータスを本反映。
 			m_attack = (*m_weapon)->GetAttack() * (kStatusBaseMul + m_statusBaseList[static_cast<int>(nsFeature::EnStatusRef::enAttack)]);
 			m_intelligence = (*m_weapon)->GetIntelligence() * (kStatusBaseMul + m_statusBaseList[static_cast<int>(nsFeature::EnStatusRef::enInteligence)]);
@@ -85,12 +95,13 @@ namespace nsAWA {
 		void CPlayerStatus::LoadStatus(const std::vector<std::string>& statusDataStr) {
 
 			//ステータスをロード。
-			m_level = std::stoi(statusDataStr[0]);
-			m_exp = std::stoi(statusDataStr[1]);
-			m_HP = std::stof(statusDataStr[2]);
-			m_maxHP = std::stof(statusDataStr[3]);
-			m_MP = std::stof(statusDataStr[4]);
-			m_maxMP = std::stof(statusDataStr[5]);
+			m_playerName = statusDataStr[0];
+			m_level = std::stoi(statusDataStr[1]);
+			m_exp = std::stoi(statusDataStr[2]);
+			m_HP = std::stof(statusDataStr[3]);
+			m_maxHP = std::stof(statusDataStr[4]);
+			m_MP = std::stof(statusDataStr[5]);
+			m_maxMP = std::stof(statusDataStr[6]);
 			m_SP = kSPValue;
 			m_maxSP = kSPValue;
 			m_guardGaugeValue = kGGValue;

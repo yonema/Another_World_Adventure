@@ -42,6 +42,8 @@ namespace nsAWA {
 
 			void SetActiveSkill(int setNum, const std::string& activeSkillName);
 
+			void SetActiveSkillMaxNum(int maxNum);
+
 			void SetPassiveSkill(int setNum, const std::string& passiveSkillName);
 
 			std::list<nsSkill::SActiveSkillData> GetCanUseActiveSkillList();
@@ -114,7 +116,7 @@ namespace nsAWA {
 
 			void CreateObserver();
 
-		private:
+		public:
 			static const std::string m_kTestFontNotFound;
 
 		private:

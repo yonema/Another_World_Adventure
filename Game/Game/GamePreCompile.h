@@ -9,6 +9,7 @@
 #include "../YonemaEngine/Graphics/Environment/SkyCubeRenderer.h"
 #include "../YonemaEngine/Graphics/Sprites/Sprite.h"
 #include "../YonemaEngine/Graphics/Fonts/FontRenderer.h"
+#include "../YonemaEngine/Graphics/Fade.h"
 #include "../YonemaEngine/Physics/PhysicsEngine.h"
 #include "../YonemaEngine/Physics/PhysicsStaticObject.h"
 #include "../YonemaEngine/Physics/PhysicsDynamicObject.h"
@@ -160,4 +161,16 @@ static bool IsEnableAutoFitCullingBoxToMainCamera() noexcept
 static nsUtils::CRandom* Random() noexcept
 {
 	return CYonemaEngine::GetInstance()->GetRandom();
+}
+
+static void InvokeFunc(const std::function<void(void)>& func, float delayTime)
+{
+	CYonemaEngine::GetInstance()->GetInvokeFunc()->PushInvokeFunc(func, delayTime);
+}
+
+
+// フェード
+static nsGraphics::CFade* Fade() noexcept
+{
+	return CYonemaEngine::GetInstance()->GetFade();
 }

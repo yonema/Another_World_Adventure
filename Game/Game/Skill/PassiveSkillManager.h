@@ -34,10 +34,13 @@ namespace nsAWA {
 				return m_passiveSkill[skillNum];
 			}
 
-			void AddPassiveSkillSize() {
+			void SetPassiveSkillMaxNum(int maxNum) {
 
-				//装着可能な数を加算。
-				m_passiveSkillMaxNum++;
+				//装着可能な数を設定。
+				m_passiveSkillMaxNum = maxNum;
+
+				//枠のサイズを変更。
+				m_passiveSkill.resize(m_passiveSkillMaxNum);
 			}
 
 			void UpdatePassiveSkill();

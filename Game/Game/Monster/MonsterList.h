@@ -1,5 +1,6 @@
 #pragma once
 #include "MonsterAnimation.h"
+#include "../Attribute.h"
 
 namespace nsAWA {
 
@@ -13,6 +14,7 @@ namespace nsAWA {
 		struct SMonsterInitData {
 
 			std::string name = "NoName";				//名前
+			EnAttribute attribute = EnAttribute::enNone;//属性
 			int dropExp = 0;							//獲得経験値量
 			std::list<std::string> dropMaterialItemList;//ドロップ素材アイテムのリスト
 			std::string modelFilePath = "NoFilePath";	//モデルのファイルパス

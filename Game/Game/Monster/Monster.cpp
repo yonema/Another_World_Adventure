@@ -43,6 +43,13 @@ namespace nsAWA {
 
 		void CMonster::UpdateActor(float deltaTime) {
 
+			if (m_isInited != true)
+			{
+				InitAfterLoadModel();
+				return;
+			}
+
+
 			// UIの処理
 			m_enemyBattleStatusUI->SetUIEnemyStatus(
 				m_status.GetHP(), m_status.GetMaxHP(), 0.0f
@@ -86,43 +93,12 @@ namespace nsAWA {
 
 		void CMonster::Create(const SMonsterInitData& monsterInfo) {
 
+			m_initData = monsterInfo;
+
 			//モンスターモデルを生成。
-			CreateMonsterModel(monsterInfo);
+			CreateMonsterModel(m_initData);
 
-			//名前を設定。
-			m_name = monsterInfo.name;
 
-			//獲得経験値量を設定。
-			m_dropExp = monsterInfo.dropExp;
-
-			//ドロップアイテムのリストを設定。
-			m_dropItemList = monsterInfo.dropMaterialItemList;
-
-			//ステータスを初期化。
-			m_status.Init(m_name);
-
-			//アニメーションイベントを初期化。
-			m_animation.InitAnimationEvent(this, &m_AIContoller);
-
-			//アニメーションを初期化。
-			m_animation.Init(
-				m_modelRenderer,
-				monsterInfo.animDataList,
-				monsterInfo.animationFilePath
-			);
-
-			//AIコントローラーを初期化。
-			m_AIContoller.Init(this);
-
-			//当たり判定を初期化。
-			m_collider.Init(this);
-
-			//待機状態に設定。
-			SetState(EnMonsterState::enIdle);
-
-			// UIの処理
-			m_enemyBattleStatusUI = NewGO<nsUI::CEnemyBattleStatusUI>();
-			m_enemyBattleStatusUI->LoadLevel();
 		}
 
 		void CMonster::ApplyDamage(float damage, float power, bool canGuard) {
@@ -165,6 +141,7 @@ namespace nsAWA {
 			modelInitData.textureRootPath = kMonsterModelTextureRootPath;
 			modelInitData.SetFlags(EnModelInitDataFlags::enRegisterAnimationBank);
 			modelInitData.SetFlags(EnModelInitDataFlags::enRegisterTextureBank);
+			modelInitData.SetFlags(EnModelInitDataFlags::enLoadingAsynchronous);
 			modelInitData.SetFlags(EnModelInitDataFlags::enShadowCaster);
 
 			
@@ -192,6 +169,57 @@ namespace nsAWA {
 			m_modelRenderer->Init(modelInitData);
 			m_modelRenderer->SetScale(0.1f);
 		}
+
+		void CMonster::InitAfterLoadModel()
+		{
+			if (m_modelRenderer->IsLoadingAsynchronous())
+			{
+				return;
+			}
+
+			//名前を設定。
+			m_name = m_initData.name;
+
+			//獲得経験値量を設定。
+			m_dropExp = m_initData.dropExp;
+
+			//ドロップアイテムのリストを設定。
+			m_dropItemList = m_initData.dropMaterialItemList;
+
+			//ステータスを初期化。
+			m_status.Init(m_name);
+
+			//属性を設定。
+			m_status.SetAttribute(m_initData.attribute);
+
+			//アニメーションイベントを初期化。
+			m_animation.InitAnimationEvent(this, &m_AIContoller);
+
+			//アニメーションを初期化。
+			m_animation.Init(
+				m_modelRenderer,
+				m_initData.animDataList,
+				m_initData.animationFilePath
+			);
+
+			//AIコントローラーを初期化。
+			m_AIContoller.Init(this);
+
+			//当たり判定を初期化。
+			m_collider.Init(this);
+
+			//待機状態に設定。
+			SetState(EnMonsterState::enIdle);
+
+			// UIの処理
+			m_enemyBattleStatusUI = NewGO<nsUI::CEnemyBattleStatusUI>();
+			m_enemyBattleStatusUI->LoadLevel();
+
+			m_isInited = true;
+
+			return;
+		}
+
 
 		CStatus* CMonster::GetStatus() {
 

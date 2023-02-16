@@ -34,12 +34,16 @@ namespace nsAWA {
 				//アニメーションのファイルパスを取得。
 				std::string animFilePath = lineData[3];
 
+				//エフェクトの名前を取得。
+				std::string effectName = lineData[4];
+
 				//アクティブスキルのデータを設定。
 				SActiveSkillData activeSkillData;
 				activeSkillData.type = type;
 				activeSkillData.name = name;
 				activeSkillData.useMP = useMP;
 				activeSkillData.animFilePath= animFilePath;
+				activeSkillData.effectName = effectName;
 
 				//アクティブスキルのデータをリストに追加。
 				AddActiveSkill(activeSkillData);
@@ -128,7 +132,7 @@ namespace nsAWA {
 			}
 
 			//名前がリストに存在していないので警告を出力。
-			std::string errorMsg = "検索された名前がリストにありません。 : ";
+			std::string errorMsg = "CActiveSkillList : 検索された名前がリストにありません。 : ";
 			errorMsg += activeSkillName;
 
 			//警告ウィンドウを出力。
@@ -169,6 +173,7 @@ namespace nsAWA {
 			activeSkill->SetType(type);
 			activeSkill->SetAnimaitonFilePath(activeSkillData.animFilePath);
 			activeSkill->SetAnimDataList(activeSkillData.animDataList);
+			activeSkill->SetEffectName(activeSkillData.effectName);
 
 			//生成したアクティブスキルをリターン。
 			return activeSkill;

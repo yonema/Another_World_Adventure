@@ -151,6 +151,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Scenes\EnterGameScene.cpp" />
+    <ClCompile Include="Game\Event\ProgressManagement\EventSaveData.cpp" />
+    <ClCompile Include="Game\UI\Story\ConversationPlayerInputDisable.cpp" />
+    <ClCompile Include="Game\UI\Institution\Guild\GuildQuestText.cpp" />
+    <ClCompile Include="Game\Event\EventCut\EventCutBase.cpp" />
+    <ClCompile Include="Game\Event\EventCut\TutorialEventCut.cpp" />
+    <ClCompile Include="Game\Event\EventCut\ReceiveSkillEventCut.cpp" />
+    <ClCompile Include="YonemaEngine\Graphics\Fade.cpp" />
+    <ClCompile Include="Game\Event\EventSetFuncPool.cpp" />
+    <ClCompile Include="Game\Event\EventController.cpp" />
+    <ClCompile Include="Game\GameNowLoading.cpp" />
+    <ClCompile Include="Game\GamePreLoading.cpp" />
+    <ClCompile Include="Game\Event\EventFlow.cpp" />
+    <ClCompile Include="Game\Event\EventPiece.cpp" />
+    <ClCompile Include="Game\Event\EventManager.cpp" />
     <ClCompile Include="Game\Facility\Forge.cpp" />
     <ClCompile Include="Game\Facility\FacilityBase.cpp" />
     <ClCompile Include="Game\GameLog\LogParts.cpp" />
@@ -190,6 +205,9 @@
     <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
+    <ClCompile Include="Game\Sound\SoundList.cpp" />
+    <ClCompile Include="Game\Sound\SoundManager.cpp" />
+    <ClCompile Include="YonemaEngine\Utils\InvokeFunc.cpp" />
     <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
     <ClCompile Include="Game\Quest\QuestData.cpp" />
@@ -427,6 +445,25 @@
     <Image Include="Assets\Images\StarMan.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Scenes\EnterGameScene.h" />
+    <ClInclude Include="Game\UI\Story\ConversationPlayerInputDisable.h" />
+    <ClInclude Include="Game\Event\ProgressManagement\EventSaveData.h" />
+    <ClInclude Include="Game\Event\EventCut\EventCutBase.h" />
+    <ClInclude Include="Game\Attribute.h" />
+    <ClInclude Include="Game\UI\Institution\Guild\GuildQuestText.h" />
+    <ClInclude Include="Game\Event\EventCut\EventCutInclude.h" />
+    <ClInclude Include="Game\Event\EventCut\TutorialEventCut.h" />
+    <ClInclude Include="Game\Event\EventCut\ReceiveSkillEventCut.h" />
+    <ClInclude Include="YonemaEngine\Graphics\Fade.h" />
+    <ClInclude Include="Game\Event\EventNameTable.h" />
+    <ClInclude Include="Game\Event\EventSetFuncPool.h" />
+    <ClInclude Include="Game\Event\EventController.h" />
+    <ClInclude Include="Game\GameNowLoading.h" />
+    <ClInclude Include="Game\GamePreLoading.h" />
+    <ClInclude Include="Game\Event\EventFlow.h" />
+    <ClInclude Include="Game\Event\EventPiece.h" />
+    <ClInclude Include="Game\Event\EventManager.h" />
+    <ClInclude Include="Game\Event\EventPieceType.h" />
     <ClInclude Include="Game\Facility\FacilityType.h" />
     <ClInclude Include="Game\Facility\Forge.h" />
     <ClInclude Include="Game\Facility\FacilityBase.h" />
@@ -472,6 +509,9 @@
     <ClInclude Include="Game\Network\NetworkManager.h" />
     <ClInclude Include="Game\Monster\MonsterPop\MonsterPopManager.h" />
     <ClInclude Include="Game\Monster\MonsterPop\MonsterPopPoint.h" />
+    <ClInclude Include="Game\Sound\SoundList.h" />
+    <ClInclude Include="Game\Sound\SoundManager.h" />
+    <ClInclude Include="YonemaEngine\Utils\InvokeFunc.h" />
     <ClInclude Include="Game\Player\PlayerQuestManager.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
     <ClInclude Include="Game\Quest\QuestData.h" />

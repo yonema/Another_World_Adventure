@@ -10,6 +10,11 @@ namespace nsAWA
 	{
 		class CWorld;
 	}
+
+	namespace nsEvent
+	{
+		class CEventFlow;
+	}
 }
 
 namespace nsAWA
@@ -34,6 +39,13 @@ namespace nsAWA
 			constexpr CYonejiTestScene() = default;
 			~CYonejiTestScene() = default;
 
+			constexpr void Tutorial() noexcept
+			{
+				m_isTutorial = true;
+			}
+
+			bool IsLoaded() const noexcept;
+
 		private:
 
 			void InitAfterBaseLoaded(float deltaTime);
@@ -41,6 +53,7 @@ namespace nsAWA
 		private:
 			CLoadGame* m_loadGame = nullptr;
 			nsWorld::CWorld* m_world = nullptr;
+			bool m_isTutorial = false;
 		};
 
 	}

@@ -1,11 +1,11 @@
 #pragma once
 #include "FacilityBase.h"
+#include "../UI/Institution/Inn/InnWindowUI.h"
 
 namespace nsAWA
 {
 	namespace nsFacility
 	{
-		//�����̃X�e�[�g ���̌����ł�g�p�ł������Ȃ�IFacilityBase�Ɉڂ����ق�������?
 		enum class EnFacilityState
 		{
 			enClose,
@@ -30,22 +30,9 @@ namespace nsAWA
 			constexpr CInn() = default;
 			~CInn() = default;
 		private:
-			void InitBackgroundLevel();
-		private:
-			const std::string m_kSpritePath = "Assets/Images/ButtonRelated/Button_A.png";
-			const CVector2 m_kSpriteSize = CVector2(300.0f,300.0f);
-			const CVector2 m_kSpritePosition = CVector2(0.0f, -250.0f);
-			const float m_kSpriteScale = 0.2f;
-			const CVector4 m_kTransparent = CVector4(1.0f, 1.0f, 1.0f, 0.0f);
-
-			const std::string m_kBackGroundLevelPath = "Assets/Level2D/LevelFiles/InnBackground.tdl";
-		private:
-			CSpriteRenderer* m_enterSprite = nullptr;
-
-			CLevel2D m_backGroundLevel;
-
+			CFontRenderer* m_enterFont = nullptr;
 			EnFacilityState m_state = EnFacilityState::enClose;
-
+			nsUI::CInnWindowUI* m_windowUI = nullptr;
 		};
 
 	}

@@ -4,6 +4,7 @@
 #include "../../../Network/NetworkManager.h"
 #include "../../../Feature/FeatureBuilder.h"
 #include "../../../Player/Player.h"
+#include "../../../Event/ProgressManagement/EventSaveData.h"
 
 namespace nsAWA
 {
@@ -87,21 +88,28 @@ namespace nsAWA
 			}
 
 			//ChengeSelect
-			if (Keyboard()->IsTrigger(EnKeyButton::en8))
+			if (abs(Input()->GetVirtualAxis(EnAxisMapping::enForward)) >= 0.8f && m_canChangeItem == true)
 			{
 				ChengeSelectingItem();
+
+				m_canChangeItem = false;
 			}
 			
 			//Exit
-			if (Keyboard()->IsTrigger(EnKeyButton::en9))
+			if (Input()->IsTrigger(EnActionMapping::enCancel))
 			{
 				ExitUI();
 			}
 
 			//OK
-			if (Keyboard()->IsTrigger(EnKeyButton::en0))
+			if (Input()->IsTrigger(EnActionMapping::enDecision))
 			{
 				StartExecute();
+			}
+
+			if (abs(Input()->GetVirtualAxis(EnAxisMapping::enForward)) < 0.8f)
+			{
+				m_canChangeItem = true;
 			}
 		}
 
@@ -193,13 +201,16 @@ namespace nsAWA
 
 				//セーブする時の音が欲しい?
 
+				//ユーザーデータのセーブ
 				CUserData userDataSave;
 				userDataSave.Save();
 
+				//イベントデータのセーブ
+				nsEvent::CEventSaveData eventDataSave;
+				eventDataSave.Save();
+
 				//セーブしたデータをネットワークにアップロード
 				nsNetwork::CNetworkManager::GetInstance()->UploadSaveData();
-
-				nsGameWindow::MessageBoxWarning(L"セーブしました。");
 			}
 
 			m_level.PlayAnimation("FadeEnd");

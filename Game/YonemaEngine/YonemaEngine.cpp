@@ -8,6 +8,7 @@
 #include "Graphics/Animations/UpdateAnimationManager.h"
 #include "Utils/Random.h"
 #include "Thread/LoadModelThread.h"
+#include "Graphics/Fade.h"
 #include "DebugSystem/DisplayFPS.h"
 #include "../Game/Game.h"
 #include "../Game/Samples/SampleMain.h"
@@ -44,6 +45,7 @@ namespace nsYMEngine
 		m_effectEngine = nsEffect::CEffectEngine::CreateInstance();
 		m_loadModelThread = nsThread::CLoadModelThread::CreateInstance();
 		m_updateAnimationManager = nsGraphics::nsAnimations::CUpdateAnimationManager::CreateInstance();
+		m_fade = NewGO<nsGraphics::CFade>("CFade");
 
 		NewGO<nsAWA::CGame>(EnGOPriority::enMid, "AWAGame");
 		//NewGO<nsAWA::nsSamples::CSampleMain> ("SampleMain");
@@ -66,6 +68,8 @@ namespace nsYMEngine
 
 		delete m_random;
 		m_random = nullptr;
+		DeleteGO(m_fade);
+		m_fade = nullptr;
 
 		// オブジェクトの破棄より先にスレッドの破棄
 		nsThread::CLoadModelThread::DeleteInstance();
@@ -106,6 +110,8 @@ namespace nsYMEngine
 		m_inputManager->Update(deltaTime);
 
 		m_gameObjectManager->Update(deltaTime);
+
+		m_invokeFunc.Update(deltaTime);
 
 		m_updateAnimationManager->Update();
 

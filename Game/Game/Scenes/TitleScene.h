@@ -24,6 +24,8 @@ namespace nsAWA
 			~CTitleScene() = default;
 
 		private:
+			CSpriteRenderer* m_titleBackSR = nullptr;
+			CSpriteRenderer* m_titleLogoSR = nullptr;
 			CFontRenderer* m_fontRenderer = nullptr;
 		};
 

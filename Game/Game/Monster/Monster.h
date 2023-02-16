@@ -4,6 +4,8 @@
 #include "MonsterAnimation.h"
 #include "MonsterCollider.h"
 #include "AI/MonsterAIController.h"
+#include "../Attribute.h"
+#include "MonsterList.h"
 
 namespace nsAWA {
 
@@ -24,7 +26,6 @@ namespace nsAWA {
 
 		enum class EnMonsterList;
 		enum class EnMonsterState;
-		struct SMonsterInitData;
 	}
 
 	namespace nsMonster {
@@ -130,8 +131,15 @@ namespace nsAWA {
 
 			bool CheckDrop(const std::string& dropItemName);
 
+			constexpr bool IsInitied() const noexcept
+			{
+				return m_isInited;
+			}
+
 		private:
 			void CreateMonsterModel(const SMonsterInitData& monsterInfo);
+
+			void InitAfterLoadModel();
 
 		private:
 			std::string m_name = "NoName";				//名前
@@ -146,6 +154,9 @@ namespace nsAWA {
 			bool m_isChangeState = false;	//ステートがこのフレームで変更された？
 
 			nsUI::CEnemyBattleStatusUI* m_enemyBattleStatusUI = nullptr;
+
+			SMonsterInitData m_initData = {};
+			bool m_isInited = false;
 		};
 	}
 }

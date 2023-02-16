@@ -3,6 +3,10 @@
 #include "CSV/CSVManager.h"
 #include "Player/Player.h"
 #include "Player/PlayerManager.h"
+#include "Armor/Armor.h"
+#include "Skill/PassiveSkillManager.h"
+#include "Skill/PassiveSkill.h"
+#include "Event/ProgressManagement/EventProgressManager.h"
 
 
 namespace nsAWA {
@@ -32,6 +36,15 @@ namespace nsAWA {
 
 		//アイテムを保存。
 		SaveItem();
+
+		//武器と防具を保存。
+		SaveWeaponAndArmor(player);
+
+		//セット中のアクティブスキルを保存。
+		SaveSetActiveSkill(player);
+
+		//セット中のパッシブスキルを保存。
+		SaveSetPassiveSkill(player);
 
 		//データを保存。
 		csvManager.SaveCSV(kUserDataCSVFilePath, m_userData);
@@ -76,7 +89,7 @@ namespace nsAWA {
 		//アイテムのリストをロード。
 		auto playerItemManager = playerManager->GetItemManager();
 
-		
+		//アイテムを追加。
 		for (int dataNum = 0; dataNum < (*itr).size(); dataNum++) {
 
 			std::string name = (*itr)[dataNum];
@@ -84,13 +97,53 @@ namespace nsAWA {
 
 			playerItemManager->AddItem(name, num, true);
 		}
+		itr++;
+
+		//武器と防具をロード。
+		playerManager->SetWeapon((*itr)[0]);
+		playerManager->SetArmor((*itr)[1]);
+		itr++;
+
+		//アクティブスキルをロード。
+		for (int dataNum = 0; dataNum < (*itr).size(); dataNum++) {
+
+			//名前を取得。
+			std::string name = (*itr)[dataNum];
+
+			//Noneじゃなければ。
+			if (name != "None") {
+
+				//アクティブスキルを設定。
+				playerManager->SetActiveSkill(dataNum, name);
+			}
+		}
+		itr++;
+		
+		//パッシブスキルの装着可能数を設定。
+		playerManager->SetActiveSkillMaxNum(static_cast<int>((*itr).size()));
+
+		//パッシブスキルをロード。
+		for (int dataNum = 0; dataNum < (*itr).size(); dataNum++) {
+
+			//名前を取得。
+			std::string name = (*itr)[dataNum];
+
+			//Noneじゃなければ。
+			if (name != "None") {
+
+				//パッシブスキルを設定。
+				playerManager->SetPassiveSkill(dataNum, name);
+			}
+		}
 	}
 
 	void CUserData::SaveStatus(nsPlayer::CPlayer* player) {
 
 		//ステータスをリストに格納。
 		std::vector<std::string> statusData;
+		statusData.emplace_back(player->GetStatus()->GetPlayerName());
 		statusData.emplace_back(std::to_string(player->GetStatus()->GetLevel()));
+		statusData.emplace_back(std::to_string(player->GetStatus()->GetExp()));
 		statusData.emplace_back(std::to_string(player->GetStatus()->GetHP()));
 		statusData.emplace_back(std::to_string(player->GetStatus()->GetMaxHP()));
 		statusData.emplace_back(std::to_string(player->GetStatus()->GetMP()));
@@ -145,5 +198,75 @@ namespace nsAWA {
 
 		//ユーザーデータに追加。
 		m_userData.emplace_back(itemData);
+	}
+
+	void CUserData::SaveWeaponAndArmor(nsPlayer::CPlayer* player) {
+
+		//装備中の武器と防具の名前を取得。
+		std::string playerWeaponName = player->GetWeapon()->GetWeaponName();
+		std::string playerArmorName = player->GetArmor()->GetArmorName();
+
+		std::vector<std::string> weaponAndArmorName;
+
+		//名前をリストに追加。
+		weaponAndArmorName.emplace_back(playerWeaponName);
+		weaponAndArmorName.emplace_back(playerArmorName);
+
+		//ユーザーデータに追加。
+		m_userData.emplace_back(weaponAndArmorName);
+	}
+
+	void CUserData::SaveSetActiveSkill(nsPlayer::CPlayer* player) {
+
+		std::vector<std::string> setActiveSkillName;
+
+		//アクティブスキルの名前をデータに保存。
+		for (int skillNum = 0; skillNum < static_cast<int>(nsPlayer::EnActiveSkillListNumber::enActiveSkill_Num); skillNum++) {
+
+			std::string skillName = nsPlayer::CPlayerManager::GetInstance()->GetActiveSkillName(skillNum);
+
+			//もしアクティブスキルがセットされていなければ。
+			if (skillName == nsPlayer::CPlayerManager::m_kTestFontNotFound) {
+
+				//Noneを保存。
+				setActiveSkillName.emplace_back("None");
+			}
+			else {
+
+				//スキル名を保存。
+				setActiveSkillName.emplace_back(skillName);
+			}
+		}
+
+		//ユーザーデータに追加。
+		m_userData.emplace_back(setActiveSkillName);
+	}
+
+	void CUserData::SaveSetPassiveSkill(nsPlayer::CPlayer* player) {
+
+		std::vector<std::string> setPassiveSkillName;
+
+		auto* passiveSkillManager = player->GetPassiveSkillManager();
+
+		//パッシブスキルの名前をデータに保存。
+
+		//パッシブスキルを順に参照。
+		for (const auto& passiveSkill : passiveSkillManager->GetPassiveSkillList()) {
+
+			std::string passiveSkillName = "None";
+
+			//設定されていれば。
+			if (passiveSkill != nullptr) {
+
+				//名前を取得。
+				passiveSkillName = passiveSkill->GetName();
+			}
+
+			//データに追加。
+			setPassiveSkillName.emplace_back(passiveSkillName);
+		}
+
+		//ユーザーデータに追加。
+		m_userData.emplace_back(setPassiveSkillName);
 	}
 }

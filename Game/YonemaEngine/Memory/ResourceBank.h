@@ -26,6 +26,10 @@ namespace nsYMEngine
 					// ñ¢ìoò^ÇÃÇΩÇﬂÅAêVãKìoò^Ç∑ÇÈÅB
 					m_resourceMap.emplace(filePath, resource);
 				}
+				else
+				{
+					int a = 1;
+				}
 			}
 
 			/**

@@ -6,31 +6,32 @@ namespace nsAWA {
 
 	namespace nsCamera {
 
+		CVector3 CCameraAction::m_startAddCameraVec = { 0.0f,10.0f,-30.0f };		//開始時点での加算ベクトル
+
 		namespace {
 
-			const CVector3 kStartAddCameraVec = { 0.0f,10.0f,-30.0f };		//開始時点での加算ベクトル
 			constexpr const float kRotationSpeed = 2.0f;					//回転速度
 			constexpr const float kAddPlayerPosition = 10.0f;				//プレイヤーの胸あたりを見るための加算スカラー
 			constexpr float kDirectionUpMax = -0.5f;						//カメラがどれくらい上を向けるか
 			constexpr float kDirectionDownMax = 0.8f;						//カメラがどれくらい下を向けるか
 		}
 
-		void CCameraAction::Init() {
+		void CCameraAction::Init(nsPlayer::CPlayer* player) {
+
+			//プレイヤーのポインタを取得。
+			m_player = player;
 
 			//加算ベクトルを初期化。
-			m_addCameraVec = kStartAddCameraVec;
+			m_addCameraVec = m_startAddCameraVec;
 		}
 
 		void CCameraAction::Update() {
 
-			//プレイヤーを検索。
-			auto player = FindGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
-
 			//プレイヤーの座標を取得。
-			CVector3 playerPosition = player->GetPosition();
+			CVector3 playerPosition = m_player->GetPosition();
 
 			//プレイヤーの揺れとは反対にオフセットを設定。
-			CVector3 cameraPositionOffset = player->GetPositionOffset();
+			CVector3 cameraPositionOffset = m_player->GetPositionOffset();
 			cameraPositionOffset *= -1.0f;
 
 			//注視点を調整。

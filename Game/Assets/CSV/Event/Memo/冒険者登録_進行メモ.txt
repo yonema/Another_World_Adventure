@@ -1,0 +1,41 @@
+冒険者登録
+Set
+	メアリーに話しかける
+Conversation
+	会話1
+Set
+	フェードして冒険者3人組を生成、メアリー非表示
+Conversation
+	会話2
+Set
+	ぼこぼこに倒す
+Conversation
+	会話3
+Set
+	フェードしてジョンとメアリー生成
+Conversation
+	会話4
+Conversation
+	会話5
+Conversation
+	会話6
+Conversation
+	会話7
+Conversation
+	会話8
+Conversation
+	会話9
+Set
+	フェードして冒険者3人とジョンを消去
+Conversation
+	会話10
+Set
+	お金ゲット
+Conversation
+	会話11
+Set
+	冒険者カードゲット
+Conversation
+	会話12
+Set
+	依頼をセットしてイベント終了

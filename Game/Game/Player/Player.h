@@ -22,10 +22,6 @@ namespace nsAWA {
 	namespace nsUI {
 		
 		class CPlayerUIManager;
-		class CPlayerBattleStatusUI;
-		class CSkillIconUI;
-		class CItemUI;
-		class CMenuManager;
 	}
 
 	namespace nsPlayer {
@@ -65,7 +61,7 @@ namespace nsAWA {
 				//SPを回復。
 				m_status.HealSP(healValue);
 			}
-			void AddExp(float exp) {
+			void AddExp(int exp) {
 
 				//経験値を獲得。
 				m_status.AddExp(exp);
@@ -78,21 +74,27 @@ namespace nsAWA {
 				return m_action;
 			}
 
-			void InputEnable() {
+			void InputEnableBySystem() {
 
 				//入力できる状態にする。
-				m_input.InputEnable();
+				m_input.InputEnableBySystem();
 			}
 
-			void InputDisable() {
+			void InputDisableBySystem() {
 
 				//入力できない状態にする。
-				m_input.InputDisable();
+				m_input.InputDisableBySystem();
 			}
 
 			CPlayerStatus* GetStatus()override final;
 
 			nsWeapon::CWeapon* GetWeapon();
+
+			CPlayerWeaponManager* GetWeaponManager() {
+
+				//武器管理クラスを取得。
+				return &m_weaponManager;
+			}
 
 			nsArmor::CArmor* GetArmor();
 
@@ -109,6 +111,33 @@ namespace nsAWA {
 			void SetWeapon(nsWeapon::CWeapon* weapon);
 
 			void SetArmor(nsArmor::CArmor* armor);
+
+
+			void SetPlayerName(const std::string& playerName) {
+
+				//プレイヤーネームを設定。
+				m_status.SetPlayerName(playerName);
+			}
+
+			void SetIsInTown(bool flag) {
+
+				//街中かどうかを設定。
+				m_isInTown = flag;
+
+				//ステート変更扱い。
+				m_action.ChangeState();
+			}
+
+			bool IsInTown()const {
+
+				//街中？
+				return m_isInTown;
+			}
+
+			constexpr bool IsInited() const noexcept
+			{
+				return m_isInited;
+			}
 
 		public:	//依頼関連
 			void SetSlayQuest(const std::string& questName, const std::string& targetEnemyName, int slayToCompleteNum)
@@ -138,9 +167,12 @@ namespace nsAWA {
 
 				m_questManager.EraseQuest(eraseQuestName);
 
+
 			}
 		private:
 			void CreatePlayerModel();
+
+			void InitAfterLoadModel();
 
 		public: // UI
 			void ChangeFromSkillToItemUI();
@@ -152,6 +184,7 @@ namespace nsAWA {
 			void MoveBackItemUI();
 
 		private:
+			bool m_isInTown = false;								//街中？
 			CPlayerInput m_input;									//入力
 			CPlayerAction m_action;									//アクション
 			nsPlayerAnimation::CPlayerAnimation m_animation;		//アニメーション
@@ -164,11 +197,9 @@ namespace nsAWA {
 			CFontRenderer* m_fontRenderer = nullptr;
 			wchar_t m_dispText[32] = {};
 #endif		
-			nsUI::CPlayerBattleStatusUI* m_playerBattleStatusUI = nullptr;
-			nsUI::CSkillIconUI* m_skillIconUI = nullptr;
-			nsUI::CItemUI* m_itemUI = nullptr;
-			nsUI::CMenuManager* m_menuManager = nullptr;
+
 			nsUI::CPlayerUIManager* m_playerUIManager = nullptr;
+			bool m_isInited = false;
 
 		};
 	}

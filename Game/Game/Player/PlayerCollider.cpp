@@ -31,7 +31,7 @@ namespace nsAWA {
 			rot.SetRotation(CVector3::AxisZ(), nsMath::YM_PIDIV2);
 
 			//当たり判定を初期化。
-			m_triggerBox.InitAsCapsule<CGameActorCollider>(
+			m_trigger.InitAsCapsule<CGameActorCollider>(
 				this,
 				kPlayerTriggerBoxRadius,
 				kPlayerTriggerBoxHeight,
@@ -40,7 +40,7 @@ namespace nsAWA {
 			);
 
 			//トリガーを回転。
-			m_triggerBox.SetRotation(rot);
+			m_trigger.SetRotation(rot);
 		}
 
 		void CPlayerCollider::Update() {
@@ -50,7 +50,7 @@ namespace nsAWA {
 			finalPosition = *m_position + kPlayerTriggerBoxAddPosition;
 
 			//座標を設定。
-			m_triggerBox.SetPosition(finalPosition);
+			m_trigger.SetPosition(finalPosition);
 		}
 	}
 }

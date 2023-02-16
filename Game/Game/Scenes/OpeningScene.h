@@ -1,5 +1,13 @@
 #pragma once
 #include "SceneBase.h"
+namespace nsAWA
+{
+	class CGameNowLoading;
+	namespace nsHumans
+	{
+		class CHumanModelRenderer;
+	}
+}
 
 namespace nsAWA
 {
@@ -23,8 +31,16 @@ namespace nsAWA
 			constexpr COpeningScene() = default;
 			~COpeningScene() = default;
 
+			static bool IsInitialOpening() noexcept
+			{
+				return m_initialOpening;
+			}
+
 		private:
-			CFontRenderer* m_fontRenderer = nullptr;
+			static bool m_initialOpening;
+			CSkyCubeRenderer* m_skyCubeRenderer = nullptr;
+			nsHumans::CHumanModelRenderer* m_humanMR = nullptr;
+			CGameNowLoading* m_gameNowLoading = nullptr;
 		};
 
 	}

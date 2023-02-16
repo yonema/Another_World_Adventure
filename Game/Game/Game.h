@@ -1,6 +1,10 @@
 #pragma once
 namespace nsAWA
 {
+	class CGamePreLoading;
+}
+namespace nsAWA
+{
 	//ÉQÅ[ÉÄÉNÉâÉX
 	class CGame : public IGameObject
 	{
@@ -24,6 +28,6 @@ namespace nsAWA
 		~CGame() = default;
 
 	private:
-
+		CGamePreLoading* m_gamePreLoading = nullptr;
 	};
 }

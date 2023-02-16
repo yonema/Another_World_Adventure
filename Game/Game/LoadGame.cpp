@@ -13,6 +13,8 @@
 #include "Magic/MagicList.h"
 #include "Item/MaterialItemList.h"
 #include "GameLog/GameLog.h"
+#include "Sound/SoundList.h"
+#include "Sound/SoundManager.h"
 
 //仮に。
 #include "Monster/Monster.h"
@@ -35,6 +37,8 @@ namespace nsAWA {
 
 		//プレイヤーを生成。
 		m_player = NewGO<nsPlayer::CPlayer>(nsPlayer::CPlayer::m_kObjName_Player);
+		m_player->SetPosition(m_playerSpawnPosition);
+		m_player->SetRotation(m_playerSpawnQuaternion);
 
 		//メインカメラを生成。
 		m_mainCamera = NewGO<nsCamera::CMainCamera>(nsCamera::CMainCamera::m_kObjName_MainCamera);
@@ -42,8 +46,10 @@ namespace nsAWA {
 		//バックグラウンドを生成。
 		m_backGround = NewGO<nsBackGround::CBackGround>(nsBackGround::CBackGround::m_kObjName_BackGround);
 
-		//仮に。
-		nsMonster::CMonster* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+		//BGM再生。
+		nsSound::CSoundManager::GetInstance()->ChangeBGM("MeadowBGM");
+
+		auto monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
 		monster->SetPosition({ 0.0f,0.0f,50.0f });
 
 		return true;
@@ -90,10 +96,10 @@ namespace nsAWA {
 		nsMonster::CMonsterList::GetInstance()->CreateMonsterList();
 
 		//アクティブスキルのリストを生成。
-		nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
+		//nsSkill::CActiveSkillList::GetInstance()->LoadActiveSkillList();
 
 		//パッシブスキルのリストを生成。
-		nsSkill::CPassiveSkillList::GetInstance()->LoadPassiveSkillList();
+		//nsSkill::CPassiveSkillList::GetInstance()->LoadPassiveSkillList();
 
 		//武器のリストを生成。
 		nsWeapon::CWeaponList::GetInstance()->LoadWeaponList();
@@ -102,7 +108,11 @@ namespace nsAWA {
 		nsArmor::CArmorList::GetInstance()->LoadArmorList();
 
 		//魔法のリストを生成。
-		nsMagic::CMagicList::GetInstance()->LoadMagicList();
+
+		//nsMagic::CMagicList::GetInstance()->LoadMagicList();
+
+		//サウンドのリストを生成。
+		nsSound::CSoundList::GetInstance()->LoadSoundList();
 	}
 
 	void CLoadGame::DeleteGameList() {
@@ -130,5 +140,21 @@ namespace nsAWA {
 
 		//魔法のリストを破棄。
 		nsMagic::CMagicList::GetInstance()->DeleteInstance();
+
+		//サウンドのリストを破棄。
+		nsSound::CSoundList::GetInstance()->DeleteInstance();
+
+		//サウンド管理クラスを破棄。
+		nsSound::CSoundManager::GetInstance()->DeleteInstance();
 	}
+
+	bool CLoadGame::IsPlayerInited() const noexcept
+	{
+		return m_player->IsInited();
+	}
+
+
+
+
+
 }

@@ -13,8 +13,11 @@ namespace nsAWA {
 
 			void OnDestroy()override final;
 
+			void Update(float deltaTime)override final;
+
 		private:
 			CEffectPlayer* m_effect = nullptr;	//エフェクト
+			float m_effectDurationTime = 0.0f;	//エフェクトの持続時間
 		};
 	}
 }

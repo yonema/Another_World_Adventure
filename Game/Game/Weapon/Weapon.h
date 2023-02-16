@@ -34,6 +34,7 @@ namespace nsAWA {
 		public:
 
 			void Release();
+
 		private:
 
 			void Create(const SWeaponInfo& weaponInfo);
@@ -66,6 +67,12 @@ namespace nsAWA {
 			float GetCritical()const {
 
 				return m_sInfo.critical;
+			}
+
+			const std::string& GetWeaponName()const {
+
+				//武器の名前を取得。
+				return m_sInfo.name;
 			}
 
 			void SetPosition(const CVector3& position) {
@@ -110,8 +117,12 @@ namespace nsAWA {
 				return m_sInfo.weaponType;
 			}
 
+			CModelRenderer* GetModelRenderer() {
+
+				//モデルを取得。
+				return m_modelRenderer;
+			}
 		private:
-			
 			CModelRenderer* m_modelRenderer = nullptr;		//モデル
 			SWeaponInfo m_sInfo;							//情報
 		};

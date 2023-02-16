@@ -211,6 +211,7 @@ namespace nsAWA
 
 				}
 
+				m_scvManager.ClearCSV();
 				return;
 			}
 
