@@ -8,7 +8,7 @@ namespace nsAWA
     namespace nsUI
     {
         const char* CPlayerHPUI::m_kLevel2DFilePath =
-            "Assets/Level2D/HP_Bar.tdl";
+            "Assets/Level2D/PlayerStatus.tdl";
 
         const char* CPlayerHPUI::m_kSpriteHPBarFilePath =
             "Assets/Images/FitnessBar/Common/Bar_HP.png";
@@ -143,6 +143,7 @@ namespace nsAWA
                         return true;
                     }
 
+                    return true;
                     return false;
                 });
         }

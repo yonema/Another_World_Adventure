@@ -41,6 +41,7 @@ namespace nsYMEngine
 					enSimplePostEffect,
 					enSprite,
 					enTransSprite,
+					enTopSprite,
 					enNumType
 				};
 

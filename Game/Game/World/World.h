@@ -45,6 +45,11 @@ namespace nsAWA
 				return m_playerSpawnPosition;
 			}
 
+			constexpr const auto& GetPlayerSpawnRotation() const noexcept
+			{
+				return m_playerSpawnRotation;
+			}
+
 			constexpr void SetMode(EnMode mode) noexcept
 			{
 				m_mode = mode;
@@ -54,6 +59,8 @@ namespace nsAWA
 			{
 				return m_mode;
 			}
+
+			bool IsAllModelLoaded() const noexcept;
 
 		private:
 			void TryLoadLevel();
@@ -70,6 +77,7 @@ namespace nsAWA
 			CWorldParts m_worldParts = {};
 			TRSListMap m_levelTRS = {};
 			CVector3 m_playerSpawnPosition = CVector3::Zero();
+			CQuaternion m_playerSpawnRotation = CQuaternion::Identity();
 			EnMode m_mode = EnMode::enNormal;
 		};
 

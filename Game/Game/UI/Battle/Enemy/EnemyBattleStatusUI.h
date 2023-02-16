@@ -45,6 +45,8 @@ namespace nsAWA
             */
             const bool CheckDrawUI(const CVector3& targetPosition);
 
+            void CheckEnemyDistance(const CVector3& targetPosition);
+
 
         private: // constant data member
             static const char* m_kLevel2DFilePath; // レベルファイルのパス
@@ -52,7 +54,10 @@ namespace nsAWA
 
             // UIの取得した敵の位置に対しての補正値（Y座標）
             static const float m_kUIPositionCorrectionAmountY;
+            static const float m_kUIPositionCorrectionAmountX;
             static const float m_kDrawingAngle; // UI表示の判定角度
+
+            static const float m_kEnemyMaximumDistance;
 
         private: // data member
             ////////////////////////////////////////////////////////////
@@ -75,6 +80,7 @@ namespace nsAWA
             ////////////////////////////////////////////////////////////
 
             CVector2 m_initialPosition = CVector2::Zero(); // UIの初期位置
+            CVector2 m_initialScale = CVector2::One();
 
             CVector2 m_setUIEnemyPosition = CVector2::Zero();
 

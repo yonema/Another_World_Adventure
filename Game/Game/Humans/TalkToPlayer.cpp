@@ -4,7 +4,7 @@
 #include "HumanManager.h"
 #include "HumanTable.h"
 #include "../Player/Player.h"
-#include "../UI/Story/ConversationWindowUI.h"
+#include "../UI/Story/ConversationPlayerInputDisable.h"
 
 namespace nsAWA
 {
@@ -13,9 +13,9 @@ namespace nsAWA
 		const float CTalkToPlayer::m_kTalkingDistance = 20.0f;
 		const float CTalkToPlayer::m_kTalkingRadAngle = nsMath::DegToRad(45.0f);
 		const char* const CTalkToPlayer::m_kTalkingCursorFilePath = 
-			"Assets/Images/Presets/Sapmles/200x200PNG.png";
-		const CVector2 CTalkToPlayer::m_kTalkingCursorSize = { 100.0f,100.0f };
-		const float CTalkToPlayer::m_kTalkingCursorOffset = 10.0f;
+			"Assets/Images/Icon/Pin.png";
+		const CVector2 CTalkToPlayer::m_kTalkingCursorSize = { 256.0f,256.0f };
+		const float CTalkToPlayer::m_kTalkingCursorOffset = 17.0f;
 
 
 
@@ -55,7 +55,10 @@ namespace nsAWA
 			SSpriteInitData initData;
 			initData.filePath = m_kTalkingCursorFilePath;
 			initData.spriteSize = m_kTalkingCursorSize;
+			initData.alphaBlendMode = EnAlphaBlendMode::enTrans;
 			m_talkingCursorSR->Init(initData);
+			m_talkingCursorSR->SetScale(0.2f);
+			m_talkingCursorSR->SetPivot({ 0.5f,1.0f });
 			m_talkingCursorSR->SetAnchor(EnAnchors::enMiddleCenter);
 			m_talkingCursorSR->SetDrawingFlag(false);
 
@@ -178,11 +181,11 @@ namespace nsAWA
 				m_talkingCursorSR->SetDrawingFlag(false);
 
 				// 会話ウィンドウと会話内容を生成
-				m_conversationWindowUI = NewGO<nsUI::CConversationWindowUI>("TalkToPlayer");
+				m_conversation = NewGO<nsUI::CConversationPlayerInputDisable>("TalkToPlayer");
 				std::string filePath = {};
 				BuildCsvFilePath(&filePath, 0);
 				auto wstr = nsUtils::GetWideStringFromString(filePath);
-				m_conversationWindowUI->InitConvesationCSV(wstr.c_str());
+				m_conversation->Init(wstr.c_str());
 			}
 
 			return;
@@ -207,18 +210,18 @@ namespace nsAWA
 
 		void CTalkToPlayer::UpdateTalking()
 		{
-			if (m_conversationWindowUI == nullptr)
+			if (m_conversation == nullptr)
 			{
 				return;
 			}
 
 
-			if (m_conversationWindowUI->IsEnd())
+			if (m_conversation->IsEnd())
 			{
 				m_talkingHuman = nullptr;
 				m_isTalking = false;
-				DeleteGO(m_conversationWindowUI);
-				m_conversationWindowUI = nullptr;
+				DeleteGO(m_conversation);
+				m_conversation = nullptr;
 			}
 
 

@@ -5,7 +5,7 @@ namespace nsAWA
 {
 	namespace nsUI
 	{
-		class CConversationWindowUI;
+		class CConversationPlayerInputDisable;
 	}
 }
 
@@ -91,10 +91,11 @@ namespace nsAWA
 			int m_triggerCount = -1;
 			int m_setFuncCount = -1;
 			CPhysicsTriggerObject m_trigger = {};
-			nsUI::CConversationWindowUI* m_conversationWindowUI = nullptr;
+			nsUI::CConversationPlayerInputDisable* m_conversation = nullptr;
 			CVector3 m_position = CVector3::Zero();
 			bool m_isClear = false;
 			std::function<bool(void)> m_setFunc = [](){ return true; };
+			bool m_isStartEvent = false;
 		};
 
 	}

@@ -1,0 +1,24 @@
+高ランク冒険者と修行
+Trigger
+	このトリガーに入ったらイベント開始
+Set
+	モデル生成
+	トリガーに入ってすぐ会話だと、ロードしてすぐ会話になって、急すぎるため、少し待つ。
+Conversation
+	会話1
+Conversation
+	会話2
+Set
+	チュートリアルイベントカット
+Conversation
+	会話3
+Set
+	なんかよくわからんが、次の会話が受け答えした後っぽいせりふだから、少し間を開ける
+Conversation
+	会話4
+Set
+	お金ゲット
+Conversation
+	会話5
+Set
+	モデル消去

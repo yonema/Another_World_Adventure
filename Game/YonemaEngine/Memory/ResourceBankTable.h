@@ -60,6 +60,7 @@ namespace nsYMEngine
 			TRsourceBank<nsSound::CWaveFile> m_waveFileBank = {};
 			TRsourceBank<nsGraphics::nsAnimations::CAnimationClip> m_animationClipBank = {};
 			TRsourceBank<nsGraphics::nsDx12Wrappers::CTexture> m_textureBank = {};
+			std::mutex m_mutex = {};
 		};
 
 	}

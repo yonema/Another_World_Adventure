@@ -6,6 +6,7 @@
 #include "Armor/Armor.h"
 #include "Skill/PassiveSkillManager.h"
 #include "Skill/PassiveSkill.h"
+#include "Event/ProgressManagement/EventProgressManager.h"
 
 
 namespace nsAWA {

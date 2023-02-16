@@ -1,5 +1,5 @@
 #include "EventPiece.h"
-#include "../UI/Story/ConversationWindowUI.h"
+#include "../UI/Story/ConversationPlayerInputDisable.h"
 #include "EventManager.h"
 #include "EventSetFuncPool.h"
 #include "../Player/Player.h"
@@ -20,6 +20,11 @@ namespace nsAWA
 		void CEventPiece::Update(float deltaTime)
 		{
 			if (IsClear())
+			{
+				return;
+			}
+
+			if (m_isStartEvent != true)
 			{
 				return;
 			}
@@ -49,8 +54,8 @@ namespace nsAWA
 		{
 			m_trigger.Release();
 
-			DeleteGO(m_conversationWindowUI);
-			m_conversationWindowUI = nullptr;
+			DeleteGO(m_conversation);
+			m_conversation = nullptr;
 
 			return;
 		}
@@ -78,6 +83,8 @@ namespace nsAWA
 			{
 				return;
 			}
+
+			m_isStartEvent = true;
 
 			if (m_eventPieceType == EnEventPieceType::enTrigger)
 			{
@@ -107,12 +114,12 @@ namespace nsAWA
 			}
 			else if (m_eventPieceType == EnEventPieceType::enConversation)
 			{
-				m_conversationWindowUI = NewGO<nsUI::CConversationWindowUI>();
+				m_conversation = NewGO<nsUI::CConversationPlayerInputDisable>();
 				std::string str = m_kCsvFileRootPath;
 				str += m_eventName;
 				str += ('0' + m_conversationCount + 1);
 				str += ".csv";
-				m_conversationWindowUI->InitConvesationCSV(
+				m_conversation->Init(
 					nsUtils::GetWideStringFromString(str).c_str());
 			}
 			else if (m_eventPieceType == EnEventPieceType::enSet)
@@ -176,16 +183,16 @@ namespace nsAWA
 
 		void CEventPiece::UpdateConversation()
 		{
-			if (m_conversationWindowUI == nullptr)
+			if (m_conversation == nullptr)
 			{
 				return;
 			}
 
-			if (m_conversationWindowUI->IsEnd())
+			if (m_conversation->IsEnd())
 			{
 				Clear();
-				DeleteGO(m_conversationWindowUI);
-				m_conversationWindowUI = nullptr;
+				DeleteGO(m_conversation);
+				m_conversation = nullptr;
 			}
 
 			return;

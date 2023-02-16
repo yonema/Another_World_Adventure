@@ -137,6 +137,11 @@ namespace nsAWA {
 				return m_isInTown;
 			}
 
+			constexpr bool IsInited() const noexcept
+			{
+				return m_isInited;
+			}
+
 		public:	//ˆË—ŠŠÖ˜A
 			void SetSlayQuest(const std::string& questName, const std::string& targetEnemyName, int slayToCompleteNum)
 			{
@@ -170,6 +175,8 @@ namespace nsAWA {
 		private:
 			void CreatePlayerModel();
 
+			void InitAfterLoadModel();
+
 		public: // UI
 			void ChangeFromSkillToItemUI();
 
@@ -197,6 +204,7 @@ namespace nsAWA {
 			nsUI::CSkillIconUI* m_skillIconUI = nullptr;
 			nsUI::CItemUI* m_itemUI = nullptr;
 			nsUI::CMenuManager* m_menuManager;
+			bool m_isInited = false;
 
 		};
 	}

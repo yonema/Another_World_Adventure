@@ -6,9 +6,10 @@ namespace nsAWA {
 
 	namespace nsCamera {
 
+		CVector3 CCameraAction::m_startAddCameraVec = { 0.0f,10.0f,-30.0f };		//開始時点での加算ベクトル
+
 		namespace {
 
-			const CVector3 kStartAddCameraVec = { 0.0f,10.0f,-30.0f };		//開始時点での加算ベクトル
 			constexpr const float kRotationSpeed = 2.0f;					//回転速度
 			constexpr const float kAddPlayerPosition = 10.0f;				//プレイヤーの胸あたりを見るための加算スカラー
 			constexpr float kDirectionUpMax = -0.5f;						//カメラがどれくらい上を向けるか
@@ -21,7 +22,7 @@ namespace nsAWA {
 			m_player = player;
 
 			//加算ベクトルを初期化。
-			m_addCameraVec = kStartAddCameraVec;
+			m_addCameraVec = m_startAddCameraVec;
 		}
 
 		void CCameraAction::Update() {

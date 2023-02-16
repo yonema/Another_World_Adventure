@@ -1,6 +1,6 @@
 NAME,女神と異世界転移,CONDITIONS,PROGRESS,Set,Conversation,Set,Conversation,,,,,,,,,,,,
-NAME,高ランク冒険者と修行,CONDITIONS,女神と異世界転移,PROGRESS,Trigger,Conversation,Conversation,Trigger,Conversation,Conversation,Set,Conversation,,,,,,,
-NAME,アルマの町,CONDITIONS,高ランク冒険者と修行,PROGRESS,Trigger,Conversation,Trigger,,,,,,,,,,,,
+NAME,高ランク冒険者と修行,CONDITIONS,女神と異世界転移,PROGRESS,Trigger,Set,Conversation,Conversation,Set,Conversation,Set,Conversation,Set,Conversation,Set,,,,
+NAME,アルマの町,CONDITIONS,高ランク冒険者と修行,PROGRESS,Trigger,Set,Conversation,Set,Trigger,,,,,,,,,,
 NAME,冒険者登録,CONDITIONS,アルマの町,PROGRESS,Set,Conversation,Conversation,Set,Conversation,Conversation,Conversation,Conversation,Conversation,Conversation,Conversation,Conversation,Conversation,Conversation,Set
 NAME,薬草採取とモンスター討伐,CONDITIONS,冒険者登録,PROGRESS,Set,Trigger,Conversation,Set,Conversation,Trigger,,,,,,,,,
 NAME,宿と冒険者ランクアップ,CONDITIONS,薬草採取とモンスター討伐,PROGRESS,Trigger,Conversation,Conversation,Conversation,Conversation,Conversation,Set,Conversation,Conversation,Conversation,Set,Conversation,Conversation,,
