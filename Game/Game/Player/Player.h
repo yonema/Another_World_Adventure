@@ -21,6 +21,7 @@ namespace nsAWA {
 	}
 	namespace nsUI {
 		
+		class CPlayerUIManager;
 		class CPlayerBattleStatusUI;
 		class CSkillIconUI;
 		class CItemUI;
@@ -166,7 +167,8 @@ namespace nsAWA {
 			nsUI::CPlayerBattleStatusUI* m_playerBattleStatusUI = nullptr;
 			nsUI::CSkillIconUI* m_skillIconUI = nullptr;
 			nsUI::CItemUI* m_itemUI = nullptr;
-			nsUI::CMenuManager* m_menuManager;
+			nsUI::CMenuManager* m_menuManager = nullptr;
+			nsUI::CPlayerUIManager* m_playerUIManager = nullptr;
 
 		};
 	}

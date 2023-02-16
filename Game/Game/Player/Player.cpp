@@ -16,6 +16,7 @@
 #include "../UI/Battle/Skill/SkillIconUI.h"
 #include "../UI/Battle/Item/ItemUI.h"
 #include "../UI/Menu/MenuManager.h"
+#include "../UI/Battle/Player/PlayerUIManager.h"
 
 namespace nsAWA {
 
@@ -88,16 +89,18 @@ namespace nsAWA {
 #endif
 
 			// UIの処理
-			m_playerBattleStatusUI = NewGO<nsUI::CPlayerBattleStatusUI>();
-			m_playerBattleStatusUI->LoadLevel();
+			//m_playerBattleStatusUI = NewGO<nsUI::CPlayerBattleStatusUI>();
+			//m_playerBattleStatusUI->LoadLevel();
 
-			m_skillIconUI = NewGO<nsUI::CSkillIconUI>();
-			m_skillIconUI->LoadLevel();
+			//m_skillIconUI = NewGO<nsUI::CSkillIconUI>();
+			//m_skillIconUI->LoadLevel();
 
-			m_itemUI = NewGO<nsUI::CItemUI>();
-			m_itemUI->LoadLevel();
+			//m_itemUI = NewGO<nsUI::CItemUI>();
+			//m_itemUI->LoadLevel();
 
-			m_menuManager = NewGO<nsUI::CMenuManager>();
+			//m_menuManager = NewGO<nsUI::CMenuManager>();
+
+			m_playerUIManager = NewGO<nsUI::CPlayerUIManager>();
 
 			//データをロード。
 			CUserData userData;
@@ -136,12 +139,17 @@ namespace nsAWA {
 			m_collider.Release();
 
 			// UIを破棄。
-			DeleteGO(m_playerBattleStatusUI);
-			DeleteGO(m_skillIconUI);
-			DeleteGO(m_menuManager);
+			DeleteGO(m_playerUIManager);
 		}
 
 		void CPlayer::UpdateActor(float deltaTime) {
+
+			// UIにプレイヤーのステータスを渡す
+			m_playerUIManager->SetUIPlayerStatus(
+				m_status.GetHP(), m_status.GetMaxHP(),
+				m_status.GetMP(), m_status.GetMaxMP(),
+				m_status.GetSP(), m_status.GetMaxSP()
+			);
 
 			//死んでいるなら。
 			if (IsDeath()) {
@@ -185,13 +193,6 @@ namespace nsAWA {
 
 			//トリガーを更新。
 			m_collider.Update();
-
-			// UIにプレイヤーのステータスを渡す
-			m_playerBattleStatusUI->SetUIPlayerStatus(
-				m_status.GetHP(), m_status.GetMaxHP(),
-				m_status.GetMP(), m_status.GetMaxMP(),
-				m_status.GetSP(), m_status.GetMaxSP()
-			);
 
 #ifdef _DEBUG
 			//プレイヤーのHPを表示。
@@ -347,24 +348,22 @@ namespace nsAWA {
 
 		void CPlayer::ChangeFromSkillToItemUI()
 		{
-			m_skillIconUI->DeactiveDrawing();
-			m_itemUI->ActiveDrawing();
+			m_playerUIManager->ChangeFromSkillToItemUI();
 		}
 
 		void CPlayer::ChangeFromItemToSkillUI()
 		{
-			m_itemUI->DeactiveDrawing();
-			m_skillIconUI->ActiveDrawing();
+			m_playerUIManager->ChangeFromItemToSkillUI();
 		}
 
 		void CPlayer::MoveNextItemUI()
 		{
-			m_itemUI->MoveNextItemUI();
+			m_playerUIManager->MoveNextItemUI();
 		}
 
 		void CPlayer::MoveBackItemUI()
 		{
-			m_itemUI->MoveBackItemUI();
+			m_playerUIManager->MoveBackItemUI();
 		}
 	}
 }

@@ -133,7 +133,7 @@ namespace nsAWA
 
         void CSkillIconUI::ActiveDrawing()
         {
-            if (nullptr == this) {
+            if (nullptr == this || false == IsActive()) {
                 return;
             }
 
@@ -144,12 +144,36 @@ namespace nsAWA
 
         void CSkillIconUI::DeactiveDrawing()
         {
+            if (nullptr == this || false == IsActive()) {
+                return;
+            }
+
+            for (auto forNum : m_spriteSkillIcon) {
+                forNum->SetDrawingFlag(false);
+            }
+        }
+
+        void CSkillIconUI::ActivatePlayerBattleStatusDrawingFlag()
+        {
+            if (nullptr == this) {
+                return;
+            }
+
+            for (auto forNum : m_spriteSkillIcon) {
+                forNum->SetDrawingFlag(true);
+                forNum->Activate();
+            }
+        }
+
+        void CSkillIconUI::DeactivatePlayerBattleStatusDrawingFlag()
+        {
             if (nullptr == this) {
                 return;
             }
 
             for (auto forNum : m_spriteSkillIcon) {
                 forNum->SetDrawingFlag(false);
+                forNum->Deactivate();
             }
         }
     }

@@ -40,6 +40,10 @@ namespace nsAWA
                 m_barWidthSize = mp / maxMP * m_kMaxBarWidthSize;
             }
 
+            void ActivatePlayerBattleStatusDrawingFlag();
+
+            void DeactivatePlayerBattleStatusDrawingFlag();
+
         private:
             static const char* m_kSpriteMPBarFilePath;
             static const char* m_kSpriteFrameFilePath;

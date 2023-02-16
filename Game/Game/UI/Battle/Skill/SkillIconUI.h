@@ -52,6 +52,10 @@ namespace nsAWA
 
             void DeactiveDrawing();
 
+            void ActivatePlayerBattleStatusDrawingFlag();
+
+            void DeactivatePlayerBattleStatusDrawingFlag();
+
 
         private: // constant member
             static const char* m_kLevel2DFilePath;

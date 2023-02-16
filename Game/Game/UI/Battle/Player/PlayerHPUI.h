@@ -53,6 +53,10 @@ namespace nsAWA
                 }
             }
 
+            void ActivatePlayerBattleStatusDrawingFlag();
+
+            void DeactivatePlayerBattleStatusDrawingFlag();
+
         private: // constant member
             ////////////////////////////////////////////////////////////
             // ファイルパス
