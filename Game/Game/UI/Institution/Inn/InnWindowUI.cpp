@@ -211,8 +211,6 @@ namespace nsAWA
 
 				//セーブしたデータをネットワークにアップロード
 				nsNetwork::CNetworkManager::GetInstance()->UploadSaveData();
-
-				nsGameWindow::MessageBoxWarning(L"セーブしました。");
 			}
 
 			m_level.PlayAnimation("FadeEnd");
