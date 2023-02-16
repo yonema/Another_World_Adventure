@@ -205,6 +205,8 @@
     <ClCompile Include="Game\Network\NetworkManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopManager.cpp" />
     <ClCompile Include="Game\Monster\MonsterPop\MonsterPopPoint.cpp" />
+    <ClCompile Include="Game\Sound\SoundList.cpp" />
+    <ClCompile Include="Game\Sound\SoundManager.cpp" />
     <ClCompile Include="YonemaEngine\Utils\InvokeFunc.cpp" />
     <ClCompile Include="Game\Player\PlayerQuestManager.cpp" />
     <ClCompile Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.cpp" />
@@ -505,6 +507,8 @@
     <ClInclude Include="Game\Network\NetworkManager.h" />
     <ClInclude Include="Game\Monster\MonsterPop\MonsterPopManager.h" />
     <ClInclude Include="Game\Monster\MonsterPop\MonsterPopPoint.h" />
+    <ClInclude Include="Game\Sound\SoundList.h" />
+    <ClInclude Include="Game\Sound\SoundManager.h" />
     <ClInclude Include="YonemaEngine\Utils\InvokeFunc.h" />
     <ClInclude Include="Game\Player\PlayerQuestManager.h" />
     <ClInclude Include="Game\Player\Observer\ObserverList\PlayerSlayQuestObserver.h" />
