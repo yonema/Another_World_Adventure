@@ -282,6 +282,8 @@
     <ClCompile Include="Game\Event\EventController.cpp" />
     <ClCompile Include="Game\GameNowLoading.cpp" />
     <ClCompile Include="Game\GamePreLoading.cpp" />
+    <ClCompile Include="Game\Sound\SoundList.cpp" />
+    <ClCompile Include="Game\Sound\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\BackGround\BackGround.h" />
@@ -591,6 +593,8 @@
     <ClInclude Include="Game\Quest\QuestData.h" />
     <ClInclude Include="Game\UI\Menu\MenuManager.h" />
     <ClInclude Include="Game\Attribute.h" />
+    <ClInclude Include="Game\Sound\SoundList.h" />
+    <ClInclude Include="Game\Sound\SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Images\StarMan.png" />

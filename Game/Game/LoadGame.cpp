@@ -13,6 +13,8 @@
 #include "Magic/MagicList.h"
 #include "Item/MaterialItemList.h"
 #include "GameLog/GameLog.h"
+#include "Sound/SoundList.h"
+#include "Sound/SoundManager.h"
 
 //仮に。
 #include "Monster/Monster.h"
@@ -46,6 +48,9 @@ namespace nsAWA {
 		//仮に。
 		nsMonster::CMonster* eagle = nsMonster::CMonsterList::GetInstance()->CreateMonster("Eagle");
 		eagle->SetPosition({ 0.0f,0.0f,50.0f });
+
+		//BGM再生。
+		nsSound::CSoundManager::GetInstance()->ChangeBGM("MeadowBGM");
 
 		return true;
 	}
@@ -104,6 +109,9 @@ namespace nsAWA {
 
 		//魔法のリストを生成。
 		nsMagic::CMagicList::GetInstance()->LoadMagicList();
+
+		//サウンドのリストを生成。
+		nsSound::CSoundList::GetInstance()->LoadSoundList();
 	}
 
 	void CLoadGame::DeleteGameList() {
@@ -131,5 +139,11 @@ namespace nsAWA {
 
 		//魔法のリストを破棄。
 		nsMagic::CMagicList::GetInstance()->DeleteInstance();
+
+		//サウンドのリストを破棄。
+		nsSound::CSoundList::GetInstance()->DeleteInstance();
+
+		//サウンド管理クラスを破棄。
+		nsSound::CSoundManager::GetInstance()->DeleteInstance();
 	}
 }
