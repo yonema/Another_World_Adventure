@@ -8,7 +8,7 @@ namespace nsAWA
     namespace nsUI
     {
         const char* CEnemyHPUI::m_kLevel2DFilePath =
-            "Assets/Level2D/EnemyHPBar.tdl";
+            "Assets/Level2D/EnemyStatus.tdl";
 
         const char* CEnemyHPUI::m_kSpriteHPBarFilePath = 
             "Assets/Images/FitnessBar/Common/Bar_HP.png";
@@ -158,6 +158,7 @@ namespace nsAWA
                         return true;
                     }
 
+                    return true;
                     return false;
                 });
         }
@@ -196,25 +197,33 @@ namespace nsAWA
 
             // 現在のバーの横幅を保存
             m_oldBarWidthSize = m_barWidthSize;
+
+            // 表示、非表示
+            if (false == m_flagAllDrawSprite) {
+                m_spriteHPBar->SetDrawingFlag(false);
+                m_spriteFrame->SetDrawingFlag(false);
+                m_spriteDanger->SetDrawingFlag(false);
+                m_spriteBase->SetDrawingFlag(false);
+                m_spriteDecrease->SetDrawingFlag(false);
+            }
+            else {
+                m_spriteBase->SetDrawingFlag(true);
+                m_spriteFrame->SetDrawingFlag(true);
+                m_spriteDecrease->SetDrawingFlag(true);
+            }
         }
 
         void CEnemyHPUI::ChangeDangerUI()
         {
             // ピンチ状態のとき
             if (m_kDangerLine > m_barWidthSize) {
-                // ピンチ状態のUIが非表示なら
-                if (false == m_spriteDanger->IsDrawingFlag()) {
-                    m_spriteDanger->SetDrawingFlag(true);
-                    m_spriteHPBar->SetDrawingFlag(false);
-                }
+                m_spriteDanger->SetDrawingFlag(true);
+                m_spriteHPBar->SetDrawingFlag(false);
             }
             // ピンチ状態ではないとき
             else {
-                // ピンチ状態のUIが表示状態なら
-                if (true == m_spriteDanger->IsDrawingFlag()) {
-                    m_spriteDanger->SetDrawingFlag(false);
-                    m_spriteHPBar->SetDrawingFlag(true);
-                }
+                m_spriteDanger->SetDrawingFlag(false);
+                m_spriteHPBar->SetDrawingFlag(true);
             }
         }
 
