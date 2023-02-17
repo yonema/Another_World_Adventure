@@ -28,7 +28,8 @@ namespace nsAWA {
 			CQuaternion& rotation,
 			CPlayerStatus* playerStatus, 
 			nsFeature::CFeatureManager* playerFeatureManager,
-			nsPlayerAnimation::CPlayerAnimation* playerAnimation
+			nsPlayerAnimation::CPlayerAnimation* playerAnimation,
+			CCharacterController* charaConRef
 		) {
 			//座標を取得。
 			m_position = &position;
@@ -47,6 +48,8 @@ namespace nsAWA {
 
 			//プレイヤーアニメーションのポインタを取得。
 			m_playerAnimation = playerAnimation;
+
+			m_charaConRef = charaConRef;
 		}
 
 		void CPlayerAction::Release() {
@@ -101,6 +104,12 @@ namespace nsAWA {
 
 			//移動量を計算。
 			CVector3 moveAmount = CalculateMoveAmount(inputX, inputZ, speed);
+
+			//if (m_charaConRef)
+			//{
+			//	auto nextPos = m_charaConRef->Execute(moveAmount, 1.0f);
+			//	moveAmount = nextPos - *m_position;
+			//}
 
 			//移動方向を計算。
 			m_moveDirection = moveAmount;
@@ -190,6 +199,11 @@ namespace nsAWA {
 			if (m_state == EnPlayerState::enUseActiveSkill) {
 
 				//早期リターン。
+				return;
+			}
+
+			if (m_activeSkill[static_cast<int>(activeSkillNum)] == nullptr)
+			{
 				return;
 			}
 

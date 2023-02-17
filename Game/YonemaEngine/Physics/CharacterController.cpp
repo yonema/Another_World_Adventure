@@ -100,6 +100,8 @@ namespace nsYMEngine
 				return m_position;
 			}
 
+			return ExecuteKari(moveVec, deltaTime);
+
 			UpdateGravity();
 
 			ResetFlag();
@@ -138,6 +140,24 @@ namespace nsYMEngine
 
 		
 		}
+
+		const nsMath::CVector3& CCharacterController::ExecuteKari(
+			const nsMath::CVector3& moveVec, float deltaTime) noexcept
+		{
+			auto moveVecXZ = moveVec;
+			//moveVecXZ.y = 0.0f;
+
+
+
+
+
+
+
+			m_position += moveVecXZ;
+
+			return m_position;
+		}
+
 
 
 		void CCharacterController::UpdateGravity()

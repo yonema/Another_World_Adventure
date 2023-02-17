@@ -112,6 +112,10 @@ namespace nsYMEngine
 
 			const nsMath::CVector3& Execute(const nsMath::CVector3& moveVec, float deltaTime) noexcept;
 
+
+
+			const nsMath::CVector3& ExecuteKari(const nsMath::CVector3& moveVec, float deltaTime) noexcept;
+
 			constexpr const nsMath::CVector3& GetPosition() const noexcept
 			{
 				return m_position;

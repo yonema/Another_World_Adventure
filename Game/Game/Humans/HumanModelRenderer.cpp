@@ -36,7 +36,8 @@ namespace nsAWA
 			const char* name,
 			const CVector3& position,
 			const CQuaternion& rotation,
-			const char* filePath
+			const char* filePath,
+			bool isShadowReceiver
 		)
 		{
 			Release();
@@ -57,6 +58,10 @@ namespace nsAWA
 			modelInitData.SetFlags(EnModelInitDataFlags::enRegisterTextureBank);
 			modelInitData.SetFlags(EnModelInitDataFlags::enCullingOff);
 			modelInitData.SetFlags(EnModelInitDataFlags::enShadowCaster);
+			if (isShadowReceiver != true)
+			{
+				modelInitData.SetFlags(EnModelInitDataFlags::enShadowReceiver, false);
+			}
 
 			m_modelRenderer = NewGO<CModelRenderer>();
 			m_modelRenderer->SetPosition(position);

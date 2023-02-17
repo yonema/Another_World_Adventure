@@ -1,7 +1,7 @@
 #pragma once
 namespace nsYMEngine
 {
-#define ENABLE_COFIG
+//#define ENABLE_COFIG
 
 #ifdef ENABLE_COFIG
 

@@ -136,12 +136,13 @@ namespace nsAWA
 
 		void CWorld::UnexpectedLevelObject(const std::string& objName) const noexcept
 		{
+#ifdef _DEBUG
 			std::wstring wstr = L"予想外のオブジェクト ";
 			wstr += nsUtils::GetWideStringFromString(objName);
 			wstr.erase(wstr.end() - 1);
 			wstr += L" がレベルで読み込まれています。";
 			nsGameWindow::MessageBoxWarning(wstr.c_str());
-
+#endif // _DEBUG
 			return;
 		}
 
