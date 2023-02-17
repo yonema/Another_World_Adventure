@@ -9,6 +9,7 @@
 |	+---ExLibrary
 |	|	+---DirectXTex-main
 |	|	+---DirectXTK12-sept2021
+|	|	+---EffekseerForCpp170a
 |	|	+---PhysX-4.1
 |	+---Game
 |	+---Tools
