@@ -17,6 +17,14 @@ namespace nsAWA
 			const float CMonsterPopPoint::m_kMonsterPopMaxOffset = 50.0f;
 			const float CMonsterPopPoint::m_kMonsterPopShiftPos = 10.0f;
 
+			const std::unordered_map<std::string, const char* const>
+				CMonsterPopPoint::m_popNameToCreateName =
+			{
+				{"ギヤラ", "Giyara"},
+				{"スケルトン", "Skeleton"},
+				{"イーグル", "Eagle"},
+			};
+
 
 			bool CMonsterPopPoint::Start()
 			{
@@ -246,7 +254,17 @@ namespace nsAWA
 				for (const auto& name : popInfoRef->nameArray)
 				{
 					const auto& monsterName = name;
-					auto* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster("Giyara");
+					auto itr = m_popNameToCreateName.find(monsterName);
+					const char* createName = nullptr;
+					if (itr == m_popNameToCreateName.end())
+					{
+						createName = "Giyara";
+					}
+					else
+					{
+						createName = itr->second;
+					}
+					auto* monster = nsMonster::CMonsterList::GetInstance()->CreateMonster(createName);
 					monster->SetPosition(popPos);
 					popPos.x += m_kMonsterPopShiftPos;
 

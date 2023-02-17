@@ -76,6 +76,9 @@ namespace nsAWA {
 
 						//レベルアップテキストを表示。
 						nsGameLog::CGameLog::GetInstance()->AddGameLog(levelUpText);
+
+						//レベルを保存。
+						m_oldPlayerLevel = level;
 					}
 
 					//終了。

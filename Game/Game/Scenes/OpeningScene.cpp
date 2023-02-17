@@ -30,7 +30,8 @@ namespace nsAWA
 				"Goddess",
 				CVector3::Zero(),
 				CQuaternion::Identity(),
-				nsHumans::g_kNameToModelFilePath.at("Goddess")
+				nsHumans::g_kNameToModelFilePath.at("Goddess"),
+				false
 			);
 
 			InvokeFunc([&]() {m_initialOpening = true; }, 3.0f);

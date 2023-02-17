@@ -74,7 +74,8 @@ namespace nsAWA {
 				CQuaternion& rotation,
 				CPlayerStatus* playerStatus, 
 				nsFeature::CFeatureManager* playerFeatureManager,
-				nsPlayerAnimation::CPlayerAnimation* playerAnimation
+				nsPlayerAnimation::CPlayerAnimation* playerAnimation,
+				CCharacterController* charaConRef
 			);
 
 			void Release();
@@ -170,6 +171,9 @@ namespace nsAWA {
 			CPlayerStatus* m_playerStatus = nullptr;			//プレイヤーステータスのポインタ
 			nsPlayerAnimation::CPlayerAnimation* m_playerAnimation = nullptr;		//プレイヤーアニメーション
 			nsFeature::CFeatureManager* m_playerFeatureManager = nullptr;	//プレイヤーのステータス変化管理クラスのポインタ
+
+
+			CCharacterController* m_charaConRef = nullptr;
 		};
 	}
 }

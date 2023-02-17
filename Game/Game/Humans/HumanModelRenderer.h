@@ -27,7 +27,8 @@ namespace nsAWA
 				const char* name,
 				const CVector3& position,
 				const CQuaternion& rotation,
-				const char* filePath
+				const char* filePath,
+				bool isShadowReceiver = true
 			);
 
 			void Release();

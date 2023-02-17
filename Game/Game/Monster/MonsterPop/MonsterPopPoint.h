@@ -26,6 +26,8 @@ namespace nsAWA
 				static const float m_kMonsterPopMaxOffset;
 				static const float m_kMonsterPopShiftPos;
 
+				static const std::unordered_map<std::string, const char* const> m_popNameToCreateName;
+
 				enum class EnGenerateState
 				{
 					enBeforeGenerate,

@@ -20,7 +20,7 @@ float4 PSMain(SPSInput input) : SV_TARGET
 	float3 baseCol = diffuseTexCol.xyz;
 	float3 finalCol = baseCol;
 
-	float3 lightDir = normalize(float3(1.0f, -1.0f, 1.0f));
+	float3 lightDir = normalize(float3(0.5f, -1.0f, 1.0f));
 	float diffuse = dot(-lightDir, normalWS);
 
 	float3 shadowCol = baseCol * 0.2f;
